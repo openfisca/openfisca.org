@@ -1,7 +1,5 @@
 ---
 title: "Turn law into software"
-date: 2017-07-27T15:31:07+02:00
-draft: false
 ---
 
 ## Calculate citizens rights

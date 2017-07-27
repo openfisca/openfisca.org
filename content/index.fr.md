@@ -1,7 +1,5 @@
 ---
 title: "Transformer le code législatif en code logiciel"
-date: 2017-07-27T15:31:07+02:00
-draft: false
 ---
 
 ## Calculer les droits des citoyens
