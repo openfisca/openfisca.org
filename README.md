@@ -22,3 +22,10 @@ Create & optimise conversion funnels from person who never heard about OpenFisca
 
 For each type in the [user taxonomy](https://github.com/openfisca/openfisca-core/wiki/Taxonomie-des-utilisateurs), showcase examples of fulfilled **needs**, add an associated CTA to replicate the usage, and suggest **contribution paths**.
 
+
+## Metrics
+
+- **Correlated homepage bounce rate & time spent**: measure bounce occurrences where time spent is less than needed to read the value proposition and use this metric to optimise acquisition channels.
+- **Newsletter subscriptions**: measure acquisition rate and use this metric to optimise activation channels.
+- **API calls**: measure API calls and use this metric to optimise the experimentation process.
+- **Contribution rate**: measure the issue-, PR- and email- reception ratios to homepage visits and use this metric to optimise the conversion funnels.
