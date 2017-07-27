@@ -8,19 +8,75 @@ Create & optimise conversion funnels from person who never heard about OpenFisca
 
 ## Intended audience
 
-1. Developers.
+1. Project managers.
 2. Researchers.
-3. Public policy makers.
-4. Datajournalists.
-5. Citizens of countries where a country package is available.
-6. General public.
+3. Developers.
+4. Activists & lobbyists.
+5. Public policy makers.
+6. Datajournalists.
+7. Entities impacted by an already modelled tax and benefit system
+8. General public.
 
 > This is adapted from our [user taxonomy](https://github.com/openfisca/openfisca-core/wiki/Taxonomie-des-utilisateurs). Prioritisation is made according to the distribution of active users in August 2017, to minimise the risk of targeting an audience where offer is inadequate.
 
 
 ## Conversion funnels
 
-For each type in the [user taxonomy](https://github.com/openfisca/openfisca-core/wiki/Taxonomie-des-utilisateurs), showcase examples of fulfilled **needs**, add an associated CTA to replicate the usage, and suggest **contribution paths**.
+For each type in the [user taxonomy](https://github.com/openfisca/openfisca-core/wiki/Taxonomie-des-utilisateurs), showcase examples of fulfilled **needs**, add an associated CTA to replicate the usage, and indicate tailored **contribution paths**.
+
+
+### Contribution taxonomy
+
+#### Project managers
+
+- Ensure usage in their projects.
+- Promote usage in their peers' projects.
+- Update legislation (directly or through setting up a process in their teams).
+- Create software that showcases OpenFisca.
+- Fund creation of country packages and extensions.
+- Ensure code reusability.
+
+#### Researchers
+
+- Enrich a country package model.
+- Update legislation.
+- Promote usage as a research tool.
+- Proclaim model validity.
+
+#### Developers
+
+- Detect and correct bugs.
+- Improve performance.
+- Improve technical documentation.
+- Update legislation.
+
+#### Activists & lobbyists
+
+- Promote usage as a research tool.
+- Proclaim model validity.
+- Create visualisation & comparison tools.
+- Ensure code reusability.
+
+#### Public policy makers
+
+- Proclaim model validity.
+- Standardise usage.
+- Ensure code reusability.
+
+#### Datajournalists
+
+- Promote usage as a research tool.
+- Create visualisation & comparison tools.
+- Ensure code reusability.
+
+#### Entities impacted by an already modelled tax and benefit system
+
+- Promote usage.
+- Detect and fix legislation errors.
+
+#### General public
+
+- Mobilise other actors in their country to start modelling.
 
 
 ## Metrics
