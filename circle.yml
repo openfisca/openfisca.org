@@ -1,0 +1,14 @@
+machine:
+  python:
+    version: 2.7.12  # this specific version is preinstalled on the CI servers and allows faster builds
+test:
+  override:
+    - echo 'no tests, just say us Okay!'
+deployment:
+  master:
+    branch: ci_from_master
+    commands:
+      - echo 'just say us Okay!'
+      - git add .
+      - git commit -m "Add content to repo"
+      - git push origin test-gh-pages -f
