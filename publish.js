@@ -1,10 +1,10 @@
 var ghpages = require('gh-pages');
 var path = require('path');
  
-ghpages.publish('dist', {
+ghpages.publish('to_be_published', {
 	user: {
     name: 'OpenFisca-Bot',
   	},
-  	branch: 'test-gh-pages',
-  	message: 'Commit from ci_from_master'
+  	branch: 'gh-pages',
+  	message: 'Auto-commit from master branch'
 }, function(err) {});
