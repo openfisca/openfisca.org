@@ -1,14 +1,18 @@
 var ghpages = require('gh-pages');
 
-ghpages.publish('public', {
-  user: {
-    name: 'OpenFisca-Bot',
+ghpages.publish(
+  'public',
+  {
+    user: {
+      name: 'OpenFisca-Bot',
+    },
+    branch: 'gh-pages',
+    message: 'Auto-commit from master branch',
   },
-  branch: 'gh-pages',
-  message: 'Auto-commit from master branch'
-}, function(err) {
-  if(err){
-  console.error(err)
-  process.exit(1)
+  function(err) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
   }
-})
+);
