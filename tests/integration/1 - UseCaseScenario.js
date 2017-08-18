@@ -1,4 +1,4 @@
-description: "A use case section must have a title, an illustration legend and a link",
+description: "A use case section must have a title, a description and an illustration reference.",
 
 steps: [
   {
