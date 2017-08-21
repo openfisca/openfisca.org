@@ -1,5 +1,5 @@
 module.exports = {
     name: 'openfisca.org ',
-    baseURL: 'file://' + __dirname + '/../../public/index.html',
+    baseURL: 'http://localhost:2030',
     browser: 'chrome',
 }
