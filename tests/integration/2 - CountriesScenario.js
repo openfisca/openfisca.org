@@ -1,6 +1,7 @@
 description: "A countries page must list three available countries, have a link to existing github repository and legislation explorer.",
 
 steps: [
+  goToCountriesPage(),
   {
     "CountriesComponent.frSection": true,
   },
@@ -10,11 +11,17 @@ steps: [
     "CountriesComponent.countryInfo": frGithub,
     "CountriesComponent.countryLegislationExplorer": frExplorer,
   },
+  {
+    "CountriesComponent.tnSection": true,
+  },
   CountriesComponent.goToTnSection(),
   {
     "CountriesComponent.countryTitle": tnTitle,
     "CountriesComponent.countryInfo": tnGithub,
     "CountriesComponent.countryLegislationExplorer": tnExplorer,
+  },
+  {
+    "CountriesComponent.snSection": true,
   },
   CountriesComponent.goToSnSection(),
   {
@@ -22,4 +29,5 @@ steps: [
     "CountriesComponent.countryInfo": snGithub,
     "CountriesComponent.countryLegislationExplorer": false,
   },
+  CountriesComponent.goHome(),
 ]
