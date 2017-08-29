@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode | default "en" }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="icon" href="/img/favicon.ico">
+
+        <title>OpenFisca - {{ .Title }}</title>
+
+        <link href="/dist/main.css" rel='stylesheet' type="text/css" />
+        <link href="/css/main.css" rel='stylesheet' type="text/css" />
+    </head>
+    <body class="ma0 avenir bg-near-white{{ with getenv "HUGO_ENV" }} {{ . }}{{ end }}">
+
+    {{ block "header" . }}{{ partial "site-header.html" .}}{{ end }}
+    <main class="pb7" role="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ block "footer" . }}{{ partial "site-footer.html" . }}{{ end }}
+    {{ block "scripts" . }}{{ partial "site-scripts.html" . }}{{ end }}
+    </body>
+</html>
