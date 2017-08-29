@@ -1,16 +1,9 @@
-goToCountriesPageLink: {a: "Available country packages"},
+frInfo: "a[href=https://github.com/openfisca/openfisca-france]",
+frLegislationExplorer: "a[href=https://legislation.openfisca.fr]",
 
-frSection: "#fr",
-goToFrSectionLink: "#fr",
+tnInfo: "a[href=href=https://github.com/openfisca/openfisca-tunisia]",
+tnLegislationExplorer: "a[href=https://legislation.openfisca.tn]",
 
-tnSection: "#tn",
-goToTnSectionLink: "#tn",
-
-snSection: "#sn",
-goToSnSectionLink: "#sn",
-
-countryTitle: "div h3",
-countryInfo: "div p a[href]",
-countryLegislationExplorer: "a[href]",
+snInfo: "div p a[href=https://github.com/openfisca/senegal]",
 
 goHomeLink: {a: "Home"},
