@@ -6,11 +6,14 @@ body {
 	font-family: "Helvetica Neue",-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-header {
-	padding-top: 1em;
-	padding-bottom: 1em;
-	margin-bottom: 1em;
+header:not(.main-header) {
+	height: 2em;
+	padding: 1em;
+	display: flex;
+	align-items: center;
 	background-color: #222;
+	font-size: 1.5em;
+	font-weight: bold;
 }
 
 h1 {
@@ -29,12 +32,6 @@ p {
 a {
 	text-decoration: underline;
 	color: inherit;
-}
-
-#logo-small {
-	margin: auto;
-	width: 5em;
-	display: block;
 }
 
 section {
@@ -60,30 +57,6 @@ figcaption {
 	padding-top: 1em;
 }
 
-.content {
-	max-width: 42em;
-	margin: auto;
-	padding: 1em;
-}
-
-.cta {
-	margin: 2em auto;
-	max-width: 10em;
-	padding: .3em .5em;
-	background-color: rgb(157, 18, 60);
-	border-radius: .5em;
-	color: white;
-	display: block;
-	font-size: 130%;
-	text-align: center;
-	text-decoration: none;
-	transition: .2s box-shadow;
-}
-
-.cta:hover, .cta:focus {
-	box-shadow: rgb(157, 18, 60) 0 0 .2em;
-}
-
 ul {
 	list-style-type: none;
 	font-size: 80%;
@@ -96,18 +69,15 @@ ul li {
 footer {
 	border-top-style: solid;
 	border-width: 2px;
-	border-color: #FFF;
-
+	border-color: #666;
 	margin-top: 2em;
-	padding: 1em;
+	padding: 3em;
 	background-color: #222;
 }
-
 
 footer ul {
 	margin: auto;
 	padding: 1em;
-
 	display: flex;
 	justify-content: center;
 	flex-flow: row wrap;
@@ -123,4 +93,55 @@ footer ul li+li {
 
 footer img {
 	max-width: 1em;
+}
+
+footer a {
+	text-decoration: none;
+}
+
+
+.content {
+	max-width: 42em;
+	margin: auto;
+	padding: 1em;
+}
+
+.cta {
+	margin: auto;
+	max-width: 10em;
+	padding: .3em 3em;
+	background-color: rgb(157, 18, 60);
+	border-radius: .2em;
+	box-shadow: 0 0.2em 0 rgb(107, 14, 43);
+	color: white;
+	display: block;
+	font-size: 130%;
+	text-align: center;
+	text-decoration: none;
+
+}
+
+.cta:hover {
+    filter: brightness(130%);
+}
+
+.cta:active, .cta:focus {
+	filter: none;
+	background-color: rgb(140, 16, 53);
+	box-shadow: inset 0 0.1em rgb(157, 18, 60);
+}
+
+#logo-small {
+	margin: 0 1em;
+	height: 2em;
+	width: auto;
+}
+
+@media (min-width: 960px) {
+	.left-col {
+		width: 50%
+	}
+	.row {
+		flex-direction: row;
+	}
 }
