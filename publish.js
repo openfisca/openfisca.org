@@ -6,7 +6,7 @@ ghpages.publish(
     user: {
       name: 'OpenFisca-Bot',
     },
-    branch: 'doc-branch-publish',
+    branch: 'gh-pages',
     message: 'Auto-commit from master branch',
   },
   function(err) {
