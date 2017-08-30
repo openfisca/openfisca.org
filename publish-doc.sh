@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 git clone --branch gh-pages https://github.com/openfisca/openfisca.org.git
 # this next line clones the "doc-html" branch.
 # "doc-html" contains the latest build of the doc's html.
