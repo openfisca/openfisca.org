@@ -1,5 +1,21 @@
 ---
 title: "Turn law into software"
-title_0: Calculate citizens' rights
-description_0: From an individual situation, calculate any variable of a national tax and benefit system.
+usecases:
+  mes_aides:
+    title: Calculate citizens' rights
+    description: From an individual situation, calculate any variable of a national tax and benefit system.
+  embauche: 
+    title: Assess company taxes
+    description: Model any kind of entity and evaluate its eligibility to fiscal obligations and benefits.
+  reforms:
+    title: Evaluate reforms impact
+    description: Compare the law now to what it could be.
+get_started: Get started
+links:
+  index: Homepage
+  countries: Available countries
+  analytics: Analytics policy
+  contribute: Contribute to this page
+  contact: Contact us
+  legal_notice: Legal notice
 ---

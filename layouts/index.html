@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<link rel="icon" href="favicon.ico">
 
-		<title>OpenFisca - Turn law into software</title>
+		<title>OpenFisca - {{ .Title}}</title>
 
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
 		<link rel="stylesheet" type="text/css" href="/css/index.css">
@@ -16,13 +16,13 @@
 
 			<h1>{{ .Title}}</h1>
 
-			<a href="countries.html" class="cta get-started">Get started  🙌</a>
+			<a href="countries.html" class="cta get-started">{{ $.Param "get_started" }}  🙌</a>
 		</header>
 
 		<section class="row">
 			<div class="left-col">
-				<h3>{{ $.Param "title_0" }}</h3>
-				<p>{{ $.Param "description_0" }}</p>
+				<h3>{{ $.Param "usecases.mes_aides.title" }}</h3>
+				<p>{{ $.Param "usecases.mes_aides.description" }}</p>
 			</div>
 
 			<figure>
@@ -33,8 +33,8 @@
 
 		<section class="row">
 			<div class="left-col">
-				<h3>Assess company taxes</h3>
-				<p>Model any kind of entity and evaluate its eligibility to fiscal obligations and benefits.</p>
+				<h3>{{ $.Param "usecases.embauche.title" }}</h3>
+				<p>{{ $.Param "usecases.embauche.description" }}</p>
 			</div>
 
 			<figure>
@@ -45,8 +45,8 @@
 
 		<section class="row">
 			<div class="left-col">
-				<h3>Evaluate reforms impact</h3>
-				<p>Compare the law now to what it could be.</p>
+				<h3>{{ $.Param "usecases.reforms.title" }}</h3>
+				<p>{{ $.Param "usecases.reforms.description" }}</p>
 			</div>
 
 			<figure>
@@ -55,7 +55,7 @@
 			</figure>
 		</section>
 
-		<a href="countries.html" class="cta get-started">Get started  🙌</a>
+		<a href="countries.html" class="cta get-started">{{ $.Param "get_started" }}  🙌</a>
 		{{ partial "footer.html" . }}
 	</body>
 </html>
