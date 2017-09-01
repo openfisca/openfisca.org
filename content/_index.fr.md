@@ -1,11 +1,13 @@
 ---
 title: "Transformer le code législatif en code logiciel"
+title_0: Calculer les droits des citoyens
+description_0: Calculez toute variable d’un système socio-fiscal à partir d’une situation individuelle.
 ---
 
-{{% section %}}
-## Calculer les droits des citoyens
 
-Calculez toute variable d’un système socio-fiscal à partir d’une situation individuelle.
+## 
+
+
 {{% /section %}}
 
 {{% section %}}

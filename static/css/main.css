@@ -6,19 +6,22 @@ body {
 	font-family: "Helvetica Neue",-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-header {
-	padding-top: 5em;
-	padding-bottom: 1em;
-	margin-bottom: 3em;
+header:not(.main-header) {
+	height: 2em;
+	padding: 1em;
+	display: flex;
+	align-items: center;
 	background-color: #222;
+	font-size: 1.5em;
+	font-weight: bold;
 }
 
 h1 {
 	text-align: center;
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 }
 
-h3 {
+h2, h3 {
 	font-weight: normal;
 }
 
@@ -27,13 +30,8 @@ p {
 }
 
 a {
+	text-decoration: underline;
 	color: inherit;
-}
-
-#logo {
-	margin: auto;
-	width: 10em;
-	display: block;
 }
 
 section {
@@ -59,36 +57,91 @@ figcaption {
 	padding-top: 1em;
 }
 
-.cta {
-	margin: 2em auto;
-	max-width: 10em;
-	padding: .3em .5em;
+ul {
+	list-style-type: none;
+	font-size: 80%;
+}
 
+ul li {
+	margin: 1em;
+}
+
+footer {
+	border-top-style: solid;
+	border-width: 2px;
+	border-color: #666;
+	margin-top: 2em;
+	padding: 3em;
+	background-color: #222;
+}
+
+footer ul {
+	margin: auto;
+	padding: 1em;
+	display: flex;
+	justify-content: center;
+	flex-flow: row wrap;
+}
+
+footer ul li {
+	display: inline;
+}
+
+footer ul li+li {
+	margin-left: 1em;
+}
+
+footer img {
+	max-width: 1em;
+}
+
+footer a {
+	text-decoration: none;
+}
+
+
+.content {
+	max-width: 42em;
+	margin: auto;
+	padding: 1em;
+}
+
+.cta {
+	margin: auto;
+	max-width: 10em;
+	padding: .3em 3em;
 	background-color: rgb(157, 18, 60);
-	border-radius: .5em;
+	border-radius: .2em;
+	box-shadow: 0 0.2em 0 rgb(107, 14, 43);
 	color: white;
 	display: block;
 	font-size: 130%;
 	text-align: center;
 	text-decoration: none;
-	transition: .2s box-shadow;
+
 }
 
-.cta:hover, .cta:focus {
-	box-shadow: rgb(157, 18, 60) 0 0 .2em;
+.cta:hover {
+    filter: brightness(130%);
 }
 
+.cta:active, .cta:focus {
+	filter: none;
+	background-color: rgb(140, 16, 53);
+	box-shadow: inset 0 0.1em rgb(157, 18, 60);
+}
+
+#logo-small {
+	margin: 0 1em;
+	height: 2em;
+	width: auto;
+}
 
 @media (min-width: 960px) {
-	section {
+	.left-col {
+		width: 50%
+	}
+	.row {
 		flex-direction: row;
-	}
-
-	section div {
-		width: 50%;
-	}
-
-	figure {
-		width: 45%;
 	}
 }
