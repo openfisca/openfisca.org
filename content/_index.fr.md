@@ -11,11 +11,4 @@ usecases:
     title: Déterminer l’impact de réformes
     description: Comparez la loi telle qu’elle est et telle qu’elle pourrait être.
 get_started: Commencer
-links:
-  index: Page d'accueil
-  countries: Pays disponibles
-  analytics: Analyses d'usage
-  contribute: Contribuer à cette page
-  contact: Contact
-  legal_notice: Mentions légales
 ---

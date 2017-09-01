@@ -11,11 +11,4 @@ usecases:
     title: Evaluate reforms impact
     description: Compare the law now to what it could be.
 get_started: Get started
-links:
-  index: Homepage
-  countries: Available countries
-  analytics: Analytics policy
-  contribute: Contribute to this page
-  contact: Contact us
-  legal_notice: Legal notice
 ---
