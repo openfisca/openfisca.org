@@ -14,7 +14,7 @@ usecases:
   reforms:
     title: Evaluate reforms impact
     description: Compare the law now to what it could be.
-    caption_1: of the French Movement for a Basic Income uses OpenFisca and its
+    caption_1: of the French Movement for a Basic Income that uses OpenFisca and its
     caption_2: to evaluate the cost and benefits of a reform introducing a basic income in France.
 get_started: Get started
 ---

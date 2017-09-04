@@ -14,7 +14,7 @@ usecases:
   reforms:
     title: Déterminer l’impact de réformes
     description: Comparez la loi telle qu’elle est et telle qu’elle pourrait être.
-    caption_1: du Mouvement Français pour un Revenu de Base utilise OpenFisca et sa 
+    caption_1: du Mouvement Français pour un Revenu de Base qui utilise OpenFisca et sa 
     caption_2: pour évaluer le coût et les bénéfices d'une réforme qui instaure un revenu de base en France.
 get_started: Commencer
 ---
