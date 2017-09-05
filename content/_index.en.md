@@ -9,7 +9,7 @@ usecases:
   embauche: 
     title: Assess company taxes
     description: Model any kind of entity and evaluate its eligibility to fiscal obligations and benefits.
-    caption_1: uses OpenFisca and a
+    caption_1: uses OpenFisca and a specific
     caption_2: to allow employers and accountants to assess the hiring cost a new employee, including fiscal deductions.
   reforms:
     title: Evaluate reforms impact
