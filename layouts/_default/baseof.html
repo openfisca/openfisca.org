@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ $.Site.LanguageCode | default "en" }}">
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,10 +13,13 @@
     </head>
     <body>
     <header>
-        <a href="{{ "index.html" | relLangURL }}">
-            <img id="logo-small" src="/img/logo-openfisca.svg" alt="OpenFisca">
-        </a>
-        <div>{{ $.Site.Params.pitch }}</div>
+    	<div class="intro">
+	        <a href="{{ "index.html" | relLangURL }}">
+	            <img id="logo-small" src="/img/logo-openfisca.svg" alt="OpenFisca">
+	        </a>
+	        <div>{{ $.Site.Params.pitch }}</div>
+    	</div>
+        {{ partial "button-language.html" . }}
     </header>
     {{ block "main" . }}{{ end }}
     {{ block "footer" . }}{{ partial "footer.html" . }}{{ end }}
