@@ -6,18 +6,20 @@ machine:
     WATAI_TESTS: tests/integration
     SAUCE_USERNAME: openfisca
     # SAUCE_ACCESS_KEY is defined in the CircleCI web UI
-    PORT: 2030 # openfisca.org python server port
+    PORT: 1313 # openfisca.org & Hugo framework
 
 dependencies:
   post:
     - npm install saucelabs # allow sending Watai results to SauceLabs
     - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
     - tar -xzf sc-latest-linux.tar.gz
+    - wget https://github.com/gohugoio/hugo/releases/download/v0.26/hugo_0.26_Linux-64bit.tar.gz
+    - tar -xzf hugo_0.26_Linux-64bit.tar.gz
 
 test:
   pre:
-    # start python server
-    - cd public && python -m SimpleHTTPServer $PORT:
+    # start site serving
+    - hugo version && hugo serve:
         background: true
         parallel: true
     # start Sauce Connect
