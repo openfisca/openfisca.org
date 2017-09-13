@@ -7,7 +7,7 @@ usecases:
     caption_1: utilise OpenFisca et sa
     caption_2: pour informer les citoyens français de leur éligibilité aux aides nationales et locales.
   embauche: 
-    title: Prédire les impôts des entreprises
+    title: Evaluer le coût du travail
     description: Modélisez tous types d’entités et évaluez leur éligibilité à des charges et à des allégements.
     caption_1: utilise OpenFisca et une 
     caption_2: spécifique pour permettre aux employeurs et comptables d'estimer le coût d'embauche d'un nouvel employé, déductions fiscales comprises.
