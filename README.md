@@ -85,3 +85,35 @@ For each type in the [user taxonomy](https://github.com/openfisca/openfisca-core
 - **Newsletter subscriptions**: measure acquisition rate and use this metric to optimise activation channels.
 - **API calls**: measure API calls and use this metric to optimise the experimentation process.
 - **Contribution rate**: measure the issue-, PR- and email- reception ratios to homepage visits and use this metric to optimise the conversion funnels.
+
+
+## Installation
+
+This website is built using [Hugo](https://gohugo.io), a static website editor.
+
+To build it, [install Hugo](https://gohugo.io/getting-started/installing/), and then:
+
+```
+git clone https://github.com/openfisca/openfisca.org
+cd openfisca.org
+git submodule update --init --recursive
+hugo server
+```
+
+And, to regenerate the site, use the following instructions:
+
+```
+cd openfisca.org
+rm -rf public/
+hugo
+```
+
+The website will be built in the `public` directory.
+ 
+## Serving the app locally
+ 
+To run hugo in developpement mode, run:
+ 
+```
+hugo serve
+```
