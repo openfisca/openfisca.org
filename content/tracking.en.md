@@ -2,7 +2,7 @@
 title: "Cookies and opt-out"
 layout: tracking
 
-introduction: "When you visit this website, we leave a small text file (a \"cookie\") on your computer. This helps us measure how many visits we\'ve had and which pages are most viewed."
+introduction: "When you visit this website, we leave a small text file (a \"cookie\") on your computer. This helps us measure how many visits we've had and which pages are most viewed."
 
 consent:
   title: "This website does not show a consent banner for cookies, why?"
