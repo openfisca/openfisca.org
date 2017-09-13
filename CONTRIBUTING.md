@@ -1,10 +1,4 @@
-This website is built using [Hugo](https://gohugo.io), a static website editor.
+Thank you for wanting to contribute to OpenFisca! :smiley:  
 
-To build it, [install Hugo](https://gohugo.io/getting-started/installing/), and then:
-
-```
-git clone https://github.com/openfisca/openfisca.org
-cd openfisca.org
-git submodule update --init --recursive
-hugo server
-```
+Feel free to contact us or send us GIT pull requests.  
+For more information on how to do so, please see our [contribution guidelines](http://openfisca.org/doc/contribute/index.html).
