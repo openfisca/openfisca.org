@@ -99,3 +99,21 @@ cd openfisca.org
 git submodule update --init --recursive
 hugo server
 ```
+
+And, to regenerate the site, use the following instructions:
+
+```
+cd openfisca.org
+rm -rf public/
+hugo
+```
+
+The website will be built in the `public` directory.
+ 
+## Serving the app locally
+ 
+To run hugo in developpement mode, run:
+ 
+```
+hugo serve
+```
