@@ -1,5 +1,11 @@
-{{ if .IsTranslated }}
-    {{ range .Translations }}
-        <a href="{{ .Permalink }}" class="lang">{{ .Site.Language.Lang }}</a>
-    {{ end}}
-{{ end }}
+<ul>
+  <li><a href="{{ "countries" | relLangURL }}">{{ $.Site.Params.countries }}</a></li>
+  <li><a href="{{ "tracking" | relLangURL }}">{{ $.Site.Params.analytics }}</a></li>
+  <li>
+    {{ if .IsTranslated }}
+        {{ range .Translations }}
+            <a href="{{ .Permalink }}" class="lang">/{{ .Site.Language.Lang }}</a>
+        {{ end}}
+    {{ end }}
+  </li>
+</ul>
