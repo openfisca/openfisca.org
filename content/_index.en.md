@@ -17,4 +17,5 @@ usecases:
     caption_1: of the French Movement for a Basic Income that uses OpenFisca and its
     caption_2: to evaluate the cost and benefits of a reform introducing a basic income in France.
 get_started: Get started
+products: Powered by OpenFisca
 ---
