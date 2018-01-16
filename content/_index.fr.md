@@ -17,5 +17,5 @@ usecases:
     caption_1: du Mouvement Français pour un Revenu de Base qui utilise OpenFisca et sa 
     caption_2: pour évaluer le coût et les bénéfices d'une réforme qui instaurerait un revenu de base en France.
 get_started: Commencer
-products: Propulsé par OpenFisca
+products: Propulsés par OpenFisca
 ---
