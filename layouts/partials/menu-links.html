@@ -1,0 +1,12 @@
+<ul>
+  <li><a href="{{ "#products" | relLangURL }}">{{ $.Site.Params.products }}</a></li>
+  <li><a href="{{ "countries" | relLangURL }}">{{ $.Site.Params.countries }}</a></li>
+  <li><a href="http://openfisca.org/doc/">{{ $.Site.Params.documentation }}</a></li>
+  <li>
+    {{ if .IsTranslated }}
+        {{ range .Translations }}
+            <a href="{{ .Permalink }}" class="lang">{{ .Site.Language.LanguageName }}</a>
+        {{ end}}
+    {{ end }}
+  </li>
+</ul>

@@ -10,9 +10,10 @@ machine:
 
 dependencies:
   post:
-    - npm install saucelabs # allow sending Watai results to SauceLabs
-    - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
-    - tar -xzf sc-latest-linux.tar.gz
+    - npm install saucelabs@0.1.1 # allow sending Watai results to SauceLabs
+    # https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy
+    - curl --remote-name https://saucelabs.com/downloads/sc-4.4.9-linux.tar.gz
+    - tar -xzf sc-4.4.9-linux.tar.gz
     - wget https://github.com/gohugoio/hugo/releases/download/v0.26/hugo_0.26_Linux-64bit.tar.gz
     - tar -xzf hugo_0.26_Linux-64bit.tar.gz -C ../bin/
     - hugo version

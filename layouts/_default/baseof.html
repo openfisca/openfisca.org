@@ -7,20 +7,23 @@
 
         <title>OpenFisca - {{ .Title }}</title>
 
+        <link href="/css/header.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel='stylesheet' type="text/css" />
         <link href="/css/countries.css" rel='stylesheet' type="text/css" />
         <link href="/css/tracking.css" rel='stylesheet' type="text/css" />
         <link href="/css/legal-notice.css" rel='stylesheet' type="text/css" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
     <header>
         <div class="intro">
-            <a href="{{ "index.html" | relLangURL }}">
+            <a id="home" href="{{ "index.html" | relLangURL }}">
                 <img id="logo-small" src="/img/logo-openfisca.svg" alt="OpenFisca">
             </a>
-            {{ $.Site.Params.pitch }}
+            <h1>{{ $.Site.Params.pitch }}</h1>
         </div>
-       {{ partial "button-language.html" . }}
+       {{ partial "menu-links.html" . }}
     </header>
     {{ block "main" . }}{{ end }}
     {{ block "footer" . }}{{ partial "footer.html" . }}{{ end }}

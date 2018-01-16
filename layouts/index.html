@@ -7,19 +7,25 @@
 
 		<title>OpenFisca - {{ .Title}}</title>
 
+		<link rel="stylesheet" type="text/css" href="/css/header.css">
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
-		<link rel="stylesheet" type="text/css" href="/css/index.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
 		<header class="main-header">
-			{{ partial "button-language.html" . }}
+			{{ partial "menu-links.html" . }}
 
-			<img id="logo-large" src="/img/logo-openfisca.svg" alt="OpenFisca">
+			<div class="hero">
+				<img id="logo-large" src="/img/logo-openfisca.svg" alt="OpenFisca">
 
-			<h1>{{ .Title}}</h1>
+				<h1>{{ .Title}}</h1>
 
-			<a href="{{ "countries" | relLangURL }}" class="cta get-started">{{ $.Param "get_started" }}  🙌</a>
+				<a href="{{ "countries" | relLangURL }}" class="cta get-started">{{ $.Param "get_started" }}  🙌</a>
+			</div>
 		</header>
+
+
+		<h1 id="products">{{ $.Param "products" }}  🚀</h1>
 
 		<section class="row">
 			<div class="left-col">

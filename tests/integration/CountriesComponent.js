@@ -6,4 +6,4 @@ tnLegislationExplorer: "a[href='https://legislation.openfisca.tn']",
 
 snInfo: "a[href='https://github.com/openfisca/senegal']",
 
-goHomeLink: {a: "Home"},
+goHomeLink: "a[id='home']",
