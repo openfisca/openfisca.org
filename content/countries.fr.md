@@ -2,7 +2,6 @@
 title: "Country Packages disponibles"
 layout: countries
 
-cat: "Catalogne"
 fr: "France"
 tn: "Tunisie"
 sn: "Sénégal"
