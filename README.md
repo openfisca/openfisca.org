@@ -109,11 +109,11 @@ hugo
 ```
 
 The website will be built in the `public` directory.
- 
+
 ## Serving the app locally
- 
+
 To run hugo in developpement mode, run:
- 
+
 ```
 hugo serve
 ```

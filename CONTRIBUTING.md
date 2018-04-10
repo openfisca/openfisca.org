@@ -1,4 +1,4 @@
-Thank you for wanting to contribute to OpenFisca! :smiley:  
+Thank you for wanting to contribute to OpenFisca! :smiley:
 
-Feel free to contact us or send us GIT pull requests.  
+Feel free to contact us or send us pull requests over GitHub.
 For more information on how to do so, please see our [contribution guidelines](http://openfisca.org/doc/contribute/index.html).
