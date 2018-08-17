@@ -4,7 +4,7 @@ jobs:
   build:
     parallelism: 4
     docker:
-      - image: circleci/node:8-jessie-browsers
+      - image: jank1310/hugo-node-docker
     environment:
       WATAI_TESTS: tests/integration
       SAUCE_USERNAME: openfisca
@@ -63,6 +63,9 @@ jobs:
           path: /tmp/sauce_log.txt
           destination: sauce-log
   deploy:
+    docker:
+      - image: jank1310/hugo-node-docker
+    steps:
       - run:
           name: Build app
           command: hugo
