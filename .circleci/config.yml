@@ -69,6 +69,8 @@ jobs:
       - image: jank1310/hugo-node-docker@sha256:9b8d89227135bad4088bed10fe7136adc8b7748b807e868de07fa234fef05684
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Build app
           command: hugo
