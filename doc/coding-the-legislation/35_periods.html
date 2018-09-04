@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Periods | OpenFisca</title>
+        <title>Periods and instants | OpenFisca</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.7">
@@ -50,10 +50,10 @@
         
     <div class="book"
         data-level="2.4"
-        data-chapter-title="Periods"
+        data-chapter-title="Periods and instants"
         data-filepath="coding-the-legislation/35_periods.md"
         data-basepath=".."
-        data-revision="Mon Aug 20 2018 17:25:19 GMT+0000 (UTC)"
+        data-revision="Tue Sep 04 2018 14:57:43 GMT+0000 (UTC)"
         data-innerlanguage="">
     
 
@@ -300,7 +300,7 @@
                         
                             <b>2.4.</b>
                         
-                        Periods
+                        Periods and instants
                     </a>
             
             
@@ -818,11 +818,101 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="periods">Periods</h1>
-<p>A period can be a month, a year, <code>n</code> successive months, <code>n</code> successive years or the eternity.</p>
-<h2 id="periods-for-variable">Periods for variable</h2>
-<p>Most of the quantities calculated in openfisca can change over time. Therefore, each formula calculates a variable for a person (or a family, etc.) <strong>for a given period</strong>.</p>
-<p>This period is always the second argument of the formulas:</p>
+                        <h1 id="periods-and-instants">Periods and instants</h1>
+<p>A period can be a month, a year, <code>n</code> successive months, <code>n</code> successive years or the eternity.
+The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore:</p>
+<ul>
+<li>All periods are presumed to start on the first day of their first month.</li>
+<li>A period cannot be smaller than a month.</li>
+</ul>
+<p>An Instant is a specific day, such as a cutoff date.</p>
+<blockquote>
+<p>Internally, periods are stored as:</p>
+<ul>
+<li>a start instant</li>
+<li>a unit (MONTH, YEAR)</li>
+<li>a quantity of units.</li>
+</ul>
+</blockquote>
+<h2 id="periods-in-simulations">Periods in simulations</h2>
+<p>In OpenFisca inputs, periods are encoded in strings. All the valid period formats are referenced in this table:</p>
+<table>
+<thead>
+<tr>
+<th>Period format</th>
+<th>Period type</th>
+<th>Example</th>
+<th>Represents</th>
+<th>Disambiguation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AAAA</code></td>
+<td>Calendar year</td>
+<td><code>&apos;2010&apos;</code></td>
+<td>The year 2010.</td>
+<td>From the 1st of January 2010 to the 31st of December 2010, inclusive.</td>
+</tr>
+<tr>
+<td><code>AAAA-MM</code></td>
+<td>Month</td>
+<td><code>&apos;2010-04&apos;</code></td>
+<td>The month of April 2010.</td>
+<td>From the 1st of April 2010 to the 30th of April 2010, inclusive.</td>
+</tr>
+<tr>
+<td><code>year:AAAA-MM</code></td>
+<td>Rolling year</td>
+<td><code>&apos;year:2010-04&apos;</code></td>
+<td>The 1 year period starting in April 2010.</td>
+<td>From the 1st of April 2010 to the 31st of March 2011, inclusive</td>
+</tr>
+<tr>
+<td><code>year:AAAA:N</code></td>
+<td>N years</td>
+<td><code>&apos;year:2010:3&apos;</code></td>
+<td>The years 2010, 2011 and 2012.</td>
+<td>From the 1st of January 2010 to the 31st of December 2012, inclusive.</td>
+</tr>
+<tr>
+<td><code>year:AAAA-MM:N</code></td>
+<td>N rolling years</td>
+<td><code>&apos;year:2010-04:3&apos;</code></td>
+<td>The three years period starting in April 2010.</td>
+<td>From the 1st of April 2010 to the 31st of March 2013, inclusive.</td>
+</tr>
+<tr>
+<td><code>month:AAAA-MM:N</code></td>
+<td>N months</td>
+<td><code>&apos;month:2010-04:3&apos;</code></td>
+<td>The three months from April to June 2010.</td>
+<td>From the 1st of April 2010 to the 30th of June 2010, inclusive.</td>
+</tr>
+<tr>
+<td><code>ETERNITY</code></td>
+<td>Forever</td>
+<td><code>ETERNITY</code></td>
+<td>All of time.</td>
+<td>All past, present and future day, month or year</td>
+</tr>
+</tbody>
+</table>
+<p>This <a href="writing_yaml_tests.html">YAML test</a> on <code>income_tax</code> evolution over time shows periods&apos; impact on a variable</p>
+<pre><code class="lang-yaml">
+- name: Income tax over time
+  period: 2016-01
+  input_variables:
+    salary:
+      year:2014:3: 100000 # This person earned 100,000 between 2014 and 2016
+  output_variables:
+    income_tax:
+      2014-01: 388.8889
+      2015-01: 416.6667 # The income tax rate changes in 2015
+      2016-01: 416.6667
+      2017-01: 0 # The salary is not set for this period and defaults to 0
+</code></pre>
+<h2 id="periods-in-variable-definition">Periods in variable definition</h2>
 <pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">salary</span><span class="hljs-params">(Variable)</span>:</span>
     value_type = float
     entity = Person
@@ -832,13 +922,16 @@
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formula</span><span class="hljs-params">(person, period)</span>:</span>
         ...
 </code></pre>
-<p>The size of the period is constrained by the class attribute <code>definition_period</code>:</p>
+<p>Most of the values calculated in OpenFisca, such as <code>income_tax</code>, and <code>housing_allowance</code>, can change over time. </p>
+<p>Therefore, all OpenFisca variables have a <code>definition_period</code> attribute:</p>
 <ul>
 <li><code>definition_period = MONTH</code>: The variable may have a different value each month. <em>For example</em>, the salary of a person. When <code>formula</code> is executed, the parameter <code>period</code> will always be a whole month. Trying to compute <code>salary</code> with a period that is not a month will raise an error before entering <code>formula</code>.</li>
 <li><code>definition_period = YEAR</code>: The variable is defined for a year or it has always the same value every months of a year. <em>For example</em>, if taxes are to be paid yearly, the corresponding variable is yearly. When <code>formula</code> is executed, the parameter <code>period</code> will always be a whole year (from January 1st to December 31th).</li>
 <li><code>definition_period = ETERNITY</code>: The value of the variable is constant. <em>For example</em>, the date of birth of a person never changes. <code>period</code> is still the 2nd parameter of <code>formula</code>. However when <code>formula</code> is executed, the parameter <code>period</code> can be anything and it should not be used.</li>
 </ul>
-<h2 id="calculating-dependencies-for-a-period-different-than-the-one-they-are-defined-for">Calculating dependencies for a period different than the one they are defined for</h2>
+<p>Each formula calculates the value of a variable for a period the size of <strong>the given definition period</strong>. This period is always the second argument of the formulas.</p>
+<h2 id="periods-in-formulas">Periods in formulas</h2>
+<h3 id="calculate-dependencies-for-a-period-different-than-the-variables-definitionperiod">Calculate dependencies for a period different than the variable&apos;s <code>definition_period</code></h3>
 <p>Calling a formula with a period that is incompatible with the attribute <code>definition_period</code> will cause an error. For instance, if we assume that a person <code>salary</code> is paid monthly:</p>
 <pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">taxes</span><span class="hljs-params">(Variable)</span>:</span>
     value_type = float
@@ -847,7 +940,7 @@
     definition_period = YEAR
 
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formula</span><span class="hljs-params">(person, period)</span>:</span>  <span class="hljs-comment"># period is a year because definition_period = YEAR</span>
-        salary_past_year = person(<span class="hljs-string">&apos;salary&apos;</span>, period)  <span class="hljs-comment"># salary is computed on a year while it&apos;s a montly variable, openfisca will complain</span>
+        salary_past_year = person(<span class="hljs-string">&apos;salary&apos;</span>, period)  <span class="hljs-comment"># salary is a montly variable. This will cause an error.</span>
         ...
 </code></pre>
 <p>However, sometimes, we do need to estimate a variable for a different period than the one it is defined for.</p>
@@ -855,14 +948,14 @@
 <pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">taxes</span><span class="hljs-params">(Variable)</span>:</span>
     value_type = float
     entity = Person
-    label = <span class="hljs-string">u&quot;Taxes for a whole year&quot;</span>
+    label = <span class="hljs-string">&quot;Taxes for a whole year&quot;</span>
     definition_period = YEAR
 
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formula</span><span class="hljs-params">(person, period)</span>:</span>  <span class="hljs-comment"># period is a year because definition_period = YEAR</span>
         salary_last_year = person(<span class="hljs-string">&apos;salary&apos;</span>, period, options = [ADD])
         ...
 </code></pre>
-<p>The option <code>DIVIDE</code> allows you to do the opposite: evaluating a quantity for a month while the variable is defined for a year. Openfisca computes the variable for the whole year that contains the specified month and then divides the result by 12.</p>
+<p>The option <code>DIVIDE</code> allows you to do the opposite: evaluating a quantity for a month while the variable is defined for a year. OpenFisca computes the variable for the whole year that contains the specified month and then divides the result by 12.</p>
 <pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">salary_net_of_taxes</span><span class="hljs-params">(Variable)</span>:</span>
     value_type = float
     entity = Person
@@ -878,7 +971,7 @@
 
         <span class="hljs-keyword">return</span> salary - monthly_taxes
 </code></pre>
-<h2 id="calculating-dependencies-for-a-specific-period">Calculating dependencies for a specific period</h2>
+<h3 id="calculate-dependencies-for-a-specific-period">Calculate dependencies for a specific period</h3>
 <p>It happens that the formula to calculate a variable at a given period needs the value of another variable for another period. Usually, the second period is defined relatively to the first one (previous month, last three month, current year).</p>
 <p>For instance, we want to compute an unemployment benefit that equals half of last year&apos;s salary, if the person had no income for the past 3 months.</p>
 <pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">unemployment_benefit</span><span class="hljs-params">(Variable)</span>:</span>
@@ -953,14 +1046,14 @@
 </tr>
 </tbody>
 </table>
-<p>You can find more information on the <code>period</code> object in the <a href="">reference documentation</a> (<em>not available yet</em>)</p>
-<h2 id="automatically-process-variable-inputs-defined-for-periods-not-matching-the-definitionperiod">Automatically process variable inputs defined for periods not matching the <code>definition_period</code></h2>
-<p>By default, when you provide a simulation inputs, you won&apos;t a able to set a variable value for a period that doesn&apos;t match its <code>definition_period</code>.</p>
-<p>For instance, as the <code>definition_period</code> of <code>salary</code> is <code>MONTH</code>, if you provide as an input a value of <code>salary</code> for <code>2015</code>, an error will be raised.</p>
+<p>You can find more information on the <code>Period</code> object in the <a href="">reference documentation</a> (<em>not available yet</em>)</p>
+<h2 id="setinput-automatically-process-variable-inputs-defined-for-periods-not-matching-the-definitionperiod"><code>set_input</code>: Automatically process variable inputs defined for periods not matching the <code>definition_period</code></h2>
+<p>By default, when you provide a simulation input, you won&apos;t be able to set a variable value for a period that doesn&apos;t match its <code>definition_period</code>.</p>
+<p>For instance, if the <code>definition_period</code> of <code>salary</code> is <code>MONTH</code>, and you input a value for <code>salary</code> for <code>2015</code>, an error will be raised.</p>
 <p>It is however possible to define an automatic behaviour to cast yearly inputs into monthy values. To do this, add a <code>set_input</code> class attribute to a variable.</p>
 <ul>
-<li>if <code>set_input = set_input_divide_by_period</code>, the 12 months are set equal to the 12th of the input value,</li>
-<li>if <code>set_input = set_input_dispatch_by_period</code>, the 12 months are set equal to input value.</li>
+<li><code>set_input = set_input_divide_by_period</code>: the 12 months are set equal to the 12th of the input value,</li>
+<li><code>set_input = set_input_dispatch_by_period</code>: the 12 months are set equal to input value.</li>
 </ul>
 <p>For instance, let&apos;s slightly modify the code of <code>salary</code>:</p>
 <pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">salary</span><span class="hljs-params">(Variable)</span>:</span>
@@ -973,7 +1066,7 @@
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formula</span><span class="hljs-params">(person, period)</span>:</span>
         ...
 </code></pre>
-<p>We can now provide an input for <code>2015</code> for <code>salary</code>: no error will be raised, and the value will be automatically split between the 12 months of `2015.</p>
+<p>We can now provide an input for <code>2015</code> for <code>salary</code>: no error will be raised, and the value will be automatically split between the 12 months of <code>2015</code>.</p>
 
                     
                     </section>
