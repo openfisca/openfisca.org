@@ -53,7 +53,7 @@
         data-chapter-title="Legislation evolutions"
         data-filepath="coding-the-legislation/40_legislation_evolutions.md"
         data-basepath=".."
-        data-revision="Wed Oct 17 2018 14:27:08 GMT+0000 (UTC)"
+        data-revision="Fri Oct 19 2018 01:05:39 GMT+0000 (UTC)"
         data-innerlanguage="">
     
 
@@ -862,20 +862,20 @@
       description: Rate for the flat tax on salaries
       values:
         2017-01-01:
-          value: 0.25
+          value: 0.3
           reference: https://www.legislation-source.com/2017
         2016-01-01:
           value: 0.25
           reference: https://www.legislation-source.com/2016
         2015-01-01:
-          value: 0.20
+          value: 0.2
           reference: https://www.legislation-source.com/2015
 </code></pre>
-<p>After this change <code>legislation(period).taxes.salary.rate</code> will return the corresponding values:</p>
+<p>After this change, in a formula:</p>
 <ul>
-<li><code>legislation(&apos;2015-04&apos;).taxes.salary.rate</code> will return <code>0.2</code></li>
-<li><code>legislation(&apos;2017-01&apos;).taxes.salary.rate</code> will return <code>0.3</code></li>
-<li><code>legislation(&apos;2022-01&apos;).taxes.salary.rate</code> will return <code>0.3</code></li>
+<li><code>parameters(&apos;2016-04&apos;).taxes.salary.rate</code> is <code>0.25</code></li>
+<li><code>parameters(&apos;2017-01&apos;).taxes.salary.rate</code> is <code>0.3</code></li>
+<li><code>parameters(&apos;2022-01&apos;).taxes.salary.rate</code> is <code>0.3</code></li>
 </ul>
 <p><a href="legislation_parameters.html#parameters-and-time">Read more about how to code parameters</a>.</p>
 <h2 id="formula-evolution">Formula evolution</h2>
@@ -922,7 +922,7 @@
 </ul>
 <h2 id="formula-introduction">Formula introduction</h2>
 <p>In our previous example, we assumed that <code>flat_tax_on_salary</code> had <em>always</em> had a formula, since the dawn of time. This is a reasonable hypothesis if we are only interested in running computations for recent years.</p>
-<p>But most fiscal and benefit mechanisms have been introduced at some point. Let&apos;s for instance assume that our <code>flat_tax_on_salary</code> only appeared in our legislation on the 1st of June 2005. </p>
+<p>But most fiscal and benefit mechanisms have been introduced at some point. Let&apos;s for instance assume that our <code>flat_tax_on_salary</code> only appeared in our legislation on the 1st of June 2005.</p>
 <p>This is easily implemented by <em>dating</em> the two formulas:</p>
 <pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">flat_tax_on_salary</span><span class="hljs-params">(Variable)</span>:</span>
     value_type = float
@@ -958,7 +958,7 @@
         ...
 </code></pre>
 <p>If <code>progressive_income_tax</code> is called <strong>before</strong> <code>2005-05-31</code>(included), <code>formula</code> will be used.</p>
-<p>However, if <code>progressive_income_tax</code> is calculated <strong>after</strong> <code>2005-06-01</code> (included), <code>formula</code> is <strong>not</strong> used, as it is not active anymore at this time. Instead, <strong>the variable <a href="../variables.html#default-values">default value</a> is returned</strong>. </p>
+<p>However, if <code>progressive_income_tax</code> is calculated <strong>after</strong> <code>2005-06-01</code> (included), <code>formula</code> is <strong>not</strong> used, as it is not active anymore at this time. Instead, <strong>the variable <a href="../variables.html#default-values">default value</a> is returned</strong>.</p>
 <p>Note that:</p>
 <ul>
 <li>The <code>end</code> day is <strong>inclusive</strong>: it is the last day a variable and its formulas are active (and not the first day it is not active anymore).</li>
