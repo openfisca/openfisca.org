@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Coding a formula &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introducing an input variable" href="20_input_variables.html" />
+    <link rel="prev" title="From law to code" href="README.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="20_input_variables.html" title="Introducing an input variable"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="From law to code"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">From law to code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts/README.html">Key concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">From law to code</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Coding a formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20_input_variables.html">Introducing an input variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="25_vectorial_computing.html">Vectorial computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="35_periods.html">Periods and instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="40_legislation_evolutions.html">Legislation evolutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="50_entities.html">Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inferences.html">Inferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing_yaml_tests.html">Writing YAML tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="legislation_parameters.html">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootstrapping_a_new_country_package.html">Bootstraping a new country package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#tutorial">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#additional-documentation">Additional documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/README.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/README.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+                <li><a href="README.html">From law to code</a></li>
+              
+              <li>Coding a formula</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="coding-a-formula">
+<span id="coding-a-formula"></span><h1>Coding a formula<a class="headerlink" href="#coding-a-formula" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-example">
+<span id="basic-example"></span><h2>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h2>
+<p>The following piece of code creates a variable named <code class="docutils literal"><span class="pre">flat_tax_on_salary</span></code>, representing an imaginary tax of 25% on salaries, paid monthly by individuals (not households).</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">flat_tax_on_salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Individualized and monthly paid tax on salaries&quot;</span>
+
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">salary</span> <span class="o">*</span> <span class="mf">0.25</span>
+</pre></div>
+</div>
+<p>Let&#8217;s explain in details the different parts of the code:</p>
+<div class="section" id="the-variable-name">
+<span id="the-variable-name"></span><h3>The variable name<a class="headerlink" href="#the-variable-name" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">class</span> <span class="pre">flat_tax_on_salary(Variable):</span></code> declares a new variable named <code class="docutils literal"><span class="pre">flat_tax_on_salary</span></code>.  You can check out our recommended <a class="reference internal" href="../contribute/variables-naming.html"><span class="doc">naming conventions</span></a>.</p>
+</div>
+<div class="section" id="the-variable-attributes">
+<span id="the-variable-attributes"></span><h3>The variable attributes<a class="headerlink" href="#the-variable-attributes" title="Permalink to this headline">¶</a></h3>
+<p>All variables have a set of attributes.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">value_type</span></code> defines the type of the formula output. Possible types are the basic python types.
+Note however that OpenFisca uses NumPy to <a class="reference internal" href="25_vectorial_computing.html"><span class="doc">run calculations vectorially</span></a>,
+so the actual type of data may be slightly different from the builtin Python ones.
+Available types are :<ul>
+<li><code class="docutils literal"><span class="pre">bool</span></code>: boolean</li>
+<li><code class="docutils literal"><span class="pre">date</span></code>: date</li>
+<li><code class="docutils literal"><span class="pre">Enum</span></code>: discrete value (from an enumerable). <a class="reference external" href="/coding-the-legislation/20_input_variables.html#advanced-example-enumerations-enum">See details</a> in the next section.</li>
+<li><code class="docutils literal"><span class="pre">float</span></code>: float (Note that to reduce memory usage, float are stored on 32 bits using NumPy&#8217;s <code class="docutils literal"><span class="pre">float32</span></code>)</li>
+<li><code class="docutils literal"><span class="pre">int</span></code>: integer</li>
+<li><code class="docutils literal"><span class="pre">str</span></code>: string</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">entity</span></code> defines who or what group the variable concerns, e.g. individuals, households, families.</li>
+<li><code class="docutils literal"><span class="pre">definition_period</span></code> defines the period on which the variable is calculated. It can be <code class="docutils literal"><span class="pre">MONTH</span></code> (e.g. salary), <code class="docutils literal"><span class="pre">YEAR</span></code> (e.g. income taxes), or ETERNITY (e.g. date of birth)</li>
+<li><code class="docutils literal"><span class="pre">label</span></code> is a human friendly way to describe the variable</li>
+<li><code class="docutils literal"><span class="pre">reference</span></code> is a list of relevant legislative reference for this variables (usually URLs the text of the law or another trustworthy source)</li>
+</ul>
+</div>
+<div class="section" id="the-formula">
+<span id="the-formula"></span><h3>The formula<a class="headerlink" href="#the-formula" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">def</span> <span class="pre">formula(person,</span> <span class="pre">period):</span></code> declares the formula that will be used to calculate the <code class="docutils literal"><span class="pre">flat_tax_on_salary</span></code> for a given <code class="docutils literal"><span class="pre">person</span></code> at a given <code class="docutils literal"><span class="pre">period</span></code>. Because <code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">MONTH</span></code>, <code class="docutils literal"><span class="pre">period</span></code> is constrained to be a month.</li>
+<li><code class="docutils literal"><span class="pre">salary</span> <span class="pre">=</span> <span class="pre">person('salary',</span> <span class="pre">period)</span></code> calculates the salary of the person, for the given month. This will, of course, work only if <code class="docutils literal"><span class="pre">salary</span></code> is another variable in the tax and benefit system.</li>
+<li><code class="docutils literal"><span class="pre">return</span> <span class="pre">salary</span> <span class="pre">*</span> <span class="pre">0.25</span></code> returns the result for the given period.</li>
+<li><a class="reference internal" href="40_legislation_evolutions.html"><span class="doc">Dated Formulas</span></a> have a start and/or an end date.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="testing-a-formula">
+<span id="testing-a-formula"></span><h2>Testing a formula<a class="headerlink" href="#testing-a-formula" title="Permalink to this headline">¶</a></h2>
+<p>To make sure that the formula you have just written works the way you expect, you have to test it. Tests about legislation are written in a <a class="reference internal" href="writing_yaml_tests.html"><span class="doc">YAML syntax</span></a>. The <code class="docutils literal"><span class="pre">flat_tax_on_salary</span></code> formula can for instance be tested with the following test file:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Flax</span><span class="nv"> </span><span class="s">tax</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">salary</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">No</span><span class="nv"> </span><span class="s">income&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2017-01</span>
+  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">flat_tax_on_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Flax</span><span class="nv"> </span><span class="s">tax</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">salary</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">With</span><span class="nv"> </span><span class="s">income&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2017-01</span>
+  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2000</span>
+  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">flat_tax_on_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">500</span>
+</pre></div>
+</div>
+<p>You can check the <a class="reference internal" href="writing_yaml_tests.html"><span class="doc">YAML tests documentation</span></a> to learn more about how to write YAML tests, and how to run them.</p>
+</div>
+<div class="section" id="example-with-legislation-parameters">
+<span id="example-with-legislation-parameters"></span><h2>Example with legislation parameters<a class="headerlink" href="#example-with-legislation-parameters" title="Permalink to this headline">¶</a></h2>
+<p>To access a common legislation parameter, a third parameter can be added to the function signature. The previous formulas could thus be rewritten:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">flat_tax_on_salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Individualized and monthly paid tax on salaries&quot;</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
+
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">salary</span> <span class="o">*</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">taxes</span><span class="o">.</span><span class="n">salary</span><span class="o">.</span><span class="n">rate</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parameters</span></code> is here a function that be be called for a given period, and returns the whole legislation parameters (in a hierarchical tree structure). You can get the parameter you are interested in by navigating this tree with the <code class="docutils literal"><span class="pre">.</span></code> notation.</p>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="README.html" title="previous chapter (use the left arrow)">From law to code</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="20_input_variables.html" title="next chapter (use the right arrow)">Introducing an input variable</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="20_input_variables.html" title="Introducing an input variable"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="From law to code"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >From law to code</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

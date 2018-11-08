@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Variables and formulas &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parameters" href="parameters.html" />
+    <link rel="prev" title="Tax and Benefit System" href="tax_and_benefit_system.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="parameters.html" title="Parameters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tax_and_benefit_system.html" title="Tax and Benefit System"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Key concepts</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">Key concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tax_and_benefit_system.html">Tax and Benefit System</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Variables and formulas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="person,_entities,_role.html">Person, entities, role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="periodsinstants.html">Periods, Instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_data.html">Input Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulation.html">Simulation, Computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../coding-the-legislation/README.html">From law to code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/README.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/README.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+                <li><a href="README.html">Key concepts</a></li>
+              
+              <li>Variables and formulas</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="variables-and-formulas">
+<span id="variables-and-formulas"></span><h1>Variables and formulas<a class="headerlink" href="#variables-and-formulas" title="Permalink to this headline">¶</a></h1>
+<p>A variable is property of a person, or an entity (e.g. a family).</p>
+<p>For instance:</p>
+<ul class="simple">
+<li>The <em>birth date</em> of a person</li>
+<li>The amount of <em>basic income</em> (in France, <em>RSA</em>) a family can get in a month.</li>
+<li>The amount of <em>income tax</em> a household has to pay in a year.</li>
+<li>Whether a family is <em>living in Paris</em>, or not.</li>
+</ul>
+<div class="section" id="input-variables">
+<span id="input-variables"></span><h2>Input variables<a class="headerlink" href="#input-variables" title="Permalink to this headline">¶</a></h2>
+<p>Some variables can only be given as inputs of a simulation. For instance, the <em>birth date</em> of a person.</p>
+</div>
+<div class="section" id="formulas">
+<span id="formulas"></span><h2>Formulas<a class="headerlink" href="#formulas" title="Permalink to this headline">¶</a></h2>
+<p>Other variables can be calculated thanks to a <strong>formula</strong>.</p>
+<p>A formula is a <strong>function</strong> that calculates the value of given variable, for a given period. To do so, it performs (usually arithmetic) operations on the values of other variables, the formula <strong>dependencies</strong>.</p>
+<p>For instance:</p>
+<ul class="simple">
+<li>The <em>basic income</em> of a family can be calculated from its income, and some other information about its situation.</li>
+<li>The <em>income tax</em> of a tax household can be calculated the same way.</li>
+</ul>
+<p>It is important to note that <strong>all variables can be used as inputs</strong>. This means that even if the <em>basic income</em> can be calculated from other variables, I can, for a given simulation, provide it as an input. Then, if another formula asks for the value of <em>basic income</em> for a month, the input value will be returned, and the <em>basic income</em> formula <strong>won&#8217;t be executed.</strong></p>
+</div>
+<div class="section" id="default-values">
+<span id="default-values"></span><h2>Default values<a class="headerlink" href="#default-values" title="Permalink to this headline">¶</a></h2>
+<p>When OpenFisca is not able to calculate the value of a variable for a requested period, it returns a <strong>default value</strong>.</p>
+<p>The default value of a variable is returned:</p>
+<ul>
+<li><p class="first">When the value of an input variables is requested, if this variable has not been set in the input for the requested period.</p>
+<blockquote>
+<div><p>For example:
+Let&#8217;s assume the input variable <code class="docutils literal"><span class="pre">student</span></code> default value is <code class="docutils literal"><span class="pre">False</span></code>. If the value of <code class="docutils literal"><span class="pre">student</span></code> for <code class="docutils literal"><span class="pre">2017-09</span></code> has <strong>not</strong> been set in the input of the simulation, then computing <code class="docutils literal"><span class="pre">student</span></code> for <code class="docutils literal"><span class="pre">2017-09</span></code> will return <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p class="first">When the value of a variable with formulas is requested, if no formula is defined for the requested period.</p>
+<blockquote>
+<div><p>For example:
+Let&#8217;s assume the variable <code class="docutils literal"><span class="pre">basic_income</span></code>&#8216;s formula is defined starting <code class="docutils literal"><span class="pre">2015-01-01</span></code>, and its default value is <code class="docutils literal"><span class="pre">0</span></code>. Computing <code class="docutils literal"><span class="pre">basic_income</span></code> for <code class="docutils literal"><span class="pre">2014-01-01</span></code> will return <code class="docutils literal"><span class="pre">0</span></code>, while computing <code class="docutils literal"><span class="pre">basic_income</span></code> for <code class="docutils literal"><span class="pre">2015-01-01</span></code> will use the formula.</p>
+</div></blockquote>
+</li>
+</ul>
+<p>Legislation writers can <a class="reference external" href="key-concepts/coding-the-legislation/20_input_variables.html#setting-a-default-value">define a specific default value</a> for each variable.</p>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="tax_and_benefit_system.html" title="previous chapter (use the left arrow)">Tax and Benefit System</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="parameters.html" title="next chapter (use the right arrow)">Parameters</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="parameters.html" title="Parameters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tax_and_benefit_system.html" title="Tax and Benefit System"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Key concepts</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

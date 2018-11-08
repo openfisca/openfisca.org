@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Introducing an input variable &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Vectorial computing" href="25_vectorial_computing.html" />
+    <link rel="prev" title="Coding a formula" href="10_basic_example.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="25_vectorial_computing.html" title="Vectorial computing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="10_basic_example.html" title="Coding a formula"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">From law to code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts/README.html">Key concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">From law to code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="10_basic_example.html">Coding a formula</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introducing an input variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="25_vectorial_computing.html">Vectorial computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="35_periods.html">Periods and instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="40_legislation_evolutions.html">Legislation evolutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="50_entities.html">Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inferences.html">Inferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing_yaml_tests.html">Writing YAML tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="legislation_parameters.html">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootstrapping_a_new_country_package.html">Bootstraping a new country package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#tutorial">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#additional-documentation">Additional documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/README.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/README.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+                <li><a href="README.html">From law to code</a></li>
+              
+              <li>Introducing an input variable</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="introducing-an-input-variable">
+<span id="introducing-an-input-variable"></span><h1>Introducing an input variable<a class="headerlink" href="#introducing-an-input-variable" title="Permalink to this headline">¶</a></h1>
+<p>The syntax to introduce an input variable is very similar to the one we used to code a formula.</p>
+<p>For instance:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Salary earned by a person for a given month&quot;</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
+</pre></div>
+</div>
+<p>The only difference is that we do <strong>not</strong> have a formula to calculate the value of a variable.</p>
+<p>If we ask the value of <code class="docutils literal"><span class="pre">salary</span></code> for a given month, the returned result will be:</p>
+<ul class="simple">
+<li>The <strong>input</strong> that was provided when initializing the simulation if it exists.</li>
+<li>The <strong>default value</strong> of the Variable if no input has been provided.</li>
+</ul>
+<div class="section" id="setting-a-default-value">
+<span id="setting-a-default-value"></span><h2>Setting a default value<a class="headerlink" href="#setting-a-default-value" title="Permalink to this headline">¶</a></h2>
+<p>When declaring an input variable, you can change its default value by adding the <code class="docutils literal"><span class="pre">default_value</span></code> attribute:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">french_citizen</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">bool</span>
+    <span class="n">default_value</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Whether the person is a French citizen&quot;</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">YEAR</span>
+</pre></div>
+</div>
+<p>If you do not explicitly define a default value, the following will be used:</p>
+<ul class="simple">
+<li>For numeric variables: <code class="docutils literal"><span class="pre">0</span></code>.</li>
+<li>For boolean variables: <code class="docutils literal"><span class="pre">False</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="advanced-example-enumerations-enum">
+<span id="advanced-example-enumerations-enum"></span><h2>Advanced example: enumerations (enum)<a class="headerlink" href="#advanced-example-enumerations-enum" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="usecases">
+<span id="usecases"></span><h3>Usecases<a class="headerlink" href="#usecases" title="Permalink to this headline">¶</a></h3>
+<p>Enumerations are variables that have a limited set of possible values. For instance:</p>
+<ul class="simple">
+<li>A person&#8217;s relationship status: married, single, divorced.</li>
+<li>A household housing occupancy status: owner, tenant, free-lodger, homeless.</li>
+<li>The main occupation of a person: employee, freelance, retired, student, unemployed.</li>
+</ul>
+</div>
+<div class="section" id="defining-and-using-an-enumeration-variable">
+<span id="defining-and-using-an-enumeration-variable"></span><h3>Defining and using an enumeration variable<a class="headerlink" href="#defining-and-using-an-enumeration-variable" title="Permalink to this headline">¶</a></h3>
+<p>As an example, let&#8217;s code a <code class="docutils literal"><span class="pre">housing_tax</span></code> that is paid by households who own or rent their main homes, but does not apply to households that do not have a stable residence, or are accommodated for free.</p>
+<p>The variable <code class="docutils literal"><span class="pre">housing_tax</span></code> will thus depend on <code class="docutils literal"><span class="pre">housing_occupancy_status</span></code>, an enumeration variable that can take 4 values: <code class="docutils literal"><span class="pre">tenant</span></code>, <code class="docutils literal"><span class="pre">owner</span></code>, <code class="docutils literal"><span class="pre">free_lodger</span></code> and <code class="docutils literal"><span class="pre">homeless</span></code>.</p>
+<p>First, we can create an <a class="reference external" href="https://en.wikipedia.org/wiki/Enumerated_type">enumerated type</a> <code class="docutils literal"><span class="pre">HousingOccupancyStatus</span></code>:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HousingOccupancyStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">tenant</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Tenant or lodger who pays a rent&#39;</span>
+    <span class="n">owner</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Owner&#39;</span>
+    <span class="n">free_lodger</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Free logder&#39;</span>
+    <span class="n">homeless</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Homeless&#39;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>OpenFisca enums are based on Python 3 native enums. Each enum item (for instance <code class="docutils literal"><span class="pre">HousingOccupancyStatus.tenant</span></code>) has:</p>
+<ul class="simple">
+<li>a <code class="docutils literal"><span class="pre">name</span></code> attribute that contains its key (e.g. <code class="docutils literal"><span class="pre">tenant</span></code>)</li>
+<li>a <code class="docutils literal"><span class="pre">value</span></code> attribute that contains its description (e.g. <code class="docutils literal"><span class="pre">&quot;Tenant</span> <span class="pre">or</span> <span class="pre">lodger</span> <span class="pre">who</span> <span class="pre">pays</span> <span class="pre">a</span> <span class="pre">monthly</span> <span class="pre">rent&quot;</span></code>)</li>
+</ul>
+</div></blockquote>
+<p>Then, create an OpenFisca variable <code class="docutils literal"><span class="pre">housing_occupancy_status</span></code>:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">housing_occupancy_status</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="n">Enum</span>
+    <span class="n">possible_values</span> <span class="o">=</span> <span class="n">HousingOccupancyStatus</span>
+    <span class="n">default_value</span> <span class="o">=</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">tenant</span>  <span class="c1"># The default is mandatory</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Household</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Legal housing situation of the household concerning their main residence&quot;</span>
+</pre></div>
+</div>
+<p>You can now use the enum in variable formulas !</p>
+<p>For instance, assuming the enumeration and the formula using it are defined in the same file:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">housing_tax</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Household</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span><span class="o">.</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Tax paid by each household proportionnally to the size of its accommodation&quot;</span>
+
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">legislation</span><span class="p">):</span>
+        <span class="n">accommodation_size</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;accomodation_size&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">housing_occupancy_status</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;housing_occupancy_status&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">tenant</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_occupancy_status</span> <span class="o">==</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">tenant</span><span class="p">)</span>
+        <span class="n">owner</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_occupancy_status</span> <span class="o">==</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">owner</span><span class="p">)</span>
+
+        <span class="c1"># The tax is applied only if the household owns or rents its main residency</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">owner</span> <span class="o">+</span> <span class="n">tenant</span><span class="p">)</span> <span class="o">*</span> <span class="n">accommodation_size</span> <span class="o">*</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>If the enumeration and the formula using it are <strong>not</strong> defined in the same file, an extra step is necessary:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">housing_tax</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Household</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span><span class="o">.</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Tax paid by each household proportionnally to the size of its accommodation&quot;</span>
+
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">legislation</span><span class="p">):</span>
+        <span class="n">accommodation_size</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;accomodation_size&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">housing_occupancy_status</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;housing_occupancy_status&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">HousingOccupancyStatus</span> <span class="o">=</span> <span class="n">housing_occupancy_status</span><span class="o">.</span><span class="n">possible_values</span>  <span class="c1"># &quot;Import&quot; the enum type. Careful: do not use python imports accross variables files: comparisons would not work !</span>
+        <span class="n">tenant</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_occupancy_status</span> <span class="o">==</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">tenant</span><span class="p">)</span>
+        <span class="n">owner</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_occupancy_status</span> <span class="o">==</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">owner</span><span class="p">)</span>
+
+        <span class="c1"># The tax is applied only if the household owns or rents its main residency</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">owner</span> <span class="o">+</span> <span class="n">tenant</span><span class="p">)</span> <span class="o">*</span> <span class="n">accommodation_size</span> <span class="o">*</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>You can now test the formula in a YAML test:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Household with free lodger status living in a 100 sq.meters accomodation</span>
+  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2017</span>
+  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">accomodation_size</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2017-01</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">100</span>
+    <span class="l l-Scalar l-Scalar-Plain">housing_occupancy_status</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2017-01</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">free_lodger</span>
+  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">housing_tax</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="10_basic_example.html" title="previous chapter (use the left arrow)">Coding a formula</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="25_vectorial_computing.html" title="next chapter (use the right arrow)">Vectorial computing</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="25_vectorial_computing.html" title="Vectorial computing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="10_basic_example.html" title="Coding a formula"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >From law to code</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

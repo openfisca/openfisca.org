@@ -1,0 +1,597 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>openfisca_core.variables &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../key-concepts/README.html">Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../coding-the-legislation/README.html">From law to code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../openfisca-web-api/README.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recipes.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/README.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../../summary.html">Docs</a></li>
+              
+                <li><a href="../index.html">Module code</a></li>
+              
+              <li>openfisca_core.variables</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <h1>Source code for openfisca_core.variables</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sortedcontainers.sorteddict</span> <span class="k">import</span> <span class="n">SortedDict</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">date</span>
+
+<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">entities</span>
+<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">ENUM_ARRAY_DTYPE</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">MONTH</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">,</span> <span class="n">ETERNITY</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.base_functions</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">missing_value</span><span class="p">,</span>
+    <span class="n">requested_period_default_value</span><span class="p">,</span>
+    <span class="n">requested_period_last_or_next_value</span><span class="p">,</span>
+    <span class="n">requested_period_last_value</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">basestring_type</span><span class="p">,</span> <span class="n">to_unicode</span>
+
+
+<span class="n">VALUE_TYPES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">bool</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">,</span>
+        <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s1">&#39;json_type&#39;</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;formatted_value_type&#39;</span><span class="p">:</span> <span class="s1">&#39;Boolean&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;is_period_size_independent&#39;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">},</span>
+    <span class="nb">int</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span>
+        <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;json_type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;formatted_value_type&#39;</span><span class="p">:</span> <span class="s1">&#39;Int&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;is_period_size_independent&#39;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="p">},</span>
+    <span class="nb">float</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+        <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;json_type&#39;</span><span class="p">:</span> <span class="s1">&#39;number&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;formatted_value_type&#39;</span><span class="p">:</span> <span class="s1">&#39;Float&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;is_period_size_independent&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="nb">str</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;json_type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;formatted_value_type&#39;</span><span class="p">:</span> <span class="s1">&#39;String&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;is_period_size_independent&#39;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">},</span>
+    <span class="n">Enum</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">ENUM_ARRAY_DTYPE</span><span class="p">,</span>
+        <span class="s1">&#39;json_type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;formatted_value_type&#39;</span><span class="p">:</span> <span class="s1">&#39;String&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;is_period_size_independent&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="n">date</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="s1">&#39;datetime64[D]&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>  <span class="c1"># 0 == 1970-01-01</span>
+        <span class="s1">&#39;json_type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;formatted_value_type&#39;</span><span class="p">:</span> <span class="s1">&#39;Date&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;is_period_size_independent&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+
+
+<span class="n">FORMULA_NAME_PREFIX</span> <span class="o">=</span> <span class="s1">&#39;formula&#39;</span>
+
+
+<div class="viewcode-block" id="Variable"><a class="viewcode-back" href="../../openfisca-python-api/variables.html#openfisca_core.variables.Variable">[docs]</a><span class="k">class</span> <span class="nc">Variable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    A `variable &lt;http://openfisca.org/doc/variables.html&gt;`_ of the legislation.</span>
+
+<span class="sd">    Main attributes:</span>
+
+<span class="sd">       .. py:attribute: name</span>
+
+<span class="sd">           Name of the variable</span>
+
+<span class="sd">       .. py:attribute:: value_type</span>
+
+<span class="sd">           The value type of the variable. Possible value types in OpenFisca are ``int`` ``float`` ``bool`` ``str`` ``date`` and ``Enum``.</span>
+
+<span class="sd">       .. py:attribute:: entity</span>
+
+<span class="sd">           `Entity &lt;http://openfisca.org/doc/person,_entities,_role.html&gt;`_ the variable is defined for. For instance : ``Person``, ``Household``.</span>
+
+<span class="sd">       .. py:attribute:: definition_period</span>
+
+<span class="sd">           `Period &lt;http://openfisca.org/doc/coding-the-legislation/35_periods.html&gt;`_ the variable is defined for. Possible value: ``MONTH``, ``YEAR``, ``ETERNITY``.</span>
+
+<span class="sd">       .. py:attribute:: formulas</span>
+
+<span class="sd">           Formulas used to calculate the variable</span>
+
+<span class="sd">       .. py:attribute:: label</span>
+
+<span class="sd">           Description of the variable</span>
+
+<span class="sd">       .. py:attribute:: reference</span>
+
+<span class="sd">           Legislative reference describing the variable.</span>
+
+<span class="sd">       .. py:attribute:: default_value</span>
+
+<span class="sd">           `Default value &lt;http://openfisca.org/doc/variables.html#default-values&gt;`_ of the variable.</span>
+
+<span class="sd">    Secondary attributes:</span>
+
+<span class="sd">       .. py:attribute:: baseline_variable</span>
+
+<span class="sd">           If the variable has been introduced in a `reform &lt;http://openfisca.org/doc/reforms.html&gt;`_ to replace another variable, baseline_variable is the replaced variable.</span>
+
+<span class="sd">       .. py:attribute:: dtype</span>
+
+<span class="sd">           Numpy `dtype &lt;https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.dtype.html&gt;`_ used under the hood for the variable.</span>
+
+<span class="sd">       .. py:attribute:: end</span>
+
+<span class="sd">           `Date &lt;http://openfisca.org/doc/coding-the-legislation/40_legislation_evolutions.html#variable-end&gt;`_  when the variable disappears from the legislation.</span>
+
+<span class="sd">       .. py:attribute:: is_neutralized</span>
+
+<span class="sd">           True if the variable is neutralized. Neutralized variables never use their formula, and only return their default values when calculated.</span>
+
+<span class="sd">       .. py:attribute:: json_type</span>
+
+<span class="sd">           JSON type corresponding to the variable.</span>
+
+<span class="sd">       .. py:attribute:: max_length</span>
+
+<span class="sd">           If the value type of the variable is ``str``, max length of the string allowed. ``None`` if there is no limit.</span>
+
+<span class="sd">       .. py:attribute:: possible_values</span>
+
+<span class="sd">           If the value type of the variable is ``Enum``, contains the values the variable can take.</span>
+
+<span class="sd">       .. py:attribute:: set_input</span>
+
+<span class="sd">           Function used to automatically process variable inputs defined for periods not matching the definition_period of the variable. See more on the `documentation &lt;http://openfisca.org/doc/coding-the-legislation/35_periods.html#automatically-process-variable-inputs-defined-for-periods-not-matching-the-definitionperiod&gt;`_. Possible values are ``set_input_dispatch_by_period``, ``set_input_divide_by_period``, or nothing.</span>
+
+<span class="sd">       .. py:attribute:: unit</span>
+
+<span class="sd">           Free text field describing the unit of the variable. Only used as metadata.</span>
+
+<span class="sd">       .. py:attribute:: documentation</span>
+
+<span class="sd">           Free multilines text field describing the variable context and usage.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline_variable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">to_unicode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="n">attr</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span> <span class="o">=</span> <span class="n">baseline_variable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;value_type&#39;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">allowed_values</span> <span class="o">=</span> <span class="n">VALUE_TYPES</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">][</span><span class="s1">&#39;dtype&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">json_type</span> <span class="o">=</span> <span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">][</span><span class="s1">&#39;json_type&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">Enum</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;possible_values&#39;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">setter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_possible_values</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;max_length&#39;</span><span class="p">,</span> <span class="n">allowed_type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="s1">&#39;|S</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_length</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">Enum</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">default_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;default_value&#39;</span><span class="p">,</span> <span class="n">allowed_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">default_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;default_value&#39;</span><span class="p">,</span> <span class="n">allowed_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">setter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_entity</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;definition_period&#39;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">allowed_values</span> <span class="o">=</span> <span class="p">(</span><span class="n">MONTH</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">,</span> <span class="n">ETERNITY</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="n">allowed_type</span> <span class="o">=</span> <span class="n">basestring_type</span><span class="p">,</span> <span class="n">setter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="n">allowed_type</span> <span class="o">=</span> <span class="n">basestring_type</span><span class="p">,</span> <span class="n">setter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_end</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">,</span> <span class="n">setter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_reference</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cerfa_field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;cerfa_field&#39;</span><span class="p">,</span> <span class="n">allowed_type</span> <span class="o">=</span> <span class="p">(</span><span class="n">basestring_type</span><span class="p">,</span> <span class="nb">dict</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="n">allowed_type</span> <span class="o">=</span> <span class="n">basestring_type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;documentation&#39;</span><span class="p">,</span> <span class="n">allowed_type</span> <span class="o">=</span> <span class="n">basestring_type</span><span class="p">,</span> <span class="n">setter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_documentation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_set_input</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;set_input&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculate_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_calculate_output</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;calculate_output&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_period_size_independent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;is_period_size_independent&#39;</span><span class="p">,</span> <span class="n">allowed_type</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">][</span><span class="s1">&#39;is_period_size_independent&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_base_function</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;base_function&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+
+        <span class="n">formulas_attr</span><span class="p">,</span> <span class="n">unexpected_attrs</span> <span class="o">=</span> <span class="n">_partition</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">FORMULA_NAME_PREFIX</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">formulas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_formulas</span><span class="p">(</span><span class="n">formulas_attr</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">unexpected_attrs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Unexpected attributes in definition of variable &quot;</span><span class="si">{}</span><span class="s1">&quot;: </span><span class="si">{!r}</span><span class="s1">&#39;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">unexpected_attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">()))))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_neutralized</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># ----- Setters used to build the variable ----- #</span>
+
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attributes</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">allowed_values</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">allowed_type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">setter</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">attribute_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">required</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing attribute &#39;</span><span class="si">{}</span><span class="s2">&#39; in definition of variable &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attribute_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">allowed_values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed_values</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{}</span><span class="s2">&#39; for attribute &#39;</span><span class="si">{}</span><span class="s2">&#39; in variable &#39;</span><span class="si">{}</span><span class="s2">&#39;. Allowed values are &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">allowed_values</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">allowed_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">allowed_type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">allowed_type</span> <span class="o">==</span> <span class="nb">float</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{}</span><span class="s2">&#39; for attribute &#39;</span><span class="si">{}</span><span class="s2">&#39; in variable &#39;</span><span class="si">{}</span><span class="s2">&#39;. Must be of type &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">allowed_type</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">setter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">setter</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">default</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">set_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">entities</span><span class="o">.</span><span class="n">Entity</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{}</span><span class="s2">&#39; for attribute &#39;entity&#39; in variable &#39;</span><span class="si">{}</span><span class="s2">&#39;. Must be a subclass of Entity.&quot;</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">entity</span>
+
+    <span class="k">def</span> <span class="nf">set_possible_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">possible_values</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">possible_values</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{}</span><span class="s2">&#39; for attribute &#39;possible_values&#39; in variable &#39;</span><span class="si">{}</span><span class="s2">&#39;. Must be a subclass of </span><span class="si">{}</span><span class="s2">.&quot;</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">possible_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">Enum</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">possible_values</span>
+
+    <span class="k">def</span> <span class="nf">set_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">label</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">to_unicode</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">end</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Incorrect &#39;end&#39; attribute format in &#39;</span><span class="si">{}</span><span class="s2">&#39;. &#39;YYYY-MM-DD&#39; expected where YYYY, MM and DD are year, month and day. Found: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">set_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">reference</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">basestring_type</span><span class="p">):</span>
+                <span class="n">reference</span> <span class="o">=</span> <span class="p">[</span><span class="n">to_unicode</span><span class="p">(</span><span class="n">reference</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">pass</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="n">reference</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;The reference of the variable </span><span class="si">{}</span><span class="s1"> is a </span><span class="si">{}</span><span class="s1"> instead of a String or a List of Strings.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">reference</span><span class="p">)))</span>
+
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">reference</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">basestring_type</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                        <span class="s1">&#39;The reference of the variable </span><span class="si">{}</span><span class="s1"> is a </span><span class="si">{}</span><span class="s1"> instead of a String or a List of Strings.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">reference</span><span class="p">)))</span>
+
+        <span class="k">return</span> <span class="n">reference</span>
+
+    <span class="k">def</span> <span class="nf">set_documentation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">documentation</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">documentation</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="n">documentation</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_base_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_function</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">base_function</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span><span class="o">.</span><span class="n">base_function</span>
+
+        <span class="k">if</span> <span class="n">base_function</span> <span class="ow">and</span> <span class="n">base_function</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span>
+                <span class="n">missing_value</span><span class="p">,</span>
+                <span class="n">requested_period_default_value</span><span class="p">,</span>
+                <span class="n">requested_period_last_or_next_value</span><span class="p">,</span>
+                <span class="n">requested_period_last_value</span>
+                <span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unexpected base_function </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base_function</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_period_size_independent</span> <span class="ow">and</span> <span class="n">base_function</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">requested_period_last_value</span>
+
+        <span class="k">return</span> <span class="n">base_function</span>
+
+    <span class="k">def</span> <span class="nf">set_set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">set_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">set_input</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span><span class="o">.</span><span class="n">set_input</span>
+        <span class="k">return</span> <span class="n">set_input</span>
+
+    <span class="k">def</span> <span class="nf">set_calculate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calculate_output</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">calculate_output</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span><span class="o">.</span><span class="n">calculate_output</span>
+        <span class="k">return</span> <span class="n">calculate_output</span>
+
+    <span class="k">def</span> <span class="nf">set_formulas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formulas_attr</span><span class="p">):</span>
+        <span class="n">formulas</span> <span class="o">=</span> <span class="n">SortedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">formula_name</span><span class="p">,</span> <span class="n">formula</span> <span class="ow">in</span> <span class="n">formulas_attr</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">starting_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_formula_name</span><span class="p">(</span><span class="n">formula_name</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">starting_date</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You declared that &quot;</span><span class="si">{}</span><span class="s1">&quot; ends on &quot;</span><span class="si">{}</span><span class="s1">&quot;, but you wrote a formula to calculate it from &quot;</span><span class="si">{}</span><span class="s1">&quot; (</span><span class="si">{}</span><span class="s1">). The &quot;end&quot; attribute of a variable must be posterior to the start dates of all its formulas.&#39;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">starting_date</span><span class="p">,</span> <span class="n">formula_name</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+            <span class="n">formulas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">starting_date</span><span class="p">)]</span> <span class="o">=</span> <span class="n">formula</span>
+
+        <span class="c1"># If the variable is reforming a baseline variable, keep the formulas from the latter when they are not overridden by new formulas.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">first_reform_formula_date</span> <span class="o">=</span> <span class="n">formulas</span><span class="o">.</span><span class="n">peekitem</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">formulas</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">formulas</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                <span class="n">baseline_start_date</span><span class="p">:</span> <span class="n">baseline_formula</span>
+                <span class="k">for</span> <span class="n">baseline_start_date</span><span class="p">,</span> <span class="n">baseline_formula</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span><span class="o">.</span><span class="n">formulas</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">first_reform_formula_date</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">baseline_start_date</span> <span class="o">&lt;</span> <span class="n">first_reform_formula_date</span>
+                <span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">formulas</span>
+
+<div class="viewcode-block" id="Variable.parse_formula_name"><a class="viewcode-back" href="../../openfisca-python-api/variables.html#openfisca_core.variables.Variable.parse_formula_name">[docs]</a>    <span class="k">def</span> <span class="nf">parse_formula_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the starting date of a formula based on its name.</span>
+
+<span class="sd">        Valid dated name formats are : &#39;formula&#39;, &#39;formula_YYYY&#39;, &#39;formula_YYYY_MM&#39; and &#39;formula_YYYY_MM_DD&#39; where YYYY, MM and DD are a year, month and day.</span>
+
+<span class="sd">        By convention, the starting date of:</span>
+<span class="sd">            - `formula` is `0001-01-01` (minimal date in Python)</span>
+<span class="sd">            - `formula_YYYY` is `YYYY-01-01`</span>
+<span class="sd">            - `formula_YYYY_MM` is `YYYY-MM-01`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">raise_error</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Unrecognized formula name in variable &quot;</span><span class="si">{}</span><span class="s1">&quot;. Expecting &quot;formula_YYYY&quot; or &quot;formula_YYYY_MM&quot; or &quot;formula_YYYY_MM_DD where YYYY, MM and DD are year, month and day. Found: &quot;</span><span class="si">{}</span><span class="s1">&quot;.&#39;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">attribute_name</span> <span class="o">==</span> <span class="n">FORMULA_NAME_PREFIX</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">date</span><span class="o">.</span><span class="n">min</span>
+
+        <span class="n">FORMULA_REGEX</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;formula_(\d</span><span class="si">{4}</span><span class="s1">)(?:_(\d</span><span class="si">{2}</span><span class="s1">))?(?:_(\d</span><span class="si">{2}</span><span class="s1">))?$&#39;</span>  <span class="c1"># YYYY or YYYY_MM or YYYY_MM_DD</span>
+
+        <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">FORMULA_REGEX</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+            <span class="n">raise_error</span><span class="p">()</span>
+        <span class="n">date_str</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;01&#39;</span><span class="p">,</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;01&#39;</span><span class="p">])</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_str</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>  <span class="c1"># formula_2005_99_99 for instance</span>
+            <span class="n">raise_error</span><span class="p">()</span></div>
+
+    <span class="c1"># ----- Methods ----- #</span>
+
+<div class="viewcode-block" id="Variable.is_input_variable"><a class="viewcode-back" href="../../openfisca-python-api/variables.html#openfisca_core.variables.Variable.is_input_variable">[docs]</a>    <span class="k">def</span> <span class="nf">is_input_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns True if the variable is an input variable.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formulas</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></div>
+
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Variable.get_introspection_data"><a class="viewcode-back" href="../../openfisca-python-api/variables.html#openfisca_core.variables.Variable.get_introspection_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_introspection_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get instrospection data about the code of the variable.</span>
+
+<span class="sd">        :returns: (comments, source file path, source code, start line number)</span>
+<span class="sd">        :rtype: tuple</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">comments</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getcomments</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+
+        <span class="c1"># Handle dynamically generated variable classes or Jupyter Notebooks, which have no source.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">absolute_file_path</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsourcefile</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="n">source_file_path</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">source_file_path</span> <span class="o">=</span> <span class="n">absolute_file_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_package_metadata</span><span class="p">()[</span><span class="s1">&#39;location&#39;</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">source_lines</span><span class="p">,</span> <span class="n">start_line_number</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsourcelines</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+            <span class="c1"># Python 2 backward compatibility</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source_lines</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">bytes</span><span class="p">):</span>
+                <span class="n">source_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">source_line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">source_line</span> <span class="ow">in</span> <span class="n">source_lines</span><span class="p">]</span>
+            <span class="n">source_code</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">source_lines</span><span class="p">))</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">source_code</span><span class="p">,</span> <span class="n">start_line_number</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">comments</span><span class="p">,</span> <span class="n">to_unicode</span><span class="p">(</span><span class="n">source_file_path</span><span class="p">),</span> <span class="n">to_unicode</span><span class="p">(</span><span class="n">source_code</span><span class="p">),</span> <span class="n">start_line_number</span></div>
+
+<div class="viewcode-block" id="Variable.get_formula"><a class="viewcode-back" href="../../openfisca-python-api/variables.html#openfisca_core.variables.Variable.get_formula">[docs]</a>    <span class="k">def</span> <span class="nf">get_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the formula used to compute the variable at the given period.</span>
+
+<span class="sd">        If no period is given and the variable has several formula, return the oldest formula.</span>
+
+<span class="sd">        :returns: Formula used to compute the variable</span>
+<span class="sd">        :rtype: function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">formulas</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">formulas</span><span class="o">.</span><span class="n">peekitem</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># peekitem gets the 1st key-value tuple (the oldest start_date and formula). Return the formula.</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
+            <span class="n">instant</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">start</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">instant</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">start</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">instant</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="ow">and</span> <span class="n">instant</span><span class="o">.</span><span class="n">date</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">start_date</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formulas</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">start_date</span> <span class="o">&lt;=</span> <span class="n">instant</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">formulas</span><span class="p">[</span><span class="n">start_date</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">clone</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">clone</span></div>
+
+
+<span class="k">def</span> <span class="nf">_partition</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">predicate</span><span class="p">):</span>
+    <span class="n">true_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">false_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="n">true_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">false_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">return</span> <span class="n">true_dict</span><span class="p">,</span> <span class="n">false_dict</span>
+
+
+<div class="viewcode-block" id="get_neutralized_variable"><a class="viewcode-back" href="../../openfisca-python-api/variables.html#openfisca_core.variables.get_neutralized_variable">[docs]</a><span class="k">def</span> <span class="nf">get_neutralized_variable</span><span class="p">(</span><span class="n">variable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a new neutralized variable (to be used by reforms).</span>
+<span class="sd">        A neutralized variable always returns its default value, and does not cache anything.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">is_neutralized</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;[Neutralized]&#39;</span> <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;[Neutralized] </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">label</span><span class="p">),</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+</pre></div>
+
+          </div>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

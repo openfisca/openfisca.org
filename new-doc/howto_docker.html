@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>How to use OpenFisca with Docker &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installing OpenFisca in an offline environment" href="offline-environment.html" />
+    <link rel="prev" title="Use OpenFisca on the web" href="howto-web-no-local-install.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="offline-environment.html" title="Installing OpenFisca in an offline environment"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="howto-web-no-local-install.html" title="Use OpenFisca on the web"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="recipes.html" accesskey="U">Recipes for OpenFisca</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key-concepts/README.html">Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coding-the-legislation/README.html">From law to code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openfisca-web-api/README.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="recipes.html">Recipes for OpenFisca</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="howto-web-no-local-install.html">Use OpenFisca on the web</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to use OpenFisca with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offline-environment.html">Installing OpenFisca in an offline environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows-no-admin.html">Work on OpenFisca on a Windows without being administrator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_situations.html">How to test your changes on &#8220;ready to use&#8221; situations (for OpenFisca-France)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute/README.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="summary.html">Docs</a></li>
+              
+                <li><a href="recipes.html">Recipes for OpenFisca</a></li>
+              
+              <li>How to use OpenFisca with Docker</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="how-to-use-openfisca-with-docker">
+<span id="how-to-use-openfisca-with-docker"></span><h1>How to use OpenFisca with Docker<a class="headerlink" href="#how-to-use-openfisca-with-docker" title="Permalink to this headline">¶</a></h1>
+<p>When you want to use OpenFisca, either for running simulations or editing a country package, you need to setup a specific environement.
+If you don&#8217;t want the OpenFisca environment to interfere with your pre-existing setup, or if you don&#8217;t have one, you can use a container such as Docker that will set everything up for you.</p>
+<div class="section" id="run-openfisca-on-docker">
+<span id="run-openfisca-on-docker"></span><h2>Run OpenFisca on Docker<a class="headerlink" href="#run-openfisca-on-docker" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li>Install <a class="reference external" href="https://docs.docker.com/install/">Docker</a></li>
+<li>Create a docker file in the directory you wish to work on</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FROM</span> <span class="n">python</span><span class="p">:</span><span class="mi">2</span><span class="o">-</span><span class="n">stretch</span> 
+<span class="n">RUN</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">openfisca_country_template</span>
+<span class="n">WORKDIR</span> <span class="o">/</span><span class="n">app</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li>Build the container</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker build --rm -t openfisca-country-template .
+</pre></div>
+</div>
+<ol class="simple">
+<li>Run the container</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run -it openfisca-country-template bash
+</pre></div>
+</div>
+</div>
+<div class="section" id="interface-local-files-with-openfisca-on-docker">
+<span id="interface-local-files-with-openfisca-on-docker"></span><h2>Interface local files with OpenFisca on Docker<a class="headerlink" href="#interface-local-files-with-openfisca-on-docker" title="Permalink to this headline">¶</a></h2>
+<p>If you need to run local files with your Docker image, you can interface (i.e. mount) a local directory with a directory in your docker interface.
+E.g. You need to update a country package such as <code class="docutils literal"><span class="pre">openfisca-country-template</span></code></p>
+<ol class="simple">
+<li>Create a Dockerfile with <code class="docutils literal"><span class="pre">openfisca-core</span></code> in your <code class="docutils literal"><span class="pre">project</span></code> directory</li>
+</ol>
+<p>The Dokerfile:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FROM</span> <span class="n">python</span><span class="p">:</span><span class="mi">2</span><span class="o">-</span><span class="n">stretch</span> 
+<span class="n">RUN</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">OpenFisca</span><span class="o">-</span><span class="n">core</span>
+<span class="n">WORKDIR</span> <span class="o">/</span><span class="n">country</span><span class="o">-</span><span class="n">template</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li>Clone the <a class="reference external" href="https://github.com/openfisca/country-template"><code class="docutils literal"><span class="pre">country-template</span></code></a> in the directory</li>
+</ol>
+<p>The directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>project
+│   README.md
+│   Dockerfile    
+│
+└───country-template
+</pre></div>
+</div>
+<ol class="simple">
+<li>Build the container</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker build --rm -t openfisca-core .
+</pre></div>
+</div>
+<ol class="simple">
+<li>Run the container</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run -it -v /absolute/path/to/country-template/:/country-template openfisca-core bash
+</pre></div>
+</div>
+<ol class="simple">
+<li>Use <code class="docutils literal"><span class="pre">country-template</span></code> in the Docker container
+Use the <code class="docutils literal"><span class="pre">country-template</span></code> in the docker container, any changes to the <code class="docutils literal"><span class="pre">country-template</span></code> local files will affect the <code class="docutils literal"><span class="pre">country-template</span></code> files in the container.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="howto-web-no-local-install.html" title="previous chapter (use the left arrow)">Use OpenFisca on the web</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="offline-environment.html" title="next chapter (use the right arrow)">Installing OpenFisca in an offline environment</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="offline-environment.html" title="Installing OpenFisca in an offline environment"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="howto-web-no-local-install.html" title="Use OpenFisca on the web"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="recipes.html" >Recipes for OpenFisca</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

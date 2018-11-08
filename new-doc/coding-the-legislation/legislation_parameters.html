@@ -1,0 +1,500 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Parameters &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bootstraping a new country package" href="bootstrapping_a_new_country_package.html" />
+    <link rel="prev" title="Writing YAML tests" href="writing_yaml_tests.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bootstrapping_a_new_country_package.html" title="Bootstraping a new country package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="writing_yaml_tests.html" title="Writing YAML tests"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">From law to code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts/README.html">Key concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">From law to code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="10_basic_example.html">Coding a formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20_input_variables.html">Introducing an input variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="25_vectorial_computing.html">Vectorial computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="35_periods.html">Periods and instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="40_legislation_evolutions.html">Legislation evolutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="50_entities.html">Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inferences.html">Inferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing_yaml_tests.html">Writing YAML tests</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootstrapping_a_new_country_package.html">Bootstraping a new country package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#tutorial">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#additional-documentation">Additional documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/README.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/README.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+                <li><a href="README.html">From law to code</a></li>
+              
+              <li>Parameters</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="parameters">
+<span id="parameters"></span><h1>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="parameters.html">Legislation parameters</a> can be found in the <code class="docutils literal"><span class="pre">parameters</span></code> directory of your country package.</p>
+<p>The parameters are organized with in a <a class="reference external" href="https://en.wikipedia.org/wiki/Tree_structure">tree structure</a>.</p>
+<blockquote>
+<div><strong>Example</strong>: <code class="docutils literal"><span class="pre">tax_on_salary.public_sector.rate</span></code> can be found in <code class="docutils literal"><span class="pre">parameters/tax_on_salary/public_sector/rate.yml</span></code>.</div></blockquote>
+<p>Example of a <code class="docutils literal"><span class="pre">parameters</span></code> directory:</p>
+<ul class="simple">
+<li>parameters<ul>
+<li>tax_on_salary<ul>
+<li><strong>tax_scale.yaml</strong></li>
+<li>public_sector<ul>
+<li><strong>rate.yaml</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>universal_income<ul>
+<li><strong>minimum_age.yaml</strong></li>
+<li><strong>amount.yaml</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>In this file structure:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">tax_on_salaries</span></code>, <code class="docutils literal"><span class="pre">tax_on_salary.public_sector</span></code>, <code class="docutils literal"><span class="pre">universal_income</span></code> are <strong>nodes</strong>;</li>
+<li><code class="docutils literal"><span class="pre">tax_on_salaries.tax_scale</span></code>, <code class="docutils literal"><span class="pre">tax_on_salary.public_sector.rate</span></code>,<code class="docutils literal"><span class="pre">universal_income.minimum_age</span></code>,<code class="docutils literal"><span class="pre">universal_income.amount</span></code> are <strong>parameters</strong> (or scales).</li>
+</ul>
+<div class="section" id="how-to-write-a-new-parameter">
+<span id="how-to-write-a-new-parameter"></span><h2>How to write a new parameter<a class="headerlink" href="#how-to-write-a-new-parameter" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>if you wish to update a parameter, read our <a class="reference internal" href="40_legislation_evolutions.html"><span class="doc">legislation evolution page</span></a>.</div></blockquote>
+<ol class="simple">
+<li>Find where the parameter fits</li>
+</ol>
+<p>A parameter is located inside a <strong>node</strong>, that has the same name as the directory it is contained in.</p>
+<blockquote>
+<div><strong>Example</strong>: <code class="docutils literal"><span class="pre">tax_on_salary.public_sector</span></code> is the node that contains the <code class="docutils literal"><span class="pre">tax_on_salary.public_sector.rate</span></code>parameter.</div></blockquote>
+<ol class="simple">
+<li>Create a new parameter YAML file</li>
+</ol>
+<p>A legislative parameter is defined by a YAML file of the same name. Possible attributes are:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">description</span></code> (optional) Description;</li>
+<li><code class="docutils literal"><span class="pre">reference</span></code> (optional) Legislative reference;</li>
+<li><code class="docutils literal"><span class="pre">unit</span></code> (optional) Can be:<ul>
+<li><code class="docutils literal"><span class="pre">year</span></code> : The values are years;</li>
+<li><code class="docutils literal"><span class="pre">currency</span></code>: The values are in the unit of currency of the country;</li>
+<li><code class="docutils literal"><span class="pre">/1</span></code>: The values are percentages, with <code class="docutils literal"><span class="pre">1.0</span></code>=100%;</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">values</span></code>: Value of the parameter for several dates.</li>
+</ul>
+<p>Sample file <code class="docutils literal"><span class="pre">parameters/universal_income/amount.yaml</span></code></p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Universal income</span>
+<span class="l l-Scalar l-Scalar-Plain">unit</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">currency</span>
+<span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">1993-01-01</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
+  <span class="l l-Scalar l-Scalar-Plain">2010-01-01</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1500</span>
+    <span class="l l-Scalar l-Scalar-Plain">reference</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">http://law.reference.org/universal_income</span>
+  <span class="l l-Scalar l-Scalar-Plain">2020-01-01</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">expected</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1700</span>
+</pre></div>
+</div>
+<p>In this example, the parameter <code class="docutils literal"><span class="pre">universal_income.amount</span></code> is:</p>
+<ul class="simple">
+<li>undefined before 1993;</li>
+<li>equal to 1000 from 1993 to 2010;</li>
+<li>equal to 1500 in 2010</li>
+<li>expected to be raised to 1700 &#8220;local currency&#8221; in 2020.</li>
+</ul>
+<p>The ordering of the dates has no effect. It is recommended to add legislative references for every value?</p>
+<ol class="simple">
+<li>Use the parameter in a variable</li>
+</ol>
+<p>See <a class="reference external" href="/coding-the-legislation/10_basic_example.html#example-with-legislation-parameters">this example of a variable using legislation parameters</a>.</p>
+<div class="section" id="naming-conventions-and-reserved-words">
+<span id="naming-conventions-and-reserved-words"></span><h3>Naming conventions and reserved words<a class="headerlink" href="#naming-conventions-and-reserved-words" title="Permalink to this headline">¶</a></h3>
+<p>Names should begin with a lowercase letter and should contain only lowercase letters and the underscore (<code class="docutils literal"><span class="pre">_</span></code>).</p>
+<p>The following keywords are reserved and should not be used as names : <code class="docutils literal"><span class="pre">description</span></code>, <code class="docutils literal"><span class="pre">reference</span></code>, <code class="docutils literal"><span class="pre">values</span></code>, <code class="docutils literal"><span class="pre">brackets</span></code>.</p>
+<p>YAML parameter files should not be name <code class="docutils literal"><span class="pre">index.yaml</span></code>.</p>
+</div>
+<div class="section" id="advanced-uses">
+<span id="advanced-uses"></span><h3>Advanced uses<a class="headerlink" href="#advanced-uses" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="use-a-yaml-files-to-define-nodes">
+<span id="use-a-yaml-files-to-define-nodes"></span><h4>Use a YAML files to define nodes<a class="headerlink" href="#use-a-yaml-files-to-define-nodes" title="Permalink to this headline">¶</a></h4>
+<p>A node can be defined with a YAML file instead of a directory. In such a case, the name of the file defines the name of the node. Such a file can define children nodes (which can define grandchildren...).</p>
+<p>Sample <code class="docutils literal"><span class="pre">parameters/tax_on_salary.yaml</span></code>:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Tax on salaries</span>
+<span class="l l-Scalar l-Scalar-Plain">reference</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">http://fiscaladministration.government/tax_on_salaries.html</span>
+<span class="l l-Scalar l-Scalar-Plain">tax_scale</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">bracket</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="l l-Scalar l-Scalar-Plain">public_sector</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Tax on salaries for public sector</span>
+  <span class="l l-Scalar l-Scalar-Plain">rate</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
+     <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-scales">
+<span id="create-scales"></span><h4>Create Scales<a class="headerlink" href="#create-scales" title="Permalink to this headline">¶</a></h4>
+<p>Scales are constituted of brackets. Brackets are defined by amounts, bases, rates, average rates and thresholds.</p>
+<p>Sample <code class="docutils literal"><span class="pre">parameters/tax_on_salary/tax_scale.yaml</span></code>:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Scale for tax on salaries</span>
+<span class="l l-Scalar l-Scalar-Plain">brackets</span><span class="p p-Indicator">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rate</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">1950-01-01</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>
+    <span class="l l-Scalar l-Scalar-Plain">2010-01-01</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.02</span>
+  <span class="l l-Scalar l-Scalar-Plain">threshold</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">1950-01-01</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rate</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">1950-01-01</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.2</span>
+  <span class="l l-Scalar l-Scalar-Plain">threshold</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">1950-01-01</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2000</span>
+</pre></div>
+</div>
+<p>Example: <a class="reference external" href="https://fr.openfisca.org/legislation/impot_revenu.bareme">the french tax scale on income</a></p>
+</div>
+<div class="section" id="import-parameters-from-ipp-tables">
+<span id="import-parameters-from-ipp-tables"></span><h4>Import parameters from IPP tables<a class="headerlink" href="#import-parameters-from-ipp-tables" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div>This section applies only to OpenFisca-France.</div></blockquote>
+<p>The <a class="reference external" href="http://www.ipp.eu/"><abbr title="Institut des politiques publiques">IPP</abbr></a> is a French centre in economics which produces tax and benefit tables in the <code class="docutils literal"><span class="pre">XLSX</span></code> format, with parameters history.</p>
+<p>The OpenFisca team works on importing those data into the YAML parameter files of OpenFisca-France.</p>
+<p>See <a class="reference external" href="https://github.com/openfisca/openfisca-france/tree/master/openfisca_france/scripts/parameters/baremes_ipp">this README</a> for more information.</p>
+</div>
+</div>
+</div>
+<div class="section" id="computing-a-parameter-that-depends-on-a-variable-fancy-indexing">
+<span id="computing-a-parameter-that-depends-on-a-variable-fancy-indexing"></span><h2>Computing a parameter that depends on a variable (fancy indexing)<a class="headerlink" href="#computing-a-parameter-that-depends-on-a-variable-fancy-indexing" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, the value of a parameter depends on a variable (e.g. a housing benefit that depends on the zone the house is built on).</p>
+<p>To be more specific, let&#8217;s assume that:</p>
+<ul class="simple">
+<li>Households who rent their accomodation can get a <code class="docutils literal"><span class="pre">housing_benefit</span></code></li>
+<li>The amount of this benefit depends on which <code class="docutils literal"><span class="pre">zone</span></code> the household lives in. The <code class="docutils literal"><span class="pre">zone</span></code> can take only three values: <code class="docutils literal"><span class="pre">zone_1</span></code>, <code class="docutils literal"><span class="pre">zone_2</span></code> or <code class="docutils literal"><span class="pre">zone_3</span></code>.</li>
+<li>The amount also depends on the composition of the household.</li>
+</ul>
+<p>The parameters of this benefit can be defined in a <code class="docutils literal"><span class="pre">housing_benefit.yaml</span></code> file:</p>
+<div class="highlight-YAML"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">zone_1</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">single</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2015-01-01</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">150</span>
+  <span class="l l-Scalar l-Scalar-Plain">couple</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">couple,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2015-01-01</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">250</span>
+  <span class="l l-Scalar l-Scalar-Plain">per_child</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">child,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2015-01-01</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="l l-Scalar l-Scalar-Plain">zone_2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">single</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">2&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2015-01-01</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">120</span>
+  <span class="l l-Scalar l-Scalar-Plain">couple</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">couple,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">2&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2015-01-01</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">220</span>
+  <span class="l l-Scalar l-Scalar-Plain">per_child</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">child,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">2&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2015-01-01</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">60</span>
+<span class="l l-Scalar l-Scalar-Plain">zone_3</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">single</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">3&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2015-01-01</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">100</span>
+  <span class="l l-Scalar l-Scalar-Plain">couple</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">couple,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">3&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2015-01-01</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">180</span>
+  <span class="l l-Scalar l-Scalar-Plain">per_child</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">child,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">3&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2015-01-01</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>
+</pre></div>
+</div>
+<p>Then the formula calculting <code class="docutils literal"><span class="pre">housing_benefit</span></code> can be implemented with:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+  <span class="n">is_couple</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;couple&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+  <span class="n">nb_children</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;nb_children&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+  <span class="n">zone</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;zone&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+
+  <span class="n">P</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">housing_benefit</span><span class="p">[</span><span class="n">zone</span><span class="p">]</span>
+
+  <span class="k">return</span> <span class="n">where</span><span class="p">(</span><span class="n">is_couple</span><span class="p">,</span> <span class="n">P</span><span class="o">.</span><span class="n">couple</span><span class="p">,</span> <span class="n">P</span><span class="o">.</span><span class="n">single</span><span class="p">)</span> <span class="o">+</span> <span class="n">nb_children</span> <span class="o">*</span> <span class="n">P</span><span class="o">.</span><span class="n">per_children</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parameters(period).housing_benefit[zone]</span></code> return the parameters for the zone corresponding to the household.</p>
+<p>If there are many households in your simulation, this parameter will be <strong>vectorial</strong> : it may have a different value for each household of your entity.</p>
+<p>To be able to use this notation, all the children node of the parameter node <code class="docutils literal"><span class="pre">housing_benefit</span></code> must be <strong>homogenous</strong>. In the previous example, <code class="docutils literal"><span class="pre">housing_benefit.zone_1</span></code>, <code class="docutils literal"><span class="pre">housing_benefit.zone_2</span></code>, <code class="docutils literal"><span class="pre">housing_benefit.zone_3</span></code> are homogenous, as they have the same subnodes.</p>
+<p>However, let&#8217;s imagine that <code class="docutils literal"><span class="pre">housing_benefit.yaml</span></code> had another subnode named <code class="docutils literal"><span class="pre">coeff_furnished</span></code>, which described a coefficient to apply to the benefit is the accomodation is rented furnished:</p>
+<p><code class="docutils literal"><span class="pre">housing_benefit.yaml</span></code> content:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">coeff_furnished</span><span class="p">:</span>
+  <span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Coefficient to apply if the accomodation is rented furnished&quot;</span>
+    <span class="n">values</span><span class="p">:</span>
+      <span class="mi">2015</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="p">:</span>
+        <span class="n">value</span><span class="p">:</span> <span class="mf">0.75</span>
+<span class="n">zone_1</span><span class="p">:</span>
+  <span class="n">single</span><span class="p">:</span>
+    <span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Amount of housing benefit for a single person, in zone 1&quot;</span>
+    <span class="n">values</span><span class="p">:</span>
+      <span class="mi">2015</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="p">:</span>
+        <span class="n">value</span><span class="p">:</span> <span class="mi">150</span>
+<span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, <code class="docutils literal"><span class="pre">parameters(period).housing_benefit[zone]</span></code> would raise en error, whatever <code class="docutils literal"><span class="pre">zone</span></code> contains, as <strong>the homogeneity condition is not respected</strong>: <code class="docutils literal"><span class="pre">housing_benefit.zone_1</span></code> is a node, while <code class="docutils literal"><span class="pre">housing_benefit.coeff_furnished</span></code> is a parameter.</p>
+<p>To solve this issue, the good practice would be to create an intermediate node <code class="docutils literal"><span class="pre">amount_by_zone</span></code>:</p>
+<p><code class="docutils literal"><span class="pre">housing_benefit.yaml</span></code> content:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">coeff_furnished</span><span class="p">:</span>
+  <span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Coefficient to apply if the accomodation is rented furnished&quot;</span>
+    <span class="n">values</span><span class="p">:</span>
+      <span class="mi">2015</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="p">:</span>
+        <span class="n">value</span><span class="p">:</span> <span class="mf">0.75</span>
+
+<span class="n">amount_by_zone</span><span class="p">:</span>
+  <span class="n">zone_1</span><span class="p">:</span>
+    <span class="n">single</span><span class="p">:</span>
+      <span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Amount of housing benefit for a single person, in zone 1&quot;</span>
+      <span class="n">values</span><span class="p">:</span>
+        <span class="mi">2015</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="p">:</span>
+          <span class="n">value</span><span class="p">:</span> <span class="mi">150</span>
+  <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And then to get <code class="docutils literal"><span class="pre">parameters(period).housing_benefit.amount_by_zone[zone]</span></code></p>
+</div>
+<div class="section" id="how-to-navigate-the-parameters-in-python">
+<span id="how-to-navigate-the-parameters-in-python"></span><h2>How to navigate the parameters in Python<a class="headerlink" href="#how-to-navigate-the-parameters-in-python" title="Permalink to this headline">¶</a></h2>
+<p>Set-up your python file by importing a <code class="docutils literal"><span class="pre">country</span> <span class="pre">package</span></code> and building the <code class="docutils literal"><span class="pre">tax</span> <span class="pre">and</span> <span class="pre">benefits</span> <span class="pre">system</span></code></p>
+<blockquote>
+<div><p>Example :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openfisca_country_template</span>
+<span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">openfisca_country_template</span><span class="o">.</span><span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="access-a-parameter-for-all-periods">
+<span id="access-a-parameter-for-all-periods"></span><h3>Access a parameter for all periods<a class="headerlink" href="#access-a-parameter-for-all-periods" title="Permalink to this headline">¶</a></h3>
+<p>To access a point in the parameter tree, call <code class="docutils literal"><span class="pre">tax_benefit_system.parameters</span></code></p>
+<blockquote>
+<div><p>Example :
+Access the <code class="docutils literal"><span class="pre">benefit</span></code> branch of the <code class="docutils literal"><span class="pre">openfisca-country-template</span></code> legislation</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">benefits</span>
+</pre></div>
+</div>
+<p>Returns:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>basic_income:
+    <span class="m">2015</span>-12-01: <span class="m">600</span>.0
+housing_allowance:
+  <span class="m">2016</span>-12-01: None
+  <span class="m">2010</span>-01-01: <span class="m">0</span>.25
+</pre></div>
+</div>
+<p>Access <code class="docutils literal"><span class="pre">basic_income</span></code>, a parameter of the <code class="docutils literal"><span class="pre">benefits</span></code> branch.</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">benefits</span><span class="o">.</span><span class="n">basic_income</span>
+</pre></div>
+</div>
+<p>Returns:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="m">2015</span>-12-01: <span class="m">600</span>.0
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="access-a-parameter-for-a-specific-period">
+<span id="access-a-parameter-for-a-specific-period"></span><h3>Access a parameter for a specific period<a class="headerlink" href="#access-a-parameter-for-a-specific-period" title="Permalink to this headline">¶</a></h3>
+<p>Request a branch of a parameter at a given date with the <code class="docutils literal"><span class="pre">parameters.benefits('2015-07-01')</span></code> notation.</p>
+</div>
+</div>
+<div class="section" id="how-to-update-parameters-in-python">
+<span id="how-to-update-parameters-in-python"></span><h2>How to update parameters in python<a class="headerlink" href="#how-to-update-parameters-in-python" title="Permalink to this headline">¶</a></h2>
+<p>To add an entry to an existing parameter, use <code class="docutils literal"><span class="pre">update</span></code>:</p>
+<blockquote>
+<div><p>Example:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">benefits</span><span class="o">.</span><span class="n">basic_bro</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;2017-01&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">benefits</span><span class="o">.</span><span class="n">basic_bro</span>
+</pre></div>
+</div>
+<p>Returns:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="m">2017</span>-01-01: <span class="m">2000</span>
+<span class="m">2015</span>-12-01: <span class="m">600</span>.0
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="writing_yaml_tests.html" title="previous chapter (use the left arrow)">Writing YAML tests</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="bootstrapping_a_new_country_package.html" title="next chapter (use the right arrow)">Bootstraping a new country package</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bootstrapping_a_new_country_package.html" title="Bootstraping a new country package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="writing_yaml_tests.html" title="Writing YAML tests"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >From law to code</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

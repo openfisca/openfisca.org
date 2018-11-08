@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Simulation generator &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="openfisca-run-test" href="openfisca-run-test.html" />
+    <link rel="prev" title="Holders" href="holder.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="openfisca-run-test.html" title="openfisca-run-test"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="holder.html" title="Holders"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Openfisca Python API</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts/README.html">Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding-the-legislation/README.html">From law to code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/README.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/README.html">Contribute</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Openfisca Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tax-benefit-system.html">TaxBenefitSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulations.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entities.html">Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_runner.html">tools.test_runner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer.html">Tracer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enum_array.html">Enum &amp; EnumArray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holder.html">Holders</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Simulation generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openfisca-run-test.html">openfisca-run-test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openfisca_serve.html">openfisca serve</a></li>
+</ul>
+</li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+                <li><a href="index.html">Openfisca Python API</a></li>
+              
+              <li>Simulation generator</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="module-openfisca_core.scripts.simulation_generator">
+<span id="simulation-generator"></span><h1>Simulation generator<a class="headerlink" href="#module-openfisca_core.scripts.simulation_generator" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="openfisca_core.scripts.simulation_generator.make_simulation">
+<code class="descclassname">openfisca_core.scripts.simulation_generator.</code><code class="descname">make_simulation</code><span class="sig-paren">(</span><em>tax_benefit_system</em>, <em>nb_persons</em>, <em>nb_groups</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/scripts/simulation_generator.html#make_simulation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.scripts.simulation_generator.make_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a simulation containing nb_persons persons spread in nb_groups groups.</p>
+<p>Exemple:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core.scripts.simulation_generator</span> <span class="k">import</span> <span class="n">make_simulation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_france</span> <span class="k">import</span> <span class="n">CountryTaxBenefitSystem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbs</span> <span class="o">=</span> <span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span> <span class="o">=</span> <span class="n">make_simulation</span><span class="p">(</span><span class="n">tbs</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Create a simulation with 400 persons, spread among 100 families</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;revenu_disponible&#39;</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="openfisca_core.scripts.simulation_generator.randomly_init_variable">
+<code class="descclassname">openfisca_core.scripts.simulation_generator.</code><code class="descname">randomly_init_variable</code><span class="sig-paren">(</span><em>simulation</em>, <em>variable_name</em>, <em>period</em>, <em>max_value</em>, <em>condition=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/scripts/simulation_generator.html#randomly_init_variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.scripts.simulation_generator.randomly_init_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialise a variable with random values (from 0 to max_value) for the given period.
+If a condition vector is provided, only set the value of persons or groups for which condition is True.</p>
+<p>Exemple:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core.scripts.simulation_generator</span> <span class="k">import</span> <span class="n">make_simulation</span><span class="p">,</span> <span class="n">randomly_init_variable</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_france</span> <span class="k">import</span> <span class="n">CountryTaxBenefitSystem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbs</span> <span class="o">=</span> <span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span> <span class="o">=</span> <span class="n">make_simulation</span><span class="p">(</span><span class="n">tbs</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Create a simulation with 400 persons, spread among 100 families</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomly_init_variable</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="s1">&#39;salaire_net&#39;</span><span class="p">,</span> <span class="mi">2017</span><span class="p">,</span> <span class="n">max_value</span> <span class="o">=</span> <span class="mi">50000</span><span class="p">,</span> <span class="n">condition</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">famille</span><span class="o">.</span><span class="n">DEMANDEUR</span><span class="p">))</span>  <span class="c1"># Randomly set a salaire_net for all persons between 0 and 50000?</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;revenu_disponible&#39;</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="holder.html" title="previous chapter (use the left arrow)">Holders</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="openfisca-run-test.html" title="next chapter (use the right arrow)">openfisca-run-test</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="openfisca-run-test.html" title="openfisca-run-test"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="holder.html" title="Holders"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Openfisca Python API</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>OpenFisca Web API &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Endpoints" href="endpoints.html" />
+    <link rel="prev" title="Bootstraping a new country package" href="../coding-the-legislation/bootstrapping_a_new_country_package.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="endpoints.html" title="Endpoints"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../coding-the-legislation/bootstrapping_a_new_country_package.html" title="Bootstraping a new country package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts/README.html">Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding-the-legislation/README.html">From law to code</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OpenFisca Web API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html">Endpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-output-data.html">Using the /calculate endpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#public-france-api">Public France API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-cases">Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conditions">Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hosting-an-api-instance">Hosting an API instance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/README.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+              <li>OpenFisca Web API</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="openfisca-web-api">
+<span id="openfisca-web-api"></span><h1>OpenFisca Web API<a class="headerlink" href="#openfisca-web-api" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>OpenFisca provides a web API package compatible with all country packages.
+Using a web interface, App Developers can access information and computations without installing anything locally.</p>
+<div class="section" id="public-france-api">
+<span id="public-france-api"></span><h2>Public France API<a class="headerlink" href="#public-france-api" title="Permalink to this headline">¶</a></h2>
+<p>The latest version of the France web api is <a class="reference external" href="https://fr.openfisca.org/api/v21"><code class="docutils literal"><span class="pre">fr.openfisca.org/api/v21</span></code></a>.
+Its endpoints are documented in <a class="reference external" href="https://fr.openfisca.org/legislation/swagger"><code class="docutils literal"><span class="pre">fr.openfisca.org/legislation/swagger</span></code></a>.
+The stability of this API is guaranteed over time.</p>
+</div>
+<div class="section" id="use-cases">
+<span id="use-cases"></span><h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
+<p>The following services use the OpenFisca Web API:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://fr.openfisca.org/legislation">fr.openfisca.org/legislation</a>, giving you information on available OpenFisca variables.</li>
+<li><a class="reference external" href="https://mes-aides.gouv.fr">Mes Aides</a>, the French social benefits simulator.</li>
+<li><a class="reference external" href="https://pa-comp.firebaseapp.com">PA-comp</a>, a divorce fiscal impact simulator.</li>
+</ul>
+</div>
+<div class="section" id="conditions">
+<span id="conditions"></span><h2>Conditions<a class="headerlink" href="#conditions" title="Permalink to this headline">¶</a></h2>
+<p>Please remember that OpenFisca is free software, licensed under an <a class="reference external" href="https://choosealicense.com/licenses/agpl-3.0/">Affero GPL license</a>. That means you have to provide access to the source code of the API you make available, including any changes you might have made on the original code. You also have to provide a link to the OpenFisca source code, and state its license, in a place that is easily discoverable by users of your software.</p>
+<p>You could for example add one the following lines to a “credits” page:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span>Computations done by <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://openfisca.org&quot;</span><span class="p">&gt;</span>OpenFisca<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>, the <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://choosealicense.com/licenses/agpl-3.0/&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;AGPL-3.0&quot;</span><span class="p">&gt;</span>free and open-source<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> social and fiscal computation engine. Source code available at <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://github.com/openfisca&quot;</span><span class="p">&gt;</span>github.com/openfisca<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.
+</pre></div>
+</div>
+<div class="highlight-html"><div class="highlight"><pre><span></span>Calculs effectués par <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://openfisca.org&quot;</span><span class="p">&gt;</span>OpenFisca<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>, le moteur <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://choosealicense.com/licenses/agpl-3.0/&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;AGPL-3.0&quot;</span><span class="p">&gt;</span>libre et ouvert<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> du système social et fiscal. Code source disponible sur <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://github.com/openfisca&quot;</span><span class="p">&gt;</span>github.com/openfisca<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.
+</pre></div>
+</div>
+</div>
+<div class="section" id="hosting-an-api-instance">
+<span id="hosting-an-api-instance"></span><h2>Hosting an API instance<a class="headerlink" href="#hosting-an-api-instance" title="Permalink to this headline">¶</a></h2>
+<p>Let App Developers access your country package information and computations by serving the web API that comes bundled with the OpenFisca-Core module. See the <a class="reference external" href="https://github.com/openfisca/openfisca-core#serving-the-api">technical documentation</a> for serving instructions.</p>
+<div class="section" id="track-your-api">
+<span id="track-your-api"></span><h3>Track your API<a class="headerlink" href="#track-your-api" title="Permalink to this headline">¶</a></h3>
+<p>If you want to track how your API is being used, you can install the <a class="reference external" href="https://github.com/openfisca/openfisca-core#tracker">OpenFisca Tracker</a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="../coding-the-legislation/bootstrapping_a_new_country_package.html" title="previous chapter (use the left arrow)">Bootstraping a new country package</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="endpoints.html" title="next chapter (use the right arrow)">Endpoints</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="endpoints.html" title="Endpoints"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../coding-the-legislation/bootstrapping_a_new_country_package.html" title="Bootstraping a new country package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>
