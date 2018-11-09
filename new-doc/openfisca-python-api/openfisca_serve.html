@@ -139,6 +139,58 @@
             
   <div class="section" id="openfisca-serve">
 <h1>openfisca serve<a class="headerlink" href="#openfisca-serve" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">openfisca</span> <span class="n">serve</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">COUNTRY_PACKAGE</span><span class="p">]</span>
+                       <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="p">[</span><span class="n">EXTENSIONS</span> <span class="p">[</span><span class="n">EXTENSIONS</span> <span class="o">...</span><span class="p">]]]</span>
+                       <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="p">[</span><span class="n">REFORMS</span> <span class="p">[</span><span class="n">REFORMS</span> <span class="o">...</span><span class="p">]]]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">PORT</span><span class="p">]</span>
+                       <span class="p">[</span><span class="o">--</span><span class="n">tracker</span><span class="o">-</span><span class="n">url</span> <span class="n">TRACKER_URL</span><span class="p">]</span>
+                       <span class="p">[</span><span class="o">--</span><span class="n">tracker</span><span class="o">-</span><span class="n">idsite</span> <span class="n">TRACKER_IDSITE</span><span class="p">]</span>
+                       <span class="p">[</span><span class="o">--</span><span class="n">tracker</span><span class="o">-</span><span class="n">token</span> <span class="n">TRACKER_TOKEN</span><span class="p">]</span>
+                       <span class="p">[</span><span class="o">--</span><span class="n">welcome</span><span class="o">-</span><span class="n">message</span> <span class="n">WELCOME_MESSAGE</span><span class="p">]</span>
+                       <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="n">CONFIGURATION_FILE</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="Named Arguments">
+<h2>Named Arguments<a class="headerlink" href="#Named Arguments" title="Permalink to this headline">¶</a></h2>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd>-c, &#8211;country-package</kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>country package to use. If not provided, an automatic detection will be attempted by scanning the python packages installed in your environment which name contains the word &#8220;openfisca&#8221;.</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-e, &#8211;extensions</kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>extensions to load</td></tr>
+<tr><td class="option-group">
+<kbd>-r, &#8211;reforms</kbd></td>
+<td>reforms to apply to the country package</td></tr>
+<tr><td class="option-group">
+<kbd>-p, &#8211;port</kbd></td>
+<td>port to serve on</td></tr>
+<tr><td class="option-group">
+<kbd>&#8211;tracker-url</kbd></td>
+<td>tracking service url</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd>&#8211;tracker-idsite</kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>tracking service id site</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd>&#8211;tracker-token</kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>tracking service authentication token</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd>&#8211;welcome-message</kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>welcome message users will get when visiting the API root</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd>-f, &#8211;configuration-file</kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>configuration file</td></tr>
+</tbody>
+</table>
+</div>
 <div class="section" id="additional-arguments">
 <h2>Additional arguments<a class="headerlink" href="#additional-arguments" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">serve</span></code> uses <code class="docutils literal"><span class="pre">gunicorn</span></code> under the hood. In addition to the arguments listed above, you can use any <code class="docutils literal"><span class="pre">gunicorn</span></code> arguments when running <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">serve</span></code> (e.g. <code class="docutils literal"><span class="pre">--reload</span></code>, <code class="docutils literal"><span class="pre">--workers</span></code>, <code class="docutils literal"><span class="pre">--timeout</span></code>, <code class="docutils literal"><span class="pre">--bind</span></code>).
