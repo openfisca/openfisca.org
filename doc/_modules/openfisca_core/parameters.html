@@ -1,0 +1,999 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>openfisca_core.parameters &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/scripts.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../key-concepts/index.html">Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../coding-the-legislation/index.html">From law to code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../openfisca-web-api/index.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recipes/index.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../../summary.html">Docs</a></li>
+              
+                <li><a href="../index.html">Module code</a></li>
+              
+              <li>openfisca_core.parameters</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <h1>Source code for openfisca_core.parameters</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+
+<span class="sd">&quot;&quot;&quot;Handle legislative parameters.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">taxscales</span>
+<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">INSTANT_PATTERN</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="k">import</span> <span class="n">indent</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">basestring_type</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">yaml</span> <span class="k">import</span> <span class="n">CLoader</span> <span class="k">as</span> <span class="n">Loader</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+        <span class="s2">&quot;libyaml is not installed in your environment. This can make OpenFisca slower to start. Once you have installed libyaml, run &#39;pip uninstall pyyaml &amp;&amp; pip install pyyaml --no-cache-dir&#39; so that it is used in your Python environment.&quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">yaml</span> <span class="k">import</span> <span class="n">Loader</span>
+
+
+<span class="n">FILE_EXTENSIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;.yaml&#39;</span><span class="p">,</span> <span class="s1">&#39;.yml&#39;</span><span class="p">}</span>
+
+<span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility.</span>
+<span class="c1">#  It is now recommended to include them in metadata, until a common consensus emerges.</span>
+<span class="n">COMMON_KEYS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">,</span> <span class="s1">&#39;documentation&#39;</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">date_constructor</span><span class="p">(</span><span class="n">loader</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">value</span>
+
+
+<span class="n">yaml</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span><span class="s1">&#39;tag:yaml.org,2002:timestamp&#39;</span><span class="p">,</span> <span class="n">date_constructor</span><span class="p">,</span> <span class="n">Loader</span> <span class="o">=</span> <span class="n">Loader</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ParameterNotFound"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterNotFound">[docs]</a><span class="k">class</span> <span class="nc">ParameterNotFound</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Exception raised when a parameter is not found in the parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">,</span> <span class="n">variable_name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: Name of the parameter</span>
+<span class="sd">        :param instant_str: Instant where the parameter does not exist, in the format `YYYY-MM-DD`.</span>
+<span class="sd">        :param variable_name: If the parameter was queried during the computation of a variable, name of that variable.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instant_str</span> <span class="o">=</span> <span class="n">instant_str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable_name</span> <span class="o">=</span> <span class="n">variable_name</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;The parameter &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">variable_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s2">&quot; requested by variable &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="p">(</span>
+            <span class="s2">&quot; was not found in the </span><span class="si">{}</span><span class="s2"> tax and benefit system.&quot;</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">instant_str</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ParameterNotFound</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ParameterParsingError"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterParsingError">[docs]</a><span class="k">class</span> <span class="nc">ParameterParsingError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Exception raised when a parameter cannot be parsed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">traceback</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param message: Error message</span>
+<span class="sd">        :param file: Parameter file which caused the error (optional)</span>
+<span class="sd">        :param traceback: Traceback (optional)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                <span class="s2">&quot;Error parsing parameter file &#39;</span><span class="si">{}</span><span class="s2">&#39;:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file</span><span class="p">),</span>
+                <span class="n">message</span>
+                <span class="p">])</span>
+        <span class="k">if</span> <span class="n">traceback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">traceback</span><span class="p">,</span> <span class="n">message</span><span class="p">])</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ParameterParsingError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Parameter"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.Parameter">[docs]</a><span class="k">class</span> <span class="nc">Parameter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A parameter of the legislation. Parameters can change over time.</span>
+
+<span class="sd">        :param string name: Name of the parameter, e.g. &quot;taxes.some_tax.some_param&quot;</span>
+<span class="sd">        :param dict data: Data loaded from a YAML file.</span>
+<span class="sd">        :param string file_path: File the parameter was loaded from.</span>
+<span class="sd">        :param string documentation: Documentation describing parameter usage and context.</span>
+
+
+<span class="sd">        Instantiate a parameter without metadata:</span>
+
+<span class="sd">        &gt;&gt;&gt;  Parameter(&#39;rate&#39;, data = {</span>
+<span class="sd">                &quot;2015-01-01&quot;: 550,</span>
+<span class="sd">                &quot;2016-01-01&quot;: 600</span>
+<span class="sd">                })</span>
+
+<span class="sd">        Instantiate a parameter with metadata:</span>
+
+<span class="sd">        &gt;&gt;&gt;  Parameter(&#39;rate&#39;, data = {</span>
+<span class="sd">                &#39;description&#39;: &#39;Income tax rate applied on salaries&#39;,</span>
+<span class="sd">                &#39;values&#39;: {</span>
+<span class="sd">                    &quot;2015-01-01&quot;: {&#39;value&#39;: 550, &#39;metadata&#39;: {&#39;reference&#39;: &#39;http://taxes.gov/income_tax/2015&#39;}},</span>
+<span class="sd">                    &quot;2016-01-01&quot;: {&#39;value&#39;: 600, &#39;metadata&#39;: {&#39;reference&#39;: &#39;http://taxes.gov/income_tax/2016&#39;}}</span>
+<span class="sd">                    }</span>
+<span class="sd">                })</span>
+
+<span class="sd">        .. py:attribute:: values_list</span>
+
+<span class="sd">           List of the values, in reverse chronological order</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">file_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">file_path</span>
+        <span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data_type</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values_history</span> <span class="o">=</span> <span class="bp">self</span>  <span class="c1"># Only for backward compatibility</span>
+
+        <span class="c1"># Normal parameter declaration: the values are declared under the &#39;values&#39; key: parse the description and metadata.</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;values&#39;</span><span class="p">):</span>
+            <span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility</span>
+            <span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">allowed_keys</span> <span class="o">=</span> <span class="n">COMMON_KEYS</span><span class="o">.</span><span class="n">union</span><span class="p">({</span><span class="s1">&#39;values&#39;</span><span class="p">}))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span>
+
+            <span class="n">_set_backward_compatibility_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+            <span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">],</span> <span class="n">data_type</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">)</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;documentation&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Simplified parameter declaration: only values are provided</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">data</span>
+
+        <span class="n">instants</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">reverse</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># sort in reverse chronological order</span>
+
+        <span class="n">values_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">instant_str</span> <span class="ow">in</span> <span class="n">instants</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">INSTANT_PATTERN</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">instant_str</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
+                    <span class="s2">&quot;Invalid property &#39;</span><span class="si">{}</span><span class="s2">&#39; in &#39;</span><span class="si">{}</span><span class="s2">&#39;. Properties must be valid YYYY-MM-DD instants, such as 2017-01-15.&quot;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">instant_str</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                    <span class="n">file_path</span><span class="p">)</span>
+
+            <span class="n">instant_info</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">instant_str</span><span class="p">]</span>
+
+            <span class="c1">#  Ignore expected values, as they are just metadata</span>
+            <span class="k">if</span> <span class="n">instant_info</span> <span class="o">==</span> <span class="s2">&quot;expected&quot;</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant_info</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="n">instant_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;expected&quot;</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="n">value_name</span> <span class="o">=</span> <span class="n">_compose_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">)</span>
+            <span class="n">value_at_instant</span> <span class="o">=</span> <span class="n">ParameterAtInstant</span><span class="p">(</span><span class="n">value_name</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">instant_info</span><span class="p">,</span> <span class="n">file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+            <span class="n">values_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value_at_instant</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span> <span class="o">=</span> <span class="n">values_list</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">instant_str</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">value</span> <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;null&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span>
+            <span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values_list</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">values_list</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">value_at_instant</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value_at_instant</span><span class="o">.</span><span class="n">instant_str</span> <span class="o">&lt;=</span> <span class="n">instant</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">value_at_instant</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Parameter.update"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.Parameter.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Change the value for a given period.</span>
+
+<span class="sd">        :param period: Period where the value is modified. If set, `start` and `stop` should be `None`.</span>
+<span class="sd">        :param start: Start of the period. Instance of `openfisca_core.periods.Instant`. If set, `period` should be `None`.</span>
+<span class="sd">        :param stop: Stop of the period. Instance of `openfisca_core.periods.Instant`. If set, `period` should be `None`.</span>
+<span class="sd">        :param value: New value. If `None`, the parameter is removed from the legislation parameters for the given period.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">stop</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Wrong input for &#39;update&#39; method: use either &#39;update(period, value = value)&#39; or &#39;update(start = start, stop = stop, value = value)&#39;. You cannot both use &#39;period&#39; and &#39;start&#39; or &#39;stop&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">basestring_type</span><span class="p">):</span>
+                <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">start</span>
+            <span class="n">stop</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">stop</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You must provide either a start or a period&quot;</span><span class="p">)</span>
+        <span class="n">start_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+        <span class="n">stop_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">stop</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">))</span> <span class="k">if</span> <span class="n">stop</span> <span class="k">else</span> <span class="kc">None</span>
+
+        <span class="n">old_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span>
+        <span class="n">new_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old_values</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Future intervals : not affected</span>
+        <span class="k">if</span> <span class="n">stop_str</span><span class="p">:</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">old_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">instant_str</span> <span class="o">&gt;=</span> <span class="n">stop_str</span><span class="p">):</span>
+                <span class="n">new_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">old_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Right-overlapped interval</span>
+        <span class="k">if</span> <span class="n">stop_str</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">new_values</span> <span class="ow">and</span> <span class="p">(</span><span class="n">stop_str</span> <span class="o">==</span> <span class="n">new_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">instant_str</span><span class="p">):</span>
+                <span class="k">pass</span>  <span class="c1"># such interval is empty</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+                    <span class="n">overlapped_value</span> <span class="o">=</span> <span class="n">old_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+                    <span class="n">value_name</span> <span class="o">=</span> <span class="n">_compose_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">stop_str</span><span class="p">)</span>
+                    <span class="n">new_interval</span> <span class="o">=</span> <span class="n">ParameterAtInstant</span><span class="p">(</span><span class="n">value_name</span><span class="p">,</span> <span class="n">stop_str</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">overlapped_value</span><span class="p">})</span>
+                    <span class="n">new_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_interval</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">value_name</span> <span class="o">=</span> <span class="n">_compose_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">stop_str</span><span class="p">)</span>
+                    <span class="n">new_interval</span> <span class="o">=</span> <span class="n">ParameterAtInstant</span><span class="p">(</span><span class="n">value_name</span><span class="p">,</span> <span class="n">stop_str</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">})</span>
+                    <span class="n">new_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_interval</span><span class="p">)</span>
+
+        <span class="c1"># Insert new interval</span>
+        <span class="n">value_name</span> <span class="o">=</span> <span class="n">_compose_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">start_str</span><span class="p">)</span>
+        <span class="n">new_interval</span> <span class="o">=</span> <span class="n">ParameterAtInstant</span><span class="p">(</span><span class="n">value_name</span><span class="p">,</span> <span class="n">start_str</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+        <span class="n">new_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_interval</span><span class="p">)</span>
+
+        <span class="c1"># Remove covered intervals</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">old_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">instant_str</span> <span class="o">&gt;=</span> <span class="n">start_str</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Past intervals : not affected</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">new_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">old_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span> <span class="o">=</span> <span class="n">new_values</span></div></div>
+
+
+<div class="viewcode-block" id="ParameterAtInstant"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterAtInstant">[docs]</a><span class="k">class</span> <span class="nc">ParameterAtInstant</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A value of a parameter at a given instant.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_allowed_value_data_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+    <span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility</span>
+    <span class="n">_allowed_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">file_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            :param string name: name of the parameter, e.g. &quot;taxes.some_tax.some_param&quot;</span>
+<span class="sd">            :param string instant_str: Date of the value in the format `YYYY-MM-DD`.</span>
+<span class="sd">            :param dict data: Data, usually loaded from a YAML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instant_str</span> <span class="o">=</span> <span class="n">instant_str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">file_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Accept { 2015-01-01: 4000 }</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allowed_value_data_types</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">data</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>  <span class="c1"># Inherit metadata from Parameter</span>
+        <span class="n">_set_backward_compatibility_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data_type</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">allowed_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allowed_keys</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
+                <span class="s2">&quot;Missing &#39;value&#39; property for </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span>
+                <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allowed_value_data_types</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid value in </span><span class="si">{}</span><span class="s2"> : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instant_str</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">instant_str</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;ParameterAtInstant(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">({</span><span class="bp">self</span><span class="o">.</span><span class="n">instant_str</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">})</span>
+        <span class="c1"># repr output must be encoded in Python 2, but not in Python 3</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="ParameterNode"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterNode">[docs]</a><span class="k">class</span> <span class="nc">ParameterNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A node in the legislation `parameter tree &lt;http://openfisca.org/doc/coding-the-legislation/legislation_parameters.html&gt;`_.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_allowed_keys</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># By default, no restriction on the keys</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">directory_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">file_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Instantiate a ParameterNode either from a dict, (using `data`), or from a directory containing YAML files (using `directory_path`).</span>
+
+<span class="sd">        :param string name: Name of the node, eg &quot;taxes.some_tax&quot;.</span>
+<span class="sd">        :param string directory_path: Directory containing YAML files describing the node.</span>
+<span class="sd">        :param dict data: Object representing the parameter node. It usually has been extracted from a YAML file.</span>
+<span class="sd">        :param string file_path: YAML file from which the `data` has been extracted from.</span>
+
+
+<span class="sd">        Instantiate a ParameterNode from a dict:</span>
+
+<span class="sd">        &gt;&gt;&gt; node = ParameterNode(&#39;basic_income&#39;, data = {</span>
+<span class="sd">            &#39;amount&#39;: {</span>
+<span class="sd">              &#39;values&#39;: {</span>
+<span class="sd">                &quot;2015-01-01&quot;: {&#39;value&#39;: 550},</span>
+<span class="sd">                &quot;2016-01-01&quot;: {&#39;value&#39;: 600}</span>
+<span class="sd">                }</span>
+<span class="sd">              },</span>
+<span class="sd">            &#39;min_age&#39;: {</span>
+<span class="sd">              &#39;values&#39;: {</span>
+<span class="sd">                &quot;2015-01-01&quot;: {&#39;value&#39;: 25},</span>
+<span class="sd">                &quot;2016-01-01&quot;: {&#39;value&#39;: 18}</span>
+<span class="sd">                }</span>
+<span class="sd">              },</span>
+<span class="sd">            })</span>
+
+<span class="sd">        Instantiate a ParameterNode from a directory containing YAML parameter files:</span>
+
+<span class="sd">        &gt;&gt;&gt; node = ParameterNode(&#39;benefits&#39;, directory_path = &#39;/path/to/country_package/parameters/benefits&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="n">directory_path</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">directory_path</span>
+            <span class="k">for</span> <span class="n">child_name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory_path</span><span class="p">):</span>
+                <span class="n">child_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="n">child_name</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">child_path</span><span class="p">):</span>
+                    <span class="n">child_name</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">child_name</span><span class="p">)</span>
+
+                    <span class="c1"># We ignore non-YAML files</span>
+                    <span class="k">if</span> <span class="n">ext</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FILE_EXTENSIONS</span><span class="p">:</span>
+                        <span class="k">continue</span>
+
+                    <span class="k">if</span> <span class="n">child_name</span> <span class="o">==</span> <span class="s1">&#39;index&#39;</span><span class="p">:</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">_load_yaml_file</span><span class="p">(</span><span class="n">child_path</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+                        <span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">allowed_keys</span> <span class="o">=</span> <span class="n">COMMON_KEYS</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;documentation&#39;</span><span class="p">)</span>
+                        <span class="n">_set_backward_compatibility_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">child_name_expanded</span> <span class="o">=</span> <span class="n">_compose_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">child_name</span><span class="p">)</span>
+                        <span class="n">child</span> <span class="o">=</span> <span class="n">load_parameter_file</span><span class="p">(</span><span class="n">child_path</span><span class="p">,</span> <span class="n">child_name_expanded</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">child_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span>
+                        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child_name</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">child_path</span><span class="p">):</span>
+                    <span class="n">child_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">child_path</span><span class="p">)</span>
+                    <span class="n">child_name_expanded</span> <span class="o">=</span> <span class="n">_compose_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">child_name</span><span class="p">)</span>
+                    <span class="n">child</span> <span class="o">=</span> <span class="n">ParameterNode</span><span class="p">(</span><span class="n">child_name_expanded</span><span class="p">,</span> <span class="n">directory_path</span> <span class="o">=</span> <span class="n">child_path</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">child_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child_name</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">file_path</span>
+            <span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data_type</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">allowed_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allowed_keys</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;documentation&#39;</span><span class="p">)</span>
+            <span class="n">_set_backward_compatibility_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+            <span class="k">for</span> <span class="n">child_name</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">child_name</span> <span class="ow">in</span> <span class="n">COMMON_KEYS</span><span class="p">:</span>
+                    <span class="k">continue</span>  <span class="c1"># do not treat reserved keys as subparameters.</span>
+
+                <span class="n">child_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">child_name</span><span class="p">)</span>
+                <span class="n">child_name_expanded</span> <span class="o">=</span> <span class="n">_compose_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">child_name</span><span class="p">)</span>
+                <span class="n">child</span> <span class="o">=</span> <span class="n">_parse_child</span><span class="p">(</span><span class="n">child_name_expanded</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">child_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child_name</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ParameterNodeAtInstant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ParameterNode.merge"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterNode.merge">[docs]</a>    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Merges another ParameterNode into the current node.</span>
+
+<span class="sd">        In case of child name conflict, the other node child will replace the current node child.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">child_name</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">child_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span></div>
+
+<div class="viewcode-block" id="ParameterNode.add_child"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterNode.add_child">[docs]</a>    <span class="k">def</span> <span class="nf">add_child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">child</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a new child to the node.</span>
+
+<span class="sd">        :param name: Name of the child that must be used to access that child. Should not contain anything that could interfere with the operator `.` (dot).</span>
+<span class="sd">        :param child: The new child, an instance of :any:`Scale` or :any:`Parameter` or :any:`ParameterNode`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> has already a child named </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">ParameterNode</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">Scale</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;child must be of type ParameterNode, Parameter, or Scale. Instead got </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">child</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">:&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">indent</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">items</span><span class="p">())]</span>
+            <span class="p">)</span>
+        <span class="c1"># repr output must be encoded in Python 2, but not in Python 3</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="ParameterNodeAtInstant"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterNodeAtInstant">[docs]</a><span class="k">class</span> <span class="nc">ParameterNodeAtInstant</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameter node of the legislation, at a given instant.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: Name of the node.</span>
+<span class="sd">        :param node: Original :any:`ParameterNode` instance.</span>
+<span class="sd">        :param instant_str: A date in the format `YYYY-MM-DD`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># The &quot;technical&quot; attributes are hidden, so that the node children can be easily browsed with auto-completion without pollution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span> <span class="o">=</span> <span class="n">instant_str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_children</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">child_name</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">child_at_instant</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant_str</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">child_at_instant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_children</span><span class="p">[</span><span class="n">child_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">child_at_instant</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child_name</span><span class="p">,</span> <span class="n">child_at_instant</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">param_name</span> <span class="o">=</span> <span class="n">_compose_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ParameterNotFound</span><span class="p">(</span><span class="n">param_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="c1"># If fancy indexing is used, cast to a vectorial node</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">build_from_node</span><span class="p">(</span><span class="bp">self</span><span class="p">)[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_children</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_children</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">:&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">indent</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_children</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="VectorialParameterNodeAtInstant"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.VectorialParameterNodeAtInstant">[docs]</a><span class="k">class</span> <span class="nc">VectorialParameterNodeAtInstant</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameter node of the legislation at a given instant which has been vectorized.</span>
+<span class="sd">        Vectorized parameters allow requests such as parameters.housing_benefit[zipcode], where zipcode is a vector</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">build_from_node</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+        <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">check_node_vectorisable</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">subnodes_name</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_children</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="c1"># Recursively vectorize the children of the node</span>
+        <span class="n">vectorial_subnodes</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span>
+            <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">build_from_node</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">subnode_name</span><span class="p">])</span><span class="o">.</span><span class="n">vector</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">subnode_name</span><span class="p">],</span> <span class="n">ParameterNodeAtInstant</span><span class="p">)</span> <span class="k">else</span> <span class="n">node</span><span class="p">[</span><span class="n">subnode_name</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">subnode_name</span> <span class="ow">in</span> <span class="n">subnodes_name</span>
+            <span class="p">])</span>
+        <span class="c1"># A vectorial node is a wrapper around a numpy recarray</span>
+        <span class="c1"># We first build the recarray</span>
+        <span class="n">recarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">vectorial_subnodes</span><span class="p">],</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">(</span><span class="n">subnode_name</span><span class="p">,</span> <span class="n">subnode</span><span class="o">.</span><span class="n">dtype</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subnode</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;float&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">subnode_name</span><span class="p">,</span> <span class="n">subnode</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">subnodes_name</span><span class="p">,</span> <span class="n">vectorial_subnodes</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">recarray</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">),</span> <span class="n">node</span><span class="o">.</span><span class="n">_instant_str</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="VectorialParameterNodeAtInstant.check_node_vectorisable"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.VectorialParameterNodeAtInstant.check_node_vectorisable">[docs]</a>    <span class="k">def</span> <span class="nf">check_node_vectorisable</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Check that a node can be casted to a vectorial node, in order to be able to use fancy indexing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">MESSAGE_PART_1</span> <span class="o">=</span> <span class="s2">&quot;Cannot use fancy indexing on parameter node &#39;</span><span class="si">{}</span><span class="s2">&#39;, as&quot;</span>
+        <span class="n">MESSAGE_PART_3</span> <span class="o">=</span> <span class="s2">&quot;To use fancy indexing on parameter node, its children must be homogenous.&quot;</span>
+        <span class="n">MESSAGE_PART_4</span> <span class="o">=</span> <span class="s2">&quot;See more at &lt;http://openfisca.org/doc/coding-the-legislation/legislation_parameters#computing-a-parameter-that-depends-on-a-variable&gt;.&quot;</span>
+
+        <span class="k">def</span> <span class="nf">raise_key_inhomogeneity_error</span><span class="p">(</span><span class="n">node_with_key</span><span class="p">,</span> <span class="n">node_without_key</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">):</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                <span class="n">MESSAGE_PART_1</span><span class="p">,</span>
+                <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; exists, but &#39;</span><span class="si">{}</span><span class="s2">&#39; doesn&#39;t.&quot;</span><span class="p">,</span>
+                <span class="n">MESSAGE_PART_3</span><span class="p">,</span>
+                <span class="n">MESSAGE_PART_4</span><span class="p">,</span>
+                <span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
+                <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">node_with_key</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">]),</span>
+                <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">node_without_key</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">]),</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">raise_type_inhomogeneity_error</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="n">non_node_name</span><span class="p">):</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                <span class="n">MESSAGE_PART_1</span><span class="p">,</span>
+                <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; is a node, but &#39;</span><span class="si">{}</span><span class="s2">&#39; is not.&quot;</span><span class="p">,</span>
+                <span class="n">MESSAGE_PART_3</span><span class="p">,</span>
+                <span class="n">MESSAGE_PART_4</span><span class="p">,</span>
+                <span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
+                <span class="n">node_name</span><span class="p">,</span>
+                <span class="n">non_node_name</span><span class="p">,</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">raise_not_implemented</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="n">node_type</span><span class="p">):</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                <span class="n">MESSAGE_PART_1</span><span class="p">,</span>
+                <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; is a &#39;</span><span class="si">{}</span><span class="s2">&#39;, and fancy indexing has not been implemented yet on this kind of parameters.&quot;</span><span class="p">,</span>
+                <span class="n">MESSAGE_PART_4</span><span class="p">,</span>
+                <span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
+                <span class="n">node_name</span><span class="p">,</span>
+                <span class="n">node_type</span><span class="p">,</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">extract_named_children</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">]):</span> <span class="n">value</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">_children</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                <span class="p">}</span>
+
+        <span class="k">def</span> <span class="nf">check_nodes_homogeneous</span><span class="p">(</span><span class="n">named_nodes</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Check than several nodes (or parameters, or baremes) have the same structure.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">named_nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">named_nodes</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">first_node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">first_name</span> <span class="o">=</span> <span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first_node</span><span class="p">,</span> <span class="n">ParameterNodeAtInstant</span><span class="p">):</span>
+                <span class="n">children</span> <span class="o">=</span> <span class="n">extract_named_children</span><span class="p">(</span><span class="n">first_node</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">names</span><span class="p">))[</span><span class="mi">1</span><span class="p">:]:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ParameterNodeAtInstant</span><span class="p">):</span>
+                        <span class="n">raise_type_inhomogeneity_error</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+                    <span class="n">first_node_keys</span> <span class="o">=</span> <span class="n">first_node</span><span class="o">.</span><span class="n">_children</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                    <span class="n">node_keys</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_children</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">first_node_keys</span> <span class="o">==</span> <span class="n">node_keys</span><span class="p">:</span>
+                        <span class="n">missing_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">first_node_keys</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">node_keys</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">missing_keys</span><span class="p">:</span>  <span class="c1"># If the first_node has a key that node hasn&#39;t</span>
+                            <span class="n">raise_key_inhomogeneity_error</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">missing_keys</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+                        <span class="k">else</span><span class="p">:</span>  <span class="c1"># If If the node has a key that first_node doesn&#39;t have</span>
+                            <span class="n">missing_key</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">node_keys</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">first_node_keys</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                            <span class="n">raise_key_inhomogeneity_error</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">)</span>
+                    <span class="n">children</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extract_named_children</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+                <span class="n">check_nodes_homogeneous</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first_node</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first_node</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">names</span><span class="p">))[</span><span class="mi">1</span><span class="p">:]:</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+                        <span class="k">pass</span>
+                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ParameterNodeAtInstant</span><span class="p">):</span>
+                        <span class="n">raise_type_inhomogeneity_error</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">first_name</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">raise_not_implemented</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">raise_not_implemented</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">first_node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+        <span class="n">check_nodes_homogeneous</span><span class="p">(</span><span class="n">extract_named_children</span><span class="p">(</span><span class="n">node</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span> <span class="o">=</span> <span class="n">instant_str</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="c1"># If the key is a string, just get the subnode</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">basestring_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="c1"># If the key is a vector, e.g. [&#39;zone_1&#39;, &#39;zone_2&#39;, &#39;zone_1&#39;]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">):</span>
+                <span class="c1"># In case the key is not a string vector, stringify it</span>
+                <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">object</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">Enum</span><span class="p">):</span>
+                    <span class="n">enum</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">key</span> <span class="o">==</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">],</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">])</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">):</span>
+                    <span class="n">enum</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">possible_values</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">key</span> <span class="o">==</span> <span class="n">item</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">],</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">)</span>  <span class="c1"># Get all the names of the subnodes, e.g. [&#39;zone_1&#39;, &#39;zone_2&#39;]</span>
+            <span class="n">default</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>  <span class="c1"># In case of unexpected key, we will set the corresponding value to NaN.</span>
+            <span class="n">conditions</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="o">==</span> <span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">contains_nan</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+                <span class="n">unexpected_key</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="n">ParameterNotFound</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">unexpected_key</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span><span class="p">)</span>
+
+            <span class="c1"># If the result is not a leaf, wrap the result in a vectorial node.</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">record</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="Scale"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.Scale">[docs]</a><span class="k">class</span> <span class="nc">Scale</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A parameter scale (for instance a  marginal scale).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility</span>
+    <span class="n">_allowed_keys</span> <span class="o">=</span> <span class="n">COMMON_KEYS</span><span class="o">.</span><span class="n">union</span><span class="p">({</span><span class="s1">&#39;brackets&#39;</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: name of the scale, eg &quot;taxes.some_scale&quot;</span>
+<span class="sd">        :param data: Data loaded from a YAML file. In case of a reform, the data can also be created dynamically.</span>
+<span class="sd">        :param file_path: File the parameter was loaded from.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">file_path</span>
+        <span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data_type</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">allowed_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allowed_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">_set_backward_compatibility_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;brackets&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
+                <span class="s2">&quot;Property &#39;brackets&#39; of scale &#39;</span><span class="si">{}</span><span class="s2">&#39; must be of type array.&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span>
+                <span class="p">)</span>
+
+        <span class="n">brackets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">bracket_data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;brackets&#39;</span><span class="p">]):</span>
+            <span class="n">bracket_name</span> <span class="o">=</span> <span class="n">_compose_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">bracket</span> <span class="o">=</span> <span class="n">Bracket</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="n">bracket_name</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">bracket_data</span><span class="p">,</span> <span class="n">file_path</span> <span class="o">=</span> <span class="n">file_path</span><span class="p">)</span>
+            <span class="n">brackets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bracket</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brackets</span> <span class="o">=</span> <span class="n">brackets</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+        <span class="n">brackets</span> <span class="o">=</span> <span class="p">[</span><span class="n">bracket</span><span class="o">.</span><span class="n">get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span> <span class="k">for</span> <span class="n">bracket</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">brackets</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span> <span class="k">for</span> <span class="n">bracket</span> <span class="ow">in</span> <span class="n">brackets</span><span class="p">):</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">taxscales</span><span class="o">.</span><span class="n">AmountTaxScale</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">bracket</span> <span class="ow">in</span> <span class="n">brackets</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;amount&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span> <span class="ow">and</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span><span class="p">:</span>
+                    <span class="n">amount</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">amount</span>
+                    <span class="n">threshold</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">threshold</span>
+                    <span class="n">scale</span><span class="o">.</span><span class="n">add_bracket</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="s1">&#39;average_rate&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span> <span class="k">for</span> <span class="n">bracket</span> <span class="ow">in</span> <span class="n">brackets</span><span class="p">):</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">taxscales</span><span class="o">.</span><span class="n">LinearAverageRateTaxScale</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">bracket</span> <span class="ow">in</span> <span class="n">brackets</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;base&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span><span class="p">:</span>
+                    <span class="n">base</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">base</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">base</span> <span class="o">=</span> <span class="mf">1.</span>
+                <span class="k">if</span> <span class="s1">&#39;average_rate&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span> <span class="ow">and</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span><span class="p">:</span>
+                    <span class="n">average_rate</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">average_rate</span>
+                    <span class="n">threshold</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">threshold</span>
+                    <span class="n">scale</span><span class="o">.</span><span class="n">add_bracket</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">average_rate</span> <span class="o">*</span> <span class="n">base</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">scale</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">taxscales</span><span class="o">.</span><span class="n">MarginalRateTaxScale</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">bracket</span> <span class="ow">in</span> <span class="n">brackets</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;base&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span><span class="p">:</span>
+                    <span class="n">base</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">base</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">base</span> <span class="o">=</span> <span class="mf">1.</span>
+                <span class="k">if</span> <span class="s1">&#39;rate&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span> <span class="ow">and</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span><span class="p">:</span>
+                    <span class="n">rate</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">rate</span>
+                    <span class="n">threshold</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">threshold</span>
+                    <span class="n">scale</span><span class="o">.</span><span class="n">add_bracket</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">rate</span> <span class="o">*</span> <span class="n">base</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">scale</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">brackets</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">brackets</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="s1">&#39;brackets:&#39;</span><span class="p">]</span>
+            <span class="o">+</span> <span class="p">[</span><span class="n">indent</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">indent</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">bracket</span><span class="p">))[</span><span class="mi">1</span><span class="p">:])</span> <span class="k">for</span> <span class="n">bracket</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">brackets</span><span class="p">]</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Bracket"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.Bracket">[docs]</a><span class="k">class</span> <span class="nc">Bracket</span><span class="p">(</span><span class="n">ParameterNode</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A scale bracket.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_allowed_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;amount&#39;</span><span class="p">,</span> <span class="s1">&#39;threshold&#39;</span><span class="p">,</span> <span class="s1">&#39;rate&#39;</span><span class="p">,</span> <span class="s1">&#39;average_rate&#39;</span><span class="p">,</span> <span class="s1">&#39;base&#39;</span><span class="p">])</span></div>
+
+
+<span class="k">def</span> <span class="nf">_load_yaml_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Loader</span> <span class="o">=</span> <span class="n">Loader</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">scanner</span><span class="o">.</span><span class="n">ScannerError</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">ParserError</span><span class="p">):</span>
+            <span class="n">stack_trace</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid YAML. Check the traceback above for more details.&quot;</span><span class="p">,</span>
+                <span class="n">file_path</span><span class="p">,</span>
+                <span class="n">stack_trace</span>
+                <span class="p">)</span>
+
+
+<div class="viewcode-block" id="load_parameter_file"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.load_parameter_file">[docs]</a><span class="k">def</span> <span class="nf">load_parameter_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load parameters from a YAML file (or a directory containing YAML files).</span>
+
+<span class="sd">    :returns: An instance of :any:`ParameterNode` or :any:`Scale` or :any:`Parameter`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> doest not exist&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ParameterNode</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">directory_path</span> <span class="o">=</span> <span class="n">file_path</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_load_yaml_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_parse_child</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_parse_child</span><span class="p">(</span><span class="n">child_name</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">child_path</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;values&#39;</span> <span class="ow">in</span> <span class="n">child</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">child_name</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">child_path</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s1">&#39;brackets&#39;</span> <span class="ow">in</span> <span class="n">child</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Scale</span><span class="p">(</span><span class="n">child_name</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">child_path</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">([</span><span class="n">INSTANT_PATTERN</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">child</span><span class="o">.</span><span class="n">keys</span><span class="p">()]):</span>
+        <span class="k">return</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">child_name</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">child_path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ParameterNode</span><span class="p">(</span><span class="n">child_name</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">child</span><span class="p">,</span> <span class="n">file_path</span> <span class="o">=</span> <span class="n">child_path</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_compose_name</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">child_name</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">path</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child_name</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">INSTANT_PATTERN</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">child_name</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">[</span><span class="si">{}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">child_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">child_name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">child_name</span>
+
+
+<span class="k">def</span> <span class="nf">_validate_parameter</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data_type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">allowed_keys</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">type_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nb">dict</span><span class="p">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+        <span class="nb">list</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">data_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data_type</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
+            <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; must be of type </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">parameter</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">type_map</span><span class="p">[</span><span class="n">data_type</span><span class="p">]),</span>
+            <span class="n">parameter</span><span class="o">.</span><span class="n">file_path</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">allowed_keys</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed_keys</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
+                    <span class="s2">&quot;Unexpected property &#39;</span><span class="si">{}</span><span class="s2">&#39; in &#39;</span><span class="si">{}</span><span class="s2">&#39;. Allowed properties are </span><span class="si">{}</span><span class="s2">.&quot;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">parameter</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">allowed_keys</span><span class="p">)),</span>
+                    <span class="n">parameter</span><span class="o">.</span><span class="n">file_path</span>
+                    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_set_backward_compatibility_metadata</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">parameter</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reference&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">parameter</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;reference&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">contains_nan</span><span class="p">(</span><span class="n">vector</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">vector</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">record</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">([</span><span class="n">contains_nan</span><span class="p">(</span><span class="n">vector</span><span class="p">[</span><span class="n">name</span><span class="p">])</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">vector</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+
+
+<span class="c1"># Only for backward compatibility</span>
+<span class="k">class</span> <span class="nc">ValuesHistory</span><span class="p">(</span><span class="n">Parameter</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+
+          </div>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

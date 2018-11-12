@@ -1,1028 +1,346 @@
-<!DOCTYPE HTML>
-<html lang="en" >
-    
-    <head>
-        
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Writing YAML tests | OpenFisca</title>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="">
-        <meta name="generator" content="GitBook 2.6.9">
-        
-        
-        <meta name="HandheldFriendly" content="true"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
-        
-    <link rel="stylesheet" href="../gitbook/style.css">
-    
-        
-        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
-        
-    
-        
-        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
-        
-    
-        
-        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
-        
-    
-    
-
-        
-    
-    
-    <link rel="next" href="../coding-the-legislation/legislation_parameters.html" />
-    
-    
-    <link rel="prev" href="../coding-the-legislation/inferences.html" />
-    
-
-        
-    </head>
-    <body>
-        
-        
-    <div class="book"
-        data-level="2.9"
-        data-chapter-title="Writing YAML tests"
-        data-filepath="coding-the-legislation/writing_yaml_tests.md"
-        data-basepath=".."
-        data-revision="Fri Oct 19 2018 01:05:39 GMT+0000 (UTC)"
-        data-innerlanguage="">
-    
-
-<div class="book-summary">
-    <nav role="navigation">
-        <ul class="summary">
-            
-            
-            
-                
-                <li>
-                    <a href="https://openfisca.org/doc" target="blank" class="custom-link">OpenFisca website</a>
-                </li>
-            
-            
-
-            
-            <li class="divider"></li>
-            
-
-            
-    
-        <li class="chapter " data-level="0" data-path="index.html">
-            
-                
-                    <a href="../index.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                        Introduction
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1" data-path="key-concepts.html">
-            
-                
-                    <a href="../key-concepts.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.</b>
-                        
-                        Key concepts
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.1" data-path="tax_and_benefit_system.html">
-            
-                
-                    <a href="../tax_and_benefit_system.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.1.</b>
-                        
-                        Tax and Benefit System
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="variables.html">
-            
-                
-                    <a href="../variables.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.2.</b>
-                        
-                        Variables
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="parameters.html">
-            
-                
-                    <a href="../parameters.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.3.</b>
-                        
-                        Parameters
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="person,_entities,_role.html">
-            
-                
-                    <a href="../person,_entities,_role.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.4.</b>
-                        
-                        Person, entities, role
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="periodsinstants.html">
-            
-                
-                    <a href="../periodsinstants.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.5.</b>
-                        
-                        Periods, Instants
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="input_data.html">
-            
-                
-                    <a href="../input_data.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.6.</b>
-                        
-                        Input Data
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="simulation.html">
-            
-                
-                    <a href="../simulation.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.7.</b>
-                        
-                        Simulation, Computation
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="reforms.html">
-            
-                
-                    <a href="../reforms.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.8.</b>
-                        
-                        Reforms
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2" data-path="coding-the-legislation/index.html">
-            
-                
-                    <a href="../coding-the-legislation/index.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.</b>
-                        
-                        From law to code
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1" data-path="coding-the-legislation/10_basic_example.html">
-            
-                
-                    <a href="../coding-the-legislation/10_basic_example.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.1.</b>
-                        
-                        Coding a formula: basic example
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="coding-the-legislation/20_input_variables.html">
-            
-                
-                    <a href="../coding-the-legislation/20_input_variables.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.2.</b>
-                        
-                        Introducing an input variable
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="coding-the-legislation/25_vectorial_computing.html">
-            
-                
-                    <a href="../coding-the-legislation/25_vectorial_computing.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.3.</b>
-                        
-                        Vectorial computing
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="coding-the-legislation/35_periods.html">
-            
-                
-                    <a href="../coding-the-legislation/35_periods.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.4.</b>
-                        
-                        Periods and instants
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="coding-the-legislation/40_legislation_evolutions.html">
-            
-                
-                    <a href="../coding-the-legislation/40_legislation_evolutions.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.5.</b>
-                        
-                        Legislation evolutions
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="coding-the-legislation/50_entities.html">
-            
-                
-                    <a href="../coding-the-legislation/50_entities.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.6.</b>
-                        
-                        Entities
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.7" data-path="coding-the-legislation/reforms.html">
-            
-                
-                    <a href="../coding-the-legislation/reforms.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.7.</b>
-                        
-                        Reforms
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.8" data-path="coding-the-legislation/inferences.html">
-            
-                
-                    <a href="../coding-the-legislation/inferences.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.8.</b>
-                        
-                        Inferences
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter active" data-level="2.9" data-path="coding-the-legislation/writing_yaml_tests.html">
-            
-                
-                    <a href="../coding-the-legislation/writing_yaml_tests.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.9.</b>
-                        
-                        Writing YAML tests
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.10" data-path="coding-the-legislation/legislation_parameters.html">
-            
-                
-                    <a href="../coding-the-legislation/legislation_parameters.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.10.</b>
-                        
-                        Parameters
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.11" data-path="coding-the-legislation/bootstrapping_a_new_country_package.html">
-            
-                
-                    <a href="../coding-the-legislation/bootstrapping_a_new_country_package.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.11.</b>
-                        
-                        Bootstrapping a new country package
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="3" data-path="openfisca-web-api/index.html">
-            
-                
-                    <a href="../openfisca-web-api/index.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>3.</b>
-                        
-                        OpenFisca Web API
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="3.1" data-path="openfisca-web-api/endpoints.html">
-            
-                
-                    <a href="../openfisca-web-api/endpoints.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>3.1.</b>
-                        
-                        Endpoints
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="3.2" data-path="openfisca-web-api/input-output-data.html">
-            
-                
-                    <a href="../openfisca-web-api/input-output-data.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>3.2.</b>
-                        
-                        Input and output data
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="3.3" data-path="openfisca-web-api/config-openapi.html">
-            
-                
-                    <a href="../openfisca-web-api/config-openapi.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>3.3.</b>
-                        
-                        OpenAPI specification config
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="4" data-path="troubleshooting.html">
-            
-                
-                    <a href="../troubleshooting.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>4.</b>
-                        
-                        Troubleshooting
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="5" data-path="recipes.html">
-            
-                
-                    <a href="../recipes.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.</b>
-                        
-                        Recipes
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="5.1" data-path="howto-web-no-local-install.html">
-            
-                
-                    <a href="../howto-web-no-local-install.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.1.</b>
-                        
-                        Use OpenFisca on the web (no installation required on your computer)
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="5.2" data-path="howto_docker.html">
-            
-                
-                    <a href="../howto_docker.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.2.</b>
-                        
-                        Use OpenFisca with Docker
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="5.3" data-path="offline-environment.html">
-            
-                
-                    <a href="../offline-environment.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.3.</b>
-                        
-                        Install OpenFisca in an offline environment
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="5.4" data-path="windows-no-admin.html">
-            
-                
-                    <a href="../windows-no-admin.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.4.</b>
-                        
-                        Work on OpenFisca on a Windows without being administrator
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="5.5" data-path="test_situations.html">
-            
-                
-                    <a href="../test_situations.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.5.</b>
-                        
-                        Test your changes on &quot;ready to use&quot; situations
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="6" data-path="publishing.html">
-            
-                
-                    <a href="../publishing.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>6.</b>
-                        
-                        Publishing results
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="7" data-path="community.html">
-            
-                
-                    <a href="../community.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>7.</b>
-                        
-                        Community
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8" data-path="contribute/index.html">
-            
-                
-                    <a href="../contribute/index.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.</b>
-                        
-                        Contribute
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="8.1" data-path="contribute/guidelines.html">
-            
-                
-                    <a href="../contribute/guidelines.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.1.</b>
-                        
-                        Contributor guidelines
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="8.1.1" data-path="contribute/language.html">
-            
-                
-                    <a href="../contribute/language.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.1.1.</b>
-                        
-                        Language
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.1.2" data-path="contribute/commit-messages.html">
-            
-                
-                    <a href="../contribute/commit-messages.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.1.2.</b>
-                        
-                        Commit messages
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.1.3" data-path="contribute/variables-naming.html">
-            
-                
-                    <a href="../contribute/variables-naming.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.1.3.</b>
-                        
-                        Variables naming
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.1.4" data-path="contribute/semver.html">
-            
-                
-                    <a href="../contribute/semver.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.1.4.</b>
-                        
-                        Semantic versionning
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="8.2" data-path="contribute/documentation.html">
-            
-                
-                    <a href="../contribute/documentation.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.2.</b>
-                        
-                        Enhance the documentation
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.3" data-path="contribute/extensions.html">
-            
-                
-                    <a href="../contribute/extensions.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.3.</b>
-                        
-                        Extensions
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.4" data-path="contribute/developer-guide.html">
-            
-                
-                    <a href="../contribute/developer-guide.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.4.</b>
-                        
-                        Developer guide
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.5" data-path="contribute/tests.html">
-            
-                
-                    <a href="../contribute/tests.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.5.</b>
-                        
-                        Tests
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.6" data-path="contribute/release-process.html">
-            
-                
-                    <a href="../contribute/release-process.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.6.</b>
-                        
-                        Release process
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-            
-            <li class="divider"></li>
-            <li>
-                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-                    Published with GitBook
-                </a>
-            </li>
-            
-        </ul>
-    </nav>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Writing YAML tests &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parameters" href="legislation_parameters.html" />
+    <link rel="prev" title="Inferences" href="inferences.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="legislation_parameters.html" title="Parameters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="inferences.html" title="Inferences"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">From law to code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts/index.html">Key concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">From law to code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="10_basic_example.html">Coding a formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20_input_variables.html">Introducing an input variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="25_vectorial_computing.html">Vectorial computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="35_periods.html">Periods and instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="40_legislation_evolutions.html">Legislation evolutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="50_entities.html">Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inferences.html">Inferences</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Writing YAML tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="legislation_parameters.html">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootstrapping_a_new_country_package.html">Bootstraping a new country package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#tutorial">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#additional-documentation">Additional documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/index.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
 </div>
-
-    <div class="book-body">
-        <div class="body-inner">
-            <div class="book-header" role="navigation">
-    <!-- Actions Left -->
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../" >OpenFisca</a>
-    </h1>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
 </div>
-
-            <div class="page-wrapper" tabindex="-1" role="main">
-                <div class="page-inner">
-                
-                
-                    <section class="normal" id="section-">
-                    
-                        <h1 id="writing-yaml-tests">Writing YAML tests</h1>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+                <li><a href="index.html">From law to code</a></li>
+              
+              <li>Writing YAML tests</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="writing-yaml-tests">
+<span id="writing-yaml-tests"></span><h1>Writing YAML tests<a class="headerlink" href="#writing-yaml-tests" title="Permalink to this headline">¶</a></h1>
 <p>The recommended way to write tests is to use YAML tests.</p>
 <p>Each formula should be tested at least with one test, and better with specific boundary values (thresholds for example).</p>
 <blockquote>
-<p>Terminology: Python dictionnary are called associative arrays in YAML.</p>
-</blockquote>
-<h2 id="example">Example</h2>
-<p>In <a href="https://github.com/openfisca/openfisca-france/blob/master/openfisca_france/tests/formulas/irpp.yaml" target="_blank"><code>irpp.yaml</code></a> we see:</p>
-<pre><code class="lang-yaml">- name: &quot;IRPP - C&#xE9;libataire ayant des revenus salariaux (1AJ) de 20 000 &#x20AC;&quot;
-  period: 2012
-  absolute_error_margin: 0.5
-  input_variables:
-    salaire_imposable: 20000
-  output_variables:
-    irpp: -1181
-</code></pre>
-<h2 id="common-keys">Common keys</h2>
-<ul>
-<li><code>name</code> (string)</li>
-<li><code>period</code> (string with period syntax)</li>
-<li><code>keywords</code>  (list of strings, optional)</li>
-<li><code>description</code> (string, optional, multiline)</li>
-<li><code>absolute_error_margin</code> (number, optional)</li>
-<li><code>relative_error_margin</code> (number, optional)</li>
-<li><code>input_variables</code> (associative array, keys are variable names, values are numbers)</li>
-<li><code>output_variables</code> (associative array, keys are variable names, values are numbers)</li>
+<div>Terminology: Python dictionnary are called associative arrays in YAML.</div></blockquote>
+<div class="section" id="example">
+<span id="example"></span><h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>In <a class="reference external" href="https://github.com/openfisca/openfisca-france/blob/29.3.7/tests/formulas/irpp.yaml"><code class="docutils literal"><span class="pre">irpp.yaml</span></code></a> we see:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2012</span>
+  <span class="l l-Scalar l-Scalar-Plain">absolute_error_margin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>
+  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">salaire_imposable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">20000</span>
+  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">irpp</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">-1181</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="common-keys">
+<span id="common-keys"></span><h2>Common keys<a class="headerlink" href="#common-keys" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">name</span></code> (string)</li>
+<li><code class="docutils literal"><span class="pre">period</span></code> (string with period syntax)</li>
+<li><code class="docutils literal"><span class="pre">keywords</span></code>  (list of strings, optional)</li>
+<li><code class="docutils literal"><span class="pre">description</span></code> (string, optional, multiline)</li>
+<li><code class="docutils literal"><span class="pre">absolute_error_margin</span></code> (number, optional)</li>
+<li><code class="docutils literal"><span class="pre">relative_error_margin</span></code> (number, optional)</li>
+<li><code class="docutils literal"><span class="pre">input_variables</span></code> (associative array, keys are variable names, values are numbers)</li>
+<li><code class="docutils literal"><span class="pre">output_variables</span></code> (associative array, keys are variable names, values are numbers)</li>
 <li>other any key defined in the model</li>
 </ul>
-<h2 id="syntax">Syntax</h2>
-<h3 id="testing-formulas-by-giving-input-variables">Testing formulas by giving input variables</h3>
+</div>
+<div class="section" id="syntax">
+<span id="syntax"></span><h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="testing-formulas-by-giving-input-variables">
+<span id="testing-formulas-by-giving-input-variables"></span><h3>Testing formulas by giving input variables<a class="headerlink" href="#testing-formulas-by-giving-input-variables" title="Permalink to this headline">¶</a></h3>
 <p>This is the simplest way to test formulas when you only need to give input values for only one individual.</p>
-<ul>
-<li>First, name your test. Start a test with <code>-</code>, which is the YAML list separator, followed by a space, the field <code>name</code>, and the test name as a string.</li>
+<ul class="simple">
+<li>First, name your test. Start a test with <code class="docutils literal"><span class="pre">-</span></code>, which is the YAML list separator, followed by a space, the field <code class="docutils literal"><span class="pre">name</span></code>, and the test name as a string.</li>
 </ul>
-<pre><code class="lang-yaml">- name: &quot;IRPP - C&#xE9;libataire ayant des revenus salariaux (1AJ) de 20 000 &#x20AC;&quot;
-</code></pre>
-<ul>
-<li>Then add the other relevant keys to your test. Usually, one defines the keys <code>period</code>, <code>keywords</code>, <code>description</code>, <code>absolute_error_margin</code> (or <code>relative_error_margin</code>) and their associated chosen values as follows:</li>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Then add the other relevant keys to your test. Usually, one defines the keys <code class="docutils literal"><span class="pre">period</span></code>, <code class="docutils literal"><span class="pre">keywords</span></code>, <code class="docutils literal"><span class="pre">description</span></code>, <code class="docutils literal"><span class="pre">absolute_error_margin</span></code> (or <code class="docutils literal"><span class="pre">relative_error_margin</span></code>) and their associated chosen values as follows:</li>
 </ul>
-<pre><code class="lang-yaml">- name: &quot;IRPP - C&#xE9;libataire ayant des revenus salariaux (1AJ) de 20 000 &#x20AC;&quot;
-  period: 2012
-  absolute_error_margin: 0.5
-</code></pre>
-<ul>
-<li>Create nested dictionnaries within the keys <code>input_variables</code> and <code>output_variables</code>,
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2012</span>
+  <span class="l l-Scalar l-Scalar-Plain">absolute_error_margin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Create nested dictionnaries within the keys <code class="docutils literal"><span class="pre">input_variables</span></code> and <code class="docutils literal"><span class="pre">output_variables</span></code>,
 which keys are variable names and values are numbers, respectively input and expected values.
 For instance:</li>
 </ul>
-<pre><code class="lang-yaml">- name: &quot;IRPP - C&#xE9;libataire ayant des revenus salariaux (1AJ) de 20 000 &#x20AC;&quot;
-  period: 2012
-  absolute_error_margin: 0.5
-  input_variables:
-    salaire_imposable: 20000
-    salaire_brut: 20000
-  output_variables:
-    irpp: -1181
-</code></pre>
-<h3 id="testing-formulas-giving-a-test-case">Testing formulas giving a test case</h3>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2012</span>
+  <span class="l l-Scalar l-Scalar-Plain">absolute_error_margin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>
+  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">salaire_imposable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">20000</span>
+    <span class="l l-Scalar l-Scalar-Plain">salaire_brut</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">20000</span>
+  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">irpp</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">-1181</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-formulas-giving-a-test-case">
+<span id="testing-formulas-giving-a-test-case"></span><h3>Testing formulas giving a test case<a class="headerlink" href="#testing-formulas-giving-a-test-case" title="Permalink to this headline">¶</a></h3>
 <p>This is the simplest way to test formulas when you need to give input values for many individuals
 which are dispatched into entities.</p>
 <blockquote>
-<p>See the last test of <a href="https://github.com/openfisca/openfisca-france/blob/master/openfisca_france/tests/fonction_publique/cotisations_sociales_simulateur_IPP.yaml#L241-L300" target="_blank">cotisations_sociales_simulateur_IPP.yaml</a></p>
-</blockquote>
+<div>See the last test of <a class="reference external" href="https://github.com/openfisca/openfisca-france/blob/29.3.7/tests/cotisations_sociales_simulateur_IPP.yaml#L244-L303">cotisations_sociales_simulateur_IPP.yaml</a></div></blockquote>
 <p>In this case, there is another convention:</p>
 <ul>
-<li><p>do not include the field <code>input_variables</code> but instead define new keys corresponding to the entities:</p>
-<pre><code class="lang-yaml">  - name: &quot;IRPP - Famille ayant des revenus salariaux de 20 000 &#x20AC;&quot;
-  period: 2012
-  absolute_error_margin: 0.5
-  familles:
-  menages:
-  foyers_fiscaux:
-</code></pre>
+<li><p class="first">do not include the field <code class="docutils literal"><span class="pre">input_variables</span></code> but instead define new keys corresponding to the entities:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Famille</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2012</span>
+<span class="l l-Scalar l-Scalar-Plain">absolute_error_margin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="l l-Scalar l-Scalar-Plain">familles</span><span class="p p-Indicator">:</span>
+<span class="l l-Scalar l-Scalar-Plain">menages</span><span class="p p-Indicator">:</span>
+<span class="l l-Scalar l-Scalar-Plain">foyers_fiscaux</span><span class="p p-Indicator">:</span>
+</pre></div>
+</div>
 </li>
-<li><p>define the individuals with their <code>id</code> and their variables:</p>
-<pre><code class="lang-yaml">  individus:
-      - id: &quot;parent1&quot;
-      date_naissance: 1972-01-01
-      depcom_entreprise: &quot;69381&quot;
-      primes_fonction_publique: 500
-      - id: &quot;parent2&quot;
-      date_naissance: 1972-01-01
-      depcom_entreprise: &quot;69381&quot;
-      primes_fonction_publique: 500
-      traitement_indiciaire_brut: 2000
-      - id: &quot;enfant1&quot;
-      date_naissance: 2000-01-01
-      - id: &quot;enfant2&quot;
-      date_naissance: 2009-01-01
-</code></pre>
+<li><p class="first">define the individuals with their <code class="docutils literal"><span class="pre">id</span></code> and their variables:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">individus</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="s">&quot;parent1&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">date_naissance</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1972-01-01</span>
+    <span class="l l-Scalar l-Scalar-Plain">depcom_entreprise</span><span class="p p-Indicator">:</span> <span class="s">&quot;69381&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">primes_fonction_publique</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">500</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="s">&quot;parent2&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">date_naissance</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1972-01-01</span>
+    <span class="l l-Scalar l-Scalar-Plain">depcom_entreprise</span><span class="p p-Indicator">:</span> <span class="s">&quot;69381&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">primes_fonction_publique</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">500</span>
+    <span class="l l-Scalar l-Scalar-Plain">traitement_indiciaire_brut</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2000</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="s">&quot;enfant1&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">date_naissance</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2000-01-01</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="s">&quot;enfant2&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">date_naissance</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2009-01-01</span>
+</pre></div>
+</div>
 </li>
-<li><p>specify the relations between individuals and their entity:</p>
-<pre><code class="lang-yaml">  familles:
-      parents: [&quot;parent1&quot;, &quot;parent2&quot;]
-      enfants: [&quot;enfant1&quot;, &quot;enfant2&quot;]
-  menages:
-      personne_de_reference: &quot;parent1&quot;
-      conjoint: &quot;parent2&quot;
-      enfants: [&quot;enfant1&quot;, &quot;enfant2&quot;]
-  foyers_fiscaux:
-      declarants: [&quot;parent1&quot;, &quot;parent2&quot;]
-      personnes_a_charge: [&quot;enfant1&quot;, &quot;enfant2&quot;]
-</code></pre>
+<li><p class="first">specify the relations between individuals and their entity:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">familles</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">parents</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;parent1&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;parent2&quot;</span><span class="p p-Indicator">]</span>
+    <span class="l l-Scalar l-Scalar-Plain">enfants</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;enfant1&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;enfant2&quot;</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">menages</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">personne_de_reference</span><span class="p p-Indicator">:</span> <span class="s">&quot;parent1&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">conjoint</span><span class="p p-Indicator">:</span> <span class="s">&quot;parent2&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">enfants</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;enfant1&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;enfant2&quot;</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">foyers_fiscaux</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">declarants</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;parent1&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;parent2&quot;</span><span class="p p-Indicator">]</span>
+    <span class="l l-Scalar l-Scalar-Plain">personnes_a_charge</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;enfant1&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;enfant2&quot;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
 </li>
-<li><p>finally, define a dictionnary of the expected values of the output variables. Each output variable takes a list of length equal to the number of individuals defined in the test. E.g, for a family of four individuals with two working parents and two unemployed children, the output variable salaire_super_brut is defined as follows:</p>
-<pre><code class="lang-yaml">  output_variables:
-      salaire_super_brut: [3500, 2500, 0, 0]
-</code></pre>
+<li><p class="first">finally, define a dictionnary of the expected values of the output variables. Each output variable takes a list of length equal to the number of individuals defined in the test. E.g, for a family of four individuals with two working parents and two unemployed children, the output variable salaire_super_brut is defined as follows:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">salaire_super_brut</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">3500</span><span class="p p-Indicator">,</span> <span class="nv">2500</span><span class="p p-Indicator">,</span> <span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">0</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
 </li>
 </ul>
-<h3 id="testing-formulas-using-variables-defined-for-multiple-periods">Testing formulas using variables defined for multiple periods</h3>
+</div>
+<div class="section" id="testing-formulas-using-variables-defined-for-multiple-periods">
+<span id="testing-formulas-using-variables-defined-for-multiple-periods"></span><h3>Testing formulas using variables defined for multiple periods<a class="headerlink" href="#testing-formulas-using-variables-defined-for-multiple-periods" title="Permalink to this headline">¶</a></h3>
 <p>Input or output variables can be defined for multiple periods by giving an associated array
 which keys are a period expression and values are the value for that period.</p>
 <p>Values can be arithmetic expressions too.</p>
-<pre><code class="lang-yaml">  individus:
-    salaire_de_base:
-      2013-01: 35 * 52 / 12 * 9
-      2013-02: 35 * 52 / 12 * 9
-      2013-03: 35 * 52 / 12 * 9
-</code></pre>
-<h2 id="running-a-test">Running a test</h2>
-<p>To run YAML tests, use the command line tool <code>openfisca-run-test</code>, documented <a href="https://openfisca.readthedocs.io/en/latest/openfisca-run-test.html" target="_blank">here</a>:</p>
-<pre><code class="lang-sh">  openfisca-run-test path/to/file.yaml
-</code></pre>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span>  <span class="l l-Scalar l-Scalar-Plain">individus</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">salaire_de_base</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2013-01</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">35 * 52 / 12 * 9</span>
+      <span class="l l-Scalar l-Scalar-Plain">2013-02</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">35 * 52 / 12 * 9</span>
+      <span class="l l-Scalar l-Scalar-Plain">2013-03</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">35 * 52 / 12 * 9</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="running-a-test">
+<span id="running-a-test"></span><h2>Running a test<a class="headerlink" href="#running-a-test" title="Permalink to this headline">¶</a></h2>
+<p>To run YAML tests, use the command line tool <code class="docutils literal"><span class="pre">openfisca-run-test</span></code>, documented <a class="reference external" href="https://openfisca.readthedocs.io/en/latest/openfisca-run-test.html">here</a>:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>  openfisca-run-test path/to/file.yaml
+</pre></div>
+</div>
 <blockquote>
-<p>You can also run tests programatically using the <a href="https://openfisca.readthedocs.io/en/latest/test_runner.html" target="_blank"><code>test_runner</code> module</a>.</p>
-</blockquote>
-<h2 id="next-steps">Next steps</h2>
-<p>Other kinds of tests exist, see <a href="../contribute/tests.html">contribute/tests</a>.</p>
-
-                    
-                    </section>
-                
-                
-                </div>
-            </div>
-        </div>
-
-        
-        <a href="../coding-the-legislation/inferences.html" class="navigation navigation-prev " aria-label="Previous page: Inferences"><i class="fa fa-angle-left"></i></a>
-        
-        
-        <a href="../coding-the-legislation/legislation_parameters.html" class="navigation navigation-next " aria-label="Next page: Parameters"><i class="fa fa-angle-right"></i></a>
-        
-    </div>
+<div>You can also run tests programatically using the <a class="reference external" href="https://openfisca.readthedocs.io/en/latest/test_runner.html"><code class="docutils literal"><span class="pre">test_runner</span></code> module</a>.</div></blockquote>
+</div>
+<div class="section" id="next-steps">
+<span id="next-steps"></span><h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>Other kinds of tests exist, see <a class="reference internal" href="../contribute/tests.html"><span class="doc">contribute/tests</span></a>.</p>
+</div>
 </div>
 
-        
-<script src="../gitbook/app.js"></script>
 
+          </div>
+            
+  <div class="footer-relations">
     
-    <script src="../gitbook/plugins/gitbook-plugin-github/plugin.js"></script>
+      <div class="pull-left">
+        <a class="btn btn-default" href="inferences.html" title="previous chapter (use the left arrow)">Inferences</a>
+      </div>
     
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
-    
-
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-anchorjs/anchor-style.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
-    
-
-<script>
-require(["gitbook"], function(gitbook) {
-    var config = {"github":{"url":"https://github.com/openfisca/openfisca-doc"},"edit-link":{"base":"https://github.com/openfisca/openfisca-doc/edit/master","label":"Edit This Page"},"anchorjs":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
-    gitbook.start(config);
-});
+      <div class="pull-right">
+        <a class="btn btn-default" href="legislation_parameters.html" title="next chapter (use the right arrow)">Parameters</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="legislation_parameters.html" title="Parameters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="inferences.html" title="Inferences"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >From law to code</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
 </script>
-
-        
-    </body>
-    
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
 </html>

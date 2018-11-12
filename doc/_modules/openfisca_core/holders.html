@@ -1,0 +1,557 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>openfisca_core.holders &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/scripts.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../key-concepts/index.html">Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../coding-the-legislation/index.html">From law to code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../openfisca-web-api/index.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recipes/index.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../../summary.html">Docs</a></li>
+              
+                <li><a href="../index.html">Module code</a></li>
+              
+              <li>openfisca_core.holders</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <h1>Source code for openfisca_core.holders</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">psutil</span>
+
+<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">empty_clone</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">MONTH</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">,</span> <span class="n">ETERNITY</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.columns</span> <span class="k">import</span> <span class="n">make_column_from_variable</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.data_storage</span> <span class="k">import</span> <span class="n">InMemoryStorage</span><span class="p">,</span> <span class="n">OnDiskStorage</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Holder"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder">[docs]</a><span class="k">class</span> <span class="nc">Holder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A holder keeps tracks of a variable values after they have been calculated, or set as an input.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="n">entity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable</span> <span class="o">=</span> <span class="n">variable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">simulation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span> <span class="o">=</span> <span class="n">InMemoryStorage</span><span class="p">(</span><span class="n">is_eternal</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">ETERNITY</span><span class="p">))</span>
+
+        <span class="c1"># By default, do not activate on-disk storage, or variable dropping</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_on_disk_storable</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_do_not_store</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">memory_config</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">memory_config</span><span class="o">.</span><span class="n">priority_variables</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_disk_storage</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_on_disk_storable</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">memory_config</span><span class="o">.</span><span class="n">variables_to_drop</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_do_not_store</span> <span class="o">=</span> <span class="kc">True</span>
+
+<div class="viewcode-block" id="Holder.clone"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.clone">[docs]</a>    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Copy the holder just enough to be able to run a new simulation without modifying the original simulation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">empty_clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">new_dict</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="vm">__dict__</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;entity&#39;</span><span class="p">,</span> <span class="s1">&#39;formula&#39;</span><span class="p">,</span> <span class="s1">&#39;simulation&#39;</span><span class="p">):</span>
+                <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;entity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span>
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;simulation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">simulation</span>
+
+        <span class="k">return</span> <span class="n">new</span></div>
+
+    <span class="k">def</span> <span class="nf">create_disk_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">preserve</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">directory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">directory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">data_storage_dir</span>
+        <span class="n">storage_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">storage_dir</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">storage_dir</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">OnDiskStorage</span><span class="p">(</span>
+            <span class="n">storage_dir</span><span class="p">,</span>
+            <span class="n">is_eternal</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">ETERNITY</span><span class="p">),</span>
+            <span class="n">preserve_storage_dir</span> <span class="o">=</span> <span class="n">preserve</span>
+            <span class="p">)</span>
+
+<div class="viewcode-block" id="Holder.delete_arrays"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.delete_arrays">[docs]</a>    <span class="k">def</span> <span class="nf">delete_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            If ``period`` is ``None``, remove all known values of the variable.</span>
+
+<span class="sd">            If ``period`` is not ``None``, only remove all values for any period included in period (e.g. if period is &quot;2017&quot;, values for &quot;2017-01&quot;, &quot;2017-07&quot;, etc. would be removed)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">period</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Holder.get_array"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.get_array">[docs]</a>    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get the value of the variable for the given period (and possibly a list of extra parameters).</span>
+
+<span class="sd">            If the value is not known, return ``None``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">is_neutralized</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_array</span><span class="p">()</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Holder.get_memory_usage"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.get_memory_usage">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get data about the virtual memory usage of the holder.</span>
+
+<span class="sd">            :returns: Memory usage data</span>
+<span class="sd">            :rtype: dict</span>
+
+<span class="sd">            Exemple:</span>
+
+<span class="sd">            &gt;&gt;&gt; holder.get_memory_usage()</span>
+<span class="sd">            &gt;&gt;&gt; {</span>
+<span class="sd">            &gt;&gt;&gt;    &#39;nb_arrays&#39;: 12,  # The holder contains the variable values for 12 different periods</span>
+<span class="sd">            &gt;&gt;&gt;    &#39;nb_cells_by_array&#39;: 100, # There are 100 entities (e.g. persons) in our simulation</span>
+<span class="sd">            &gt;&gt;&gt;    &#39;cell_size&#39;: 8,  # Each value takes 8B of memory</span>
+<span class="sd">            &gt;&gt;&gt;    &#39;dtype&#39;: dtype(&#39;float64&#39;)  # Each value is a float 64</span>
+<span class="sd">            &gt;&gt;&gt;    &#39;total_nb_bytes&#39;: 10400  # The holder uses 10.4kB of virtual memory</span>
+<span class="sd">            &gt;&gt;&gt;    &#39;nb_requests&#39;: 24  # The variable has been computed 24 times</span>
+<span class="sd">            &gt;&gt;&gt;    &#39;nb_requests_by_array&#39;: 2  # Each array stored has been on average requested twice</span>
+<span class="sd">            &gt;&gt;&gt;    }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">usage</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">nb_cells_by_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">count</span><span class="p">,</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">usage</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">get_memory_usage</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">trace</span><span class="p">:</span>
+            <span class="n">usage_stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">usage_stats</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">usage</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">nb_requests</span> <span class="o">=</span> <span class="n">usage_stats</span><span class="p">[</span><span class="s1">&#39;nb_requests&#39;</span><span class="p">],</span>
+                <span class="n">nb_requests_by_array</span> <span class="o">=</span> <span class="n">usage_stats</span><span class="p">[</span><span class="s1">&#39;nb_requests&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">usage</span><span class="p">[</span><span class="s1">&#39;nb_arrays&#39;</span><span class="p">])</span> <span class="k">if</span> <span class="n">usage</span><span class="p">[</span><span class="s1">&#39;nb_arrays&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+                <span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">usage</span></div>
+
+<div class="viewcode-block" id="Holder.get_known_periods"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.get_known_periods">[docs]</a>    <span class="k">def</span> <span class="nf">get_known_periods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get the list of periods the variable value is known for.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">get_known_periods</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">((</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">get_known_periods</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span> <span class="k">else</span> <span class="p">[]))</span></div>
+
+<div class="viewcode-block" id="Holder.set_input"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.set_input">[docs]</a>    <span class="k">def</span> <span class="nf">set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Set a variable&#39;s value (``array``) for a given period (``period``)</span>
+
+<span class="sd">            :param array: the input value for the variable</span>
+<span class="sd">            :param period: the period at which the value is setted</span>
+
+<span class="sd">            Exemple :</span>
+
+<span class="sd">            &gt;&gt;&gt; holder.set_input([12, 14], &#39;2018-04&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; holder.get_array(&#39;2018-04&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; [12, 14]</span>
+
+
+<span class="sd">            If a ``set_input`` property has been set for the variable, this method may accept inputs for periods not matching the ``definition_period`` of the variable. To read more about this, check the `documentation &lt;http://openfisca.org/doc/coding-the-legislation/35_periods.html#automatically-process-variable-inputs-defined-for-periods-not-matching-the-definitionperiod&gt;`_.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">ETERNITY</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">!=</span> <span class="n">ETERNITY</span><span class="p">:</span>
+            <span class="n">error_message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                <span class="s1">&#39;Unable to set a value for variable </span><span class="si">{0}</span><span class="s1"> for ETERNITY.&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> is only defined for </span><span class="si">{1}</span><span class="s1">s. Please adapt your input.&#39;</span><span class="p">,</span>
+                <span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">PeriodMismatchError</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">period</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span><span class="p">,</span>
+                <span class="n">error_message</span>
+                <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">is_neutralized</span><span class="p">:</span>
+            <span class="n">warning_message</span> <span class="o">=</span> <span class="s2">&quot;You cannot set a value for the variable </span><span class="si">{}</span><span class="s2">, as it has been neutralized. The value you provided (</span><span class="si">{}</span><span class="s2">) will be ignored.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">warning_message</span> <span class="o">=</span> <span class="n">warning_message</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="n">warning_message</span><span class="p">,</span>
+                <span class="ne">Warning</span>
+                <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">set_input</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extra_params</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">Enum</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">possible_values</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s1">&#39;Unable to set value &quot;</span><span class="si">{}</span><span class="s1">&quot; for variable &quot;</span><span class="si">{}</span><span class="s1">&quot;, as the variable dtype &quot;</span><span class="si">{}</span><span class="s1">&quot; does not match the value dtype &quot;</span><span class="si">{}</span><span class="s1">&quot;.&#39;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+                    <span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">!=</span> <span class="n">ETERNITY</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;A period must be specified to set values, except for variables with ETERNITY as as period_definition.&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">MONTH</span> <span class="ow">and</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span><span class="p">)</span> <span class="ow">or</span>
+               <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">YEAR</span> <span class="ow">and</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span><span class="p">)):</span>
+                <span class="n">error_message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="s1">&#39;Unable to set a value for variable </span><span class="si">{0}</span><span class="s1"> for </span><span class="si">{1}</span><span class="s1">-long period </span><span class="si">{2}</span><span class="s1">.&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> is only defined for </span><span class="si">{3}</span><span class="s1">s. Please adapt your input.&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;If you are the maintainer of </span><span class="si">{0}</span><span class="s1">, you can consider adding it a set_input attribute to enable automatic period casting.&#39;</span>
+                    <span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                        <span class="n">period</span><span class="o">.</span><span class="n">unit</span><span class="p">,</span>
+                        <span class="n">period</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span>
+                    <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+                <span class="k">raise</span> <span class="n">PeriodMismatchError</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="n">period</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span><span class="p">,</span>
+                    <span class="n">error_message</span>
+                    <span class="p">)</span>
+
+        <span class="n">should_store_on_disk</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_on_disk_storable</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span>  <span class="c1"># If there is already a value in memory, replace it and don&#39;t put a new value in the disk storage</span>
+            <span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">()</span><span class="o">.</span><span class="n">percent</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">memory_config</span><span class="o">.</span><span class="n">max_memory_occupation_pc</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">should_store_on_disk</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">put_in_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_not_store</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">opt_out_cache</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">cache_blacklist</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">cache_blacklist</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Holder.default_array"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.default_array">[docs]</a>    <span class="k">def</span> <span class="nf">default_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a new array of the appropriate length for the entity, filled with the variable default values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">array_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">count</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">array_size</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">Enum</span><span class="p">:</span>
+            <span class="n">array</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">default_value</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">EnumArray</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">possible_values</span><span class="p">)</span>
+        <span class="n">array</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">default_value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span></div>
+
+    <span class="c1"># Legacy method used by the old OpenFisca Web API to display intermediate results</span>
+    <span class="k">def</span> <span class="nf">to_value_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_label</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="n">column</span> <span class="o">=</span> <span class="n">make_column_from_variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="p">)</span>
+        <span class="n">transform_dated_value_to_json</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">transform_dated_value_to_json</span>
+
+        <span class="k">def</span> <span class="nf">extra_params_to_json_key</span><span class="p">(</span><span class="n">extra_params</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;{&#39;</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_extra_param_names</span><span class="p">(</span><span class="n">period</span><span class="p">),</span> <span class="n">extra_params</span><span class="p">)]</span>
+                <span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">ETERNITY</span><span class="p">:</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="p">[</span>
+                <span class="n">transform_dated_value_to_json</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">use_label</span> <span class="o">=</span> <span class="n">use_label</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">array</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="p">]</span>
+        <span class="n">value_json</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">period</span><span class="p">,</span> <span class="n">array_or_dict</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">_arrays</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">array_or_dict</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span>
+                <span class="n">values_dict</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">extra_params</span><span class="p">,</span> <span class="n">array</span> <span class="ow">in</span> <span class="n">array_or_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">extra_params_key</span> <span class="o">=</span> <span class="n">extra_params_to_json_key</span><span class="p">(</span><span class="n">extra_params</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+                    <span class="n">values_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">extra_params_key</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">transform_dated_value_to_json</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">use_label</span> <span class="o">=</span> <span class="n">use_label</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">array</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                        <span class="p">]</span>
+                <span class="n">value_json</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">)]</span> <span class="o">=</span> <span class="n">values_dict</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value_json</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">transform_dated_value_to_json</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">use_label</span> <span class="o">=</span> <span class="n">use_label</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">array_or_dict</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                    <span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">period</span><span class="p">,</span> <span class="n">file_or_dict</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">_files</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">file_or_dict</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span>
+                    <span class="n">values_dict</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="k">for</span> <span class="n">extra_params</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">file_or_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="n">extra_params_key</span> <span class="o">=</span> <span class="n">extra_params_to_json_key</span><span class="p">(</span><span class="n">extra_params</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+                        <span class="n">values_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">extra_params_key</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span>
+                            <span class="n">transform_dated_value_to_json</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">use_label</span> <span class="o">=</span> <span class="n">use_label</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                            <span class="p">]</span>
+                    <span class="n">value_json</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">)]</span> <span class="o">=</span> <span class="n">values_dict</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">value_json</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">transform_dated_value_to_json</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">use_label</span> <span class="o">=</span> <span class="n">use_label</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_or_dict</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">value_json</span>
+
+    <span class="c1"># Legacy method called by to_value_json</span>
+    <span class="k">def</span> <span class="nf">get_extra_param_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="n">formula</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">get_formula</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">formula</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_varnames</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span></div>
+
+
+<span class="k">class</span> <span class="nc">PeriodMismatchError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">definition_period</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable_name</span> <span class="o">=</span> <span class="n">variable_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">period</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">=</span> <span class="n">definition_period</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+        <span class="ne">ValueError</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="set_input_dispatch_by_period"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.set_input_dispatch_by_period">[docs]</a><span class="k">def</span> <span class="nf">set_input_dispatch_by_period</span><span class="p">(</span><span class="n">holder</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function can be declared as a ``set_input`` attribute of a variable.</span>
+
+<span class="sd">        In this case, the variable will accept inputs on larger periods that its definition period, and the value for the larger period will be applied to all its subperiods.</span>
+
+<span class="sd">        To read more about ``set_input`` attributes, check the `documentation &lt;http://openfisca.org/doc/coding-the-legislation/35_periods.html#automatically-process-variable-inputs-defined-for-periods-not-matching-the-definitionperiod&gt;`_.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">period_size</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">size</span>
+    <span class="n">period_unit</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span>
+
+    <span class="k">if</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">MONTH</span><span class="p">:</span>
+        <span class="n">cached_period_unit</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span>
+    <span class="k">elif</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">YEAR</span><span class="p">:</span>
+        <span class="n">cached_period_unit</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;set_input_dispatch_by_period can be used only for yearly or monthly variables.&#39;</span><span class="p">)</span>
+
+    <span class="n">after_instant</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="n">period_size</span><span class="p">,</span> <span class="n">period_unit</span><span class="p">)</span>
+
+    <span class="c1"># Cache the input data, skipping the existing cached months</span>
+    <span class="n">sub_period</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">cached_period_unit</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">sub_period</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">after_instant</span><span class="p">:</span>
+        <span class="n">existing_array</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="n">sub_period</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">existing_array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">holder</span><span class="o">.</span><span class="n">_set</span><span class="p">(</span><span class="n">sub_period</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># The array of the current sub-period is reused for the next ones.</span>
+            <span class="c1"># TODO: refactor or document this behavior</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">existing_array</span>
+        <span class="n">sub_period</span> <span class="o">=</span> <span class="n">sub_period</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="set_input_divide_by_period"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.set_input_divide_by_period">[docs]</a><span class="k">def</span> <span class="nf">set_input_divide_by_period</span><span class="p">(</span><span class="n">holder</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function can be declared as a ``set_input`` attribute of a variable.</span>
+
+<span class="sd">        In this case, the variable will accept inputs on larger periods that its definition period, and the value for the larger period will be divided between its subperiods.</span>
+
+<span class="sd">        To read more about ``set_input`` attributes, check the `documentation &lt;http://openfisca.org/doc/coding-the-legislation/35_periods.html#automatically-process-variable-inputs-defined-for-periods-not-matching-the-definitionperiod&gt;`_.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">period_size</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">size</span>
+    <span class="n">period_unit</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span>
+
+    <span class="k">if</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">MONTH</span><span class="p">:</span>
+        <span class="n">cached_period_unit</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span>
+    <span class="k">elif</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">YEAR</span><span class="p">:</span>
+        <span class="n">cached_period_unit</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;set_input_divide_by_period can be used only for yearly or monthly variables.&#39;</span><span class="p">)</span>
+
+    <span class="n">after_instant</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="n">period_size</span><span class="p">,</span> <span class="n">period_unit</span><span class="p">)</span>
+
+    <span class="c1"># Count the number of elementary periods to change, and the difference with what is already known.</span>
+    <span class="n">remaining_array</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">sub_period</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">cached_period_unit</span><span class="p">)</span>
+    <span class="n">sub_periods_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">sub_period</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">after_instant</span><span class="p">:</span>
+        <span class="n">existing_array</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="n">sub_period</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">existing_array</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">remaining_array</span> <span class="o">-=</span> <span class="n">existing_array</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sub_periods_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">sub_period</span> <span class="o">=</span> <span class="n">sub_period</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Cache the input data</span>
+    <span class="k">if</span> <span class="n">sub_periods_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">divided_array</span> <span class="o">=</span> <span class="n">remaining_array</span> <span class="o">/</span> <span class="n">sub_periods_count</span>
+        <span class="n">sub_period</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">cached_period_unit</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">sub_period</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">after_instant</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">holder</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="n">sub_period</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">holder</span><span class="o">.</span><span class="n">_set</span><span class="p">(</span><span class="n">sub_period</span><span class="p">,</span> <span class="n">divided_array</span><span class="p">)</span>
+            <span class="n">sub_period</span> <span class="o">=</span> <span class="n">sub_period</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="p">(</span><span class="n">remaining_array</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Inconsistent input: variable </span><span class="si">{0}</span><span class="s2"> has already been set for all months contained in period </span><span class="si">{1}</span><span class="s2">, and value </span><span class="si">{2}</span><span class="s2"> provided for </span><span class="si">{1}</span><span class="s2"> doesn&#39;t match the total (</span><span class="si">{3}</span><span class="s2">). This error may also be thrown if you try to call set_input twice for the same variable and period.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">array</span> <span class="o">-</span> <span class="n">remaining_array</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span></div>
+</pre></div>
+
+          </div>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

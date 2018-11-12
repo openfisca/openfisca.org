@@ -1,857 +1,167 @@
-<!DOCTYPE HTML>
-<html lang="en" >
-    
-    <head>
-        
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Periods and instants | OpenFisca</title>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="">
-        <meta name="generator" content="GitBook 2.6.9">
-        
-        
-        <meta name="HandheldFriendly" content="true"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
-        
-    <link rel="stylesheet" href="../gitbook/style.css">
-    
-        
-        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
-        
-    
-        
-        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
-        
-    
-        
-        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
-        
-    
-    
-
-        
-    
-    
-    <link rel="next" href="../coding-the-legislation/40_legislation_evolutions.html" />
-    
-    
-    <link rel="prev" href="../coding-the-legislation/25_vectorial_computing.html" />
-    
-
-        
-    </head>
-    <body>
-        
-        
-    <div class="book"
-        data-level="2.4"
-        data-chapter-title="Periods and instants"
-        data-filepath="coding-the-legislation/35_periods.md"
-        data-basepath=".."
-        data-revision="Fri Oct 19 2018 01:05:39 GMT+0000 (UTC)"
-        data-innerlanguage="">
-    
-
-<div class="book-summary">
-    <nav role="navigation">
-        <ul class="summary">
-            
-            
-            
-                
-                <li>
-                    <a href="https://openfisca.org/doc" target="blank" class="custom-link">OpenFisca website</a>
-                </li>
-            
-            
-
-            
-            <li class="divider"></li>
-            
-
-            
-    
-        <li class="chapter " data-level="0" data-path="index.html">
-            
-                
-                    <a href="../index.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                        Introduction
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1" data-path="key-concepts.html">
-            
-                
-                    <a href="../key-concepts.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.</b>
-                        
-                        Key concepts
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.1" data-path="tax_and_benefit_system.html">
-            
-                
-                    <a href="../tax_and_benefit_system.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.1.</b>
-                        
-                        Tax and Benefit System
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="variables.html">
-            
-                
-                    <a href="../variables.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.2.</b>
-                        
-                        Variables
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="parameters.html">
-            
-                
-                    <a href="../parameters.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.3.</b>
-                        
-                        Parameters
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="person,_entities,_role.html">
-            
-                
-                    <a href="../person,_entities,_role.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.4.</b>
-                        
-                        Person, entities, role
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="periodsinstants.html">
-            
-                
-                    <a href="../periodsinstants.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.5.</b>
-                        
-                        Periods, Instants
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="input_data.html">
-            
-                
-                    <a href="../input_data.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.6.</b>
-                        
-                        Input Data
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="simulation.html">
-            
-                
-                    <a href="../simulation.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.7.</b>
-                        
-                        Simulation, Computation
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="reforms.html">
-            
-                
-                    <a href="../reforms.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.8.</b>
-                        
-                        Reforms
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2" data-path="coding-the-legislation/index.html">
-            
-                
-                    <a href="../coding-the-legislation/index.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.</b>
-                        
-                        From law to code
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1" data-path="coding-the-legislation/10_basic_example.html">
-            
-                
-                    <a href="../coding-the-legislation/10_basic_example.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.1.</b>
-                        
-                        Coding a formula: basic example
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="coding-the-legislation/20_input_variables.html">
-            
-                
-                    <a href="../coding-the-legislation/20_input_variables.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.2.</b>
-                        
-                        Introducing an input variable
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="coding-the-legislation/25_vectorial_computing.html">
-            
-                
-                    <a href="../coding-the-legislation/25_vectorial_computing.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.3.</b>
-                        
-                        Vectorial computing
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter active" data-level="2.4" data-path="coding-the-legislation/35_periods.html">
-            
-                
-                    <a href="../coding-the-legislation/35_periods.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.4.</b>
-                        
-                        Periods and instants
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="coding-the-legislation/40_legislation_evolutions.html">
-            
-                
-                    <a href="../coding-the-legislation/40_legislation_evolutions.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.5.</b>
-                        
-                        Legislation evolutions
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="coding-the-legislation/50_entities.html">
-            
-                
-                    <a href="../coding-the-legislation/50_entities.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.6.</b>
-                        
-                        Entities
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.7" data-path="coding-the-legislation/reforms.html">
-            
-                
-                    <a href="../coding-the-legislation/reforms.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.7.</b>
-                        
-                        Reforms
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.8" data-path="coding-the-legislation/inferences.html">
-            
-                
-                    <a href="../coding-the-legislation/inferences.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.8.</b>
-                        
-                        Inferences
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.9" data-path="coding-the-legislation/writing_yaml_tests.html">
-            
-                
-                    <a href="../coding-the-legislation/writing_yaml_tests.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.9.</b>
-                        
-                        Writing YAML tests
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.10" data-path="coding-the-legislation/legislation_parameters.html">
-            
-                
-                    <a href="../coding-the-legislation/legislation_parameters.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.10.</b>
-                        
-                        Parameters
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="2.11" data-path="coding-the-legislation/bootstrapping_a_new_country_package.html">
-            
-                
-                    <a href="../coding-the-legislation/bootstrapping_a_new_country_package.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.11.</b>
-                        
-                        Bootstrapping a new country package
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="3" data-path="openfisca-web-api/index.html">
-            
-                
-                    <a href="../openfisca-web-api/index.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>3.</b>
-                        
-                        OpenFisca Web API
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="3.1" data-path="openfisca-web-api/endpoints.html">
-            
-                
-                    <a href="../openfisca-web-api/endpoints.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>3.1.</b>
-                        
-                        Endpoints
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="3.2" data-path="openfisca-web-api/input-output-data.html">
-            
-                
-                    <a href="../openfisca-web-api/input-output-data.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>3.2.</b>
-                        
-                        Input and output data
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="3.3" data-path="openfisca-web-api/config-openapi.html">
-            
-                
-                    <a href="../openfisca-web-api/config-openapi.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>3.3.</b>
-                        
-                        OpenAPI specification config
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="4" data-path="troubleshooting.html">
-            
-                
-                    <a href="../troubleshooting.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>4.</b>
-                        
-                        Troubleshooting
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="5" data-path="recipes.html">
-            
-                
-                    <a href="../recipes.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.</b>
-                        
-                        Recipes
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="5.1" data-path="howto-web-no-local-install.html">
-            
-                
-                    <a href="../howto-web-no-local-install.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.1.</b>
-                        
-                        Use OpenFisca on the web (no installation required on your computer)
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="5.2" data-path="howto_docker.html">
-            
-                
-                    <a href="../howto_docker.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.2.</b>
-                        
-                        Use OpenFisca with Docker
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="5.3" data-path="offline-environment.html">
-            
-                
-                    <a href="../offline-environment.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.3.</b>
-                        
-                        Install OpenFisca in an offline environment
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="5.4" data-path="windows-no-admin.html">
-            
-                
-                    <a href="../windows-no-admin.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.4.</b>
-                        
-                        Work on OpenFisca on a Windows without being administrator
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="5.5" data-path="test_situations.html">
-            
-                
-                    <a href="../test_situations.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.5.</b>
-                        
-                        Test your changes on &quot;ready to use&quot; situations
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="6" data-path="publishing.html">
-            
-                
-                    <a href="../publishing.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>6.</b>
-                        
-                        Publishing results
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="7" data-path="community.html">
-            
-                
-                    <a href="../community.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>7.</b>
-                        
-                        Community
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8" data-path="contribute/index.html">
-            
-                
-                    <a href="../contribute/index.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.</b>
-                        
-                        Contribute
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="8.1" data-path="contribute/guidelines.html">
-            
-                
-                    <a href="../contribute/guidelines.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.1.</b>
-                        
-                        Contributor guidelines
-                    </a>
-            
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="8.1.1" data-path="contribute/language.html">
-            
-                
-                    <a href="../contribute/language.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.1.1.</b>
-                        
-                        Language
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.1.2" data-path="contribute/commit-messages.html">
-            
-                
-                    <a href="../contribute/commit-messages.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.1.2.</b>
-                        
-                        Commit messages
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.1.3" data-path="contribute/variables-naming.html">
-            
-                
-                    <a href="../contribute/variables-naming.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.1.3.</b>
-                        
-                        Variables naming
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.1.4" data-path="contribute/semver.html">
-            
-                
-                    <a href="../contribute/semver.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.1.4.</b>
-                        
-                        Semantic versionning
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="8.2" data-path="contribute/documentation.html">
-            
-                
-                    <a href="../contribute/documentation.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.2.</b>
-                        
-                        Enhance the documentation
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.3" data-path="contribute/extensions.html">
-            
-                
-                    <a href="../contribute/extensions.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.3.</b>
-                        
-                        Extensions
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.4" data-path="contribute/developer-guide.html">
-            
-                
-                    <a href="../contribute/developer-guide.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.4.</b>
-                        
-                        Developer guide
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.5" data-path="contribute/tests.html">
-            
-                
-                    <a href="../contribute/tests.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.5.</b>
-                        
-                        Tests
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="8.6" data-path="contribute/release-process.html">
-            
-                
-                    <a href="../contribute/release-process.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>8.6.</b>
-                        
-                        Release process
-                    </a>
-            
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-            
-            <li class="divider"></li>
-            <li>
-                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-                    Published with GitBook
-                </a>
-            </li>
-            
-        </ul>
-    </nav>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Periods and instants &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Legislation evolutions" href="40_legislation_evolutions.html" />
+    <link rel="prev" title="Vectorial computing" href="25_vectorial_computing.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="40_legislation_evolutions.html" title="Legislation evolutions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="25_vectorial_computing.html" title="Vectorial computing"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">From law to code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts/index.html">Key concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">From law to code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="10_basic_example.html">Coding a formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20_input_variables.html">Introducing an input variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="25_vectorial_computing.html">Vectorial computing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Periods and instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="40_legislation_evolutions.html">Legislation evolutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="50_entities.html">Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inferences.html">Inferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing_yaml_tests.html">Writing YAML tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="legislation_parameters.html">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootstrapping_a_new_country_package.html">Bootstraping a new country package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#tutorial">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#additional-documentation">Additional documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/index.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
 </div>
-
-    <div class="book-body">
-        <div class="body-inner">
-            <div class="book-header" role="navigation">
-    <!-- Actions Left -->
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../" >OpenFisca</a>
-    </h1>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
 </div>
-
-            <div class="page-wrapper" tabindex="-1" role="main">
-                <div class="page-inner">
-                
-                
-                    <section class="normal" id="section-">
-                    
-                        <h1 id="periods-and-instants">Periods and instants</h1>
-<p>A period can be a month, a year, <code>n</code> successive months, <code>n</code> successive years or the eternity.
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+                <li><a href="index.html">From law to code</a></li>
+              
+              <li>Periods and instants</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="periods-and-instants">
+<span id="periods-and-instants"></span><h1>Periods and instants<a class="headerlink" href="#periods-and-instants" title="Permalink to this headline">¶</a></h1>
+<p>A period can be a month, a year, <code class="docutils literal"><span class="pre">n</span></code> successive months, <code class="docutils literal"><span class="pre">n</span></code> successive years or the eternity.
 The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore:</p>
-<ul>
+<ul class="simple">
 <li>All periods are presumed to start on the first day of their first month.</li>
 <li>A period cannot be smaller than a month.</li>
 </ul>
 <p>An Instant is a specific day, such as a cutoff date.</p>
 <blockquote>
-<p>Internally, periods are stored as:</p>
-<ul>
+<div><p>Internally, periods are stored as:</p>
+<ul class="simple">
 <li>a start instant</li>
 <li>a unit (MONTH, YEAR)</li>
 <li>a quantity of units.</li>
 </ul>
-</blockquote>
-<h2 id="periods-in-simulations">Periods in simulations</h2>
+</div></blockquote>
+<div class="section" id="periods-in-simulations">
+<span id="periods-in-simulations"></span><h2>Periods in simulations<a class="headerlink" href="#periods-in-simulations" title="Permalink to this headline">¶</a></h2>
 <p>In OpenFisca inputs, periods are encoded in strings. All the valid period formats are referenced in this table:</p>
-<table>
+<table border="1" class="docutils">
 <thead>
 <tr>
 <th>Period format</th>
@@ -865,42 +175,42 @@ The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore
 <tr>
 <td><code>AAAA</code></td>
 <td>Calendar year</td>
-<td><code>&apos;2010&apos;</code></td>
+<td><code>'2010'</code></td>
 <td>The year 2010.</td>
 <td>From the 1st of January 2010 to the 31st of December 2010, inclusive.</td>
 </tr>
 <tr>
 <td><code>AAAA-MM</code></td>
 <td>Month</td>
-<td><code>&apos;2010-04&apos;</code></td>
+<td><code>'2010-04'</code></td>
 <td>The month of April 2010.</td>
 <td>From the 1st of April 2010 to the 30th of April 2010, inclusive.</td>
 </tr>
 <tr>
 <td><code>year:AAAA-MM</code></td>
 <td>Rolling year</td>
-<td><code>&apos;year:2010-04&apos;</code></td>
+<td><code>'year:2010-04'</code></td>
 <td>The 1 year period starting in April 2010.</td>
 <td>From the 1st of April 2010 to the 31st of March 2011, inclusive</td>
 </tr>
 <tr>
 <td><code>year:AAAA:N</code></td>
 <td>N years</td>
-<td><code>&apos;year:2010:3&apos;</code></td>
+<td><code>'year:2010:3'</code></td>
 <td>The years 2010, 2011 and 2012.</td>
 <td>From the 1st of January 2010 to the 31st of December 2012, inclusive.</td>
 </tr>
 <tr>
 <td><code>year:AAAA-MM:N</code></td>
 <td>N rolling years</td>
-<td><code>&apos;year:2010-04:3&apos;</code></td>
+<td><code>'year:2010-04:3'</code></td>
 <td>The three years period starting in April 2010.</td>
 <td>From the 1st of April 2010 to the 31st of March 2013, inclusive.</td>
 </tr>
 <tr>
 <td><code>month:AAAA-MM:N</code></td>
 <td>N months</td>
-<td><code>&apos;month:2010-04:3&apos;</code></td>
+<td><code>'month:2010-04:3'</code></td>
 <td>The three months from April to June 2010.</td>
 <td>From the 1st of April 2010 to the 30th of June 2010, inclusive.</td>
 </tr>
@@ -912,98 +222,109 @@ The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore
 <td>All past, present and future day, month or year</td>
 </tr>
 </tbody>
-</table>
-<p>This <a href="writing_yaml_tests.html">YAML test</a> on <code>income_tax</code> evolution over time shows periods&apos; impact on a variable</p>
-<pre><code class="lang-yaml">
-- name: Income tax over time
-  period: 2016-01
-  input_variables:
-    salary:
-      year:2014:3: 100000 # This person earned 100,000 between 2014 and 2016
-  output_variables:
-    income_tax:
-      2014-01: 388.8889
-      2015-01: 416.6667 # The income tax rate changes in 2015
-      2016-01: 416.6667
-      2017-01: 0 # The salary is not set for this period and defaults to 0
-</code></pre>
-<h2 id="periods-in-variable-definition">Periods in variable definition</h2>
-<pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">salary</span><span class="hljs-params">(Variable)</span>:</span>
-    value_type = float
-    entity = Person
-    label = <span class="hljs-string">u&quot;Salary for a month&quot;</span>
-    definition_period = MONTH
+</table><p>This <a class="reference internal" href="writing_yaml_tests.html"><span class="doc">YAML test</span></a> on <code class="docutils literal"><span class="pre">income_tax</span></code> evolution over time shows periods&#8217; impact on a variable</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Income tax over time</span>
+  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2016-01</span>
+  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">salary</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">year:2014:3</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">100000</span> <span class="c1"># This person earned 100,000 between 2014 and 2016</span>
+  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">income_tax</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">2014-01</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">388.8889</span>
+      <span class="l l-Scalar l-Scalar-Plain">2015-01</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">416.6667</span> <span class="c1"># The income tax rate changes in 2015</span>
+      <span class="l l-Scalar l-Scalar-Plain">2016-01</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">416.6667</span>
+      <span class="l l-Scalar l-Scalar-Plain">2017-01</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span> <span class="c1"># The salary is not set for this period and defaults to 0 </span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="periods-in-variable-definition">
+<span id="periods-in-variable-definition"></span><h2>Periods in variable definition<a class="headerlink" href="#periods-in-variable-definition" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Salary for a month&quot;</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formula</span><span class="hljs-params">(person, period)</span>:</span>
-        ...
-</code></pre>
-<p>Most of the values calculated in OpenFisca, such as <code>income_tax</code>, and <code>housing_allowance</code>, can change over time. </p>
-<p>Therefore, all OpenFisca variables have a <code>definition_period</code> attribute:</p>
-<ul>
-<li><code>definition_period = MONTH</code>: The variable may have a different value each month. <em>For example</em>, the salary of a person. When <code>formula</code> is executed, the parameter <code>period</code> will always be a whole month. Trying to compute <code>salary</code> with a period that is not a month will raise an error before entering <code>formula</code>.</li>
-<li><code>definition_period = YEAR</code>: The variable is defined for a year or it has always the same value every months of a year. <em>For example</em>, if taxes are to be paid yearly, the corresponding variable is yearly. When <code>formula</code> is executed, the parameter <code>period</code> will always be a whole year (from January 1st to December 31th).</li>
-<li><code>definition_period = ETERNITY</code>: The value of the variable is constant. <em>For example</em>, the date of birth of a person never changes. <code>period</code> is still the 2nd parameter of <code>formula</code>. However when <code>formula</code> is executed, the parameter <code>period</code> can be anything and it should not be used.</li>
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>Most of the values calculated in OpenFisca, such as <code class="docutils literal"><span class="pre">income_tax</span></code>, and <code class="docutils literal"><span class="pre">housing_allowance</span></code>, can change over time.</p>
+<p>Therefore, all OpenFisca variables have a <code class="docutils literal"><span class="pre">definition_period</span></code> attribute:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">MONTH</span></code>: The variable may have a different value each month. <em>For example</em>, the salary of a person. When <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> will always be a whole month. Trying to compute <code class="docutils literal"><span class="pre">salary</span></code> with a period that is not a month will raise an error before entering <code class="docutils literal"><span class="pre">formula</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">YEAR</span></code>: The variable is defined for a year or it has always the same value every months of a year. <em>For example</em>, if taxes are to be paid yearly, the corresponding variable is yearly. When <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> will always be a whole year (from January 1st to December 31th).</li>
+<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">ETERNITY</span></code>: The value of the variable is constant. <em>For example</em>, the date of birth of a person never changes. <code class="docutils literal"><span class="pre">period</span></code> is still the 2nd parameter of <code class="docutils literal"><span class="pre">formula</span></code>. However when <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> can be anything and it should not be used.</li>
 </ul>
 <p>Each formula calculates the value of a variable for a period the size of <strong>the given definition period</strong>. This period is always the second argument of the formulas.</p>
-<h2 id="periods-in-formulas">Periods in formulas</h2>
-<h3 id="calculate-dependencies-for-a-period-different-than-the-variables-definitionperiod">Calculate dependencies for a period different than the variable&apos;s <code>definition_period</code></h3>
-<p>Calling a formula with a period that is incompatible with the attribute <code>definition_period</code> will cause an error. For instance, if we assume that a person <code>salary</code> is paid monthly:</p>
-<pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">taxes</span><span class="hljs-params">(Variable)</span>:</span>
-    value_type = float
-    entity = Person
-    label = <span class="hljs-string">u&quot;Taxes for a whole year&quot;</span>
-    definition_period = YEAR
+</div>
+<div class="section" id="periods-in-formulas">
+<span id="periods-in-formulas"></span><h2>Periods in formulas<a class="headerlink" href="#periods-in-formulas" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="calculate-dependencies-for-a-period-different-than-the-variable-s-definition-period">
+<span id="calculate-dependencies-for-a-period-different-than-the-variable-s-definition-period"></span><h3>Calculate dependencies for a period different than the variable&#8217;s <code class="docutils literal"><span class="pre">definition_period</span></code><a class="headerlink" href="#calculate-dependencies-for-a-period-different-than-the-variable-s-definition-period" title="Permalink to this headline">¶</a></h3>
+<p>Calling a formula with a period that is incompatible with the attribute <code class="docutils literal"><span class="pre">definition_period</span></code> will cause an error. For instance, if we assume that a person <code class="docutils literal"><span class="pre">salary</span></code> is paid monthly:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Taxes for a whole year&quot;</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">YEAR</span>
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formula</span><span class="hljs-params">(person, period)</span>:</span>  <span class="hljs-comment"># period is a year because definition_period = YEAR</span>
-        salary_past_year = person(<span class="hljs-string">&apos;salary&apos;</span>, period)  <span class="hljs-comment"># salary is a montly variable. This will cause an error.</span>
-        ...
-</code></pre>
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>  <span class="c1"># period is a year because definition_period = YEAR</span>
+        <span class="n">salary_past_year</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>  <span class="c1"># salary is a montly variable. This will cause an error.</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
 <p>However, sometimes, we do need to estimate a variable for a different period than the one it is defined for.</p>
-<p>We may for example want to get the sum of the salaries perceived on the past year, or the past 3 months. The option <code>ADD</code> tells openfisca to split the period into months, compute the variable for each month and sum up the results:</p>
-<pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">taxes</span><span class="hljs-params">(Variable)</span>:</span>
-    value_type = float
-    entity = Person
-    label = <span class="hljs-string">&quot;Taxes for a whole year&quot;</span>
-    definition_period = YEAR
+<p>We may for example want to get the sum of the salaries perceived on the past year, or the past 3 months. The option <code class="docutils literal"><span class="pre">ADD</span></code> tells openfisca to split the period into months, compute the variable for each month and sum up the results:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Taxes for a whole year&quot;</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">YEAR</span>
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formula</span><span class="hljs-params">(person, period)</span>:</span>  <span class="hljs-comment"># period is a year because definition_period = YEAR</span>
-        salary_last_year = person(<span class="hljs-string">&apos;salary&apos;</span>, period, options = [ADD])
-        ...
-</code></pre>
-<p>The option <code>DIVIDE</code> allows you to do the opposite: evaluating a quantity for a month while the variable is defined for a year. OpenFisca computes the variable for the whole year that contains the specified month and then divides the result by 12.</p>
-<pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">salary_net_of_taxes</span><span class="hljs-params">(Variable)</span>:</span>
-    value_type = float
-    entity = Person
-    label = <span class="hljs-string">u&quot;Monthly salary, net of taxes&quot;</span>
-    definition_period = MONTH
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>  <span class="c1"># period is a year because definition_period = YEAR</span>
+        <span class="n">salary_last_year</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">ADD</span><span class="p">])</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>The option <code class="docutils literal"><span class="pre">DIVIDE</span></code> allows you to do the opposite: evaluating a quantity for a month while the variable is defined for a year. OpenFisca computes the variable for the whole year that contains the specified month and then divides the result by 12.</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">salary_net_of_taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Monthly salary, net of taxes&quot;</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formula</span><span class="hljs-params">(person, period)</span>:</span>  <span class="hljs-comment"># period is a month because definition_period = MONTH</span>
-        <span class="hljs-comment"># The variable taxes is computed on a year, monthly_taxes equals the 12th of that result</span>
-        monthly_taxes = person(<span class="hljs-string">&apos;taxes&apos;</span>, period, options = [DIVIDE])
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>  <span class="c1"># period is a month because definition_period = MONTH</span>
+        <span class="c1"># The variable taxes is computed on a year, monthly_taxes equals the 12th of that result</span>
+        <span class="n">monthly_taxes</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;taxes&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">DIVIDE</span><span class="p">])</span>
 
-        <span class="hljs-comment"># salary is a monthly variable, period is a month: no option is required</span>
-        salary = person(<span class="hljs-string">&apos;salary&apos;</span>, period)
+        <span class="c1"># salary is a monthly variable, period is a month: no option is required</span>
+        <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
-        <span class="hljs-keyword">return</span> salary - monthly_taxes
-</code></pre>
-<h3 id="calculate-dependencies-for-a-specific-period">Calculate dependencies for a specific period</h3>
+        <span class="k">return</span> <span class="n">salary</span> <span class="o">-</span> <span class="n">monthly_taxes</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="calculate-dependencies-for-a-specific-period">
+<span id="calculate-dependencies-for-a-specific-period"></span><h3>Calculate dependencies for a specific period<a class="headerlink" href="#calculate-dependencies-for-a-specific-period" title="Permalink to this headline">¶</a></h3>
 <p>It happens that the formula to calculate a variable at a given period needs the value of another variable for another period. Usually, the second period is defined relatively to the first one (previous month, last three month, current year).</p>
-<p>For instance, we want to compute an unemployment benefit that equals half of last year&apos;s salary, if the person had no income for the past 3 months.</p>
-<pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">unemployment_benefit</span><span class="hljs-params">(Variable)</span>:</span>
-    value_type = float
-    entity = Person
-    label = <span class="hljs-string">u&quot;Unemployment benefit&quot;</span>
-    definition_period = MONTH
+<p>For instance, we want to compute an unemployment benefit that equals half of last year&#8217;s salary, if the person had no income for the past 3 months.</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">unemployment_benefit</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Unemployment benefit&quot;</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formula</span><span class="hljs-params">(person, period)</span>:</span>
-        salary_last_3_months = person(<span class="hljs-string">&apos;salary&apos;</span>, period.last_3_month)
-        salary_last_year = person(<span class="hljs-string">&apos;salary&apos;</span>, period.last_year)
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="n">salary_last_3_months</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">.</span><span class="n">last_3_month</span><span class="p">)</span>
+        <span class="n">salary_last_year</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">.</span><span class="n">last_year</span><span class="p">)</span>
 
-        is_unemployed = (salary_last_3_months == <span class="hljs-number">0</span>)
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0.5</span> * salary_last_year * is_unemployed
-</code></pre>
+        <span class="n">is_unemployed</span> <span class="o">=</span> <span class="p">(</span><span class="n">salary_last_3_months</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">salary_last_year</span> <span class="o">*</span> <span class="n">is_unemployed</span>
+</pre></div>
+</div>
 <p>You can generate any period with the following properties and methods:</p>
-<table>
+<table border="1" class="docutils">
 <thead>
 <tr>
 <th>Period</th>
@@ -1036,113 +357,103 @@ The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore
 <td>The three-month period preceding <code>period.this_month</code></td>
 </tr>
 <tr>
-<td><code>period.offset(n, &apos;month&apos;)</code></td>
+<td><code>period.offset(n, 'month')</code></td>
 <td><code>period</code> translated by n months (backwards if n &lt;0)</td>
 </tr>
 <tr>
-<td><code>period.offset(n, &apos;year&apos;)</code></td>
+<td><code>period.offset(n, 'year')</code></td>
 <td><code>period</code> translated by n years (backwards if n &lt;0)</td>
 </tr>
 <tr>
-<td><code>period.start.period(&apos;year&apos;)</code></td>
+<td><code>period.start.period('year')</code></td>
 <td>Year-long period starting a the same time than <code>period</code></td>
 </tr>
 <tr>
-<td><code>period.start.period(&apos;month&apos;)</code></td>
+<td><code>period.start.period('month')</code></td>
 <td>Month-long period starting a the same time than <code>period</code></td>
 </tr>
 <tr>
-<td><code>period.start.period(&apos;year&apos;, n)</code></td>
+<td><code>period.start.period('year', n)</code></td>
 <td>n-year-long period starting a the same time than <code>period</code></td>
 </tr>
 <tr>
-<td><code>period.start.period(&apos;month&apos;, n)</code></td>
+<td><code>period.start.period('month', n)</code></td>
 <td>n-month-long period starting a the same time than <code>period</code></td>
 </tr>
 </tbody>
-</table>
-<p>You can find more information on the <code>Period</code> object in the <a href="">reference documentation</a> (<em>not available yet</em>)</p>
-<h2 id="setinput-automatically-process-variable-inputs-defined-for-periods-not-matching-the-definitionperiod"><code>set_input</code>: Automatically process variable inputs defined for periods not matching the <code>definition_period</code></h2>
-<p>By default, when you provide a simulation input, you won&apos;t be able to set a variable value for a period that doesn&apos;t match its <code>definition_period</code>.</p>
-<p>For instance, if the <code>definition_period</code> of <code>salary</code> is <code>MONTH</code>, and you input a value for <code>salary</code> for <code>2015</code>, an error will be raised.</p>
-<p>It is however possible to define an automatic behaviour to cast yearly inputs into monthy values. To do this, add a <code>set_input</code> class attribute to a variable.</p>
-<ul>
-<li><code>set_input = set_input_divide_by_period</code>: the 12 months are set equal to the 12th of the input value,</li>
-<li><code>set_input = set_input_dispatch_by_period</code>: the 12 months are set equal to input value.</li>
+</table><p>You can find more information on the <code class="docutils literal"><span class="pre">Period</span></code> object in the <a class="reference external" href="#">reference documentation</a> (<em>not available yet</em>)</p>
+</div>
+</div>
+<div class="section" id="set-input-automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period">
+<span id="set-input-automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period"></span><h2><code class="docutils literal"><span class="pre">set_input</span></code>: Automatically process variable inputs defined for periods not matching the <code class="docutils literal"><span class="pre">definition_period</span></code><a class="headerlink" href="#set-input-automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period" title="Permalink to this headline">¶</a></h2>
+<p>By default, when you provide a simulation input, you won&#8217;t be able to set a variable value for a period that doesn&#8217;t match its <code class="docutils literal"><span class="pre">definition_period</span></code>.</p>
+<p>For instance, if the <code class="docutils literal"><span class="pre">definition_period</span></code> of <code class="docutils literal"><span class="pre">salary</span></code> is <code class="docutils literal"><span class="pre">MONTH</span></code>, and you input a value for <code class="docutils literal"><span class="pre">salary</span></code> for <code class="docutils literal"><span class="pre">2015</span></code>, an error will be raised.</p>
+<p>It is however possible to define an automatic behaviour to cast yearly inputs into monthy values. To do this, add a <code class="docutils literal"><span class="pre">set_input</span></code> class attribute to a variable.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">set_input</span> <span class="pre">=</span> <span class="pre">set_input_divide_by_period</span></code>: the 12 months are set equal to the 12th of the input value,</li>
+<li><code class="docutils literal"><span class="pre">set_input</span> <span class="pre">=</span> <span class="pre">set_input_dispatch_by_period</span></code>: the 12 months are set equal to input value.</li>
 </ul>
-<p>For instance, let&apos;s slightly modify the code of <code>salary</code>:</p>
-<pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">salary</span><span class="hljs-params">(Variable)</span>:</span>
-    value_type = float
-    entity = Person
-    label = <span class="hljs-string">u&quot;Salary for a month&quot;</span>
-    definition_period = MONTH
-    set_input = set_input_divide_by_period
+<p>For instance, let&#8217;s slightly modify the code of <code class="docutils literal"><span class="pre">salary</span></code>:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Salary for a month&quot;</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
+    <span class="n">set_input</span> <span class="o">=</span> <span class="n">set_input_divide_by_period</span>
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formula</span><span class="hljs-params">(person, period)</span>:</span>
-        ...
-</code></pre>
-<p>We can now provide an input for <code>2015</code> for <code>salary</code>: no error will be raised, and the value will be automatically split between the 12 months of <code>2015</code>.</p>
-
-                    
-                    </section>
-                
-                
-                </div>
-            </div>
-        </div>
-
-        
-        <a href="../coding-the-legislation/25_vectorial_computing.html" class="navigation navigation-prev " aria-label="Previous page: Vectorial computing"><i class="fa fa-angle-left"></i></a>
-        
-        
-        <a href="../coding-the-legislation/40_legislation_evolutions.html" class="navigation navigation-next " aria-label="Next page: Legislation evolutions"><i class="fa fa-angle-right"></i></a>
-        
-    </div>
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>We can now provide an input for <code class="docutils literal"><span class="pre">2015</span></code> for <code class="docutils literal"><span class="pre">salary</span></code>: no error will be raised, and the value will be automatically split between the 12 months of <code class="docutils literal"><span class="pre">2015</span></code>.</p>
+</div>
 </div>
 
-        
-<script src="../gitbook/app.js"></script>
 
+          </div>
+            
+  <div class="footer-relations">
     
-    <script src="../gitbook/plugins/gitbook-plugin-github/plugin.js"></script>
+      <div class="pull-left">
+        <a class="btn btn-default" href="25_vectorial_computing.html" title="previous chapter (use the left arrow)">Vectorial computing</a>
+      </div>
     
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
-    
-
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-anchorjs/anchor-style.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
-    
-
-<script>
-require(["gitbook"], function(gitbook) {
-    var config = {"github":{"url":"https://github.com/openfisca/openfisca-doc"},"edit-link":{"base":"https://github.com/openfisca/openfisca-doc/edit/master","label":"Edit This Page"},"anchorjs":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
-    gitbook.start(config);
-});
+      <div class="pull-right">
+        <a class="btn btn-default" href="40_legislation_evolutions.html" title="next chapter (use the right arrow)">Legislation evolutions</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="40_legislation_evolutions.html" title="Legislation evolutions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="25_vectorial_computing.html" title="Vectorial computing"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >From law to code</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
 </script>
-
-        
-    </body>
-    
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
 </html>
