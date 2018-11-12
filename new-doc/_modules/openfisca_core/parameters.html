@@ -151,7 +151,11 @@
     <span class="kn">from</span> <span class="nn">yaml</span> <span class="k">import</span> <span class="n">Loader</span>
 
 
-<span class="n">PARAM_FILE_EXTENSIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;.yaml&#39;</span><span class="p">,</span> <span class="s1">&#39;.yml&#39;</span><span class="p">}</span>
+<span class="n">FILE_EXTENSIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;.yaml&#39;</span><span class="p">,</span> <span class="s1">&#39;.yml&#39;</span><span class="p">}</span>
+
+<span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility.</span>
+<span class="c1">#  It is now recommended to include them in metadata, until a common consensus emerges.</span>
+<span class="n">COMMON_KEYS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">,</span> <span class="s1">&#39;documentation&#39;</span><span class="p">}</span>
 
 
 <span class="k">def</span> <span class="nf">date_constructor</span><span class="p">(</span><span class="n">loader</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
@@ -249,7 +253,7 @@
         <span class="c1"># Normal parameter declaration: the values are declared under the &#39;values&#39; key: parse the description and metadata.</span>
         <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;values&#39;</span><span class="p">):</span>
             <span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility</span>
-            <span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">allowed_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;values&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">,</span> <span class="s1">&#39;documentation&#39;</span><span class="p">]))</span>
+            <span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">allowed_keys</span> <span class="o">=</span> <span class="n">COMMON_KEYS</span><span class="o">.</span><span class="n">union</span><span class="p">({</span><span class="s1">&#39;values&#39;</span><span class="p">}))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span>
 
             <span class="n">_set_backward_compatibility_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
@@ -442,7 +446,6 @@
 <span class="sd">        :param string name: Name of the node, eg &quot;taxes.some_tax&quot;.</span>
 <span class="sd">        :param string directory_path: Directory containing YAML files describing the node.</span>
 <span class="sd">        :param dict data: Object representing the parameter node. It usually has been extracted from a YAML file.</span>
-<span class="sd">        :param string documentation: Documentation describing parameter node usage and context.</span>
 <span class="sd">        :param string file_path: YAML file from which the `data` has been extracted from.</span>
 
 
@@ -482,12 +485,12 @@
                     <span class="n">child_name</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">child_name</span><span class="p">)</span>
 
                     <span class="c1"># We ignore non-YAML files</span>
-                    <span class="k">if</span> <span class="n">ext</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PARAM_FILE_EXTENSIONS</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">ext</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FILE_EXTENSIONS</span><span class="p">:</span>
                         <span class="k">continue</span>
 
                     <span class="k">if</span> <span class="n">child_name</span> <span class="o">==</span> <span class="s1">&#39;index&#39;</span><span class="p">:</span>
                         <span class="n">data</span> <span class="o">=</span> <span class="n">_load_yaml_file</span><span class="p">(</span><span class="n">child_path</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
-                        <span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">allowed_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;documentation&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">])</span>
+                        <span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">allowed_keys</span> <span class="o">=</span> <span class="n">COMMON_KEYS</span><span class="p">)</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;documentation&#39;</span><span class="p">)</span>
                         <span class="n">_set_backward_compatibility_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
@@ -513,8 +516,8 @@
             <span class="n">_set_backward_compatibility_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="p">{}))</span>
             <span class="k">for</span> <span class="n">child_name</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">child_name</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">}:</span>
-                    <span class="k">continue</span>  <span class="c1"># do not treat metadata as subparameters. &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility</span>
+                <span class="k">if</span> <span class="n">child_name</span> <span class="ow">in</span> <span class="n">COMMON_KEYS</span><span class="p">:</span>
+                    <span class="k">continue</span>  <span class="c1"># do not treat reserved keys as subparameters.</span>
 
                 <span class="n">child_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">child_name</span><span class="p">)</span>
                 <span class="n">child_name_expanded</span> <span class="o">=</span> <span class="n">_compose_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">child_name</span><span class="p">)</span>
@@ -782,7 +785,7 @@
 <span class="sd">        A parameter scale (for instance a  marginal scale).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility</span>
-    <span class="n">_allowed_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;brackets&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">])</span>
+    <span class="n">_allowed_keys</span> <span class="o">=</span> <span class="n">COMMON_KEYS</span><span class="o">.</span><span class="n">union</span><span class="p">({</span><span class="s1">&#39;brackets&#39;</span><span class="p">})</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
