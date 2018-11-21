@@ -156,6 +156,7 @@
 <span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility.</span>
 <span class="c1">#  It is now recommended to include them in metadata, until a common consensus emerges.</span>
 <span class="n">COMMON_KEYS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">,</span> <span class="s1">&#39;documentation&#39;</span><span class="p">}</span>
+<span class="n">ALLOWED_PARAM_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">date_constructor</span><span class="p">(</span><span class="n">loader</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
@@ -370,7 +371,10 @@
             <span class="n">new_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">old_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span> <span class="o">=</span> <span class="n">new_values</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span> <span class="o">=</span> <span class="n">new_values</span></div>
+
+    <span class="k">def</span> <span class="nf">get_descendants</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(())</span></div>
 
 
 <div class="viewcode-block" id="ParameterAtInstant"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterAtInstant">[docs]</a><span class="k">class</span> <span class="nc">ParameterAtInstant</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -378,7 +382,6 @@
 <span class="sd">        A value of a parameter at a given instant.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_allowed_value_data_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
     <span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility</span>
     <span class="n">_allowed_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">])</span>
 
@@ -394,7 +397,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="c1"># Accept { 2015-01-01: 4000 }</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allowed_value_data_types</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ALLOWED_PARAM_TYPES</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">data</span>
             <span class="k">return</span>
 
@@ -415,7 +418,7 @@
                 <span class="s2">&quot;Missing &#39;value&#39; property for </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span>
                 <span class="p">)</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allowed_value_data_types</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ALLOWED_PARAM_TYPES</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
                 <span class="s2">&quot;Invalid value in </span><span class="si">{}</span><span class="s2"> : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span>
@@ -567,7 +570,16 @@
         <span class="c1"># repr output must be encoded in Python 2, but not in Python 3</span>
         <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span></div>
+        <span class="k">return</span> <span class="n">result</span>
+
+<div class="viewcode-block" id="ParameterNode.get_descendants"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterNode.get_descendants">[docs]</a>    <span class="k">def</span> <span class="nf">get_descendants</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return a generator containing all the parameters and nodes recursively contained in this `ParameterNode`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">yield</span> <span class="n">child</span>
+            <span class="k">for</span> <span class="n">descendant</span> <span class="ow">in</span> <span class="n">child</span><span class="o">.</span><span class="n">get_descendants</span><span class="p">():</span>  <span class="c1"># would be `yield from child.walk()` in Python 3.</span>
+                <span class="k">yield</span> <span class="n">descendant</span></div></div>
 
 
 <div class="viewcode-block" id="ParameterNodeAtInstant"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterNodeAtInstant">[docs]</a><span class="k">class</span> <span class="nc">ParameterNodeAtInstant</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -586,6 +598,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span> <span class="o">=</span> <span class="n">instant_str</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_children</span> <span class="o">=</span> <span class="p">{}</span>
+
         <span class="k">for</span> <span class="n">child_name</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">child_at_instant</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant_str</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">child_at_instant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -869,7 +882,10 @@
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="p">[</span><span class="s1">&#39;brackets:&#39;</span><span class="p">]</span>
             <span class="o">+</span> <span class="p">[</span><span class="n">indent</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">indent</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">bracket</span><span class="p">))[</span><span class="mi">1</span><span class="p">:])</span> <span class="k">for</span> <span class="n">bracket</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">brackets</span><span class="p">]</span>
-            <span class="p">)</span></div>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_descendants</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(())</span></div>
 
 
 <div class="viewcode-block" id="Bracket"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.Bracket">[docs]</a><span class="k">class</span> <span class="nc">Bracket</span><span class="p">(</span><span class="n">ParameterNode</span><span class="p">):</span>
