@@ -132,7 +132,7 @@
 
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">empty_clone</span><span class="p">,</span> <span class="n">stringify_array</span><span class="p">,</span> <span class="n">basestring_type</span><span class="p">,</span> <span class="n">to_unicode</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.tracers</span> <span class="k">import</span> <span class="n">Tracer</span><span class="p">,</span> <span class="n">TracingParameterNodeAtInstant</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.tracers</span> <span class="k">import</span> <span class="n">Tracer</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
 
 
@@ -369,12 +369,6 @@
 
         <span class="k">return</span> <span class="n">variable</span><span class="o">.</span><span class="n">calculate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">trace_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula_period</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">TracingParameterNodeAtInstant</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_parameters_at_instant</span><span class="p">(</span><span class="n">formula_period</span><span class="p">),</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span>
-            <span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">_run_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">,</span> <span class="n">max_nb_cycles</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Find the ``variable`` formula for the given ``period`` if it exists, and apply it to ``entity``.</span>
@@ -383,12 +377,7 @@
         <span class="n">formula</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">get_formula</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">formula</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">:</span>
-            <span class="n">parameters_at</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace_parameters_at_instant</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">parameters_at</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_parameters_at_instant</span>
-
+        <span class="n">parameters_at</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_parameters_at_instant</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_cycle</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">formula</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_argcount</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
