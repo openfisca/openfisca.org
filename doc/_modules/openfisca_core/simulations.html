@@ -573,6 +573,24 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span><span class="o">.</span><span class="n">delete_arrays</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">get_known_periods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get a list variable&#39;s known period, i.e. the periods where a value has been initialized and</span>
+
+<span class="sd">            :param variable: the variable to be set</span>
+
+<span class="sd">            Example:</span>
+
+<span class="sd">            &gt;&gt;&gt; from openfisca_country_template import CountryTaxBenefitSystem</span>
+<span class="sd">            &gt;&gt;&gt; simulation = Simulation(CountryTaxBenefitSystem())</span>
+<span class="sd">            &gt;&gt;&gt; simulation.set_input(&#39;age&#39;, &#39;2018-04&#39;, [12, 14])</span>
+<span class="sd">            &gt;&gt;&gt; simulation.set_input(&#39;age&#39;, &#39;2018-05&#39;, [13, 14])</span>
+<span class="sd">            &gt;&gt;&gt; simulation.get_known_periods(&#39;age&#39;)</span>
+<span class="sd">            [Period((u&#39;month&#39;, Instant((2018, 5, 1)), 1)), Period((u&#39;month&#39;, Instant((2018, 4, 1)), 1))]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span><span class="o">.</span><span class="n">get_known_periods</span><span class="p">()</span>
+
     <span class="k">def</span> <span class="nf">set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Set a variable&#39;s value for a given period</span>
