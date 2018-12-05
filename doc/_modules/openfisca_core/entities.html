@@ -126,18 +126,11 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">textwrap</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">linesep</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">date</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">dpath</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.scenarios</span> <span class="k">import</span> <span class="n">iter_over_entity_members</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.simulations</span> <span class="k">import</span> <span class="n">check_type</span><span class="p">,</span> <span class="n">SituationParsingError</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.holders</span> <span class="k">import</span> <span class="n">Holder</span><span class="p">,</span> <span class="n">PeriodMismatchError</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">key_period_size</span><span class="p">,</span> <span class="n">period</span> <span class="k">as</span> <span class="n">make_period</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">VariableNotFound</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">basestring_type</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">EnumArray</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.holders</span> <span class="k">import</span> <span class="n">Holder</span>
 
 <span class="n">ADD</span> <span class="o">=</span> <span class="s1">&#39;add&#39;</span>
 <span class="n">DIVIDE</span> <span class="o">=</span> <span class="s1">&#39;divide&#39;</span>
@@ -153,111 +146,12 @@
     <span class="n">doc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">is_person</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">,</span> <span class="n">entities_json</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_holders</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">if</span> <span class="n">entities_json</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">init_from_json</span><span class="p">(</span><span class="n">entities_json</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">entities_json</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">def</span> <span class="nf">init_from_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities_json</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Initilalises entities from a JSON dictionnary.</span>
-
-<span class="sd">            This method, still under experimentation, aims at replacing the initialisation from `scenario.make_json_or_python_to_attributes`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">check_type</span><span class="p">(</span><span class="n">entities_json</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">entities_json</span> <span class="o">=</span> <span class="n">entities_json</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">entities_json</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span>  <span class="c1"># Related to axes.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">entities_json</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="k">for</span> <span class="n">entity_id</span><span class="p">,</span> <span class="n">entity_object</span> <span class="ow">in</span> <span class="n">entities_json</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">check_type</span><span class="p">(</span><span class="n">entity_object</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">])</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_person</span><span class="p">:</span>
-                <span class="n">roles_json</span><span class="p">,</span> <span class="n">variables_json</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">split_variables_and_roles_json</span><span class="p">(</span><span class="n">entity_object</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">init_members</span><span class="p">(</span><span class="n">roles_json</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">variables_json</span> <span class="o">=</span> <span class="n">entity_object</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">init_variable_values</span><span class="p">(</span><span class="n">variables_json</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">)</span>
-
-        <span class="c1"># Due to set_input mechanism, we must bufferize all inputs, then actually set them, so that the months are set first and the years last.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">finalize_variables_init</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">init_variable_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_object</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">):</span>
-        <span class="n">entity_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ids</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">entity_id</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">variable_values</span> <span class="ow">in</span> <span class="n">entity_object</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">path_in_json</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">]</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># The variable is defined for another entity</span>
-                <span class="k">raise</span> <span class="n">SituationParsingError</span><span class="p">(</span><span class="n">path_in_json</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="k">except</span> <span class="n">VariableNotFound</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># The variable doesn&#39;t exist</span>
-                <span class="k">raise</span> <span class="n">SituationParsingError</span><span class="p">(</span><span class="n">path_in_json</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">code</span> <span class="o">=</span> <span class="mi">404</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">variable_values</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="n">SituationParsingError</span><span class="p">(</span><span class="n">path_in_json</span><span class="p">,</span>
-                    <span class="s2">&quot;Can&#39;t deal with type: expected object. Input variables should be set for specific periods. For instance: {&#39;salary&#39;: {&#39;2017-01&#39;: 2000, &#39;2017-02&#39;: 2500}}, or {&#39;birth_date&#39;: {&#39;ETERNITY&#39;: &#39;1980-01-01&#39;}}.&quot;</span><span class="p">)</span>
-
-            <span class="n">holder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">period_str</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">variable_values</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">path_in_json</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">period_str</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">period</span> <span class="o">=</span> <span class="n">make_period</span><span class="p">(</span><span class="n">period_str</span><span class="p">)</span>
-                <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">SituationParsingError</span><span class="p">(</span><span class="n">path_in_json</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">array</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                        <span class="n">array</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">default_array</span><span class="p">()</span>
-                    <span class="k">if</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">Enum</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">basestring_type</span><span class="p">):</span>
-                        <span class="k">try</span><span class="p">:</span>
-                            <span class="n">value</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">possible_values</span><span class="p">[</span><span class="n">value</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
-                        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                            <span class="n">possible_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">possible_values</span><span class="p">]</span>
-                            <span class="k">raise</span> <span class="n">SituationParsingError</span><span class="p">(</span><span class="n">path_in_json</span><span class="p">,</span>
-                                <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; is not a known value for &#39;</span><span class="si">{}</span><span class="s2">&#39;. Possible values are [&#39;</span><span class="si">{}</span><span class="s2">&#39;].&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                                    <span class="n">value</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="s2">&quot;&#39;, &#39;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">possible_values</span><span class="p">))</span>
-                                <span class="p">)</span>
-                    <span class="k">try</span><span class="p">:</span>
-                        <span class="n">array</span><span class="p">[</span><span class="n">entity_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-                    <span class="k">except</span> <span class="p">(</span><span class="ne">OverflowError</span><span class="p">):</span>
-                        <span class="n">error_message</span> <span class="o">=</span> <span class="s2">&quot;Can&#39;t deal with value: &#39;</span><span class="si">{}</span><span class="s2">&#39;, it&#39;s too large for type &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">json_type</span><span class="p">)</span>
-                        <span class="k">raise</span> <span class="n">SituationParsingError</span><span class="p">(</span><span class="n">path_in_json</span><span class="p">,</span> <span class="n">error_message</span><span class="p">)</span>
-                    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">date</span><span class="p">:</span>
-                            <span class="n">error_message</span> <span class="o">=</span> <span class="s2">&quot;Can&#39;t deal with date: &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="n">error_message</span> <span class="o">=</span> <span class="s2">&quot;Can&#39;t deal with value: expected type </span><span class="si">{}</span><span class="s2">, received &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">json_type</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-                        <span class="k">raise</span> <span class="n">SituationParsingError</span><span class="p">(</span><span class="n">path_in_json</span><span class="p">,</span> <span class="n">error_message</span><span class="p">)</span>
-
-                    <span class="n">holder</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span>
-
-    <span class="k">def</span> <span class="nf">finalize_variables_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">holder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_holders</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">periods</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-            <span class="c1"># We need to handle small periods first for set_input to work</span>
-            <span class="n">sorted_periods</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">periods</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key_period_size</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">sorted_periods</span><span class="p">:</span>
-                <span class="n">array</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">period</span><span class="p">]</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">holder</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
-                <span class="k">except</span> <span class="n">PeriodMismatchError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                    <span class="c1"># This errors happens when we try to set a variable value for a period that doesn&#39;t match its definition period</span>
-                    <span class="c1"># It is only raised when we consume the buffer. We thus don&#39;t know which exact key caused the error.</span>
-                    <span class="c1"># We do a basic research to find the culprit path</span>
-                    <span class="n">culprit_path</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
-                        <span class="n">dpath</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities_json</span><span class="p">,</span> <span class="s2">&quot;*/</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">variable_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">period</span><span class="p">)),</span> <span class="n">yielded</span> <span class="o">=</span> <span class="kc">True</span><span class="p">),</span>
-                        <span class="kc">None</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">culprit_path</span><span class="p">:</span>
-                        <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">]</span> <span class="o">+</span> <span class="n">culprit_path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">]</span>  <span class="c1"># Fallback: if we can&#39;t find the culprit, just set the error at the entities level</span>
-
-                    <span class="k">raise</span> <span class="n">SituationParsingError</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_simulation</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -494,75 +388,15 @@
     <span class="n">flattened_roles</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">roles_description</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">,</span> <span class="n">entities_json</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="n">Entity</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">,</span> <span class="n">entities_json</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">entities_json</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">members_legacy_role</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">):</span>
+        <span class="n">Entity</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members_legacy_role</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">members</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_roles_count</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ordered_members_map</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">def</span> <span class="nf">split_variables_and_roles_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_object</span><span class="p">):</span>
-        <span class="n">entity_object</span> <span class="o">=</span> <span class="n">entity_object</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Don&#39;t mutate function input</span>
-
-        <span class="n">roles_definition</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">role</span><span class="o">.</span><span class="n">plural</span> <span class="ow">or</span> <span class="n">role</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="n">entity_object</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">plural</span> <span class="ow">or</span> <span class="n">role</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="p">[])</span>
-            <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">roles</span>
-            <span class="p">}</span>
-        <span class="k">return</span> <span class="n">roles_definition</span><span class="p">,</span> <span class="n">entity_object</span>
-
-    <span class="k">def</span> <span class="nf">init_from_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities_json</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">count</span><span class="p">,</span>
-            <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span>
-            <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">members_role</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">count</span><span class="p">,</span>
-            <span class="n">dtype</span> <span class="o">=</span> <span class="nb">object</span>
-            <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">members_legacy_role</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">count</span><span class="p">,</span>
-            <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span>
-            <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">persons_to_allocate</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">ids</span><span class="p">)</span>
-
-        <span class="n">Entity</span><span class="o">.</span><span class="n">init_from_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities_json</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons_to_allocate</span><span class="p">:</span>
-            <span class="n">unallocated_person</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons_to_allocate</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-            <span class="k">raise</span> <span class="n">SituationParsingError</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">],</span>
-                <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> has been declared in </span><span class="si">{1}</span><span class="s1">, but is not a member of any </span><span class="si">{2}</span><span class="s1">. All </span><span class="si">{1}</span><span class="s1"> must be allocated to a </span><span class="si">{2}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">unallocated_person</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">plural</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
-                <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">init_members</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roles_json</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">role_id</span><span class="p">,</span> <span class="n">role_definition</span> <span class="ow">in</span> <span class="n">roles_json</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">check_type</span><span class="p">(</span><span class="n">role_definition</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">,</span> <span class="n">role_id</span><span class="p">])</span>
-            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">person_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">role_definition</span><span class="p">):</span>
-                <span class="n">check_type</span><span class="p">(</span><span class="n">person_id</span><span class="p">,</span> <span class="n">basestring_type</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">,</span> <span class="n">role_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)])</span>
-                <span class="k">if</span> <span class="n">person_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">ids</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">SituationParsingError</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">,</span> <span class="n">role_id</span><span class="p">],</span>
-                        <span class="s2">&quot;Unexpected value: </span><span class="si">{0}</span><span class="s2">. </span><span class="si">{0}</span><span class="s2"> has been declared in </span><span class="si">{1}</span><span class="s2"> </span><span class="si">{2}</span><span class="s2">, but has not been declared in </span><span class="si">{3}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                            <span class="n">person_id</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">,</span> <span class="n">role_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">plural</span><span class="p">)</span>
-                        <span class="p">)</span>
-                <span class="k">if</span> <span class="n">person_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons_to_allocate</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">SituationParsingError</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">,</span> <span class="n">role_id</span><span class="p">],</span>
-                        <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> has been declared more than once in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                            <span class="n">person_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">)</span>
-                        <span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">persons_to_allocate</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">person_id</span><span class="p">)</span>
-
-        <span class="n">entity_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ids</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">entity_id</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">person_role</span><span class="p">,</span> <span class="n">person_legacy_role</span><span class="p">,</span> <span class="n">person_id</span> <span class="ow">in</span> <span class="n">iter_over_entity_members</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roles_json</span><span class="p">):</span>
-            <span class="n">person_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">ids</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">person_id</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">[</span><span class="n">person_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity_index</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">members_role</span><span class="p">[</span><span class="n">person_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">person_role</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">members_legacy_role</span><span class="p">[</span><span class="n">person_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">person_legacy_role</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">members_role</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

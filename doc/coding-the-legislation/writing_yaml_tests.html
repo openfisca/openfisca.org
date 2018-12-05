@@ -153,9 +153,9 @@
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2012</span>
   <span class="l l-Scalar l-Scalar-Plain">absolute_error_margin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>
-  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">salaire_imposable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">20000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">irpp</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">-1181</span>
 </pre></div>
 </div>
@@ -201,10 +201,10 @@ For instance:</li>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2012</span>
   <span class="l l-Scalar l-Scalar-Plain">absolute_error_margin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>
-  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">salaire_imposable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">20000</span>
     <span class="l l-Scalar l-Scalar-Plain">salaire_brut</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">20000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">irpp</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">-1181</span>
 </pre></div>
 </div>
@@ -260,7 +260,7 @@ which are dispatched into entities.</p>
 </div>
 </li>
 <li><p class="first">finally, define a dictionnary of the expected values of the output variables. Each output variable takes a list of length equal to the number of individuals defined in the test. E.g, for a family of four individuals with two working parents and two unemployed children, the output variable salaire_super_brut is defined as follows:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">salaire_super_brut</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">3500</span><span class="p p-Indicator">,</span> <span class="nv">2500</span><span class="p p-Indicator">,</span> <span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">0</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
@@ -283,8 +283,8 @@ which keys are a period expression and values are the value for that period.</p>
 </div>
 <div class="section" id="running-a-test">
 <span id="running-a-test"></span><h2>Running a test<a class="headerlink" href="#running-a-test" title="Permalink to this headline">¶</a></h2>
-<p>To run YAML tests, use the command line tool <code class="docutils literal"><span class="pre">openfisca-run-test</span></code>, documented <a class="reference external" href="https://openfisca.readthedocs.io/en/latest/openfisca-run-test.html">here</a>:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>  openfisca-run-test path/to/file.yaml
+<p>To run YAML tests, use the command line tool <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code>, documented <a class="reference external" href="https://openfisca.readthedocs.io/en/latest/openfisca-run-test.html">here</a>:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>openfisca <span class="nb">test</span> path/to/file.yaml
 </pre></div>
 </div>
 <blockquote>

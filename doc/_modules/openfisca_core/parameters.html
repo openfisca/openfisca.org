@@ -139,7 +139,7 @@
 <span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">INSTANT_PATTERN</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="k">import</span> <span class="n">indent</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">basestring_type</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">basestring_type</span><span class="p">,</span> <span class="n">empty_clone</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -576,7 +576,19 @@
         <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="k">yield</span> <span class="n">child</span>
             <span class="k">for</span> <span class="n">descendant</span> <span class="ow">in</span> <span class="n">child</span><span class="o">.</span><span class="n">get_descendants</span><span class="p">():</span>  <span class="c1"># would be `yield from child.walk()` in Python 3.</span>
-                <span class="k">yield</span> <span class="n">descendant</span></div></div>
+                <span class="k">yield</span> <span class="n">descendant</span></div>
+
+    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">empty_clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">new_dict</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="vm">__dict__</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">):</span>
+                <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">new</span></div>
 
 
 <div class="viewcode-block" id="ParameterNodeAtInstant"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterNodeAtInstant">[docs]</a><span class="k">class</span> <span class="nc">ParameterNodeAtInstant</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>

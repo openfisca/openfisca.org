@@ -128,27 +128,26 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="nb">str</span>
 
-<span class="kn">import</span> <span class="nn">collections</span>
-<span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">unittest</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
 
 <span class="kn">import</span> <span class="nn">nose</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">yaml</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">conv</span><span class="p">,</span> <span class="n">periods</span><span class="p">,</span> <span class="n">scenarios</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="k">import</span> <span class="n">assert_near</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">to_unicode</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="k">import</span> <span class="n">SimulationBuilder</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">SituationParsingError</span>
 
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">yaml</span> <span class="k">import</span> <span class="n">CLoader</span> <span class="k">as</span> <span class="n">Loader</span><span class="p">,</span> <span class="n">CDumper</span> <span class="k">as</span> <span class="n">Dumper</span>
+    <span class="kn">from</span> <span class="nn">yaml</span> <span class="k">import</span> <span class="n">CLoader</span> <span class="k">as</span> <span class="n">Loader</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
         <span class="s1">&#39; &#39;</span>
@@ -156,30 +155,9 @@
         <span class="s1">&#39;test suite slower to run. Once you have installed libyaml, run `pip &#39;</span>
         <span class="s1">&#39;uninstall pyyaml &amp;&amp; pip install pyyaml --no-cache-dir` so that it is used in your &#39;</span>
         <span class="s1">&#39;Python environment.&#39;</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">yaml</span> <span class="k">import</span> <span class="n">Loader</span><span class="p">,</span> <span class="n">Dumper</span>
+    <span class="kn">from</span> <span class="nn">yaml</span> <span class="k">import</span> <span class="n">Loader</span>
 
-
-<span class="c1"># Yaml module configuration</span>
-
-
-<span class="k">class</span> <span class="nc">unicode_folder</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-
-<span class="k">class</span> <span class="nc">unicode_literal</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-
-<span class="n">Loader</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">BaseResolver</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_TAG</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">loader</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">(</span><span class="n">loader</span><span class="o">.</span><span class="n">construct_pairs</span><span class="p">(</span><span class="n">node</span><span class="p">)))</span>
-<span class="n">Dumper</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_dict</span><span class="p">((</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
-<span class="n">Dumper</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_dict</span><span class="p">((</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
-<span class="n">Dumper</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
-<span class="n">Dumper</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_list</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-<span class="n">Dumper</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="n">unicode_folder</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_scalar</span><span class="p">(</span><span class="s1">&#39;tag:yaml.org,2002:str&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;&gt;&#39;</span><span class="p">))</span>
-<span class="n">Dumper</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="n">unicode_literal</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_scalar</span><span class="p">(</span><span class="s1">&#39;tag:yaml.org,2002:str&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">))</span>
-<span class="n">Dumper</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_scalar</span><span class="p">(</span><span class="s1">&#39;tag:yaml.org,2002:str&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
-<span class="n">Dumper</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_scalar</span><span class="p">(</span><span class="s1">&#39;tag:yaml.org,2002:str&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
-<span class="n">Dumper</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_scalar</span><span class="p">(</span><span class="s1">&#39;tag:yaml.org,2002:str&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+<span class="n">_tax_benefit_system_cache</span> <span class="o">=</span> <span class="p">{}</span>
 
 
 <span class="c1"># Exposed methods</span>
@@ -250,12 +228,10 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_filter</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">name_filter</span> <span class="o">=</span> <span class="n">to_unicode</span><span class="p">(</span><span class="n">name_filter</span><span class="p">)</span>
     <span class="n">verbose</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">)</span>
-    <span class="n">only_variables</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;only_variables&#39;</span><span class="p">)</span>
-    <span class="n">ignore_variables</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ignore_variables&#39;</span><span class="p">)</span>
 
-    <span class="n">tests</span> <span class="o">=</span> <span class="n">_parse_test_file</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">path_to_file</span><span class="p">)</span>
+    <span class="n">tests</span> <span class="o">=</span> <span class="n">_parse_test_file</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">path_to_file</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">test_index</span><span class="p">,</span> <span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">period_str</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tests</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">test_index</span><span class="p">,</span> <span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tests</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">name_filter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">name_filter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">filename</span> \
                 <span class="ow">and</span> <span class="n">name_filter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span> \
                 <span class="ow">and</span> <span class="n">name_filter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;keywords&#39;</span><span class="p">,</span> <span class="p">[])):</span>
@@ -265,16 +241,21 @@
         <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}{}</span><span class="s2"> - </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">),</span>
             <span class="s1">&#39;[</span><span class="si">{}</span><span class="s1">] &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">keywords</span><span class="p">))</span> <span class="k">if</span> <span class="n">keywords</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-            <span class="n">name</span><span class="p">,</span>
-            <span class="n">period_str</span><span class="p">,</span>
+            <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span>
+            <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">),</span>
             <span class="p">)</span>
+        <span class="n">test</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="n">options</span><span class="p">})</span>
 
         <span class="k">def</span> <span class="nf">check</span><span class="p">():</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">_run_test</span><span class="p">(</span><span class="n">period_str</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">only_variables</span><span class="p">,</span> <span class="n">ignore_variables</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+                <span class="n">_run_test</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
                 <span class="k">raise</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Computation log:&quot;</span><span class="p">)</span>
+                    <span class="n">simulation</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">print_computation_log</span><span class="p">()</span>
 
         <span class="k">yield</span> <span class="n">unittest</span><span class="o">.</span><span class="n">FunctionTestCase</span><span class="p">(</span><span class="n">check</span><span class="p">)</span>
 
@@ -292,96 +273,116 @@
             <span class="k">yield</span> <span class="n">test</span>
 
 
-<span class="k">def</span> <span class="nf">_parse_test_file</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">yaml_path</span><span class="p">):</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">_parse_test_file</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">yaml_path</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">yaml_file</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">tests</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">yaml_file</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">Loader</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">yaml</span><span class="o">.</span><span class="n">scanner</span><span class="o">.</span><span class="n">ScannerError</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is not a valid YAML file&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-            <span class="k">raise</span>
+            <span class="n">tests</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">yaml_file</span><span class="p">,</span> <span class="n">Loader</span> <span class="o">=</span> <span class="n">Loader</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">scanner</span><span class="o">.</span><span class="n">ScannerError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">(),</span>
+                <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39;&#39; is not a valid YAML file. Check the stack trace above for more details.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">),</span>
+                <span class="p">])</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
-    <span class="n">tests</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span>
-        <span class="n">conv</span><span class="o">.</span><span class="n">make_item_to_singleton</span><span class="p">(),</span>
-        <span class="n">conv</span><span class="o">.</span><span class="n">uniform_sequence</span><span class="p">(</span>
-            <span class="n">conv</span><span class="o">.</span><span class="n">noop</span><span class="p">,</span>
-            <span class="n">drop_none_items</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="p">),</span>
-        <span class="p">)(</span><span class="n">tests</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tests</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">tests</span> <span class="o">=</span> <span class="p">[</span><span class="n">tests</span><span class="p">]</span>
+    <span class="n">tests</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">test</span><span class="p">:</span> <span class="n">test</span><span class="p">,</span> <span class="n">tests</span><span class="p">)</span>  <span class="c1"># Remove empty tests</span>
 
-    <span class="k">if</span> <span class="n">error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">embedding_error</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">embed_error</span><span class="p">(</span><span class="n">tests</span><span class="p">,</span> <span class="s1">&#39;errors&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">embedding_error</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">embedding_error</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Error in test </span><span class="si">{}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tests</span><span class="p">,</span> <span class="n">Dumper</span><span class="o">=</span><span class="n">Dumper</span><span class="p">,</span> <span class="n">allow_unicode</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="n">default_flow_style</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">120</span><span class="p">)))</span>
-
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">tests</span><span class="p">:</span>
-        <span class="n">current_tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span>
-        <span class="k">if</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reforms&#39;</span><span class="p">):</span>
-            <span class="n">reforms</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;reforms&#39;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reforms</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="n">reforms</span> <span class="o">=</span> <span class="p">[</span><span class="n">reforms</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">reform_path</span> <span class="ow">in</span> <span class="n">reforms</span><span class="p">:</span>
-                <span class="n">current_tax_benefit_system</span> <span class="o">=</span> <span class="n">current_tax_benefit_system</span><span class="o">.</span><span class="n">apply_reform</span><span class="p">(</span><span class="n">reform_path</span><span class="p">)</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">test</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">scenarios</span><span class="o">.</span><span class="n">make_json_or_python_to_test</span><span class="p">(</span>
-                <span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">current_tax_benefit_system</span>
-                <span class="p">)(</span><span class="n">test</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is not a valid OpenFisca test file&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-            <span class="k">raise</span>
-
-        <span class="k">if</span> <span class="n">error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">embedding_error</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">embed_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="s1">&#39;errors&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="n">embedding_error</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">embedding_error</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Error in test </span><span class="si">{}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{}</span><span class="se">\n</span><span class="s2">Yaml test content: </span><span class="se">\n</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">yaml_path</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">Dumper</span><span class="o">=</span><span class="n">Dumper</span><span class="p">,</span> <span class="n">allow_unicode</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                <span class="n">default_flow_style</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">120</span><span class="p">)))</span>
-
-        <span class="k">yield</span> <span class="n">yaml_path</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">filename</span><span class="p">,</span> <span class="n">to_unicode</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;scenario&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">period</span><span class="p">),</span> <span class="n">test</span>
+        <span class="n">test</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="n">test</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">yaml_path</span>
+        <span class="k">yield</span> <span class="n">_parse_test</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="n">period_str</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">only_variables</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_variables</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{}):</span>
-    <span class="n">absolute_error_margin</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">relative_error_margin</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;absolute_error_margin&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">absolute_error_margin</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;absolute_error_margin&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;relative_error_margin&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">relative_error_margin</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;relative_error_margin&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_get_tax_benefit_system</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">reforms</span><span class="p">,</span> <span class="n">extensions</span><span class="p">):</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">((</span><span class="nb">id</span><span class="p">(</span><span class="n">baseline</span><span class="p">),</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">reforms</span><span class="p">),</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">extensions</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">_tax_benefit_system_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_tax_benefit_system_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-    <span class="n">scenario</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;scenario&#39;</span><span class="p">]</span>
-    <span class="n">scenario</span><span class="o">.</span><span class="n">suggest</span><span class="p">()</span>
-    <span class="n">simulation</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">new_simulation</span><span class="p">(</span><span class="n">trace</span> <span class="o">=</span> <span class="n">verbose</span><span class="p">)</span>
-    <span class="n">output_variables</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;output_variables&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">output_variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">expected_value</span> <span class="ow">in</span> <span class="n">output_variables</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">variable_ignored</span> <span class="o">=</span> <span class="n">ignore_variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">variable_name</span> <span class="ow">in</span> <span class="n">ignore_variables</span>
-                <span class="n">variable_not_tested</span> <span class="o">=</span> <span class="n">only_variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">variable_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">only_variables</span>
-                <span class="k">if</span> <span class="n">variable_ignored</span> <span class="ow">or</span> <span class="n">variable_not_tested</span><span class="p">:</span>
-                    <span class="k">continue</span>  <span class="c1"># Skip this variable</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected_value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                    <span class="k">for</span> <span class="n">requested_period</span><span class="p">,</span> <span class="n">expected_value_at_period</span> <span class="ow">in</span> <span class="n">expected_value</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                        <span class="n">assert_near</span><span class="p">(</span>
-                            <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">requested_period</span><span class="p">),</span>
-                            <span class="n">expected_value_at_period</span><span class="p">,</span>
-                            <span class="n">absolute_error_margin</span> <span class="o">=</span> <span class="n">absolute_error_margin</span><span class="p">,</span>
-                            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">@</span><span class="si">{}</span><span class="s1">: &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">requested_period</span><span class="p">),</span>
-                            <span class="n">relative_error_margin</span> <span class="o">=</span> <span class="n">relative_error_margin</span><span class="p">,</span>
-                            <span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">assert_near</span><span class="p">(</span>
-                        <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">variable_name</span><span class="p">),</span>
-                        <span class="n">expected_value</span><span class="p">,</span>
-                        <span class="n">absolute_error_margin</span> <span class="o">=</span> <span class="n">absolute_error_margin</span><span class="p">,</span>
-                        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">@</span><span class="si">{}</span><span class="s1">: &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period_str</span><span class="p">),</span>
-                        <span class="n">relative_error_margin</span> <span class="o">=</span> <span class="n">relative_error_margin</span><span class="p">,</span>
-                        <span class="p">)</span>
-        <span class="k">finally</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Computation log:&quot;</span><span class="p">)</span>
-                <span class="n">simulation</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">print_computation_log</span><span class="p">()</span>
+    <span class="n">current_tax_benefit_system</span> <span class="o">=</span> <span class="n">baseline</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reforms</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">reforms</span> <span class="o">=</span> <span class="p">[</span><span class="n">reforms</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">reform_path</span> <span class="ow">in</span> <span class="n">reforms</span><span class="p">:</span>
+        <span class="n">current_tax_benefit_system</span> <span class="o">=</span> <span class="n">current_tax_benefit_system</span><span class="o">.</span><span class="n">apply_reform</span><span class="p">(</span><span class="n">reform_path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">extensions</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">extensions</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">extensions</span><span class="p">:</span>
+        <span class="n">current_tax_benefit_system</span> <span class="o">=</span> <span class="n">current_tax_benefit_system</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">current_tax_benefit_system</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span>
+
+    <span class="n">_tax_benefit_system_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_tax_benefit_system</span>
+
+    <span class="k">return</span> <span class="n">current_tax_benefit_system</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_test</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+    <span class="n">current_tax_benefit_system</span> <span class="o">=</span> <span class="n">_get_tax_benefit_system</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reforms&#39;</span><span class="p">,</span> <span class="p">[]),</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;extensions&#39;</span><span class="p">,</span> <span class="p">[]))</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing key &#39;output&#39; in test &#39;</span><span class="si">{}</span><span class="s2">&#39; in file &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">]))</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">simulation</span> <span class="o">=</span> <span class="n">SimulationBuilder</span><span class="p">(</span><span class="n">current_tax_benefit_system</span><span class="p">)</span><span class="o">.</span><span class="n">build_from_dict</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">default_period</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">),</span> <span class="n">trace</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="n">SituationParsingError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">(),</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">error</span><span class="p">),</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="p">,</span>
+            <span class="s2">&quot;Could not parse situation described in test &#39;</span><span class="si">{}</span><span class="s2">&#39; in YAML file &#39;</span><span class="si">{}</span><span class="s2">&#39;. Check the stack trace above for more details.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">]),</span>
+            <span class="p">])</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">simulation</span><span class="p">,</span> <span class="n">test</span>
+
+
+<span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">test</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">expected_value</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">simulation</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>  <span class="c1"># If key is a variable</span>
+            <span class="k">return</span> <span class="n">_check_variable</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">expected_value</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">),</span> <span class="n">test</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">simulation</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>  <span class="c1"># If key is an entity singular</span>
+            <span class="k">for</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">expected_value</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">_check_variable</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">),</span> <span class="n">test</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">entity_array</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">plural</span> <span class="o">=</span> <span class="n">key</span><span class="p">)</span>  <span class="c1"># If key is an entity plural</span>
+        <span class="k">for</span> <span class="n">entity_id</span><span class="p">,</span> <span class="n">value_by_entity</span> <span class="ow">in</span> <span class="n">expected_value</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">value_by_entity</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">entity_index</span> <span class="o">=</span> <span class="n">entity_array</span><span class="o">.</span><span class="n">ids</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">entity_id</span><span class="p">)</span>
+                <span class="n">_check_variable</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">),</span> <span class="n">test</span><span class="p">,</span> <span class="n">entity_index</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_should_ignore_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">test</span><span class="p">):</span>
+    <span class="n">only_variables</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;only_variables&#39;</span><span class="p">)</span>
+    <span class="n">ignore_variables</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ignore_variables&#39;</span><span class="p">)</span>
+    <span class="n">variable_ignored</span> <span class="o">=</span> <span class="n">ignore_variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">variable_name</span> <span class="ow">in</span> <span class="n">ignore_variables</span>
+    <span class="n">variable_not_tested</span> <span class="o">=</span> <span class="n">only_variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">variable_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">only_variables</span>
+
+    <span class="k">return</span> <span class="n">variable_ignored</span> <span class="ow">or</span> <span class="n">variable_not_tested</span>
+
+
+<span class="k">def</span> <span class="nf">_check_variable</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">expected_value</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">entity_index</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">_should_ignore_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">test</span><span class="p">):</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected_value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">requested_period</span><span class="p">,</span> <span class="n">expected_value_at_period</span> <span class="ow">in</span> <span class="n">expected_value</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">_check_variable</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">expected_value_at_period</span><span class="p">,</span> <span class="n">requested_period</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">entity_index</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">actual_value</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">entity_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">actual_value</span> <span class="o">=</span> <span class="n">actual_value</span><span class="p">[</span><span class="n">entity_index</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">assert_near</span><span class="p">(</span>
+        <span class="n">actual_value</span><span class="p">,</span>
+        <span class="n">expected_value</span><span class="p">,</span>
+        <span class="n">absolute_error_margin</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;absolute_error_margin&#39;</span><span class="p">),</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;In test &#39;</span><span class="si">{}</span><span class="s2">&#39;, in file &#39;</span><span class="si">{}</span><span class="s2">&#39;, </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;file_path&#39;</span><span class="p">),</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">)),</span>
+        <span class="n">relative_error_margin</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;relative_error_margin&#39;</span><span class="p">),</span>
+        <span class="p">)</span>
 </pre></div>
 
           </div>

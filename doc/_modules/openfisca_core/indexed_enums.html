@@ -228,6 +228,18 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="bp">self</span> <span class="o">==</span> <span class="n">item</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span><span class="p">],</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span><span class="p">])</span></div>
 
+<div class="viewcode-block" id="EnumArray.decode_to_str"><a class="viewcode-back" href="../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.decode_to_str">[docs]</a>    <span class="k">def</span> <span class="nf">decode_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return the array of string identifiers corresponding to self</span>
+
+<span class="sd">            &gt;&gt;&gt; enum_array = household(&#39;housing_occupancy_status&#39;, period)</span>
+<span class="sd">            &gt;&gt;&gt; enum_array[0]</span>
+<span class="sd">            &gt;&gt;&gt; 2  # Encoded value</span>
+<span class="sd">            &gt;&gt;&gt; enum_array.decode_to_str()[0]</span>
+<span class="sd">            &gt;&gt;&gt; &#39;free_lodger&#39; # String identifier</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="bp">self</span> <span class="o">==</span> <span class="n">item</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span><span class="p">],</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span><span class="p">])</span></div>
+
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">(</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">()))</span></div>
 </pre></div>

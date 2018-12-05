@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>openfisca-run-test &#8212; OpenFisca  documentation</title>
+    <title>openfisca test &#8212; OpenFisca  documentation</title>
     
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -96,13 +96,14 @@
 <li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulations.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulation_builder.html">SimulationBuilder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="entities.html">Entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test_runner.html">tools.test_runner</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tracer.html">Tracer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="enum_array.html">Enum &amp; EnumArray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="holder.html">Holders</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulation_generator.html">Simulation generator</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">openfisca-run-test</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">openfisca test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="openfisca_serve.html">openfisca serve</a></li>
 </ul>
 </li>
@@ -135,20 +136,20 @@
               
                 <li><a href="index.html">Openfisca Python API</a></li>
               
-              <li>openfisca-run-test</li>
+              <li>openfisca test</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <div class="section" id="openfisca-run-test">
-<h1>openfisca-run-test<a class="headerlink" href="#openfisca-run-test" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">openfisca</span><span class="o">-</span><span class="n">run</span><span class="o">-</span><span class="n">test</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">COUNTRY_PACKAGE</span><span class="p">]</span>
-                          <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="p">[</span><span class="n">EXTENSIONS</span> <span class="p">[</span><span class="n">EXTENSIONS</span> <span class="o">...</span><span class="p">]]]</span>
-                          <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="p">[</span><span class="n">REFORMS</span> <span class="p">[</span><span class="n">REFORMS</span> <span class="o">...</span><span class="p">]]]</span> <span class="p">[</span><span class="o">-</span><span class="n">n</span> <span class="n">NAME_FILTER</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span><span class="p">]</span>
-                          <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="p">[</span><span class="n">ONLY_VARIABLES</span> <span class="p">[</span><span class="n">ONLY_VARIABLES</span> <span class="o">...</span><span class="p">]]]</span>
-                          <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="p">[</span><span class="n">IGNORE_VARIABLES</span> <span class="p">[</span><span class="n">IGNORE_VARIABLES</span> <span class="o">...</span><span class="p">]]]</span>
-                          <span class="n">path</span> <span class="p">[</span><span class="n">path</span> <span class="o">...</span><span class="p">]</span>
+  <div class="section" id="openfisca-test">
+<h1>openfisca test<a class="headerlink" href="#openfisca-test" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">COUNTRY_PACKAGE</span><span class="p">]</span>
+                      <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="p">[</span><span class="n">EXTENSIONS</span> <span class="p">[</span><span class="n">EXTENSIONS</span> <span class="o">...</span><span class="p">]]]</span>
+                      <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="p">[</span><span class="n">REFORMS</span> <span class="p">[</span><span class="n">REFORMS</span> <span class="o">...</span><span class="p">]]]</span> <span class="p">[</span><span class="o">-</span><span class="n">n</span> <span class="n">NAME_FILTER</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span><span class="p">]</span>
+                      <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="p">[</span><span class="n">ONLY_VARIABLES</span> <span class="p">[</span><span class="n">ONLY_VARIABLES</span> <span class="o">...</span><span class="p">]]]</span>
+                      <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="p">[</span><span class="n">IGNORE_VARIABLES</span> <span class="p">[</span><span class="n">IGNORE_VARIABLES</span> <span class="o">...</span><span class="p">]]]</span>
+                      <span class="n">path</span> <span class="p">[</span><span class="n">path</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
 <div class="section" id="Positional Arguments">
@@ -208,17 +209,17 @@
 <p><strong>test.yaml:</strong></p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Basic</span><span class="nv"> </span><span class="s">test&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2000 * 0.8</span>
 </pre></div>
 </div>
 <p><strong>Command line:</strong></p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>openfisca-run-test -c openfisca_france test.yaml
+<div class="highlight-shell"><div class="highlight"><pre><span></span>openfisca <span class="nb">test</span> -c openfisca_france test.yaml
 <span class="c1"># Success</span>
 
-openfisca-run-test test.yaml
+openfisca <span class="nb">test</span> test.yaml
 <span class="c1"># Success: the country package is automatically detected.</span>
 <span class="c1"># May fail if several country packages are installed in your environment.</span>
 <span class="c1"># In that case, specify which package to use with the --country_package option</span>
@@ -231,34 +232,34 @@ openfisca-run-test test.yaml
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">defining</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">relative</span><span class="nv"> </span><span class="s">error</span><span class="nv"> </span><span class="s">margin&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
   <span class="l l-Scalar l-Scalar-Plain">relative_error_margin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.05</span>
-  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">780</span> <span class="c1"># the right value is 800</span>
 
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">defining</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">absolute</span><span class="nv"> </span><span class="s">error</span><span class="nv"> </span><span class="s">margin&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">absolute_error_margin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
   <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">790</span> <span class="c1"># the right value is 800</span>
 </pre></div>
 </div>
 <p><strong>test_3.yaml:</strong></p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">defining</span><span class="nv"> </span><span class="s">any</span><span class="nv"> </span><span class="s">error</span><span class="nv"> </span><span class="s">margin&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">795</span> <span class="c1"># the right value is 800</span>
 </pre></div>
 </div>
 <p><strong>Command line:</strong></p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>openfisca-run-test test_2.yaml
+<div class="highlight-shell"><div class="highlight"><pre><span></span>openfisca <span class="nb">test</span> test_2.yaml
 <span class="c1"># Success: the test pass, as the actual results are within the error margins</span>
 
-openfisca-run-test test_3.yaml
+openfisca <span class="nb">test</span> test_3.yaml
 <span class="c1"># Failure: the test does not pass, as its error margin is by default 0</span>
 </pre></div>
 </div>
@@ -268,9 +269,9 @@ openfisca-run-test test_3.yaml
 <p><strong>test_4.yaml:</strong></p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">containing</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">word</span><span class="nv"> </span><span class="s">openfisca</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">name&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">800</span>
 
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">contains</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">magic</span><span class="nv"> </span><span class="s">word</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">keywords&quot;</span>
@@ -278,24 +279,24 @@ openfisca-run-test test_3.yaml
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">some keyword</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openfisca</span>
   <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">800</span>
 
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Some</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">test</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">fails&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
 </pre></div>
 </div>
 <p><strong>Command line:</strong></p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>openfisca-run-test test_4.yaml
+<div class="highlight-shell"><div class="highlight"><pre><span></span>openfisca <span class="nb">test</span> test_4.yaml
 <span class="c1"># Failure: the third test does not pass</span>
 
-openfisca-run-test -n openfisca test_4.yaml
+openfisca <span class="nb">test</span> -n openfisca test_4.yaml
 <span class="c1"># Success: the third test is not executed, as it doesn&#39;t contain the word &#39;openfisca&#39;</span>
 </pre></div>
 </div>
@@ -307,18 +308,18 @@ openfisca-run-test -n openfisca test_4.yaml
 <p><strong>test_5.yaml:</strong></p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">extension&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">paris_housing_benefit</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">200</span>
 </pre></div>
 </div>
 <p><strong>Command line:</strong></p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>openfisca-run-test test_5.yaml
+<div class="highlight-shell"><div class="highlight"><pre><span></span>openfisca <span class="nb">test</span> test_5.yaml
 <span class="c1"># Failure: the test returns an error:</span>
 <span class="c1"># the country package openfisca_france does not references a variable named paris_housing_benefit</span>
 
-openfisca-run-test -e openfisca_paris test_5.yaml
+openfisca <span class="nb">test</span> -e openfisca_paris test_5.yaml
 <span class="c1"># Success: The test passes, as the extension is loaded in the tax benefit system before running the test</span>
 </pre></div>
 </div>
@@ -330,17 +331,17 @@ openfisca-run-test -e openfisca_paris test_5.yaml
 <p><strong>test_6.yaml:</strong></p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">reform&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output_variables</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">600</span>
 </pre></div>
 </div>
 <p><strong>Command line:</strong></p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>openfisca-run-test test_6.yaml
+<div class="highlight-shell"><div class="highlight"><pre><span></span>openfisca <span class="nb">test</span> test_6.yaml
 <span class="c1"># Failure: the test does not pass, as the regular openfisca_france is used</span>
 
-openfisca-run-test -r openfisca_france.reforms.increase_cotisation.increase_cotisation test_5.yaml
+openfisca <span class="nb">test</span> -r openfisca_france.reforms.increase_cotisation.increase_cotisation test_5.yaml
 <span class="c1"># Success: The test passes, as the increase_cotisation reform is applied</span>
 </pre></div>
 </div>

@@ -140,7 +140,7 @@
 <span class="kn">from</span> <span class="nn">openfisca_core.variables</span> <span class="k">import</span> <span class="n">Variable</span><span class="p">,</span> <span class="n">get_neutralized_variable</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.scenarios</span> <span class="k">import</span> <span class="n">AbstractScenario</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">VariableNotFound</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">to_unicode</span><span class="p">,</span> <span class="n">basestring_type</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">to_unicode</span><span class="p">,</span> <span class="n">basestring_type</span><span class="p">,</span> <span class="n">empty_clone</span>
 
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -182,6 +182,7 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">):</span>
         <span class="c1"># TODO: Currently: Don&#39;t use a weakref, because they are cleared by Paste (at least) at each call.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_parameters_at_instant_cache</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># weakref.WeakValueDictionary()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">open_api_config</span> <span class="o">=</span> <span class="p">{}</span>
@@ -521,7 +522,21 @@
                 <span class="n">variable_name</span><span class="p">:</span> <span class="n">variable</span>
                 <span class="k">for</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">variable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">entity</span> <span class="o">==</span> <span class="n">entity</span>
-                <span class="p">}</span></div></div>
+                <span class="p">}</span></div>
+
+    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">empty_clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">new_dict</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="vm">__dict__</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;parameters&#39;</span><span class="p">,</span> <span class="s1">&#39;_parameters_at_instant_cache&#39;</span><span class="p">,</span> <span class="s1">&#39;variables&#39;</span><span class="p">,</span> <span class="s1">&#39;open_api_config&#39;</span><span class="p">):</span>
+                <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;_parameters_at_instant_cache&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;variables&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;open_api_config&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">open_api_config</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">new</span></div>
 </pre></div>
 
           </div>

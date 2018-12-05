@@ -131,11 +131,13 @@
 <span class="kn">import</span> <span class="nn">psutil</span>
 
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">empty_clone</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">MONTH</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">,</span> <span class="n">ETERNITY</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.columns</span> <span class="k">import</span> <span class="n">make_column_from_variable</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">empty_clone</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.data_storage</span> <span class="k">import</span> <span class="n">InMemoryStorage</span><span class="p">,</span> <span class="n">OnDiskStorage</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">PeriodMismatchError</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">MONTH</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">,</span> <span class="n">ETERNITY</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="k">import</span> <span class="n">eval_expression</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -280,8 +282,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-            <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">ETERNITY</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">!=</span> <span class="n">ETERNITY</span><span class="p">:</span>
             <span class="n">error_message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
                 <span class="s1">&#39;Unable to set a value for variable </span><span class="si">{0}</span><span class="s1"> for ETERNITY.&#39;</span><span class="p">,</span>
@@ -304,22 +304,31 @@
                 <span class="n">warning_message</span><span class="p">,</span>
                 <span class="ne">Warning</span>
                 <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">value_type</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">eval_expression</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">set_input</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extra_params</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># 0-dim arrays are casted to scalar when they interact with float. We don&#39;t want that.</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Unable to set value &quot;</span><span class="si">{}</span><span class="s1">&quot; for variable &quot;</span><span class="si">{}</span><span class="s1">&quot;, as its length is </span><span class="si">{}</span><span class="s1"> while there are </span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1"> in the simulation.&#39;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">Enum</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">possible_values</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-
         <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="s1">&#39;Unable to set value &quot;</span><span class="si">{}</span><span class="s1">&quot; for variable &quot;</span><span class="si">{}</span><span class="s1">&quot;, as the variable dtype &quot;</span><span class="si">{}</span><span class="s1">&quot; does not match the value dtype &quot;</span><span class="si">{}</span><span class="s1">&quot;.&#39;</span>
-                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-                    <span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">!=</span> <span class="n">ETERNITY</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -438,15 +447,6 @@
         <span class="k">return</span> <span class="n">formula</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_varnames</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span></div>
 
 
-<span class="k">class</span> <span class="nc">PeriodMismatchError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">definition_period</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">variable_name</span> <span class="o">=</span> <span class="n">variable_name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">period</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">=</span> <span class="n">definition_period</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
-        <span class="ne">ValueError</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-
-
 <div class="viewcode-block" id="set_input_dispatch_by_period"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.set_input_dispatch_by_period">[docs]</a><span class="k">def</span> <span class="nf">set_input_dispatch_by_period</span><span class="p">(</span><span class="n">holder</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function can be declared as a ``set_input`` attribute of a variable.</span>
@@ -489,7 +489,8 @@
 
 <span class="sd">        To read more about ``set_input`` attributes, check the `documentation &lt;https://openfisca.org/doc/coding-the-legislation/35_periods.html#set-input-automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period&gt;`_.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
     <span class="n">period_size</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">size</span>
     <span class="n">period_unit</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span>
 
