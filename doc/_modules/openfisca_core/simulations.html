@@ -209,7 +209,7 @@
                 <span class="ne">Warning</span>
                 <span class="p">)</span>
             <span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="k">import</span> <span class="n">SimulationBuilder</span>
-            <span class="n">SimulationBuilder</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">simulation_json</span><span class="p">,</span> <span class="n">simulation</span> <span class="o">=</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="n">SimulationBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">simulation_json</span><span class="p">,</span> <span class="n">simulation</span> <span class="o">=</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">instantiate_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">persons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">person_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -528,6 +528,48 @@
 
     <span class="c1"># ----- Misc ----- #</span>
 
+    <span class="k">def</span> <span class="nf">delete_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Delete a variable&#39;s value for a given period</span>
+
+<span class="sd">            :param variable: the variable to be set</span>
+<span class="sd">            :param period: the period for which the value should be deleted</span>
+
+<span class="sd">            Example:</span>
+
+<span class="sd">            &gt;&gt;&gt; from openfisca_country_template import CountryTaxBenefitSystem</span>
+<span class="sd">            &gt;&gt;&gt; simulation = Simulation(CountryTaxBenefitSystem())</span>
+<span class="sd">            &gt;&gt;&gt; simulation.set_input(&#39;age&#39;, &#39;2018-04&#39;, [12, 14])</span>
+<span class="sd">            &gt;&gt;&gt; simulation.set_input(&#39;age&#39;, &#39;2018-05&#39;, [13, 14])</span>
+<span class="sd">            &gt;&gt;&gt; simulation.get_array(&#39;age&#39;, &#39;2018-05&#39;)</span>
+<span class="sd">            array([13, 14], dtype=int32)</span>
+<span class="sd">            &gt;&gt;&gt; simulation.delete_arrays(&#39;age&#39;, &#39;2018-05&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; simulation.get_array(&#39;age&#39;, &#39;2018-04&#39;)</span>
+<span class="sd">            array([12, 14], dtype=int32)</span>
+<span class="sd">            &gt;&gt;&gt; simulation.get_array(&#39;age&#39;, &#39;2018-05&#39;) is None</span>
+<span class="sd">            True</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span><span class="o">.</span><span class="n">delete_arrays</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_known_periods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get a list variable&#39;s known period, i.e. the periods where a value has been initialized and</span>
+
+<span class="sd">            :param variable: the variable to be set</span>
+
+<span class="sd">            Example:</span>
+
+<span class="sd">            &gt;&gt;&gt; from openfisca_country_template import CountryTaxBenefitSystem</span>
+<span class="sd">            &gt;&gt;&gt; simulation = Simulation(CountryTaxBenefitSystem())</span>
+<span class="sd">            &gt;&gt;&gt; simulation.set_input(&#39;age&#39;, &#39;2018-04&#39;, [12, 14])</span>
+<span class="sd">            &gt;&gt;&gt; simulation.set_input(&#39;age&#39;, &#39;2018-05&#39;, [13, 14])</span>
+<span class="sd">            &gt;&gt;&gt; simulation.get_known_periods(&#39;age&#39;)</span>
+<span class="sd">            [Period((u&#39;month&#39;, Instant((2018, 5, 1)), 1)), Period((u&#39;month&#39;, Instant((2018, 4, 1)), 1))]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span><span class="o">.</span><span class="n">get_known_periods</span><span class="p">()</span>
+
     <span class="k">def</span> <span class="nf">set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Set a variable&#39;s value for a given period</span>
@@ -537,10 +579,11 @@
 <span class="sd">            :param period: the period for which the value is setted</span>
 
 <span class="sd">            Example:</span>
-
-<span class="sd">            &gt;&gt;&gt; set_input(&#39;age&#39;, [12, 14], &#39;2018-04&#39;)</span>
-<span class="sd">            &gt;&gt;&gt; get_array(&#39;age&#39;, &#39;2018-04&#39;)</span>
-<span class="sd">            &gt;&gt;&gt; [12, 14]</span>
+<span class="sd">            &gt;&gt;&gt; from openfisca_country_template import CountryTaxBenefitSystem</span>
+<span class="sd">            &gt;&gt;&gt; simulation = Simulation(CountryTaxBenefitSystem())</span>
+<span class="sd">            &gt;&gt;&gt; simulation.set_input(&#39;age&#39;, &#39;2018-04&#39;, [12, 14])</span>
+<span class="sd">            &gt;&gt;&gt; simulation.get_array(&#39;age&#39;, &#39;2018-04&#39;)</span>
+<span class="sd">            array([12, 14], dtype=int32)</span>
 
 <span class="sd">            If a ``set_input`` property has been set for the variable, this method may accept inputs for periods not matching the ``definition_period`` of the variable. To read more about this, check the `documentation &lt;https://openfisca.org/doc/coding-the-legislation/35_periods.html#automatically-process-variable-inputs-defined-for-periods-not-matching-the-definitionperiod&gt;`_.</span>
 <span class="sd">        &quot;&quot;&quot;</span>

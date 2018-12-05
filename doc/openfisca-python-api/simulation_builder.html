@@ -146,10 +146,10 @@
 <h1>SimulationBuilder<a class="headerlink" href="#simulationbuilder" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="openfisca_core.simulation_builder.SimulationBuilder">
-<em class="property">class </em><code class="descclassname">openfisca_core.simulation_builder.</code><code class="descname">SimulationBuilder</code><span class="sig-paren">(</span><em>tax_benefit_system</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">openfisca_core.simulation_builder.</code><code class="descname">SimulationBuilder</code><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="openfisca_core.simulation_builder.SimulationBuilder.build_default_simulation">
-<code class="descname">build_default_simulation</code><span class="sig-paren">(</span><em>count=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder.build_default_simulation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder.build_default_simulation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">build_default_simulation</code><span class="sig-paren">(</span><em>tax_benefit_system</em>, <em>count=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder.build_default_simulation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder.build_default_simulation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Build a simulation where:</dt>
 <dd><ul class="first last simple">
@@ -163,7 +163,7 @@
 
 <dl class="method">
 <dt id="openfisca_core.simulation_builder.SimulationBuilder.build_from_dict">
-<code class="descname">build_from_dict</code><span class="sig-paren">(</span><em>input_dict</em>, <em>default_period=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder.build_from_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder.build_from_dict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">build_from_dict</code><span class="sig-paren">(</span><em>tax_benefit_system</em>, <em>input_dict</em>, <em>default_period=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder.build_from_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder.build_from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a simulation from <code class="docutils literal"><span class="pre">input_dict</span></code></p>
 <p>This method uses <a class="reference internal" href="#openfisca_core.simulation_builder.SimulationBuilder.build_from_entities" title="openfisca_core.simulation_builder.SimulationBuilder.build_from_entities"><code class="xref any py py-meth docutils literal"><span class="pre">build_from_entities</span></code></a> if entities are fully specified, or <a class="reference internal" href="#openfisca_core.simulation_builder.SimulationBuilder.build_from_variables" title="openfisca_core.simulation_builder.SimulationBuilder.build_from_variables"><code class="xref any py py-meth docutils literal"><span class="pre">build_from_variables</span></code></a> if not.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -186,7 +186,7 @@
 
 <dl class="method">
 <dt id="openfisca_core.simulation_builder.SimulationBuilder.build_from_entities">
-<code class="descname">build_from_entities</code><span class="sig-paren">(</span><em>input_dict</em>, <em>default_period=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder.build_from_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder.build_from_entities" title="Permalink to this definition">¶</a></dt>
+<code class="descname">build_from_entities</code><span class="sig-paren">(</span><em>tax_benefit_system</em>, <em>input_dict</em>, <em>default_period=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder.build_from_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder.build_from_entities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a simulation from a Python dict <code class="docutils literal"><span class="pre">input_dict</span></code> fully specifying entities.</p>
 <p>Examples:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">simulation_builder</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">({</span>
@@ -199,7 +199,7 @@
 
 <dl class="method">
 <dt id="openfisca_core.simulation_builder.SimulationBuilder.build_from_variables">
-<code class="descname">build_from_variables</code><span class="sig-paren">(</span><em>input_dict</em>, <em>default_period=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder.build_from_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder.build_from_variables" title="Permalink to this definition">¶</a></dt>
+<code class="descname">build_from_variables</code><span class="sig-paren">(</span><em>tax_benefit_system</em>, <em>input_dict</em>, <em>default_period=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder.build_from_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder.build_from_variables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a simulation from a Python dict <code class="docutils literal"><span class="pre">input_dict</span></code> describing variables values without expliciting entities.</p>
 <p>This method uses <a class="reference internal" href="#openfisca_core.simulation_builder.SimulationBuilder.build_default_simulation" title="openfisca_core.simulation_builder.SimulationBuilder.build_default_simulation"><code class="xref any py py-meth docutils literal"><span class="pre">build_default_simulation</span></code></a> to infer an entity structure</p>
 <p>Example:</p>
@@ -212,7 +212,7 @@
 
 <dl class="method">
 <dt id="openfisca_core.simulation_builder.SimulationBuilder.explicit_singular_entities">
-<code class="descname">explicit_singular_entities</code><span class="sig-paren">(</span><em>input_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder.explicit_singular_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder.explicit_singular_entities" title="Permalink to this definition">¶</a></dt>
+<code class="descname">explicit_singular_entities</code><span class="sig-paren">(</span><em>tax_benefit_system</em>, <em>input_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/simulation_builder.html#SimulationBuilder.explicit_singular_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.simulation_builder.SimulationBuilder.explicit_singular_entities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Preprocess <code class="docutils literal"><span class="pre">input_dict</span></code> to explicit entities defined using the single-entity shortcut</p>
 <p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">simulation_builder</span><span class="o">.</span><span class="n">explicit_singular_entities</span><span class="p">(</span>
