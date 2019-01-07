@@ -143,6 +143,9 @@
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">SituationParsingError</span>
 
 
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
 <span class="k">def</span> <span class="nf">import_yaml</span><span class="p">():</span>
     <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
         <span class="c1"># In Python 2, we need a YAML loader that preserves the dict orders, as it&#39;s not natively suported.</span>
@@ -167,8 +170,6 @@
 <span class="n">TEST_KEYWORDS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;absolute_error_margin&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;extensions&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore_variables&#39;</span><span class="p">,</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;keywords&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;only_variables&#39;</span><span class="p">,</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="s1">&#39;reforms&#39;</span><span class="p">,</span> <span class="s1">&#39;relative_error_margin&#39;</span><span class="p">}</span>
 
 <span class="n">yaml</span><span class="p">,</span> <span class="n">Loader</span> <span class="o">=</span> <span class="n">import_yaml</span><span class="p">()</span>
-
-<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="n">_tax_benefit_system_cache</span> <span class="o">=</span> <span class="p">{}</span>
 

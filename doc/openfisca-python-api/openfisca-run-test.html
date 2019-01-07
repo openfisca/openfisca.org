@@ -207,12 +207,12 @@
 <div class="section" id="basic-use">
 <h3>Basic use<a class="headerlink" href="#basic-use" title="Permalink to this headline">¶</a></h3>
 <p><strong>test.yaml:</strong></p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Basic</span><span class="nv"> </span><span class="s">test&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2000 * 0.8</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Basic</span><span class="nv"> </span><span class="s">test&quot;</span>
+  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
+  <span class="nt">input</span><span class="p">:</span>
+    <span class="nt">gross_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2000</span>
+  <span class="nt">output</span><span class="p">:</span>
+    <span class="nt">net_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2000 * 0.8</span>
 </pre></div>
 </div>
 <p><strong>Command line:</strong></p>
@@ -229,30 +229,30 @@ openfisca <span class="nb">test</span> test.yaml
 <div class="section" id="error-margin">
 <h3>Error margin<a class="headerlink" href="#error-margin" title="Permalink to this headline">¶</a></h3>
 <p><strong>test_2.yaml:</strong></p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">defining</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">relative</span><span class="nv"> </span><span class="s">error</span><span class="nv"> </span><span class="s">margin&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">relative_error_margin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.05</span>
-  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">780</span> <span class="c1"># the right value is 800</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">defining</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">relative</span><span class="nv"> </span><span class="s">error</span><span class="nv"> </span><span class="s">margin&quot;</span>
+  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
+  <span class="nt">relative_error_margin</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.05</span>
+  <span class="nt">input</span><span class="p">:</span>
+    <span class="nt">gross_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
+  <span class="nt">output</span><span class="p">:</span>
+    <span class="nt">net_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">780</span> <span class="c1"># the right value is 800</span>
 
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">defining</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">absolute</span><span class="nv"> </span><span class="s">error</span><span class="nv"> </span><span class="s">margin&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">absolute_error_margin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
-  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">790</span> <span class="c1"># the right value is 800</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">defining</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">absolute</span><span class="nv"> </span><span class="s">error</span><span class="nv"> </span><span class="s">margin&quot;</span>
+  <span class="nt">absolute_error_margin</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
+  <span class="nt">input</span><span class="p">:</span>
+    <span class="nt">gross_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
+  <span class="nt">output</span><span class="p">:</span>
+    <span class="nt">net_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">790</span> <span class="c1"># the right value is 800</span>
 </pre></div>
 </div>
 <p><strong>test_3.yaml:</strong></p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">defining</span><span class="nv"> </span><span class="s">any</span><span class="nv"> </span><span class="s">error</span><span class="nv"> </span><span class="s">margin&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">795</span> <span class="c1"># the right value is 800</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">defining</span><span class="nv"> </span><span class="s">any</span><span class="nv"> </span><span class="s">error</span><span class="nv"> </span><span class="s">margin&quot;</span>
+  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
+  <span class="nt">input</span><span class="p">:</span>
+    <span class="nt">gross_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
+  <span class="nt">output</span><span class="p">:</span>
+    <span class="nt">net_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">795</span> <span class="c1"># the right value is 800</span>
 </pre></div>
 </div>
 <p><strong>Command line:</strong></p>
@@ -267,29 +267,29 @@ openfisca <span class="nb">test</span> test_3.yaml
 <div class="section" id="name-filter">
 <h3>Name filter<a class="headerlink" href="#name-filter" title="Permalink to this headline">¶</a></h3>
 <p><strong>test_4.yaml:</strong></p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">containing</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">word</span><span class="nv"> </span><span class="s">openfisca</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">name&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">800</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">containing</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">word</span><span class="nv"> </span><span class="s">openfisca</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">name&quot;</span>
+  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
+  <span class="nt">input</span><span class="p">:</span>
+    <span class="nt">gross_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
+  <span class="nt">output</span><span class="p">:</span>
+    <span class="nt">net_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">800</span>
 
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">contains</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">magic</span><span class="nv"> </span><span class="s">word</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">keywords&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">keywords</span><span class="p p-Indicator">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">contains</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">magic</span><span class="nv"> </span><span class="s">word</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">keywords&quot;</span>
+  <span class="nt">keywords</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">some keyword</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openfisca</span>
-  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">800</span>
+  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
+  <span class="nt">input</span><span class="p">:</span>
+    <span class="nt">gross_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
+  <span class="nt">output</span><span class="p">:</span>
+    <span class="nt">net_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">800</span>
 
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Some</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">test</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">fails&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Some</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">test</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">fails&quot;</span>
+  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
+  <span class="nt">input</span><span class="p">:</span>
+    <span class="nt">gross_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
+  <span class="nt">output</span><span class="p">:</span>
+    <span class="nt">net_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
 </pre></div>
 </div>
 <p><strong>Command line:</strong></p>
@@ -306,12 +306,12 @@ openfisca <span class="nb">test</span> -n openfisca test_4.yaml
 <h3>Extensions<a class="headerlink" href="#extensions" title="Permalink to this headline">¶</a></h3>
 <p>Let&#8217;s now assume an extension to <code class="docutils literal"><span class="pre">openfisca_france</span></code>, <code class="docutils literal"><span class="pre">openfisca_paris</span></code> is installed on our system, defines the variable <code class="docutils literal"><span class="pre">paris_housing_benefit</span></code>, and that this variable is worth <code class="docutils literal"><span class="pre">200</span></code> if <code class="docutils literal"><span class="pre">net_salary</span></code> is <code class="docutils literal"><span class="pre">0</span></code>.</p>
 <p><strong>test_5.yaml:</strong></p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">extension&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">paris_housing_benefit</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">200</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">extension&quot;</span>
+  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
+  <span class="nt">input</span><span class="p">:</span>
+    <span class="nt">net_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+  <span class="nt">output</span><span class="p">:</span>
+    <span class="nt">paris_housing_benefit</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">200</span>
 </pre></div>
 </div>
 <p><strong>Command line:</strong></p>
@@ -329,12 +329,12 @@ openfisca <span class="nb">test</span> -e openfisca_paris test_5.yaml
 <p>Let&#8217;s assume that I want to test a reform that lowers <code class="docutils literal"><span class="pre">net_salary</span></code> to 60% of <code class="docutils literal"><span class="pre">gross_salary</span></code> (instead of 80% in the regular <code class="docutils literal"><span class="pre">openfisca_france</span></code>).</p>
 <p>This reform is called <code class="docutils literal"><span class="pre">increase_cotisation</span></code> and available in the python module <code class="docutils literal"><span class="pre">openfisca_france.reforms.increase_cotisation</span></code>.</p>
 <p><strong>test_6.yaml:</strong></p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">reform&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
-  <span class="l l-Scalar l-Scalar-Plain">input</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">gross_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-  <span class="l l-Scalar l-Scalar-Plain">output</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">net_salary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">600</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Test</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">reform&quot;</span>
+  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2015</span>
+  <span class="nt">input</span><span class="p">:</span>
+    <span class="nt">gross_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
+  <span class="nt">output</span><span class="p">:</span>
+    <span class="nt">net_salary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">600</span>
 </pre></div>
 </div>
 <p><strong>Command line:</strong></p>
