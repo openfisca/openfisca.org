@@ -529,7 +529,7 @@
 
     <span class="c1"># ----- Misc ----- #</span>
 
-    <span class="k">def</span> <span class="nf">delete_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">delete_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Delete a variable&#39;s value for a given period</span>
 
@@ -549,7 +549,12 @@
 <span class="sd">            array([12, 14], dtype=int32)</span>
 <span class="sd">            &gt;&gt;&gt; simulation.get_array(&#39;age&#39;, &#39;2018-05&#39;) is None</span>
 <span class="sd">            True</span>
-
+<span class="sd">            &gt;&gt;&gt; simulation.set_input(&#39;age&#39;, &#39;2018-05&#39;, [13, 14])</span>
+<span class="sd">            &gt;&gt;&gt; simulation.delete_arrays(&#39;age&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; simulation.get_array(&#39;age&#39;, &#39;2018-04&#39;) is None</span>
+<span class="sd">            True</span>
+<span class="sd">            &gt;&gt;&gt; simulation.get_array(&#39;age&#39;, &#39;2018-05&#39;) is None</span>
+<span class="sd">            True</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span><span class="o">.</span><span class="n">delete_arrays</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 
