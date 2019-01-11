@@ -132,7 +132,6 @@
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">import</span> <span class="nn">pkg_resources</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
-<span class="kn">from</span> <span class="nn">setuptools</span> <span class="k">import</span> <span class="n">find_packages</span>
 
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">conv</span>
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
@@ -327,24 +326,16 @@
 <span class="sd">        :param string extension: The extension to load. Can be an absolute path pointing to an extension directory, or the name of an OpenFisca extension installed as a pip package.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">extension</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">find_packages</span><span class="p">(</span><span class="n">extension</span><span class="p">):</span>
-                <span class="c1"># Load extension from a package directory</span>
-                <span class="n">extension_directory</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extension</span><span class="p">,</span> <span class="n">find_packages</span><span class="p">(</span><span class="n">extension</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># Load extension from a simple directory</span>
-                <span class="n">extension_directory</span> <span class="o">=</span> <span class="n">extension</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Load extension from installed pip package</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">package</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span>
-                <span class="n">extension_directory</span> <span class="o">=</span> <span class="n">package</span><span class="o">.</span><span class="n">__path__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">(),</span>
-                                        <span class="s1">&#39;Error loading extension: `</span><span class="si">{}</span><span class="s1">` is neither a directory, nor a package.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extension</span><span class="p">),</span>
-                                        <span class="s1">&#39;Are you sure it is installed in your environment? If so, look at the stack trace above to determine the origin of this error.&#39;</span><span class="p">,</span>
-                                        <span class="s1">&#39;See more at &lt;https://github.com/openfisca/openfisca-extension-template#installing&gt;.&#39;</span><span class="p">])</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="c1"># Load extension from installed pip package</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">package</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span>
+            <span class="n">extension_directory</span> <span class="o">=</span> <span class="n">package</span><span class="o">.</span><span class="n">__path__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">(),</span>
+                                    <span class="s1">&#39;Error loading extension: `</span><span class="si">{}</span><span class="s1">` is neither a directory, nor a package.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extension</span><span class="p">),</span>
+                                    <span class="s1">&#39;Are you sure it is installed in your environment? If so, look at the stack trace above to determine the origin of this error.&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;See more at &lt;https://github.com/openfisca/openfisca-extension-template#installing&gt;.&#39;</span><span class="p">])</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">add_variables_from_directory</span><span class="p">(</span><span class="n">extension_directory</span><span class="p">)</span>
         <span class="n">param_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extension_directory</span><span class="p">,</span> <span class="s1">&#39;parameters&#39;</span><span class="p">)</span>
