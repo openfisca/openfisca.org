@@ -10,7 +10,7 @@ jobs:
       WATAI_TESTS: tests/integration
       SAUCE_USERNAME: openfisca
       # SAUCE_ACCESS_KEY is defined in the CircleCI web UI
-      PORT: 1313 # openfisca.org & Hugo framework
+      PORT: 8080 # openfisca.org & Hugo framework
 
     steps:
       - checkout
@@ -39,7 +39,7 @@ jobs:
             - sc
       - run:
           name: Run app
-          command: hugo serve
+          command: hugo serve --port $PORT
           background: true
       - run:
           name: Start Sauce Connect
