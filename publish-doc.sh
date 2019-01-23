@@ -12,5 +12,5 @@ cd openfisca.org
 git add .
 git config --global user.name "OpenFisca-Bot"
 git config --global user.email "contact@openfisca.fr"
-git commit --message="Add latest doc version"
+git commit --message="[skip ci] Add latest doc version"
 git push https://github.com/openfisca/openfisca.org.git gh-pages

@@ -76,7 +76,9 @@ jobs:
           command: hugo
       - run:
           name: Publish openfisca.org
-          command: npm run publish
+          command: |
+            touch public/.nojekyll # Bypass Jekyll processing on GitHub Pages
+            npm run publish
       - run:
           name: Publish openfisca.org/doc
           command: ./publish-doc.sh

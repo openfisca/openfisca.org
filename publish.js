@@ -8,6 +8,7 @@ ghpages.publish(
     },
     branch: 'gh-pages',
     message: 'Auto-commit from master branch',
+    dotfiles: true,  // Keep .nojekyll
   },
   function(err) {
     if (err) {
