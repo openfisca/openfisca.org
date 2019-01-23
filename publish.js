@@ -7,8 +7,8 @@ ghpages.publish(
       name: 'OpenFisca-Bot',
     },
     branch: 'gh-pages',
-    message: 'Auto-commit from master branch',
-    dotfiles: true,  // Keep .nojekyll
+    message: '[skip ci] Auto-commit from master branch',
+    dotfiles: true, // Keep .nojekyll
   },
   function(err) {
     if (err) {
