@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Person, entities, role &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Periods, Instants" href="periodsinstants.html" />
+    <link rel="prev" title="Parameters" href="parameters.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="periodsinstants.html" title="Periods, Instants"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="parameters.html" title="Parameters"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Key concepts</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      ../index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Key concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tax_and_benefit_system.html">Tax and Benefit System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="variables.html">Variables and formulas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Person, entities, role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="periodsinstants.html">Periods, Instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_data.html">Input Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulation.html">Simulation, Computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../coding-the-legislation/index.html">From law to code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/index.html">Recipes for OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+                <li><a href="index.html">Key concepts</a></li>
+              
+              <li>Person, entities, role</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="person-entities-role">
+<span id="person-entities-role"></span><h1>Person, entities, role<a class="headerlink" href="#person-entities-role" title="Permalink to this headline">¶</a></h1>
+<p>Taxes and benefits can be calculated for different entities: persons, household, companies, etc.</p>
+<div class="section" id="person">
+<span id="person"></span><h2>Person<a class="headerlink" href="#person" title="Permalink to this headline">¶</a></h2>
+<p>Some openfisca variables are defined for a <em>person</em>.</p>
+<p>Example: a <a class="reference external" href="https://fr.openfisca.org/legislation/salaire_net">&#8220;salary&#8221;</a> is defined as the individual level.</p>
+</div>
+<div class="section" id="group-entities">
+<span id="group-entities"></span><h2>Group entities<a class="headerlink" href="#group-entities" title="Permalink to this headline">¶</a></h2>
+<p><em>Group entities</em> are clusters of <em>persons</em> such as the family, the household or the company.
+A tax and benefit system can define several entities and specifies each time which tax and benefit applies to which entity.</p>
+<p>In France the legislation has these <em>group entities</em>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">&quot;familles&quot;</span></code>,  (families)</li>
+<li><code class="docutils literal"><span class="pre">&quot;foyers_fiscaux&quot;</span></code> (tax homes) and</li>
+<li><code class="docutils literal"><span class="pre">&quot;menages&quot;</span></code> (households).</li>
+</ul>
+<p>Example: the  <a class="reference external" href="https://fr.openfisca.org/legislation/taxe_habitation">&#8220;local tax&#8221;</a> is calculated over the <code class="docutils literal"><span class="pre">&quot;menages&quot;</span></code>.</p>
+<div class="section" id="roles">
+<span id="roles"></span><h3>Roles<a class="headerlink" href="#roles" title="Permalink to this headline">¶</a></h3>
+<p>Each person related to a <em>group entity</em> has a <em>role</em> inside this entity.</p>
+<p>The <em>roles</em> are:</p>
+<ul class="simple">
+<li>for &#8216;<code class="docutils literal"><span class="pre">familles</span></code>&#8216;: <code class="docutils literal"><span class="pre">parents</span></code> and <code class="docutils literal"><span class="pre">enfants</span></code> (children),</li>
+<li>for &#8216;<code class="docutils literal"><span class="pre">foyers_fiscaux</span></code>&#8216;: <code class="docutils literal"><span class="pre">declarants</span></code> (registrants) and <code class="docutils literal"><span class="pre">personnes_a_charge</span></code> (dependants),</li>
+<li>for &#8216;<code class="docutils literal"><span class="pre">menages</span></code>&#8216;: <code class="docutils literal"><span class="pre">personne_de_reference</span></code> (reference person), <code class="docutils literal"><span class="pre">conjoint</span></code>, <code class="docutils literal"><span class="pre">enfants</span></code>and <code class="docutils literal"><span class="pre">autres</span></code> (other).</li>
+</ul>
+<p>You can define as many entities as you want and dispatch persons into them.</p>
+</div>
+<div class="section" id="application-module-used-by-openfisca">
+<span id="application-module-used-by-openfisca"></span><h3>Application: module used by OpenFisca<a class="headerlink" href="#application-module-used-by-openfisca" title="Permalink to this headline">¶</a></h3>
+<p>The entities definitions are closely related to a country, therefore they are defined in a Python package (OpenFisca-France) independent from the core engine (OpenFisca-Core).</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="parameters.html" title="previous chapter (use the left arrow)">Parameters</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="periodsinstants.html" title="next chapter (use the right arrow)">Periods, Instants</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="periodsinstants.html" title="Periods, Instants"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="parameters.html" title="Parameters"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Key concepts</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>
