@@ -319,7 +319,7 @@
     <span class="k">def</span> <span class="nf">_print_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">):</span>
 
         <span class="k">def</span> <span class="nf">print_line</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2"> &gt;&gt; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;  &#39;</span> <span class="o">*</span> <span class="n">depth</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2"> &gt;&gt; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;  &#39;</span> <span class="o">*</span> <span class="n">depth</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">print_line</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&quot;Calculation aborted due to a circular dependency&quot;</span><span class="p">)</span>
@@ -345,14 +345,14 @@
         <span class="k">def</span> <span class="nf">_print_details</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">depth</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">ignore_zero</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
                 <span class="k">return</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_print_node</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print_node</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">depth</span> <span class="o">&lt;</span> <span class="n">max_depth</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">dependency</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;dependencies&#39;</span><span class="p">]:</span>
-                    <span class="n">_print_details</span><span class="p">(</span><span class="n">dependency</span><span class="p">,</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">_print_details</span><span class="p">(</span><span class="n">dependency</span><span class="p">,</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="n">_print_details</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">_print_details</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Tracer.print_computation_log"><a class="viewcode-back" href="../../openfisca-python-api/tracer.html#openfisca_core.tracers.Tracer.print_computation_log">[docs]</a>    <span class="k">def</span> <span class="nf">print_computation_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aggregate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Tracer.computation_log"><a class="viewcode-back" href="../../openfisca-python-api/tracer.html#openfisca_core.tracers.Tracer.computation_log">[docs]</a>    <span class="k">def</span> <span class="nf">computation_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aggregate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Print the computation log of a simulation.</span>
 
@@ -361,8 +361,11 @@
 <span class="sd">            If ``aggregate`` is ``True``, only print the minimum, maximum, and average value of each computed vector.</span>
 <span class="sd">            This mode is more suited for simulations on a large population.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">depth</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computation_log</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_print_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_print_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">depth</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computation_log</span><span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">print_computation_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aggregate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">computation_log</span><span class="p">(</span><span class="n">aggregate</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></div>
 
 
 <span class="k">class</span> <span class="nc">TracingParameterNodeAtInstant</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
