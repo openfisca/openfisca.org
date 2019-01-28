@@ -352,7 +352,10 @@
 
         <span class="k">return</span> <span class="n">_print_details</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Tracer.computation_log"><a class="viewcode-back" href="../../openfisca-python-api/tracer.html#openfisca_core.tracers.Tracer.computation_log">[docs]</a>    <span class="k">def</span> <span class="nf">computation_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aggregate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computation_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aggregate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_print_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">depth</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computation_log</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Tracer.print_computation_log"><a class="viewcode-back" href="../../openfisca-python-api/tracer.html#openfisca_core.tracers.Tracer.print_computation_log">[docs]</a>    <span class="k">def</span> <span class="nf">print_computation_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aggregate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Print the computation log of a simulation.</span>
 
@@ -361,11 +364,8 @@
 <span class="sd">            If ``aggregate`` is ``True``, only print the minimum, maximum, and average value of each computed vector.</span>
 <span class="sd">            This mode is more suited for simulations on a large population.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_print_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">depth</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computation_log</span><span class="p">]</span></div>
-
-    <span class="k">def</span> <span class="nf">print_computation_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aggregate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">computation_log</span><span class="p">(</span><span class="n">aggregate</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">TracingParameterNodeAtInstant</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
