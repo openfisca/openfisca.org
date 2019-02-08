@@ -224,9 +224,15 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Nose crashes if it gets any unexpected argument.</span>
+
+    <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pdb&#39;</span><span class="p">):</span>
+        <span class="n">argv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;--pdb&#39;</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">):</span>
         <span class="n">argv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;--nocapture&#39;</span><span class="p">)</span>  <span class="c1"># Do not capture output when verbose mode is activated</span>
+
     <span class="n">argv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;--nologcapture&#39;</span><span class="p">)</span>  <span class="c1"># Do not capture logs so that the user can define a log level</span>
+
     <span class="k">return</span> <span class="n">nose</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
         <span class="c1"># The suite argument must be a lambda for nose to run the tests lazily</span>
         <span class="n">suite</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">generate_tests</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">options</span><span class="p">),</span>
