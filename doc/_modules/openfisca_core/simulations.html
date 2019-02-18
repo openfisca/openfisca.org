@@ -156,7 +156,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">period</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">steps_count</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">trace</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -217,7 +216,7 @@
         <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons</span><span class="p">)</span>  <span class="c1"># create shortcut simulation.person (for instance)</span>
 
         <span class="k">for</span> <span class="n">entity_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">group_entities</span><span class="p">:</span>
-            <span class="n">entities</span> <span class="o">=</span> <span class="n">entity_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">entities</span> <span class="o">=</span> <span class="n">entity_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="n">entity_class</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">entities</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_class</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">entities</span><span class="p">)</span>  <span class="c1"># create shortcut simulation.household (for instance)</span>
 

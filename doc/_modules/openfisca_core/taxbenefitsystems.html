@@ -133,13 +133,13 @@
 <span class="kn">import</span> <span class="nn">pkg_resources</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">conv</span>
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="k">import</span> <span class="n">ParameterNode</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.variables</span> <span class="k">import</span> <span class="n">Variable</span><span class="p">,</span> <span class="n">get_neutralized_variable</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.scenarios</span> <span class="k">import</span> <span class="n">AbstractScenario</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">VariableNotFound</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">to_unicode</span><span class="p">,</span> <span class="n">basestring_type</span><span class="p">,</span> <span class="n">empty_clone</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="k">import</span> <span class="n">SimulationBuilder</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.tracers</span> <span class="k">import</span> <span class="n">Tracer</span>
 
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -170,12 +170,7 @@
     <span class="n">_parameters_at_instant_cache</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">person_key_plural</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">preprocess_parameters</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">json_to_attributes</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">conv</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span>
-        <span class="n">conv</span><span class="o">.</span><span class="n">test_isinstance</span><span class="p">(</span><span class="nb">dict</span><span class="p">),</span>
-        <span class="n">conv</span><span class="o">.</span><span class="n">struct</span><span class="p">({}),</span>
-        <span class="p">))</span>
     <span class="n">baseline</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Baseline tax-benefit system. Used only by reforms. Note: Reforms can be chained.</span>
-    <span class="n">Scenario</span> <span class="o">=</span> <span class="n">AbstractScenario</span>
     <span class="n">cache_blacklist</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">decomposition_file_path</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -201,20 +196,52 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_base_tax_benefit_system</span> <span class="o">=</span> <span class="n">base_tax_benefit_system</span> <span class="o">=</span> <span class="n">baseline</span><span class="o">.</span><span class="n">base_tax_benefit_system</span>
         <span class="k">return</span> <span class="n">base_tax_benefit_system</span>
 
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">json_to_instance</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="n">attributes</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span>
-            <span class="bp">cls</span><span class="o">.</span><span class="n">json_to_attributes</span><span class="p">,</span>
-            <span class="n">conv</span><span class="o">.</span><span class="n">default</span><span class="p">({}),</span>
-            <span class="p">)(</span><span class="n">value</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">state</span> <span class="ow">or</span> <span class="n">conv</span><span class="o">.</span><span class="n">default_state</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">attributes</span><span class="p">,</span> <span class="n">error</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">attributes</span><span class="p">),</span> <span class="kc">None</span>
-
+    <span class="c1"># Deprecated method of constructing simulations, to be phased out in favor of SimulationBuilder</span>
     <span class="k">def</span> <span class="nf">new_scenario</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">scenario</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Scenario</span><span class="p">()</span>
-        <span class="n">scenario</span><span class="o">.</span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="bp">self</span>
-        <span class="k">return</span> <span class="n">scenario</span>
+        <span class="k">class</span> <span class="nc">ScenarioAdapter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span>
+
+            <span class="k">def</span> <span class="nf">init_from_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">attributes</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="n">attributes</span>
+                <span class="k">return</span> <span class="bp">self</span>
+
+            <span class="k">def</span> <span class="nf">init_from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dict</span> <span class="o">=</span> <span class="nb">dict</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span>
+
+            <span class="k">def</span> <span class="nf">new_simulation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">opt_out_cache</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">use_baseline</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">trace</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="c1"># Legacy from scenarios, used in reforms</span>
+                <span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span>
+                <span class="k">if</span> <span class="n">use_baseline</span><span class="p">:</span>
+                    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="n">baseline</span> <span class="o">=</span> <span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">baseline</span>
+                        <span class="k">if</span> <span class="n">baseline</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="k">break</span>
+                        <span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">baseline</span>
+
+                <span class="n">builder</span> <span class="o">=</span> <span class="n">SimulationBuilder</span><span class="p">()</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">:</span>
+                    <span class="n">variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;input_variables&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+                    <span class="n">period</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">)</span>
+                    <span class="n">builder</span><span class="o">.</span><span class="n">set_default_period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+                    <span class="n">simulation</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build_from_variables</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">builder</span><span class="o">.</span><span class="n">set_default_period</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
+                    <span class="n">simulation</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">)</span>
+                    <span class="n">simulation</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
+
+                <span class="n">simulation</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
+                <span class="n">simulation</span><span class="o">.</span><span class="n">opt_out_cache</span> <span class="o">=</span> <span class="n">opt_out_cache</span>
+                <span class="k">if</span> <span class="n">trace</span><span class="p">:</span>
+                    <span class="n">simulation</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="n">trace</span>
+                    <span class="n">simulation</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">Tracer</span><span class="p">()</span>
+
+                <span class="k">return</span> <span class="n">simulation</span>
+
+        <span class="k">return</span> <span class="n">ScenarioAdapter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">prefill_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>

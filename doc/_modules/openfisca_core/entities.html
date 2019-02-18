@@ -391,23 +391,17 @@
     <span class="n">flattened_roles</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">roles_description</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">,</span> <span class="n">persons</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="n">Entity</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">members_legacy_role</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">members</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span> <span class="o">=</span> <span class="n">persons</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_roles_count</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ordered_members_map</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">members_role</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_legacy_role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="n">legacy_role</span><span class="p">]</span> <span class="k">if</span> <span class="n">legacy_role</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">for</span> <span class="n">legacy_role</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_legacy_role</span>
-                <span class="p">])</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span>
 
     <span class="nd">@property</span>
@@ -432,28 +426,6 @@
     <span class="nd">@members_position</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">members_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">members_position</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="n">members_position</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">roles_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-            <span class="s2">&quot;entity.roles_count is deprecated.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Since OpenFisca Core 23.0, this attribute has strictly no effect, and it is not necessary to set it.&quot;</span>
-            <span class="p">]),</span>
-            <span class="ne">Warning</span>
-            <span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_roles_count</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_roles_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_legacy_role</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_roles_count</span>
-
-    <span class="nd">@roles_count</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">roles_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-            <span class="s2">&quot;entity.roles_count is deprecated.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Since OpenFisca Core 23.0, this attribute has strictly no effect, and it is not necessary to set it.&quot;</span>
-            <span class="p">]),</span>
-            <span class="ne">Warning</span>
-            <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_roles_count</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ordered_members_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -483,7 +455,7 @@
 <span class="sd">            &gt;&gt;&gt; array([3500])</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">role_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span>
@@ -513,7 +485,7 @@
 
     <span class="nd">@projectable</span>
     <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">reducer</span><span class="p">,</span> <span class="n">neutral_element</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
         <span class="n">position_in_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_position</span>
         <span class="n">role_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">True</span>
@@ -615,7 +587,7 @@
                 <span class="s1">&#39;You can only use value_from_person with a role that is unique in </span><span class="si">{}</span><span class="s1">. Role </span><span class="si">{}</span><span class="s1"> is not unique.&#39;</span>
                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">role</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
                 <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
         <span class="n">members_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ordered_members_map</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filled_array</span><span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">):</span>
@@ -638,7 +610,7 @@
 
 <span class="sd">            The result is a vector which dimension is the number of entities.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
         <span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_position</span>
         <span class="n">nb_persons_per_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">()</span>
         <span class="n">members_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ordered_members_map</span>
@@ -678,18 +650,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
         <span class="n">nb_persons_per_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">array</span> <span class="o">/</span> <span class="n">nb_persons_per_entity</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)</span>
-
-    <span class="c1"># Projection entity -&gt; entity</span>
-
-    <span class="c1"># Doesn&#39;t seem to be used either, as we can do entity1.first_person.entity2</span>
-    <span class="c1"># Maybe should not introduce</span>
-    <span class="nd">@projectable</span>
-    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">origin_entity</span><span class="p">):</span>
-        <span class="n">origin_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">origin_entity</span><span class="p">)</span>
-        <span class="n">origin_entity</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-        <span class="n">input_projected</span> <span class="o">=</span> <span class="n">origin_entity</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_from_first_person</span><span class="p">(</span><span class="n">input_projected</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">array</span> <span class="o">/</span> <span class="n">nb_persons_per_entity</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)</span></div>
 
 
 <span class="k">class</span> <span class="nc">Role</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -777,13 +738,13 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_entity</span><span class="o">.</span><span class="n">value_from_person</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">role</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">build_entity</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">roles</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_person</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">build_entity</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">roles</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_person</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">class_override</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="n">entity_class_name</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
     <span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s1">&#39;plural&#39;</span><span class="p">:</span> <span class="n">plural</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s1">&#39;doc&#39;</span><span class="p">:</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="n">doc</span><span class="p">),</span> <span class="s1">&#39;roles_description&#39;</span><span class="p">:</span> <span class="n">roles</span><span class="p">}</span>
     <span class="k">if</span> <span class="n">is_person</span><span class="p">:</span>
-        <span class="n">entity_class</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">entity_class_name</span><span class="p">,</span> <span class="p">(</span><span class="n">PersonEntity</span><span class="p">,),</span> <span class="n">attributes</span><span class="p">)</span>
+        <span class="n">entity_class</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">entity_class_name</span><span class="p">,</span> <span class="p">(</span><span class="n">class_override</span> <span class="ow">or</span> <span class="n">PersonEntity</span><span class="p">,),</span> <span class="n">attributes</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">roles</span><span class="p">:</span>
-        <span class="n">entity_class</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">entity_class_name</span><span class="p">,</span> <span class="p">(</span><span class="n">GroupEntity</span><span class="p">,),</span> <span class="n">attributes</span><span class="p">)</span>
+        <span class="n">entity_class</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">entity_class_name</span><span class="p">,</span> <span class="p">(</span><span class="n">class_override</span> <span class="ow">or</span> <span class="n">GroupEntity</span><span class="p">,),</span> <span class="n">attributes</span><span class="p">)</span>
         <span class="n">entity_class</span><span class="o">.</span><span class="n">roles</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">role_description</span> <span class="ow">in</span> <span class="n">roles</span><span class="p">:</span>
             <span class="n">role</span> <span class="o">=</span> <span class="n">Role</span><span class="p">(</span><span class="n">role_description</span><span class="p">,</span> <span class="n">entity_class</span><span class="p">)</span>

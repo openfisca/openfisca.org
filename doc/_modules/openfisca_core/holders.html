@@ -134,7 +134,7 @@
 <span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">empty_clone</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.data_storage</span> <span class="k">import</span> <span class="n">InMemoryStorage</span><span class="p">,</span> <span class="n">OnDiskStorage</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">PeriodMismatchError</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">MONTH</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">,</span> <span class="n">ETERNITY</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="k">import</span> <span class="n">eval_expression</span>
 
@@ -150,7 +150,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="n">entity</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variable</span> <span class="o">=</span> <span class="n">variable</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">simulation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span> <span class="o">=</span> <span class="n">InMemoryStorage</span><span class="p">(</span><span class="n">is_eternal</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">ETERNITY</span><span class="p">))</span>
 
         <span class="c1"># By default, do not activate on-disk storage, or variable dropping</span>
@@ -382,13 +381,7 @@
 <span class="sd">        Return a new array of the appropriate length for the entity, filled with the variable default values.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">array_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">count</span>
-        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">array_size</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">Enum</span><span class="p">:</span>
-            <span class="n">array</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">default_value</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">EnumArray</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">possible_values</span><span class="p">)</span>
-        <span class="n">array</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">default_value</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">array</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">default_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">count</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="set_input_dispatch_by_period"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.set_input_dispatch_by_period">[docs]</a><span class="k">def</span> <span class="nf">set_input_dispatch_by_period</span><span class="p">(</span><span class="n">holder</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
