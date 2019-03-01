@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>How to use OpenFisca with Docker &#8212; OpenFisca  documentation</title>
+    <title>Using OpenFisca with Docker &#8212; OpenFisca  documentation</title>
     
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -60,7 +60,7 @@
           <a href="howto-web-no-local-install.html" title="Use OpenFisca on the web"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Recipes for OpenFisca</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Installation recipes</a> &#187;</li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -86,9 +86,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../coding-the-legislation/index.html">From law to code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html">OpenFisca Web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Recipes for OpenFisca</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Installation recipes</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="howto-web-no-local-install.html">Use OpenFisca on the web</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">How to use OpenFisca with Docker</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Using OpenFisca with Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="offline-environment.html">Installing OpenFisca in an offline environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="windows-no-admin.html">Work on OpenFisca on a Windows without being administrator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test_situations.html">How to test your changes on &#8220;ready to use&#8221; situations (for OpenFisca-France)</a></li>
@@ -125,82 +125,96 @@
             <ol class="breadcrumb">
               <li><a href="../summary.html">Docs</a></li>
               
-                <li><a href="index.html">Recipes for OpenFisca</a></li>
+                <li><a href="index.html">Installation recipes</a></li>
               
-              <li>How to use OpenFisca with Docker</li>
+              <li>Using OpenFisca with Docker</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <div class="section" id="how-to-use-openfisca-with-docker">
-<span id="how-to-use-openfisca-with-docker"></span><h1>How to use OpenFisca with Docker<a class="headerlink" href="#how-to-use-openfisca-with-docker" title="Permalink to this headline">¶</a></h1>
-<p>When you want to use OpenFisca, either for running simulations or editing a country package, you need to setup a specific environement.
-If you don&#8217;t want the OpenFisca environment to interfere with your pre-existing setup, or if you don&#8217;t have one, you can use a container such as Docker that will set everything up for you.</p>
-<div class="section" id="run-openfisca-on-docker">
-<span id="run-openfisca-on-docker"></span><h2>Run OpenFisca on Docker<a class="headerlink" href="#run-openfisca-on-docker" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li>Install <a class="reference external" href="https://docs.docker.com/install/">Docker</a></li>
-<li>Create a docker file in the directory you wish to work on</li>
-</ol>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FROM</span> <span class="n">python</span><span class="p">:</span><span class="mi">2</span><span class="o">-</span><span class="n">stretch</span> 
-<span class="n">RUN</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">openfisca_country_template</span>
-<span class="n">WORKDIR</span> <span class="o">/</span><span class="n">app</span>
+  <div class="section" id="using-openfisca-with-docker">
+<span id="using-openfisca-with-docker"></span><h1>Using OpenFisca with Docker<a class="headerlink" href="#using-openfisca-with-docker" title="Permalink to this headline">¶</a></h1>
+<p>When you want to use OpenFisca, either to run it or edit its code, you need to setup a specific environement.
+If you don&#8217;t want the OpenFisca environment to interfere with your pre-existing setup, or if you don&#8217;t have one, you can use a container platform such as <a class="reference external" href="https://www.docker.com">Docker</a> that will set everything up for you.</p>
+<blockquote>
+<div>On Windows operating system, you need to have Windows 10 or higher to use Docker.</div></blockquote>
+<div class="section" id="install-docker">
+<span id="install-docker"></span><h2>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this headline">¶</a></h2>
+<p>Docker allows you to run a minimal image of Unix operating system.
+In this docker container, you will have an isolated environment with user rights to install OpenFisca.</p>
+<ul class="simple">
+<li>Install free <a class="reference external" href="https://docs.docker.com/install/#supported-platforms">Docker Community Edition</a> (also named <code class="docutils literal"><span class="pre">Docker</span> <span class="pre">Desktop</span></code>).<ul>
+<li>Follow default installation instructions (you will need to create a free Docker ID).</li>
+<li>Run installed Docker application (to activate docker daemon).</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="install-openfisca-in-a-docker-container">
+<span id="install-openfisca-in-a-docker-container"></span><h2>Install OpenFisca in a Docker container<a class="headerlink" href="#install-openfisca-in-a-docker-container" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s say that you want to install the <a class="reference external" href="https://github.com/openfisca/country-template">openfisca-country-template</a> model (or your specific country model). And you want to work in a directory named <code class="docutils literal"><span class="pre">my-openfisca</span></code> where any change you do is visible on both sides, locally and on Docker.</p>
+<ol>
+<li><p class="first">Go to your working directory:</p>
+<ul>
+<li><p class="first">If you don&#8217;t have one, create a new directory named <code class="docutils literal"><span class="pre">my-openfisca</span></code>.</p>
+</li>
+<li><p class="first">Open your system console (<code class="docutils literal"><span class="pre">cmd.exe</span></code> for Windows OS, a bash Terminal for Unix/Linux/Mac) and run:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> my-openfisca <span class="c1"># Updated with the real path to your working directory</span>
 </pre></div>
 </div>
-<ol class="simple">
-<li>Build the container</li>
-</ol>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>docker build --rm -t openfisca-country-template .
+</li>
+</ul>
+</li>
+<li><p class="first">Build a container with Python 3.7, Git and console commands.</p>
+<blockquote>
+<div><p>Git comes with Python image.</p>
+</div></blockquote>
+<ul>
+<li><p class="first">For Linux/Unix/Mac operating systems, run:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run --rm -it -v <span class="nv">$PWD</span>:/my-openfisca -w /my-openfisca python:3.7 bash
 </pre></div>
 </div>
-<ol class="simple">
-<li>Run the container</li>
-</ol>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run -it openfisca-country-template bash
+</li>
+<li><p class="first">For Windows operating system, run:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run --rm -it -v %cd%:/my-openfisca -w /my-openfisca python:3.7 bash
 </pre></div>
 </div>
-</div>
-<div class="section" id="interface-local-files-with-openfisca-on-docker">
-<span id="interface-local-files-with-openfisca-on-docker"></span><h2>Interface local files with OpenFisca on Docker<a class="headerlink" href="#interface-local-files-with-openfisca-on-docker" title="Permalink to this headline">¶</a></h2>
-<p>If you need to run local files with your Docker image, you can interface (i.e. mount) a local directory with a directory in your docker interface.
-E.g. You need to update a country package such as <code class="docutils literal"><span class="pre">openfisca-country-template</span></code></p>
-<ol class="simple">
-<li>Create a Dockerfile with <code class="docutils literal"><span class="pre">openfisca-core</span></code> in your <code class="docutils literal"><span class="pre">project</span></code> directory</li>
-</ol>
-<p>The Dokerfile:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FROM</span> <span class="n">python</span><span class="p">:</span><span class="mi">2</span><span class="o">-</span><span class="n">stretch</span> 
-<span class="n">RUN</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">OpenFisca</span><span class="o">-</span><span class="n">core</span>
-<span class="n">WORKDIR</span> <span class="o">/</span><span class="n">country</span><span class="o">-</span><span class="n">template</span>
+</li>
+</ul>
+</li>
+<li><p class="first">Check for installed libraries with <code class="docutils literal"><span class="pre">pip</span> <span class="pre">list</span></code> command.
+You should get this list of packages:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span> Package    Version
+ ---------- -------
+ pip        *.*.*   
+ setuptools *.*.* 
+ wheel      *.*.* 
 </pre></div>
 </div>
-<ol class="simple">
-<li>Clone the <a class="reference external" href="https://github.com/openfisca/country-template"><code class="docutils literal"><span class="pre">country-template</span></code></a> in the directory</li>
-</ol>
-<p>The directory:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>project
-│   README.md
-│   Dockerfile    
-│
-└───country-template
+</li>
+<li><p class="first">Install <a class="reference external" href="https://github.com/openfisca/country-template">openfisca-country-template</a>. Here are two main options: you can run it without modifying it or install it to edit its code.</p>
+<ul>
+<li><p class="first">To edit <code class="docutils literal"><span class="pre">openfisca-country-template</span></code>, get its source code with:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>git clone https://github.com/openfisca/country-template.git
 </pre></div>
 </div>
-<ol class="simple">
-<li>Build the container</li>
-</ol>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>docker build --rm -t openfisca-core .
+<p>And, install it with:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> country-template
+make install
 </pre></div>
 </div>
-<ol class="simple">
-<li>Run the container</li>
-</ol>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run -it -v /absolute/path/to/country-template/:/country-template openfisca-core bash
+</li>
+<li><p class="first">Or, to run <code class="docutils literal"><span class="pre">openfisca-country-template</span></code> without modifying it, install it as a library with:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>pip install openfisca_country_template
 </pre></div>
 </div>
-<ol class="simple">
-<li>Use <code class="docutils literal"><span class="pre">country-template</span></code> in the Docker container
-Use the <code class="docutils literal"><span class="pre">country-template</span></code> in the docker container, any changes to the <code class="docutils literal"><span class="pre">country-template</span></code> local files will affect the <code class="docutils literal"><span class="pre">country-template</span></code> files in the container.</li>
+</li>
+</ul>
+<p>In both cases, the installation should end without error.And, now, <code class="docutils literal"><span class="pre">pip</span> <span class="pre">list</span></code> response shoud contain <code class="docutils literal"><span class="pre">OpenFisca-Country-Template</span></code>.</p>
+</li>
 </ol>
+<p>You&#8217;re all set! You can now use <code class="docutils literal"><span class="pre">openfisca-country-template</span></code>.Any changes to your <code class="docutils literal"><span class="pre">my-openfisca/</span></code> local files will be reflected to <code class="docutils literal"><span class="pre">my-openfisca/</span></code> files in Docker, and vice-versa.</p>
 </div>
 </div>
 
@@ -238,7 +252,7 @@ Use the <code class="docutils literal"><span class="pre">country-template</span>
           <a href="howto-web-no-local-install.html" title="Use OpenFisca on the web"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Recipes for OpenFisca</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >Installation recipes</a> &#187;</li> 
       </ul>
     </div>
 <script type="text/javascript">
