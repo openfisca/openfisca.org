@@ -163,6 +163,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">tax_benefit_system</span><span class="p">,</span>
+            <span class="n">entities_instances</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">simulation_json</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">period</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -177,6 +178,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span>
         <span class="k">assert</span> <span class="n">tax_benefit_system</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">entities_instances</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="n">entities_instances</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">instantiate_entities</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">persons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">person_entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">link_to_entities_instances</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_shortcuts</span><span class="p">()</span>
+
         <span class="k">if</span> <span class="n">period</span><span class="p">:</span>
             <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">period</span>
@@ -197,7 +207,6 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">memory_config</span> <span class="o">=</span> <span class="n">memory_config</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">instantiate_entities</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">simulation_json</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
@@ -207,17 +216,16 @@
                 <span class="ne">Warning</span>
                 <span class="p">)</span>
             <span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="k">import</span> <span class="n">SimulationBuilder</span>
-            <span class="n">SimulationBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">simulation_json</span><span class="p">,</span> <span class="n">simulation</span> <span class="o">=</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="n">SimulationBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">simulation_json</span><span class="p">,</span> <span class="n">simulation</span> <span class="o">=</span> <span class="bp">self</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">instantiate_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">persons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">person_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons</span><span class="p">}</span>
-        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons</span><span class="p">)</span>  <span class="c1"># create shortcut simulation.person (for instance)</span>
+    <span class="k">def</span> <span class="nf">link_to_entities_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">entity_instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">entity_instance</span><span class="o">.</span><span class="n">simulation</span> <span class="o">=</span> <span class="bp">self</span>
 
-        <span class="k">for</span> <span class="n">entity_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">group_entities</span><span class="p">:</span>
-            <span class="n">entities</span> <span class="o">=</span> <span class="n">entity_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="n">entity_class</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">entities</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_class</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">entities</span><span class="p">)</span>  <span class="c1"># create shortcut simulation.household (for instance)</span>
+    <span class="k">def</span> <span class="nf">create_shortcuts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">entity_instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># create shortcut simulation.person and simulation.household (for instance)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_instance</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">entity_instance</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">data_storage_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

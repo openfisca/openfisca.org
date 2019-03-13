@@ -123,6 +123,7 @@
 
 
 <span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span>
 <span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">isclass</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">linesep</span>
 <span class="kn">from</span> <span class="nn">imp</span> <span class="k">import</span> <span class="n">find_module</span><span class="p">,</span> <span class="n">load_module</span>
@@ -133,6 +134,7 @@
 <span class="kn">import</span> <span class="nn">traceback</span>
 
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.entities</span> <span class="k">import</span> <span class="n">Entity</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="k">import</span> <span class="n">ParameterNode</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.variables</span> <span class="k">import</span> <span class="n">Variable</span><span class="p">,</span> <span class="n">get_neutralized_variable</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">VariableNotFound</span>
@@ -194,6 +196,15 @@
                 <span class="k">return</span> <span class="bp">self</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_base_tax_benefit_system</span> <span class="o">=</span> <span class="n">base_tax_benefit_system</span> <span class="o">=</span> <span class="n">baseline</span><span class="o">.</span><span class="n">base_tax_benefit_system</span>
         <span class="k">return</span> <span class="n">base_tax_benefit_system</span>
+
+    <span class="k">def</span> <span class="nf">instantiate_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">person_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">person_entity</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">entities_instances</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">Entity</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">person_instance</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="n">person_instance</span><span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">entity_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_entities</span><span class="p">:</span>
+            <span class="n">entities_instances</span><span class="p">[</span><span class="n">entity_class</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity_class</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">person_instance</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">entities_instances</span>
 
     <span class="c1"># Deprecated method of constructing simulations, to be phased out in favor of SimulationBuilder</span>
     <span class="k">def</span> <span class="nf">new_scenario</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
