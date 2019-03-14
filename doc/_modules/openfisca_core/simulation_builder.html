@@ -525,7 +525,11 @@
                 <span class="c1"># Hack to replicate the values in the persons entity</span>
                 <span class="c1"># when we have an axis along a group entity but not persons</span>
                 <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">count</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
-                <span class="n">holder</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">period_value</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
+                <span class="n">variable</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span>
+                <span class="c1"># TODO - this duplicates the check in Simulation.set_input, but</span>
+                <span class="c1"># fixing that requires improving Simulation&#39;s handling of entities</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">period_value</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">date</span> <span class="o">&gt;</span> <span class="n">variable</span><span class="o">.</span><span class="n">end</span><span class="p">):</span>
+                    <span class="n">holder</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">period_value</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">raise_period_mismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
         <span class="c1"># This error happens when we try to set a variable value for a period that doesn&#39;t match its definition period</span>
