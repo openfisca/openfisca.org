@@ -1,0 +1,432 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>How to run a simulation &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/scripts.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="OpenFisca Web API" href="openfisca-web-api/index.html" />
+    <link rel="prev" title="Bootstraping a new country package" href="coding-the-legislation/bootstrapping_a_new_country_package.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="openfisca-web-api/index.html" title="OpenFisca Web API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="coding-the-legislation/bootstrapping_a_new_country_package.html" title="Bootstraping a new country package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="summary.html">OpenFisca  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+      index.html" class="text-logo">OpenFisca</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key-concepts/index.html">Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coding-the-legislation/index.html">From law to code</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to run a simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-run-a-simulation-on-a-test-case">How to run a simulation on a test case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-run-a-simulation-on-data">How to run a simulation on data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="openfisca-web-api/index.html">OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/index.html">Installation recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publishing.html">Publishing results based on OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openfisca-python-api/index.html">Openfisca Python API</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="summary.html">Docs</a></li>
+              
+              <li>How to run a simulation</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="how-to-run-a-simulation">
+<span id="how-to-run-a-simulation"></span><h1>How to run a simulation<a class="headerlink" href="#how-to-run-a-simulation" title="Permalink to this headline">¶</a></h1>
+<p>When you have an OpenFisca tax and benefits system and you want to calculate some legislation variables on people situations, you need to create and run a new <em>Simulation</em>.</p>
+<p>OpenFisca will work the same if there is one person or seven or seven million in the modelled situation.</p>
+<p>Nevertheless, you won&#8217;t have the same experience defining those various situations sizes and linking them to your simulation. So, multiple options could be used to describe this information:</p>
+<ul class="simple">
+<li>either <a class="reference external" href="/running-simulation.html#test-cases">test cases</a>: you simulate the legislation for small number of situations</li>
+<li>or <a class="reference external" href="/running-simulation.html#data">data</a>: you provide a population (survey with aggregated data, CSV files with bulk data, etc.) on which you want to apply the legislation.</li>
+</ul>
+<p>In both cases, OpenFisca looks for two kinds of inputs to describe situations:</p>
+<ul class="simple">
+<li>how persons are dispatched in other entities,</li>
+<li>what variables&#8217; values are already known.</li>
+</ul>
+<blockquote>
+<div>Technically speaking, OpenFisca is using <a class="reference external" href="../coding-the-legislation/25_vectorial_computing.html">vector computing</a> for performance reasons via the <a class="reference external" href="http://www.numpy.org/">NumPy</a> Python package</div></blockquote>
+<div class="section" id="how-to-run-a-simulation-on-a-test-case">
+<span id="how-to-run-a-simulation-on-a-test-case"></span><h2>How to run a simulation on a test case<a class="headerlink" href="#how-to-run-a-simulation-on-a-test-case" title="Permalink to this headline">¶</a></h2>
+<p>Test cases can be expressed in Python, or in JSON when using the Web API (see the <a class="reference external" href="../openfisca-web-api/input-output-data.html">specific section</a> of the documentation).</p>
+<div class="section" id="test-cases">
+<span id="test-cases"></span><h3>Test cases<a class="headerlink" href="#test-cases" title="Permalink to this headline">¶</a></h3>
+<p>A test case describes persons and other entities with their variables values.It&#8217;s the usual solution to define a small number of situations.</p>
+<p>Here is an example of test case (in Python):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">BASIC_TEST_CASE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;h1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;h2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>This test case defines 4 persons, <code class="docutils literal"><span class="pre">Ari</span></code>, <code class="docutils literal"><span class="pre">Paul</span></code>, <code class="docutils literal"><span class="pre">Leila</span></code> and <code class="docutils literal"><span class="pre">Javier</span></code>.
+They belong to 2 households named <code class="docutils literal"><span class="pre">h1</span></code> and <code class="docutils literal"><span class="pre">h2</span></code>.
+For example, <code class="docutils literal"><span class="pre">Ari</span></code> and <code class="docutils literal"><span class="pre">Paul</span></code> are parents in <code class="docutils literal"><span class="pre">h1</span></code> and have one child, <code class="docutils literal"><span class="pre">Leila</span></code>.</p>
+<p>You may add information at the <em>individual</em> level or at the <em>group entity</em> level:</p>
+<ul class="simple">
+<li>known variable values,</li>
+<li>and definition periods for those variable values.</li>
+</ul>
+<p>Let&#8217;s say that we want to add a salary to <code class="docutils literal"><span class="pre">Ari</span></code> and a <code class="docutils literal"><span class="pre">rent</span></code> to <code class="docutils literal"><span class="pre">h1</span></code>.
+Here is the updated test case:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">TEST_CASE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;salary&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;2011-01&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">}</span>
+        <span class="p">},</span> 
+        <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> 
+        <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> 
+        <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;h1&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> 
+            <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;rent&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;2011-01&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;h2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">salary</span></code> and <code class="docutils literal"><span class="pre">rent</span></code> names come from the <a class="reference external" href="https://demo.openfisca.org/legislation/salary">salary</a> and <a class="reference external" href="https://demo.openfisca.org/legislation/rent">rent</a> variables of the <code class="docutils literal"><span class="pre">OpenFisca-Country-Template</span></code>. In this <a class="reference external" href="https://demo.openfisca.org/legislation/">model</a>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">salary</span></code> is a Person entity variable defined on a monthly basis,</li>
+<li><code class="docutils literal"><span class="pre">rent</span></code> is a Household entity variable defined on a monthly basis as well.</li>
+</ul>
+<p>It&#8217;s a Python dictionary object that we will use to build a <em>Simulation</em>.</p>
+<div class="section" id="application-calculate-two-households-housing-allowances">
+<span id="application-calculate-two-households-housing-allowances"></span><h4>Application: calculate two households housing allowances<a class="headerlink" href="#application-calculate-two-households-housing-allowances" title="Permalink to this headline">¶</a></h4>
+<p>Let&#8217;s assume that you want to calculate households&#8217; <code class="docutils literal"><span class="pre">housing_allowance</span></code> for the same period.
+You have to follow these steps:</p>
+<ol class="simple">
+<li>Load a tax and benefits system like <a class="reference external" href="https://demo.openfisca.org/legislation">OpenFisca-Country-Template</a>.</li>
+<li>Initialise a <em>SimulationBuilder</em>.</li>
+<li>Create a <em>Simulation</em> using, for example, the <code class="docutils literal"><span class="pre">build_from_entities(...)</span></code> function.</li>
+<li>Calculate the <a class="reference external" href="https://demo.openfisca.org/legislation/housing_allowance">housing_allowance</a> and print its value for every test case household.</li>
+</ol>
+<p>Which gives:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="kn">import</span> <span class="n">SimulationBuilder</span>
+<span class="kn">from</span> <span class="nn">openfisca_country_template</span> <span class="kn">import</span> <span class="n">CountryTaxBenefitSystem</span>
+
+<span class="n">TEST_CASE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># ... whole test case ...</span>
+<span class="p">}</span>
+
+<span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
+
+<span class="n">simulation_builder</span> <span class="o">=</span> <span class="n">SimulationBuilder</span><span class="p">()</span>
+<span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation_builder</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">TEST_CASE</span><span class="p">)</span>
+
+<span class="n">housing_allowance</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;2011-01&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;households&quot;</span><span class="p">,</span> <span class="n">simulation</span><span class="o">.</span><span class="n">household</span><span class="o">.</span><span class="n">ids</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;housing_allowance&quot;</span><span class="p">,</span> <span class="n">housing_allowance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="how-to-run-a-simulation-on-data">
+<span id="how-to-run-a-simulation-on-data"></span><h2>How to run a simulation on data<a class="headerlink" href="#how-to-run-a-simulation-on-data" title="Permalink to this headline">¶</a></h2>
+<p>You can build a <em>Simulation</em> on multiple data formats.
+Any well structured tabular input shoud be fine as long as you are able to iterate over its items in Python.</p>
+<p>In the following example, will use the <a class="reference external" href="https://pandas.pydata.org">pandas</a> library to do so.</p>
+<div class="section" id="data">
+<span id="data"></span><h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<p>Data sets describe multiple people situations. It could define a whole population.
+This data could come from a survey with aggregated data, data files extracted from a database, etc.</p>
+<blockquote>
+<div>Here is a <a class="reference external" href="https://www.casd.eu/en/source/tax-and-social-incomes-survey/">survey example</a>. It typically goes from 50 000 households to 500 000.</div></blockquote>
+<p>Here is a minimal example of data (in CSV format):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">person_id</span><span class="p">,</span><span class="n">household_id</span><span class="p">,</span><span class="n">person_salary</span><span class="p">,</span><span class="n">age</span>
+<span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="mi">2694</span><span class="p">,</span><span class="mi">40</span>
+<span class="mi">2</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="mi">2720</span><span class="p">,</span><span class="mi">43</span>
+<span class="mi">3</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">3865</span><span class="p">,</span><span class="mi">45</span>
+<span class="mi">4</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">1300</span><span class="p">,</span><span class="mi">23</span>
+<span class="mi">5</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span>
+<span class="mi">6</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">14</span>
+<span class="mi">7</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="mi">2884</span><span class="p">,</span><span class="mi">44</span>
+<span class="mi">12</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">38</span>
+<span class="mi">8</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="mi">3386</span><span class="p">,</span><span class="mi">27</span>
+<span class="mi">9</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="mi">2929</span><span class="p">,</span><span class="mi">28</span>
+<span class="mi">10</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span>
+</pre></div>
+</div>
+<p>As for the <em>test case</em> content, you will need the following information:</p>
+<ul>
+<li><p class="first">unique indentifiers for persons and <em>group entities</em></p>
+<blockquote>
+<div><p>like <code class="docutils literal"><span class="pre">person_id</span></code> and <code class="docutils literal"><span class="pre">household_id</span></code> columns information in the CSV example</p>
+</div></blockquote>
+</li>
+<li><p class="first">if you have multiple <a class="reference internal" href="key-concepts/person,_entities,_role.html"><span class="doc">entities</span></a> types (persons, households, ...), you need to know how your persons list is dispatched over your <em>group entities</em></p>
+<blockquote>
+<div><p>in CSV example, every <code class="docutils literal"><span class="pre">person_id</span></code> is associated with a <code class="docutils literal"><span class="pre">household_id</span></code> on the same line</p>
+</div></blockquote>
+</li>
+<li><p class="first">the name of the corresponding variable in your model for every set of values</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">person_salary</span></code> values become <a class="reference external" href="https://demo.openfisca.org/legislation/salary">salary</a> values in <code class="docutils literal"><span class="pre">OpenFisca-Country-Template</span></code> model</p>
+</div></blockquote>
+</li>
+<li><p class="first">the period and entity for every set of values</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">person_salary</span></code> and <code class="docutils literal"><span class="pre">age</span></code> belong to <em>Person</em> entitythe definition period isn&#8217;t in the CSV file but it might, for example, come from the CSV creation time and be identical for the whole data set.</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="section" id="application-calculate-a-population-s-income-tax-from-a-csv-file">
+<span id="application-calculate-a-population-s-income-tax-from-a-csv-file"></span><h4>Application: calculate a population&#8217;s income tax from a CSV file<a class="headerlink" href="#application-calculate-a-population-s-income-tax-from-a-csv-file" title="Permalink to this headline">¶</a></h4>
+<p>Let&#8217;s say you are using the <a class="reference external" href="https://github.com/openfisca/country-template">country-template</a>, which describes the legislation of a yet to be country.</p>
+<p>Let&#8217;s also say you have the following <code class="docutils literal"><span class="pre">data.csv</span></code> and that you want to calculate <a class="reference external" href="https://demo.openfisca.org/legislation/income_tax">income_tax</a> for all persons:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">person_id</span><span class="p">,</span><span class="n">person_salary</span><span class="p">,</span><span class="n">person_age</span>
+<span class="mi">1</span><span class="p">,</span><span class="mi">2694</span><span class="p">,</span><span class="mi">40</span>
+<span class="mi">2</span><span class="p">,</span><span class="mi">2720</span><span class="p">,</span><span class="mi">43</span>
+<span class="mi">3</span><span class="p">,</span><span class="mi">1865</span><span class="p">,</span><span class="mi">45</span>
+<span class="mi">4</span><span class="p">,</span><span class="mi">1941</span><span class="p">,</span><span class="mi">23</span>
+<span class="mi">5</span><span class="p">,</span><span class="mi">2393</span><span class="p">,</span><span class="mi">31</span>
+<span class="mi">6</span><span class="p">,</span><span class="mi">3008</span><span class="p">,</span><span class="mi">47</span>
+<span class="mi">7</span><span class="p">,</span><span class="mi">2286</span><span class="p">,</span><span class="mi">23</span>
+<span class="mi">8</span><span class="p">,</span><span class="mi">3386</span><span class="p">,</span><span class="mi">28</span>
+<span class="mi">9</span><span class="p">,</span><span class="mi">2929</span><span class="p">,</span><span class="mi">38</span>
+<span class="mi">10</span><span class="p">,</span><span class="mi">3981</span><span class="p">,</span><span class="mi">37</span>
+<span class="mi">11</span><span class="p">,</span><span class="mi">3643</span><span class="p">,</span><span class="mi">38</span>
+<span class="mi">12</span><span class="p">,</span><span class="mi">2078</span><span class="p">,</span><span class="mi">23</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li>Install the required libraries, by running in your console:</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>$ python --version <span class="c1"># Python 3.7.0 or greater should be installed on your computer</span>
+$ pip install --upgrade pip openfisca_country_template pandas ipython
+$ ipython
+</pre></div>
+</div>
+<ol class="simple">
+<li>Load the <code class="docutils literal"><span class="pre">country-template</span></code> legislation and, then, the content of the <code class="docutils literal"><span class="pre">data.csv</span></code> file with the <a class="reference external" href="https://pandas.pydata.org">pandas</a> library:</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">openfisca_country_template</span> <span class="kn">import</span> <span class="n">CountryTaxBenefitSystem</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pandas</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data.csv&#39;</span><span class="p">)</span>  <span class="c1"># pandas.DataFrame object</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># ignores CSV header</span>
+</pre></div>
+</div>
+<p>You can now access the <code class="docutils literal"><span class="pre">person_salary</span></code> column values:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">data</span><span class="o">.</span><span class="n">person_salary</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span>
+<span class="mi">0</span>     <span class="mi">2694</span>
+<span class="mi">1</span>     <span class="mi">2720</span>
+<span class="mi">2</span>     <span class="mi">1865</span>
+<span class="mi">3</span>     <span class="mi">1941</span>
+<span class="mi">4</span>     <span class="mi">2393</span>
+<span class="mi">5</span>     <span class="mi">3008</span>
+<span class="mi">6</span>     <span class="mi">2286</span>
+<span class="mi">7</span>     <span class="mi">3386</span>
+<span class="mi">8</span>     <span class="mi">2929</span>
+<span class="mi">9</span>     <span class="mi">3981</span>
+<span class="mi">10</span>    <span class="mi">3643</span>
+<span class="mi">11</span>    <span class="mi">2078</span>
+<span class="n">Name</span><span class="p">:</span> <span class="n">person_salary</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">int64</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li>Build a simulation according to your data&#8217;s length:</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="kn">import</span> <span class="n">SimulationBuilder</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">simulation</span> <span class="o">=</span> <span class="n">SimulationBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">build_default_simulation</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li>Configure the simulation and calculate the <a class="reference external" href="https://demo.openfisca.org/legislation/income_tax">income_tax</a> variable for all persons on the same period:</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">numpy</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">period</span> <span class="o">=</span> <span class="s1">&#39;2018-01&#39;</span>
+
+<span class="c1"># match data from the &#39;person_salary&#39; column</span>
+<span class="c1"># with the &#39;salary&#39; variable of our yet to be country&#39;s tax-benefit system</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">person_salary</span><span class="p">))</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="n">income_tax</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;income_tax&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li>You are all set! The <code class="docutils literal"><span class="pre">income_tax</span></code> has been calculated for each person on your <code class="docutils literal"><span class="pre">data.csv</span></code> file.</li>
+</ol>
+<p>Persons&#8217; order is kept:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">data</span><span class="o">.</span><span class="n">person_id</span><span class="o">.</span><span class="n">values</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">array</span><span class="p">([</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>And <code class="docutils literal"><span class="pre">income_tax</span></code> is an instance of <code class="docutils literal"><span class="pre">numpy.ndarray</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">income_tax</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span>
+<span class="n">array</span><span class="p">([</span><span class="mf">404.1</span>    <span class="p">,</span> <span class="mf">408.00003</span><span class="p">,</span> <span class="mf">279.75</span>   <span class="p">,</span> <span class="mf">291.15002</span><span class="p">,</span> <span class="mf">358.95</span>   <span class="p">,</span> <span class="mf">451.2</span>    <span class="p">,</span>
+       <span class="mf">342.90002</span><span class="p">,</span> <span class="mf">507.90002</span><span class="p">,</span> <span class="mf">439.35</span>   <span class="p">,</span> <span class="mf">597.15</span>   <span class="p">,</span> <span class="mf">546.45</span>   <span class="p">,</span> <span class="mf">311.7</span>    <span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">income_tax</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># person_id == 3</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="mf">279.75</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="coding-the-legislation/bootstrapping_a_new_country_package.html" title="previous chapter (use the left arrow)">Bootstraping a new country package</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="openfisca-web-api/index.html" title="next chapter (use the right arrow)">OpenFisca Web API</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="openfisca-web-api/index.html" title="OpenFisca Web API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="coding-the-legislation/bootstrapping_a_new_country_package.html" title="Bootstraping a new country package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="summary.html">OpenFisca  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2018, contact@openfisca.org. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>
