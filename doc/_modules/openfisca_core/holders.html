@@ -202,19 +202,19 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">period</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Holder.get_array"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.get_array">[docs]</a>    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Holder.get_array"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.get_array">[docs]</a>    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Get the value of the variable for the given period (and possibly a list of extra parameters).</span>
+<span class="sd">            Get the value of the variable for the given period.</span>
 
 <span class="sd">            If the value is not known, return ``None``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">is_neutralized</span> <span class="ow">or</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">period</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">date</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">end</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">is_neutralized</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_array</span><span class="p">()</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span></div>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Holder.get_memory_usage"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.get_memory_usage">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -328,7 +328,7 @@
                     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">value</span>
 
-    <span class="k">def</span> <span class="nf">_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extra_params</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_array</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">!=</span> <span class="n">ETERNITY</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -355,16 +355,16 @@
 
         <span class="n">should_store_on_disk</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_on_disk_storable</span> <span class="ow">and</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span>  <span class="c1"># If there is already a value in memory, replace it and don&#39;t put a new value in the disk storage</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span>  <span class="c1"># If there is already a value in memory, replace it and don&#39;t put a new value in the disk storage</span>
             <span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">()</span><span class="o">.</span><span class="n">percent</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">memory_config</span><span class="o">.</span><span class="n">max_memory_occupation_pc</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">should_store_on_disk</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">put_in_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">put_in_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_not_store</span><span class="p">:</span>
             <span class="k">return</span>
 
@@ -373,7 +373,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">cache_blacklist</span><span class="p">):</span>
             <span class="k">return</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_set</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Holder.default_array"><a class="viewcode-back" href="../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.default_array">[docs]</a>    <span class="k">def</span> <span class="nf">default_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

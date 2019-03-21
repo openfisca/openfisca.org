@@ -260,10 +260,8 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_period_consistency</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span>
 
-        <span class="n">extra_params</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;extra_params&#39;</span><span class="p">,</span> <span class="p">())</span>
-
         <span class="c1"># First look for a value already cached</span>
-        <span class="n">cached_array</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span>
+        <span class="n">cached_array</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">cached_array</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_end</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">cached_array</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
@@ -274,11 +272,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">max_nb_cycles</span> <span class="o">=</span> <span class="n">max_nb_cycles</span>
 
         <span class="c1"># First, try to run a formula</span>
-        <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_formula</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">,</span> <span class="n">max_nb_cycles</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_formula</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">max_nb_cycles</span><span class="p">)</span>
 
         <span class="c1"># If no result, try a base function</span>
         <span class="k">if</span> <span class="n">array</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">variable</span><span class="o">.</span><span class="n">base_function</span><span class="p">:</span>
-            <span class="n">array</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">base_function</span><span class="p">(</span><span class="n">holder</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="o">*</span><span class="n">extra_params</span><span class="p">)</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">base_function</span><span class="p">(</span><span class="n">holder</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
         <span class="c1"># If no result, use the default value</span>
         <span class="k">if</span> <span class="n">array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -288,7 +286,7 @@
         <span class="k">if</span> <span class="n">max_nb_cycles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">max_nb_cycles</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="n">holder</span><span class="o">.</span><span class="n">put_in_cache</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">)</span>
+        <span class="n">holder</span><span class="o">.</span><span class="n">put_in_cache</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_end</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
 
@@ -361,7 +359,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_run_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span><span class="p">,</span> <span class="n">max_nb_cycles</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_run_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">max_nb_cycles</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Find the ``variable`` formula for the given ``period`` if it exists, and apply it to ``entity``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -380,12 +378,12 @@
             <span class="k">if</span> <span class="n">formula</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_argcount</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
                 <span class="n">array</span> <span class="o">=</span> <span class="n">formula</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">array</span> <span class="o">=</span> <span class="n">formula</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters_at</span><span class="p">,</span> <span class="o">*</span><span class="n">extra_params</span><span class="p">)</span>
+                <span class="n">array</span> <span class="o">=</span> <span class="n">formula</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters_at</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">CycleError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_clean_cycle_detection_data</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">max_nb_cycles</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_abortion</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">extra_params</span> <span class="o">=</span> <span class="n">extra_params</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_abortion</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
                 <span class="c1"># Re-raise until reaching the first variable called with max_nb_cycles != None in the stack.</span>
                 <span class="k">raise</span> <span class="n">error</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">max_nb_cycles</span> <span class="o">=</span> <span class="kc">None</span>
