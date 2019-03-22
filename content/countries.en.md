@@ -2,6 +2,7 @@
 title: "Available country packages"
 layout: countries
 
+bcn: "Barcelona"
 fr: "France"
 tn: "Tunisia"
 sn: "Senegal"
