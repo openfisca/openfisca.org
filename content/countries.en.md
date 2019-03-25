@@ -11,6 +11,7 @@ definition: "Country Packages are the basic modules of OpenFisca. They define th
 introduction: "Tax and benefit system models exist for the following countries:"
 sources_introduction: "See the source code of this project on"
 
+others_title: "Other packages"
 others: "Yours is missing?"
 explore: "Explore"
 modelize: "Start modeling!"
