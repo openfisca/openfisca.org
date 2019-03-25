@@ -4,6 +4,7 @@ layout: countries
 
 bcn: "Barcelona"
 fr: "France"
+it: "Italy"
 nz: "Aotearoa New Zealand"
 tn: "Tunisia"
 sn: "Senegal"
