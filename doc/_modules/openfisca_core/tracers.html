@@ -268,28 +268,6 @@
                 <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span></div>
 
-<div class="viewcode-block" id="Tracer.record_calculation_abortion"><a class="viewcode-back" href="../../openfisca-python-api/tracer.html#openfisca_core.tracers.Tracer.record_calculation_abortion">[docs]</a>    <span class="k">def</span> <span class="nf">record_calculation_abortion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Record that OpenFisca aborted computing a variable. This removes all trace of this computation.</span>
-
-<span class="sd">            :param str variable_name: Name of the variable starting to be computed</span>
-<span class="sd">            :param Period period: Period for which the variable is being computed</span>
-<span class="sd">            :param list parameters: Parameter with which the variable is being computed</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_key</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
-        <span class="n">expected_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="o">==</span> <span class="n">expected_key</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Something went wrong with the simulation tracer: calculation of &#39;</span><span class="si">{1}</span><span class="s2">&#39; was aborted, whereas the last variable we started computing was &#39;</span><span class="si">{0}</span><span class="s2">&#39;.&quot;</span>
-                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expected_key</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-                <span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">:</span>
-            <span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">[</span><span class="n">parent</span><span class="p">][</span><span class="s1">&#39;dependencies&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
-
     <span class="k">def</span> <span class="nf">_get_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aggregates</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aggregates</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
