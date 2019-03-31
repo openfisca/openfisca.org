@@ -137,7 +137,6 @@
 <span class="kn">import</span> <span class="nn">nose</span>
 
 <span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="k">import</span> <span class="n">assert_near</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">to_unicode</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="k">import</span> <span class="n">SimulationBuilder</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">SituationParsingError</span><span class="p">,</span> <span class="n">VariableNotFound</span>
 
@@ -238,8 +237,6 @@
 <span class="k">def</span> <span class="nf">_generate_tests_from_file</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">path_to_file</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">name_filter</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name_filter&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_filter</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">name_filter</span> <span class="o">=</span> <span class="n">to_unicode</span><span class="p">(</span><span class="n">name_filter</span><span class="p">)</span>
     <span class="n">verbose</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">)</span>
 
     <span class="n">tests</span> <span class="o">=</span> <span class="n">_parse_test_file</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">path_to_file</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
