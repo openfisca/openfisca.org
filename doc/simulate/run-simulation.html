@@ -268,7 +268,7 @@ This data could come from a survey with aggregated data, data files extracted fr
 </li>
 <li><p class="first">the period and entity for every set of values</p>
 <blockquote>
-<div><p><code class="docutils literal"><span class="pre">person_salary</span></code> and <code class="docutils literal"><span class="pre">age</span></code> belong to <em>Person</em> entitythe definition period isn&#8217;t in the CSV file but it might, for example, come from the CSV creation time and be identical for the whole data set.</p>
+<div><p><code class="docutils literal"><span class="pre">person_salary</span></code> and <code class="docutils literal"><span class="pre">age</span></code> belong to <em>Person</em> entitythe reference period isn&#8217;t in the CSV file but it might, for example, come from the CSV creation time and be identical for the whole data set.</p>
 </div></blockquote>
 </li>
 </ul>
@@ -373,6 +373,190 @@ $ ipython
 </pre></div>
 </div>
 </div>
+</div>
+</div>
+<div class="section" id="replicating-a-situation-along-axes">
+<span id="replicating-a-situation-along-axes"></span><h2>Replicating a situation along axes<a class="headerlink" href="#replicating-a-situation-along-axes" title="Permalink to this headline">¶</a></h2>
+<p>So far we&#8217;ve seen two ways of populating a Simulation object with data:</p>
+<ul class="simple">
+<li>either describe a small population with fine control over input variables and over the relationship between individuals and group entities;</li>
+<li>or provide inputs in bulk, typically using tabular data (CSV, Excel, etc.)</li>
+</ul>
+<p>A third possibility exists: you can set up a small-scale situation, as in test cases; and use it to generate a number of &#8220;copies&#8221; of this situation, in which one or more variables of your choice take on a range of values.</p>
+<p>We do this by adding an &#8220;axes&#8221; entry to a test case:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">WITH_AXES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;h1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;h2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+        <span class="p">},</span>
+    <span class="s1">&#39;axes&#39;</span><span class="p">:</span> <span class="p">[[{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">3000</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span><span class="s1">&#39;2018-11&#39;</span><span class="p">}]]</span>
+    <span class="p">}</span>
+
+<span class="n">simulation_builder</span> <span class="o">=</span> <span class="n">SimulationBuilder</span><span class="p">()</span>
+<span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation_builder</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">WITH_AXES</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Be careful to note the structure of the &#8220;axes&#8221; field: an <strong>array of arrays</strong> of axis objects. We will come back to this, but for now let&#8217;s investigate the effects of adding this single axis.</p>
+<p>As before, <code class="docutils literal"><span class="pre">BASIC_TEST_CASE</span></code> describes one household with two parents and one child, and a second household which is in fact a single adult person. However, the specification of an axis results in something quite different now:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">))</span>
+<span class="go">40</span>
+</pre></div>
+</div>
+<p>We started with a &#8220;prototype&#8221; situation containing 4 individuals, and we specified an axis which replicates this situation 10 times. And so, as expected, we end up with a simulation containing 4 times 10 individuals.</p>
+<p>What happened with respect to the data? It&#8217;s easier to represent if we first &#8220;reshape&#8221; the computed data to reflect this structure of 10 groups of 4 individuals:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">),(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">array([[   0.     ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [ 333.33334,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [ 666.6667 ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [1000.     ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [1333.3334 ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [1666.6666 ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [2000.     ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [2333.3333 ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [2666.6667 ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [3000.     ,    0.     ,    0.     ,    0.     ]], dtype=float32)</span>
+</pre></div>
+</div>
+<p>We can see that, for the requested period, the variable <code class="docutils literal"><span class="pre">salary</span></code> <strong>of the first individual in each group</strong> is varying in increments from 0 to 3000.</p>
+<div class="section" id="targeting-individuals">
+<span id="targeting-individuals"></span><h3>Targeting individuals<a class="headerlink" href="#targeting-individuals" title="Permalink to this headline">¶</a></h3>
+<p>The control provided by an axis is fine-grained and targets one individual. If you wanted to set Javier&#8217;s salary instead of Ari&#8217;s, you could do so by providing the <em>index</em> of Javier in the original situation; since our indices are 0-based, this is 3:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">WITH_AXES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;h1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;h2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+        <span class="p">},</span>
+    <span class="s1">&#39;axes&#39;</span><span class="p">:</span> <span class="p">[[{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">3000</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span><span class="s1">&#39;2018-11&#39;</span><span class="p">}]]</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>And the result is now:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">),(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">array([[   0.     ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [   0.     ,    0.     ,    0.     ,  333.33334],</span>
+<span class="go">       [   0.     ,    0.     ,    0.     ,  666.6667 ],</span>
+<span class="go">       [   0.     ,    0.     ,    0.     , 1000.     ],</span>
+<span class="go">       [   0.     ,    0.     ,    0.     , 1333.3334 ],</span>
+<span class="go">       [   0.     ,    0.     ,    0.     , 1666.6666 ],</span>
+<span class="go">       [   0.     ,    0.     ,    0.     , 2000.     ],</span>
+<span class="go">       [   0.     ,    0.     ,    0.     , 2333.3333 ],</span>
+<span class="go">       [   0.     ,    0.     ,    0.     , 2666.6667 ],</span>
+<span class="go">       [   0.     ,    0.     ,    0.     , 3000.     ]], dtype=float32)</span>
+</pre></div>
+</div>
+<p>Axes are particularly interesting when you want to chart how one variable relates to another, as in <a class="reference external" href="https://mybinder.org/v2/gh/openfisca/tutorial/master?filepath=notebooks/how_to_handle_axes.ipynb">this tutorial notebook</a>.</p>
+</div>
+<div class="section" id="adding-axes-parallel-axes">
+<span id="adding-axes-parallel-axes"></span><h3>Adding axes: parallel axes<a class="headerlink" href="#adding-axes-parallel-axes" title="Permalink to this headline">¶</a></h3>
+<p>We noted above that the &#8220;axes&#8221; are in fact an array of arrays, which allows us to use several axes at once&nbsp;: parallel <strong>or</strong> perpendicular axes.</p>
+<p>Sets of axes in the inner array are &#8220;parallel&#8221;. They allow additional variables to be generated in increments. For instance (again take careful note of the position of the square brackets):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">WITH_PARALLEL_AXES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;h1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;h2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+        <span class="p">},</span>
+    <span class="s1">&#39;axes&#39;</span><span class="p">:</span> <span class="p">[[</span>
+        <span class="p">{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">78</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span><span class="s1">&#39;2018-11&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">3000</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span><span class="s1">&#39;2018-11&#39;</span><span class="p">}</span>
+    <span class="p">]]</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>The result should be as follows, with both age and salary changing in lockstep:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">simulation_builder</span> <span class="o">=</span> <span class="n">SimulationBuilder</span><span class="p">()</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation_builder</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">WITH_PARALLEL_AXES</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">),(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">array([[18,  0,  0,  0],</span>
+<span class="go">       [24,  0,  0,  0],</span>
+<span class="go">       [31,  0,  0,  0],</span>
+<span class="go">       [38,  0,  0,  0],</span>
+<span class="go">       [44,  0,  0,  0],</span>
+<span class="go">       [51,  0,  0,  0],</span>
+<span class="go">       [58,  0,  0,  0],</span>
+<span class="go">       [64,  0,  0,  0],</span>
+<span class="go">       [71,  0,  0,  0],</span>
+<span class="go">       [78,  0,  0,  0]], dtype=int32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">),(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">array([[   0.     ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [ 333.33334,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [ 666.6667 ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [1000.     ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [1333.3334 ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [1666.6666 ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [2000.     ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [2333.3333 ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [2666.6667 ,    0.     ,    0.     ,    0.     ],</span>
+<span class="go">       [3000.     ,    0.     ,    0.     ,    0.     ]], dtype=float32)</span>
+</pre></div>
+</div>
+<p>For this to work, the <code class="docutils literal"><span class="pre">count</span></code> values of parallel axes must be the same. An error will be raised if they are different.</p>
+</div>
+<div class="section" id="adding-axes-perpendicular-axes">
+<span id="adding-axes-perpendicular-axes"></span><h3>Adding axes: perpendicular axes<a class="headerlink" href="#adding-axes-perpendicular-axes" title="Permalink to this headline">¶</a></h3>
+<p>Sets of axes in the outer array are &#8220;perpendicular&#8221;, that is, they result in independent variation. For instance, we might have:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">WITH_PERPENDICULAR_AXES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;h1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;h2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+        <span class="p">},</span>
+    <span class="s1">&#39;axes&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">78</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span><span class="s1">&#39;2018-11&#39;</span><span class="p">}],</span>
+        <span class="p">[{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">3000</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span><span class="s1">&#39;2018-11&#39;</span><span class="p">}]</span>
+    <span class="p">]</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>Note the difference in nesting: we no longer have an inner set of two axes, but two sets of one axis each. The result is more complex:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">simulation_builder</span> <span class="o">=</span> <span class="n">SimulationBuilder</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation_builder</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">WITH_PERPENDICULAR_AXES</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">))</span>
+<span class="go">64</span>
+</pre></div>
+</div>
+<p>Why? Because we are varying <code class="docutils literal"><span class="pre">age</span></code> and <code class="docutils literal"><span class="pre">salary</span></code> independently, and each axis results in multiplying by 4 our original population of 4, resulting in 4 times 4 times 4 individuals, which is indeed 64.</p>
+<p>What does the data look like?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">),(</span><span class="mi">16</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">array([[   0.,    0.,    0.,    0.],</span>
+<span class="go">       [   0.,    0.,    0.,    0.],</span>
+<span class="go">       [   0.,    0.,    0.,    0.],</span>
+<span class="go">       [   0.,    0.,    0.,    0.],</span>
+<span class="go">       [1000.,    0.,    0.,    0.],</span>
+<span class="go">       [1000.,    0.,    0.,    0.],</span>
+<span class="go">       [1000.,    0.,    0.,    0.],</span>
+<span class="go">       [1000.,    0.,    0.,    0.],</span>
+<span class="go">       [2000.,    0.,    0.,    0.],</span>
+<span class="go">       [2000.,    0.,    0.,    0.],</span>
+<span class="go">       [2000.,    0.,    0.,    0.],</span>
+<span class="go">       [2000.,    0.,    0.,    0.],</span>
+<span class="go">       [3000.,    0.,    0.,    0.],</span>
+<span class="go">       [3000.,    0.,    0.,    0.],</span>
+<span class="go">       [3000.,    0.,    0.,    0.],</span>
+<span class="go">       [3000.,    0.,    0.,    0.]], dtype=float32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">),(</span><span class="mi">16</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">array([[18,  0,  0,  0],</span>
+<span class="go">       [38,  0,  0,  0],</span>
+<span class="go">       [58,  0,  0,  0],</span>
+<span class="go">       [78,  0,  0,  0],</span>
+<span class="go">       [18,  0,  0,  0],</span>
+<span class="go">       [38,  0,  0,  0],</span>
+<span class="go">       [58,  0,  0,  0],</span>
+<span class="go">       [78,  0,  0,  0],</span>
+<span class="go">       [18,  0,  0,  0],</span>
+<span class="go">       [38,  0,  0,  0],</span>
+<span class="go">       [58,  0,  0,  0],</span>
+<span class="go">       [78,  0,  0,  0],</span>
+<span class="go">       [18,  0,  0,  0],</span>
+<span class="go">       [38,  0,  0,  0],</span>
+<span class="go">       [58,  0,  0,  0],</span>
+<span class="go">       [78,  0,  0,  0]], dtype=int32)</span>
+</pre></div>
+</div>
+<p>We can see that both the <code class="docutils literal"><span class="pre">age</span></code> and the <code class="docutils literal"><span class="pre">salary</span></code> variables vary by increments, so that <strong>all combinations are present</strong>: for each <code class="docutils literal"><span class="pre">age</span></code> increment, there exists a variant with each <code class="docutils literal"><span class="pre">salary</span></code> increment.</p>
+<p>This allows us to use OpenFisca for <code class="docutils literal"><span class="pre">multivariate</span> <span class="pre">observation</span></code>: charting how two variables interact to control a third, as in <a class="reference external" href="https://mybinder.org/v2/gh/adrienpacifico/adrienpacifico.github.io/master?filepath=Notebooks/plotly_openfisca_cohabitants.ipynb">this example</a>.</p>
 </div>
 </div>
 </div>
