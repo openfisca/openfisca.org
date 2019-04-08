@@ -229,8 +229,8 @@
 </div>
 <div class="section" id="advanced-uses">
 <span id="advanced-uses"></span><h3>Advanced uses<a class="headerlink" href="#advanced-uses" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="use-a-yaml-files-to-define-nodes">
-<span id="use-a-yaml-files-to-define-nodes"></span><h4>Use a YAML files to define nodes<a class="headerlink" href="#use-a-yaml-files-to-define-nodes" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="defining-parameter-nodes-in-a-yaml-file">
+<span id="defining-parameter-nodes-in-a-yaml-file"></span><h4>Defining parameter nodes in a YAML file<a class="headerlink" href="#defining-parameter-nodes-in-a-yaml-file" title="Permalink to this headline">¶</a></h4>
 <p>A node can be defined with a YAML file instead of a directory. In such a case, the name of the file defines the name of the node. Such a file can define children nodes (which can define grandchildren...).</p>
 <p>Sample <code class="docutils literal"><span class="pre">parameters/tax_on_salary.yaml</span></code>:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Tax on salaries</span>
@@ -246,42 +246,63 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="create-scales">
-<span id="create-scales"></span><h4>Create Scales<a class="headerlink" href="#create-scales" title="Permalink to this headline">¶</a></h4>
-<p>Scales are constituted of brackets. Brackets are defined by amounts, bases, rates, average rates and thresholds.</p>
-<p>Sample <code class="docutils literal"><span class="pre">parameters/tax_on_salary/tax_scale.yaml</span></code>:</p>
+<div class="section" id="creating-scales">
+<span id="creating-scales"></span><h4>Creating scales<a class="headerlink" href="#creating-scales" title="Permalink to this headline">¶</a></h4>
+<p>Scales are complex parameters constituted of brackets. They offer convenient built-in tools for recurring calculation patterns.</p>
+<p>For instance, a marginal rate test scale can be defined in a YAML file with:</p>
+<p>File <code class="docutils literal"><span class="pre">parameters/tax_on_salary/tax_scale.yaml</span></code></p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Scale for tax on salaries</span>
 <span class="nt">brackets</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="nt">rate</span><span class="p">:</span>
-    <span class="nt">1950-01-01</span><span class="p">:</span>
-      <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>
-    <span class="nt">2010-01-01</span><span class="p">:</span>
-      <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.02</span>
-  <span class="nt">threshold</span><span class="p">:</span>
-    <span class="nt">1950-01-01</span><span class="p">:</span>
-      <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="p p-Indicator">-</span> <span class="nt">rate</span><span class="p">:</span>
-    <span class="nt">1950-01-01</span><span class="p">:</span>
-      <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.2</span>
-  <span class="nt">threshold</span><span class="p">:</span>
-    <span class="nt">1950-01-01</span><span class="p">:</span>
-      <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2000</span>
+  <span class="p p-Indicator">-</span> <span class="nt">rate</span><span class="p">:</span> <span class="c1"># Define a 1st bracket</span>
+      <span class="nt">1950-01-01</span><span class="p">:</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>  <span class="c1"># The rate applied to the first bracket was 0% from 1950 to 2009</span>
+      <span class="nt">2010-01-01</span><span class="p">:</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.02</span>  <span class="c1"># The rate applied to the first bracket has changed to 2% in 2010</span>
+    <span class="nt">threshold</span><span class="p">:</span>
+      <span class="nt">1950-01-01</span><span class="p">:</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>
+  <span class="p p-Indicator">-</span> <span class="nt">rate</span><span class="p">:</span> <span class="c1"># Define a 2nd bracket</span>
+      <span class="nt">1950-01-01</span><span class="p">:</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.2</span>  <span class="c1"># The rate applied to the second bracket has been 20% since 1950</span>
+    <span class="nt">threshold</span><span class="p">:</span>
+      <span class="nt">1950-01-01</span><span class="p">:</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2000</span>  <span class="c1"># The 2nd bracket starts for wages beyond 2000</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">marginal_rate</span>
+  <span class="nt">threshold_unit</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">currency-EUR</span>
+  <span class="nt">rate_unit</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/1</span>
 </pre></div>
 </div>
+<p>It can then be used in a formula with:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">tax_on_salary</span><span class="o">.</span><span class="n">tax_scale</span>
+    <span class="k">return</span> <span class="n">scale</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal"><span class="pre">salary</span></code> is <code class="docutils literal"><span class="pre">3000</span></code> and period is <code class="docutils literal"><span class="pre">2015-06</span></code>, the output of the formula will be <code class="docutils literal"><span class="pre">2000</span> <span class="pre">*</span> <span class="pre">0.02</span> <span class="pre">+</span> <span class="pre">1000</span> <span class="pre">*</span> <span class="pre">0.2</span></code></p>
+<p>The scales built-in OpenFisca are:</p>
+<ul class="simple">
+<li>Marginal rate scale:<ul>
+<li>Split the input into several brackets according the thresholds, and apply the corresponding rate to each bracket</li>
+<li>See previous example</li>
+</ul>
+</li>
+<li>Marginal amount tax scale:<ul>
+<li>Matches the input amount to a set of brackets and returns the sum of cell values from the lowest bracket to the one containing the input</li>
+<li>Defined as in the previous YAML example, but replacing <code class="docutils literal"><span class="pre">rate</span></code> by <code class="docutils literal"><span class="pre">amount</span></code>, and setting <code class="docutils literal"><span class="pre">type</span></code> to <code class="docutils literal"><span class="pre">marginal_amount</span></code> to the parameter&#8217;s metadata</li>
+</ul>
+</li>
+<li>Single amount tax scale:<ul>
+<li>Matches the input amount to a set of brackets and returns the single cell value that fits within that bracket</li>
+<li>Defined as in the previous YAML example, but replacing <code class="docutils literal"><span class="pre">rate</span></code> by <code class="docutils literal"><span class="pre">amount</span></code>, and setting <code class="docutils literal"><span class="pre">type</span></code> to <code class="docutils literal"><span class="pre">single_amount</span></code> to the parameter&#8217;s metadata</li>
+</ul>
+</li>
+</ul>
 <p>Example: <a class="reference external" href="https://fr.openfisca.org/legislation/impot_revenu.bareme">the french tax scale on income</a></p>
 </div>
-<div class="section" id="import-parameters-from-ipp-tables">
-<span id="import-parameters-from-ipp-tables"></span><h4>Import parameters from IPP tables<a class="headerlink" href="#import-parameters-from-ipp-tables" title="Permalink to this headline">¶</a></h4>
-<blockquote>
-<div>This section applies only to OpenFisca-France.</div></blockquote>
-<p>The <a class="reference external" href="http://www.ipp.eu/"><abbr title="Institut des politiques publiques">IPP</abbr></a> is a French centre in economics which produces tax and benefit tables in the <code class="docutils literal"><span class="pre">XLSX</span></code> format, with parameters history.</p>
-<p>The OpenFisca team works on importing those data into the YAML parameter files of OpenFisca-France.</p>
-<p>See <a class="reference external" href="https://github.com/openfisca/openfisca-france/tree/master/openfisca_france/scripts/parameters/baremes_ipp">this README</a> for more information.</p>
-</div>
-</div>
-</div>
 <div class="section" id="computing-a-parameter-that-depends-on-a-variable-fancy-indexing">
-<span id="computing-a-parameter-that-depends-on-a-variable-fancy-indexing"></span><h2>Computing a parameter that depends on a variable (fancy indexing)<a class="headerlink" href="#computing-a-parameter-that-depends-on-a-variable-fancy-indexing" title="Permalink to this headline">¶</a></h2>
+<span id="computing-a-parameter-that-depends-on-a-variable-fancy-indexing"></span><h4>Computing a parameter that depends on a variable (fancy indexing)<a class="headerlink" href="#computing-a-parameter-that-depends-on-a-variable-fancy-indexing" title="Permalink to this headline">¶</a></h4>
 <p>Sometimes, the value of a parameter depends on a variable (e.g. a housing benefit that depends on the zone the house is built on).</p>
 <p>To be more specific, let&#8217;s assume that:</p>
 <ul class="simple">
@@ -390,6 +411,8 @@
 </pre></div>
 </div>
 <p>And then to get <code class="docutils literal"><span class="pre">parameters(period).housing_benefit.amount_by_zone[zone]</span></code></p>
+</div>
+</div>
 </div>
 <div class="section" id="how-to-navigate-the-parameters-in-python">
 <span id="how-to-navigate-the-parameters-in-python"></span><h2>How to navigate the parameters in Python<a class="headerlink" href="#how-to-navigate-the-parameters-in-python" title="Permalink to this headline">¶</a></h2>
