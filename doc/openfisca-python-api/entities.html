@@ -146,148 +146,19 @@
 <h1>Entities<a class="headerlink" href="#entities" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="openfisca_core.entities.Entity">
-<em class="property">class </em><code class="descclassname">openfisca_core.entities.</code><code class="descname">Entity</code><span class="sig-paren">(</span><em>simulation</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#Entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.Entity" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">openfisca_core.entities.</code><code class="descname">Entity</code><span class="sig-paren">(</span><em>key</em>, <em>plural</em>, <em>label</em>, <em>doc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#Entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.Entity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an entity (e.g. a person, a household, etc.) on which calculations can be run.</p>
-<dl class="method">
+<dl class="attribute">
 <dt id="openfisca_core.entities.Entity.__call__">
-<code class="descname">__call__</code><span class="sig-paren">(</span><em>variable_name</em>, <em>period=None</em>, <em>options=None</em>, <em>**parameters</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#Entity.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.Entity.__call__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the variable <code class="docutils literal"><span class="pre">variable_name</span></code> for the entity and the period <code class="docutils literal"><span class="pre">period</span></code>, using the variable formula if it exists.</p>
-<p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2017-04&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="mf">300.</span><span class="p">])</span>
-</pre></div>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A numpy array containing the result of the calculation</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="openfisca_core.entities.PersonEntity">
-<em class="property">class </em><code class="descclassname">openfisca_core.entities.</code><code class="descname">PersonEntity</code><span class="sig-paren">(</span><em>simulation</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#PersonEntity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.PersonEntity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Represents a person on which calculations are run.</p>
-<dl class="method">
-<dt id="openfisca_core.entities.PersonEntity.get_rank">
-<code class="descname">get_rank</code><span class="sig-paren">(</span><em>entity</em>, <em>criteria</em>, <em>condition=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#PersonEntity.get_rank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.PersonEntity.get_rank" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the rank of a person within an entity according to a criteria.
-The person with rank 0 has the minimum value of criteria.
-If condition is specified, then the persons who don&#8217;t respect it are not taken into account and their rank is -1.</p>
-<p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">age</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>  <span class="c1"># e.g [32, 34, 2, 8, 1]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">get_rank</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_child</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">CHILD</span><span class="p">)</span>  <span class="c1"># [False, False, True, True, True]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">get_rank</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="o">-</span> <span class="n">age</span><span class="p">,</span> <span class="n">condition</span> <span class="o">=</span> <span class="n">is_child</span><span class="p">)</span>  <span class="c1"># Sort in reverse order so that the eldest child gets the rank 0.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="openfisca_core.entities.PersonEntity.has_role">
-<code class="descname">has_role</code><span class="sig-paren">(</span><em>role</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#PersonEntity.has_role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.PersonEntity.has_role" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if a person has a given role within its <a class="reference internal" href="#openfisca_core.entities.GroupEntity" title="openfisca_core.entities.GroupEntity"><code class="xref any py py-class docutils literal"><span class="pre">GroupEntity</span></code></a></p>
-<p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">CHILD</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="kc">False</span><span class="p">])</span>
-</pre></div>
-</div>
-</dd></dl>
+<code class="descname">__call__</code><em class="property"> = &lt;method-wrapper '__call__' of type object&gt;</em><a class="headerlink" href="#openfisca_core.entities.Entity.__call__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="openfisca_core.entities.GroupEntity">
-<em class="property">class </em><code class="descclassname">openfisca_core.entities.</code><code class="descname">GroupEntity</code><span class="sig-paren">(</span><em>simulation</em>, <em>persons=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#GroupEntity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">openfisca_core.entities.</code><code class="descname">GroupEntity</code><span class="sig-paren">(</span><em>key</em>, <em>plural</em>, <em>label</em>, <em>doc</em>, <em>roles</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#GroupEntity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an entity composed of several persons with different roles, on which calculations are run.</p>
-<dl class="method">
-<dt id="openfisca_core.entities.GroupEntity.all">
-<code class="descname">all</code><span class="sig-paren">(</span><em>array</em>, <em>role=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#GroupEntity.all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity.all" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if <code class="docutils literal"><span class="pre">array</span></code> is <code class="docutils literal"><span class="pre">True</span></code> for all members of the entity.</p>
-<p><code class="docutils literal"><span class="pre">array</span></code> must have the dimension of the number of persons in the simulation</p>
-<p>If <code class="docutils literal"><span class="pre">role</span></code> is provided, only the entity member with the given role are taken into account.</p>
-<p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-01&#39;</span><span class="p">)</span>  <span class="c1"># e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">salaries</span> <span class="o">&gt;=</span> <span class="mi">1800</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="kc">False</span><span class="p">])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="openfisca_core.entities.GroupEntity.any">
-<code class="descname">any</code><span class="sig-paren">(</span><em>array</em>, <em>role=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#GroupEntity.any"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity.any" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if <code class="docutils literal"><span class="pre">array</span></code> is <code class="docutils literal"><span class="pre">True</span></code> for any members of the entity.</p>
-<p><code class="docutils literal"><span class="pre">array</span></code> must have the dimension of the number of persons in the simulation</p>
-<p>If <code class="docutils literal"><span class="pre">role</span></code> is provided, only the entity member with the given role are taken into account.</p>
-<p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-01&#39;</span><span class="p">)</span>  <span class="c1"># e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">salaries</span> <span class="o">&gt;=</span> <span class="mi">1800</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="openfisca_core.entities.GroupEntity.max">
-<code class="descname">max</code><span class="sig-paren">(</span><em>array</em>, <em>role=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#GroupEntity.max"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity.max" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the maximum value of <code class="docutils literal"><span class="pre">array</span></code> for the entity members.</p>
-<p><code class="docutils literal"><span class="pre">array</span></code> must have the dimension of the number of persons in the simulation</p>
-<p>If <code class="docutils literal"><span class="pre">role</span></code> is provided, only the entity member with the given role are taken into account.</p>
-<p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-01&#39;</span><span class="p">)</span>  <span class="c1"># e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">salaries</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="mi">2000</span><span class="p">])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="openfisca_core.entities.GroupEntity.min">
-<code class="descname">min</code><span class="sig-paren">(</span><em>array</em>, <em>role=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#GroupEntity.min"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity.min" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the minimum value of <code class="docutils literal"><span class="pre">array</span></code> for the entity members.</p>
-<p><code class="docutils literal"><span class="pre">array</span></code> must have the dimension of the number of persons in the simulation</p>
-<p>If <code class="docutils literal"><span class="pre">role</span></code> is provided, only the entity member with the given role are taken into account.</p>
-<p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-01&#39;</span><span class="p">)</span>  <span class="c1"># e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">salaries</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">salaries</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">Household</span><span class="o">.</span><span class="n">PARENT</span><span class="p">)</span>  <span class="c1"># Assuming the 1st two persons are parents</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="mi">1500</span><span class="p">])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="openfisca_core.entities.GroupEntity.nb_persons">
-<code class="descname">nb_persons</code><span class="sig-paren">(</span><em>role=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#GroupEntity.nb_persons"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity.nb_persons" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the number of persons contained in the entity.</p>
-<p>If <code class="docutils literal"><span class="pre">role</span></code> is provided, only the entity member with the given role are taken into account.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="openfisca_core.entities.GroupEntity.sum">
-<code class="descname">sum</code><span class="sig-paren">(</span><em>array</em>, <em>role=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities.html#GroupEntity.sum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity.sum" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the sum of <code class="docutils literal"><span class="pre">array</span></code> for the members of the entity.</p>
-<p><code class="docutils literal"><span class="pre">array</span></code> must have the dimension of the number of persons in the simulation</p>
-<p>If <code class="docutils literal"><span class="pre">role</span></code> is provided, only the entity member with the given role are taken into account.</p>
-<p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-01&#39;</span><span class="p">)</span>  <span class="c1"># e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">salaries</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="mi">3500</span><span class="p">])</span>
-</pre></div>
-</div>
-</dd></dl>
-
 </dd></dl>
 
 </div>

@@ -121,25 +121,14 @@
   <h1>Source code for openfisca_core.entities</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">import</span> <span class="nn">traceback</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">textwrap</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">linesep</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Iterable</span>
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">EnumArray</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.holders</span> <span class="k">import</span> <span class="n">Holder</span>
-
-<span class="n">ADD</span> <span class="o">=</span> <span class="s1">&#39;add&#39;</span>
-<span class="n">DIVIDE</span> <span class="o">=</span> <span class="s1">&#39;divide&#39;</span>
 
 
 <span class="k">class</span> <span class="nc">Role</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">entity_class</span> <span class="o">=</span> <span class="n">entity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="n">entity</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plural</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;plural&#39;</span><span class="p">)</span>
@@ -155,645 +144,65 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Represents an entity (e.g. a person, a household, etc.) on which calculations can be run.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">key</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">plural</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">doc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">is_person</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plural</span> <span class="o">=</span> <span class="n">plural</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_person</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tax_benefit_system</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_holders</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_simulation</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Returns an entity instance with the same structure, but no variable value set.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">new_simulation</span><span class="p">)</span>
-        <span class="n">new_dict</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="vm">__dict__</span>
-
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;_holders&#39;</span><span class="p">:</span>
-                <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-                    <span class="n">name</span><span class="p">:</span> <span class="n">holder</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">holder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_holders</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-                    <span class="p">}</span>
-            <span class="k">elif</span> <span class="n">key</span> <span class="o">!=</span> <span class="s1">&#39;simulation&#39;</span><span class="p">:</span>
-                <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-
-        <span class="k">return</span> <span class="n">new</span>
-
-    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
-        <span class="n">projector</span> <span class="o">=</span> <span class="n">get_projector_from_shortcut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">projector</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Entity </span><span class="si">{}</span><span class="s2"> has no attribute </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">attribute</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">projector</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;isPersonsEntity&#39;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">is_person</span><span class="p">,</span>
-            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
-            <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
-            <span class="s1">&#39;plural&#39;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">plural</span><span class="p">,</span>
-            <span class="s1">&#39;doc&#39;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">doc</span><span class="p">,</span>
-            <span class="s1">&#39;roles&#39;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">roles_description</span><span class="p">,</span>
-            <span class="p">}</span>
-
-    <span class="c1"># Calculations</span>
-
-    <span class="k">def</span> <span class="nf">check_variable_defined_for_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">):</span>
-        <span class="n">variable_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">entity</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_entity</span><span class="p">):</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                <span class="s2">&quot;You tried to compute the variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; for the entity &#39;</span><span class="si">{1}</span><span class="s2">&#39;;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">),</span>
-                <span class="s2">&quot;however the variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; is defined for &#39;</span><span class="si">{1}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">variable_entity</span><span class="o">.</span><span class="n">plural</span><span class="p">),</span>
-                <span class="s2">&quot;Learn more about entities in our documentation:&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;&lt;https://openfisca.org/doc/coding-the-legislation/50_entities.html&gt;.&quot;</span><span class="p">])</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">check_array_compatible_with_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="n">array</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input </span><span class="si">{}</span><span class="s2"> is not a valid value for the entity </span><span class="si">{}</span><span class="s2"> (size = </span><span class="si">{}</span><span class="s2"> != </span><span class="si">{}</span><span class="s2"> = count)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">array</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_tax_benefit_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span>
 
     <span class="k">def</span> <span class="nf">check_role_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="o">==</span> <span class="n">Role</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is not a valid role&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">role</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">check_period_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">stack</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">extract_stack</span><span class="p">()</span>
-            <span class="n">filename</span><span class="p">,</span> <span class="n">line_number</span><span class="p">,</span> <span class="n">function_name</span><span class="p">,</span> <span class="n">line_of_code</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">You requested computation of variable &quot;</span><span class="si">{}</span><span class="s1">&quot;, but you did not specify on which period in &quot;</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">&quot;:</span>
-<span class="s1">    </span><span class="si">{}</span><span class="s1"></span>
-<span class="s1">When you request the computation of a variable within a formula, you must always specify the period as the second parameter. The convention is to call this parameter &quot;period&quot;. For example:</span>
-<span class="s1">    computed_salary = person(&#39;salary&#39;, period).</span>
-<span class="s1">See more information at &lt;https://openfisca.org/doc/coding-the-legislation/35_periods.html#periods-in-variable-definition&gt;.</span>
-<span class="s1">&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">line_number</span><span class="p">,</span> <span class="n">line_of_code</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-
-<div class="viewcode-block" id="Entity.__call__"><a class="viewcode-back" href="../../openfisca-python-api/entities.html#openfisca_core.entities.Entity.__call__">[docs]</a>    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Calculate the variable ``variable_name`` for the entity and the period ``period``, using the variable formula if it exists.</span>
-
-<span class="sd">            Example:</span>
-
-<span class="sd">            &gt;&gt;&gt; person(&#39;salary&#39;, &#39;2017-04&#39;)</span>
-<span class="sd">            &gt;&gt;&gt; array([300.])</span>
-
-<span class="sd">            :returns: A numpy array containing the result of the calculation</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_period_validity</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">options</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">if</span> <span class="n">ADD</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">DIVIDE</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Options ADD and DIVIDE are incompatible (trying to compute variable </span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">ADD</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate_add</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">DIVIDE</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate_divide</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span></div>
-
-    <span class="c1"># Helpers</span>
-
-    <span class="k">def</span> <span class="nf">empty_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">filled_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>  <span class="c1"># Avoid a non-relevant warning</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">get_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_holder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-        <span class="n">holder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_holders</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">holder</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">holder</span>
-        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_holders</span><span class="p">[</span><span class="n">variable_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">holder</span> <span class="o">=</span> <span class="n">Holder</span><span class="p">(</span>
-            <span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="p">,</span>
-            <span class="n">variable</span> <span class="o">=</span> <span class="n">variable</span><span class="p">,</span>
-            <span class="p">)</span>
-        <span class="k">return</span> <span class="n">holder</span>
-
-    <span class="k">def</span> <span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="n">holders_memory_usage</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">variable_name</span><span class="p">:</span> <span class="n">holder</span><span class="o">.</span><span class="n">get_memory_usage</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">holder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_holders</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">variables</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">variable_name</span> <span class="ow">in</span> <span class="n">variables</span>
-            <span class="p">}</span>
-
-        <span class="n">total_memory_usage</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
-            <span class="n">holder_memory_usage</span><span class="p">[</span><span class="s1">&#39;total_nb_bytes&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">holder_memory_usage</span> <span class="ow">in</span> <span class="n">holders_memory_usage</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-            <span class="p">)</span>
-
-        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
-            <span class="n">total_nb_bytes</span> <span class="o">=</span> <span class="n">total_memory_usage</span><span class="p">,</span>
-            <span class="n">by_variable</span> <span class="o">=</span> <span class="n">holders_memory_usage</span>
-            <span class="p">)</span></div>
-
-
-<span class="k">def</span> <span class="nf">projectable</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decorator to indicate that when called on a projector, the outcome of the function must be projected.</span>
-<span class="sd">    For instance person.household.sum(...) must be projected on person, while it would not make sense for person.household.get_holder.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">function</span><span class="o">.</span><span class="n">projectable</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="n">function</span>
-
-
-<div class="viewcode-block" id="PersonEntity"><a class="viewcode-back" href="../../openfisca-python-api/entities.html#openfisca_core.entities.PersonEntity">[docs]</a><span class="k">class</span> <span class="nc">PersonEntity</span><span class="p">(</span><span class="n">Entity</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Represents a person on which calculations are run.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">is_person</span> <span class="o">=</span> <span class="kc">True</span>
-
-    <span class="c1"># Projection person -&gt; person</span>
-
-    <span class="nd">@projectable</span>
-<div class="viewcode-block" id="PersonEntity.has_role"><a class="viewcode-back" href="../../openfisca-python-api/entities.html#openfisca_core.entities.PersonEntity.has_role">[docs]</a>    <span class="k">def</span> <span class="nf">has_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Check if a person has a given role within its :any:`GroupEntity`</span>
-
-<span class="sd">            Example:</span>
-
-<span class="sd">            &gt;&gt;&gt; person.has_role(Household.CHILD)</span>
-<span class="sd">            &gt;&gt;&gt; array([False])</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-        <span class="n">group_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">entity_class</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="o">.</span><span class="n">reduce</span><span class="p">([</span><span class="n">group_entity</span><span class="o">.</span><span class="n">members_role</span> <span class="o">==</span> <span class="n">subrole</span> <span class="k">for</span> <span class="n">subrole</span> <span class="ow">in</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">group_entity</span><span class="o">.</span><span class="n">members_role</span> <span class="o">==</span> <span class="n">role</span></div>
-
-    <span class="nd">@projectable</span>
-    <span class="k">def</span> <span class="nf">value_from_partner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Projection to partner is only implemented for roles having exactly two subroles.&#39;</span><span class="p">)</span>
-
-        <span class="p">[</span><span class="n">subrole_1</span><span class="p">,</span> <span class="n">subrole_2</span><span class="p">]</span> <span class="o">=</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span>
-        <span class="n">value_subrole_1</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">value_from_person</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">subrole_1</span><span class="p">)</span>
-        <span class="n">value_subrole_2</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">value_from_person</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">subrole_2</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
-            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">subrole_1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">subrole_2</span><span class="p">)],</span>
-            <span class="p">[</span><span class="n">value_subrole_2</span><span class="p">,</span> <span class="n">value_subrole_1</span><span class="p">],</span>
-            <span class="p">)</span>
-
-    <span class="nd">@projectable</span>
-<div class="viewcode-block" id="PersonEntity.get_rank"><a class="viewcode-back" href="../../openfisca-python-api/entities.html#openfisca_core.entities.PersonEntity.get_rank">[docs]</a>    <span class="k">def</span> <span class="nf">get_rank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">criteria</span><span class="p">,</span> <span class="n">condition</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the rank of a person within an entity according to a criteria.</span>
-<span class="sd">        The person with rank 0 has the minimum value of criteria.</span>
-<span class="sd">        If condition is specified, then the persons who don&#39;t respect it are not taken into account and their rank is -1.</span>
-
-<span class="sd">        Example:</span>
-
-<span class="sd">        &gt;&gt;&gt; age = person(&#39;age&#39;, period)  # e.g [32, 34, 2, 8, 1]</span>
-<span class="sd">        &gt;&gt;&gt; person.get_rank(household, age)</span>
-<span class="sd">        &gt;&gt;&gt; [3, 4, 0, 2, 1]</span>
-
-<span class="sd">        &gt;&gt;&gt; is_child = person.has_role(Household.CHILD)  # [False, False, True, True, True]</span>
-<span class="sd">        &gt;&gt;&gt; person.get_rank(household, - age, condition = is_child)  # Sort in reverse order so that the eldest child gets the rank 0.</span>
-<span class="sd">        &gt;&gt;&gt; [-1, -1, 1, 0, 2]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="c1"># If entity is for instance &#39;person.household&#39;, we get the reference entity &#39;household&#39; behind the projector</span>
-        <span class="n">entity</span> <span class="o">=</span> <span class="n">entity</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">Projector</span><span class="p">)</span> <span class="k">else</span> <span class="n">entity</span><span class="o">.</span><span class="n">reference_entity</span>
-
-        <span class="n">positions</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">members_position</span>
-        <span class="n">biggest_entity_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">filtered_criteria</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">criteria</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
-        <span class="n">ids</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">members_entity_id</span>
-
-        <span class="c1"># Matrix: the value in line i and column j is the value of criteria for the jth person of the ith entity</span>
-        <span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span>
-            <span class="n">entity</span><span class="o">.</span><span class="n">value_nth_person</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">filtered_criteria</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">biggest_entity_size</span><span class="p">)</span>
-            <span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
-
-        <span class="c1"># We double-argsort all lines of the matrix.</span>
-        <span class="c1"># Double-argsorting gets the rank of each value once sorted</span>
-        <span class="c1"># For instance, if x = [3,1,6,4,0], y = np.argsort(x) is [4, 1, 0, 3, 2] (because the value with index 4 is the smallest one, the value with index 1 the second smallest, etc.) and z = np.argsort(y) is [2, 1, 4, 3, 0], the rank of each value.</span>
-        <span class="n">sorted_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">matrix</span><span class="p">))</span>
-
-        <span class="c1"># Build the result vector by taking for each person the value in the right line (corresponding to its household id) and the right column (corresponding to its position)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">sorted_matrix</span><span class="p">[</span><span class="n">ids</span><span class="p">,</span> <span class="n">positions</span><span class="p">]</span>
-
-        <span class="c1"># Return -1 for the persons who don&#39;t respect the condition</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span></div></div>
+    <span class="k">def</span> <span class="nf">check_variable_defined_for_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">):</span>
+        <span class="n">variable_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">entity</span>
+        <span class="c1"># Should be this:</span>
+        <span class="c1"># if variable_entity is not self:</span>
+        <span class="k">if</span> <span class="n">variable_entity</span><span class="o">.</span><span class="n">key</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                <span class="s2">&quot;You tried to compute the variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; for the entity &#39;</span><span class="si">{1}</span><span class="s2">&#39;;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="p">),</span>
+                <span class="s2">&quot;however the variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; is defined for &#39;</span><span class="si">{1}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">variable_entity</span><span class="o">.</span><span class="n">plural</span><span class="p">),</span>
+                <span class="s2">&quot;Learn more about entities in our documentation:&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;&lt;https://openfisca.org/doc/coding-the-legislation/50_entities.html&gt;.&quot;</span><span class="p">])</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="GroupEntity"><a class="viewcode-back" href="../../openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity">[docs]</a><span class="k">class</span> <span class="nc">GroupEntity</span><span class="p">(</span><span class="n">Entity</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Represents an entity composed of several persons with different roles, on which calculations are run.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">roles</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">flattened_roles</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">roles_description</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">,</span> <span class="n">persons</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="n">Entity</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_members_entity_id</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">members</span> <span class="o">=</span> <span class="n">persons</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_roles_count</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_ordered_members_map</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">members_position</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># We could use self.count and self.members.count , but with the current initilization, we are not sure count will be set before members_position is called</span>
-            <span class="n">nb_entities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="n">nb_persons</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">)</span>
-            <span class="n">counter_by_entity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nb_entities</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">):</span>
-                <span class="n">entity_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter_by_entity</span><span class="p">[</span><span class="n">entity_index</span><span class="p">]</span>
-                <span class="n">counter_by_entity</span><span class="p">[</span><span class="n">entity_index</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">members_entity_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_entity_id</span>
-
-    <span class="nd">@members_entity_id</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">members_entity_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">members_entity_id</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_members_entity_id</span> <span class="o">=</span> <span class="n">members_entity_id</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">members_role</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">default_role</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">default_role</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">))</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span>
-
-    <span class="nd">@members_role</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">members_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">members_role</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Role</span><span class="p">]):</span>
-        <span class="k">if</span> <span class="n">members_role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">members_role</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">get_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role_name</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">next</span><span class="p">((</span><span class="n">role</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">flattened_roles</span> <span class="k">if</span> <span class="n">role</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">role_name</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
-
-    <span class="nd">@members_position</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">members_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">members_position</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="n">members_position</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">ordered_members_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Mask to group the persons by entity</span>
-<span class="sd">        This function only caches the map value, to see what the map is used for, see value_nth_person method.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ordered_members_map</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ordered_members_map</span>
-
-    <span class="c1">#  Aggregation persons -&gt; entity</span>
-
-    <span class="nd">@projectable</span>
-<div class="viewcode-block" id="GroupEntity.sum"><a class="viewcode-back" href="../../openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity.sum">[docs]</a>    <span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Return the sum of ``array`` for the members of the entity.</span>
-
-<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
-
-<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
-
-<span class="sd">            Example:</span>
-
-<span class="sd">            &gt;&gt;&gt; salaries = household.members(&#39;salary&#39;, &#39;2018-01&#39;)  # e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="sd">            &gt;&gt;&gt; household.sum(salaries)</span>
-<span class="sd">            &gt;&gt;&gt; array([3500])</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">role_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">[</span><span class="n">role_filter</span><span class="p">],</span>
-                <span class="n">weights</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">role_filter</span><span class="p">],</span>
-                <span class="n">minlength</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">array</span><span class="p">)</span></div>
-
-    <span class="nd">@projectable</span>
-<div class="viewcode-block" id="GroupEntity.any"><a class="viewcode-back" href="../../openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity.any">[docs]</a>    <span class="k">def</span> <span class="nf">any</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Return ``True`` if ``array`` is ``True`` for any members of the entity.</span>
-
-<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
-
-<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
-
-<span class="sd">            Example:</span>
-
-<span class="sd">            &gt;&gt;&gt; salaries = household.members(&#39;salary&#39;, &#39;2018-01&#39;)  # e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="sd">            &gt;&gt;&gt; household.any(salaries &gt;= 1800)</span>
-<span class="sd">            &gt;&gt;&gt; array([True])</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">sum_in_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">sum_in_entity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span></div>
-
-    <span class="nd">@projectable</span>
-    <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">reducer</span><span class="p">,</span> <span class="n">neutral_element</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-        <span class="n">position_in_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_position</span>
-        <span class="n">role_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">True</span>
-        <span class="n">filtered_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">role_filter</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">neutral_element</span><span class="p">)</span>
-
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filled_array</span><span class="p">(</span><span class="n">neutral_element</span><span class="p">)</span>  <span class="c1"># Neutral value that will be returned if no one with the given role exists.</span>
-
-        <span class="c1"># We loop over the positions in the entity</span>
-        <span class="c1"># Looping over the entities is tempting, but potentielly slow if there are a lot of entities</span>
-        <span class="n">biggest_entity_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">position_in_entity</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-
-        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">biggest_entity_size</span><span class="p">):</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">reducer</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_nth_person</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">filtered_array</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">neutral_element</span><span class="p">))</span>
-
-        <span class="k">return</span> <span class="n">result</span>
-
-    <span class="nd">@projectable</span>
-<div class="viewcode-block" id="GroupEntity.all"><a class="viewcode-back" href="../../openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity.all">[docs]</a>    <span class="k">def</span> <span class="nf">all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Return ``True`` if ``array`` is ``True`` for all members of the entity.</span>
-
-<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
-
-<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
-
-<span class="sd">            Example:</span>
-
-<span class="sd">            &gt;&gt;&gt; salaries = household.members(&#39;salary&#39;, &#39;2018-01&#39;)  # e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="sd">            &gt;&gt;&gt; household.all(salaries &gt;= 1800)</span>
-<span class="sd">            &gt;&gt;&gt; array([False])</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">reducer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">,</span> <span class="n">neutral_element</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)</span></div>
-
-    <span class="nd">@projectable</span>
-<div class="viewcode-block" id="GroupEntity.max"><a class="viewcode-back" href="../../openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity.max">[docs]</a>    <span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Return the maximum value of ``array`` for the entity members.</span>
-
-<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
-
-<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
-
-<span class="sd">            Example:</span>
-
-<span class="sd">            &gt;&gt;&gt; salaries = household.members(&#39;salary&#39;, &#39;2018-01&#39;)  # e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="sd">            &gt;&gt;&gt; household.max(salaries)</span>
-<span class="sd">            &gt;&gt;&gt; array([2000])</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">reducer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">,</span> <span class="n">neutral_element</span> <span class="o">=</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">infty</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)</span></div>
-
-    <span class="nd">@projectable</span>
-<div class="viewcode-block" id="GroupEntity.min"><a class="viewcode-back" href="../../openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity.min">[docs]</a>    <span class="k">def</span> <span class="nf">min</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Return the minimum value of ``array`` for the entity members.</span>
-
-<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
-
-<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
-
-<span class="sd">            Example:</span>
-
-<span class="sd">            &gt;&gt;&gt; salaries = household.members(&#39;salary&#39;, &#39;2018-01&#39;)  # e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="sd">            &gt;&gt;&gt; household.min(salaries)</span>
-<span class="sd">            &gt;&gt;&gt; array([0])</span>
-<span class="sd">            &gt;&gt;&gt; household.min(salaries, role = Household.PARENT)  # Assuming the 1st two persons are parents</span>
-<span class="sd">            &gt;&gt;&gt; array([1500])</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">reducer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">,</span> <span class="n">neutral_element</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">infty</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)</span></div>
-
-    <span class="nd">@projectable</span>
-<div class="viewcode-block" id="GroupEntity.nb_persons"><a class="viewcode-back" href="../../openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity.nb_persons">[docs]</a>    <span class="k">def</span> <span class="nf">nb_persons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Returns the number of persons contained in the entity.</span>
-
-<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">role</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">:</span>
-                <span class="n">role_condition</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="o">.</span><span class="n">reduce</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">members_role</span> <span class="o">==</span> <span class="n">subrole</span> <span class="k">for</span> <span class="n">subrole</span> <span class="ow">in</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">role_condition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_role</span> <span class="o">==</span> <span class="n">role</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">role_condition</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">)</span></div>
-
-    <span class="c1"># Projection person -&gt; entity</span>
-
-    <span class="nd">@projectable</span>
-    <span class="k">def</span> <span class="nf">value_from_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Get the value of ``array`` for the person with the unique role ``role``.</span>
-
-<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
-
-<span class="sd">            If such a person does not exist, return ``default`` instead</span>
-
-<span class="sd">            The result is a vector which dimension is the number of entities</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">role</span><span class="o">.</span><span class="n">max</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
-                <span class="s1">&#39;You can only use value_from_person with a role that is unique in </span><span class="si">{}</span><span class="s1">. Role </span><span class="si">{}</span><span class="s1"> is not unique.&#39;</span>
-                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">role</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
-                <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-        <span class="n">members_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ordered_members_map</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filled_array</span><span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">):</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">EnumArray</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">possible_values</span><span class="p">)</span>
-        <span class="n">role_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-        <span class="n">entity_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">role_filter</span><span class="p">)</span>
-
-        <span class="n">result</span><span class="p">[</span><span class="n">entity_filter</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">members_map</span><span class="p">][</span><span class="n">role_filter</span><span class="p">[</span><span class="n">members_map</span><span class="p">]]</span>
-
-        <span class="k">return</span> <span class="n">result</span>
-
-    <span class="nd">@projectable</span>
-    <span class="k">def</span> <span class="nf">value_nth_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Get the value of array for the person whose position in the entity is n.</span>
-
-<span class="sd">            Note that this position is arbitrary, and that members are not sorted.</span>
-
-<span class="sd">            If the nth person does not exist, return  ``default`` instead.</span>
-
-<span class="sd">            The result is a vector which dimension is the number of entities.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-        <span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_position</span>
-        <span class="n">nb_persons_per_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">()</span>
-        <span class="n">members_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ordered_members_map</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filled_array</span><span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="c1"># For households that have at least n persons, set the result as the value of criteria for the person for which the position is n.</span>
-        <span class="c1"># The map is needed b/c the order of the nth persons of each household in the persons vector is not necessarily the same than the household order.</span>
-        <span class="n">result</span><span class="p">[</span><span class="n">nb_persons_per_entity</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">members_map</span><span class="p">][</span><span class="n">positions</span><span class="p">[</span><span class="n">members_map</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">]</span>
-
-        <span class="k">return</span> <span class="n">result</span>
-
-    <span class="nd">@projectable</span>
-    <span class="k">def</span> <span class="nf">value_from_first_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_nth_person</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
-
-    <span class="c1"># Projection entity -&gt; person(s)</span>
-
-    <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">array</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">role_condition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">role_condition</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
-
-    <span class="c1"># Does it really make sense ? Should not we use roles instead of position when projecting on someone in particular ?</span>
-    <span class="c1"># Doesn&#39;t seem to be used, maybe should just not introduce</span>
-    <span class="k">def</span> <span class="nf">project_on_first_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-        <span class="n">entity_position_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_position</span>
-        <span class="n">entity_index_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span>
-        <span class="n">position_filter</span> <span class="o">=</span> <span class="p">(</span><span class="n">entity_position_array</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">position_filter</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">entity_index_array</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
-
-    <span class="nd">@projectable</span>
-    <span class="k">def</span> <span class="nf">share_between_members</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-        <span class="n">nb_persons_per_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">array</span> <span class="o">/</span> <span class="n">nb_persons_per_entity</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)</span></div>
-
-
-<span class="k">class</span> <span class="nc">Projector</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="n">reference_entity</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
-        <span class="n">projector</span> <span class="o">=</span> <span class="n">get_projector_from_shortcut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reference_entity</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">projector</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">projector</span>
-
-        <span class="n">reference_attr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reference_entity</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">reference_attr</span><span class="p">,</span> <span class="s1">&#39;projectable&#39;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">reference_attr</span>
-
-        <span class="k">def</span> <span class="nf">projector_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">reference_attr</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_and_bubble_up</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">projector_function</span>
-
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference_entity</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_and_bubble_up</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">transform_and_bubble_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-        <span class="n">transformed_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">transformed_result</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">transform_and_bubble_up</span><span class="p">(</span><span class="n">transformed_result</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-        <span class="k">return</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
-
-
-<span class="c1"># For instance person.family</span>
-<span class="k">class</span> <span class="nc">EntityToPersonProjector</span><span class="p">(</span><span class="n">Projector</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reference_entity</span> <span class="o">=</span> <span class="n">entity</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
-
-    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference_entity</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-
-<span class="c1"># For instance famille.first_person</span>
-<span class="k">class</span> <span class="nc">FirstPersonToEntityProjector</span><span class="p">(</span><span class="n">Projector</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">target_entity</span> <span class="o">=</span> <span class="n">entity</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reference_entity</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">members</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
-
-    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_entity</span><span class="o">.</span><span class="n">value_from_first_person</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-
-<span class="c1"># For instance famille.declarant_principal</span>
-<span class="k">class</span> <span class="nc">UniqueRoleToEntityProjector</span><span class="p">(</span><span class="n">Projector</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">target_entity</span> <span class="o">=</span> <span class="n">entity</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reference_entity</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">members</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">role</span> <span class="o">=</span> <span class="n">role</span>
-
-    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_entity</span><span class="o">.</span><span class="n">value_from_person</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">role</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">build_entity</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">roles</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_person</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">class_override</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    <span class="n">entity_class_name</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
-    <span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s1">&#39;plural&#39;</span><span class="p">:</span> <span class="n">plural</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s1">&#39;doc&#39;</span><span class="p">:</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="n">doc</span><span class="p">),</span> <span class="s1">&#39;roles_description&#39;</span><span class="p">:</span> <span class="n">roles</span><span class="p">}</span>
-    <span class="k">if</span> <span class="n">is_person</span><span class="p">:</span>
-        <span class="n">entity_class</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">entity_class_name</span><span class="p">,</span> <span class="p">(</span><span class="n">class_override</span> <span class="ow">or</span> <span class="n">PersonEntity</span><span class="p">,),</span> <span class="n">attributes</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">roles</span><span class="p">:</span>
-        <span class="n">entity_class</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">entity_class_name</span><span class="p">,</span> <span class="p">(</span><span class="n">class_override</span> <span class="ow">or</span> <span class="n">GroupEntity</span><span class="p">,),</span> <span class="n">attributes</span><span class="p">)</span>
-        <span class="n">entity_class</span><span class="o">.</span><span class="n">roles</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">roles</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roles_description</span> <span class="o">=</span> <span class="n">roles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roles</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">role_description</span> <span class="ow">in</span> <span class="n">roles</span><span class="p">:</span>
-            <span class="n">role</span> <span class="o">=</span> <span class="n">Role</span><span class="p">(</span><span class="n">role_description</span><span class="p">,</span> <span class="n">entity_class</span><span class="p">)</span>
-            <span class="n">entity_class</span><span class="o">.</span><span class="n">roles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="n">entity_class</span><span class="p">,</span> <span class="n">role</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">role</span><span class="p">)</span>
+            <span class="n">role</span> <span class="o">=</span> <span class="n">Role</span><span class="p">(</span><span class="n">role_description</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">role</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">role_description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subroles&#39;</span><span class="p">):</span>
                 <span class="n">role</span><span class="o">.</span><span class="n">subroles</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">subrole_key</span> <span class="ow">in</span> <span class="n">role_description</span><span class="p">[</span><span class="s1">&#39;subroles&#39;</span><span class="p">]:</span>
-                    <span class="n">subrole</span> <span class="o">=</span> <span class="n">Role</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">subrole_key</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="n">entity_class</span><span class="p">)</span>
-                    <span class="nb">setattr</span><span class="p">(</span><span class="n">entity_class</span><span class="p">,</span> <span class="n">subrole</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">subrole</span><span class="p">)</span>
+                    <span class="n">subrole</span> <span class="o">=</span> <span class="n">Role</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">subrole_key</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="bp">self</span><span class="p">)</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subrole</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">subrole</span><span class="p">)</span>
                     <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subrole</span><span class="p">)</span>
                 <span class="n">role</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">)</span>
-        <span class="n">entity_class</span><span class="o">.</span><span class="n">flattened_roles</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">role2</span><span class="o">.</span><span class="n">subroles</span> <span class="ow">or</span> <span class="p">[</span><span class="n">role2</span><span class="p">]</span> <span class="k">for</span> <span class="n">role2</span> <span class="ow">in</span> <span class="n">entity_class</span><span class="o">.</span><span class="n">roles</span><span class="p">],</span> <span class="p">[])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flattened_roles</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">role2</span><span class="o">.</span><span class="n">subroles</span> <span class="ow">or</span> <span class="p">[</span><span class="n">role2</span><span class="p">]</span> <span class="k">for</span> <span class="n">role2</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="p">],</span> <span class="p">[])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_person</span> <span class="o">=</span> <span class="kc">False</span></div>
 
-    <span class="k">return</span> <span class="n">entity_class</span>
 
-
-<span class="k">def</span> <span class="nf">get_projector_from_shortcut</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">shortcut</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">is_person</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">shortcut</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">entities</span><span class="p">:</span>
-            <span class="n">entity_2</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="n">shortcut</span><span class="p">]</span>
-            <span class="k">return</span> <span class="n">EntityToPersonProjector</span><span class="p">(</span><span class="n">entity_2</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">build_entity</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">roles</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_person</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">class_override</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">is_person</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Entity</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">shortcut</span> <span class="o">==</span> <span class="s1">&#39;first_person&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">FirstPersonToEntityProjector</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
-        <span class="n">role</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">role</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span> <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">max</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">shortcut</span><span class="p">)),</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">role</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">UniqueRoleToEntityProjector</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">GroupEntity</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">roles</span><span class="p">)</span>
 </pre></div>
 
           </div>

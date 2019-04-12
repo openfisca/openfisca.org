@@ -132,9 +132,11 @@
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">import</span> <span class="nn">pkg_resources</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">copy</span>
 
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.entities</span> <span class="k">import</span> <span class="n">Entity</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.populations</span> <span class="k">import</span> <span class="n">Population</span><span class="p">,</span> <span class="n">GroupPopulation</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="k">import</span> <span class="n">ParameterNode</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.variables</span> <span class="k">import</span> <span class="n">Variable</span><span class="p">,</span> <span class="n">get_neutralized_variable</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">VariableNotFound</span>
@@ -181,11 +183,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_parameters_at_instant_cache</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># weakref.WeakValueDictionary()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">open_api_config</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="n">entities</span>
+        <span class="c1"># Tax benefit systems are mutable, so entities (which need to know about our variables) can&#39;t be shared among them</span>
         <span class="k">if</span> <span class="n">entities</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;A tax and benefit sytem must have at least an entity.&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">person_entity</span> <span class="o">=</span> <span class="p">[</span><span class="n">entity</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span> <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">is_person</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">group_entities</span> <span class="o">=</span> <span class="p">[</span><span class="n">entity</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">entity</span><span class="o">.</span><span class="n">is_person</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">person_entity</span> <span class="o">=</span> <span class="p">[</span><span class="n">entity</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">is_person</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group_entities</span> <span class="o">=</span> <span class="p">[</span><span class="n">entity</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">entity</span><span class="o">.</span><span class="n">is_person</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">:</span>
+            <span class="n">entity</span><span class="o">.</span><span class="n">set_tax_benefit_system</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">base_tax_benefit_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -198,13 +203,14 @@
         <span class="k">return</span> <span class="n">base_tax_benefit_system</span>
 
     <span class="k">def</span> <span class="nf">instantiate_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">person_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">person_entity</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-        <span class="n">entities_instances</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">Entity</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">person_instance</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="n">person_instance</span><span class="p">}</span>
+        <span class="n">person</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">person_entity</span>
+        <span class="n">members</span> <span class="o">=</span> <span class="n">Population</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+        <span class="n">entities</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">Entity</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">person</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="n">members</span><span class="p">}</span>
 
-        <span class="k">for</span> <span class="n">entity_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_entities</span><span class="p">:</span>
-            <span class="n">entities_instances</span><span class="p">[</span><span class="n">entity_class</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity_class</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">person_instance</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_entities</span><span class="p">:</span>
+            <span class="n">entities</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">GroupPopulation</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">members</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">entities_instances</span>
+        <span class="k">return</span> <span class="n">entities</span>
 
     <span class="c1"># Deprecated method of constructing simulations, to be phased out in favor of SimulationBuilder</span>
     <span class="k">def</span> <span class="nf">new_scenario</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -421,10 +427,11 @@
 <span class="sd">        :param variable_name: Name of the requested variable.</span>
 <span class="sd">        :param check_existence: If True, raise an error if the requested variable does not exist.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">variables</span> <span class="ow">and</span> <span class="n">check_existence</span><span class="p">:</span>
+        <span class="n">variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="n">variables</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">and</span> <span class="n">check_existence</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">VariableNotFound</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">variables</span></div>
+        <span class="k">return</span> <span class="n">found</span></div>
 
 <div class="viewcode-block" id="TaxBenefitSystem.neutralize_variable"><a class="viewcode-back" href="../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.neutralize_variable">[docs]</a>    <span class="k">def</span> <span class="nf">neutralize_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -548,7 +555,8 @@
             <span class="k">return</span> <span class="p">{</span>
                 <span class="n">variable_name</span><span class="p">:</span> <span class="n">variable</span>
                 <span class="k">for</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">variable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">entity</span> <span class="o">==</span> <span class="n">entity</span>
+                <span class="c1"># TODO - because entities are copied (see constructor) they can&#39;t be compared</span>
+                <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">entity</span><span class="o">.</span><span class="n">key</span>
                 <span class="p">}</span></div>
 
     <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -558,6 +566,8 @@
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;parameters&#39;</span><span class="p">,</span> <span class="s1">&#39;_parameters_at_instant_cache&#39;</span><span class="p">,</span> <span class="s1">&#39;variables&#39;</span><span class="p">,</span> <span class="s1">&#39;open_api_config&#39;</span><span class="p">):</span>
                 <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;entities&#39;</span><span class="p">]:</span>
+            <span class="n">entity</span><span class="o">.</span><span class="n">set_tax_benefit_system</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
 
         <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
         <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;_parameters_at_instant_cache&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>

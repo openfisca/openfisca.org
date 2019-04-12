@@ -130,8 +130,8 @@
 <span class="kn">from</span> <span class="nn">sortedcontainers.sorteddict</span> <span class="k">import</span> <span class="n">SortedDict</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">date</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">entities</span>
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.entities</span> <span class="k">import</span> <span class="n">Entity</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">,</span> <span class="n">ENUM_ARRAY_DTYPE</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">DAY</span><span class="p">,</span> <span class="n">MONTH</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">,</span> <span class="n">ETERNITY</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="k">import</span> <span class="n">eval_expression</span>
@@ -332,9 +332,8 @@
         <span class="k">return</span> <span class="n">value</span>
 
     <span class="k">def</span> <span class="nf">set_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">entities</span><span class="o">.</span><span class="n">Entity</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{}</span><span class="s2">&#39; for attribute &#39;entity&#39; in variable &#39;</span><span class="si">{}</span><span class="s2">&#39;. Must be a subclass of Entity.&quot;</span>
-            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">Entity</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{entity}</span><span class="s2">&#39; for attribute &#39;entity&#39; in variable &#39;</span><span class="si">{self.name}</span><span class="s2">&#39;. Must be an instance of Entity.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">entity</span>
 
     <span class="k">def</span> <span class="nf">set_possible_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">possible_values</span><span class="p">):</span>

@@ -160,7 +160,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">tax_benefit_system</span><span class="p">,</span>
-            <span class="n">entities_instances</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">populations</span>
             <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            This constructor is reserved for internal use; see :any:`SimulationBuilder`,</span>
@@ -170,8 +170,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span>
         <span class="k">assert</span> <span class="n">tax_benefit_system</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="n">entities_instances</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">persons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">person_entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">populations</span> <span class="o">=</span> <span class="n">populations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">persons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="p">[</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">person_entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">link_to_entities_instances</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">create_shortcuts</span><span class="p">()</span>
 
@@ -203,13 +203,13 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">link_to_entities_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">_key</span><span class="p">,</span> <span class="n">entity_instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">_key</span><span class="p">,</span> <span class="n">entity_instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">entity_instance</span><span class="o">.</span><span class="n">simulation</span> <span class="o">=</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">create_shortcuts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">_key</span><span class="p">,</span> <span class="n">entity_instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">_key</span><span class="p">,</span> <span class="n">population</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="c1"># create shortcut simulation.person and simulation.household (for instance)</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_instance</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">entity_instance</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">data_storage_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -232,8 +232,8 @@
 
 <span class="sd">            :returns: A numpy array containing the result of the calculation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable_entity</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-        <span class="n">holder</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
+        <span class="n">population</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable_population</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
+        <span class="n">holder</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
         <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
@@ -256,7 +256,7 @@
         <span class="c1"># First, try to run a formula</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_cycle</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
-            <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_formula</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_formula</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
             <span class="c1"># If no result, use the default value and cache it</span>
             <span class="k">if</span> <span class="n">array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -351,9 +351,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_run_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_run_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Find the ``variable`` formula for the given ``period`` if it exists, and apply it to ``entity``.</span>
+<span class="sd">            Find the ``variable`` formula for the given ``period`` if it exists, and apply it to ``population``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">formula</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">get_formula</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
@@ -366,11 +366,11 @@
             <span class="n">parameters_at</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_parameters_at_instant</span>
 
         <span class="k">if</span> <span class="n">formula</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_argcount</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">array</span> <span class="o">=</span> <span class="n">formula</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">formula</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">array</span> <span class="o">=</span> <span class="n">formula</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters_at</span><span class="p">)</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">formula</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters_at</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_formula_result</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_formula_result</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">array</span>
 
     <span class="k">def</span> <span class="nf">_check_period_consistency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
@@ -489,7 +489,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Get the :any:`Holder` associated with the variable ``variable_name`` for the simulation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable_entity</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable_population</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Simulation.get_memory_usage"><a class="viewcode-back" href="../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_memory_usage">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -499,7 +499,7 @@
             <span class="n">total_nb_bytes</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
             <span class="n">by_variable</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="p">)</span>
-        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="n">entity_memory_usage</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get_memory_usage</span><span class="p">(</span><span class="n">variables</span> <span class="o">=</span> <span class="n">variables</span><span class="p">)</span>
             <span class="n">result</span><span class="p">[</span><span class="s1">&#39;total_nb_bytes&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">entity_memory_usage</span><span class="p">[</span><span class="s1">&#39;total_nb_bytes&#39;</span><span class="p">]</span>
             <span class="n">result</span><span class="p">[</span><span class="s1">&#39;by_variable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">entity_memory_usage</span><span class="p">[</span><span class="s1">&#39;by_variable&#39;</span><span class="p">])</span>
@@ -577,15 +577,19 @@
             <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_variable_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_variable_population</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">):</span>
         <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">entity</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="p">[</span><span class="n">variable</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">get_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">plural</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">entity_type</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="n">entity_type</span><span class="o">.</span><span class="n">key</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">plural</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">next</span><span class="p">((</span><span class="n">entity</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">plural</span> <span class="o">==</span> <span class="n">plural</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_population</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plural</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">((</span><span class="n">population</span> <span class="k">for</span> <span class="n">population</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span> <span class="o">==</span> <span class="n">plural</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plural</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">population</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_population</span><span class="p">(</span><span class="n">plural</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">population</span> <span class="ow">and</span> <span class="n">population</span><span class="o">.</span><span class="n">entity</span>
+
+    <span class="k">def</span> <span class="nf">describe_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">population</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">:</span> <span class="n">population</span><span class="o">.</span><span class="n">ids</span> <span class="k">for</span> <span class="n">population</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">()}</span>
 
     <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">trace</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -599,13 +603,13 @@
                 <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
         <span class="n">new</span><span class="o">.</span><span class="n">persons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
-        <span class="nb">setattr</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">new</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">new</span><span class="o">.</span><span class="n">persons</span><span class="p">)</span>
-        <span class="n">new</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="p">{</span><span class="n">new</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="n">new</span><span class="o">.</span><span class="n">persons</span><span class="p">}</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">new</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">new</span><span class="o">.</span><span class="n">persons</span><span class="p">)</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">populations</span> <span class="o">=</span> <span class="p">{</span><span class="n">new</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="n">new</span><span class="o">.</span><span class="n">persons</span><span class="p">}</span>
 
-        <span class="k">for</span> <span class="n">entity_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">group_entities</span><span class="p">:</span>
-            <span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="n">entity_class</span><span class="o">.</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
-            <span class="n">new</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">entity_class</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">entity</span><span class="p">)</span>  <span class="c1"># create shortcut simulation.household (for instance)</span>
+        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">group_entities</span><span class="p">:</span>
+            <span class="n">population</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">populations</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">population</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span>  <span class="c1"># create shortcut simulation.household (for instance)</span>
 
         <span class="n">new</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
         <span class="n">new</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="n">trace</span>
