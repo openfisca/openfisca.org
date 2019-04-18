@@ -162,6 +162,17 @@
     <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">value</span>
 
 
+<span class="k">def</span> <span class="nf">dict_no_duplicate_constructor</span><span class="p">(</span><span class="n">loader</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">value</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">keys</span><span class="p">)):</span>
+        <span class="n">duplicate</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span> <span class="k">if</span> <span class="n">keys</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">yaml</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">ParserError</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">start_mark</span><span class="p">,</span> <span class="n">f</span><span class="s2">&quot;Found duplicate key &#39;</span><span class="si">{duplicate}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">deep</span><span class="p">)</span>
+
+
+<span class="n">yaml</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">BaseResolver</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_TAG</span><span class="p">,</span> <span class="n">dict_no_duplicate_constructor</span><span class="p">,</span> <span class="n">Loader</span> <span class="o">=</span> <span class="n">Loader</span><span class="p">)</span>
 <span class="n">yaml</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span><span class="s1">&#39;tag:yaml.org,2002:timestamp&#39;</span><span class="p">,</span> <span class="n">date_constructor</span><span class="p">,</span> <span class="n">Loader</span> <span class="o">=</span> <span class="n">Loader</span><span class="p">)</span>
 
 
@@ -185,7 +196,7 @@
         <span class="n">message</span> <span class="o">+=</span> <span class="p">(</span>
             <span class="s2">&quot; was not found in the </span><span class="si">{}</span><span class="s2"> tax and benefit system.&quot;</span>
             <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">instant_str</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ParameterNotFound</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ParameterNotFound</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ParameterParsingError"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterParsingError">[docs]</a><span class="k">class</span> <span class="nc">ParameterParsingError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -205,7 +216,7 @@
                 <span class="n">message</span>
                 <span class="p">])</span>
         <span class="k">if</span> <span class="n">traceback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">traceback</span><span class="p">,</span> <span class="n">message</span><span class="p">])</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">traceback</span><span class="p">,</span> <span class="n">message</span><span class="p">])</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ParameterParsingError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
 
@@ -547,9 +558,9 @@
 <span class="sd">        :param child: The new child, an instance of :any:`Scale` or :any:`Parameter` or :any:`ParameterNode`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> has already a child named </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> has already a child named </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">ParameterNode</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">Scale</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;child must be of type ParameterNode, Parameter, or Scale. Instead got </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">child</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;child must be of type ParameterNode, Parameter, or Scale. Instead got </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">child</span><span class="p">)))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span></div>
 
@@ -628,7 +639,7 @@
                 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_children</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
 
@@ -678,7 +689,7 @@
                 <span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
                 <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">node_with_key</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">]),</span>
                 <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">node_without_key</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">]),</span>
-                <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                <span class="p">)</span>
 
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
@@ -692,7 +703,7 @@
                 <span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
                 <span class="n">node_name</span><span class="p">,</span>
                 <span class="n">non_node_name</span><span class="p">,</span>
-                <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                <span class="p">)</span>
 
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
@@ -705,7 +716,7 @@
                 <span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
                 <span class="n">node_name</span><span class="p">,</span>
                 <span class="n">node_type</span><span class="p">,</span>
-                <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                <span class="p">)</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">extract_named_children</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
@@ -927,7 +938,7 @@
 <span class="sd">    :returns: An instance of :any:`ParameterNode` or :any:`Scale` or :any:`Parameter`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> doest not exist&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> doest not exist&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_path</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">ParameterNode</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">directory_path</span> <span class="o">=</span> <span class="n">file_path</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">_load_yaml_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
