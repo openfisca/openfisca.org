@@ -353,8 +353,6 @@
         <span class="n">builder</span><span class="o">.</span><span class="n">set_default_period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
         <span class="n">simulation</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build_from_dict</span><span class="p">(</span><span class="n">current_tax_benefit_system</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
         <span class="n">simulation</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="n">verbose</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unexpected error while parsing </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">]))</span>
     <span class="k">except</span> <span class="n">SituationParsingError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
         <span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
             <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">(),</span>
@@ -363,6 +361,9 @@
             <span class="s2">&quot;Could not parse situation described in test &#39;</span><span class="si">{}</span><span class="s2">&#39; in YAML file &#39;</span><span class="si">{}</span><span class="s2">&#39;. Check the stack trace above for more details.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">yaml_path</span><span class="p">),</span>
             <span class="p">])</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">error_message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">f</span><span class="s2">&quot;Unexpected error raised while parsing &#39;</span><span class="si">{test[&#39;file_path&#39;]}</span><span class="s2">&#39;&quot;</span><span class="p">])</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span> <span class="kn">from</span> <span class="nn">e</span>  <span class="c1"># Keep the stack trace from the root error</span>
     <span class="k">return</span> <span class="n">simulation</span><span class="p">,</span> <span class="n">test</span>
 
 
