@@ -123,7 +123,6 @@
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -286,7 +285,7 @@
                 <span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span>
-                <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                <span class="p">)</span>
             <span class="k">raise</span> <span class="n">PeriodMismatchError</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                 <span class="n">period</span><span class="p">,</span>
@@ -295,8 +294,6 @@
                 <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">is_neutralized</span><span class="p">:</span>
             <span class="n">warning_message</span> <span class="o">=</span> <span class="s2">&quot;You cannot set a value for the variable </span><span class="si">{}</span><span class="s2">, as it has been neutralized. The value you provided (</span><span class="si">{}</span><span class="s2">) will be ignored.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
-                <span class="n">warning_message</span> <span class="o">=</span> <span class="n">warning_message</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
                 <span class="n">warning_message</span><span class="p">,</span>
                 <span class="ne">Warning</span>
@@ -457,7 +454,7 @@
                 <span class="n">holder</span><span class="o">.</span><span class="n">_set</span><span class="p">(</span><span class="n">sub_period</span><span class="p">,</span> <span class="n">divided_array</span><span class="p">)</span>
             <span class="n">sub_period</span> <span class="o">=</span> <span class="n">sub_period</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">elif</span> <span class="ow">not</span> <span class="p">(</span><span class="n">remaining_array</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Inconsistent input: variable </span><span class="si">{0}</span><span class="s2"> has already been set for all months contained in period </span><span class="si">{1}</span><span class="s2">, and value </span><span class="si">{2}</span><span class="s2"> provided for </span><span class="si">{1}</span><span class="s2"> doesn&#39;t match the total (</span><span class="si">{3}</span><span class="s2">). This error may also be thrown if you try to call set_input twice for the same variable and period.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">array</span> <span class="o">-</span> <span class="n">remaining_array</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Inconsistent input: variable </span><span class="si">{0}</span><span class="s2"> has already been set for all months contained in period </span><span class="si">{1}</span><span class="s2">, and value </span><span class="si">{2}</span><span class="s2"> provided for </span><span class="si">{1}</span><span class="s2"> doesn&#39;t match the total (</span><span class="si">{3}</span><span class="s2">). This error may also be thrown if you try to call set_input twice for the same variable and period.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">array</span> <span class="o">-</span> <span class="n">remaining_array</span><span class="p">))</span></div>
 </pre></div>
 
           </div>
