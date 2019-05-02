@@ -144,21 +144,21 @@
 <span id="periods-instants"></span><h1>Periods, Instants<a class="headerlink" href="#periods-instants" title="Permalink to this headline">¶</a></h1>
 <p>Most of the values calculated in OpenFisca, such as an <em>income tax</em>, or a <em>housing allowance</em>, can change over time.</p>
 <p>In <a class="reference internal" href="simulation.html"><span class="doc">simulations</span></a>, parameters and variables, OpenFisca handles time via <em>periods</em> and <em>instants</em>.</p>
+<p>In OpenFisca context, a period consists of:</p>
 <ul class="simple">
-<li><em>Instant</em>: the atomic unit is a day, so instants are day dates.</li>
+<li>a starting instant (the atomic unit is a day, so instants are day dates),</li>
+<li>a unit (day, month or year),</li>
+<li>a quantity of that unit.</li>
 </ul>
-<p><em>Example: the 15th June 2015.</em></p>
+<p>Let&#8217;s look at some examples:</p>
 <ul class="simple">
-<li><em>Period</em>: a succession of days.</li>
+<li>here is an instant: the 15th June 2015,</li>
+<li>and here are some periods: <code class="docutils literal"><span class="pre">July</span> <span class="pre">2015</span></code> is a month starting on its 1st day, <code class="docutils literal"><span class="pre">2015</span></code> is a year starting on its 1st day,</li>
+<li>we can also define a period of several months, <code class="docutils literal"><span class="pre">July</span> <span class="pre">and</span> <span class="pre">August</span> <span class="pre">2015</span></code>, or a period overlapping different months, <code class="docutils literal"><span class="pre">one</span> <span class="pre">month</span> <span class="pre">starting</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">15th</span> <span class="pre">of</span> <span class="pre">July</span></code>.</li>
 </ul>
-<p><em>Example: a month (&#8220;July 2015&#8221;), a year (&#8220;2015&#8221;), several months (&#8220;July and August 2015&#8221;) or the eternity.</em></p>
-<p>The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore:</p>
-<ul class="simple">
-<li>All periods are presumed to start on the first day of their first month.</li>
-<li>A period cannot be smaller than a month.</li>
-</ul>
-<p>The largest unit for OpenFisca periods is the <strong>eternity</strong>, which is used for variables that are constant over time, e.g. a date of birth.</p>
-<p><a class="reference internal" href="../coding-the-legislation/35_periods.html"><span class="doc">Read more about the periods implementation in OpenFisca</span></a></p>
+<p>The smallest unit for OpenFisca periods is the <strong>day</strong>.</p>
+<p>The largest OpenFisca period is the <strong>eternity</strong>, which is used for variables that are constant over time, e.g. a date of birth.</p>
+<p><a class="reference internal" href="../coding-the-legislation/35_periods.html"><span class="doc">Read more about the periods implementation in OpenFisca</span></a>.</p>
 </div>
 
 

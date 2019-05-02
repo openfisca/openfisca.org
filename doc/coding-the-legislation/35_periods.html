@@ -17,7 +17,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Periods and instants &#8212; OpenFisca  documentation</title>
+    <title>Periods &#8212; OpenFisca  documentation</title>
     
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -100,7 +100,7 @@
 <li class="toctree-l2"><a class="reference internal" href="10_basic_example.html">Coding a formula</a></li>
 <li class="toctree-l2"><a class="reference internal" href="20_input_variables.html">Introducing an input variable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="25_vectorial_computing.html">Vectorial computing</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Periods and instants</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Periods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="40_legislation_evolutions.html">Legislation evolutions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="50_entities.html">Entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
@@ -140,32 +140,18 @@
               
                 <li><a href="index.html"><i class="fas fa-code"></i> From law to code</a></li>
               
-              <li>Periods and instants</li>
+              <li>Periods</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <div class="section" id="periods-and-instants">
-<span id="periods-and-instants"></span><h1>Periods and instants<a class="headerlink" href="#periods-and-instants" title="Permalink to this headline">¶</a></h1>
-<p>A period can be a month, a year, <code class="docutils literal"><span class="pre">n</span></code> successive months, <code class="docutils literal"><span class="pre">n</span></code> successive years or the eternity.
-The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore:</p>
-<ul class="simple">
-<li>All periods are presumed to start on the first day of their first month.</li>
-<li>A period cannot be smaller than a month.</li>
-</ul>
-<p>An Instant is a specific day, such as a cutoff date.</p>
-<blockquote>
-<div><p>Internally, periods are stored as:</p>
-<ul class="simple">
-<li>a start instant</li>
-<li>a unit (MONTH, YEAR)</li>
-<li>a quantity of units.</li>
-</ul>
-</div></blockquote>
-<div class="section" id="periods-in-simulations">
-<span id="periods-in-simulations"></span><h2>Periods in simulations<a class="headerlink" href="#periods-in-simulations" title="Permalink to this headline">¶</a></h2>
-<p>In OpenFisca inputs, periods are encoded in strings. All the valid period formats are referenced in this table:</p>
+  <div class="section" id="periods">
+<span id="periods"></span><h1>Periods<a class="headerlink" href="#periods" title="Permalink to this headline">¶</a></h1>
+<p>When you run an OpenFisca simulation to compute a variable, you need to define the period of interest for this variable.</p>
+<p>OpenFisca gives you a convenient string syntax to define periods.</p>
+<p>The general structure is <code class="docutils literal"><span class="pre">unit:instant:quantity</span></code> (see the <a class="reference internal" href="../key-concepts/periodsinstants.html"><span class="doc">definition of a period</span></a>). Some of the structure can be omitted.</p>
+<p>The main valid period formats are referenced in this table:</p>
 <table border="1" class="docutils">
 <thead>
 <tr>
@@ -190,6 +176,13 @@ The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore
 <td><code>'2010-04'</code></td>
 <td>The month of April 2010.</td>
 <td>From the 1st of April 2010 to the 30th of April 2010, inclusive.</td>
+</tr>
+<tr>
+<td><code>AAAA-MM-DD</code></td>
+<td>Day</td>
+<td><code>'2010-04-06'</code></td>
+<td>The day of April 6th 2010.</td>
+<td>The whole day of the 6th of April 2010.</td>
 </tr>
 <tr>
 <td><code>year:AAAA-MM</code></td>
@@ -220,31 +213,61 @@ The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore
 <td>From the 1st of April 2010 to the 30th of June 2010, inclusive.</td>
 </tr>
 <tr>
+<td><code>month:AAAA-MM-DD:N</code></td>
+<td>N months</td>
+<td><code>'month:2010-04-15:3'</code></td>
+<td>The three months from mid April to mid July 2010.</td>
+<td>From the April 15th 2010 to the 14th of July 2010, inclusive.</td>
+</tr>
+<tr>
+<td><code>day:AAAA-MM-DD:N</code></td>
+<td>N days</td>
+<td><code>'day:2010-04-01:15'</code></td>
+<td>The first 15 days of April 2010.</td>
+<td>From the 1st of April 2010 to the 15th of April 2010, inclusive.</td>
+</tr>
+<tr>
 <td><code>ETERNITY</code></td>
 <td>Forever</td>
 <td><code>ETERNITY</code></td>
 <td>All of time.</td>
-<td>All past, present and future day, month or year</td>
+<td>All past, present and future day, month or year.</td>
 </tr>
 </tbody>
-</table><p>This <a class="reference internal" href="writing_yaml_tests.html"><span class="doc">YAML test</span></a> on <code class="docutils literal"><span class="pre">income_tax</span></code> evolution over time shows periods&#8217; impact on a variable</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Income tax over time</span>
-  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2016-01</span>
-  <span class="nt">input</span><span class="p">:</span>
-    <span class="nt">salary</span><span class="p">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">year:2014:3</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">100000</span> <span class="c1"># This person earned 100,000 between 2014 and 2016</span>
-  <span class="nt">output</span><span class="p">:</span>
-    <span class="nt">income_tax</span><span class="p">:</span>
-      <span class="nt">2014-01</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">388.8889</span>
-      <span class="nt">2015-01</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">416.6667</span> <span class="c1"># The income tax rate changes in 2015</span>
-      <span class="nt">2016-01</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">416.6667</span>
-      <span class="nt">2017-01</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span> <span class="c1"># The salary is not set for this period and defaults to 0</span>
+</table><p>The starting instant can be shortened to a month or a year. Then, OpenFisca will implicitly use the first day of the first month.</p>
+<blockquote>
+<div><p>Internally, periods come from <code class="docutils literal"><span class="pre">openfisca_core.periods</span></code> and are stored as:</p>
+<ul class="simple">
+<li>a unit (<code class="docutils literal"><span class="pre">DAY</span></code>, <code class="docutils literal"><span class="pre">MONTH</span></code>, <code class="docutils literal"><span class="pre">YEAR</span></code>)</li>
+<li>a starting <code class="docutils literal"><span class="pre">Instant</span></code></li>
+<li>a quantity of units.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="using-periods-in-a-simulation">
+<span id="using-periods-in-a-simulation"></span><h2>Using periods in a simulation<a class="headerlink" href="#using-periods-in-a-simulation" title="Permalink to this headline">¶</a></h2>
+<p>As an example, here is how to calculate a <code class="docutils literal"><span class="pre">housing_allowance</span></code> on a given month:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-05&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is equivalent to this more precise variant:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;month:2019-05-01:1&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="periods-in-variable-definition">
-<span id="periods-in-variable-definition"></span><h2>Periods in variable definition<a class="headerlink" href="#periods-in-variable-definition" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="section" id="periods-in-variable-definitions">
+<span id="periods-in-variable-definitions"></span><h2>Periods in variable definitions<a class="headerlink" href="#periods-in-variable-definitions" title="Permalink to this headline">¶</a></h2>
+<p>With OpenFisca you can calculate variables such as <code class="docutils literal"><span class="pre">salary</span></code> that can change over time. You can also evaluate the impact of this <code class="docutils literal"><span class="pre">salary</span></code> on the <code class="docutils literal"><span class="pre">income_tax</span></code>.</p>
+<p>These variables can evolve through time at a diffent periodicity. Here for example, <code class="docutils literal"><span class="pre">salary</span></code> changes from month to month while the <code class="docutils literal"><span class="pre">income_tax</span></code> is calculated on a yearly basis.</p>
+<p>Therefore, all OpenFisca variables have a <code class="docutils literal"><span class="pre">definition_period</span></code> attribute:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">DAY</span></code>: The variable may have a different value each day.</li>
+<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">MONTH</span></code>: The variable may have a different value each month. <em>For example</em>, the salary of a person. When <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> will always be a whole month. Trying to compute <code class="docutils literal"><span class="pre">salary</span></code> with a period that is not a month will raise an error before entering <code class="docutils literal"><span class="pre">formula</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">YEAR</span></code>: The variable is defined for a year or it has always the same value every months of a year. <em>For example</em>, if taxes are to be paid yearly, the corresponding variable is yearly. When <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> will always be a whole year (from January 1st to December 31th).</li>
+<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">ETERNITY</span></code>: The value of the variable is constant. <em>For example</em>, the date of birth of a person never changes. <code class="docutils literal"><span class="pre">period</span></code> is still the 2nd parameter of <code class="docutils literal"><span class="pre">formula</span></code>. However when <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> can be anything and it should not be used.</li>
+</ul>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="k">class</span> <span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Salary for a month&quot;</span>
@@ -254,13 +277,6 @@ The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore
         <span class="o">...</span>
 </pre></div>
 </div>
-<p>Most of the values calculated in OpenFisca, such as <code class="docutils literal"><span class="pre">income_tax</span></code>, and <code class="docutils literal"><span class="pre">housing_allowance</span></code>, can change over time.</p>
-<p>Therefore, all OpenFisca variables have a <code class="docutils literal"><span class="pre">definition_period</span></code> attribute:</p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">MONTH</span></code>: The variable may have a different value each month. <em>For example</em>, the salary of a person. When <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> will always be a whole month. Trying to compute <code class="docutils literal"><span class="pre">salary</span></code> with a period that is not a month will raise an error before entering <code class="docutils literal"><span class="pre">formula</span></code>.</li>
-<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">YEAR</span></code>: The variable is defined for a year or it has always the same value every months of a year. <em>For example</em>, if taxes are to be paid yearly, the corresponding variable is yearly. When <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> will always be a whole year (from January 1st to December 31th).</li>
-<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">ETERNITY</span></code>: The value of the variable is constant. <em>For example</em>, the date of birth of a person never changes. <code class="docutils literal"><span class="pre">period</span></code> is still the 2nd parameter of <code class="docutils literal"><span class="pre">formula</span></code>. However when <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> can be anything and it should not be used.</li>
-</ul>
 <p>Each formula calculates the value of a variable for a period the size of <strong>the given definition period</strong>. This period is always the second argument of the formulas.</p>
 </div>
 <div class="section" id="periods-in-formulas">
@@ -389,10 +405,10 @@ The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore
 </table><p>You can find more information on the <code class="docutils literal"><span class="pre">Period</span></code> object in the <a class="reference external" href="#">reference documentation</a> (<em>not available yet</em>)</p>
 </div>
 </div>
-<div class="section" id="set-input-automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period">
-<span id="set-input-automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period"></span><h2><code class="docutils literal"><span class="pre">set_input</span></code>: Automatically process variable inputs defined for periods not matching the <code class="docutils literal"><span class="pre">definition_period</span></code><a class="headerlink" href="#set-input-automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period">
+<span id="automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period"></span><h2>Automatically process variable inputs defined for periods not matching the <code class="docutils literal"><span class="pre">definition_period</span></code><a class="headerlink" href="#automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period" title="Permalink to this headline">¶</a></h2>
 <p>By default, when you provide a simulation input, you won&#8217;t be able to set a variable value for a period that doesn&#8217;t match its <code class="docutils literal"><span class="pre">definition_period</span></code>.</p>
-<p>For instance, if the <code class="docutils literal"><span class="pre">definition_period</span></code> of <code class="docutils literal"><span class="pre">salary</span></code> is <code class="docutils literal"><span class="pre">MONTH</span></code>, and you input a value for <code class="docutils literal"><span class="pre">salary</span></code> for <code class="docutils literal"><span class="pre">2015</span></code>, an error will be raised.</p>
+<p>For instance, if the <code class="docutils literal"><span class="pre">definition_period</span></code> of <code class="docutils literal"><span class="pre">salary</span></code> is <code class="docutils literal"><span class="pre">MONTH</span></code>, and you input a value for <code class="docutils literal"><span class="pre">salary</span></code> for <code class="docutils literal"><span class="pre">2015</span></code> or more than one month, an error will be raised.</p>
 <p>It is however possible to define an automatic behaviour to cast yearly inputs into monthy values. To do this, add a <code class="docutils literal"><span class="pre">set_input</span></code> class attribute to a variable.</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">set_input</span> <span class="pre">=</span> <span class="pre">set_input_divide_by_period</span></code>: the 12 months are set equal to 1/12th of the input value,</li>
@@ -411,6 +427,28 @@ The smallest unit for OpenFisca periods is the <strong>month</strong>. Therefore
 </pre></div>
 </div>
 <p>We can now provide an input for <code class="docutils literal"><span class="pre">2015</span></code> for <code class="docutils literal"><span class="pre">salary</span></code>: no error will be raised, and the value will be automatically split between the 12 months of <code class="docutils literal"><span class="pre">2015</span></code>.</p>
+<p>This example sets 3 years salaries for two persons and calculates how much they get for one month:</p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="c1"># Each person earned 60,000 between 2014 and 2016</span>
+<span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;year:2014:3&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">60000.0</span><span class="p">,</span> <span class="mf">60000.0</span><span class="p">])</span>
+
+<span class="n">one_month_salaries</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-01&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">one_month_salaries</span><span class="p">)</span>  <span class="c1"># prints [1666.6666 1666.6666]</span>
+</pre></div>
+</div>
+<p>This syntax is also available in <a class="reference internal" href="writing_yaml_tests.html"><span class="doc">YAML tests</span></a>:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Income tax over time</span>
+  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2016-01</span>
+  <span class="nt">input</span><span class="p">:</span>
+    <span class="nt">salary</span><span class="p">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">year:2014:3</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">100000</span> <span class="c1"># This person earned 100,000 between 2014 and 2016</span>
+  <span class="nt">output</span><span class="p">:</span>
+    <span class="nt">income_tax</span><span class="p">:</span>
+      <span class="nt">2014-01</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">388.8889</span>
+      <span class="nt">2015-01</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">416.6667</span> <span class="c1"># The income tax rate changes in 2015</span>
+      <span class="nt">2016-01</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">416.6667</span>
+      <span class="nt">2017-01</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span> <span class="c1"># The salary is not set for this period and defaults to 0</span>
+</pre></div>
+</div>
 </div>
 </div>
 
