@@ -17,7 +17,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Openfisca variables naming guidelines &#8212; OpenFisca  documentation</title>
+    <title>OpenFisca variables : naming guidelines &#8212; OpenFisca  documentation</title>
     
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -105,7 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="guidelines.html">Contributor guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="language.html">Language</a></li>
 <li class="toctree-l2"><a class="reference internal" href="commit-messages.html">Commit messages</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Openfisca variables naming guidelines</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">OpenFisca variables : naming guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semver.html">Semantic versionning guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html">About this documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="extensions.html">OpenFisca extensions</a></li>
@@ -139,42 +139,45 @@
               
                 <li><a href="index.html"><i class="fas fa-users"></i> Contribute</a></li>
               
-              <li>Openfisca variables naming guidelines</li>
+              <li>OpenFisca variables : naming guidelines</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
   <div class="section" id="openfisca-variables-naming-guidelines">
-<span id="openfisca-variables-naming-guidelines"></span><h1>Openfisca variables naming guidelines<a class="headerlink" href="#openfisca-variables-naming-guidelines" title="Permalink to this headline">¶</a></h1>
+<span id="openfisca-variables-naming-guidelines"></span><h1>OpenFisca variables : naming guidelines<a class="headerlink" href="#openfisca-variables-naming-guidelines" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="general-philosophy">
 <span id="general-philosophy"></span><h2>General philosophy<a class="headerlink" href="#general-philosophy" title="Permalink to this headline">¶</a></h2>
-<p>If you consider naming variables, you are in a country-specific repository, where the <a class="reference internal" href="language.html"><span class="doc">local language rule</span></a> apply. The domain language is thus one of the native ones of the modeled country. We consider each tax, collecting organism and country regulation as a domain-specific term. In the same fashion, well-known abbreviations of these domain-specific terms are accepted.</p>
-<p>OpenFisca variables names should, as much as possible, be understandable by an external contributor who is <strong>curious</strong> about the country tax and benefits system, <strong>without necessarily being an expert</strong>.</p>
+<p>The discussion below is concerned with naming the variables of a country package. In that case, the <a class="reference internal" href="language.html"><span class="doc">&#8220;local language rule&#8221;</span></a> applies, and the appropriate language for modeling the domain is one of the native ones of the modeled country. We consider each tax, collecting organism and country regulation, and so on, as a domain-specific term. In the same fashion, well-known abbreviations of these domain-specific terms are accepted.</p>
+<p>OpenFisca variables names should, as much as possible, be understandable by an external contributor who is <strong>curious</strong> about the country&#8217;s tax and benefits system, <strong>without necessarily being an expert</strong>.</p>
 <p>One should be able to get a rough idea of the meaning of a variable by reading its name, or by quickly researching it on the web.</p>
 <p>A particular effort should be made on variables that are likely to be reused.</p>
 <p><strong>Examples:</strong></p>
 <blockquote>
 <div><strong>Good naming</strong></div></blockquote>
 <blockquote>
-<div><code class="docutils literal"><span class="pre">als_etudiant</span></code>: I don&#8217;t know what <code class="docutils literal"><span class="pre">als</span></code> stands for. I look it up on a search engine, and I see ALS are a form of Aides Logement. I thus know this variable should be the amount of ALS for a student. This is enough to tell me if it is interesting in my context.</div></blockquote>
+<div><code class="docutils literal"><span class="pre">als_etudiant</span></code>: The acronym ALS stands in English for &#8220;Amyotrophic lateral sclerosis&#8221;, but browsing for that term in France is much more likely to return &#8220;Allocation de logement sociale&#8221;, a form of housing aid. The suffix suggests that it is a specific formula for the case of student housing aid.</div></blockquote>
 <hr class="docutils" />
 <blockquote>
 <div><strong>Bad naming</strong></div></blockquote>
 <blockquote>
-<div><code class="docutils literal"><span class="pre">apje_temp</span></code>: I could find the meaning of APJE online, but the temp suffix remains a mystery.</div></blockquote>
+<div><code class="docutils literal"><span class="pre">vat_sub1</span></code>: In English-speaking countries VAT would unambiguously refer to Value Added Tax, but the addition of a suffix for technical purposes (e.g. an intermediate step in the computation) should in
+general be avoided. A better name might be <code class="docutils literal"><span class="pre">vat_on_exports</span></code> (assuming this is the intermediate step&#8217;s
+meaning).</div></blockquote>
 <blockquote>
-<div><code class="docutils literal"><span class="pre">rto_net</span></code>. I can guess it&#8217;s an amout after some kind of deduction, but looking RTO on a search engine doesn&#8217;t give me anything.</div></blockquote>
+<div><code class="docutils literal"><span class="pre">cpstd</span></code>. Here the acronym might mean &#8220;Company Paid Short-Term Disability&#8221;, but this acronym is not widely used or recognizable, and will not be found in a web search. Using a longer name is preferable.</div></blockquote>
 </div>
 <div class="section" id="do-s-and-don-ts">
 <span id="do-s-and-don-ts"></span><h2>Do&#8217;s and don&#8217;ts<a class="headerlink" href="#do-s-and-don-ts" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="acronyms">
 <span id="acronyms"></span><h3>Acronyms<a class="headerlink" href="#acronyms" title="Permalink to this headline">¶</a></h3>
-<p>Acronyms are ok as long as they are broadly accepted and their meaning is quickly findable online.</p>
+<p>Acronyms are OK as long as they are broadly accepted and their meaning is quickly findable online. A good
+test for &#8220;findable&#8221; is that a web search <em>from the relevant country</em> should turn up the intended meaning as the first or second hit.</p>
 <blockquote>
-<div><strong>OK</strong>: RSA, RFR</div></blockquote>
+<div><strong>OK</strong>: VAT (Value Added Tax, near-universal except in France), EBITDA (tax, unambiguous), RSA (French, social benefit rather than cryptography, recognizable in context)</div></blockquote>
 <blockquote>
-<div><strong>KO</strong>: PAC</div></blockquote>
+<div><strong>KO</strong>: most TLAs (Three-Letter Acronyms)…</div></blockquote>
 </div>
 <div class="section" id="abbreviations">
 <span id="abbreviations"></span><h3>Abbreviations<a class="headerlink" href="#abbreviations" title="Permalink to this headline">¶</a></h3>
@@ -186,28 +189,25 @@
 </div>
 <div class="section" id="scopes-and-prefixes">
 <span id="scopes-and-prefixes"></span><h3>Scopes and prefixes<a class="headerlink" href="#scopes-and-prefixes" title="Permalink to this headline">¶</a></h3>
-<p>To show a variable belongs to a specific scope, it is better to use a prefix rather than a suffix.</p>
+<p>OpenFisca currently lacks a namespacing mechanism. In its absence, the need sometimes arises to use prefixes or suffixes to distinguish between variables which would otherwise have the same name, leading to errors or ambiguities. Some conventions have arisen:</p>
+<p>Use a prefix to distinguish versions of a variable specific to a sub-domain.</p>
 <blockquote>
-<div><strong>OK</strong>: rsa_nb_enfants</div></blockquote>
+<div><strong>OK</strong>: housing_tax_nb_parents</div></blockquote>
 <blockquote>
-<div><strong>KO</strong>: nb_enfants_rsa</div></blockquote>
-<p>Not specifying the scope of a specific variable should be avoided, as it is confusing for other users.</p>
+<div><strong>KO</strong>: nb_parents_housing_tax</div></blockquote>
+<p>Avoid mixing suffixed and non-suffixed versions of a similarly named variables, as this might cause confusion on which version to use where.</p>
 <blockquote>
-<div><strong>OK</strong>: ir_nb_pac</div></blockquote>
+<div><strong>OK</strong>: housing_tax_nb_parents, income_tax_nb_parents</div></blockquote>
 <blockquote>
-<div><strong>KO</strong>: nb_pac</div></blockquote>
-</div>
-<div class="section" id="entity-suffixes">
-<span id="entity-suffixes"></span><h3>Entity suffixes<a class="headerlink" href="#entity-suffixes" title="Permalink to this headline">¶</a></h3>
-<p>It happens that several variables have the same meaning, but for different entitities (individus, familles, etc.). Standard suffixes should be used to distinguish them.</p>
+<div><strong>KO</strong>: nb_parents, housing_tax_nb_parents</div></blockquote>
+<p>Use a suffix if it is necessary to distinguish between versions of a variable at the level of different entities; this is often seen when aggregating from the individual level to e.g. the household level.</p>
 <blockquote>
-<div><strong>OK</strong>: ass_base_ressources_individu, statut_occupation_logement_famille</div></blockquote>
+<div><strong>OK</strong>: taxable_income_household, work_income_individual</div></blockquote>
 </div>
 </div>
 <div class="section" id="legacy">
 <span id="legacy"></span><h2>Legacy<a class="headerlink" href="#legacy" title="Permalink to this headline">¶</a></h2>
-<p>Many variables on the current codebase of OpenFisca France do not respect the guidelines presented here. An exhautsive and global renaming is not considered as of today.</p>
-<p>However, new variables should be compliant with these guidelines, and legacy ones should progressively and opportunistically be renamed.</p>
+<p>Some existing models (such as the France model, grown over several years) do not respect all the guidelines presented here. These guidelines may also evolve with improvements to the underlying computation engine (such as namespacing or improved approaches to aggregation and other relations between entity and group values). Since variables and parameters represent the external API of a model, and excessive migration labor may discourage the users of an API, it is preferable to avoid global renamings. However, new names should be compliant with these guidelines, and legacy ones should be improved progressively and opportunistically. Communicating your standards to contributors is an important part of maintaining your model.</p>
 </div>
 </div>
 
