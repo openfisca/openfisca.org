@@ -127,14 +127,13 @@
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
 
-<span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">linesep</span>
 <span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">empty_clone</span><span class="p">,</span> <span class="n">stringify_array</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">empty_clone</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.tracers</span> <span class="k">import</span> <span class="n">Tracer</span><span class="p">,</span> <span class="n">TracingParameterNodeAtInstant</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
 
@@ -375,7 +374,6 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">array</span> <span class="o">=</span> <span class="n">formula</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters_at</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_formula_result</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">array</span>
 
     <span class="k">def</span> <span class="nf">_check_period_consistency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
@@ -404,35 +402,13 @@
                 <span class="s1">&#39;month&#39;</span> <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span> <span class="k">else</span> <span class="s1">&#39;year&#39;</span>
                 <span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">_check_formula_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">),</span> <span class="p">(</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-            <span class="s2">&quot;You tried to compute the formula &#39;</span><span class="si">{0}</span><span class="s2">&#39; for the period &#39;</span><span class="si">{1}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">)),</span>
-            <span class="s2">&quot;The formula &#39;</span><span class="si">{0}</span><span class="s2">@</span><span class="si">{1}</span><span class="s2">&#39; should return a Numpy array;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">)),</span>
-            <span class="s2">&quot;instead it returned &#39;</span><span class="si">{0}</span><span class="s2">&#39; of </span><span class="si">{1}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)),</span>
-            <span class="s2">&quot;Learn more about Numpy arrays and vectorial computing:&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;&lt;https://openfisca.org/doc/coding-the-legislation/25_vectorial_computing.html.&gt;&quot;</span>
-            <span class="p">]))</span>
-
-        <span class="k">assert</span> <span class="n">value</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="n">entity</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> \
-            <span class="s2">&quot;Function </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">&lt;</span><span class="si">{}</span><span class="s2">&gt;() --&gt; &lt;</span><span class="si">{}</span><span class="s2">&gt;</span><span class="si">{}</span><span class="s2"> returns an array of size </span><span class="si">{}</span><span class="s2">, but size </span><span class="si">{}</span><span class="s2"> is expected for </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">),</span> <span class="n">stringify_array</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
-                <span class="n">value</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="c1"># cf https://stackoverflow.com/questions/6736590/fast-check-for-nan-in-numpy</span>
-                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">value</span><span class="p">)):</span>
-                    <span class="n">nan_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
-                    <span class="k">raise</span> <span class="n">NaNCreationError</span><span class="p">(</span><span class="s2">&quot;Function </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">&lt;</span><span class="si">{}</span><span class="s2">&gt;() --&gt; &lt;</span><span class="si">{}</span><span class="s2">&gt;</span><span class="si">{}</span><span class="s2"> returns </span><span class="si">{}</span><span class="s2"> NaN value(s)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">),</span> <span class="n">stringify_array</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
-                        <span class="n">nan_count</span><span class="p">))</span>
-            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-                <span class="k">pass</span>
-
     <span class="k">def</span> <span class="nf">_cast_formula_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">Enum</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">variable</span><span class="o">.</span><span class="n">possible_values</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">population</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable_population</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">filled_array</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
