@@ -135,6 +135,7 @@
 
 <span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="k">import</span> <span class="n">ParameterNodeAtInstant</span><span class="p">,</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="p">,</span> <span class="n">ALLOWED_PARAM_TYPES</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.taxscales</span> <span class="k">import</span> <span class="n">AbstractTaxScale</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">EnumArray</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -299,7 +300,10 @@
     <span class="k">def</span> <span class="nf">_print_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">):</span>
 
         <span class="k">def</span> <span class="nf">print_line</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2"> &gt;&gt; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;  &#39;</span> <span class="o">*</span> <span class="n">depth</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">decode_to_str</span><span class="p">()</span>
+            <span class="n">formatted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">max_line_width</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">))</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2"> &gt;&gt; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;  &#39;</span> <span class="o">*</span> <span class="n">depth</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">formatted</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">print_line</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&quot;Calculation aborted due to a circular dependency&quot;</span><span class="p">)</span>
