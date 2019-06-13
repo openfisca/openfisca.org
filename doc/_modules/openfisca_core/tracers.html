@@ -216,18 +216,17 @@
         <span class="k">return</span> <span class="n">new</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_get_key</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_get_key</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&lt;</span><span class="si">{}</span><span class="s2">&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Tracer.record_calculation_start"><a class="viewcode-back" href="../../openfisca-python-api/tracer.html#openfisca_core.tracers.Tracer.record_calculation_start">[docs]</a>    <span class="k">def</span> <span class="nf">record_calculation_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">):</span>
+<div class="viewcode-block" id="Tracer.record_calculation_start"><a class="viewcode-back" href="../../openfisca-python-api/tracer.html#openfisca_core.tracers.Tracer.record_calculation_start">[docs]</a>    <span class="k">def</span> <span class="nf">record_calculation_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Record that OpenFisca started computing a variable.</span>
 
 <span class="sd">            :param str variable_name: Name of the variable starting to be computed</span>
 <span class="sd">            :param Period period: Period for which the variable is being computed</span>
-<span class="sd">            :param list parameters: Parameter with which the variable is being computed</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_key</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_key</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">:</span>  <span class="c1"># The variable is a dependency of another variable</span>
             <span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -255,16 +254,15 @@
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">[</span><span class="n">parent</span><span class="p">][</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="n">parameter_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
-<div class="viewcode-block" id="Tracer.record_calculation_end"><a class="viewcode-back" href="../../openfisca-python-api/tracer.html#openfisca_core.tracers.Tracer.record_calculation_end">[docs]</a>    <span class="k">def</span> <span class="nf">record_calculation_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">):</span>
+<div class="viewcode-block" id="Tracer.record_calculation_end"><a class="viewcode-back" href="../../openfisca-python-api/tracer.html#openfisca_core.tracers.Tracer.record_calculation_end">[docs]</a>    <span class="k">def</span> <span class="nf">record_calculation_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Record that OpenFisca finished computing a variable.</span>
 
 <span class="sd">            :param str variable_name: Name of the variable starting to be computed</span>
 <span class="sd">            :param Period period: Period for which the variable is being computed</span>
 <span class="sd">            :param numpy.ndarray result: Result of the computation</span>
-<span class="sd">            :param list parameters: Parameter with which the variable is being computed</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_key</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_key</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="n">expected_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="o">==</span> <span class="n">expected_key</span><span class="p">:</span>
@@ -315,7 +313,7 @@
 
 <div class="viewcode-block" id="Tracer.print_trace"><a class="viewcode-back" href="../../openfisca-python-api/tracer.html#openfisca_core.tracers.Tracer.print_trace">[docs]</a>    <span class="k">def</span> <span class="nf">print_trace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">max_depth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">aggregate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ignore_zero</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Print value, the dependencies, and the dependencies values of the variable for the given period (and possibly the given set of extra parameters).</span>
+<span class="sd">            Print value, the dependencies, and the dependencies values of the variable for the given period.</span>
 
 <span class="sd">            :param str variable_name: Name of the variable to investigate</span>
 <span class="sd">            :param Period period: Period to investigate</span>
