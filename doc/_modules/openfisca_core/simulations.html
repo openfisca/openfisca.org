@@ -134,7 +134,7 @@
 
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">empty_clone</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.tracers</span> <span class="k">import</span> <span class="n">Tracer</span><span class="p">,</span> <span class="n">TracingParameterNodeAtInstant</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.tracers</span> <span class="k">import</span> <span class="n">TracingParameterNodeAtInstant</span><span class="p">,</span> <span class="n">SimpleTracer</span><span class="p">,</span> <span class="n">FullTracer</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
 
 
@@ -179,14 +179,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">link_to_entities_instances</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">create_shortcuts</span><span class="p">()</span>
 
-        <span class="c1"># To keep track of the values (formulas and periods) being calculated to detect circular definitions.</span>
-        <span class="c1"># The data structure of computation_stack is:</span>
-        <span class="c1"># [(&#39;variable_name&#39;, &#39;period1&#39;), (&#39;variable_name&#39;, &#39;period2&#39;)]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">computation_stack</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">invalidated_caches</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">SimpleTracer</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">opt_out_cache</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="c1"># controls the spirals detection; check for performance impact if &gt; 1</span>
@@ -202,9 +199,9 @@
     <span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_trace</span> <span class="o">=</span> <span class="n">trace</span>
         <span class="k">if</span> <span class="n">trace</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">Tracer</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">FullTracer</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">SimpleTracer</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">link_to_entities_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">_key</span><span class="p">,</span> <span class="n">entity_instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -230,7 +227,22 @@
 
     <span class="c1"># ----- Calculation methods ----- #</span>
 
-<div class="viewcode-block" id="Simulation.calculate"><a class="viewcode-back" href="../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.calculate">[docs]</a>    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
+            <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">enter_calculation</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">exit_calculation</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">purge_cache_of_invalid_values</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Calculate the variable ``variable_name`` for the period ``period``, using the variable formula if it exists.</span>
 
@@ -240,26 +252,18 @@
         <span class="n">holder</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
         <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
-            <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_start</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_period_consistency</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span>
 
         <span class="c1"># First look for a value already cached</span>
         <span class="n">cached_array</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">cached_array</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_end</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">cached_array</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">cached_array</span>
 
         <span class="n">array</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># First, try to run a formula</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_cycle</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_cycle</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
             <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_formula</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
             <span class="c1"># If no result, use the default value and cache it</span>
@@ -267,22 +271,16 @@
                 <span class="n">array</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">default_array</span><span class="p">()</span>
 
             <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cast_formula_result</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span>
-
             <span class="n">holder</span><span class="o">.</span><span class="n">put_in_cache</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+
         <span class="k">except</span> <span class="n">SpiralError</span><span class="p">:</span>
             <span class="n">array</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">default_array</span><span class="p">()</span>
-        <span class="k">finally</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_end</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_clean_cycle_detection_data</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">purge_cache_of_invalid_values</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">array</span></div>
+        <span class="k">return</span> <span class="n">array</span>
 
     <span class="k">def</span> <span class="nf">purge_cache_of_invalid_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># We wait for the end of calculate(), signalled by an empty stack, before purging the cache</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">computation_stack</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">_period</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">invalidated_caches</span><span class="p">:</span>
             <span class="n">holder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">_name</span><span class="p">)</span>
@@ -417,42 +415,38 @@
 
     <span class="c1"># ----- Handle circular dependencies in a calculation ----- #</span>
 
-    <span class="k">def</span> <span class="nf">_check_for_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_check_for_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Raise an exception in the case of a circular definition, where evaluating a variable for</span>
 <span class="sd">        a given period loops around to evaluating the same variable/period pair. Also guards, as</span>
 <span class="sd">        a heuristic, against &quot;quasicircles&quot;, where the evaluation of a variable at a period involves</span>
 <span class="sd">        the same variable at a different period.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">previous_periods</span> <span class="o">=</span> <span class="p">[</span><span class="n">_period</span> <span class="k">for</span> <span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">_period</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">computation_stack</span> <span class="k">if</span> <span class="n">_name</span> <span class="o">==</span> <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">computation_stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">)))</span>
-        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">)</span> <span class="ow">in</span> <span class="n">previous_periods</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">CycleError</span><span class="p">(</span><span class="s2">&quot;Circular definition detected on formula </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">))</span>
+        <span class="c1"># The last frame is the current calculation, so it should be ignored from cycle detection</span>
+        <span class="n">previous_periods</span> <span class="o">=</span> <span class="p">[</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">frame</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">variable</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">previous_periods</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CycleError</span><span class="p">(</span><span class="s2">&quot;Circular definition detected on formula </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">))</span>
         <span class="n">spiral</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">previous_periods</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_spiral_loops</span>
         <span class="k">if</span> <span class="n">spiral</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">invalidate_spiral_variables</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Quasicircular definition detected on formula </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2"> involving </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">computation_stack</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">SpiralError</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Quasicircular definition detected on formula </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2"> involving </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">SpiralError</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">invalidate_spiral_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">invalidate_cache_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">invalidated_caches</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">invalidate_spiral_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="c1"># Visit the stack, from the bottom (most recent) up; we know that we&#39;ll find</span>
         <span class="c1"># the variable implicated in the spiral (max_spiral_loops+1) times; we keep the</span>
         <span class="c1"># intermediate values computed (to avoid impacting performance) but we mark them</span>
         <span class="c1"># for deletion from the cache once the calculation ends.</span>
         <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computation_stack</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">invalidated_caches</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">frame</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">invalidate_cache_entry</span><span class="p">(</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">frame</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">frame</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">variable</span><span class="p">:</span>
                 <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_spiral_loops</span><span class="p">:</span>
                     <span class="k">break</span>
-
-    <span class="k">def</span> <span class="nf">_clean_cycle_detection_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        When the value of a formula have been computed, remove the period from</span>
-<span class="sd">        requested_periods_by_variable_name[variable_name] and delete the latter if empty.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">computation_stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 
     <span class="c1"># ----- Methods to access stored values ----- #</span>
 

@@ -147,7 +147,6 @@
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">VariableNotFound</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">empty_clone</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="k">import</span> <span class="n">SimulationBuilder</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.tracers</span> <span class="k">import</span> <span class="n">Tracer</span>
 
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -253,11 +252,9 @@
                     <span class="n">builder</span><span class="o">.</span><span class="n">set_default_period</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
                     <span class="n">simulation</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">)</span>
 
+                <span class="n">simulation</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="n">trace</span>
                 <span class="n">simulation</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
                 <span class="n">simulation</span><span class="o">.</span><span class="n">opt_out_cache</span> <span class="o">=</span> <span class="n">opt_out_cache</span>
-                <span class="k">if</span> <span class="n">trace</span><span class="p">:</span>
-                    <span class="n">simulation</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="n">trace</span>
-                    <span class="n">simulation</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">Tracer</span><span class="p">()</span>
 
                 <span class="k">return</span> <span class="n">simulation</span>
 
