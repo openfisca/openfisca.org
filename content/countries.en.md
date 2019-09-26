@@ -9,6 +9,7 @@ nsw: "New South Wales - Australia"
 nz: "Aotearoa New Zealand"
 tn: "Tunisia"
 sn: "Senegal"
+uy: "Uruguay"
 
 definition: "Country Packages are the basic modules of OpenFisca. They define the Parameters, Entities and Variables of a country."
 introduction: "Tax and benefit system models exist for the following countries:"
