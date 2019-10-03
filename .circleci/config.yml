@@ -31,6 +31,8 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
+      - attach_workspace:
+          at: .
       - run:
           name: Publish openfisca.org
           command: |
@@ -52,6 +54,3 @@ workflows:
           requires:
             - test
             - hugo/build
-          filters:
-            branches:
-              only: master
