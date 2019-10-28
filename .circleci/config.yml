@@ -1,79 +1,38 @@
-# CircleCI 2.0 configuration file. See <https://circleci.com/docs/2.0/language-python/>.
-version: 2
+version: 2.1
+
+orbs:
+  hugo: circleci/hugo@0.3.1
+
 jobs:
-  build:
-    parallelism: 4
+  test:
     docker:
-      # Third-party docker image containing Hugo 0.37 and Node 8. The integrity is checked by the Sha256, which needs to be changed to update the Hugo and Node versions. See https://circleci.com/docs/2.0/circleci-images/#using-a-docker-image-id-to-pin-an-image-to-a-fixed-version
-      - image: jank1310/hugo-node-docker@sha256:9b8d89227135bad4088bed10fe7136adc8b7748b807e868de07fa234fef05684
-    environment:
-      WATAI_TESTS: tests/integration
-      SAUCE_USERNAME: openfisca
-      # SAUCE_ACCESS_KEY is defined in the CircleCI web UI
-      PORT: 8080 # openfisca.org & Hugo framework
+      - image: circleci/node:lts
 
     steps:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-      - restore_cache:
-          key: sc-4.4.9
       - run:
-          name: Install app dependencies
+          name: Install dependencies
           command: npm install
-      - run:
-          name: Install saucelabs
-          command: |
-            npm install saucelabs@1.5.0 --no-save # allow sending Watai results to SauceLabs. Don't save in package.json, as this would change its checksum and mess up the cache.
-            if [ -d sc ]; then exit; fi  # sc has already been downloaded
-            mkdir sc
-            wget https://saucelabs.com/downloads/sc-4.4.9-linux.tar.gz --directory-prefix sc
-            tar -xzf sc/sc-4.4.9-linux.tar.gz --directory sc
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - save_cache:
-          key: sc-4.4.9
-          paths:
-            - sc
-      - run:
-          name: Run app
-          command: hugo serve --port $PORT
-          background: true
-      - run:
-          name: Start Sauce Connect
-          command: cd sc/sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY --tunnel-identifier "circle-$CIRCLE_BUILD_NUM-$CIRCLE_NODE_INDEX" --readyfile ~/sauce_is_ready > /tmp/sauce_log.txt
-          background: true
-      - run:
-          name: Wait for Sauce Connect
-          command: while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
-      - run:
-          name: Wait for app to start
-          command: wget --retry-connrefused --waitretry=1 --quiet http://localhost:$PORT
-      - run:
-          name: Prepare CI-specific config holder and add CI-specific config to Watai
-          command: mkdir $HOME/.watai && cp $WATAI_TESTS/config-ci.js $HOME/.watai/config.js
       - run:
           name: Run tests
           command: npm test
-      - run:
-          name: Kill Sauce Connect
-          command: pkill sc
-      - store_artifacts:
-          path: /tmp/sauce_log.txt
-          destination: sauce-log
+
   deploy:
     docker:
-      # Third-party docker image containing Hugo 0.37 and Node 8. The integrity is checked by the Sha256, which needs to be changed to update the Hugo and Node versions. See https://circleci.com/docs/2.0/circleci-images/#using-a-docker-image-id-to-pin-an-image-to-a-fixed-version
-      - image: jank1310/hugo-node-docker@sha256:9b8d89227135bad4088bed10fe7136adc8b7748b807e868de07fa234fef05684
+      - image: circleci/node:lts
+
     steps:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Build app
-          command: hugo
+      - attach_workspace:
+          at: .
       - run:
           name: Publish openfisca.org
           command: |
@@ -82,14 +41,19 @@ jobs:
       - run:
           name: Publish openfisca.org/doc
           command: ./publish-doc.sh
+
 workflows:
   version: 2
-  build:
+  main:
     jobs:
-      - build
+      - test
+      - hugo/build:
+          version: '0.37'
+          html-proofer: true
       - deploy:
           requires:
-            - build
+            - test
+            - hugo/build
           filters:
             branches:
               only: master
