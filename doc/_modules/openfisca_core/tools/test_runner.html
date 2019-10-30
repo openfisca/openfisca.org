@@ -262,7 +262,8 @@
         <span class="nb">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="p">{})</span>
         <span class="n">period</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">)</span>
         <span class="n">verbose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">)</span>
-        <span class="n">performance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;performance&#39;</span><span class="p">)</span>
+        <span class="n">performance_graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;performance_graph&#39;</span><span class="p">)</span>
+        <span class="n">performance_tables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;performance_tables&#39;</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">builder</span><span class="o">.</span><span class="n">set_default_period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
@@ -274,14 +275,16 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span> <span class="kn">from</span> <span class="nn">e</span>  <span class="c1"># Keep the stack trace from the root error</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="n">verbose</span> <span class="ow">or</span> <span class="n">performance</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="n">verbose</span> <span class="ow">or</span> <span class="n">performance_graph</span> <span class="ow">or</span> <span class="n">performance_tables</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">check_output</span><span class="p">()</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="n">tracer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">tracer</span>
             <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_computation_log</span><span class="p">(</span><span class="n">tracer</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">performance</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">performance_graph</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">generate_performance_graph</span><span class="p">(</span><span class="n">tracer</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">performance_tables</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">generate_performance_tables</span><span class="p">(</span><span class="n">tracer</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">print_computation_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracer</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Computation log:&quot;</span><span class="p">)</span>  <span class="c1"># noqa T001</span>
@@ -289,6 +292,9 @@
 
     <span class="k">def</span> <span class="nf">generate_performance_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracer</span><span class="p">):</span>
         <span class="n">tracer</span><span class="o">.</span><span class="n">generate_performance_graph</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">generate_performance_tables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracer</span><span class="p">):</span>
+        <span class="n">tracer</span><span class="o">.</span><span class="n">generate_performance_tables</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">check_output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">)</span>
