@@ -128,7 +128,7 @@
 
 
 <span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">isclass</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">linesep</span>
 <span class="kn">from</span> <span class="nn">imp</span> <span class="k">import</span> <span class="n">find_module</span><span class="p">,</span> <span class="n">load_module</span>
@@ -139,11 +139,11 @@
 <span class="kn">import</span> <span class="nn">traceback</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">Period</span><span class="p">,</span> <span class="n">Instant</span><span class="p">,</span> <span class="n">instant</span> <span class="k">as</span> <span class="n">make_instant</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.entities</span> <span class="k">import</span> <span class="n">Entity</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.populations</span> <span class="k">import</span> <span class="n">Population</span><span class="p">,</span> <span class="n">GroupPopulation</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="k">import</span> <span class="n">ParameterNode</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.variables</span> <span class="k">import</span> <span class="n">Variable</span><span class="p">,</span> <span class="n">get_neutralized_variable</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.variables</span> <span class="k">import</span> <span class="n">Variable</span><span class="p">,</span> <span class="n">get_neutralized_variable</span><span class="p">,</span> <span class="n">get_annualized_variable</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">VariableNotFound</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">empty_clone</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="k">import</span> <span class="n">SimulationBuilder</span>
@@ -445,6 +445,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">variable_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_neutralized_variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">))</span></div>
 
+    <span class="k">def</span> <span class="nf">annualize_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Period</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">variable_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_annualized_variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">))</span>
+
 <div class="viewcode-block" id="TaxBenefitSystem.load_parameters"><a class="viewcode-back" href="../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.load_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">load_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_to_yaml_dir</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Loads the legislation parameter for a directory containing YAML parameters files.</span>
@@ -477,12 +480,12 @@
 <span class="sd">        :returns: The parameters of the legislation at a given instant.</span>
 <span class="sd">        :rtype: :any:`ParameterNodeAtInstant`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="n">Period</span><span class="p">):</span>
             <span class="n">instant</span> <span class="o">=</span> <span class="n">instant</span><span class="o">.</span><span class="n">start</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
-            <span class="n">instant</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+            <span class="n">instant</span> <span class="o">=</span> <span class="n">make_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">),</span> <span class="s2">&quot;Expected an Instant (e.g. Instant((2017, 1, 1)) ). Got: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="n">Instant</span><span class="p">),</span> <span class="s2">&quot;Expected an Instant (e.g. Instant((2017, 1, 1)) ). Got: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
 
         <span class="n">parameters_at_instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters_at_instant_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">parameters_at_instant</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

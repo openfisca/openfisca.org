@@ -130,6 +130,7 @@
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sortedcontainers.sorteddict</span> <span class="k">import</span> <span class="n">SortedDict</span>
@@ -197,7 +198,7 @@
 
 <span class="sd">    Main attributes:</span>
 
-<span class="sd">       .. py:attribute: name</span>
+<span class="sd">       .. py:attribute:: name</span>
 
 <span class="sd">           Name of the variable</span>
 
@@ -582,6 +583,34 @@
     <span class="n">result</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;[Neutralized]&#39;</span> <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;[Neutralized] </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">label</span><span class="p">),</span>
 
     <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="get_annualized_variable"><a class="viewcode-back" href="../../openfisca-python-api/variables.html#openfisca_core.variables.get_annualized_variable">[docs]</a><span class="k">def</span> <span class="nf">get_annualized_variable</span><span class="p">(</span><span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span><span class="p">,</span> <span class="n">annualization_period</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variable</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a clone of ``variable`` that is annualized for the period ``annualization_period``.</span>
+<span class="sd">        When annualized, a variable&#39;s formula is only called for a January calculation, and the results for other months are assumed to be identical.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">make_annual_formula</span><span class="p">(</span><span class="n">original_formula</span><span class="p">,</span> <span class="n">annualization_period</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">annual_formula</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">period</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">month</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">(</span><span class="n">annualization_period</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">annualization_period</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">period</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="n">population</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="o">.</span><span class="n">this_year</span><span class="o">.</span><span class="n">first_month</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">original_formula</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_argcount</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">original_formula</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">original_formula</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">annual_formula</span>
+
+    <span class="kn">from</span> <span class="nn">sortedcontainers.sorteddict</span> <span class="k">import</span> <span class="n">SortedDict</span>
+
+    <span class="n">new_variable</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="n">new_variable</span><span class="o">.</span><span class="n">formulas</span> <span class="o">=</span> <span class="n">SortedDict</span><span class="p">({</span>
+        <span class="n">key</span><span class="p">:</span> <span class="n">make_annual_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">annualization_period</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">formula</span> <span class="ow">in</span> <span class="n">variable</span><span class="o">.</span><span class="n">formulas</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">new_variable</span></div>
 </pre></div>
 
           </div>
