@@ -14,9 +14,13 @@ usecases:
     caption_1: utilise OpenFisca et sa
     caption_2: pour informer les citoyens de Barcelone de leur éligibilité aux aides sociales.
 
-  reforms:
+  leximpact:
     title: Déterminer l’impact de réformes
     description: Comparez la loi telle qu’elle est et telle qu’elle pourrait être.
+    caption_1: utilise OpenFisca et sa
+    caption_2: pour simuler, de façon rapide, l'impact des réformes paramétriques de l'impôt sur le revenu.
+
+  reforms:
     caption_1: du Mouvement Français pour un Revenu de Base qui utilise OpenFisca et sa
     caption_2: pour évaluer le coût et les bénéfices d'une réforme qui instaurerait un revenu de base en France.
 

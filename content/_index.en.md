@@ -14,9 +14,13 @@ usecases:
     caption_1: uses OpenFisca and its
     caption_2: to inform Barcelona citizens on their eligibility to social benefits.
 
-  reforms:
+  leximpact:
     title: Evaluate reforms impact
     description: Compare the law now to what it could be.
+    caption_1: uses OpenFisca and its
+    caption_2: evaluate the ex ante impact of tax and benefit system reforms, thanks to a simulator dedicated to the income tax.
+
+  reforms:
     caption_1: of the French Movement for a Basic Income that uses OpenFisca and its
     caption_2: to evaluate the cost and benefits of a reform introducing a basic income in France.
 
