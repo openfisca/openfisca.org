@@ -3,6 +3,7 @@ title: "Available country packages"
 layout: countries
 
 bcn: "Barcelona"
+ci: "Ivory Coast"
 fr: "France"
 it: "Italy"
 ml: "Mali"
