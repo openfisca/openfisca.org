@@ -3,10 +3,15 @@ title: "Turn law into software"
 usecases:
   mes_aides:
     title: Calculate citizens' rights
-    description: From an individual situation, calculate any variable of a national tax and benefit system.
+    description: From an individual situation, calculate any rule of a national tax and benefit system.
     caption_1: uses OpenFisca and its
     caption_2: to inform French citizens on their eligibility to national and local benefits.
-  embauche: 
+  les_meves_ajudes:
+    title:
+    description:
+    caption_1: uses OpenFisca and its
+    caption_2: to inform Barcelona citizens on their eligibility to social benefits.
+  embauche:
     title: Assess labor cost
     description: Model any kind of entity and evaluate its eligibility to fiscal obligations and benefits.
     caption_1: uses OpenFisca and a specific
