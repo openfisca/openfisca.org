@@ -5,6 +5,7 @@ layout: countries
 bcn: "Barcelona"
 fr: "France"
 it: "Italy"
+ml: "Mali"
 nsw: "New South Wales - Australia"
 nz: "Aotearoa New Zealand"
 tn: "Tunisia"
