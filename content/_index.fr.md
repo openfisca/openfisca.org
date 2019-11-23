@@ -1,26 +1,28 @@
 ---
 title: "Transformer le code législatif en code logiciel"
+get_started: Commencer
+products: Propulsés par OpenFisca
+
 usecases:
   mes_aides:
     title: Calculer les droits des citoyens
-    description: Calculez toute règle d’un système socio-fiscal à partir d’une situation individuelle.
+    description: Calculez toute règle de la législation à partir d’une situation individuelle.
     caption_1: utilise OpenFisca et sa
     caption_2: pour informer les citoyens français de leur éligibilité aux aides nationales et locales.
+
   les_meves_ajudes:
-    title:
-    description:
     caption_1: utilise OpenFisca et sa
     caption_2: pour informer les citoyens de Barcelone de leur éligibilité aux aides sociales.
-  embauche:
-    title: Evaluer le coût du travail
-    description: Modélisez tous types d’entités et évaluez leur éligibilité à des charges et à des allégements.
-    caption_1: utilise OpenFisca et une
-    caption_2: spécifique pour permettre aux employeurs et comptables d'estimer le coût d'embauche d'un nouvel employé, déductions fiscales comprises.
+
   reforms:
     title: Déterminer l’impact de réformes
     description: Comparez la loi telle qu’elle est et telle qu’elle pourrait être.
     caption_1: du Mouvement Français pour un Revenu de Base qui utilise OpenFisca et sa
     caption_2: pour évaluer le coût et les bénéfices d'une réforme qui instaurerait un revenu de base en France.
-get_started: Commencer
-products: Propulsés par OpenFisca
+
+  legexp_tn:
+    title: Explorer la législation
+    description: Modélisez les règles de la législation, explorez-les, et en évaluez l'éligibilité des citoyens.
+    caption_1: utilise OpenFisca et son
+    caption_2: pour permettre aux citoyens, aux agents publics, aux experts métier, et aux développeurs d'explorer la législation.
 ---
