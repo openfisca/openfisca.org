@@ -23,5 +23,5 @@ usecases:
   rapu_ture:
     title: Explore government rules
     description: Model any kind of government rule, explore them and evaluate who is eligible to what.
-    caption: uses OpenFisca to allow New Zealand citizens, civil servants, policy officers and developers to explore government rules.
+    caption: uses OpenFisca to allow Aotearoa New Zealand citizens, civil servants, policy officers and developers to explore government rules.
 ---
