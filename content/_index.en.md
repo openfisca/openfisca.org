@@ -21,7 +21,7 @@ usecases:
     caption_2: to evaluate the cost and benefits of a reform introducing a basic income in France.
 
   rapu_ture:
-    title: Rapu Ture (Exploring  the Rules)
-    description: Web interface to explore variables, formulas, parameters and scenarios (unit tests) in New Zealand's Openfisca built from government legislation, regulation and some policies.
-    caption: uses OpenFisca to allow Aotearoa New Zealand citizens, civil servants, policy officers and developers to explore government rules.
+    title: Explore the Rules
+    description: Model any kind of government rule, explore them and evaluate who is eligible to what.
+    caption: (Exploring the Rules) is a web interface to explore the rules in New Zealand's Openfisca built from government legislation, regulation and some policies.
 ---

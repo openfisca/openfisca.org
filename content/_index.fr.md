@@ -23,5 +23,5 @@ usecases:
   rapu_ture:
     title: Explorer la législation
     description: Modélisez les règles de la législation, explorez-les, et en évaluez l'éligibilité des citoyens.
-    caption: utilise OpenFisca pour permettre aux citoyens, aux agents publics, aux experts métier, et aux développeurs d'explorer la législation.
+    caption: (Exploring the Rules) utilise OpenFisca pour permettre aux citoyens, aux agents publics, aux experts métier, et aux développeurs d'explorer les règles de la législation néo-zélandaise.
 ---
