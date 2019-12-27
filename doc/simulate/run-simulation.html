@@ -222,8 +222,8 @@ You have to follow these steps:</p>
 
 <span class="n">housing_allowance</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;2011-01&#39;</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;households&quot;</span><span class="p">,</span> <span class="n">simulation</span><span class="o">.</span><span class="n">household</span><span class="o">.</span><span class="n">ids</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;housing_allowance&quot;</span><span class="p">,</span> <span class="n">housing_allowance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;households&quot;</span><span class="p">,</span> <span class="n">simulation</span><span class="o">.</span><span class="n">household</span><span class="o">.</span><span class="n">ids</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;housing_allowance&quot;</span><span class="p">,</span> <span class="n">housing_allowance</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -316,7 +316,7 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </pre></div>
 </div>
 <p>You can now access the <code class="docutils literal"><span class="pre">data.person_salary</span></code> column values and get:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">person_salary</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">person_salary</span><span class="p">)</span>
 
 <span class="go">0     2694</span>
 <span class="go">1     2720</span>
@@ -353,7 +353,7 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">income_tax</span></code> is an instance of <code class="docutils literal"><span class="pre">numpy.ndarray</span></code> as you can see with:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">income_tax</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">income_tax</span><span class="p">)</span>
 
 <span class="go">array([404.1     408.00003      579.75    195.00002   0.        0.      432.6</span>
 <span class="go">       1.        507.90002      439.35      0.      240.00002],</span>
@@ -361,13 +361,13 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </pre></div>
 </div>
 <p>And, persons&#8217; order is kept:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">person_id</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">person_id</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 
 <span class="go">array([ 1  2  3  4  5  6  7 12  8  9 10 11])</span>
 </pre></div>
 </div>
 <p>Thus, you can get the calculated <code class="docutils literal"><span class="pre">income_tax</span></code> of one person. For example, get its value for the 8th person in the list with:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">income_tax</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>  <span class="c1"># person_id == 12</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">income_tax</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>  <span class="c1"># person_id == 12</span>
 
 <span class="go">180.0</span>
 </pre></div>
@@ -432,7 +432,7 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </li>
 <li><p class="first">Initialise a simulation builder with the <code class="docutils literal"><span class="pre">Person</span></code> entity. All you need is the list of persons identifiers:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="kn">import</span> <span class="n">SimulationBuilder</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">numpy</span>
 
 <span class="c1"># ...step 2 code...</span>
 

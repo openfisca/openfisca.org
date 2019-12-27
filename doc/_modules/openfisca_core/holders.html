@@ -133,13 +133,13 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">psutil</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="k">import</span> <span class="n">empty_clone</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.data_storage</span> <span class="k">import</span> <span class="n">InMemoryStorage</span><span class="p">,</span> <span class="n">OnDiskStorage</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="k">import</span> <span class="n">PeriodMismatchError</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">MONTH</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">,</span> <span class="n">ETERNITY</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="k">import</span> <span class="n">eval_expression</span>
+<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">periods</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="kn">import</span> <span class="n">empty_clone</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.data_storage</span> <span class="kn">import</span> <span class="n">InMemoryStorage</span><span class="p">,</span> <span class="n">OnDiskStorage</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="kn">import</span> <span class="n">PeriodMismatchError</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="kn">import</span> <span class="n">MONTH</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">,</span> <span class="n">ETERNITY</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="kn">import</span> <span class="n">eval_expression</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -149,7 +149,7 @@
 <span class="sd">        A holder keeps tracks of a variable values after they have been calculated, or set as an input.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">population</span> <span class="o">=</span> <span class="n">population</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variable</span> <span class="o">=</span> <span class="n">variable</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">simulation</span>
@@ -337,11 +337,11 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;A period must be specified to set values, except for variables with ETERNITY as as period_definition.&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">!=</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="ow">or</span> <span class="n">period</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
                 <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span>
-                <span class="n">period_size_adj</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{period.unit}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="p">(</span><span class="n">period</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{period.size}</span><span class="s1">-</span><span class="si">{period.unit}</span><span class="s1">s&#39;</span>
+                <span class="n">period_size_adj</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{period.unit}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="p">(</span><span class="n">period</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{period.size}</span><span class="s1">-</span><span class="si">{period.unit}</span><span class="s1">s&#39;</span>
                 <span class="n">error_message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                    <span class="n">f</span><span class="s1">&#39;Unable to set a value for variable &quot;</span><span class="si">{name}</span><span class="s1">&quot; for </span><span class="si">{period_size_adj}</span><span class="s1">-long period &quot;</span><span class="si">{period}</span><span class="s1">&quot;.&#39;</span><span class="p">,</span>
-                    <span class="n">f</span><span class="s1">&#39;&quot;</span><span class="si">{name}</span><span class="s1">&quot; can only be set for one </span><span class="si">{self.variable.definition_period}</span><span class="s1"> at a time. Please adapt your input.&#39;</span><span class="p">,</span>
-                    <span class="n">f</span><span class="s1">&#39;If you are the maintainer of &quot;</span><span class="si">{name}</span><span class="s1">&quot;, you can consider adding it a set_input attribute to enable automatic period casting.&#39;</span>
+                    <span class="sa">f</span><span class="s1">&#39;Unable to set a value for variable &quot;</span><span class="si">{name}</span><span class="s1">&quot; for </span><span class="si">{period_size_adj}</span><span class="s1">-long period &quot;</span><span class="si">{period}</span><span class="s1">&quot;.&#39;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{name}</span><span class="s1">&quot; can only be set for one </span><span class="si">{self.variable.definition_period}</span><span class="s1"> at a time. Please adapt your input.&#39;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s1">&#39;If you are the maintainer of &quot;</span><span class="si">{name}</span><span class="s1">&quot;, you can consider adding it a set_input attribute to enable automatic period casting.&#39;</span>
                     <span class="p">])</span>
 
                 <span class="k">raise</span> <span class="n">PeriodMismatchError</span><span class="p">(</span>

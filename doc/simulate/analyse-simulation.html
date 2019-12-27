@@ -160,7 +160,7 @@
 <span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation_builder</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">TEST_CASE</span><span class="p">)</span>
 
 <span class="c1"># activate the trace</span>
-<span class="n">simulation</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">simulation</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="c1"># calculate a variable</span>
 <span class="n">housing_allowance</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;2011-01&#39;</span><span class="p">)</span>
@@ -196,8 +196,8 @@
 </pre></div>
 </div>
 <p>The previous code example would give us this output:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span>  <span class="n">housing_allowance</span><span class="o">&lt;</span><span class="mi">2011</span><span class="o">-</span><span class="mo">01</span><span class="o">&gt;</span> <span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mf">75.</span>  <span class="mf">0.</span><span class="p">]</span>
-    <span class="n">rent</span><span class="o">&lt;</span><span class="mi">2011</span><span class="o">-</span><span class="mo">01</span><span class="o">&gt;</span> <span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mf">300.</span>   <span class="mf">0.</span><span class="p">]</span>
+<div class="highlight-py"><div class="highlight"><pre><span></span>  <span class="n">housing_allowance</span><span class="o">&lt;</span><span class="mi">2011</span><span class="o">-</span><span class="mi">01</span><span class="o">&gt;</span> <span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mf">75.</span>  <span class="mf">0.</span><span class="p">]</span>
+    <span class="n">rent</span><span class="o">&lt;</span><span class="mi">2011</span><span class="o">-</span><span class="mi">01</span><span class="o">&gt;</span> <span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mf">300.</span>   <span class="mf">0.</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">rent</span></code> variable is indented to the right relative to <code class="docutils literal"><span class="pre">housing_allowance</span></code>. This says that <code class="docutils literal"><span class="pre">housing_allowance</span></code> variable called the <code class="docutils literal"><span class="pre">rent</span></code> calculation. It was called on the same period, &#8216;2011-01&#8217;. As the <a class="reference external" href="https://demo.openfisca.org/legislation/rent">rent variable</a>&#8216;s value was an input value given by our <code class="docutils literal"><span class="pre">TEST_CASE</span></code>, it was returned to <code class="docutils literal"><span class="pre">housing_allowance</span></code>. Then, as the <a class="reference external" href="https://demo.openfisca.org/legislation/housing_allowance">housing_allowance variable</a> has a valid formula on &#8216;2011-01&#8217;, it used the <code class="docutils literal"><span class="pre">rent</span></code> value to calculate its amount for its two households (<code class="docutils literal"><span class="pre">h1</span></code> and <code class="docutils literal"><span class="pre">h2</span></code>): <code class="docutils literal"><span class="pre">[75.</span> <span class="pre">0.]</span></code></p>

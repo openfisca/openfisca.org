@@ -130,17 +130,17 @@
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">textwrap</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sortedcontainers.sorteddict</span> <span class="k">import</span> <span class="n">SortedDict</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">date</span>
+<span class="kn">from</span> <span class="nn">sortedcontainers.sorteddict</span> <span class="kn">import</span> <span class="n">SortedDict</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="k">import</span> <span class="n">periods</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.entities</span> <span class="k">import</span> <span class="n">Entity</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="k">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">,</span> <span class="n">ENUM_ARRAY_DTYPE</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="k">import</span> <span class="n">DAY</span><span class="p">,</span> <span class="n">MONTH</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">,</span> <span class="n">ETERNITY</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="k">import</span> <span class="n">eval_expression</span>
+<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">periods</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.entities</span> <span class="kn">import</span> <span class="n">Entity</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">,</span> <span class="n">ENUM_ARRAY_DTYPE</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="kn">import</span> <span class="n">DAY</span><span class="p">,</span> <span class="n">MONTH</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">,</span> <span class="n">ETERNITY</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="kn">import</span> <span class="n">eval_expression</span>
 
 
 <span class="n">VALUE_TYPES</span> <span class="o">=</span> <span class="p">{</span>
@@ -273,7 +273,7 @@
 <span class="sd">           Free multilines text field describing the variable context and usage.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline_variable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline_variable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="n">attr</span> <span class="o">=</span> <span class="p">{</span>
             <span class="n">name</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
@@ -339,7 +339,7 @@
 
     <span class="k">def</span> <span class="nf">set_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">Entity</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{entity}</span><span class="s2">&#39; for attribute &#39;entity&#39; in variable &#39;</span><span class="si">{self.name}</span><span class="s2">&#39;. Must be an instance of Entity.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{entity}</span><span class="s2">&#39; for attribute &#39;entity&#39; in variable &#39;</span><span class="si">{self.name}</span><span class="s2">&#39;. Must be an instance of Entity.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">entity</span>
 
     <span class="k">def</span> <span class="nf">set_possible_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">possible_values</span><span class="p">):</span>
@@ -602,7 +602,7 @@
 
         <span class="k">return</span> <span class="n">annual_formula</span>
 
-    <span class="kn">from</span> <span class="nn">sortedcontainers.sorteddict</span> <span class="k">import</span> <span class="n">SortedDict</span>
+    <span class="kn">from</span> <span class="nn">sortedcontainers.sorteddict</span> <span class="kn">import</span> <span class="n">SortedDict</span>
 
     <span class="n">new_variable</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
     <span class="n">new_variable</span><span class="o">.</span><span class="n">formulas</span> <span class="o">=</span> <span class="n">SortedDict</span><span class="p">({</span>
