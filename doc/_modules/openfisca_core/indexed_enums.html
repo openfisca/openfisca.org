@@ -124,7 +124,10 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.indexed_enums</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span> <span class="k">as</span> <span class="n">BaseEnum</span>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span> <span class="k">as</span> <span class="n">BaseEnum</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoReturn</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">asarray</span><span class="p">,</span>
@@ -144,7 +147,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Tweak enums to add an index attribute to each enum item</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># When the enum item is initialized, self._member_names_ contains the names of</span>
         <span class="c1"># the previously initialized items, so its length is the index of this item.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_member_names_</span><span class="p">)</span>
@@ -156,7 +159,15 @@
     <span class="fm">__hash__</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__hash__</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Enum.encode"><a class="viewcode-back" href="../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum.encode">[docs]</a>    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+<div class="viewcode-block" id="Enum.encode"><a class="viewcode-back" href="../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum.encode">[docs]</a>    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span>
+            <span class="bp">cls</span><span class="p">,</span>
+            <span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+                <span class="s2">&quot;EnumArray&quot;</span><span class="p">,</span>
+                <span class="n">ndarray</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+                <span class="n">ndarray</span><span class="p">[</span><span class="s2">&quot;Enum&quot;</span><span class="p">],</span>
+                <span class="n">ndarray</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+                <span class="p">],</span>
+            <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;EnumArray&quot;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Encode a string numpy array, an enum item numpy array, or an int numpy array</span>
 <span class="sd">        into an :any:`EnumArray`. See :any:`EnumArray.decode` for decoding.</span>
@@ -218,19 +229,23 @@
     <span class="c1"># Subclassing ndarray is a little tricky.</span>
     <span class="c1"># To read more about the two following methods, see:</span>
     <span class="c1"># https://docs.scipy.org/doc/numpy-1.13.0/user/basics.subclassing.html#slightly-more-realistic-example-attribute-added-to-existing-array.</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">input_array</span><span class="p">,</span> <span class="n">possible_values</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>
+            <span class="bp">cls</span><span class="p">,</span>
+            <span class="n">input_array</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+            <span class="n">possible_values</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="s2">&quot;Enum&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;EnumArray&quot;</span><span class="p">:</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">asarray</span><span class="p">(</span><span class="n">input_array</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">possible_values</span> <span class="o">=</span> <span class="n">possible_values</span>
         <span class="k">return</span> <span class="n">obj</span>
 
     <span class="c1"># See previous comment</span>
-    <span class="k">def</span> <span class="nf">__array_finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__array_finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ndarray</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;possible_values&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="c1"># When comparing to an item of self.possible_values, use the item index to</span>
         <span class="c1"># speed up the comparison.</span>
         <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span>
@@ -240,10 +255,10 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">==</span> <span class="n">other</span>
 
-    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">not_</span><span class="p">(</span><span class="bp">self</span> <span class="o">==</span> <span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_forbidden_operation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_forbidden_operation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
             <span class="s2">&quot;Forbidden operation. The only operations allowed on EnumArrays are &quot;</span>
             <span class="s2">&quot;&#39;==&#39; and &#39;!=&#39;.&quot;</span><span class="p">,</span>
@@ -258,7 +273,7 @@
     <span class="fm">__and__</span> <span class="o">=</span> <span class="n">_forbidden_operation</span>
     <span class="fm">__or__</span> <span class="o">=</span> <span class="n">_forbidden_operation</span>
 
-<div class="viewcode-block" id="EnumArray.decode"><a class="viewcode-back" href="../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.decode">[docs]</a>    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="EnumArray.decode"><a class="viewcode-back" href="../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.decode">[docs]</a>    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">[</span><span class="s2">&quot;Enum&quot;</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Return the array of enum items corresponding to self.</span>
 
 <span class="sd">        For instance:</span>
@@ -274,7 +289,7 @@
             <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span><span class="p">),</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="EnumArray.decode_to_str"><a class="viewcode-back" href="../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.decode_to_str">[docs]</a>    <span class="k">def</span> <span class="nf">decode_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="EnumArray.decode_to_str"><a class="viewcode-back" href="../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.decode_to_str">[docs]</a>    <span class="k">def</span> <span class="nf">decode_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Return the array of string identifiers corresponding to self.</span>
 
 <span class="sd">        For instance:</span>
@@ -290,10 +305,10 @@
             <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span><span class="p">],</span>
             <span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self.__class__.__name__}</span><span class="s2">({str(self.decode())})&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">decode_to_str</span><span class="p">())</span></div>
 </pre></div>
 
