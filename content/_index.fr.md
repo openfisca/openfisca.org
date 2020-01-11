@@ -18,7 +18,7 @@ usecases:
     title: Déterminer l’impact de réformes
     description: Comparez la loi telle qu’elle est et telle qu’elle pourrait être.
     caption_1: utilise OpenFisca et sa
-    caption_2: pour simuler, de façon rapide, l'impact des réformes paramétriques de l'impôt sur le revenu.
+    caption_2: pour simuler, de façon rapide, l'impact des réformes paramétriques de l'impôt sur le revenu sur des ménages.
 
   reforms:
     caption_1: du Mouvement Français pour un Revenu de Base qui utilise OpenFisca et sa
