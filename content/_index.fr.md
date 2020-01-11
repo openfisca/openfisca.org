@@ -15,10 +15,10 @@ usecases:
     caption_2: pour informer les citoyens de Barcelone de leur éligibilité aux aides sociales.
 
   leximpact:
-    title: Déterminer l’impact de réformes
-    description: Comparez la loi telle qu’elle est et telle qu’elle pourrait être.
+    title: Déterminer l’impact des politiques publiques
+    description: Comparez la législation telle qu’elle est et telle qu’elle pourrait être.
     caption_1: utilise OpenFisca et sa
-    caption_2: pour simuler, de façon rapide, l'impact des réformes paramétriques de l'impôt sur le revenu sur des ménages.
+    caption_2: pour simuler l'impact des politiques publiques sur les ménages, grâce à un simulateur dédié à l'impôt sur le revenu.
 
   reforms:
     caption_1: du Mouvement Français pour un Revenu de Base qui utilise OpenFisca et sa
