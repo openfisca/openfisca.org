@@ -24,4 +24,8 @@ usecases:
     title: Explore the Rules
     description: Model any kind of government rule, explore them and evaluate who is eligible to what.
     caption: (Exploring the Rules) is a web interface to explore the rules in New Zealand's Openfisca built from government legislation, regulation and some policies.
+
+  legexp_nsw:
+    caption_1: uses OpenFisca and its
+    caption_2: to allow citizens, civil servants, policy officers and developers to explore government rules.
 ---
