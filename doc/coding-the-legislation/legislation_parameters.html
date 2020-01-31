@@ -192,24 +192,29 @@
 <p>A legislative parameter is defined by a YAML file of the same name. Possible attributes are:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">description</span></code> (optional) Description;</li>
+<li><code class="docutils literal"><span class="pre">metadata</span></code> (optional) Can be:<ul>
 <li><code class="docutils literal"><span class="pre">reference</span></code> (optional) Legislative reference;</li>
 <li><code class="docutils literal"><span class="pre">unit</span></code> (optional) Can be:<ul>
-<li><code class="docutils literal"><span class="pre">year</span></code> : The values are years;</li>
+<li><code class="docutils literal"><span class="pre">year</span></code>: The values are years;</li>
 <li><code class="docutils literal"><span class="pre">currency</span></code>: The values are in the unit of currency of the country;</li>
 <li><code class="docutils literal"><span class="pre">/1</span></code>: The values are percentages, with <code class="docutils literal"><span class="pre">1.0</span></code>=100%;</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code class="docutils literal"><span class="pre">values</span></code>: Value of the parameter for several dates.</li>
 </ul>
 <p>Sample file <code class="docutils literal"><span class="pre">parameters/universal_income/amount.yaml</span></code></p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Universal income</span>
-<span class="nt">unit</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">currency</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">unit</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">currency</span>
 <span class="nt">values</span><span class="p">:</span>
   <span class="nt">1993-01-01</span><span class="p">:</span>
     <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
   <span class="nt">2010-01-01</span><span class="p">:</span>
     <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1500</span>
-    <span class="nt">reference</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://law.reference.org/universal_income</span>
+    <span class="nt">metadata</span><span class="p">:</span>
+      <span class="nt">reference</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://law.reference.org/universal_income</span>
   <span class="nt">2020-01-01</span><span class="p">:</span>
     <span class="nt">expected</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1700</span>
 </pre></div>
@@ -239,7 +244,8 @@
 <p>A node can be defined with a YAML file instead of a directory. In such a case, the name of the file defines the name of the node. Such a file can define children nodes (which can define grandchildren...).</p>
 <p>Sample <code class="docutils literal"><span class="pre">parameters/tax_on_salary.yaml</span></code>:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Tax on salaries</span>
-<span class="nt">reference</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://fiscaladministration.government/tax_on_salaries.html</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">reference</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://fiscaladministration.government/tax_on_salaries.html</span>
 <span class="nt">tax_scale</span><span class="p">:</span>
   <span class="nt">bracket</span><span class="p">:</span>
     <span class="l l-Scalar l-Scalar-Plain">...</span>
