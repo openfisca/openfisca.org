@@ -246,6 +246,31 @@ See:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="using-gunicorn-directly">
+<h3>Using gunicorn directly<a class="headerlink" href="#using-gunicorn-directly" title="Permalink to this headline">¶</a></h3>
+<p>If for any reason you nedd to run <code class="docutils literal"><span class="pre">gunicorn</span></code> directly, you can. See this example of <code class="docutils literal"><span class="pre">gunicorn</span></code> application:</p>
+<p><strong>app.py:</strong></p>
+<div class="highlight-py"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.scripts</span> <span class="kn">import</span> <span class="n">build_tax_benefit_system</span>
+<span class="kn">from</span> <span class="nn">openfisca_web_api.app</span> <span class="kn">import</span> <span class="n">create_app</span>
+
+<span class="n">country_package</span> <span class="o">=</span> <span class="s1">&#39;openfisca_france&#39;</span>
+<span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;openfisca_paris&#39;</span><span class="p">]</span>
+<span class="n">reforms</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;openfisca_france.reforms.plf2015.plf2015&#39;</span><span class="p">]</span>
+
+<span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">build_tax_benefit_system</span><span class="p">(</span>
+    <span class="n">country_package_name</span> <span class="o">=</span> <span class="n">country_package</span><span class="p">,</span>
+    <span class="n">extensions</span> <span class="o">=</span> <span class="n">extensions</span><span class="p">,</span>
+    <span class="n">reforms</span> <span class="o">=</span> <span class="n">reforms</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Command line:</strong></p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>gunicorn app --bind <span class="m">0</span>.0.0.0:4000 --workers<span class="o">=</span><span class="m">4</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
