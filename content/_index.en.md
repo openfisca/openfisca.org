@@ -1,5 +1,5 @@
 ---
-title: "Turn law into software"
+title: "Write rules as code"
 get_started: Get started
 products: Powered by OpenFisca
 
