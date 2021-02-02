@@ -961,6 +961,13 @@
                 <span class="n">file_path</span><span class="p">,</span>
                 <span class="n">stack_trace</span>
                 <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">stack_trace</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid parameter file content. Check the traceback above for more details.&quot;</span><span class="p">,</span>
+                <span class="n">file_path</span><span class="p">,</span>
+                <span class="n">stack_trace</span>
+                <span class="p">)</span>
 
 
 <div class="viewcode-block" id="load_parameter_file"><a class="viewcode-back" href="../../openfisca-python-api/parameters.html#openfisca_core.parameters.load_parameter_file">[docs]</a><span class="k">def</span> <span class="nf">load_parameter_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
