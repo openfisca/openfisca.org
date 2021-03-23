@@ -162,7 +162,7 @@
 <span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility.</span>
 <span class="c1">#  It is now recommended to include them in metadata, until a common consensus emerges.</span>
 <span class="n">COMMON_KEYS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">,</span> <span class="s1">&#39;documentation&#39;</span><span class="p">}</span>
-<span class="n">ALLOWED_PARAM_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+<span class="n">ALLOWED_PARAM_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="n">List</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">date_constructor</span><span class="p">(</span><span class="n">loader</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
@@ -445,7 +445,7 @@
                 <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ALLOWED_PARAM_TYPES</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
-                <span class="s2">&quot;Invalid value in </span><span class="si">{}</span><span class="s2"> : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span>
+                <span class="s2">&quot;Value in </span><span class="si">{}</span><span class="s2"> has type </span><span class="si">{}</span><span class="s2">, which is not one of the allowed types (</span><span class="si">{}</span><span class="s2">): </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">ALLOWED_PARAM_TYPES</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span>
                 <span class="p">)</span>
 
@@ -977,7 +977,7 @@
 <span class="sd">    :returns: An instance of :any:`ParameterNode` or :any:`Scale` or :any:`Parameter`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> doest not exist&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_path</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> does not exist&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_path</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">ParameterNode</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">directory_path</span> <span class="o">=</span> <span class="n">file_path</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">_load_yaml_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
