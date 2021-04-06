@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+  
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../../../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../../../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>openfisca_core.populations.group_population &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/scripts.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><div class="sphinxsidebar caption">
+    <img src="/_static/img/logo_mini.svg" />
+    
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../../../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div> <!-- Template defined by the guzzle theme-->
+</div>
+
+<div class="sidebar-block">
+    <div class="sidebar-toc">
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html"><i class="fas fa-home"></i> Before you start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../projectcomponents.html"><i class="fas fa-cubes"></i> Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/index.html"><i class="fas fa-cogs"></i> Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../key-concepts/index.html"><i class="fas fa-dice-d6"></i> Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../coding-the-legislation/index.html"><i class="fas fa-code"></i> From law to code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulate/index.html"><i class="fas fa-chart-pie"></i> Running a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i class="fab fa-python"></i> Openfisca Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i class="fas fa-cloud"></i> OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i class="fas fa-hands-helping"></i> Find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../licence.html"><i class="fab fa-creative-commons"></i> Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
+</ul>
+
+    </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+  <ul class="buttons-header">
+    <li><a class="button-appearance" href="https://media.readthedocs.org/pdf/openfisca/latest/openfisca.pdf"><i class="fas fa-download"></i> Documentation</a>
+    <li><a class="button-appearance" href="https://github.com/openfisca"><i class="fab fa-github"></i> GitHub</a></li>
+    <li><a class="button-appearance" href="https://openfisca.org/"><i class="fas fa-home"></i> OpenFisca</a></li>
+  </ul>
+  
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../../../summary.html">Docs</a></li>
+              
+                <li><a href="../../index.html">Module code</a></li>
+              
+              <li>openfisca_core.populations.group_population</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <h1>Source code for openfisca_core.populations.group_population</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">projectors</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.entities</span> <span class="kn">import</span> <span class="n">Role</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="kn">import</span> <span class="n">EnumArray</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.populations</span> <span class="kn">import</span> <span class="n">Population</span>
+
+
+<div class="viewcode-block" id="GroupPopulation"><a class="viewcode-back" href="../../../openfisca-python-api/populations.html#openfisca_core.populations.GroupPopulation">[docs]</a><span class="k">class</span> <span class="nc">GroupPopulation</span><span class="p">(</span><span class="n">Population</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">members</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span> <span class="o">=</span> <span class="n">members</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_members_entity_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ordered_members_map</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">GroupPopulation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">_holders</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">:</span> <span class="n">holder</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">holder</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_holders</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ids</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">_members_entity_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_entity_id</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">_members_role</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">_ordered_members_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ordered_members_map</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">members_position</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># We could use self.count and self.members.count , but with the current initilization, we are not sure count will be set before members_position is called</span>
+            <span class="n">nb_entities</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">nb_persons</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">)</span>
+            <span class="n">counter_by_entity</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nb_entities</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">):</span>
+                <span class="n">entity_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter_by_entity</span><span class="p">[</span><span class="n">entity_index</span><span class="p">]</span>
+                <span class="n">counter_by_entity</span><span class="p">[</span><span class="n">entity_index</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span>
+
+    <span class="nd">@members_position</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">members_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">members_position</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_members_position</span> <span class="o">=</span> <span class="n">members_position</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">members_entity_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_entity_id</span>
+
+    <span class="nd">@members_entity_id</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">members_entity_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">members_entity_id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_members_entity_id</span> <span class="o">=</span> <span class="n">members_entity_id</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">members_role</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">default_role</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">default_role</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span>
+
+    <span class="nd">@members_role</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">members_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">members_role</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Role</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">members_role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_members_role</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">members_role</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ordered_members_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Mask to group the persons by entity</span>
+<span class="sd">        This function only caches the map value, to see what the map is used for, see value_nth_person method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ordered_members_map</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ordered_members_map</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ordered_members_map</span>
+
+    <span class="k">def</span> <span class="nf">get_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">((</span><span class="n">role</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span> <span class="k">if</span> <span class="n">role</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">role_name</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1">#  Aggregation persons -&gt; entity</span>
+
+    <span class="nd">@projectors</span><span class="o">.</span><span class="n">projectable</span>
+<div class="viewcode-block" id="GroupPopulation.sum"><a class="viewcode-back" href="../../../openfisca-python-api/populations.html#openfisca_core.populations.GroupPopulation.sum">[docs]</a>    <span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return the sum of ``array`` for the members of the entity.</span>
+
+<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
+
+<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
+
+<span class="sd">            Example:</span>
+
+<span class="sd">            &gt;&gt;&gt; salaries = household.members(&#39;salary&#39;, &#39;2018-01&#39;)  # e.g. [2000, 1500, 0, 0, 0]</span>
+<span class="sd">            &gt;&gt;&gt; household.sum(salaries)</span>
+<span class="sd">            &gt;&gt;&gt; array([3500])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">role_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">[</span><span class="n">role_filter</span><span class="p">],</span>
+                <span class="n">weights</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">role_filter</span><span class="p">],</span>
+                <span class="n">minlength</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">array</span><span class="p">)</span></div>
+
+    <span class="nd">@projectors</span><span class="o">.</span><span class="n">projectable</span>
+<div class="viewcode-block" id="GroupPopulation.any"><a class="viewcode-back" href="../../../openfisca-python-api/populations.html#openfisca_core.populations.GroupPopulation.any">[docs]</a>    <span class="k">def</span> <span class="nf">any</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return ``True`` if ``array`` is ``True`` for any members of the entity.</span>
+
+<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
+
+<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
+
+<span class="sd">            Example:</span>
+
+<span class="sd">            &gt;&gt;&gt; salaries = household.members(&#39;salary&#39;, &#39;2018-01&#39;)  # e.g. [2000, 1500, 0, 0, 0]</span>
+<span class="sd">            &gt;&gt;&gt; household.any(salaries &gt;= 1800)</span>
+<span class="sd">            &gt;&gt;&gt; array([True])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sum_in_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">sum_in_entity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span></div>
+
+    <span class="nd">@projectors</span><span class="o">.</span><span class="n">projectable</span>
+    <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">reducer</span><span class="p">,</span> <span class="n">neutral_element</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+        <span class="n">position_in_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_position</span>
+        <span class="n">role_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">True</span>
+        <span class="n">filtered_array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">role_filter</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">neutral_element</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filled_array</span><span class="p">(</span><span class="n">neutral_element</span><span class="p">)</span>  <span class="c1"># Neutral value that will be returned if no one with the given role exists.</span>
+
+        <span class="c1"># We loop over the positions in the entity</span>
+        <span class="c1"># Looping over the entities is tempting, but potentielly slow if there are a lot of entities</span>
+        <span class="n">biggest_entity_size</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">position_in_entity</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">biggest_entity_size</span><span class="p">):</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_nth_person</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">filtered_array</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">neutral_element</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">reducer</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@projectors</span><span class="o">.</span><span class="n">projectable</span>
+<div class="viewcode-block" id="GroupPopulation.all"><a class="viewcode-back" href="../../../openfisca-python-api/populations.html#openfisca_core.populations.GroupPopulation.all">[docs]</a>    <span class="k">def</span> <span class="nf">all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return ``True`` if ``array`` is ``True`` for all members of the entity.</span>
+
+<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
+
+<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
+
+<span class="sd">            Example:</span>
+
+<span class="sd">            &gt;&gt;&gt; salaries = household.members(&#39;salary&#39;, &#39;2018-01&#39;)  # e.g. [2000, 1500, 0, 0, 0]</span>
+<span class="sd">            &gt;&gt;&gt; household.all(salaries &gt;= 1800)</span>
+<span class="sd">            &gt;&gt;&gt; array([False])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">reducer</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_and</span><span class="p">,</span> <span class="n">neutral_element</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)</span></div>
+
+    <span class="nd">@projectors</span><span class="o">.</span><span class="n">projectable</span>
+<div class="viewcode-block" id="GroupPopulation.max"><a class="viewcode-back" href="../../../openfisca-python-api/populations.html#openfisca_core.populations.GroupPopulation.max">[docs]</a>    <span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return the maximum value of ``array`` for the entity members.</span>
+
+<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
+
+<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
+
+<span class="sd">            Example:</span>
+
+<span class="sd">            &gt;&gt;&gt; salaries = household.members(&#39;salary&#39;, &#39;2018-01&#39;)  # e.g. [2000, 1500, 0, 0, 0]</span>
+<span class="sd">            &gt;&gt;&gt; household.max(salaries)</span>
+<span class="sd">            &gt;&gt;&gt; array([2000])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">reducer</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">maximum</span><span class="p">,</span> <span class="n">neutral_element</span> <span class="o">=</span> <span class="o">-</span> <span class="n">numpy</span><span class="o">.</span><span class="n">infty</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)</span></div>
+
+    <span class="nd">@projectors</span><span class="o">.</span><span class="n">projectable</span>
+<div class="viewcode-block" id="GroupPopulation.min"><a class="viewcode-back" href="../../../openfisca-python-api/populations.html#openfisca_core.populations.GroupPopulation.min">[docs]</a>    <span class="k">def</span> <span class="nf">min</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return the minimum value of ``array`` for the entity members.</span>
+
+<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
+
+<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
+
+<span class="sd">            Example:</span>
+
+<span class="sd">            &gt;&gt;&gt; salaries = household.members(&#39;salary&#39;, &#39;2018-01&#39;)  # e.g. [2000, 1500, 0, 0, 0]</span>
+<span class="sd">            &gt;&gt;&gt; household.min(salaries)</span>
+<span class="sd">            &gt;&gt;&gt; array([0])</span>
+<span class="sd">            &gt;&gt;&gt; household.min(salaries, role = Household.PARENT)  # Assuming the 1st two persons are parents</span>
+<span class="sd">            &gt;&gt;&gt; array([1500])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">reducer</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">minimum</span><span class="p">,</span> <span class="n">neutral_element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">infty</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)</span></div>
+
+    <span class="nd">@projectors</span><span class="o">.</span><span class="n">projectable</span>
+<div class="viewcode-block" id="GroupPopulation.nb_persons"><a class="viewcode-back" href="../../../openfisca-python-api/populations.html#openfisca_core.populations.GroupPopulation.nb_persons">[docs]</a>    <span class="k">def</span> <span class="nf">nb_persons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns the number of persons contained in the entity.</span>
+
+<span class="sd">            If ``role`` is provided, only the entity member with the given role are taken into account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">role</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">:</span>
+                <span class="n">role_condition</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_or</span><span class="o">.</span><span class="n">reduce</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">members_role</span> <span class="o">==</span> <span class="n">subrole</span> <span class="k">for</span> <span class="n">subrole</span> <span class="ow">in</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">role_condition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_role</span> <span class="o">==</span> <span class="n">role</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">role_condition</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">)</span></div>
+
+    <span class="c1"># Projection person -&gt; entity</span>
+
+    <span class="nd">@projectors</span><span class="o">.</span><span class="n">projectable</span>
+    <span class="k">def</span> <span class="nf">value_from_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get the value of ``array`` for the person with the unique role ``role``.</span>
+
+<span class="sd">            ``array`` must have the dimension of the number of persons in the simulation</span>
+
+<span class="sd">            If such a person does not exist, return ``default`` instead</span>
+
+<span class="sd">            The result is a vector which dimension is the number of entities</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">role</span><span class="o">.</span><span class="n">max</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s1">&#39;You can only use value_from_person with a role that is unique in </span><span class="si">{}</span><span class="s1">. Role </span><span class="si">{}</span><span class="s1"> is not unique.&#39;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">role</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="n">members_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ordered_members_map</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filled_array</span><span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">EnumArray</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">possible_values</span><span class="p">)</span>
+        <span class="n">role_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+        <span class="n">entity_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">role_filter</span><span class="p">)</span>
+
+        <span class="n">result</span><span class="p">[</span><span class="n">entity_filter</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">members_map</span><span class="p">][</span><span class="n">role_filter</span><span class="p">[</span><span class="n">members_map</span><span class="p">]]</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@projectors</span><span class="o">.</span><span class="n">projectable</span>
+    <span class="k">def</span> <span class="nf">value_nth_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get the value of array for the person whose position in the entity is n.</span>
+
+<span class="sd">            Note that this position is arbitrary, and that members are not sorted.</span>
+
+<span class="sd">            If the nth person does not exist, return  ``default`` instead.</span>
+
+<span class="sd">            The result is a vector which dimension is the number of entities.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members_position</span>
+        <span class="n">nb_persons_per_entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">()</span>
+        <span class="n">members_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ordered_members_map</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filled_array</span><span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="c1"># For households that have at least n persons, set the result as the value of criteria for the person for which the position is n.</span>
+        <span class="c1"># The map is needed b/c the order of the nth persons of each household in the persons vector is not necessarily the same than the household order.</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">nb_persons_per_entity</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">members_map</span><span class="p">][</span><span class="n">positions</span><span class="p">[</span><span class="n">members_map</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@projectors</span><span class="o">.</span><span class="n">projectable</span>
+    <span class="k">def</span> <span class="nf">value_from_first_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_nth_person</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
+
+    <span class="c1"># Projection entity -&gt; person(s)</span>
+
+    <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_array_compatible_with_entity</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">array</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">role_condition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">role_condition</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">members_entity_id</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+  <a class="actionbutton" title="Did you find what you were looking for?" data-toggle="tooltip" data-placement="top"  href="https://openfisca.typeform.com/to/WudIsQ"><i class="fas fa-question"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../../../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>
