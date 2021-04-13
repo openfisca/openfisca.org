@@ -126,7 +126,7 @@
   <h1>Source code for openfisca_core.tools.test_runner</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
@@ -138,8 +138,7 @@
 <span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="kn">import</span> <span class="n">assert_near</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="kn">import</span> <span class="n">SimulationBuilder</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="kn">import</span> <span class="n">SituationParsingError</span><span class="p">,</span> <span class="n">VariableNotFound</span>
-
-<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.warnings</span> <span class="kn">import</span> <span class="n">LibYAMLWarning</span>
 
 
 <span class="k">def</span> <span class="nf">import_yaml</span><span class="p">():</span>
@@ -147,12 +146,13 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">yaml</span> <span class="kn">import</span> <span class="n">CLoader</span> <span class="k">as</span> <span class="n">Loader</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s1">&#39; &#39;</span>
-            <span class="s1">&#39;libyaml is not installed in your environment, this can make your &#39;</span>
-            <span class="s1">&#39;test suite slower to run. Once you have installed libyaml, run `pip &#39;</span>
-            <span class="s1">&#39;uninstall pyyaml &amp;&amp; pip install pyyaml --no-cache-dir` so that it is used in your &#39;</span>
-            <span class="s1">&#39;Python environment.&#39;</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;libyaml is not installed in your environment.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;This can make your test suite slower to run. Once you have installed libyaml, &quot;</span><span class="p">,</span>
+            <span class="s2">&quot;run &#39;pip uninstall pyyaml &amp;&amp; pip install pyyaml --no-cache-dir&#39;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;so that it is used in your Python environment.&quot;</span>
+            <span class="p">]</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">LibYAMLWarning</span><span class="p">)</span>
         <span class="kn">from</span> <span class="nn">yaml</span> <span class="kn">import</span> <span class="n">SafeLoader</span> <span class="k">as</span> <span class="n">Loader</span>
     <span class="k">return</span> <span class="n">yaml</span><span class="p">,</span> <span class="n">Loader</span>
 

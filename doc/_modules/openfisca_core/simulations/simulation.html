@@ -125,7 +125,7 @@
             
   <h1>Source code for openfisca_core.simulations.simulation</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">tempfile</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span>
 
@@ -134,8 +134,7 @@
 <span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="kn">import</span> <span class="n">Period</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.tracers</span> <span class="kn">import</span> <span class="n">FullTracer</span><span class="p">,</span> <span class="n">SimpleTracer</span><span class="p">,</span> <span class="n">TracingParameterNodeAtInstant</span>
-
-<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.warnings</span> <span class="kn">import</span> <span class="n">TempfileWarning</span>
 
 
 <div class="viewcode-block" id="Simulation"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation">[docs]</a><span class="k">class</span> <span class="nc">Simulation</span><span class="p">:</span>
@@ -201,10 +200,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;openfisca_&quot;</span><span class="p">)</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">((</span>
-                <span class="s2">&quot;Intermediate results will be stored on disk in </span><span class="si">{}</span><span class="s2"> in case of memory overflow. &quot;</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">(</span><span class="s2">&quot;Intermediate results will be stored on disk in </span><span class="si">{}</span><span class="s2"> in case of memory overflow.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span><span class="p">),</span>
                 <span class="s2">&quot;You should remove this directory once you&#39;re done with your simulation.&quot;</span>
-                <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span><span class="p">))</span>
+                <span class="p">]</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">TempfileWarning</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span>
 
     <span class="c1"># ----- Calculation methods ----- #</span>
