@@ -153,18 +153,20 @@
 <dl class="class">
 <dt id="openfisca_core.indexed_enums.Enum">
 <em class="property">class </em><code class="descclassname">openfisca_core.indexed_enums.</code><code class="descname">Enum</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &rarr; NoneType<a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum.html#Enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.indexed_enums.Enum" title="Permalink to this definition">¶</a></dt>
-<dd><p>Enum based on <a class="reference external" href="https://pypi.python.org/pypi/enum34/">enum34</a>, whose items have an
-index.</p>
+<dd><p>Enum based on <a class="reference external" href="https://pypi.python.org/pypi/enum34/">enum34</a>, whose items
+have an index.</p>
 <dl class="classmethod">
 <dt id="openfisca_core.indexed_enums.Enum.encode">
-<em class="property">classmethod </em><code class="descname">encode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum.html#Enum.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.indexed_enums.Enum.encode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Encode a string numpy array, an enum item numpy array, or an int numpy array
-into an <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray" title="openfisca_core.indexed_enums.EnumArray"><code class="xref any py py-class docutils literal"><span class="pre">EnumArray</span></code></a>. See <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray.decode" title="openfisca_core.indexed_enums.EnumArray.decode"><code class="xref any py py-meth docutils literal"><span class="pre">EnumArray.decode</span></code></a> for decoding.</p>
+<em class="property">classmethod </em><code class="descname">encode</code><span class="sig-paren">(</span><em>array: typing.Union[openfisca_core.indexed_enums.enum_array.EnumArray, numpy.int64, numpy.float64, numpy.object_]</em><span class="sig-paren">)</span> &rarr; openfisca_core.indexed_enums.enum_array.EnumArray<a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum.html#Enum.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.indexed_enums.Enum.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode a string numpy array, an enum item numpy array, or an int numpy
+array into an <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray" title="openfisca_core.indexed_enums.EnumArray"><code class="xref any py py-class docutils literal"><span class="pre">EnumArray</span></code></a>. See <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray.decode" title="openfisca_core.indexed_enums.EnumArray.decode"><code class="xref any py py-meth docutils literal"><span class="pre">EnumArray.decode</span></code></a> for
+decoding.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>array</strong> (<em>ndarray</em>) &#8211; Array of string identifiers, or of enum items, to encode.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>array</strong> (<em>ndarray</em>) &#8211; Array of string identifiers, or of enum items, to
+encode.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">An <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray" title="openfisca_core.indexed_enums.EnumArray"><code class="xref any py py-class docutils literal"><span class="pre">EnumArray</span></code></a> encoding the input array values.</td>
 </tr>
@@ -198,21 +200,22 @@ into an <a class="reference internal" href="#openfisca_core.indexed_enums.EnumAr
 <p>EnumArrays are encoded as <code class="docutils literal"><span class="pre">int</span></code> arrays to improve performance</p>
 <dl class="method">
 <dt id="openfisca_core.indexed_enums.EnumArray.decode">
-<code class="descname">decode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum_array.html#EnumArray.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.indexed_enums.EnumArray.decode" title="Permalink to this definition">¶</a></dt>
+<code class="descname">decode</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; numpy.object_<a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum_array.html#EnumArray.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.indexed_enums.EnumArray.decode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the array of enum items corresponding to self.</p>
 <p>For instance:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;housing_occupancy_status&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span>  <span class="c1"># Encoded value</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span><span class="o">.</span><span class="n">decode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">&lt;HousingOccupancyStatus.free_lodger: &#39;Free lodger&#39;&gt;  # Decoded value : enum item</span>
+<span class="go">&lt;HousingOccupancyStatus.free_lodger: &#39;Free lodger&#39;&gt;</span>
 </pre></div>
 </div>
+<p>Decoded value: enum item</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="openfisca_core.indexed_enums.EnumArray.decode_to_str">
-<code class="descname">decode_to_str</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum_array.html#EnumArray.decode_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.indexed_enums.EnumArray.decode_to_str" title="Permalink to this definition">¶</a></dt>
+<code class="descname">decode_to_str</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; numpy.str_<a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum_array.html#EnumArray.decode_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.indexed_enums.EnumArray.decode_to_str" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the array of string identifiers corresponding to self.</p>
 <p>For instance:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;housing_occupancy_status&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
