@@ -2,11 +2,11 @@
 title: "Mentions légales"
 layout: legal-notice
 editor:
-  title: Editeur
-  url: https://www.etalab.gouv.fr
+  title: Éditeur
+  url: https://agence-cohesion-territoires.gouv.fr/
   editorial_director:
     title: Directrice de la publication
-    description: Directrice d'Etalab - Laure Lucchesi
+    description: Bérengère Aujard
 hosting_provider:
   title: Hébergeur
 ---

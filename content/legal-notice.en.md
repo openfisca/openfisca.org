@@ -3,10 +3,10 @@ title: "Legal notice"
 layout: legal-notice
 editor:
   title: Editor
-  url: https://www.etalab.gouv.fr/en/
+  url: https://agence-cohesion-territoires.gouv.fr/
   editorial_director:
     title: Editorial director
-    description: Etalab Director - Laure Lucchesi
+    description: Bérengère Aujard
 hosting_provider:
   title: Hosting provider
 ---
