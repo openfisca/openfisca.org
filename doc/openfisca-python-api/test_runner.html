@@ -103,8 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simulations.html">Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simulation_builder.html">SimulationBuilder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulations.html">Simulations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="entities.html">Entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="populations.html">Populations</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">tools.test_runner</a></li>
@@ -112,6 +111,8 @@
 <li class="toctree-l2"><a class="reference internal" href="enum_array.html">Enum &amp; EnumArray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="holder.html">Holders</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulation_generator.html">Simulation generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="periods.html">Periods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="openfisca_test.html">openfisca test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="openfisca_serve.html">openfisca serve</a></li>
 </ul>
@@ -164,22 +165,47 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>tax_benefit_system</strong> (<em>TaxBenefitSystem</em>) &#8211; the tax-benefit system to use to run the tests</li>
-<li><strong>paths</strong> (<em></em><em>(</em><em>str/list</em><em>)</em><em></em>) &#8211; A path, or a list of paths, towards the files or directories containing the tests to run. If a path is a directory, subdirectories will be recursively explored.</li>
-<li><strong>options</strong> (<em>dict</em>) &#8211; See more details below.</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tax_benefit_system</strong> (<a class="reference internal" href="tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem" title="openfisca_core.taxbenefitsystems.TaxBenefitSystem"><em>TaxBenefitSystem</em></a>) &#8211; the tax-benefit system to use to run the tests</li>
+<li><strong>or list paths</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) &#8211; A path, or a list of paths, towards the files or directories containing the tests to run. If a path is a directory, subdirectories will be recursively explored.</li>
+<li><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) &#8211; See more details below.</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>AssertionError</strong> &#8211; if a test does not pass</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the number of sucessful tests excecuted</p>
 </td>
 </tr>
 </tbody>
 </table>
+<p>:raises <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AssertionError" title="(in Python v3.9)"><code class="xref py py-exc docutils literal"><span class="pre">AssertionError</span></code></a>: if a test does not pass</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the number of sucessful tests excecuted</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Testing options</strong>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="13%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Type</th>
+<th class="head">Role</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>verbose</td>
+<td><code class="docutils literal"><span class="pre">bool</span></code></td>
+<td rowspan="2">See <a class="reference internal" href="openfisca_test.html"><span class="doc">openfisca test</span></a> options doc +</td>
+</tr>
+<tr class="row-odd"><td>name_filter</td>
+<td><code class="docutils literal"><span class="pre">str</span></code></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <p>Tests can also be run in the console with <a class="reference internal" href="openfisca_test.html"><span class="doc">openfisca test</span></a>.</p>

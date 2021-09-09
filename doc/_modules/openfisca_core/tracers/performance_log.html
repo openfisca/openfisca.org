@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+  
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../../../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../../../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>openfisca_core.tracers.performance_log &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/scripts.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><div class="sphinxsidebar caption">
+    <img src="/_static/img/logo_mini.svg" />
+    
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../../../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div> <!-- Template defined by the guzzle theme-->
+</div>
+
+<div class="sidebar-block">
+    <div class="sidebar-toc">
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html"><i class="fas fa-home"></i> Before you start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../projectcomponents.html"><i class="fas fa-cubes"></i> Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/index.html"><i class="fas fa-cogs"></i> Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../key-concepts/index.html"><i class="fas fa-dice-d6"></i> Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../coding-the-legislation/index.html"><i class="fas fa-code"></i> From law to code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulate/index.html"><i class="fas fa-chart-pie"></i> Running a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i class="fab fa-python"></i> Openfisca Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i class="fas fa-cloud"></i> OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i class="fas fa-hands-helping"></i> Find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../licence.html"><i class="fab fa-creative-commons"></i> Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
+</ul>
+
+    </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+  <ul class="buttons-header">
+    <li><a class="button-appearance" href="https://github.com/openfisca"><i class="fab fa-github"></i> GitHub</a></li>
+    <li><a class="button-appearance" href="https://openfisca.org/"><i class="fas fa-home"></i> OpenFisca</a></li>
+  </ul>
+  
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../../../summary.html">Docs</a></li>
+              
+                <li><a href="../../index.html">Module code</a></li>
+              
+              <li>openfisca_core.tracers.performance_log</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <h1>Source code for openfisca_core.tracers.performance_log</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">importlib.resources</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">tracers</span>
+
+<span class="k">if</span> <span class="n">typing</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="n">Trace</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+    <span class="n">Calculation</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+    <span class="n">SortedTrace</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">Calculation</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="PerformanceLog"><a class="viewcode-back" href="../../../openfisca-python-api/tracer.html#openfisca_core.tracers.PerformanceLog">[docs]</a><span class="k">class</span> <span class="nc">PerformanceLog</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">full_tracer</span><span class="p">:</span> <span class="n">tracers</span><span class="o">.</span><span class="n">FullTracer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_full_tracer</span> <span class="o">=</span> <span class="n">full_tracer</span>
+
+    <span class="k">def</span> <span class="nf">generate_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dir_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="s1">&#39;performance_graph.html&#39;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">template</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span>
+                <span class="s1">&#39;openfisca_core.scripts.assets&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;index.html&#39;</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="n">perf_graph_html</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                <span class="s1">&#39;{{data}}&#39;</span><span class="p">,</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_json</span><span class="p">()),</span>
+                <span class="p">)</span>
+
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">perf_graph_html</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">generate_performance_tables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dir_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">flat_trace</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_full_tracer</span><span class="o">.</span><span class="n">get_flat_trace</span><span class="p">()</span>
+
+        <span class="n">csv_rows</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span>
+                <span class="s1">&#39;calculation_time&#39;</span><span class="p">:</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;calculation_time&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;formula_time&#39;</span><span class="p">:</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;formula_time&#39;</span><span class="p">],</span>
+                <span class="p">}</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">trace</span>
+            <span class="ow">in</span> <span class="n">flat_trace</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_csv</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="s1">&#39;performance_table.csv&#39;</span><span class="p">),</span>
+            <span class="n">csv_rows</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">aggregated_csv_rows</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="o">**</span><span class="n">aggregated_time</span><span class="p">}</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">aggregated_time</span>
+            <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregate_calculation_times</span><span class="p">(</span><span class="n">flat_trace</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_csv</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="s1">&#39;aggregated_performance_table.csv&#39;</span><span class="p">),</span>
+            <span class="n">aggregated_csv_rows</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">aggregate_calculation_times</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">flat_trace</span><span class="p">:</span> <span class="n">Trace</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+
+        <span class="k">def</span> <span class="nf">_aggregate_calculations</span><span class="p">(</span><span class="n">calculations</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="n">calculation_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">calculations</span><span class="p">)</span>
+
+            <span class="n">calculation_time</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+                <span class="n">calculation</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;calculation_time&#39;</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">calculation</span>
+                <span class="ow">in</span> <span class="n">calculations</span>
+                <span class="p">)</span>
+
+            <span class="n">formula_time</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+                <span class="n">calculation</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;formula_time&#39;</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">calculation</span>
+                <span class="ow">in</span> <span class="n">calculations</span>
+                <span class="p">)</span>
+
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;calculation_count&#39;</span><span class="p">:</span> <span class="n">calculation_count</span><span class="p">,</span>
+                <span class="s1">&#39;calculation_time&#39;</span><span class="p">:</span> <span class="n">tracers</span><span class="o">.</span><span class="n">TraceNode</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">calculation_time</span><span class="p">),</span>
+                <span class="s1">&#39;formula_time&#39;</span><span class="p">:</span> <span class="n">tracers</span><span class="o">.</span><span class="n">TraceNode</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">formula_time</span><span class="p">),</span>
+                <span class="s1">&#39;avg_calculation_time&#39;</span><span class="p">:</span> <span class="n">tracers</span><span class="o">.</span><span class="n">TraceNode</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">calculation_time</span> <span class="o">/</span> <span class="n">calculation_count</span><span class="p">),</span>
+                <span class="s1">&#39;avg_formula_time&#39;</span><span class="p">:</span> <span class="n">tracers</span><span class="o">.</span><span class="n">TraceNode</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">formula_time</span> <span class="o">/</span> <span class="n">calculation_count</span><span class="p">),</span>
+                <span class="p">}</span>
+
+        <span class="k">def</span> <span class="nf">_groupby</span><span class="p">(</span><span class="n">calculation</span><span class="p">:</span> <span class="n">Calculation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">calculation</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">all_calculations</span><span class="p">:</span> <span class="n">SortedTrace</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">flat_trace</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">variable_name</span><span class="p">:</span> <span class="n">_aggregate_calculations</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">calculations</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">calculations</span>
+            <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">all_calculations</span><span class="p">,</span> <span class="n">_groupby</span><span class="p">)</span>
+            <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_json</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_json_tree</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_full_tracer</span><span class="o">.</span><span class="n">trees</span><span class="p">]</span>
+        <span class="n">calculations_total_time</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">child</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;All calculations&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">calculations_total_time</span><span class="p">,</span>
+            <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="n">children</span><span class="p">,</span>
+            <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_json_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">tracers</span><span class="o">.</span><span class="n">TraceNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">calculation_total_time</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">calculation_time</span><span class="p">()</span>
+        <span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_json_tree</span><span class="p">(</span><span class="n">child</span><span class="p">)</span> <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">children</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tree</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">tree</span><span class="o">.</span><span class="n">period</span><span class="si">}</span><span class="s2">&gt;&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">calculation_total_time</span><span class="p">,</span>
+            <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="n">children</span><span class="p">,</span>
+            <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_write_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fieldnames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csv_file</span><span class="p">:</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">fieldnames</span> <span class="o">=</span> <span class="n">fieldnames</span><span class="p">)</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+  <a class="actionbutton" title="Did you find what you were looking for?" data-toggle="tooltip" data-placement="top"  href="https://openfisca.typeform.com/to/WudIsQ"><i class="fas fa-question"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../../../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>
