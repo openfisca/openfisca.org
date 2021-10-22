@@ -17,7 +17,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Tracer &#8212; OpenFisca  documentation</title>
+    <title>Types &#8212; OpenFisca  documentation</title>
     
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -39,8 +39,8 @@
     <script type="text/javascript" src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Enum &amp; EnumArray" href="enum_array.html" />
-    <link rel="prev" title="tools.test_runner" href="test_runner.html" />
+    <link rel="next" title="openfisca test" href="openfisca_test.html" />
+    <link rel="prev" title="Errors" href="errors.html" />
   
    
 
@@ -56,10 +56,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="enum_array.html" title="Enum &amp; EnumArray"
+          <a href="openfisca_test.html" title="openfisca test"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="test_runner.html" title="tools.test_runner"
+          <a href="errors.html" title="Errors"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li> 
@@ -108,13 +108,13 @@
 <li class="toctree-l2"><a class="reference internal" href="entities.html">Entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="populations.html">Populations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test_runner.html">tools.test_runner</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Tracer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer.html">Tracer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="enum_array.html">Enum &amp; EnumArray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="holder.html">Holders</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulation_generator.html">Simulation generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="periods.html">Periods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="types.html">Types</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="openfisca_test.html">openfisca test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="openfisca_serve.html">openfisca serve</a></li>
 </ul>
@@ -144,59 +144,86 @@
               
                 <li><a href="index.html"><i class="fab fa-python"></i> Openfisca Python API</a></li>
               
-              <li>Tracer</li>
+              <li>Types</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <div class="section" id="module-openfisca_core.tracers">
-<span id="tracer"></span><h1>Tracer<a class="headerlink" href="#module-openfisca_core.tracers" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="openfisca_core.tracers.ComputationLog">
-<em class="property">class </em><code class="descclassname">openfisca_core.tracers.</code><code class="descname">ComputationLog</code><span class="sig-paren">(</span><em>full_tracer: openfisca_core.tracers.full_tracer.FullTracer</em><span class="sig-paren">)</span> &rarr; NoneType<a class="reference internal" href="../_modules/openfisca_core/tracers/computation_log.html#ComputationLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.tracers.ComputationLog" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="openfisca_core.tracers.ComputationLog.print_log">
-<code class="descname">print_log</code><span class="sig-paren">(</span><em>aggregate=False</em><span class="sig-paren">)</span> &rarr; NoneType<a class="reference internal" href="../_modules/openfisca_core/tracers/computation_log.html#ComputationLog.print_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.tracers.ComputationLog.print_log" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the computation log of a simulation.</p>
-<p>If <code class="docutils literal"><span class="pre">aggregate</span></code> is <code class="docutils literal"><span class="pre">False</span></code> (default), print the value of each
-computed vector.</p>
-<p>If <code class="docutils literal"><span class="pre">aggregate</span></code> is <code class="docutils literal"><span class="pre">True</span></code>, only print the minimum, maximum, and
-average value of each computed vector.</p>
-<p>This mode is more suited for simulations on a large population.</p>
+  <div class="section" id="module-openfisca_core.types">
+<span id="types"></span><h1>Types<a class="headerlink" href="#module-openfisca_core.types" title="Permalink to this headline">¶</a></h1>
+<p>Data types and protocols used by OpenFisca Core.</p>
+<p>The type definitions included in this sub-package are intented for
+contributors, to help them better understand and document contracts
+and expected behaviours.</p>
+<dl class="docutils">
+<dt>Official Public API:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">ArrayLike</span></code></li>
+<li><a class="reference internal" href="#openfisca_core.types.ArrayType" title="openfisca_core.types.ArrayType"><code class="xref py py-attr docutils literal"><span class="pre">ArrayType</span></code></a></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>How imports are being used today:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># Bad</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.types.data_types.arrays</span> <span class="kn">import</span> <span class="n">ArrayLike</span>  <span class="c1"># Bad</span>
+</pre></div>
+</div>
+<p>The previous examples provoke cyclic dependency problems, that prevents us
+from modularizing the different components of the library, so as to make
+them easier to test and to maintain.</p>
+<p>How could them be used after the next major release:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="n">ArrayLike</span>
+
+<span class="n">ArrayLike</span> <span class="c1"># Good: import types as publicly exposed</span>
+</pre></div>
+</div>
+<div class="last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#imports">PEP8#Imports</a> and <a class="reference external" href="https://github.com/openfisca/openfisca-core/blob/master/STYLEGUIDE.md">OpenFisca&#8217;s Styleguide</a>.</p>
+</div>
+</div>
+<dl class="attribute">
+<dt id="openfisca_core.types.ArrayType">
+<code class="descclassname">openfisca_core.types.</code><code class="descname">ArrayType</code><a class="headerlink" href="#openfisca_core.types.ArrayType" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">NDArray</span></code></p>
 </dd></dl>
 
+<span class="target" id="module-openfisca_core.types.data_types.arrays"></span><dl class="data">
+<dt id="openfisca_core.types.data_types.arrays.ArrayLike">
+<code class="descclassname">openfisca_core.types.data_types.arrays.</code><code class="descname">ArrayLike</code><em class="property"> = typing.Union[nptyping.types._ndarray.NDArray, typing.Sequence[~T]]</em><a class="headerlink" href="#openfisca_core.types.data_types.arrays.ArrayLike" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.10)"><code class="xref py py-obj docutils literal"><span class="pre">typing.Generic</span></code></a> &#8211; Type of any castable to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</p>
+<p>These include any <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> and sequences (like
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal"><span class="pre">list</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code></a>, and so on).</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+<span class="go">typing.Union[numpy.ndarray, typing.Sequence[float]]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="go">typing.Union[numpy.ndarray, typing.Sequence[str]]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>It is possible since numpy version 1.21 to specify the type of an
+array, thanks to <a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">numpy.typing.NDArray</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
+<span class="n">NDArray</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="last"><a class="reference external" href="https://mypy.readthedocs.io/en/stable/">mypy</a> provides <a class="reference external" href="https://mypy.readthedocs.io/en/stable/duck_type_compatibility.html">duck type compatibility</a>, so an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-obj docutils literal"><span class="pre">int</span></code></a> is
+considered to be valid whenever a <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-obj docutils literal"><span class="pre">float</span></code></a> is expected.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 35.5.0.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 35.6.0: </span>Moved to <a class="reference internal" href="#module-openfisca_core.types" title="openfisca_core.types"><code class="xref py py-mod docutils literal"><span class="pre">types</span></code></a></p>
+</div>
 </dd></dl>
-
-<dl class="class">
-<dt id="openfisca_core.tracers.FlatTrace">
-<em class="property">class </em><code class="descclassname">openfisca_core.tracers.</code><code class="descname">FlatTrace</code><span class="sig-paren">(</span><em>full_tracer: openfisca_core.tracers.full_tracer.FullTracer</em><span class="sig-paren">)</span> &rarr; NoneType<a class="reference internal" href="../_modules/openfisca_core/tracers/flat_trace.html#FlatTrace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.tracers.FlatTrace" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="class">
-<dt id="openfisca_core.tracers.FullTracer">
-<em class="property">class </em><code class="descclassname">openfisca_core.tracers.</code><code class="descname">FullTracer</code> &rarr; NoneType<a class="reference internal" href="../_modules/openfisca_core/tracers/full_tracer.html#FullTracer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.tracers.FullTracer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="class">
-<dt id="openfisca_core.tracers.PerformanceLog">
-<em class="property">class </em><code class="descclassname">openfisca_core.tracers.</code><code class="descname">PerformanceLog</code><span class="sig-paren">(</span><em>full_tracer: openfisca_core.tracers.full_tracer.FullTracer</em><span class="sig-paren">)</span> &rarr; NoneType<a class="reference internal" href="../_modules/openfisca_core/tracers/performance_log.html#PerformanceLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.tracers.PerformanceLog" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="class">
-<dt id="openfisca_core.tracers.SimpleTracer">
-<em class="property">class </em><code class="descclassname">openfisca_core.tracers.</code><code class="descname">SimpleTracer</code> &rarr; NoneType<a class="reference internal" href="../_modules/openfisca_core/tracers/simple_tracer.html#SimpleTracer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.tracers.SimpleTracer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="class">
-<dt id="openfisca_core.tracers.TraceNode">
-<em class="property">class </em><code class="descclassname">openfisca_core.tracers.</code><code class="descname">TraceNode</code><span class="sig-paren">(</span><em>name: 'str'</em>, <em>period: 'Period'</em>, <em>parent: 'typing.Optional[TraceNode]' = None</em>, <em>children: 'typing.List[TraceNode]' = &lt;factory&gt;</em>, <em>parameters: 'typing.List[TraceNode]' = &lt;factory&gt;</em>, <em>value: 'typing.Optional[Array]' = None</em>, <em>start: 'float' = 0</em>, <em>end: 'float' = 0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/tracers/trace_node.html#TraceNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.tracers.TraceNode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="class">
-<dt id="openfisca_core.tracers.TracingParameterNodeAtInstant">
-<em class="property">class </em><code class="descclassname">openfisca_core.tracers.</code><code class="descname">TracingParameterNodeAtInstant</code><span class="sig-paren">(</span><em>parameter_node_at_instant: typing.Union[openfisca_core.parameters.vectorial_parameter_node_at_instant.VectorialParameterNodeAtInstant, openfisca_core.parameters.parameter_node_at_instant.ParameterNodeAtInstant], tracer: openfisca_core.tracers.full_tracer.FullTracer</em><span class="sig-paren">)</span> &rarr; NoneType<a class="reference internal" href="../_modules/openfisca_core/tracers/tracing_parameter_node_at_instant.html#TracingParameterNodeAtInstant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.tracers.TracingParameterNodeAtInstant" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </div>
 
@@ -216,10 +243,10 @@ average value of each computed vector.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="enum_array.html" title="Enum &amp; EnumArray"
+          <a href="openfisca_test.html" title="openfisca test"
              >next</a> |</li>
         <li class="right" >
-          <a href="test_runner.html" title="tools.test_runner"
+          <a href="errors.html" title="Errors"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li> 
