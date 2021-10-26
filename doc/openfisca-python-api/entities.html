@@ -165,8 +165,32 @@
 
 <dl class="class">
 <dt id="openfisca_core.entities.GroupEntity">
-<em class="property">class </em><code class="descclassname">openfisca_core.entities.</code><code class="descname">GroupEntity</code><span class="sig-paren">(</span><em>key</em>, <em>plural</em>, <em>label</em>, <em>doc</em>, <em>roles</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/group_entity.html#GroupEntity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Represents an entity composed of several persons with different roles, on which calculations are run.</p>
+<em class="property">class </em><code class="descclassname">openfisca_core.entities.</code><code class="descname">GroupEntity</code><span class="sig-paren">(</span><em>key</em>, <em>plural</em>, <em>label</em>, <em>doc</em>, <em>roles</em>, <em>containing_entities=()</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/group_entity.html#GroupEntity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an entity containing several others with different roles.</p>
+<p>A <a class="reference internal" href="#openfisca_core.entities.GroupEntity" title="openfisca_core.entities.GroupEntity"><code class="xref py py-class docutils literal"><span class="pre">GroupEntity</span></code></a> represents an <a class="reference internal" href="#openfisca_core.entities.Entity" title="openfisca_core.entities.Entity"><code class="xref py py-class docutils literal"><span class="pre">Entity</span></code></a> containing
+several other <a class="reference internal" href="#openfisca_core.entities.Entity" title="openfisca_core.entities.Entity"><code class="xref py py-class docutils literal"><span class="pre">Entity</span></code></a> with different <a class="reference internal" href="#openfisca_core.entities.Role" title="openfisca_core.entities.Role"><code class="xref py py-class docutils literal"><span class="pre">Role</span></code></a>, and on
+which calculations can be run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> &#8211; A key to identify the group entity.</li>
+<li><strong>plural</strong> &#8211; The <code class="docutils literal"><span class="pre">key</span></code>, pluralised.</li>
+<li><strong>label</strong> &#8211; A summary description.</li>
+<li><strong>doc</strong> &#8211; A full description.</li>
+<li><strong>roles</strong> &#8211; The list of <a class="reference internal" href="#openfisca_core.entities.Role" title="openfisca_core.entities.Role"><code class="xref py py-class docutils literal"><span class="pre">Role</span></code></a> of the group entity.</li>
+<li><strong>containing_entities</strong> &#8211; The list of keys of group entities whose members
+are guaranteed to be a superset of this group&#8217;s entities.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 35.7.0: </span>Added <code class="docutils literal"><span class="pre">containing_entities</span></code>, that allows the defining of group
+entities which entirely contain other group entities.</p>
+</div>
 </dd></dl>
 
 <span class="target" id="module-openfisca_core.entities.helpers"></span></div>

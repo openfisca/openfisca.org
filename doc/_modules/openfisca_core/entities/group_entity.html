@@ -127,11 +127,28 @@
 
 
 <div class="viewcode-block" id="GroupEntity"><a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity">[docs]</a><span class="k">class</span> <span class="nc">GroupEntity</span><span class="p">(</span><span class="n">Entity</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Represents an entity composed of several persons with different roles, on which calculations are run.</span>
+    <span class="sd">&quot;&quot;&quot;Represents an entity containing several others with different roles.</span>
+
+<span class="sd">    A :class:`.GroupEntity` represents an :class:`.Entity` containing</span>
+<span class="sd">    several other :class:`.Entity` with different :class:`.Role`, and on</span>
+<span class="sd">    which calculations can be run.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: A key to identify the group entity.</span>
+<span class="sd">        plural: The ``key``, pluralised.</span>
+<span class="sd">        label: A summary description.</span>
+<span class="sd">        doc: A full description.</span>
+<span class="sd">        roles: The list of :class:`.Role` of the group entity.</span>
+<span class="sd">        containing_entities: The list of keys of group entities whose members</span>
+<span class="sd">            are guaranteed to be a superset of this group&#39;s entities.</span>
+
+<span class="sd">    .. versionchanged:: 35.7.0</span>
+<span class="sd">        Added ``containing_entities``, that allows the defining of group</span>
+<span class="sd">        entities which entirely contain other group entities.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">roles</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">roles</span><span class="p">,</span> <span class="n">containing_entities</span> <span class="o">=</span> <span class="p">()):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">roles_description</span> <span class="o">=</span> <span class="n">roles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">roles</span> <span class="o">=</span> <span class="p">[]</span>
@@ -147,7 +164,8 @@
                     <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subrole</span><span class="p">)</span>
                 <span class="n">role</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">flattened_roles</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">role2</span><span class="o">.</span><span class="n">subroles</span> <span class="ow">or</span> <span class="p">[</span><span class="n">role2</span><span class="p">]</span> <span class="k">for</span> <span class="n">role2</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="p">],</span> <span class="p">[])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_person</span> <span class="o">=</span> <span class="kc">False</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_person</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">containing_entities</span> <span class="o">=</span> <span class="n">containing_entities</span></div>
 </pre></div>
 
           </div>
