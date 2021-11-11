@@ -1,0 +1,729 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+  
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>How to profile the performance of a simulation &#8212; OpenFisca  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Openfisca Python API" href="../openfisca-python-api/index.html" />
+    <link rel="prev" title="Replicating a situation along axes" href="replicate-simulation-inputs.html" />
+  
+   
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../openfisca-python-api/index.html" title="Openfisca Python API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="replicate-simulation-inputs.html" title="Replicating a situation along axes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-chart-pie"></i> Running a simulation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><div class="sphinxsidebar caption">
+    <img src="/_static/img/logo_mini.svg" />
+    
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div> <!-- Template defined by the guzzle theme-->
+</div>
+
+<div class="sidebar-block">
+    <div class="sidebar-toc">
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html"><i class="fas fa-home"></i> Before you start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projectcomponents.html"><i class="fas fa-cubes"></i> Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html"><i class="fas fa-cogs"></i> Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts/index.html"><i class="fas fa-dice-d6"></i> Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding-the-legislation/index.html"><i class="fas fa-code"></i> From law to code</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html"><i class="fas fa-chart-pie"></i> Running a simulation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="run-simulation.html">How to run a simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyse-simulation.html">Analysing or debugging a simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="replicate-simulation-inputs.html">Replicating a situation along axes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to profile the performance of a simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i class="fab fa-python"></i> Openfisca Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i class="fas fa-cloud"></i> OpenFisca Web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i class="fas fa-hands-helping"></i> Find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html"><i class="fab fa-creative-commons"></i> Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
+</ul>
+
+    </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+  <ul class="buttons-header">
+    <li><a class="button-appearance" href="https://github.com/openfisca"><i class="fab fa-github"></i> GitHub</a></li>
+    <li><a class="button-appearance" href="https://openfisca.org/"><i class="fas fa-home"></i> OpenFisca</a></li>
+  </ul>
+  
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+                <li><a href="index.html"><i class="fas fa-chart-pie"></i> Running a simulation</a></li>
+              
+              <li>How to profile the performance of a simulation</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="how-to-profile-the-performance-of-a-simulation">
+<span id="how-to-profile-the-performance-of-a-simulation"></span><h1>How to profile the performance of a simulation<a class="headerlink" href="#how-to-profile-the-performance-of-a-simulation" title="Permalink to this headline">¶</a></h1>
+<p>Your simulation is way too slow, and you want to know why? We&#8217;ve got you covered! :)</p>
+<p>Since <a class="reference external" href="https://github.com/openfisca/openfisca-core/pull/895">34.4.0</a> you can generate a time performance flame graph in a web page to view the time taken by every calculation in a simulation.</p>
+<p>In the following examples, we use <a class="reference external" href="https://github.com/openfisca/openfisca-france">OpenFisca-France</a>, but the profiling applies to any country package using <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code>.</p>
+<div class="section" id="identify-a-slow-simulation">
+<span id="identify-a-slow-simulation"></span><h2>Identify a slow simulation<a class="headerlink" href="#identify-a-slow-simulation" title="Permalink to this headline">¶</a></h2>
+<p>The easier way to spot a slow simulation is to profile your test suite, as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PYTEST_ADDOPTS</span><span class="o">=</span><span class="s2">&quot;$PYTEST_ADDOPTS --durations=10&quot;</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span>
+
+<span class="o">...</span>
+<span class="n">Which</span> <span class="n">gives</span> <span class="n">you</span> <span class="n">the</span> <span class="mi">10</span> <span class="n">slowest</span> <span class="n">tests</span><span class="p">:</span>
+<span class="mf">9.69</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">test_basics</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_basics</span><span class="p">[</span><span class="n">scenario_arguments12</span><span class="p">]</span>
+<span class="mf">9.02</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">reforms</span><span class="o">/</span><span class="n">test_plf2016_ayrault_muet</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_plf2016_ayrault_muet</span>
+<span class="mf">8.91</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">test_basics</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_basics</span><span class="p">[</span><span class="n">scenario_arguments11</span><span class="p">]</span>
+<span class="mf">8.78</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+<span class="mf">8.44</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+<span class="mf">8.37</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">revenu_disponible</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+<span class="mf">8.36</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">revenu_disponible</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+<span class="mf">8.27</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">revenu_disponible</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+<span class="mf">8.23</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">revenu_disponible</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+<span class="mf">8.17</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">test_tax_rates</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_marginal_tax_rate</span>
+</pre></div>
+</div>
+<p>Now, let&#8217;s take a closer look at this test <code class="docutils literal"><span class="pre">tests/formulas/irpp_prets_participatifs.yaml</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PYTEST_ADDOPTS</span><span class="o">=</span><span class="s2">&quot;$PYTEST_ADDOPTS --durations=3&quot;</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span>
+
+<span class="o">...</span>
+
+<span class="mf">9.03</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+<span class="mf">7.75</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+<span class="mf">3.02</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+</pre></div>
+</div>
+<p>Terrific! We now know that the first test in <code class="docutils literal"><span class="pre">tests/formulas/irpp_prets_participatifs.yaml</span></code> is the slowest, compared to the others.</p>
+</div>
+<div class="section" id="generate-the-flame-graph">
+<span id="generate-the-flame-graph"></span><h2>Generate the flame graph<a class="headerlink" href="#generate-the-flame-graph" title="Permalink to this headline">¶</a></h2>
+<p>To generate the flame graph, just pass the <a class="reference external" href="https://openfisca.org/doc/openfisca-python-api/openfisca-run-test.html"><code class="docutils literal"><span class="pre">--performance</span></code></a> option to <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code>.</p>
+<p>We&#8217;ll also use the <a class="reference external" href="https://openfisca.org/doc/openfisca-python-api/openfisca-run-test.html"><code class="docutils literal"><span class="pre">--name_filter</span></code></a> option to profile the first test only.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">performance</span> <span class="o">--</span><span class="n">name_filter</span> <span class="n">ir_prets_participatifs_2016</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span>
+<span class="n">git</span> <span class="n">status</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">html</span>
+
+<span class="o">...</span>
+
+<span class="n">performance_graph</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="open-the-flame-graph">
+<span id="open-the-flame-graph"></span><h2>Open the flame graph<a class="headerlink" href="#open-the-flame-graph" title="Permalink to this headline">¶</a></h2>
+<p>Now, you can open the file with your favorite browser.</p>
+<p>For example, in OS X:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="n">performance_graph</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+<p>You&#8217;ll be greeted by a very nice looking flame graph like this one:</p>
+<p><a class="reference external" href="https://github.com/openfisca/openfisca-doc/blob/master/source/static/img/performance_graph.png"><img alt="Performance graph" src="https://cdn.rawgit.com/openfisca/openfisca-doc/master/source/static/img/performance_graph.png" /></a></p>
+<p>Looking at the graph, we now know that the <code class="docutils literal"><span class="pre">impots_directs</span></code> formula takes quite a lot of time.</p>
+<p>The question is, why?</p>
+</div>
+<div class="section" id="find-the-bottleneck">
+<span id="find-the-bottleneck"></span><h2>Find the bottleneck<a class="headerlink" href="#find-the-bottleneck" title="Permalink to this headline">¶</a></h2>
+<p>In order to identify why the simulation is slow, we need to find the bottleneck. We&#8217;ll use a line profiler to figure it out.</p>
+<p>We&#8217;ll start by installing <code class="docutils literal"><span class="pre">line_profiler</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">line_profiler</span>
+</pre></div>
+</div>
+<p>Then we&#8217;ll use it to profile our formula by adding the <code class="docutils literal"><span class="pre">&#64;profile</span></code> decorator:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">impots_directs</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">entity</span> <span class="o">=</span> <span class="n">Menage</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Impôts directs&quot;</span>
+    <span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;http://fr.wikipedia.org/wiki/Imp%C3%B4t_direct&quot;</span>
+    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">YEAR</span>
+
+    <span class="nd">@profile</span>
+    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">menage</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Finally, we run our test with the <code class="docutils literal"><span class="pre">line_profiler</span></code> enabled:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">kernprof</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">l</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">name_filter</span> <span class="n">ir_prets_participatifs_2016</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span>
+</pre></div>
+</div>
+<p>We now know where our most time consuming line lies:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time      Per Hit      % Time         Line Contents</span>
+<span class="o">====================================================================</span>
+
+<span class="mi">635</span>         <span class="mi">1</span>    <span class="mf">3488880.0</span> <span class="mf">3488880.0</span>    <span class="mf">100.0</span>          <span class="n">isf_ifi_i</span> <span class="o">=</span> <span class="n">menage</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">foyer_fiscal</span><span class="p">(</span><span class="s1">&#39;isf_ifi&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Another formula... so we&#8217;ll have to follow the breadcrumbs.</p>
+</div>
+<div class="section" id="follow-the-breadcrumbs">
+<span id="follow-the-breadcrumbs"></span><h2>Follow the breadcrumbs<a class="headerlink" href="#follow-the-breadcrumbs" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;ll repeat the same operation until we find the culprit! You&#8217;ll see that the results are coherent with the flame graph:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time      Per Hit      % Time         Line Contents</span>
+<span class="o">====================================================================</span>
+
+<span class="mi">621</span>         <span class="mi">1</span>    <span class="mf">3433186.0</span> <span class="mf">3433186.0</span>    <span class="mf">100.0</span>          <span class="n">isf_ifi_apres_plaf</span> <span class="o">=</span> <span class="n">foyer_fiscal</span><span class="p">(</span><span class="s1">&#39;isf_ifi_apres_plaf&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">606</span>         <span class="mi">1</span>    <span class="mf">3446413.0</span> <span class="mf">3446413.0</span>     <span class="mf">99.9</span>          <span class="n">total_impots_plafonnement_isf_ifi</span> <span class="o">=</span> <span class="n">foyer_fiscal</span><span class="p">(</span><span class="s1">&#39;total_impots_plafonnement_isf_ifi&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">478</span>         <span class="mi">1</span>    <span class="mf">3518928.0</span> <span class="mf">3518928.0</span>     <span class="mf">99.8</span>          <span class="n">crds_i</span> <span class="o">=</span> <span class="n">foyer_fiscal</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;crds&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">52</span>          <span class="mi">1</span>    <span class="mf">2013423.0</span> <span class="mf">2013423.0</span>     <span class="mf">57.9</span>          <span class="n">crds_pfam</span> <span class="o">=</span> <span class="n">individu</span><span class="o">.</span><span class="n">famille</span><span class="p">(</span><span class="s1">&#39;crds_pfam&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">285</span>         <span class="mi">1</span>    <span class="mf">1226506.0</span> <span class="mf">1226506.0</span>     <span class="mf">61.8</span>          <span class="n">paje</span> <span class="o">=</span> <span class="n">famille</span><span class="p">(</span><span class="s2">&quot;paje&quot;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="n">ADD</span><span class="p">])</span>
+<span class="mi">87</span>         <span class="mi">12</span>    <span class="mf">1247258.0</span>  <span class="mf">103938.2</span>     <span class="mf">98.9</span>          <span class="n">paje_cmg</span> <span class="o">=</span> <span class="n">famille</span><span class="p">(</span><span class="s1">&#39;paje_cmg&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">509</span>        <span class="mi">12</span>    <span class="mf">1215246.0</span>  <span class="mf">101270.5</span>     <span class="mf">98.8</span>          <span class="n">aah_i</span> <span class="o">=</span> <span class="n">famille</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;aah&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">332</span>        <span class="mi">16</span>    <span class="mf">1354815.0</span>   <span class="mf">84675.9</span>     <span class="mf">99.8</span>          <span class="n">aah_base</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s1">&#39;aah_base&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">311</span>        <span class="mi">16</span>    <span class="mf">1302427.0</span>   <span class="mf">81401.7</span>     <span class="mf">99.3</span>          <span class="n">aah_base_ressources</span> <span class="o">=</span> <span class="n">individu</span><span class="o">.</span><span class="n">famille</span><span class="p">(</span><span class="s1">&#39;aah_base_ressources&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">/</span> <span class="mi">12</span>
+<span class="mi">73</span>         <span class="mi">16</span>    <span class="mf">1282607.0</span>   <span class="mf">80162.9</span>     <span class="mf">98.2</span>          <span class="n">base_ressource_eval_trim</span><span class="p">(),</span>
+<span class="mi">58</span>         <span class="mi">16</span>     <span class="mf">810869.0</span>   <span class="mf">50679.3</span>     <span class="mf">63.5</span>          <span class="n">base_ressource_activite_demandeur</span> <span class="o">=</span> <span class="n">famille</span><span class="o">.</span><span class="n">demandeur</span><span class="p">(</span><span class="s1">&#39;aah_base_ressources_activite_eval_trimestrielle&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">-</span> <span class="n">famille</span><span class="o">.</span><span class="n">demandeur</span><span class="p">(</span><span class="s1">&#39;aah_base_ressources_activite_milieu_protege&#39;</span><span class="p">,</span> <span class="n">three_previous_months</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">ADD</span><span class="p">])</span>
+<span class="mi">113</span>        <span class="mi">16</span>     <span class="mf">785874.0</span>   <span class="mf">49117.1</span>     <span class="mf">98.5</span>          <span class="p">[</span><span class="n">individu</span><span class="p">(</span><span class="n">ressource</span><span class="p">,</span> <span class="n">three_previous_months</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">ADD</span><span class="p">])</span> <span class="k">for</span> <span class="n">ressource</span> <span class="ow">in</span> <span class="n">ressources_a_inclure</span><span class="p">]</span>
+<span class="mi">148</span>        <span class="mi">31</span>     <span class="mf">777545.0</span>   <span class="mf">25082.1</span>     <span class="mf">99.0</span>          <span class="n">chomage_imposable</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s2">&quot;chomage_imposable&quot;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">134</span>        <span class="mi">37</span>     <span class="mf">857364.0</span>   <span class="mf">23172.0</span>     <span class="mf">99.5</span>          <span class="n">csg_deductible_chomage</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s2">&quot;csg_deductible_chomage&quot;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">52</span>         <span class="mi">37</span>     <span class="mf">820912.0</span>   <span class="mf">22186.8</span>     <span class="mf">97.9</span>          <span class="n">taux_csg_remplacement</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s2">&quot;taux_csg_remplacement&quot;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">28</span>         <span class="mi">25</span>    <span class="mf">1534376.0</span>   <span class="mf">61375.0</span>     <span class="mf">99.4</span>          <span class="n">rfr</span> <span class="o">=</span> <span class="n">individu</span><span class="o">.</span><span class="n">foyer_fiscal</span><span class="p">(</span><span class="s2">&quot;rfr&quot;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="o">.</span><span class="n">n_2</span><span class="p">)</span>
+<span class="mi">2208</span>        <span class="mi">4</span>    <span class="mf">1418229.0</span>  <span class="mf">354557.2</span>     <span class="mf">89.8</span>          <span class="n">rni</span> <span class="o">=</span> <span class="n">foyer_fiscal</span><span class="p">(</span><span class="s1">&#39;rni&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">1082</span>        <span class="mi">3</span>    <span class="mf">2746777.0</span>  <span class="mf">915592.3</span>     <span class="mf">99.9</span>          <span class="n">rng</span> <span class="o">=</span> <span class="n">foyer_fiscal</span><span class="p">(</span><span class="s1">&#39;rng&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">1067</span>        <span class="mi">3</span>    <span class="mf">2763749.0</span>  <span class="mf">921249.7</span>     <span class="mf">99.8</span>          <span class="n">rbg</span> <span class="o">=</span> <span class="n">foyer_fiscal</span><span class="p">(</span><span class="s1">&#39;rbg&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">1028</span>        <span class="mi">3</span>    <span class="mf">2757742.0</span>  <span class="mf">919247.3</span>     <span class="mf">99.9</span>          <span class="n">revenu_categoriel</span> <span class="o">=</span> <span class="n">foyer_fiscal</span><span class="p">(</span><span class="s1">&#39;revenu_categoriel&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">983</span>         <span class="mi">3</span>    <span class="mf">2659102.0</span>  <span class="mf">886367.3</span>     <span class="mf">99.0</span>          <span class="n">rev_cat_tspr</span> <span class="o">=</span> <span class="n">foyer_fiscal</span><span class="p">(</span><span class="s1">&#39;revenu_categoriel_tspr&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">617</span>         <span class="mi">3</span>    <span class="mf">2701246.0</span>  <span class="mf">900415.3</span>    <span class="mf">100.0</span>          <span class="n">tspr_i</span> <span class="o">=</span> <span class="n">foyer_fiscal</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;traitements_salaires_pensions_rentes&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">556</span>         <span class="mi">3</span>    <span class="mf">2674322.0</span>  <span class="mf">891440.7</span>     <span class="mf">99.3</span>          <span class="n">revenu_assimile_salaire_apres_abattements</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s1">&#39;revenu_assimile_salaire_apres_abattements&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">416</span>         <span class="mi">4</span>    <span class="mf">2702072.0</span>  <span class="mf">675518.0</span>    <span class="mf">100.0</span>          <span class="n">revenu_assimile_salaire</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s1">&#39;revenu_assimile_salaire&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">401</span>         <span class="mi">4</span>    <span class="mf">2579118.0</span>  <span class="mf">644779.5</span>     <span class="mf">97.2</span>          <span class="n">salaire_imposable</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s1">&#39;salaire_imposable&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">ADD</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>From <code class="docutils literal"><span class="pre">salaire_imposable</span></code>, we can follow two different branches:</p>
+<ol>
+<li><p class="first">The <code class="docutils literal"><span class="pre">indemnite_residence</span></code> branch:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time        Per Hit    % Time         Line Contents</span>
+<span class="o">====================================================================</span>
+
+<span class="mi">199</span>        <span class="mi">48</span>    <span class="mf">1951692.0</span>   <span class="mf">40660.2</span>     <span class="mf">59.3</span>          <span class="n">indemnite_residence</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s1">&#39;indemnite_residence&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">737</span>        <span class="mi">48</span>    <span class="mf">1615270.0</span>   <span class="mf">33651.5</span>     <span class="mf">73.0</span>          <span class="n">_P</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let&#8217;s find out where <code class="docutils literal"><span class="pre">parameters</span></code> is defined by modifying the code as follows:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>class indemnite_residence(Variable):
+    value_type = float
+    entity = Individu
+    label = &quot;Indemnité de résidence des fonctionnaires&quot;
+    definition_period = MONTH
+    set_input = set_input_divide_by_period
+
+    def formula(individu, period, parameters):
+<span class="gi">+       breakpoint()</span>
+</pre></div>
+</div>
+<p>Then running <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code> with <a class="reference external" href="https://docs.python.org/3/library/pdb.html">The Python Debugger</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ openfisca test --pdb tests/formulas/irpp_prets_participatifs.yaml
+
+...
+
+(Pdb) parameters.__qualname__
+&#39;TaxBenefitSystem.get_parameters_at_instant&#39;
+</pre></div>
+</div>
+</li>
+<li><p class="first">The <code class="docutils literal"><span class="pre">cotisations_salariales</span></code> branch:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time        Per Hit    % Time         Line Contents</span>
+<span class="o">====================================================================</span>
+
+<span class="mi">202</span>        <span class="mi">48</span>    <span class="mf">1054648.0</span>   <span class="mf">21971.8</span>     <span class="mf">32.0</span>          <span class="n">cotisations_salariales</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s1">&#39;cotisations_salariales&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">180</span>        <span class="mi">48</span>     <span class="mf">784194.0</span>   <span class="mf">16337.4</span>     <span class="mf">74.7</span>          <span class="n">cotisations_salariales_contributives</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s1">&#39;cotisations_salariales_contributives&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">117</span>        <span class="mi">48</span>     <span class="mf">265682.0</span>    <span class="mf">5535.0</span>     <span class="mf">34.1</span>          <span class="n">agff_salarie</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s1">&#39;agff_salarie&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="mi">224</span>        <span class="mi">48</span>     <span class="mf">264976.0</span>    <span class="mf">5520.3</span>     <span class="mf">99.9</span>          <span class="n">variable_name</span> <span class="o">=</span> <span class="s2">&quot;agff_salarie&quot;</span>
+<span class="mi">67</span>        <span class="mi">480</span>     <span class="mf">583017.0</span>    <span class="mf">1214.6</span>     <span class="mf">66.7</span>          <span class="p">)</span> <span class="o">+</span> <span class="p">(</span>
+<span class="mi">113</span>        <span class="mi">40</span>      <span class="mf">50839.0</span>    <span class="mf">1271.0</span>     <span class="mf">96.1</span>          <span class="n">bareme_name</span> <span class="o">=</span> <span class="n">bareme_name</span><span class="p">,</span>
+<span class="mi">99</span>       <span class="mi">1000</span>     <span class="mf">360294.0</span>     <span class="mf">360.3</span>     <span class="mf">44.8</span>          <span class="n">categorie_salarie</span> <span class="o">=</span> <span class="n">categorie_salarie</span><span class="p">,</span>
+<span class="mi">40</span>       <span class="mi">1192</span>     <span class="mf">449850.0</span>     <span class="mf">377.4</span>     <span class="mf">98.5</span>          <span class="k">return</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">iter_cotisations</span><span class="p">())</span>
+<span class="mi">37</span>       <span class="mi">2532</span>     <span class="mf">359388.0</span>     <span class="mf">141.9</span>     <span class="mf">77.2</span>          <span class="n">round_base_decimals</span> <span class="o">=</span> <span class="n">round_base_decimals</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>Performing a search to find the definition of <code class="docutils literal"><span class="pre">iter_cotisations</span></code> gives us the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">iter_cotisations</span><span class="p">():</span>
+        <span class="c1"># ...</span>
+
+            <span class="k">yield</span> <span class="n">bareme</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span>
+                <span class="n">base</span> <span class="o">*</span> <span class="p">(</span><span class="n">categorie_salarie</span> <span class="o">==</span> <span class="n">categorie_salarie_type</span><span class="p">),</span>
+                <span class="n">factor</span> <span class="o">=</span> <span class="n">plafond_securite_sociale</span><span class="p">,</span>
+                <span class="n">round_base_decimals</span> <span class="o">=</span> <span class="n">round_base_decimals</span><span class="p">,</span>
+                <span class="p">)</span>
+</pre></div>
+</div>
+<p>Let&#8217;s find out where <code class="docutils literal"><span class="pre">bareme.calc</span></code> is defined by modifying the code as follows:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>    def iter_cotisations():
+        # ...
+
+<span class="gi">+           breakpoint()</span>
+            yield bareme.calc(
+                base * (categorie_salarie == categorie_salarie_type),
+                factor = plafond_securite_sociale,
+                round_base_decimals = round_base_decimals,
+                )
+</pre></div>
+</div>
+<p>Then running <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code> with <a class="reference external" href="https://docs.python.org/3/library/pdb.html">The Python Debugger</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ openfisca test --pdb tests/formulas/irpp_prets_participatifs.yaml
+
+...
+
+(Pdb) bareme.calc.__qualname__
+&#39;MarginalRateTaxScale.calc&#39;
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Great! We&#8217;ve found two performance bottlenecks in OpenFisca-Core:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">TaxBenefitSystem.get_parameters_at_instant</span></code></li>
+<li><code class="docutils literal"><span class="pre">MarginalRateTaxScale.calc</span></code></li>
+</ul>
+<p>How do we proceed?</p>
+</div>
+<div class="section" id="follow-to-the-core">
+<span id="follow-to-the-core"></span><h2>Follow to the core<a class="headerlink" href="#follow-to-the-core" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;ll continue our profiling in core, following <code class="docutils literal"><span class="pre">TaxBenefitSystem.get_parameters_at_instant</span></code>.</p>
+<p>For that, we need to install OpenFisca Core in editable mode:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">openfisca</span><span class="o">-</span><span class="n">core</span>
+</pre></div>
+</div>
+<p>And as before we add the <code class="docutils literal"><span class="pre">&#64;profile</span></code> decorator:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@profile</span>
+<span class="k">def</span> <span class="nf">get_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Let&#8217;s see:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#      Hits         Time  Per Hit   % Time  Line Contents</span>
+<span class="o">==============================================================</span>
+   <span class="mi">337</span>                                               <span class="nd">@profile</span>
+   <span class="mi">338</span>                                               <span class="k">def</span> <span class="nf">get_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+   <span class="mi">339</span>                                                   <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">   340                                                   Get the parameters of the legislation at a given instant</span>
+<span class="s2">   341                                           </span>
+<span class="s2">   342                                                   :param instant: string of the format &#39;YYYY-MM-DD&#39; or `openfisca_core.periods.Instant` instance.</span>
+<span class="s2">   343                                                   :returns: The parameters of the legislation at a given instant.</span>
+<span class="s2">   344                                                   :rtype: :any:`ParameterNodeAtInstant`</span>
+<span class="s2">   345                                                   &quot;&quot;&quot;</span>
+   <span class="mi">346</span>      <span class="mi">4351</span>       <span class="mf">4124.0</span>      <span class="mf">0.9</span>      <span class="mf">0.2</span>          <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="n">Period</span><span class="p">):</span>
+   <span class="mi">347</span>      <span class="mi">4254</span>       <span class="mf">5094.0</span>      <span class="mf">1.2</span>      <span class="mf">0.2</span>              <span class="n">instant</span> <span class="o">=</span> <span class="n">instant</span><span class="o">.</span><span class="n">start</span>
+   <span class="mi">348</span>        <span class="mi">97</span>        <span class="mf">101.0</span>      <span class="mf">1.0</span>      <span class="mf">0.0</span>          <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+   <span class="mi">349</span>                                                       <span class="n">instant</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+   <span class="mi">350</span>                                                   <span class="k">else</span><span class="p">:</span>
+   <span class="mi">351</span>        <span class="mi">97</span>         <span class="mf">54.0</span>      <span class="mf">0.6</span>      <span class="mf">0.0</span>              <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="n">Instant</span><span class="p">),</span> <span class="s2">&quot;Expected an Instant (e.g. Instant((2017, 1, 1)) ). Got: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+   <span class="mi">352</span>                                           
+   <span class="mi">353</span>      <span class="mi">4351</span>       <span class="mf">3732.0</span>      <span class="mf">0.9</span>      <span class="mf">0.2</span>          <span class="n">parameters_at_instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters_at_instant_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+   <span class="mi">354</span>      <span class="mi">4351</span>       <span class="mf">2108.0</span>      <span class="mf">0.5</span>      <span class="mf">0.1</span>          <span class="k">if</span> <span class="n">parameters_at_instant</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+   <span class="mi">355</span>        <span class="mi">50</span>    <span class="mf">2043730.0</span>  <span class="mf">40874.6</span>     <span class="mf">99.2</span>              <span class="n">parameters_at_instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get_at_instant</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+   <span class="mi">356</span>        <span class="mi">50</span>        <span class="mf">150.0</span>      <span class="mf">3.0</span>      <span class="mf">0.0</span>              <span class="bp">self</span><span class="o">.</span><span class="n">_parameters_at_instant_cache</span><span class="p">[</span><span class="n">instant</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameters_at_instant</span>
+   <span class="mi">357</span>      <span class="mi">4351</span>       <span class="mf">1672.0</span>      <span class="mf">0.4</span>      <span class="mf">0.1</span>          <span class="k">return</span> <span class="n">parameters_at_instant</span>
+</pre></div>
+</div>
+<p>Let&#8217;s take a closer look at <code class="docutils literal"><span class="pre">parameters.get_at_instant</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AtInstantLike</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+
+    <span class="nd">@profile</span>
+    <span class="k">def</span> <span class="nf">get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And the results of running the profiler:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#      Hits         Time  Per Hit   % Time  Line Contents</span>
+<span class="o">==============================================================</span>
+    <span class="mi">14</span>                                               <span class="nd">@profile</span>
+    <span class="mi">15</span>                                               <span class="k">def</span> <span class="nf">get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+    <span class="mi">16</span>     <span class="mi">54550</span>     <span class="mf">681341.0</span>     <span class="mf">12.5</span>     <span class="mf">61.4</span>          <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+    <span class="mi">17</span>     <span class="mi">54550</span>     <span class="mf">429057.0</span>      <span class="mf">7.9</span>     <span class="mf">38.6</span>          <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is the whole snippet for the expensive <code class="docutils literal"><span class="pre">periods.instant</span></code> function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">):</span>
+    <span class="c1"># ... </span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># ...</span>
+
+        <span class="n">instant</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">(</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">instant</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+            <span class="p">)</span>
+</pre></div>
+</div>
+<p>We&#8217;ll refactor it as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fragments</span> <span class="o">=</span> <span class="n">instant</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
+<span class="n">instant</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">(</span><span class="n">fragment</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>So as to see where the bottleneck is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
+<span class="o">==================================================================</span>
+
+<span class="mi">40</span>     <span class="mi">44100</span>     <span class="mf">223427.0</span>      <span class="mf">5.1</span>     <span class="mf">31.4</span>          <span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Perfect!</p>
+</div>
+<div class="section" id="isolate-the-bottleneck">
+<span id="isolate-the-bottleneck"></span><h2>Isolate the bottleneck<a class="headerlink" href="#isolate-the-bottleneck" title="Permalink to this headline">¶</a></h2>
+<p>Now we&#8217;re going to isolate it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fragments</span> <span class="o">=</span> <span class="n">instant</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
+<span class="n">instant</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">(</span><span class="n">fragments</span><span class="p">)</span>
+
+<span class="c1"># ...</span>
+
+<span class="nd">@profile</span>
+<span class="k">def</span> <span class="nf">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And profile it again:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
+<span class="o">==================================================================</span>
+
+<span class="mi">40</span>     <span class="mi">44100</span>     <span class="mf">442069.0</span>     <span class="mf">10.0</span>     <span class="mf">52.2</span>          <span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
+<span class="mi">210</span>   <span class="mi">132300</span>      <span class="mf">72826.0</span>      <span class="mf">0.6</span>    <span class="mf">100.0</span>          <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="elevate-the-bottleneck">
+<span id="elevate-the-bottleneck"></span><h2>Elevate the bottleneck<a class="headerlink" href="#elevate-the-bottleneck" title="Permalink to this headline">¶</a></h2>
+<p>Now we need to choose a strategy to reduce the bottleneck&#8217;s impact on performance.</p>
+<p>We can either:</p>
+<ul class="simple">
+<li>reduce the impact per hit</li>
+<li>reduce the number of hits</li>
+</ul>
+<p>Taking a look at the last line we profiled, we can see that:</p>
+<ul class="simple">
+<li>time per hit is very low —implementing a casting algorithm more efficient than the builtin <code class="docutils literal"><span class="pre">int</span></code> seems unlikely</li>
+<li>the range of reasonable values for the <code class="docutils literal"><span class="pre">fragment</span></code> argument is very low: 31 days, 12 months, 2021 → 2064</li>
+<li>there are 132300 hits, and that&#8217;s just for a single simulation (!)</li>
+</ul>
+<p>So let&#8217;s try to reduce the number of hits!</p>
+<p>Once again, we could for example:</p>
+<ul class="simple">
+<li>reduce recursion</li>
+<li>create a lookup table</li>
+</ul>
+<p>In this case, creating a lookup table seems more cost-efficient:</p>
+<ul class="simple">
+<li>the function application has no side effects</li>
+<li>the range of reasonable values for <code class="docutils literal"><span class="pre">fragment</span></code> is very low</li>
+<li>return values are identical for identical values of <code class="docutils literal"><span class="pre">fragment</span></code></li>
+</ul>
+<p>We&#8217;ll use <code class="docutils literal"><span class="pre">functools.lru_cache</span></code> for our lookup table:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="c1"># ...</span>
+
+<span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let&#8217;s see how it does:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits   Time        Per Hit    % Time         Line Contents</span>
+<span class="o">==================================================================</span>
+
+<span class="mi">355</span>       <span class="mi">50</span>   <span class="mf">1809954.0</span>   <span class="mf">36199.1</span>     <span class="mf">99.0</span>          <span class="n">parameters_at_instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get_at_instant</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+<span class="mi">16</span>     <span class="mi">44100</span>    <span class="mf">421208.0</span>       <span class="mf">9.6</span>     <span class="mf">49.0</span>          <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+<span class="mi">41</span>     <span class="mi">44100</span>     <span class="mf">97584.0</span>       <span class="mf">2.2</span>     <span class="mf">20.6</span>          <span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
+<span class="mi">212</span>       <span class="mi">17</span>        <span class="mf">40.0</span>       <span class="mf">2.4</span>    <span class="mf">100.0</span>          <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wow! The number of hits to <code class="docutils literal"><span class="pre">parse_fragment</span></code> decreased by 99%, improving the generator performance by 353%!</p>
+<p>That&#8217;s it!</p>
+</div>
+<div class="section" id="caching-further">
+<span id="caching-further"></span><h2>Caching further<a class="headerlink" href="#caching-further" title="Permalink to this headline">¶</a></h2>
+<p>Once we know it works, can&#8217;t we go further?</p>
+<p>With a couple of extra caches and code refactoring, we could end up with something like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="c1"># ...</span>
+
+<span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="c1"># ...</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="c1"># ...</span>
+
+<span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">]:</span>
+
+    <span class="k">if</span> <span class="n">instant</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">INSTANT_PATTERN</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">instant</span><span class="p">):</span>
+            <span class="n">raise_error</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+
+        <span class="n">fragments</span> <span class="o">=</span> <span class="n">instant</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">integers</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">(</span><span class="n">integers</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">):</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">((</span><span class="n">instant</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">instant</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">instant</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="p">(</span><span class="n">instant</span><span class="p">,)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="k">assert</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">3</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="n">instant</span><span class="o">.</span><span class="n">start</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">instant</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">instant</span>
+
+    <span class="k">return</span> <span class="nb">globals</span><span class="p">()[</span><span class="sa">f</span><span class="s2">&quot;instant_</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">](</span><span class="n">instant</span><span class="p">)</span>
+
+<span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
+
+<span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">instant_1</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">((</span><span class="n">instant</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">instant_2</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">((</span><span class="n">instant</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">instant</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">instant_3</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Please note that we&#8217;re importing <code class="docutils literal"><span class="pre">annotations</span></code> from <code class="docutils literal"><span class="pre">__future__</span></code> so as to postpone the evaluation of type annotations (<a class="reference external" href="https://www.python.org/dev/peps/pep-0484/">PEP484</a> and <a class="reference external" href="https://www.python.org/dev/peps/pep-0563/">PEP563</a>), in order to avoid <a class="reference external" href="https://discuss.python.org/t/how-to-add-type-hints-for/7459">cyclic imports</a>.</p>
+<p>Let&#8217;s profile again:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits    Time        Per Hit    % Time         Line Contents</span>
+<span class="o">===================================================================</span>
+
+<span class="mi">355</span>       <span class="mi">50</span>    <span class="mf">1787843.0</span>   <span class="mf">35756.9</span>     <span class="mf">98.8</span>          <span class="n">parameters_at_instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get_at_instant</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+<span class="mi">16</span>     <span class="mi">44100</span>      <span class="mf">92290.0</span>       <span class="mf">2.1</span>     <span class="mf">14.1</span>          <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+<span class="mi">48</span>        <span class="mi">50</span>        <span class="mf">349.0</span>       <span class="mf">7.0</span>     <span class="mf">22.2</span>          <span class="n">integers</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
+<span class="mi">213</span>       <span class="mi">17</span>         <span class="mf">76.0</span>       <span class="mf">4.5</span>    <span class="mf">100.0</span>          <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And overall?</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PYTEST_ADDOPTS</span><span class="o">=</span><span class="s2">&quot;$PYTEST_ADDOPTS --durations=3&quot;</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span>
+
+<span class="o">...</span>
+
+<span class="mf">7.33</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+<span class="mf">7.16</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+<span class="mf">2.46</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
+</pre></div>
+</div>
+<p>Looks promising!</p>
+</div>
+<div class="section" id="beware-of-context">
+<span id="beware-of-context"></span><h2>Beware of context!<a class="headerlink" href="#beware-of-context" title="Permalink to this headline">¶</a></h2>
+<p>So we tried reducing the number of hits, what about reducing the impact per hit?</p>
+<p>Looking back to <code class="docutils literal"><span class="pre">get_at_instant</span></code>, let&#8217;s follow the next function call:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
+<span class="o">===================================================================</span>
+
+<span class="mi">16</span>     <span class="mi">44100</span>      <span class="mf">76860.0</span>      <span class="mf">1.7</span>     <span class="mf">15.4</span>          <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+<span class="mi">17</span>     <span class="mi">44100</span>     <span class="mf">421350.0</span>      <span class="mf">9.6</span>     <span class="mf">84.6</span>          <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let&#8217;s look at that code closer:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">value_at_instant</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value_at_instant</span><span class="o">.</span><span class="n">instant_str</span> <span class="o">&lt;=</span> <span class="n">instant</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value_at_instant</span><span class="o">.</span><span class="n">value</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>A linear search! I know what you&#8217;re thinking, what if we do a binary search instead?</p>
+<p>Let&#8217;s try that out (naive implementation):</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+import sortedcontainers</span>
+
+# ...
+
+class Parameter(AtInstantLike):
+    # ...
+
+    def __init__(self, name, data, file_path = None):
+        #...
+
+        values_list = []
+<span class="gi">+       values_dict = sortedcontainers.sorteddict.SortedDict()</span>
+        
+        # ...
+
+            values_list.append(value_at_instant)
+<span class="gi">+           values_dict.update({instant_str: value_at_instant})</span>
+
+        self.values_list: typing.List[ParameterAtInstant] = values_list
+<span class="gi">+       self.values_dict = values_dict</span>
+
+        # ...
+
+    def _get_at_instant(self, instant):
+<span class="gd">-       for value_at_instant in self.values_list:</span>
+<span class="gd">-           if value_at_instant.instant_str &lt;= instant:</span>
+<span class="gd">-               return value_at_instant.value</span>
+<span class="gd">-       return None</span>
+<span class="gi">+       index = self.values_dict.bisect_right(instant)</span>
+<span class="gi">+</span>
+<span class="gi">+       if index &gt; len(self.values_list):</span>
+<span class="gi">+           return None</span>
+<span class="gi">+</span>
+<span class="gi">+       return self.values_list[::-1][index - 1].value</span>
+</pre></div>
+</div>
+<p>And performance wise?</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
+<span class="o">===================================================================</span>
+
+<span class="mi">16</span>     <span class="mi">44100</span>      <span class="mf">82468.0</span>      <span class="mf">1.9</span>     <span class="mf">10.6</span>          <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
+<span class="mi">17</span>     <span class="mi">44100</span>     <span class="mf">696812.0</span>     <span class="mf">15.8</span>     <span class="mf">89.4</span>          <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+<span class="mi">177</span>   <span class="mi">196150</span>     <span class="mf">596129.0</span>      <span class="mf">3.0</span>     <span class="mf">65.8</span>          <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_dict</span><span class="o">.</span><span class="n">bisect_right</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It&#8217;s actually worse... but why?</p>
+<p>One hypothesis is, even if, compared to a linear search with complexity <em>O(n)</em>, a binary search should be more efficient in that it has a complexity of <em>O(log(n))</em>, it will actually be more efficient for large numbers of <em>n</em>, which is not usually the case here.</p>
+<p>In fact, creating a lookup table for parameters would be theoretically more efficient. That would require refactoring, as the current <code class="docutils literal"><span class="pre">values_list</span></code> object is not hashable. Indeed, even using a more appropiate data structure could lead to better performance.</p>
+</div>
+<div class="section" id="wrap-up">
+<span id="wrap-up"></span><h2>Wrap up<a class="headerlink" href="#wrap-up" title="Permalink to this headline">¶</a></h2>
+<p>Finally, let&#8217;s run our base &amp; proposed scenarios several times so as to have something more statistically sound.</p>
+<p>IPython&#8217;s <code class="docutils literal"><span class="pre">%timeit</span></code> comes handy:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>pip install ipython
+ipython
+%timeit -n 10 -r 3 !openfisca test --country-package openfisca_france tests/formulas/irpp_prets_participatifs.yaml
+
+...
+
+# Before
+17.2 s ± 261 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
+
+# After
+17.1 s ± 49.2 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
+</pre></div>
+</div>
+<p>Statistically irrelevant :/ but hey! Life is about the journey, not the destination :)</p>
+<p>But now what? Reduce recursion? But how? Split-Apply-Combine?</p>
+<p>To be continued...</p>
+</div>
+</div>
+
+
+          </div>
+  <a class="actionbutton" title="Did you find what you were looking for?" data-toggle="tooltip" data-placement="top"  href="https://openfisca.typeform.com/to/WudIsQ"><i class="fas fa-question"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../openfisca-python-api/index.html" title="Openfisca Python API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="replicate-simulation-inputs.html" title="Replicating a situation along axes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-chart-pie"></i> Running a simulation</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>
