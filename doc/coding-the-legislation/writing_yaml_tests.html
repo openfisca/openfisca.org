@@ -213,6 +213,22 @@ For instance:</li>
     <span class="nt">irpp</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-1181</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li>If variables are defined for different periods, you can
+override the default period specified for the test by providing
+periodic values.
+For instance:</li>
+</ul>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Income below 50,000 and Age at or over 55 qualifies</span>
+  <span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2021-12-01</span>
+  <span class="nt">input</span><span class="p">:</span>
+    <span class="nt">age</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">55</span> <span class="c1"># Defined with the period DAY</span>
+    <span class="nt">income</span><span class="p">:</span> <span class="c1"># Defined with the period YEAR</span>
+      <span class="nt">2021</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">49999</span>
+  <span class="nt">output</span><span class="p">:</span>
+    <span class="nt">eligible</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="testing-formulas-by-giving-a-test-case">
 <span id="testing-formulas-by-giving-a-test-case"></span><h3>Testing formulas by giving a test case<a class="headerlink" href="#testing-formulas-by-giving-a-test-case" title="Permalink to this headline">¶</a></h3>
