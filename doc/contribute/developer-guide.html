@@ -176,14 +176,14 @@ ipdb&gt;
 <div class="section" id="profiling-code">
 <span id="profiling-code"></span><h2>Profiling code<a class="headerlink" href="#profiling-code" title="Permalink to this headline">¶</a></h2>
 <p>To profile the execution of a portion of code, wrap it with these lines:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+    import cProfile</span>
-<span class="gi">+    pr = cProfile.Profile()</span>
-<span class="gi">+    pr.enable()</span>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+    import cProfile</span><span class="w"></span>
+<span class="gi">+    pr = cProfile.Profile()</span><span class="w"></span>
+<span class="gi">+    pr.enable()</span><span class="w"></span>
 
-     [...portion of code...]
+<span class="w"> </span>    [...portion of code...]<span class="w"></span>
 
-<span class="gi">+    pr.disable()</span>
-<span class="gi">+    pr.dump_stats(&#39;result.profile&#39;)</span>
+<span class="gi">+    pr.disable()</span><span class="w"></span>
+<span class="gi">+    pr.dump_stats(&#39;result.profile&#39;)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Each time you call the endpoint a <code class="docutils literal"><span class="pre">result.profile</span></code> file is written.

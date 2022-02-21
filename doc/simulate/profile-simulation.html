@@ -273,15 +273,15 @@
 </pre></div>
 </div>
 <p>Let&#8217;s find out where <code class="docutils literal"><span class="pre">parameters</span></code> is defined by modifying the code as follows:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>class indemnite_residence(Variable):
-    value_type = float
-    entity = Individu
-    label = &quot;Indemnité de résidence des fonctionnaires&quot;
-    definition_period = MONTH
-    set_input = set_input_divide_by_period
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="w">class indemnite_residence(Variable):</span>
+<span class="w"> </span>   value_type = float<span class="w"></span>
+<span class="w"> </span>   entity = Individu<span class="w"></span>
+<span class="w"> </span>   label = &quot;Indemnité de résidence des fonctionnaires&quot;<span class="w"></span>
+<span class="w"> </span>   definition_period = MONTH<span class="w"></span>
+<span class="w"> </span>   set_input = set_input_divide_by_period<span class="w"></span>
 
-    def formula(individu, period, parameters):
-<span class="gi">+       breakpoint()</span>
+<span class="w"> </span>   def formula(individu, period, parameters):<span class="w"></span>
+<span class="gi">+       breakpoint()</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Then running <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code> with <a class="reference external" href="https://docs.python.org/3/library/pdb.html">The Python Debugger</a>:</p>
@@ -321,15 +321,15 @@
 </pre></div>
 </div>
 <p>Let&#8217;s find out where <code class="docutils literal"><span class="pre">bareme.calc</span></code> is defined by modifying the code as follows:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>    def iter_cotisations():
-        # ...
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="w"> </span>   def iter_cotisations():<span class="w"></span>
+<span class="w"> </span>       # ...<span class="w"></span>
 
-<span class="gi">+           breakpoint()</span>
-            yield bareme.calc(
-                base * (categorie_salarie == categorie_salarie_type),
-                factor = plafond_securite_sociale,
-                round_base_decimals = round_base_decimals,
-                )
+<span class="gi">+           breakpoint()</span><span class="w"></span>
+<span class="w"> </span>           yield bareme.calc(<span class="w"></span>
+<span class="w"> </span>               base * (categorie_salarie == categorie_salarie_type),<span class="w"></span>
+<span class="w"> </span>               factor = plafond_securite_sociale,<span class="w"></span>
+<span class="w"> </span>               round_base_decimals = round_base_decimals,<span class="w"></span>
+<span class="w"> </span>               )<span class="w"></span>
 </pre></div>
 </div>
 <p>Then running <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code> with <a class="reference external" href="https://docs.python.org/3/library/pdb.html">The Python Debugger</a>:</p>
@@ -619,40 +619,40 @@
 </div>
 <p>A linear search! I know what you&#8217;re thinking, what if we do a binary search instead?</p>
 <p>Let&#8217;s try that out (naive implementation):</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+import sortedcontainers</span>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+import sortedcontainers</span><span class="w"></span>
 
-# ...
+<span class="w"># ...</span>
 
-class Parameter(AtInstantLike):
-    # ...
+<span class="w">class Parameter(AtInstantLike):</span>
+<span class="w"> </span>   # ...<span class="w"></span>
 
-    def __init__(self, name, data, file_path = None):
-        #...
+<span class="w"> </span>   def __init__(self, name, data, file_path = None):<span class="w"></span>
+<span class="w"> </span>       #...<span class="w"></span>
 
-        values_list = []
-<span class="gi">+       values_dict = sortedcontainers.sorteddict.SortedDict()</span>
-        
-        # ...
+<span class="w"> </span>       values_list = []<span class="w"></span>
+<span class="gi">+       values_dict = sortedcontainers.sorteddict.SortedDict()</span><span class="w"></span>
+<span class="w"> </span>       <span class="w"></span>
+<span class="w"> </span>       # ...<span class="w"></span>
 
-            values_list.append(value_at_instant)
-<span class="gi">+           values_dict.update({instant_str: value_at_instant})</span>
+<span class="w"> </span>           values_list.append(value_at_instant)<span class="w"></span>
+<span class="gi">+           values_dict.update({instant_str: value_at_instant})</span><span class="w"></span>
 
-        self.values_list: typing.List[ParameterAtInstant] = values_list
-<span class="gi">+       self.values_dict = values_dict</span>
+<span class="w"> </span>       self.values_list: typing.List[ParameterAtInstant] = values_list<span class="w"></span>
+<span class="gi">+       self.values_dict = values_dict</span><span class="w"></span>
 
-        # ...
+<span class="w"> </span>       # ...<span class="w"></span>
 
-    def _get_at_instant(self, instant):
-<span class="gd">-       for value_at_instant in self.values_list:</span>
-<span class="gd">-           if value_at_instant.instant_str &lt;= instant:</span>
-<span class="gd">-               return value_at_instant.value</span>
-<span class="gd">-       return None</span>
-<span class="gi">+       index = self.values_dict.bisect_right(instant)</span>
-<span class="gi">+</span>
-<span class="gi">+       if index &gt; len(self.values_list):</span>
-<span class="gi">+           return None</span>
-<span class="gi">+</span>
-<span class="gi">+       return self.values_list[::-1][index - 1].value</span>
+<span class="w"> </span>   def _get_at_instant(self, instant):<span class="w"></span>
+<span class="gd">-       for value_at_instant in self.values_list:</span><span class="w"></span>
+<span class="gd">-           if value_at_instant.instant_str &lt;= instant:</span><span class="w"></span>
+<span class="gd">-               return value_at_instant.value</span><span class="w"></span>
+<span class="gd">-       return None</span><span class="w"></span>
+<span class="gi">+       index = self.values_dict.bisect_right(instant)</span><span class="w"></span>
+<span class="gi">+</span><span class="w"></span>
+<span class="gi">+       if index &gt; len(self.values_list):</span><span class="w"></span>
+<span class="gi">+           return None</span><span class="w"></span>
+<span class="gi">+</span><span class="w"></span>
+<span class="gi">+       return self.values_list[::-1][index - 1].value</span><span class="w"></span>
 </pre></div>
 </div>
 <p>And performance wise?</p>

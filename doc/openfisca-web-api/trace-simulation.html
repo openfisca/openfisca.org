@@ -148,26 +148,26 @@
 <div class="section" id="application-analyse-disposable-income-calculation-for-one-person">
 <span id="application-analyse-disposable-income-calculation-for-one-person"></span><h2>Application: analyse disposable income calculation for one person<a class="headerlink" href="#application-analyse-disposable-income-calculation-for-one-person" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s say that you want to calculate the <code class="docutils literal"><span class="pre">disposable_income</span></code> for one person earning a <code class="docutils literal"><span class="pre">salary</span></code> on the same period. You start with the following JSON situation description:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;households&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;_&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;parents&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Alicia&quot;</span><span class="p">]</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="nt">&quot;persons&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;Alicia&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;birth&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;ETERNITY&quot;</span><span class="p">:</span> <span class="s2">&quot;1980-01-01&quot;</span>
-      <span class="p">},</span>
-      <span class="nt">&quot;disposable_income&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;2017-01&quot;</span><span class="p">:</span> <span class="kc">null</span>
-      <span class="p">},</span>
-      <span class="nt">&quot;salary&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;2017-01&quot;</span><span class="p">:</span> <span class="mi">4000</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;households&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;_&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;parents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Alicia&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;persons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;Alicia&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;birth&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;ETERNITY&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1980-01-01&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;disposable_income&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;2017-01&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;salary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;2017-01&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>If you send this situation to your <code class="docutils literal"><span class="pre">country-template</span></code> model Web API or try it out on the <code class="docutils literal"><span class="pre">/trace</span></code> endpoint in the <a class="reference external" href="https://demo.openfisca.org/legislation/swagger">Swagger interface</a>, you get the following response composed of three sections:</p>
@@ -176,105 +176,105 @@
 <li><code class="docutils literal"><span class="pre">requestedCalculations</span></code>: lists the requested calculations (i.e. variables with values at <code class="docutils literal"><span class="pre">null</span></code>),</li>
 <li><code class="docutils literal"><span class="pre">trace</span></code>: lists the calculation steps.</li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;entitiesDescription&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;households&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;_&quot;</span>
-    <span class="p">],</span>
-    <span class="nt">&quot;persons&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;Alicia&quot;</span>
-    <span class="p">]</span>
-  <span class="p">},</span>
-  <span class="nt">&quot;requestedCalculations&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">&quot;disposable_income&lt;2017-01&gt;&quot;</span>
-  <span class="p">],</span>
-  <span class="nt">&quot;trace&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;age&lt;2017-01&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;birth&lt;2017-01&gt;&quot;</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{},</span>
-      <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="mi">37</span>
-      <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;basic_income&lt;2017-01&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;age&lt;2017-01&gt;&quot;</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;benefits.basic_income&lt;2017-01-01&gt;&quot;</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>
-        <span class="nt">&quot;general.age_of_majority&lt;2017-01-01&gt;&quot;</span><span class="p">:</span> <span class="mi">18</span>
-      <span class="p">},</span>
-      <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="mi">600</span>
-      <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;birth&lt;2017-01&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="nt">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{},</span>
-      <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Tue, 01 Jan 1980 00:00:00 GMT&quot;</span>
-      <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;disposable_income&lt;2017-01&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;salary&lt;2017-01&gt;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;basic_income&lt;2017-01&gt;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;income_tax&lt;2017-01&gt;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;social_security_contribution&lt;2017-01&gt;&quot;</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{},</span>
-      <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="mi">3920</span>
-      <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;income_tax&lt;2017-01&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;salary&lt;2017-01&gt;&quot;</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;taxes.income_tax_rate&lt;2017-01-01&gt;&quot;</span><span class="p">:</span> <span class="mf">0.15</span>
-      <span class="p">},</span>
-      <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="mi">600</span>
-      <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;salary&lt;2017-01&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="nt">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{},</span>
-      <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="mi">4000</span>
-      <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;social_security_contribution&lt;2017-01&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;salary&lt;2017-01&gt;&quot;</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{},</span>
-      <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="mi">80</span>
-      <span class="p">]</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;entitiesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;households&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;_&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;persons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;Alicia&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;requestedCalculations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;disposable_income&lt;2017-01&gt;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;trace&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;age&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;birth&lt;2017-01&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="mi">37</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;basic_income&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;age&lt;2017-01&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;benefits.basic_income&lt;2017-01-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;general.age_of_majority&lt;2017-01-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="mi">600</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;birth&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;Tue, 01 Jan 1980 00:00:00 GMT&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;disposable_income&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;salary&lt;2017-01&gt;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;basic_income&lt;2017-01&gt;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;income_tax&lt;2017-01&gt;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;social_security_contribution&lt;2017-01&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="mi">3920</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;income_tax&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;salary&lt;2017-01&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;taxes.income_tax_rate&lt;2017-01-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.15</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="mi">600</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;salary&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="mi">4000</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;social_security_contribution&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;salary&lt;2017-01&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="mi">80</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>As we calculated the <code class="docutils literal"><span class="pre">disposable_income</span></code> for <code class="docutils literal"><span class="pre">2017-01</span></code>, let&#8217;s see how the <code class="docutils literal"><span class="pre">trace</span></code> section describes it:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span>  <span class="p">{</span>
-    <span class="nt">&quot;disposable_income&lt;2017-01&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;salary&lt;2017-01&gt;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;basic_income&lt;2017-01&gt;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;income_tax&lt;2017-01&gt;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;social_security_contribution&lt;2017-01&gt;&quot;</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{},</span>
-      <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="mi">3920</span>
-      <span class="p">]</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;disposable_income&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;salary&lt;2017-01&gt;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;basic_income&lt;2017-01&gt;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;income_tax&lt;2017-01&gt;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;social_security_contribution&lt;2017-01&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="mi">3920</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>It contains these sub-sections:</p>
@@ -287,33 +287,33 @@
 <p>Following <code class="docutils literal"><span class="pre">dependencies</span></code> list, we can also see that:</p>
 <ul>
 <li><p class="first">OpenFisca didn&#8217;t need to calculate the <code class="docutils literal"><span class="pre">salary</span></code> value as it was given in situation inputs; thus the <code class="docutils literal"><span class="pre">/trace</span></code> doesn&#8217;t evaluate its <code class="docutils literal"><span class="pre">dependencies</span></code> and <code class="docutils literal"><span class="pre">parameters</span></code>:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;salary&lt;2017-01&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="nt">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{},</span>
-    <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="mi">4000</span>
-    <span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;salary&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="mi">4000</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">OpenFisca needed to calculate the next variable, <code class="docutils literal"><span class="pre">basic_income</span></code>, before <code class="docutils literal"><span class="pre">disposable_income</span></code> evaluation:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;basic_income&lt;2017-01&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;age&lt;2017-01&gt;&quot;</span>
-    <span class="p">],</span>
-    <span class="nt">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;benefits.basic_income&lt;2017-01-01&gt;&quot;</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>
-      <span class="nt">&quot;general.age_of_majority&lt;2017-01-01&gt;&quot;</span><span class="p">:</span> <span class="mi">18</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="mi">600</span>
-    <span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;basic_income&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;age&lt;2017-01&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;benefits.basic_income&lt;2017-01-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;general.age_of_majority&lt;2017-01-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="mi">600</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Note that, as a parameter depends only on its validity period, its evaluation is described in one line that includes its value.</p>
