@@ -392,6 +392,9 @@
         <span class="c1"># The map is needed b/c the order of the nth persons of each household in the persons vector is not necessarily the same than the household order.</span>
         <span class="n">result</span><span class="p">[</span><span class="n">nb_persons_per_entity</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">members_map</span><span class="p">][</span><span class="n">positions</span><span class="p">[</span><span class="n">members_map</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">]</span>
 
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">EnumArray</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">possible_values</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="nd">@projectors</span><span class="o">.</span><span class="n">projectable</span>
