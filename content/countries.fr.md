@@ -12,6 +12,7 @@ nz: "Aotearoa Nouvelle-Zélande"
 sn: "Sénégal"
 tn: "Tunisie"
 uk: "Royaume-Uni"
+us: "États Unis"
 uy: "Uruguay"
 
 definition: "Les Country Packages sont les modules de base d'OpenFisca. Ils définissent les Paramètres, Entités et Variables d'un pays."
