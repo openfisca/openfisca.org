@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Periods &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Legislation evolutions" href="40_legislation_evolutions.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="25_vectorial_computing.html" title="Vectorial computing"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-code"></i> From law to code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-code"></i> From law to code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Periods</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -145,126 +134,116 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="periods">
-<span id="periods"></span><h1>Periods<a class="headerlink" href="#periods" title="Permalink to this headline">¶</a></h1>
+  <section id="periods">
+<h1>Periods<a class="headerlink" href="#periods" title="Permalink to this headline">¶</a></h1>
 <p>When you run an OpenFisca simulation to compute a variable, you need to define the period of interest for this variable.</p>
 <p>OpenFisca gives you a convenient string syntax to define periods.</p>
-<p>The general structure is <code class="docutils literal"><span class="pre">unit:instant:quantity</span></code> (see the <a class="reference internal" href="../key-concepts/periodsinstants.html"><span class="doc">definition of a period</span></a>). Some of the structure can be omitted.</p>
+<p>The general structure is <code class="docutils literal notranslate"><span class="pre">unit:instant:quantity</span></code> (see the <a class="reference internal" href="../key-concepts/periodsinstants.html"><span class="doc std std-doc">definition of a period</span></a>). Some of the structure can be omitted.</p>
 <p>The main valid period formats are referenced in this table:</p>
-<table border="1" class="docutils">
+<table class="colwidths-auto docutils align-default">
 <thead>
-<tr>
-<th>Period format</th>
-<th>Period type</th>
-<th>Example</th>
-<th>Represents</th>
-<th>Disambiguation</th>
+<tr class="row-odd"><th class="head"><p>Period format</p></th>
+<th class="head"><p>Period type</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Represents</p></th>
+<th class="head"><p>Disambiguation</p></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>AAAA</code></td>
-<td>Calendar year</td>
-<td><code>'2010'</code></td>
-<td>The year 2010.</td>
-<td>From the 1st of January 2010 to the 31st of December 2010, inclusive.</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AAAA</span></code></p></td>
+<td><p>Calendar year</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'2010'</span></code></p></td>
+<td><p>The year 2010.</p></td>
+<td><p>From the 1st of January 2010 to the 31st of December 2010, inclusive.</p></td>
 </tr>
-<tr>
-<td><code>AAAA-MM</code></td>
-<td>Month</td>
-<td><code>'2010-04'</code></td>
-<td>The month of April 2010.</td>
-<td>From the 1st of April 2010 to the 30th of April 2010, inclusive.</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AAAA-MM</span></code></p></td>
+<td><p>Month</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'2010-04'</span></code></p></td>
+<td><p>The month of April 2010.</p></td>
+<td><p>From the 1st of April 2010 to the 30th of April 2010, inclusive.</p></td>
 </tr>
-<tr>
-<td><code>AAAA-MM-DD</code></td>
-<td>Day</td>
-<td><code>'2010-04-06'</code></td>
-<td>The day of April 6th 2010.</td>
-<td>The whole day of the 6th of April 2010.</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AAAA-MM-DD</span></code></p></td>
+<td><p>Day</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'2010-04-06'</span></code></p></td>
+<td><p>The day of April 6th 2010.</p></td>
+<td><p>The whole day of the 6th of April 2010.</p></td>
 </tr>
-<tr>
-<td><code>year:AAAA-MM</code></td>
-<td>Rolling year</td>
-<td><code>'year:2010-04'</code></td>
-<td>The 1 year period starting in April 2010.</td>
-<td>From the 1st of April 2010 to the 31st of March 2011, inclusive</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">year:AAAA-MM</span></code></p></td>
+<td><p>Rolling year</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'year:2010-04'</span></code></p></td>
+<td><p>The 1 year period starting in April 2010.</p></td>
+<td><p>From the 1st of April 2010 to the 31st of March 2011, inclusive</p></td>
 </tr>
-<tr>
-<td><code>year:AAAA:N</code></td>
-<td>N years</td>
-<td><code>'year:2010:3'</code></td>
-<td>The years 2010, 2011 and 2012.</td>
-<td>From the 1st of January 2010 to the 31st of December 2012, inclusive.</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">year:AAAA:N</span></code></p></td>
+<td><p>N years</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'year:2010:3'</span></code></p></td>
+<td><p>The years 2010, 2011 and 2012.</p></td>
+<td><p>From the 1st of January 2010 to the 31st of December 2012, inclusive.</p></td>
 </tr>
-<tr>
-<td><code>year:AAAA-MM:N</code></td>
-<td>N rolling years</td>
-<td><code>'year:2010-04:3'</code></td>
-<td>The three years period starting in April 2010.</td>
-<td>From the 1st of April 2010 to the 31st of March 2013, inclusive.</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">year:AAAA-MM:N</span></code></p></td>
+<td><p>N rolling years</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'year:2010-04:3'</span></code></p></td>
+<td><p>The three years period starting in April 2010.</p></td>
+<td><p>From the 1st of April 2010 to the 31st of March 2013, inclusive.</p></td>
 </tr>
-<tr>
-<td><code>month:AAAA-MM:N</code></td>
-<td>N months</td>
-<td><code>'month:2010-04:3'</code></td>
-<td>The three months from April to June 2010.</td>
-<td>From the 1st of April 2010 to the 30th of June 2010, inclusive.</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">month:AAAA-MM:N</span></code></p></td>
+<td><p>N months</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'month:2010-04:3'</span></code></p></td>
+<td><p>The three months from April to June 2010.</p></td>
+<td><p>From the 1st of April 2010 to the 30th of June 2010, inclusive.</p></td>
 </tr>
-<tr>
-<td><code>month:AAAA-MM-DD:N</code></td>
-<td>N months</td>
-<td><code>'month:2010-04-15:3'</code></td>
-<td>The three months from mid April to mid July 2010.</td>
-<td>From the April 15th 2010 to the 14th of July 2010, inclusive.</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">month:AAAA-MM-DD:N</span></code></p></td>
+<td><p>N months</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'month:2010-04-15:3'</span></code></p></td>
+<td><p>The three months from mid April to mid July 2010.</p></td>
+<td><p>From the April 15th 2010 to the 14th of July 2010, inclusive.</p></td>
 </tr>
-<tr>
-<td><code>day:AAAA-MM-DD:N</code></td>
-<td>N days</td>
-<td><code>'day:2010-04-01:15'</code></td>
-<td>The first 15 days of April 2010.</td>
-<td>From the 1st of April 2010 to the 15th of April 2010, inclusive.</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">day:AAAA-MM-DD:N</span></code></p></td>
+<td><p>N days</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'day:2010-04-01:15'</span></code></p></td>
+<td><p>The first 15 days of April 2010.</p></td>
+<td><p>From the 1st of April 2010 to the 15th of April 2010, inclusive.</p></td>
 </tr>
-<tr>
-<td><code>ETERNITY</code></td>
-<td>Forever</td>
-<td><code>ETERNITY</code></td>
-<td>All of time.</td>
-<td>All past, present and future day, month or year.</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ETERNITY</span></code></p></td>
+<td><p>Forever</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ETERNITY</span></code></p></td>
+<td><p>All of time.</p></td>
+<td><p>All past, present and future day, month or year.</p></td>
 </tr>
 </tbody>
-</table><p>The starting instant can be shortened to a month or a year. Then, OpenFisca will implicitly use the first day of the first month.</p>
+</table>
+<p>The starting instant can be shortened to a month or a year. Then, OpenFisca will implicitly use the first day of the first month.</p>
 <blockquote>
-<div><p>Internally, periods come from <code class="docutils literal"><span class="pre">openfisca_core.periods</span></code> and are stored as:</p>
+<div><p>Internally, periods come from <code class="docutils literal notranslate"><span class="pre">openfisca_core.periods</span></code> and are stored as:</p>
 <ul class="simple">
-<li>a unit (<code class="docutils literal"><span class="pre">DAY</span></code>, <code class="docutils literal"><span class="pre">MONTH</span></code>, <code class="docutils literal"><span class="pre">YEAR</span></code>)</li>
-<li>a starting <code class="docutils literal"><span class="pre">Instant</span></code></li>
-<li>a quantity of units.</li>
+<li><p>a unit (<code class="docutils literal notranslate"><span class="pre">DAY</span></code>, <code class="docutils literal notranslate"><span class="pre">MONTH</span></code>, <code class="docutils literal notranslate"><span class="pre">YEAR</span></code>)</p></li>
+<li><p>a starting <code class="docutils literal notranslate"><span class="pre">Instant</span></code></p></li>
+<li><p>a quantity of units.</p></li>
 </ul>
 </div></blockquote>
-<div class="section" id="using-periods-in-a-simulation">
-<span id="using-periods-in-a-simulation"></span><h2>Using periods in a simulation<a class="headerlink" href="#using-periods-in-a-simulation" title="Permalink to this headline">¶</a></h2>
-<p>As an example, here is how to calculate a <code class="docutils literal"><span class="pre">housing_allowance</span></code> on a given month:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-05&#39;</span><span class="p">)</span>
+<section id="using-periods-in-a-simulation">
+<h2>Using periods in a simulation<a class="headerlink" href="#using-periods-in-a-simulation" title="Permalink to this headline">¶</a></h2>
+<p>As an example, here is how to calculate a <code class="docutils literal notranslate"><span class="pre">housing_allowance</span></code> on a given month:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-05&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This is equivalent to this more precise variant:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;month:2019-05-01:1&#39;</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;month:2019-05-01:1&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="periods-in-variable-definitions">
-<span id="periods-in-variable-definitions"></span><h2>Periods in variable definitions<a class="headerlink" href="#periods-in-variable-definitions" title="Permalink to this headline">¶</a></h2>
-<p>With OpenFisca you can calculate variables such as <code class="docutils literal"><span class="pre">salary</span></code> that can change over time. You can also evaluate the impact of this <code class="docutils literal"><span class="pre">salary</span></code> on the <code class="docutils literal"><span class="pre">income_tax</span></code>.</p>
-<p>These variables can evolve through time at a diffent periodicity. Here for example, <code class="docutils literal"><span class="pre">salary</span></code> changes from month to month while the <code class="docutils literal"><span class="pre">income_tax</span></code> is calculated on a yearly basis.</p>
-<p>Therefore, all OpenFisca variables have a <code class="docutils literal"><span class="pre">definition_period</span></code> attribute:</p>
+</section>
+<section id="periods-in-variable-definitions">
+<h2>Periods in variable definitions<a class="headerlink" href="#periods-in-variable-definitions" title="Permalink to this headline">¶</a></h2>
+<p>With OpenFisca you can calculate variables such as <code class="docutils literal notranslate"><span class="pre">salary</span></code> that can change over time. You can also evaluate the impact of this <code class="docutils literal notranslate"><span class="pre">salary</span></code> on the <code class="docutils literal notranslate"><span class="pre">income_tax</span></code>.</p>
+<p>These variables can evolve through time at a diffent periodicity. Here for example, <code class="docutils literal notranslate"><span class="pre">salary</span></code> changes from month to month while the <code class="docutils literal notranslate"><span class="pre">income_tax</span></code> is calculated on a yearly basis.</p>
+<p>Therefore, all OpenFisca variables have a <code class="docutils literal notranslate"><span class="pre">definition_period</span></code> attribute:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">DAY</span></code>: The variable may have a different value each day.</li>
-<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">MONTH</span></code>: The variable may have a different value each month. <em>For example</em>, the salary of a person. When <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> will always be a whole month. Trying to compute <code class="docutils literal"><span class="pre">salary</span></code> with a period that is not a month will raise an error before entering <code class="docutils literal"><span class="pre">formula</span></code>.</li>
-<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">YEAR</span></code>: The variable is defined for a year or it has always the same value every months of a year. <em>For example</em>, if taxes are to be paid yearly, the corresponding variable is yearly. When <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> will always be a whole year (from January 1st to December 31th).</li>
-<li><code class="docutils literal"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">ETERNITY</span></code>: The value of the variable is constant. <em>For example</em>, the date of birth of a person never changes. <code class="docutils literal"><span class="pre">period</span></code> is still the 2nd parameter of <code class="docutils literal"><span class="pre">formula</span></code>. However when <code class="docutils literal"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal"><span class="pre">period</span></code> can be anything and it should not be used.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">DAY</span></code>: The variable may have a different value each day.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">MONTH</span></code>: The variable may have a different value each month. <em>For example</em>, the salary of a person. When <code class="docutils literal notranslate"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal notranslate"><span class="pre">period</span></code> will always be a whole month. Trying to compute <code class="docutils literal notranslate"><span class="pre">salary</span></code> with a period that is not a month will raise an error before entering <code class="docutils literal notranslate"><span class="pre">formula</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">YEAR</span></code>: The variable is defined for a year or it has always the same value every months of a year. <em>For example</em>, if taxes are to be paid yearly, the corresponding variable is yearly. When <code class="docutils literal notranslate"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal notranslate"><span class="pre">period</span></code> will always be a whole year (from January 1st to December 31th).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">ETERNITY</span></code>: The value of the variable is constant. <em>For example</em>, the date of birth of a person never changes. <code class="docutils literal notranslate"><span class="pre">period</span></code> is still the 2nd parameter of <code class="docutils literal notranslate"><span class="pre">formula</span></code>. However when <code class="docutils literal notranslate"><span class="pre">formula</span></code> is executed, the parameter <code class="docutils literal notranslate"><span class="pre">period</span></code> can be anything and it should not be used.</p></li>
 </ul>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="o">...</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
 
 <span class="k">class</span> <span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
@@ -277,13 +256,13 @@
 </pre></div>
 </div>
 <p>Each formula calculates the value of a variable for a period the size of <strong>the given definition period</strong>. This period is always the second argument of the formulas.</p>
-</div>
-<div class="section" id="periods-in-formulas">
-<span id="periods-in-formulas"></span><h2>Periods in formulas<a class="headerlink" href="#periods-in-formulas" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="calculate-dependencies-for-a-period-different-than-the-variable-s-definition-period">
-<span id="calculate-dependencies-for-a-period-different-than-the-variable-s-definition-period"></span><h3>Calculate dependencies for a period different than the variable&#8217;s <code class="docutils literal"><span class="pre">definition_period</span></code><a class="headerlink" href="#calculate-dependencies-for-a-period-different-than-the-variable-s-definition-period" title="Permalink to this headline">¶</a></h3>
-<p>Calling a formula with a period that is incompatible with the attribute <code class="docutils literal"><span class="pre">definition_period</span></code> will cause an error. For instance, if we assume that a person <code class="docutils literal"><span class="pre">salary</span></code> is paid monthly:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+</section>
+<section id="periods-in-formulas">
+<h2>Periods in formulas<a class="headerlink" href="#periods-in-formulas" title="Permalink to this headline">¶</a></h2>
+<section id="calculate-dependencies-for-a-period-different-than-the-variable-s-definition-period">
+<h3>Calculate dependencies for a period different than the variable’s <code class="docutils literal notranslate"><span class="pre">definition_period</span></code><a class="headerlink" href="#calculate-dependencies-for-a-period-different-than-the-variable-s-definition-period" title="Permalink to this headline">¶</a></h3>
+<p>Calling a formula with a period that is incompatible with the attribute <code class="docutils literal notranslate"><span class="pre">definition_period</span></code> will cause an error. For instance, if we assume that a person <code class="docutils literal notranslate"><span class="pre">salary</span></code> is paid monthly:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Taxes for a whole year&quot;</span>
@@ -295,8 +274,8 @@
 </pre></div>
 </div>
 <p>However, sometimes, we do need to estimate a variable for a different period than the one it is defined for.</p>
-<p>We may for example want to get the sum of the salaries perceived on the past year, or the past 3 months. The option <code class="docutils literal"><span class="pre">ADD</span></code> tells openfisca to split the period into months, compute the variable for each month and sum up the results:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<p>We may for example want to get the sum of the salaries perceived on the past year, or the past 3 months. The option <code class="docutils literal notranslate"><span class="pre">ADD</span></code> tells openfisca to split the period into months, compute the variable for each month and sum up the results:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Taxes for a whole year&quot;</span>
@@ -307,8 +286,8 @@
         <span class="o">...</span>
 </pre></div>
 </div>
-<p>The option <code class="docutils literal"><span class="pre">DIVIDE</span></code> allows you to do the opposite: evaluating a quantity for a month while the variable is defined for a year. OpenFisca computes the variable for the whole year that contains the specified month and then divides the result by 12.</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">salary_net_of_taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<p>The option <code class="docutils literal notranslate"><span class="pre">DIVIDE</span></code> allows you to do the opposite: evaluating a quantity for a month while the variable is defined for a year. OpenFisca computes the variable for the whole year that contains the specified month and then divides the result by 12.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">salary_net_of_taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Monthly salary, net of taxes&quot;</span>
@@ -324,12 +303,12 @@
         <span class="k">return</span> <span class="n">salary</span> <span class="o">-</span> <span class="n">monthly_taxes</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="calculate-dependencies-for-a-specific-period">
-<span id="calculate-dependencies-for-a-specific-period"></span><h3>Calculate dependencies for a specific period<a class="headerlink" href="#calculate-dependencies-for-a-specific-period" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="calculate-dependencies-for-a-specific-period">
+<h3>Calculate dependencies for a specific period<a class="headerlink" href="#calculate-dependencies-for-a-specific-period" title="Permalink to this headline">¶</a></h3>
 <p>It happens that the formula to calculate a variable at a given period needs the value of another variable for another period. Usually, the second period is defined relatively to the first one (previous month, last three month, current year).</p>
-<p>For instance, we want to compute an unemployment benefit that equals half of last year&#8217;s salary, if the person had no income for the past 3 months.</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">unemployment_benefit</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<p>For instance, we want to compute an unemployment benefit that equals half of last year’s salary, if the person had no income for the past 3 months.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">unemployment_benefit</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Unemployment benefit&quot;</span>
@@ -344,77 +323,65 @@
 </pre></div>
 </div>
 <p>You can generate any period with the following properties and methods:</p>
-<table border="1" class="docutils">
+<table class="colwidths-auto docutils align-default">
 <thead>
-<tr>
-<th>Period</th>
-<th>Meaning</th>
+<tr class="row-odd"><th class="head"><p>Period</p></th>
+<th class="head"><p>Meaning</p></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>period.first_month</code></td>
-<td>First month-length period that includes the start of <code>period</code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">period.first_month</span></code></p></td>
+<td><p>First month-length period that includes the start of <code class="docutils literal notranslate"><span class="pre">period</span></code></p></td>
 </tr>
-<tr>
-<td><code>period.last_month</code></td>
-<td>Month preceding <code>period.first_month</code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">period.last_month</span></code></p></td>
+<td><p>Month preceding <code class="docutils literal notranslate"><span class="pre">period.first_month</span></code></p></td>
 </tr>
-<tr>
-<td><code>period.this_year</code></td>
-<td>First year-length period that includes the start of <code>period</code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">period.this_year</span></code></p></td>
+<td><p>First year-length period that includes the start of <code class="docutils literal notranslate"><span class="pre">period</span></code></p></td>
 </tr>
-<tr>
-<td><code>period.last_year</code></td>
-<td>Year preceding <code>period.this_year</code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">period.last_year</span></code></p></td>
+<td><p>Year preceding <code class="docutils literal notranslate"><span class="pre">period.this_year</span></code></p></td>
 </tr>
-<tr>
-<td><code>period.n_2</code></td>
-<td>2 years before <code>period.this_year</code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">period.n_2</span></code></p></td>
+<td><p>2 years before <code class="docutils literal notranslate"><span class="pre">period.this_year</span></code></p></td>
 </tr>
-<tr>
-<td><code>period.last_3_months</code></td>
-<td>The three-month period preceding <code>period.this_month</code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">period.last_3_months</span></code></p></td>
+<td><p>The three-month period preceding <code class="docutils literal notranslate"><span class="pre">period.this_month</span></code></p></td>
 </tr>
-<tr>
-<td><code>period.offset(n, 'month')</code></td>
-<td><code>period</code> translated by n months (backwards if n &lt;0)</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">period.offset(n,</span> <span class="pre">'month')</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">period</span></code> translated by n months (backwards if n &lt;0)</p></td>
 </tr>
-<tr>
-<td><code>period.offset(n, 'year')</code></td>
-<td><code>period</code> translated by n years (backwards if n &lt;0)</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">period.offset(n,</span> <span class="pre">'year')</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">period</span></code> translated by n years (backwards if n &lt;0)</p></td>
 </tr>
-<tr>
-<td><code>period.start.period('year')</code></td>
-<td>Year-long period starting a the same time than <code>period</code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">period.start.period('year')</span></code></p></td>
+<td><p>Year-long period starting a the same time than <code class="docutils literal notranslate"><span class="pre">period</span></code></p></td>
 </tr>
-<tr>
-<td><code>period.start.period('month')</code></td>
-<td>Month-long period starting a the same time than <code>period</code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">period.start.period('month')</span></code></p></td>
+<td><p>Month-long period starting a the same time than <code class="docutils literal notranslate"><span class="pre">period</span></code></p></td>
 </tr>
-<tr>
-<td><code>period.start.period('year', n)</code></td>
-<td>n-year-long period starting a the same time than <code>period</code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">period.start.period('year',</span> <span class="pre">n)</span></code></p></td>
+<td><p>n-year-long period starting a the same time than <code class="docutils literal notranslate"><span class="pre">period</span></code></p></td>
 </tr>
-<tr>
-<td><code>period.start.period('month', n)</code></td>
-<td>n-month-long period starting a the same time than <code>period</code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">period.start.period('month',</span> <span class="pre">n)</span></code></p></td>
+<td><p>n-month-long period starting a the same time than <code class="docutils literal notranslate"><span class="pre">period</span></code></p></td>
 </tr>
 </tbody>
-</table><p>You can find more information on the <code class="docutils literal"><span class="pre">Period</span></code> object in the <a class="reference external" href="#">reference documentation</a> (<em>not available yet</em>)</p>
-</div>
-</div>
-<div class="section" id="automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period">
-<span id="automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period"></span><h2>Automatically process variable inputs defined for periods not matching the <code class="docutils literal"><span class="pre">definition_period</span></code><a class="headerlink" href="#automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period" title="Permalink to this headline">¶</a></h2>
-<p>By default, when you provide a simulation input, you won&#8217;t be able to set a variable value for a period that doesn&#8217;t match its <code class="docutils literal"><span class="pre">definition_period</span></code>.</p>
-<p>For instance, if the <code class="docutils literal"><span class="pre">definition_period</span></code> of <code class="docutils literal"><span class="pre">salary</span></code> is <code class="docutils literal"><span class="pre">MONTH</span></code>, and you input a value for <code class="docutils literal"><span class="pre">salary</span></code> for <code class="docutils literal"><span class="pre">2015</span></code> or more than one month, an error will be raised.</p>
-<p>It is however possible to define an automatic behaviour to cast yearly inputs into monthy values. To do this, add a <code class="docutils literal"><span class="pre">set_input</span></code> class attribute to a variable.</p>
+</table>
+<p>You can find more information on the <code class="docutils literal notranslate"><span class="pre">Period</span></code> object in the <a class="reference internal" href="../openfisca-python-api/periods.html"><span class="doc std std-doc">reference documentation</span></a>.</p>
+</section>
+</section>
+<section id="automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period">
+<h2>Automatically process variable inputs defined for periods not matching the <code class="docutils literal notranslate"><span class="pre">definition_period</span></code><a class="headerlink" href="#automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period" title="Permalink to this headline">¶</a></h2>
+<p>By default, when you provide a simulation input, you won’t be able to set a variable value for a period that doesn’t match its <code class="docutils literal notranslate"><span class="pre">definition_period</span></code>.</p>
+<p>For instance, if the <code class="docutils literal notranslate"><span class="pre">definition_period</span></code> of <code class="docutils literal notranslate"><span class="pre">salary</span></code> is <code class="docutils literal notranslate"><span class="pre">MONTH</span></code>, and you input a value for <code class="docutils literal notranslate"><span class="pre">salary</span></code> for <code class="docutils literal notranslate"><span class="pre">2015</span></code> or more than one month, an error will be raised.</p>
+<p>It is however possible to define an automatic behaviour to cast yearly inputs into monthy values. To do this, add a <code class="docutils literal notranslate"><span class="pre">set_input</span></code> class attribute to a variable.</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">set_input</span> <span class="pre">=</span> <span class="pre">set_input_divide_by_period</span></code>: the 12 months are set equal to 1/12th of the input value,</li>
-<li><code class="docutils literal"><span class="pre">set_input</span> <span class="pre">=</span> <span class="pre">set_input_dispatch_by_period</span></code>: the 12 months are set equal to input value.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_input</span> <span class="pre">=</span> <span class="pre">set_input_divide_by_period</span></code>: the 12 months are set equal to 1/12th of the input value,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_input</span> <span class="pre">=</span> <span class="pre">set_input_dispatch_by_period</span></code>: the 12 months are set equal to input value.</p></li>
 </ul>
-<p>For instance, let&#8217;s slightly modify the code of <code class="docutils literal"><span class="pre">salary</span></code>:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<p>For instance, let’s slightly modify the code of <code class="docutils literal notranslate"><span class="pre">salary</span></code>:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Salary for a month&quot;</span>
@@ -425,17 +392,17 @@
         <span class="o">...</span>
 </pre></div>
 </div>
-<p>We can now provide an input for <code class="docutils literal"><span class="pre">2015</span></code> for <code class="docutils literal"><span class="pre">salary</span></code>: no error will be raised, and the value will be automatically split between the 12 months of <code class="docutils literal"><span class="pre">2015</span></code>.</p>
+<p>We can now provide an input for <code class="docutils literal notranslate"><span class="pre">2015</span></code> for <code class="docutils literal notranslate"><span class="pre">salary</span></code>: no error will be raised, and the value will be automatically split between the 12 months of <code class="docutils literal notranslate"><span class="pre">2015</span></code>.</p>
 <p>This example sets 3 years salaries for two persons and calculates how much they get for one month:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="c1"># Each person earned 60,000 between 2014 and 2016</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Each person earned 60,000 between 2014 and 2016</span>
 <span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;year:2014:3&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">60000.0</span><span class="p">,</span> <span class="mf">60000.0</span><span class="p">])</span>
 
 <span class="n">one_month_salaries</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-01&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">one_month_salaries</span><span class="p">)</span>  <span class="c1"># prints [1666.6666 1666.6666]</span>
 </pre></div>
 </div>
-<p>This syntax is also available in <a class="reference internal" href="writing_yaml_tests.html"><span class="doc">YAML tests</span></a>:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Income tax over time</span><span class="w"></span>
+<p>This syntax is also available in <a class="reference internal" href="writing_yaml_tests.html"><span class="doc std std-doc">YAML tests</span></a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Income tax over time</span><span class="w"></span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2016-01</span><span class="w"></span>
 <span class="w">  </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">salary</span><span class="p">:</span><span class="w"></span>
@@ -448,8 +415,8 @@
 <span class="w">      </span><span class="nt">2017-01</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"> </span><span class="c1"># The salary is not set for this period and defaults to 0</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -473,7 +440,8 @@
           <a href="25_vectorial_computing.html" title="Vectorial computing"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-code"></i> From law to code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-code"></i> From law to code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Periods</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

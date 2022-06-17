@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Introducing an input variable &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Vectorial computing" href="25_vectorial_computing.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="10_basic_example.html" title="Coding a formula"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-code"></i> From law to code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-code"></i> From law to code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Introducing an input variable</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -145,11 +134,11 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="introducing-an-input-variable">
-<span id="introducing-an-input-variable"></span><h1>Introducing an input variable<a class="headerlink" href="#introducing-an-input-variable" title="Permalink to this headline">¶</a></h1>
+  <section id="introducing-an-input-variable">
+<h1>Introducing an input variable<a class="headerlink" href="#introducing-an-input-variable" title="Permalink to this headline">¶</a></h1>
 <p>The syntax to introduce an input variable is very similar to the one we used to code a formula.</p>
 <p>For instance:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Salary earned by a person for a given month&quot;</span>
@@ -157,15 +146,15 @@
 </pre></div>
 </div>
 <p>The only difference is that we do <strong>not</strong> have a formula to calculate the value of a variable.</p>
-<p>If we ask the value of <code class="docutils literal"><span class="pre">salary</span></code> for a given month, the returned result will be:</p>
+<p>If we ask the value of <code class="docutils literal notranslate"><span class="pre">salary</span></code> for a given month, the returned result will be:</p>
 <ul class="simple">
-<li>The <strong>input</strong> that was provided when initializing the simulation if it exists.</li>
-<li>The <strong>default value</strong> of the Variable if no input has been provided.</li>
+<li><p>The <strong>input</strong> that was provided when initializing the simulation if it exists.</p></li>
+<li><p>The <strong>default value</strong> of the Variable if no input has been provided.</p></li>
 </ul>
-<div class="section" id="setting-a-default-value">
-<span id="setting-a-default-value"></span><h2>Setting a default value<a class="headerlink" href="#setting-a-default-value" title="Permalink to this headline">¶</a></h2>
-<p>When declaring an input variable, you can change its default value by adding the <code class="docutils literal"><span class="pre">default_value</span></code> attribute:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">french_citizen</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<section id="setting-a-default-value">
+<h2>Setting a default value<a class="headerlink" href="#setting-a-default-value" title="Permalink to this headline">¶</a></h2>
+<p>When declaring an input variable, you can change its default value by adding the <code class="docutils literal notranslate"><span class="pre">default_value</span></code> attribute:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">french_citizen</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">bool</span>
     <span class="n">default_value</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
@@ -175,27 +164,27 @@
 </div>
 <p>If you do not explicitly define a default value, the following will be used:</p>
 <ul class="simple">
-<li>For numeric variables: <code class="docutils literal"><span class="pre">0</span></code>.</li>
-<li>For boolean variables: <code class="docutils literal"><span class="pre">False</span></code>.</li>
+<li><p>For numeric variables: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p>For boolean variables: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 </ul>
-</div>
-<div class="section" id="advanced-example-enumerations-enum">
-<span id="advanced-example-enumerations-enum"></span><h2>Advanced example: enumerations (enum)<a class="headerlink" href="#advanced-example-enumerations-enum" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="usecases">
-<span id="usecases"></span><h3>Usecases<a class="headerlink" href="#usecases" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="advanced-example-enumerations-enum">
+<h2>Advanced example: enumerations (enum)<a class="headerlink" href="#advanced-example-enumerations-enum" title="Permalink to this headline">¶</a></h2>
+<section id="usecases">
+<h3>Usecases<a class="headerlink" href="#usecases" title="Permalink to this headline">¶</a></h3>
 <p>Enumerations are variables that have a limited set of possible values. For instance:</p>
 <ul class="simple">
-<li>Highest academic level: high school, associate degree, bachelor&#8217;s degree, master&#8217;s degree, doctorate…</li>
-<li>A household housing occupancy status: owner, tenant, free-lodger, homeless…</li>
-<li>The main occupation of a person: employee, freelancer, retired, student, unemployed…</li>
+<li><p>Highest academic level: high school, associate degree, bachelor’s degree, master’s degree, doctorate…</p></li>
+<li><p>A household housing occupancy status: owner, tenant, free-lodger, homeless…</p></li>
+<li><p>The main occupation of a person: employee, freelancer, retired, student, unemployed…</p></li>
 </ul>
-</div>
-<div class="section" id="defining-and-using-an-enumeration-variable">
-<span id="defining-and-using-an-enumeration-variable"></span><h3>Defining and using an enumeration variable<a class="headerlink" href="#defining-and-using-an-enumeration-variable" title="Permalink to this headline">¶</a></h3>
-<p>As an example, let&#8217;s code a <code class="docutils literal"><span class="pre">housing_tax</span></code> that is paid by households who own or rent their main homes, but does not apply to households that do not have a stable residence, or are accommodated for free.</p>
-<p>The variable <code class="docutils literal"><span class="pre">housing_tax</span></code> will thus depend on <code class="docutils literal"><span class="pre">housing_occupancy_status</span></code>, an enumeration variable that can take 4 values: <code class="docutils literal"><span class="pre">tenant</span></code>, <code class="docutils literal"><span class="pre">owner</span></code>, <code class="docutils literal"><span class="pre">free_lodger</span></code> and <code class="docutils literal"><span class="pre">homeless</span></code>.</p>
-<p>First, we can create an <a class="reference external" href="https://en.wikipedia.org/wiki/Enumerated_type">enumerated type</a> <code class="docutils literal"><span class="pre">HousingOccupancyStatus</span></code>:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HousingOccupancyStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+</section>
+<section id="defining-and-using-an-enumeration-variable">
+<h3>Defining and using an enumeration variable<a class="headerlink" href="#defining-and-using-an-enumeration-variable" title="Permalink to this headline">¶</a></h3>
+<p>As an example, let’s code a <code class="docutils literal notranslate"><span class="pre">housing_tax</span></code> that is paid by households who own or rent their main homes, but does not apply to households that do not have a stable residence, or are accommodated for free.</p>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">housing_tax</span></code> will thus depend on <code class="docutils literal notranslate"><span class="pre">housing_occupancy_status</span></code>, an enumeration variable that can take 4 values: <code class="docutils literal notranslate"><span class="pre">tenant</span></code>, <code class="docutils literal notranslate"><span class="pre">owner</span></code>, <code class="docutils literal notranslate"><span class="pre">free_lodger</span></code> and <code class="docutils literal notranslate"><span class="pre">homeless</span></code>.</p>
+<p>First, we can create an <a class="reference external" href="https://en.wikipedia.org/wiki/Enumerated_type">enumerated type</a> <code class="docutils literal notranslate"><span class="pre">HousingOccupancyStatus</span></code>:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HousingOccupancyStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">tenant</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Tenant or lodger who pays a rent&#39;</span>
     <span class="n">owner</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Owner&#39;</span>
     <span class="n">free_lodger</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Free logder&#39;</span>
@@ -203,14 +192,14 @@
 </pre></div>
 </div>
 <blockquote>
-<div><p>OpenFisca enums are based on Python 3 native enums. Each enum item (for instance <code class="docutils literal"><span class="pre">HousingOccupancyStatus.tenant</span></code>) has:</p>
+<div><p>OpenFisca enums are based on Python 3 native enums. Each enum item (for instance <code class="docutils literal notranslate"><span class="pre">HousingOccupancyStatus.tenant</span></code>) has:</p>
 <ul class="simple">
-<li>a <code class="docutils literal"><span class="pre">name</span></code> attribute that contains its key (e.g. <code class="docutils literal"><span class="pre">tenant</span></code>)</li>
-<li>a <code class="docutils literal"><span class="pre">value</span></code> attribute that contains its description (e.g. <code class="docutils literal"><span class="pre">&quot;Tenant</span> <span class="pre">or</span> <span class="pre">lodger</span> <span class="pre">who</span> <span class="pre">pays</span> <span class="pre">a</span> <span class="pre">monthly</span> <span class="pre">rent&quot;</span></code>)</li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute that contains its key (e.g. <code class="docutils literal notranslate"><span class="pre">tenant</span></code>)</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">value</span></code> attribute that contains its description (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;Tenant</span> <span class="pre">or</span> <span class="pre">lodger</span> <span class="pre">who</span> <span class="pre">pays</span> <span class="pre">a</span> <span class="pre">monthly</span> <span class="pre">rent&quot;</span></code>)</p></li>
 </ul>
 </div></blockquote>
-<p>Then, create an OpenFisca variable <code class="docutils literal"><span class="pre">housing_occupancy_status</span></code>:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">housing_occupancy_status</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<p>Then, create an OpenFisca variable <code class="docutils literal notranslate"><span class="pre">housing_occupancy_status</span></code>:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">housing_occupancy_status</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="n">Enum</span>
     <span class="n">possible_values</span> <span class="o">=</span> <span class="n">HousingOccupancyStatus</span>
     <span class="n">default_value</span> <span class="o">=</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">tenant</span>  <span class="c1"># The default is mandatory</span>
@@ -221,7 +210,7 @@
 </div>
 <p>You can now use the enum in variable formulas !</p>
 <p>For instance, assuming the enumeration and the formula using it are defined in the same file:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">housing_tax</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">housing_tax</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Household</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span><span class="o">.</span>
@@ -238,7 +227,7 @@
 </pre></div>
 </div>
 <p>If the enumeration and the formula using it are <strong>not</strong> defined in the same file, an extra step is necessary:</p>
-<div class="highlight-py"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">housing_tax</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">housing_tax</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Household</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span><span class="o">.</span>
@@ -256,7 +245,7 @@
 </pre></div>
 </div>
 <p>You can now test the formula in a YAML test:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Household with free lodger status living in a 100 sq.meters accomodation</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Household with free lodger status living in a 100 sq.meters accomodation</span><span class="w"></span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017</span><span class="w"></span>
 <span class="w">  </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">accomodation_size</span><span class="p">:</span><span class="w"></span>
@@ -267,9 +256,9 @@
 <span class="w">    </span><span class="nt">housing_tax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
           </div>
@@ -293,7 +282,8 @@
           <a href="10_basic_example.html" title="Coding a formula"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-code"></i> From law to code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-code"></i> From law to code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Introducing an input variable</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

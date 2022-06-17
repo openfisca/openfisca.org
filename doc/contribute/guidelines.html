@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Contributor guidelines &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Language" href="language.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="index.html" title="Contribute"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-users"></i> Contribute</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-users"></i> Contribute</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Contributor guidelines</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -144,91 +133,93 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="contributor-guidelines">
-<span id="contributor-guidelines"></span><h1>Contributor guidelines<a class="headerlink" href="#contributor-guidelines" title="Permalink to this headline">¶</a></h1>
+  <section id="contributor-guidelines">
+<h1>Contributor guidelines<a class="headerlink" href="#contributor-guidelines" title="Permalink to this headline">¶</a></h1>
 <p>The OpenFisca project follows the <a class="reference external" href="https://guides.github.com/introduction/flow/">GitHub Flow</a>.</p>
 <p>Each Python package uses <a class="reference external" href="http://semver.org/">Semantic Versioning</a>.</p>
-<div class="section" id="opening-issues">
-<span id="opening-issues"></span><h2>Opening issues<a class="headerlink" href="#opening-issues" title="Permalink to this headline">¶</a></h2>
+<section id="opening-issues">
+<h2>Opening issues<a class="headerlink" href="#opening-issues" title="Permalink to this headline">¶</a></h2>
 <p>Each OpenFisca repository has its own issues. See <a class="reference external" href="https://github.com/openfisca">OpenFisca repositories</a>.</p>
 <ul class="simple">
-<li>Describe what you did.</li>
-<li>Describe what you expected to happen.</li>
-<li>Describe what happened.</li>
-<li>Include (or link to) any data that can help reproduce the issue you encountered.</li>
+<li><p>Describe what you did.</p></li>
+<li><p>Describe what you expected to happen.</p></li>
+<li><p>Describe what happened.</p></li>
+<li><p>Include (or link to) any data that can help reproduce the issue you encountered.</p></li>
 </ul>
-</div>
-<div class="section" id="contributing-to-the-code">
-<span id="contributing-to-the-code"></span><h2>Contributing to the code<a class="headerlink" href="#contributing-to-the-code" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="writing-code">
-<span id="writing-code"></span><h3>Writing code<a class="headerlink" href="#writing-code" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="contributing-to-the-code">
+<h2>Contributing to the code<a class="headerlink" href="#contributing-to-the-code" title="Permalink to this headline">¶</a></h2>
+<section id="writing-code">
+<h3>Writing code<a class="headerlink" href="#writing-code" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>If you modify/create/delete a simulation variable, please follow the <a class="reference internal" href="commit-messages.html"><span class="doc">commit message rules</span></a>.</li>
-<li>When adding new variables, please consider the <a class="reference internal" href="variables-naming.html"><span class="doc">naming guidelines</span></a>.</li>
-<li>Your code should be tested, if feasible:<ul>
-<li>bugfixes should include regression tests</li>
-<li>new behavior should at least get minimal exercise</li>
+<li><p>If you modify/create/delete a simulation variable, please follow the <a class="reference internal" href="commit-messages.html"><span class="doc std std-doc">commit message rules</span></a>.</p></li>
+<li><p>When adding new variables, please consider the <a class="reference internal" href="variables-naming.html"><span class="doc std std-doc">naming guidelines</span></a>.</p></li>
+<li><p>Your code should be tested, if feasible:</p>
+<ul>
+<li><p>bugfixes should include regression tests</p></li>
+<li><p>new behavior should at least get minimal exercise</p></li>
 </ul>
 </li>
-<li>Use atomic commits, in particular try to isolate &#8220;code-cleanup&#8221; commits</li>
+<li><p>Use atomic commits, in particular try to isolate “code-cleanup” commits</p></li>
 </ul>
-</div>
-<div class="section" id="opening-a-pull-request">
-<span id="opening-a-pull-request"></span><h3>Opening a Pull Request<a class="headerlink" href="#opening-a-pull-request" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="opening-a-pull-request">
+<h3>Opening a Pull Request<a class="headerlink" href="#opening-a-pull-request" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>All code contributions are submitted via a Pull Request towards <code class="docutils literal"><span class="pre">master</span></code>. The <code class="docutils literal"><span class="pre">master</span></code> branches are thus <a class="reference external" href="https://help.github.com/articles/about-protected-branches/">protected</a>.</li>
-<li>Opening a Pull Request means you want that code to be merged. If you want to only discuss it, send a link to your branch along with your questions through whichever communication channel you prefer.</li>
-<li>If the Pull Request depends on another opened Pull Request on another repository (like OpenFisca-Core/OpenFisca-France), the requirements should be updated in the dependent project via its <code class="docutils literal"><span class="pre">setup.py</span></code>.</li>
+<li><p>All code contributions are submitted via a Pull Request towards <code class="docutils literal notranslate"><span class="pre">master</span></code>. The <code class="docutils literal notranslate"><span class="pre">master</span></code> branches are thus <a class="reference external" href="https://help.github.com/articles/about-protected-branches/">protected</a>.</p></li>
+<li><p>Opening a Pull Request means you want that code to be merged. If you want to only discuss it, send a link to your branch along with your questions through whichever communication channel you prefer.</p></li>
+<li><p>If the Pull Request depends on another opened Pull Request on another repository (like OpenFisca-Core/OpenFisca-France), the requirements should be updated in the dependent project via its <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>.</p></li>
 </ul>
 <p>It is considered a good practice to begin the name of the pull request with a verb in the present imperative tense:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Good</span>
-<span class="n">Propose</span> <span class="n">a</span> <span class="n">new</span> <span class="n">reform</span> <span class="n">according</span> <span class="n">to</span> <span class="n">the</span> <span class="n">French</span> <span class="n">finance</span> <span class="n">bill</span> <span class="mi">2018</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Good
+Propose a new reform according to the French finance bill 2018
 
-<span class="c1"># Bad</span>
-<span class="n">new</span> <span class="n">reform</span> <span class="n">PLF</span> <span class="mi">2018</span>
+# Bad
+new reform PLF 2018
 </pre></div>
 </div>
-</div>
-<div class="section" id="merging-a-pull-request">
-<span id="merging-a-pull-request"></span><h3>Merging a Pull Request<a class="headerlink" href="#merging-a-pull-request" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="continuous-integration">
-<span id="continuous-integration"></span><h4>Continuous integration<a class="headerlink" href="#continuous-integration" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="merging-a-pull-request">
+<h3>Merging a Pull Request<a class="headerlink" href="#merging-a-pull-request" title="Permalink to this headline">¶</a></h3>
+<section id="continuous-integration">
+<h4>Continuous integration<a class="headerlink" href="#continuous-integration" title="Permalink to this headline">¶</a></h4>
 <p>Before allowing you to merge a PR, the continuous integration server will ensure that:</p>
 <ul class="simple">
-<li>The automated tests are passing (they are triggered automatically and result is visible from the Pull Request page).</li>
-<li>The semantic version number has been updated. Check the <a class="reference internal" href="semver.html"><span class="doc">semantic versionning guidelines</span></a> to know more about how to increment the version number.</li>
-<li>The <a class="reference external" href="https://github.com/openfisca/openfisca-france/blob/master/CHANGELOG.md"><code class="docutils literal"><span class="pre">CHANGELOG.md</span></code></a> has been updated. Make sure to briefly summarize your work, and to <strong>mention any non backward-compatible changes</strong>.</li>
+<li><p>The automated tests are passing (they are triggered automatically and result is visible from the Pull Request page).</p></li>
+<li><p>The semantic version number has been updated. Check the <a class="reference internal" href="semver.html"><span class="doc std std-doc">semantic versionning guidelines</span></a> to know more about how to increment the version number.</p></li>
+<li><p>The <a class="reference external" href="https://github.com/openfisca/openfisca-france/blob/master/CHANGELOG.md"><code class="docutils literal notranslate"><span class="pre">CHANGELOG.md</span></code></a> has been updated. Make sure to briefly summarize your work, and to <strong>mention any non backward-compatible changes</strong>.</p></li>
 </ul>
-</div>
-<div class="section" id="web-api-version-number">
-<span id="web-api-version-number"></span><h4>Web API version number<a class="headerlink" href="#web-api-version-number" title="Permalink to this headline">¶</a></h4>
-<p>Due to a <code class="docutils literal"><span class="pre">pip</span></code> limitation, it is required to increment the major version number of OpenFisca-Web-API when it is adapted to a new major version of OpenFisca-Core. This rule avoids installing a version of OpenFisca-Core incompatible with the loaded country package (for example OpenFisca-France).</p>
+</section>
+<section id="web-api-version-number">
+<h4>Web API version number<a class="headerlink" href="#web-api-version-number" title="Permalink to this headline">¶</a></h4>
+<p>Due to a <code class="docutils literal notranslate"><span class="pre">pip</span></code> limitation, it is required to increment the major version number of OpenFisca-Web-API when it is adapted to a new major version of OpenFisca-Core. This rule avoids installing a version of OpenFisca-Core incompatible with the loaded country package (for example OpenFisca-France).</p>
 <blockquote>
 <div><p>See also:</p>
 <ul class="simple">
-<li>this <a class="reference external" href="https://github.com/pypa/pip/issues/988">old <code class="docutils literal"><span class="pre">pip</span></code> issue</a></li>
-<li>the <a class="reference external" href="https://github.com/openfisca/openfisca-ops/issues/4#issuecomment-291900286">issue</a> leading to this decision</li>
+<li><p>this <a class="reference external" href="https://github.com/pypa/pip/issues/988">old <code class="docutils literal notranslate"><span class="pre">pip</span></code> issue</a></p></li>
+<li><p>the <a class="reference external" href="https://github.com/openfisca/openfisca-ops/issues/4#issuecomment-291900286">issue</a> leading to this decision</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="peer-reviews">
-<span id="peer-reviews"></span><h4>Peer reviews<a class="headerlink" href="#peer-reviews" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="peer-reviews">
+<h4>Peer reviews<a class="headerlink" href="#peer-reviews" title="Permalink to this headline">¶</a></h4>
 <p>Pull requests should generally be <strong>reviewed</strong> by someone else than their authors.</p>
 <p>This is mandatory for:</p>
 <ul class="simple">
-<li>Any Pull Request with <strong>breaking changes</strong> on <code class="docutils literal"><span class="pre">openfisca-france</span></code>, <code class="docutils literal"><span class="pre">openfisca-web-api</span></code>.</li>
-<li>Any Pull Request bringing <strong>new features</strong>, if these features are not relative to a specific scope.<ul>
-<li>Adding a new route to the API <strong>requires</strong> a review.</li>
-<li>A review is yet not mandatory to add a new formula to social contributions in <code class="docutils literal"><span class="pre">openfisca-france</span></code>. It is though recommended.</li>
+<li><p>Any Pull Request with <strong>breaking changes</strong> on <code class="docutils literal notranslate"><span class="pre">openfisca-france</span></code>, <code class="docutils literal notranslate"><span class="pre">openfisca-web-api</span></code>.</p></li>
+<li><p>Any Pull Request bringing <strong>new features</strong>, if these features are not relative to a specific scope.</p>
+<ul>
+<li><p>Adding a new route to the API <strong>requires</strong> a review.</p></li>
+<li><p>A review is yet not mandatory to add a new formula to social contributions in <code class="docutils literal notranslate"><span class="pre">openfisca-france</span></code>. It is though recommended.</p></li>
 </ul>
 </li>
 </ul>
 <p>To help reviewers, make sure to add to your PR a <strong>clear text explanation</strong> of your changes.</p>
 <p>In case of breaking changes, you <strong>must</strong> give details about what features were deprecated. You must also provide guidelines to help users adapt their code to be compatible with the new version of the package.</p>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
 
           </div>
@@ -252,7 +243,8 @@
           <a href="index.html" title="Contribute"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-users"></i> Contribute</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-users"></i> Contribute</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Contributor guidelines</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

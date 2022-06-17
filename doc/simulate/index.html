@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Running a simulation &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="How to run a simulation" href="run-simulation.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -61,7 +49,8 @@
         <li class="right" >
           <a href="../coding-the-legislation/bootstrapping_a_new_country_package.html" title="Bootstraping a new country package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><i class="fas fa-chart-pie"></i> Running a simulation</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -133,22 +122,23 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="i-class-fas-fa-chart-pie-i-running-a-simulation">
-<span id="i-class-fas-fa-chart-pie-i-running-a-simulation"></span><h1><i class="fas fa-chart-pie"></i> Running a simulation<a class="headerlink" href="#i-class-fas-fa-chart-pie-i-running-a-simulation" title="Permalink to this headline">¶</a></h1>
+  <section id="i-class-fas-fa-chart-pie-i-running-a-simulation">
+<h1><i class="fas fa-chart-pie"></i> Running a simulation<a class="headerlink" href="#i-class-fas-fa-chart-pie-i-running-a-simulation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p>To calculate Tax and Benefit System variables on people&#8217;s situations, you need to create and run a new <em>Simulation</em>.</p>
+<p>To calculate Tax and Benefit System variables on people’s situations, you need to create and run a new <em>Simulation</em>.</p>
 <p>OpenFisca will work the same if there is one person, seven, or seven million in the modeled situation.</p>
 <blockquote>
-<div>Technically speaking, OpenFisca uses <a class="reference internal" href="../coding-the-legislation/25_vectorial_computing.html"><span class="doc">vector computing</span></a> via the <a class="reference external" href="http://www.numpy.org/">NumPy</a> package for performance reasons.</div></blockquote>
-<p>Nevertheless, you won&#8217;t have the same experience defining those various situations sizes and linking them to your simulation. So, multiple options could be used to describe this information:</p>
+<div><p>Technically speaking, OpenFisca uses <a class="reference internal" href="../coding-the-legislation/25_vectorial_computing.html"><span class="doc std std-doc">vector computing</span></a> via the <a class="reference external" href="http://www.numpy.org/">NumPy</a> package for performance reasons.</p>
+</div></blockquote>
+<p>Nevertheless, you won’t have the same experience defining those various situations sizes and linking them to your simulation. So, multiple options could be used to describe this information:</p>
 <ul class="simple">
-<li>either <a class="reference external" href="/simulate/run-simulation.html#test-cases">test cases</a>: you simulate the legislation for a small number of persons,</li>
-<li>or <a class="reference external" href="/simulate/run-simulation.html#data">bulk data</a>: you provide a population (survey with aggregated data, CSV files with bulk data, etc.) on which you want to apply the legislation.</li>
+<li><p>either <a class="reference internal" href="run-simulation.html#test-cases"><span class="std std-doc">test cases</span></a>: you simulate the legislation for a small number of persons,</p></li>
+<li><p>or <a class="reference internal" href="run-simulation.html#data"><span class="std std-doc">bulk data</span></a>: you provide a population (survey with aggregated data, CSV files with bulk data, etc.) on which you want to apply the legislation.</p></li>
 </ul>
-<p>Then, when you have a defined situation and need to replicate an input in a range of values (e.g. a <code class="docutils literal"><span class="pre">salary</span></code> in [0, 100 000]), you can define an axis as described in <a class="reference internal" href="replicate-simulation-inputs.html"><span class="doc">the axes section</span></a>.</p>
-<p>Finally, you might want to understand how your simulation result was calculated. To do so, you can use the <code class="docutils literal"><span class="pre">trace</span></code> feature described in <a class="reference internal" href="analyse-simulation.html"><span class="doc">this section</span></a>.</p>
-</div>
+<p>Then, when you have a defined situation and need to replicate an input in a range of values (e.g. a <code class="docutils literal notranslate"><span class="pre">salary</span></code> in [0, 100 000]), you can define an axis as described in <a class="reference internal" href="replicate-simulation-inputs.html"><span class="doc std std-doc">the axes section</span></a>.</p>
+<p>Finally, you might want to understand how your simulation result was calculated. To do so, you can use the <code class="docutils literal notranslate"><span class="pre">trace</span></code> feature described in <a class="reference internal" href="analyse-simulation.html"><span class="doc std std-doc">this section</span></a>.</p>
+</section>
 
 
           </div>
@@ -171,7 +161,8 @@
         <li class="right" >
           <a href="../coding-the-legislation/bootstrapping_a_new_country_package.html" title="Bootstraping a new country package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><i class="fas fa-chart-pie"></i> Running a simulation</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

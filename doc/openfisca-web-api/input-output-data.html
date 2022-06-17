@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Using the /calculate endpoint &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Using the /trace endpoint" href="trace-simulation.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="endpoints.html" title="Endpoints"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-cloud"></i> OpenFisca Web API</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-cloud"></i> OpenFisca Web API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Using the /calculate endpoint</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -140,30 +129,31 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="using-the-calculate-endpoint">
-<span id="using-the-calculate-endpoint"></span><h1>Using the /calculate endpoint<a class="headerlink" href="#using-the-calculate-endpoint" title="Permalink to this headline">¶</a></h1>
+  <section id="using-the-calculate-endpoint">
+<h1>Using the /calculate endpoint<a class="headerlink" href="#using-the-calculate-endpoint" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div>All the examples provided here are from the <a class="reference external" href="https://github.com/openfisca/country-template">country package template</a>.</div></blockquote>
+<div><p>All the examples provided here are from the <a class="reference external" href="https://github.com/openfisca/country-template">country package template</a>.</p>
+</div></blockquote>
 <p>In order to run a computation on the Web API, you will need to send information to the API concerning:</p>
 <ul class="simple">
-<li>The situation, meaning describe the <a class="reference internal" href="../key-concepts/person,_entities,_role.html"><span class="doc">entities</span></a> (e.g. individuals, households) that you want to base your calculations on.</li>
-<li>The variable you need to compute.</li>
+<li><p>The situation, meaning describe the <a class="reference internal" href="../key-concepts/person%2C_entities%2C_role.html"><span class="doc std std-doc">entities</span></a> (e.g. individuals, households) that you want to base your calculations on.</p></li>
+<li><p>The variable you need to compute.</p></li>
 </ul>
-<div class="section" id="describing-the-situation">
-<span id="describing-the-situation"></span><h2>Describing the situation<a class="headerlink" href="#describing-the-situation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="describing-entities">
-<span id="describing-entities"></span><h3>Describing entities<a class="headerlink" href="#describing-entities" title="Permalink to this headline">¶</a></h3>
+<section id="describing-the-situation">
+<h2>Describing the situation<a class="headerlink" href="#describing-the-situation" title="Permalink to this headline">¶</a></h2>
+<section id="describing-entities">
+<h3>Describing entities<a class="headerlink" href="#describing-entities" title="Permalink to this headline">¶</a></h3>
 <p>The most important rule in describing a situation in OpenFisca is:</p>
 <p>Every person has to belong to one of each group entity (e.g. household).
 Every person in a group entity needs a role (e.g. parent)</p>
 <blockquote>
 <div><p>For example, if you wish to run a calculation on 2 households:</p>
 <ul class="simple">
-<li>household_1 is composed of two adults;</li>
-<li>household_2 is composed of one adult and one child.</li>
+<li><p>household_1 is composed of two adults;</p></li>
+<li><p>household_2 is composed of one adult and one child.</p></li>
 </ul>
 </div></blockquote>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;persons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;Ricarda&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;Bob&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
@@ -188,16 +178,17 @@ Every person in a group entity needs a role (e.g. parent)</p>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="adding-information-to-entities">
-<span id="adding-information-to-entities"></span><h3>Adding information to entities<a class="headerlink" href="#adding-information-to-entities" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="adding-information-to-entities">
+<h3>Adding information to entities<a class="headerlink" href="#adding-information-to-entities" title="Permalink to this headline">¶</a></h3>
 <p>To run a precise calculation, you can provide information on each person and group entity.</p>
-<p>These are the input <a class="reference internal" href="../key-concepts/variables.html"><span class="doc">variables</span></a> of your simulation.</p>
-<p>To provide an input variable, insert the value in the json, for the corresponding time period (e.g. &#8216;2015-06&#8217;) and entity (e.g. &#8216;person&#8217;, &#8216;household&#8217;).</p>
-<p>The time period must respect the <a class="reference internal" href="../coding-the-legislation/35_periods.html"><span class="doc">definition period</span></a> of the variable, and the entity must be the one the variable is defined for.</p>
+<p>These are the input <a class="reference internal" href="../key-concepts/variables.html"><span class="doc std std-doc">variables</span></a> of your simulation.</p>
+<p>To provide an input variable, insert the value in the json, for the corresponding time period (e.g. ‘2015-06’) and entity (e.g. ‘person’, ‘household’).</p>
+<p>The time period must respect the <a class="reference internal" href="../coding-the-legislation/35_periods.html"><span class="doc std std-doc">definition period</span></a> of the variable, and the entity must be the one the variable is defined for.</p>
 <blockquote>
-<div>For example, if Ricarda has a salary (defined monthly for a Person) of 3500/month until september 2016, and 4000/month after that and if household_2 were tenant and became homeowners in march 2016 (housing_occupancy_status is defined monthly for a household) of the 57 sqm apartment they live in, you would write:</div></blockquote>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<div><p>For example, if Ricarda has a salary (defined monthly for a Person) of 3500/month until september 2016, and 4000/month after that and if household_2 were tenant and became homeowners in march 2016 (housing_occupancy_status is defined monthly for a household) of the 57 sqm apartment they live in, you would write:</p>
+</div></blockquote>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;persons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;Ricarda&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;salary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -265,16 +256,17 @@ Every person in a group entity needs a role (e.g. parent)</p>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p><strong>Note that due to the default value system in OpenFisca, the variables that have not been defined explicitly are either calculated or take on their <a class="reference external" href="/key-concepts/variables.html#default-values">default value</a>.</strong></p>
-</div>
-</div>
-<div class="section" id="computing-a-variable">
-<span id="computing-a-variable"></span><h2>Computing a variable<a class="headerlink" href="#computing-a-variable" title="Permalink to this headline">¶</a></h2>
+<p><strong>Note that due to the default value system in OpenFisca, the variables that have not been defined explicitly are either calculated or take on their <a class="reference internal" href="../key-concepts/variables.html#default-values"><span class="std std-doc">default value</span></a>.</strong></p>
+</section>
+</section>
+<section id="computing-a-variable">
+<h2>Computing a variable<a class="headerlink" href="#computing-a-variable" title="Permalink to this headline">¶</a></h2>
 <p>Once you have described the situation, you can compute all variables in the Country Package.</p>
-<p>To indicate you want a variable computed, insert the variable in the corresponding entity and indicate the time period followed by the term <code class="docutils literal"><span class="pre">null</span></code>.</p>
+<p>To indicate you want a variable computed, insert the variable in the corresponding entity and indicate the time period followed by the term <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
 <blockquote>
-<div>for example, to compute Ricarda&#8217;s june income tax (defined monthly for a person) and household_2&#8217;s housing tax (defined yearly for a household), you would write:</div></blockquote>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<div><p>for example, to compute Ricarda’s june income tax (defined monthly for a person) and household_2’s housing tax (defined yearly for a household), you would write:</p>
+</div></blockquote>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;persons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;Ricarda&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;salary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -348,11 +340,11 @@ Every person in a group entity needs a role (e.g. parent)</p>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="understanding-the-result">
-<span id="understanding-the-result"></span><h2>Understanding the result<a class="headerlink" href="#understanding-the-result" title="Permalink to this headline">¶</a></h2>
-<p>The API will return an identical JSON file where all the <code class="docutils literal"><span class="pre">null</span></code> (the variable that you asked OpenFisca to compute, see above for details) have been replace by the computed value.</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+</section>
+<section id="understanding-the-result">
+<h2>Understanding the result<a class="headerlink" href="#understanding-the-result" title="Permalink to this headline">¶</a></h2>
+<p>The API will return an identical JSON file where all the <code class="docutils literal notranslate"><span class="pre">null</span></code> (the variable that you asked OpenFisca to compute, see above for details) have been replace by the computed value.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;persons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;Ricarda&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;salary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -428,9 +420,10 @@ Every person in a group entity needs a role (e.g. parent)</p>
 </pre></div>
 </div>
 <blockquote>
-<div>Note that elements might appear in a different order in the response. However the structure of the file stays the same.</div></blockquote>
-</div>
-</div>
+<div><p>Note that elements might appear in a different order in the response. However the structure of the file stays the same.</p>
+</div></blockquote>
+</section>
+</section>
 
 
           </div>
@@ -454,7 +447,8 @@ Every person in a group entity needs a role (e.g. parent)</p>
           <a href="endpoints.html" title="Endpoints"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-cloud"></i> OpenFisca Web API</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-cloud"></i> OpenFisca Web API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Using the /calculate endpoint</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

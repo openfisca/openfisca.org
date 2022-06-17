@@ -1,11 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,32 +17,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>openfisca_core.tools.test_runner &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -54,7 +41,8 @@
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">openfisca_core.tools.test_runner</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -203,14 +191,14 @@
     <span class="k">return</span> <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="o">*</span><span class="n">argv</span><span class="p">,</span> <span class="o">*</span><span class="n">paths</span><span class="p">]</span> <span class="k">if</span> <span class="kc">True</span> <span class="k">else</span> <span class="n">paths</span><span class="p">,</span> <span class="n">plugins</span> <span class="o">=</span> <span class="p">[</span><span class="n">OpenFiscaPlugin</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">options</span><span class="p">)])</span></div>
 
 
-<span class="k">class</span> <span class="nc">YamlFile</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
+<div class="viewcode-block" id="YamlFile"><a class="viewcode-back" href="../../../openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.YamlFile">[docs]</a><span class="k">class</span> <span class="nc">YamlFile</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">fspath</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">YamlFile</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
 
-    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="YamlFile.collect"><a class="viewcode-back" href="../../../openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.YamlFile.collect">[docs]</a>    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">tests</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">open</span><span class="p">(),</span> <span class="n">Loader</span> <span class="o">=</span> <span class="n">Loader</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">scanner</span><span class="o">.</span><span class="n">ScannerError</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">ParserError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
@@ -228,7 +216,7 @@
                 <span class="k">yield</span> <span class="n">YamlItem</span><span class="o">.</span><span class="n">from_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
                     <span class="n">baseline_tax_benefit_system</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">,</span>
-                    <span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+                    <span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">should_ignore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test</span><span class="p">):</span>
         <span class="n">name_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name_filter&#39;</span><span class="p">)</span>
@@ -237,7 +225,7 @@
             <span class="ow">and</span> <span class="n">name_filter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">basename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
             <span class="ow">and</span> <span class="n">name_filter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
             <span class="ow">and</span> <span class="n">name_filter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">test</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;keywords&#39;</span><span class="p">,</span> <span class="p">[])</span>
-            <span class="p">)</span>
+            <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="YamlItem"><a class="viewcode-back" href="../../../openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.YamlItem">[docs]</a><span class="k">class</span> <span class="nc">YamlItem</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">Item</span><span class="p">):</span>
@@ -427,7 +415,8 @@
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">openfisca_core.tools.test_runner</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

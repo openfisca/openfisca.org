@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Reforms &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Simulations" href="simulations.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="parameters.html" title="Parameters"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Reforms</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -150,17 +139,17 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="module-openfisca_core.reforms">
+  <section id="module-openfisca_core.reforms">
 <span id="reforms"></span><h1>Reforms<a class="headerlink" href="#module-openfisca_core.reforms" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="openfisca_core.reforms.Reform">
-<em class="property">class </em><code class="descclassname">openfisca_core.reforms.</code><code class="descname">Reform</code><span class="sig-paren">(</span><em>baseline</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/reforms/reform.html#Reform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.reforms.Reform" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.reforms.Reform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.reforms.</span></span><span class="sig-name descname"><span class="pre">Reform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseline</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/reforms/reform.html#Reform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.reforms.Reform" title="Permalink to this definition">¶</a></dt>
 <dd><p>A modified TaxBenefitSystem</p>
 <p>All reforms must subclass <cite>Reform</cite> and implement a method <cite>apply()</cite>.</p>
 <p>In this method, the reform can add or replace variables and call <cite>modify_parameters</cite> to modify the parameters of the legislation.</p>
 <blockquote>
 <div><p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">reforms</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">reforms</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="kn">import</span> <span class="n">load_parameter_file</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">modify_my_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
@@ -181,24 +170,21 @@
 </pre></div>
 </div>
 </div></blockquote>
-<dl class="method">
-<dt id="openfisca_core.reforms.Reform.modify_parameters">
-<code class="descname">modify_parameters</code><span class="sig-paren">(</span><em>modifier_function</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/reforms/reform.html#Reform.modify_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.reforms.Reform.modify_parameters" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.reforms.Reform.modify_parameters">
+<span class="sig-name descname"><span class="pre">modify_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modifier_function</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/reforms/reform.html#Reform.modify_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.reforms.Reform.modify_parameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make modifications on the parameters of the legislation.</p>
 <p>Call this function in <cite>apply()</cite> if the reform asks for legislation parameter modifications.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>modifier_function</strong> &#8211; A function that takes a <a class="reference internal" href="parameters.html#openfisca_core.parameters.ParameterNode" title="openfisca_core.parameters.ParameterNode"><code class="xref py py-obj docutils literal"><span class="pre">ParameterNode</span></code></a> and should return an object of the same type.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>modifier_function</strong> – A function that takes a <a class="reference internal" href="parameters.html#openfisca_core.parameters.ParameterNode" title="openfisca_core.parameters.ParameterNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParameterNode</span></code></a> and should return an object of the same type.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
           </div>
@@ -222,7 +208,8 @@
           <a href="parameters.html" title="Parameters"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Reforms</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

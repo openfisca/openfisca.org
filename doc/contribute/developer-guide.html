@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Developer guide &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Tests" href="tests.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="extensions.html" title="OpenFisca extensions"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-users"></i> Contribute</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-users"></i> Contribute</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Developer guide</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -144,20 +133,20 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="developer-guide">
-<span id="developer-guide"></span><h1>Developer guide<a class="headerlink" href="#developer-guide" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="source-code-repositories">
-<span id="source-code-repositories"></span><h2>Source code repositories<a class="headerlink" href="#source-code-repositories" title="Permalink to this headline">¶</a></h2>
+  <section id="developer-guide">
+<h1>Developer guide<a class="headerlink" href="#developer-guide" title="Permalink to this headline">¶</a></h1>
+<section id="source-code-repositories">
+<h2>Source code repositories<a class="headerlink" href="#source-code-repositories" title="Permalink to this headline">¶</a></h2>
 <p>The OpenFisca project is distributed across many Git repositories:</p>
 <ul class="simple">
-<li><a class="reference external" href="https://github.com/openfisca/openfisca-core">OpenFisca-Core</a></li>
-<li><a class="reference external" href="https://github.com/openfisca/openfisca-france">OpenFisca-France</a></li>
+<li><p><a class="reference external" href="https://github.com/openfisca/openfisca-core">OpenFisca-Core</a></p></li>
+<li><p><a class="reference external" href="https://github.com/openfisca/openfisca-france">OpenFisca-France</a></p></li>
 </ul>
-</div>
-<div class="section" id="debugging-code">
-<span id="debugging-code"></span><h2>Debugging code<a class="headerlink" href="#debugging-code" title="Permalink to this headline">¶</a></h2>
-<p>If you install <a class="reference external" href="https://github.com/gotcha/ipdb">ipdb</a> (<code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">ipdb</span></code>) the API server will drop you into a debugger when an exception occurs:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ paster serve --reload development-france.ini
+</section>
+<section id="debugging-code">
+<h2>Debugging code<a class="headerlink" href="#debugging-code" title="Permalink to this headline">¶</a></h2>
+<p>If you install <a class="reference external" href="https://github.com/gotcha/ipdb">ipdb</a> (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">ipdb</span></code>) the API server will drop you into a debugger when an exception occurs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ paster serve --reload development-france.ini
 Starting server in PID 3815.
 serving on 0.0.0.0:2000 view at http://127.0.0.1:2000
 model.py(52)get_cached_composed_reform()
@@ -172,11 +161,11 @@ u&#39;paris&#39;
 ipdb&gt;
 </pre></div>
 </div>
-</div>
-<div class="section" id="profiling-code">
-<span id="profiling-code"></span><h2>Profiling code<a class="headerlink" href="#profiling-code" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="profiling-code">
+<h2>Profiling code<a class="headerlink" href="#profiling-code" title="Permalink to this headline">¶</a></h2>
 <p>To profile the execution of a portion of code, wrap it with these lines:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+    import cProfile</span><span class="w"></span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+    import cProfile</span><span class="w"></span>
 <span class="gi">+    pr = cProfile.Profile()</span><span class="w"></span>
 <span class="gi">+    pr.enable()</span><span class="w"></span>
 
@@ -186,18 +175,18 @@ ipdb&gt;
 <span class="gi">+    pr.dump_stats(&#39;result.profile&#39;)</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Each time you call the endpoint a <code class="docutils literal"><span class="pre">result.profile</span></code> file is written.
-To prevent it to be overwritten, generate a dynamic name with <a class="reference external" href="https://docs.python.org/2/library/tempfile.html#tempfile.mkstemp"><code class="docutils literal"><span class="pre">tempfile.mkstemp</span></code></a>.</p>
+<p>Each time you call the endpoint a <code class="docutils literal notranslate"><span class="pre">result.profile</span></code> file is written.
+To prevent it to be overwritten, generate a dynamic name with <a class="reference external" href="https://docs.python.org/2/library/tempfile.html#tempfile.mkstemp"><code class="docutils literal notranslate"><span class="pre">tempfile.mkstemp</span></code></a>.</p>
 <p>Then you can use the <a class="reference external" href="http://www.vrplumber.com/programming/runsnakerun/">runsnakerun</a> GUI to inspect the profile data.</p>
 <blockquote>
 <div><p>Under Debian GNU/Linux:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">aptitude</span> <span class="n">install</span> <span class="n">runsnakerun</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>aptitude install runsnakerun
 </pre></div>
 </div>
 </div></blockquote>
-<p>For a throughout example on profiling and debugging please take a look at <a class="reference internal" href="../simulate/profile-simulation.html"><span class="doc">How to profile the performance of a simulation</span></a>.</p>
-</div>
-</div>
+<p>For a throughout example on profiling and debugging please take a look at <a class="reference internal" href="../simulate/profile-simulation.html"><span class="doc std std-doc">How to profile the performance of a simulation</span></a>.</p>
+</section>
+</section>
 
 
           </div>
@@ -221,7 +210,8 @@ To prevent it to be overwritten, generate a dynamic name with <a class="referenc
           <a href="extensions.html" title="OpenFisca extensions"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-users"></i> Contribute</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-users"></i> Contribute</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Developer guide</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

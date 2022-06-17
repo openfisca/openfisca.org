@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>In an offline environment &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="On Windows without admin rights" href="windows-no-admin.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="howto_docker.html" title="With Docker"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-cogs"></i> Installation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-cogs"></i> Installation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">In an offline environment</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -99,7 +88,7 @@
 <li class="toctree-l2"><a class="reference internal" href="howto_docker.html">With Docker</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">In an offline environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="windows-no-admin.html">On Windows without admin rights</a></li>
-<li class="toctree-l2"><a class="reference internal" href="test_situations.html">How to test your changes on &#8220;ready to use&#8221; situations (for OpenFisca-France)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_situations.html">How to test your changes on “ready to use” situations (for OpenFisca-France)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../key-concepts/index.html"><i class="fas fa-dice-d6"></i> Key concepts</a></li>
@@ -137,16 +126,16 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="in-an-offline-environment">
-<span id="in-an-offline-environment"></span><h1>In an offline environment<a class="headerlink" href="#in-an-offline-environment" title="Permalink to this headline">¶</a></h1>
+  <section id="in-an-offline-environment">
+<h1>In an offline environment<a class="headerlink" href="#in-an-offline-environment" title="Permalink to this headline">¶</a></h1>
 <p>If you need to install OpenFisca on a server with no Internet access, here is how to do it.</p>
 <p>The big picture: download Python packages on a machine with Internet access, copy them to the server and install them in a <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">virtualenv</a>.</p>
 <p>We assume that it is possible to copy files to the server, for example via a USB stick. Or perhaps the server filters only outgoing connections, but accepts incoming connections allowing to copy the files.</p>
-<div class="section" id="on-the-machine-with-internet-access">
-<span id="on-the-machine-with-internet-access"></span><h2>On the machine with Internet access<a class="headerlink" href="#on-the-machine-with-internet-access" title="Permalink to this headline">¶</a></h2>
-<p>We are going to create a first virtualenv in which we&#8217;ll use <code class="docutils literal"><span class="pre">pip</span></code> to download the <code class="docutils literal"><span class="pre">.whl</span></code> files in a specific directory.</p>
+<section id="on-the-machine-with-internet-access">
+<h2>On the machine with Internet access<a class="headerlink" href="#on-the-machine-with-internet-access" title="Permalink to this headline">¶</a></h2>
+<p>We are going to create a first virtualenv in which we’ll use <code class="docutils literal notranslate"><span class="pre">pip</span></code> to download the <code class="docutils literal notranslate"><span class="pre">.whl</span></code> files in a specific directory.</p>
 <p>Here we use <a class="reference external" href="https://github.com/berdario/pew">pew</a> to simplify virtualenv management.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>pip install pew
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install pew
 pew new openfisca-packages --python<span class="o">=</span>python3.7
 
 <span class="c1"># Upgrade pip itself</span>
@@ -160,18 +149,18 @@ pip download OpenFisca-France
 <span class="c1"># You should see the downloaded files in the current directory.</span>
 </pre></div>
 </div>
-<p>Now copy these files on the server (say in the <code class="docutils literal"><span class="pre">~/openfisca-packages</span></code> directory), either via a USB stick, or with <code class="docutils literal"><span class="pre">scp</span></code>, or any other way.</p>
-<p>Example with <code class="docutils literal"><span class="pre">scp</span></code>:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scp -r ~/openfisca-packages user@server:
+<p>Now copy these files on the server (say in the <code class="docutils literal notranslate"><span class="pre">~/openfisca-packages</span></code> directory), either via a USB stick, or with <code class="docutils literal notranslate"><span class="pre">scp</span></code>, or any other way.</p>
+<p>Example with <code class="docutils literal notranslate"><span class="pre">scp</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scp -r ~/openfisca-packages user@server:
 </pre></div>
 </div>
-</div>
-<div class="section" id="on-the-server">
-<span id="on-the-server"></span><h2>On the server<a class="headerlink" href="#on-the-server" title="Permalink to this headline">¶</a></h2>
-<p>Starting from here we assume you copied the packages on the server, say in <code class="docutils literal"><span class="pre">~/openfisca-packages</span></code>.</p>
+</section>
+<section id="on-the-server">
+<h2>On the server<a class="headerlink" href="#on-the-server" title="Permalink to this headline">¶</a></h2>
+<p>Starting from here we assume you copied the packages on the server, say in <code class="docutils literal notranslate"><span class="pre">~/openfisca-packages</span></code>.</p>
 <p>The following commands show how to install Python packages without any Internet access.
-If you already have a virtualenv, activate it. Otherwise create a new one following the same instructions as above (for example with <code class="docutils literal"><span class="pre">pew</span> <span class="pre">new</span></code>).</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>pip install ~/openfisca-packages/*
+If you already have a virtualenv, activate it. Otherwise create a new one following the same instructions as above (for example with <code class="docutils literal notranslate"><span class="pre">pew</span> <span class="pre">new</span></code>).</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install ~/openfisca-packages/*
     Processing ./isodate-0.5.4.tar.gz
     <span class="o">[</span>...<span class="o">]</span>
     Installing collected packages: pytz, Babel, Biryani, numpy, PyYAML, OpenFisca-Core, requests, OpenFisca-France, isodate
@@ -182,12 +171,12 @@ pip list <span class="p">|</span> grep OpenFisca-France
 </pre></div>
 </div>
 <p>Run the basic tests which confirm that OpenFisca-France is correctly installed:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>python -m openfisca_france.tests.test_basics
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python -m openfisca_france.tests.test_basics
 OpenFisca-France basic <span class="nb">test</span> was executed successfully.
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -211,7 +200,8 @@ OpenFisca-France basic <span class="nb">test</span> was executed successfully.
           <a href="howto_docker.html" title="With Docker"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-cogs"></i> Installation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-cogs"></i> Installation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">In an offline environment</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

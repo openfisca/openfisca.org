@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Using the /trace endpoint &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="OpenAPI specification configuration" href="config-openapi.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="input-output-data.html" title="Using the /calculate endpoint"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-cloud"></i> OpenFisca Web API</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-cloud"></i> OpenFisca Web API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Using the /trace endpoint</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -140,15 +129,16 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="using-the-trace-endpoint">
-<span id="using-the-trace-endpoint"></span><h1>Using the /trace endpoint<a class="headerlink" href="#using-the-trace-endpoint" title="Permalink to this headline">¶</a></h1>
+  <section id="using-the-trace-endpoint">
+<h1>Using the /trace endpoint<a class="headerlink" href="#using-the-trace-endpoint" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div>All the examples provided here are from the <a class="reference external" href="https://github.com/openfisca/country-template">country package template</a>.</div></blockquote>
-<p>When you <a class="reference internal" href="input-output-data.html"><span class="doc">run a simulation</span></a> on a specific situation (e.g. use the <code class="docutils literal"><span class="pre">/calculate</span></code> endpoint), you might want to understand the calculation. The <code class="docutils literal"><span class="pre">/trace</span></code> endpoint is here to help you analyse the simulation calculation step by step.</p>
-<div class="section" id="application-analyse-disposable-income-calculation-for-one-person">
-<span id="application-analyse-disposable-income-calculation-for-one-person"></span><h2>Application: analyse disposable income calculation for one person<a class="headerlink" href="#application-analyse-disposable-income-calculation-for-one-person" title="Permalink to this headline">¶</a></h2>
-<p>Let&#8217;s say that you want to calculate the <code class="docutils literal"><span class="pre">disposable_income</span></code> for one person earning a <code class="docutils literal"><span class="pre">salary</span></code> on the same period. You start with the following JSON situation description:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<div><p>All the examples provided here are from the <a class="reference external" href="https://github.com/openfisca/country-template">country package template</a>.</p>
+</div></blockquote>
+<p>When you <a class="reference internal" href="input-output-data.html"><span class="doc std std-doc">run a simulation</span></a> on a specific situation (e.g. use the <code class="docutils literal notranslate"><span class="pre">/calculate</span></code> endpoint), you might want to understand the calculation. The <code class="docutils literal notranslate"><span class="pre">/trace</span></code> endpoint is here to help you analyse the simulation calculation step by step.</p>
+<section id="application-analyse-disposable-income-calculation-for-one-person">
+<h2>Application: analyse disposable income calculation for one person<a class="headerlink" href="#application-analyse-disposable-income-calculation-for-one-person" title="Permalink to this headline">¶</a></h2>
+<p>Let’s say that you want to calculate the <code class="docutils literal notranslate"><span class="pre">disposable_income</span></code> for one person earning a <code class="docutils literal notranslate"><span class="pre">salary</span></code> on the same period. You start with the following JSON situation description:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;households&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;_&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;parents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Alicia&quot;</span><span class="p">]</span><span class="w"></span>
@@ -170,13 +160,13 @@
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>If you send this situation to your <code class="docutils literal"><span class="pre">country-template</span></code> model Web API or try it out on the <code class="docutils literal"><span class="pre">/trace</span></code> endpoint in the <a class="reference external" href="https://demo.openfisca.org/legislation/swagger">Swagger interface</a>, you get the following response composed of three sections:</p>
+<p>If you send this situation to your <code class="docutils literal notranslate"><span class="pre">country-template</span></code> model Web API or try it out on the <code class="docutils literal notranslate"><span class="pre">/trace</span></code> endpoint in the <a class="reference external" href="https://demo.openfisca.org/legislation/swagger">Swagger interface</a>, you get the following response composed of three sections:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">entitiesDescription</span></code>: lists the persons and how they belong to the model group entities,</li>
-<li><code class="docutils literal"><span class="pre">requestedCalculations</span></code>: lists the requested calculations (i.e. variables with values at <code class="docutils literal"><span class="pre">null</span></code>),</li>
-<li><code class="docutils literal"><span class="pre">trace</span></code>: lists the calculation steps.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entitiesDescription</span></code>: lists the persons and how they belong to the model group entities,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">requestedCalculations</span></code>: lists the requested calculations (i.e. variables with values at <code class="docutils literal notranslate"><span class="pre">null</span></code>),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trace</span></code>: lists the calculation steps.</p></li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;entitiesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;households&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">      </span><span class="s2">&quot;_&quot;</span><span class="w"></span>
@@ -260,8 +250,8 @@
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>As we calculated the <code class="docutils literal"><span class="pre">disposable_income</span></code> for <code class="docutils literal"><span class="pre">2017-01</span></code>, let&#8217;s see how the <code class="docutils literal"><span class="pre">trace</span></code> section describes it:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<p>As we calculated the <code class="docutils literal notranslate"><span class="pre">disposable_income</span></code> for <code class="docutils literal notranslate"><span class="pre">2017-01</span></code>, let’s see how the <code class="docutils literal notranslate"><span class="pre">trace</span></code> section describes it:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;disposable_income&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">        </span><span class="s2">&quot;salary&lt;2017-01&gt;&quot;</span><span class="p">,</span><span class="w"></span>
@@ -279,15 +269,15 @@
 </div>
 <p>It contains these sub-sections:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">value</span></code>: the calculated <code class="docutils literal"><span class="pre">disposable_income</span></code> on <code class="docutils literal"><span class="pre">2017-01</span></code> period,</li>
-<li><code class="docutils literal"><span class="pre">dependencies</span></code>: the <a class="reference internal" href="../key-concepts/variables.html"><span class="doc">variables</span></a> called by <code class="docutils literal"><span class="pre">disposable_income</span></code> formula and their calculation periods,</li>
-<li><code class="docutils literal"><span class="pre">parameters</span></code>: the <a class="reference internal" href="../key-concepts/parameters.html"><span class="doc">parameters</span></a> called by <code class="docutils literal"><span class="pre">disposable_income</span></code> formula and their periods.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: the calculated <code class="docutils literal notranslate"><span class="pre">disposable_income</span></code> on <code class="docutils literal notranslate"><span class="pre">2017-01</span></code> period,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dependencies</span></code>: the <a class="reference internal" href="../key-concepts/variables.html"><span class="doc std std-doc">variables</span></a> called by <code class="docutils literal notranslate"><span class="pre">disposable_income</span></code> formula and their calculation periods,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parameters</span></code>: the <a class="reference internal" href="../key-concepts/parameters.html"><span class="doc std std-doc">parameters</span></a> called by <code class="docutils literal notranslate"><span class="pre">disposable_income</span></code> formula and their periods.</p></li>
 </ul>
 <p>You can see those variables and parameters in <a class="reference external" href="https://demo.openfisca.org/legislation/disposable_income">disposable_income definition</a>.</p>
-<p>Following <code class="docutils literal"><span class="pre">dependencies</span></code> list, we can also see that:</p>
+<p>Following <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> list, we can also see that:</p>
 <ul>
-<li><p class="first">OpenFisca didn&#8217;t need to calculate the <code class="docutils literal"><span class="pre">salary</span></code> value as it was given in situation inputs; thus the <code class="docutils literal"><span class="pre">/trace</span></code> doesn&#8217;t evaluate its <code class="docutils literal"><span class="pre">dependencies</span></code> and <code class="docutils literal"><span class="pre">parameters</span></code>:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<li><p>OpenFisca didn’t need to calculate the <code class="docutils literal notranslate"><span class="pre">salary</span></code> value as it was given in situation inputs; thus the <code class="docutils literal notranslate"><span class="pre">/trace</span></code> doesn’t evaluate its <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> and <code class="docutils literal notranslate"><span class="pre">parameters</span></code>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;salary&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
@@ -299,8 +289,8 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">OpenFisca needed to calculate the next variable, <code class="docutils literal"><span class="pre">basic_income</span></code>, before <code class="docutils literal"><span class="pre">disposable_income</span></code> evaluation:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<li><p>OpenFisca needed to calculate the next variable, <code class="docutils literal notranslate"><span class="pre">basic_income</span></code>, before <code class="docutils literal notranslate"><span class="pre">disposable_income</span></code> evaluation:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;basic_income&lt;2017-01&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">      </span><span class="s2">&quot;age&lt;2017-01&gt;&quot;</span><span class="w"></span>
@@ -319,11 +309,12 @@
 <p>Note that, as a parameter depends only on its validity period, its evaluation is described in one line that includes its value.</p>
 </li>
 </ul>
-<p>So, with <code class="docutils literal"><span class="pre">/trace</span></code> endpoint, you can follow calculation steps by following the variable names and periods in its response <code class="docutils literal"><span class="pre">trace</span></code> section.</p>
+<p>So, with <code class="docutils literal notranslate"><span class="pre">/trace</span></code> endpoint, you can follow calculation steps by following the variable names and periods in its response <code class="docutils literal notranslate"><span class="pre">trace</span></code> section.</p>
 <blockquote>
-<div>Try it out on the <a class="reference external" href="https://demo.openfisca.org/legislation/swagger">Swagger interface</a> of <code class="docutils literal"><span class="pre">country-template</span></code> model.</div></blockquote>
-</div>
-</div>
+<div><p>Try it out on the <a class="reference external" href="https://demo.openfisca.org/legislation/swagger">Swagger interface</a> of <code class="docutils literal notranslate"><span class="pre">country-template</span></code> model.</p>
+</div></blockquote>
+</section>
+</section>
 
 
           </div>
@@ -347,7 +338,8 @@
           <a href="input-output-data.html" title="Using the /calculate endpoint"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-cloud"></i> OpenFisca Web API</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-cloud"></i> OpenFisca Web API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Using the /trace endpoint</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

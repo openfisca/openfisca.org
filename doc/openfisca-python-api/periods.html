@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Periods &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Errors" href="errors.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="simulation_generator.html" title="Simulation generator"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Periods</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -150,26 +139,31 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="module-openfisca_core.periods">
+  <section id="module-openfisca_core.periods">
 <span id="periods"></span><h1>Periods<a class="headerlink" href="#module-openfisca_core.periods" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="openfisca_core.periods.Period">
-<em class="property">class </em><code class="descclassname">openfisca_core.periods.</code><code class="descname">Period</code><a class="reference internal" href="../_modules/openfisca_core/periods/period_.html#Period"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.periods.Period" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.periods.Period">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.periods.</span></span><span class="sig-name descname"><span class="pre">Period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable=()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/period_.html#Period"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.periods.Period" title="Permalink to this definition">¶</a></dt>
 <dd><p>Toolbox to handle date intervals.</p>
-<p>A period is a triple (unit, start, size), where unit is either &#8220;month&#8221; or &#8220;year&#8221;, where start format is a
+<p>A period is a triple (unit, start, size), where unit is either “month” or “year”, where start format is a
 (year, month, day) triple, and where size is an integer &gt; 1.</p>
 <p>Since a period is a triple it can be used as a dictionary key.</p>
-<dl class="method">
-<dt id="openfisca_core.periods.Period.contains">
-<code class="descname">contains</code><span class="sig-paren">(</span><em>other: openfisca_core.periods.period_.Period</em><span class="sig-paren">)</span> &rarr; bool<a class="reference internal" href="../_modules/openfisca_core/periods/period_.html#Period.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.periods.Period.contains" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal"><span class="pre">True</span></code> if the period contains <code class="docutils literal"><span class="pre">other</span></code>. For instance, <code class="docutils literal"><span class="pre">period(2015)</span></code> contains <code class="docutils literal"><span class="pre">period(2015-01)</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.periods.Period.contains">
+<span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/period_.html#Period.contains"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.periods.Period.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the period contains <code class="docutils literal notranslate"><span class="pre">other</span></code>. For instance, <code class="docutils literal notranslate"><span class="pre">period(2015)</span></code> contains <code class="docutils literal notranslate"><span class="pre">period(2015-01)</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="openfisca_core.periods.Period.days">
-<code class="descname">days</code><a class="headerlink" href="#openfisca_core.periods.Period.days" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.periods.Period.days">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">days</span></span><a class="headerlink" href="#openfisca_core.periods.Period.days" title="Permalink to this definition">¶</a></dt>
 <dd><p>Count the number of days in period.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
 <span class="go">365</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
 <span class="go">365</span>
@@ -177,7 +171,7 @@
 <span class="go">365</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
 <span class="go">28</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
 <span class="go">28</span>
@@ -185,7 +179,7 @@
 <span class="go">365</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
 <span class="go">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
 <span class="go">28</span>
@@ -195,26 +189,26 @@
 </div>
 </dd></dl>
 
-<dl class="method">
-<dt id="openfisca_core.periods.Period.get_subperiods">
-<code class="descname">get_subperiods</code><span class="sig-paren">(</span><em>unit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/period_.html#Period.get_subperiods"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.periods.Period.get_subperiods" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the list of all the periods of unit <code class="docutils literal"><span class="pre">unit</span></code> contained in self.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.periods.Period.get_subperiods">
+<span class="sig-name descname"><span class="pre">get_subperiods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/period_.html#Period.get_subperiods"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.periods.Period.get_subperiods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of all the periods of unit <code class="docutils literal notranslate"><span class="pre">unit</span></code> contained in self.</p>
 <p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2017&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_subperiods</span><span class="p">(</span><span class="n">MONTH</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2017&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_subperiods</span><span class="p">(</span><span class="n">MONTH</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2017-01&#39;</span><span class="p">),</span> <span class="n">period</span><span class="p">(</span><span class="s1">&#39;2017-02&#39;</span><span class="p">),</span> <span class="o">...</span> <span class="n">period</span><span class="p">(</span><span class="s1">&#39;2017-12&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year:2014:2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_subperiods</span><span class="p">(</span><span class="n">YEAR</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year:2014:2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_subperiods</span><span class="p">(</span><span class="n">YEAR</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2014&#39;</span><span class="p">),</span> <span class="n">period</span><span class="p">(</span><span class="s1">&#39;2015&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="method">
-<dt id="openfisca_core.periods.Period.offset">
-<code class="descname">offset</code><span class="sig-paren">(</span><em>offset</em>, <em>unit=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/period_.html#Period.offset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.periods.Period.offset" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.periods.Period.offset">
+<span class="sig-name descname"><span class="pre">offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/period_.html#Period.offset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.periods.Period.offset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Increment (or decrement) the given period with offset units.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2014, 1, 2)), 365))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2014, 1, 2)), 365))</span>
@@ -224,7 +218,7 @@
 <span class="go">Period((&#39;day&#39;, Instant((2015, 1, 1)), 365))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 2, 1)), 12))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 1, 2)), 12))</span>
@@ -234,7 +228,7 @@
 <span class="go">Period((&#39;month&#39;, Instant((2015, 1, 1)), 12))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Period((&#39;year&#39;, Instant((2015, 1, 1)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;year&#39;, Instant((2014, 1, 2)), 1))</span>
@@ -244,7 +238,7 @@
 <span class="go">Period((&#39;year&#39;, Instant((2015, 1, 1)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2011-2-28&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2011-2-28&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2011, 3, 1)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2011-2-28&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2011, 3, 28)), 1))</span>
@@ -252,7 +246,7 @@
 <span class="go">Period((&#39;year&#39;, Instant((2012, 2, 28)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2011-3-1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2011-3-1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2011, 2, 28)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2011-3-1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2011, 2, 1)), 1))</span>
@@ -260,7 +254,7 @@
 <span class="go">Period((&#39;year&#39;, Instant((2010, 3, 1)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-1-30&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-1-30&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2014, 2, 2)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-1-30&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 4, 30)), 1))</span>
@@ -268,7 +262,7 @@
 <span class="go">Period((&#39;year&#39;, Instant((2017, 1, 30)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2013, 12, 29)), 365))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2013, 10, 1)), 12))</span>
@@ -276,19 +270,19 @@
 <span class="go">Period((&#39;year&#39;, Instant((2011, 1, 1)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2014, 2, 1)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2014, 1, 1)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2014, 2, 1)), 4))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2014, 1, 1)), 4))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 2, 1)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 2, 1)), 1))</span>
@@ -296,7 +290,7 @@
 <span class="go">Period((&#39;month&#39;, Instant((2014, 1, 1)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 2, 1)), 4))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 2, 1)), 4))</span>
@@ -304,7 +298,7 @@
 <span class="go">Period((&#39;month&#39;, Instant((2014, 1, 1)), 4))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;year&#39;, Instant((2014, 1, 1)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;year&#39;, Instant((2014, 1, 1)), 1))</span>
@@ -312,7 +306,7 @@
 <span class="go">Period((&#39;year&#39;, Instant((2014, 1, 1)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;year&#39;, Instant((2014, 1, 1)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;year&#39;, Instant((2014, 2, 1)), 1))</span>
@@ -320,19 +314,19 @@
 <span class="go">Period((&#39;year&#39;, Instant((2014, 1, 1)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2014, 2, 28)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2014, 12, 31)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2014, 2, 28)), 4))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;day&#39;, Instant((2014, 12, 31)), 4))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 2, 28)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 2, 28)), 1))</span>
@@ -340,7 +334,7 @@
 <span class="go">Period((&#39;month&#39;, Instant((2014, 12, 31)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 2, 28)), 4))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 2, 28)), 4))</span>
@@ -348,7 +342,7 @@
 <span class="go">Period((&#39;month&#39;, Instant((2014, 12, 31)), 4))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;year&#39;, Instant((2014, 12, 31)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;year&#39;, Instant((2014, 1, 31)), 1))</span>
@@ -356,7 +350,7 @@
 <span class="go">Period((&#39;year&#39;, Instant((2014, 12, 31)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;year&#39;, Instant((2014, 12, 31)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-2-3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;year&#39;, Instant((2014, 2, 28)), 1))</span>
@@ -366,21 +360,21 @@
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="openfisca_core.periods.Period.size">
-<code class="descname">size</code><a class="headerlink" href="#openfisca_core.periods.Period.size" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.periods.Period.size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#openfisca_core.periods.Period.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the size of the period.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>
 <span class="go">4</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="openfisca_core.periods.Period.size_in_days">
-<code class="descname">size_in_days</code><a class="headerlink" href="#openfisca_core.periods.Period.size_in_days" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.periods.Period.size_in_days">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size_in_days</span></span><a class="headerlink" href="#openfisca_core.periods.Period.size_in_days" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the size of the period in days.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">size_in_days</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">size_in_days</span>
 <span class="go">28</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2012&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">size_in_days</span>
 <span class="go">366</span>
@@ -388,11 +382,11 @@
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="openfisca_core.periods.Period.size_in_months">
-<code class="descname">size_in_months</code><a class="headerlink" href="#openfisca_core.periods.Period.size_in_months" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.periods.Period.size_in_months">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size_in_months</span></span><a class="headerlink" href="#openfisca_core.periods.Period.size_in_months" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the size of the period in months.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">size_in_months</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">size_in_months</span>
 <span class="go">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2012&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">size_in_months</span>
 <span class="go">12</span>
@@ -400,21 +394,26 @@
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="openfisca_core.periods.Period.start">
-<code class="descname">start</code><a class="headerlink" href="#openfisca_core.periods.Period.start" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.periods.Period.start">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#openfisca_core.periods.Instant" title="openfisca_core.periods.instant_.Instant"><span class="pre">openfisca_core.periods.instant_.Instant</span></a></em><a class="headerlink" href="#openfisca_core.periods.Period.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the first day of the period as an Instant instance.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">start</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">start</span>
 <span class="go">Instant((2012, 2, 29))</span>
 </pre></div>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#openfisca_core.periods.Instant" title="openfisca_core.periods.instant_.Instant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instant</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="openfisca_core.periods.Period.stop">
-<code class="descname">stop</code><a class="headerlink" href="#openfisca_core.periods.Period.stop" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.periods.Period.stop">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stop</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#openfisca_core.periods.Instant" title="openfisca_core.periods.instant_.Instant"><span class="pre">openfisca_core.periods.instant_.Instant</span></a></em><a class="headerlink" href="#openfisca_core.periods.Period.stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the last day of the period as an Instant instance.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">stop</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">stop</span>
 <span class="go">Instant((2014, 12, 31))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">stop</span>
 <span class="go">Instant((2014, 12, 31))</span>
@@ -422,7 +421,7 @@
 <span class="go">Instant((2014, 12, 31))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">stop</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">stop</span>
 <span class="go">Instant((2013, 2, 28))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">stop</span>
 <span class="go">Instant((2012, 3, 28))</span>
@@ -430,7 +429,7 @@
 <span class="go">Instant((2012, 2, 29))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">stop</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">stop</span>
 <span class="go">Instant((2014, 2, 28))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-2-29&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">stop</span>
 <span class="go">Instant((2012, 4, 28))</span>
@@ -438,18 +437,23 @@
 <span class="go">Instant((2012, 3, 1))</span>
 </pre></div>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#openfisca_core.periods.Instant" title="openfisca_core.periods.instant_.Instant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instant</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
-<dt id="openfisca_core.periods.Instant">
-<em class="property">class </em><code class="descclassname">openfisca_core.periods.</code><code class="descname">Instant</code><a class="reference internal" href="../_modules/openfisca_core/periods/instant_.html#Instant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.periods.Instant" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="attribute">
-<dt id="openfisca_core.periods.Instant.date">
-<code class="descname">date</code><a class="headerlink" href="#openfisca_core.periods.Instant.date" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.periods.Instant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.periods.</span></span><span class="sig-name descname"><span class="pre">Instant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable=()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/instant_.html#Instant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.periods.Instant" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.periods.Instant.date">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">date</span></span><a class="headerlink" href="#openfisca_core.periods.Instant.date" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert instant to a date.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">date</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">date</span>
 <span class="go">datetime.date(2014, 1, 1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span>
 <span class="go">datetime.date(2014, 2, 1)</span>
@@ -459,11 +463,11 @@
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="openfisca_core.periods.Instant.day">
-<code class="descname">day</code><a class="headerlink" href="#openfisca_core.periods.Instant.day" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.periods.Instant.day">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">day</span></span><a class="headerlink" href="#openfisca_core.periods.Instant.day" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract day from instant.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">day</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">day</span>
 <span class="go">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">day</span>
 <span class="go">1</span>
@@ -473,11 +477,11 @@
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="openfisca_core.periods.Instant.month">
-<code class="descname">month</code><a class="headerlink" href="#openfisca_core.periods.Instant.month" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.periods.Instant.month">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">month</span></span><a class="headerlink" href="#openfisca_core.periods.Instant.month" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract month from instant.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">month</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">month</span>
 <span class="go">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">month</span>
 <span class="go">2</span>
@@ -487,11 +491,11 @@
 </div>
 </dd></dl>
 
-<dl class="method">
-<dt id="openfisca_core.periods.Instant.offset">
-<code class="descname">offset</code><span class="sig-paren">(</span><em>offset</em>, <em>unit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/instant_.html#Instant.offset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.periods.Instant.offset" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.periods.Instant.offset">
+<span class="sig-name descname"><span class="pre">offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/instant_.html#Instant.offset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.periods.Instant.offset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Increment (or decrement) the given instant with offset units.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 1, 2))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 2, 1))</span>
@@ -499,7 +503,7 @@
 <span class="go">Instant((2015, 1, 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-1-31&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-1-31&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 2, 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-1-31&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 2, 28))</span>
@@ -507,7 +511,7 @@
 <span class="go">Instant((2015, 1, 31))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2011-2-28&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2011-2-28&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
 <span class="go">Instant((2011, 3, 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2011-2-28&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Instant((2011, 3, 28))</span>
@@ -515,7 +519,7 @@
 <span class="go">Instant((2013, 2, 28))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
 <span class="go">Instant((2013, 12, 31))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Instant((2013, 12, 1))</span>
@@ -523,7 +527,7 @@
 <span class="go">Instant((2013, 1, 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2011-3-1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2011-3-1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
 <span class="go">Instant((2011, 2, 28))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2011-3-31&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Instant((2011, 2, 28))</span>
@@ -531,7 +535,7 @@
 <span class="go">Instant((2011, 2, 28))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-1-30&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-1-30&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 2, 2))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-10-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Instant((2015, 1, 2))</span>
@@ -539,7 +543,7 @@
 <span class="go">Instant((2017, 1, 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
 <span class="go">Instant((2013, 12, 29))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Instant((2013, 10, 1))</span>
@@ -547,7 +551,7 @@
 <span class="go">Instant((2011, 1, 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 1, 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 2, 1))</span>
@@ -555,7 +559,7 @@
 <span class="go">Instant((2014, 2, 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 1, 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 1, 1))</span>
@@ -563,7 +567,7 @@
 <span class="go">Instant((2014, 1, 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 1, 31))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 2, 28))</span>
@@ -571,7 +575,7 @@
 <span class="go">Instant((2012, 2, 29))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 12, 31))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;last-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 12, 31))</span>
@@ -581,11 +585,11 @@
 </div>
 </dd></dl>
 
-<dl class="method">
-<dt id="openfisca_core.periods.Instant.period">
-<code class="descname">period</code><span class="sig-paren">(</span><em>unit</em>, <em>size=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/instant_.html#Instant.period"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.periods.Instant.period" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.periods.Instant.period">
+<span class="sig-name descname"><span class="pre">period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/instant_.html#Instant.period"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.periods.Instant.period" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new period starting at instant.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">)</span>
 <span class="go">Period((&#39;month&#39;, Instant((2014, 1, 1)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="go">Period((&#39;year&#39;, Instant((2014, 2, 1)), 2))</span>
@@ -595,11 +599,11 @@
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="openfisca_core.periods.Instant.year">
-<code class="descname">year</code><a class="headerlink" href="#openfisca_core.periods.Instant.year" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.periods.Instant.year">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">year</span></span><a class="headerlink" href="#openfisca_core.periods.Instant.year" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract year from instant.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">year</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span><span class="o">.</span><span class="n">year</span>
 <span class="go">2014</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014-2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">year</span>
 <span class="go">2014</span>
@@ -611,11 +615,11 @@
 
 </dd></dl>
 
-<span class="target" id="module-openfisca_core.periods.helpers"></span><dl class="function">
-<dt id="openfisca_core.periods.helpers.instant">
-<code class="descclassname">openfisca_core.periods.helpers.</code><code class="descname">instant</code><span class="sig-paren">(</span><em>instant</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/helpers.html#instant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.periods.helpers.instant" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-openfisca_core.periods.helpers"></span><dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.periods.helpers.instant">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.periods.helpers.</span></span><span class="sig-name descname"><span class="pre">instant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instant</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/helpers.html#instant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.periods.helpers.instant" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new instant, aka a triple of integers (year, month, day).</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span>
 <span class="go">Instant((2014, 1, 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="s1">&#39;2014&#39;</span><span class="p">)</span>
 <span class="go">Instant((2014, 1, 1))</span>
@@ -629,26 +633,24 @@
 <span class="go">Instant((2014, 3, 2))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instant</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="openfisca_core.periods.helpers.key_period_size">
-<code class="descclassname">openfisca_core.periods.helpers.</code><code class="descname">key_period_size</code><span class="sig-paren">(</span><em>period</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/helpers.html#key_period_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.periods.helpers.key_period_size" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.periods.helpers.key_period_size">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.periods.helpers.</span></span><span class="sig-name descname"><span class="pre">key_period_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/helpers.html#key_period_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.periods.helpers.key_period_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines a key in order to sort periods by length. It uses two aspects : first unit then size</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>period</strong> &#8211; an OpenFisca period</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a string</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key_period_size</span><span class="p">(</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2014&#39;</span><span class="p">))</span>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>period</strong> – an OpenFisca period</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a string</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key_period_size</span><span class="p">(</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2014&#39;</span><span class="p">))</span>
 <span class="go">&#39;2_1&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">key_period_size</span><span class="p">(</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2013&#39;</span><span class="p">))</span>
 <span class="go">&#39;2_1&#39;</span>
@@ -658,17 +660,17 @@
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="openfisca_core.periods.helpers.period">
-<code class="descclassname">openfisca_core.periods.helpers.</code><code class="descname">period</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/helpers.html#period"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.periods.helpers.period" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.periods.helpers.period">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.periods.helpers.</span></span><span class="sig-name descname"><span class="pre">period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/periods/helpers.html#period"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.periods.helpers.period" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new period, aka a triple (unit, start_instant, size).</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2014&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2014&#39;</span><span class="p">)</span>
 <span class="go">Period((YEAR, Instant((2014, 1, 1)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year:2014&#39;</span><span class="p">)</span>
 <span class="go">Period((YEAR, Instant((2014, 1, 1)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2014-2&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2014-2&#39;</span><span class="p">)</span>
 <span class="go">Period((MONTH, Instant((2014, 2, 1)), 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;2014-02&#39;</span><span class="p">)</span>
 <span class="go">Period((MONTH, Instant((2014, 2, 1)), 1))</span>
@@ -676,13 +678,13 @@
 <span class="go">Period((MONTH, Instant((2014, 2, 1)), 1))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year:2014-2&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year:2014-2&#39;</span><span class="p">)</span>
 <span class="go">Period((YEAR, Instant((2014, 2, 1)), 1))</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<span class="target" id="module-openfisca_core.periods.config"></span></div>
+<span class="target" id="module-openfisca_core.periods.config"></span></section>
 
 
           </div>
@@ -706,7 +708,8 @@
           <a href="simulation_generator.html" title="Simulation generator"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Periods</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

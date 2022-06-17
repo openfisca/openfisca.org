@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>How to profile the performance of a simulation &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Openfisca Python API" href="../openfisca-python-api/index.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="replicate-simulation-inputs.html" title="Replicating a situation along axes"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-chart-pie"></i> Running a simulation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-chart-pie"></i> Running a simulation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">How to profile the performance of a simulation</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -136,15 +125,15 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="how-to-profile-the-performance-of-a-simulation">
-<span id="how-to-profile-the-performance-of-a-simulation"></span><h1>How to profile the performance of a simulation<a class="headerlink" href="#how-to-profile-the-performance-of-a-simulation" title="Permalink to this headline">¶</a></h1>
-<p>Your simulation is way too slow, and you want to know why? We&#8217;ve got you covered! :)</p>
+  <section id="how-to-profile-the-performance-of-a-simulation">
+<h1>How to profile the performance of a simulation<a class="headerlink" href="#how-to-profile-the-performance-of-a-simulation" title="Permalink to this headline">¶</a></h1>
+<p>Your simulation is way too slow, and you want to know why? We’ve got you covered! :)</p>
 <p>Since <a class="reference external" href="https://github.com/openfisca/openfisca-core/pull/895">34.4.0</a> you can generate a time performance flame graph in a web page to view the time taken by every calculation in a simulation.</p>
-<p>In the following examples, we use <a class="reference external" href="https://github.com/openfisca/openfisca-france">OpenFisca-France</a>, but the profiling applies to any country package using <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code>.</p>
-<div class="section" id="identify-a-slow-simulation">
-<span id="identify-a-slow-simulation"></span><h2>Identify a slow simulation<a class="headerlink" href="#identify-a-slow-simulation" title="Permalink to this headline">¶</a></h2>
+<p>In the following examples, we use <a class="reference external" href="https://github.com/openfisca/openfisca-france">OpenFisca-France</a>, but the profiling applies to any country package using <code class="docutils literal notranslate"><span class="pre">openfisca</span> <span class="pre">test</span></code>.</p>
+<section id="identify-a-slow-simulation">
+<h2>Identify a slow simulation<a class="headerlink" href="#identify-a-slow-simulation" title="Permalink to this headline">¶</a></h2>
 <p>The easier way to spot a slow simulation is to profile your test suite, as follows:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PYTEST_ADDOPTS</span><span class="o">=</span><span class="s2">&quot;$PYTEST_ADDOPTS --durations=10&quot;</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PYTEST_ADDOPTS</span><span class="o">=</span><span class="s2">&quot;$PYTEST_ADDOPTS --durations=10&quot;</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span>
 
 <span class="o">...</span>
 <span class="n">Which</span> <span class="n">gives</span> <span class="n">you</span> <span class="n">the</span> <span class="mi">10</span> <span class="n">slowest</span> <span class="n">tests</span><span class="p">:</span>
@@ -160,8 +149,8 @@
 <span class="mf">8.17</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">test_tax_rates</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_marginal_tax_rate</span>
 </pre></div>
 </div>
-<p>Now, let&#8217;s take a closer look at this test <code class="docutils literal"><span class="pre">tests/formulas/irpp_prets_participatifs.yaml</span></code>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PYTEST_ADDOPTS</span><span class="o">=</span><span class="s2">&quot;$PYTEST_ADDOPTS --durations=3&quot;</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span>
+<p>Now, let’s take a closer look at this test <code class="docutils literal notranslate"><span class="pre">tests/formulas/irpp_prets_participatifs.yaml</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PYTEST_ADDOPTS</span><span class="o">=</span><span class="s2">&quot;$PYTEST_ADDOPTS --durations=3&quot;</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span>
 
 <span class="o">...</span>
 
@@ -170,13 +159,13 @@
 <span class="mf">3.02</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
 </pre></div>
 </div>
-<p>Terrific! We now know that the first test in <code class="docutils literal"><span class="pre">tests/formulas/irpp_prets_participatifs.yaml</span></code> is the slowest, compared to the others.</p>
-</div>
-<div class="section" id="generate-the-flame-graph">
-<span id="generate-the-flame-graph"></span><h2>Generate the flame graph<a class="headerlink" href="#generate-the-flame-graph" title="Permalink to this headline">¶</a></h2>
-<p>To generate the flame graph, just pass the <a class="reference external" href="https://openfisca.org/doc/openfisca-python-api/openfisca-run-test.html"><code class="docutils literal"><span class="pre">--performance</span></code></a> option to <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code>.</p>
-<p>We&#8217;ll also use the <a class="reference external" href="https://openfisca.org/doc/openfisca-python-api/openfisca-run-test.html"><code class="docutils literal"><span class="pre">--name_filter</span></code></a> option to profile the first test only.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">performance</span> <span class="o">--</span><span class="n">name_filter</span> <span class="n">ir_prets_participatifs_2016</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span>
+<p>Terrific! We now know that the first test in <code class="docutils literal notranslate"><span class="pre">tests/formulas/irpp_prets_participatifs.yaml</span></code> is the slowest, compared to the others.</p>
+</section>
+<section id="generate-the-flame-graph">
+<h2>Generate the flame graph<a class="headerlink" href="#generate-the-flame-graph" title="Permalink to this headline">¶</a></h2>
+<p>To generate the flame graph, just pass the <a class="reference external" href="https://openfisca.org/doc/openfisca-python-api/openfisca-run-test.html"><code class="docutils literal notranslate"><span class="pre">--performance</span></code></a> option to <code class="docutils literal notranslate"><span class="pre">openfisca</span> <span class="pre">test</span></code>.</p>
+<p>We’ll also use the <a class="reference external" href="https://openfisca.org/doc/openfisca-python-api/openfisca-run-test.html"><code class="docutils literal notranslate"><span class="pre">--name_filter</span></code></a> option to profile the first test only.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">performance</span> <span class="o">--</span><span class="n">name_filter</span> <span class="n">ir_prets_participatifs_2016</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span>
 <span class="n">git</span> <span class="n">status</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">html</span>
 
 <span class="o">...</span>
@@ -184,28 +173,28 @@
 <span class="n">performance_graph</span><span class="o">.</span><span class="n">html</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="open-the-flame-graph">
-<span id="open-the-flame-graph"></span><h2>Open the flame graph<a class="headerlink" href="#open-the-flame-graph" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="open-the-flame-graph">
+<h2>Open the flame graph<a class="headerlink" href="#open-the-flame-graph" title="Permalink to this headline">¶</a></h2>
 <p>Now, you can open the file with your favorite browser.</p>
 <p>For example, in OS X:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="n">performance_graph</span><span class="o">.</span><span class="n">html</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="n">performance_graph</span><span class="o">.</span><span class="n">html</span>
 </pre></div>
 </div>
-<p>You&#8217;ll be greeted by a very nice looking flame graph like this one:</p>
+<p>You’ll be greeted by a very nice looking flame graph like this one:</p>
 <p><a class="reference external" href="https://github.com/openfisca/openfisca-doc/blob/master/source/static/img/performance_graph.png"><img alt="Performance graph" src="https://cdn.rawgit.com/openfisca/openfisca-doc/master/source/static/img/performance_graph.png" /></a></p>
-<p>Looking at the graph, we now know that the <code class="docutils literal"><span class="pre">impots_directs</span></code> formula takes quite a lot of time.</p>
+<p>Looking at the graph, we now know that the <code class="docutils literal notranslate"><span class="pre">impots_directs</span></code> formula takes quite a lot of time.</p>
 <p>The question is, why?</p>
-</div>
-<div class="section" id="find-the-bottleneck">
-<span id="find-the-bottleneck"></span><h2>Find the bottleneck<a class="headerlink" href="#find-the-bottleneck" title="Permalink to this headline">¶</a></h2>
-<p>In order to identify why the simulation is slow, we need to find the bottleneck. We&#8217;ll use a line profiler to figure it out.</p>
-<p>We&#8217;ll start by installing <code class="docutils literal"><span class="pre">line_profiler</span></code>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">line_profiler</span>
+</section>
+<section id="find-the-bottleneck">
+<h2>Find the bottleneck<a class="headerlink" href="#find-the-bottleneck" title="Permalink to this headline">¶</a></h2>
+<p>In order to identify why the simulation is slow, we need to find the bottleneck. We’ll use a line profiler to figure it out.</p>
+<p>We’ll start by installing <code class="docutils literal notranslate"><span class="pre">line_profiler</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">line_profiler</span>
 </pre></div>
 </div>
-<p>Then we&#8217;ll use it to profile our formula by adding the <code class="docutils literal"><span class="pre">&#64;profile</span></code> decorator:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">impots_directs</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<p>Then we’ll use it to profile our formula by adding the <code class="docutils literal notranslate"><span class="pre">&#64;profile</span></code> decorator:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">impots_directs</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Menage</span>
     <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Impôts directs&quot;</span>
@@ -216,23 +205,23 @@
     <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">menage</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
 </pre></div>
 </div>
-<p>Finally, we run our test with the <code class="docutils literal"><span class="pre">line_profiler</span></code> enabled:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">kernprof</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">l</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">name_filter</span> <span class="n">ir_prets_participatifs_2016</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span>
+<p>Finally, we run our test with the <code class="docutils literal notranslate"><span class="pre">line_profiler</span></code> enabled:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernprof</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">l</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">name_filter</span> <span class="n">ir_prets_participatifs_2016</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span>
 </pre></div>
 </div>
 <p>We now know where our most time consuming line lies:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time      Per Hit      % Time         Line Contents</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time      Per Hit      % Time         Line Contents</span>
 <span class="o">====================================================================</span>
 
 <span class="mi">635</span>         <span class="mi">1</span>    <span class="mf">3488880.0</span> <span class="mf">3488880.0</span>    <span class="mf">100.0</span>          <span class="n">isf_ifi_i</span> <span class="o">=</span> <span class="n">menage</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">foyer_fiscal</span><span class="p">(</span><span class="s1">&#39;isf_ifi&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Another formula... so we&#8217;ll have to follow the breadcrumbs.</p>
-</div>
-<div class="section" id="follow-the-breadcrumbs">
-<span id="follow-the-breadcrumbs"></span><h2>Follow the breadcrumbs<a class="headerlink" href="#follow-the-breadcrumbs" title="Permalink to this headline">¶</a></h2>
-<p>We&#8217;ll repeat the same operation until we find the culprit! You&#8217;ll see that the results are coherent with the flame graph:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time      Per Hit      % Time         Line Contents</span>
+<p>Another formula… so we’ll have to follow the breadcrumbs.</p>
+</section>
+<section id="follow-the-breadcrumbs">
+<h2>Follow the breadcrumbs<a class="headerlink" href="#follow-the-breadcrumbs" title="Permalink to this headline">¶</a></h2>
+<p>We’ll repeat the same operation until we find the culprit! You’ll see that the results are coherent with the flame graph:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time      Per Hit      % Time         Line Contents</span>
 <span class="o">====================================================================</span>
 
 <span class="mi">621</span>         <span class="mi">1</span>    <span class="mf">3433186.0</span> <span class="mf">3433186.0</span>    <span class="mf">100.0</span>          <span class="n">isf_ifi_apres_plaf</span> <span class="o">=</span> <span class="n">foyer_fiscal</span><span class="p">(</span><span class="s1">&#39;isf_ifi_apres_plaf&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
@@ -262,18 +251,18 @@
 <span class="mi">401</span>         <span class="mi">4</span>    <span class="mf">2579118.0</span>  <span class="mf">644779.5</span>     <span class="mf">97.2</span>          <span class="n">salaire_imposable</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s1">&#39;salaire_imposable&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">ADD</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>From <code class="docutils literal"><span class="pre">salaire_imposable</span></code>, we can follow two different branches:</p>
-<ol>
-<li><p class="first">The <code class="docutils literal"><span class="pre">indemnite_residence</span></code> branch:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time        Per Hit    % Time         Line Contents</span>
+<p>From <code class="docutils literal notranslate"><span class="pre">salaire_imposable</span></code>, we can follow two different branches:</p>
+<ol class="arabic">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">indemnite_residence</span></code> branch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time        Per Hit    % Time         Line Contents</span>
 <span class="o">====================================================================</span>
 
 <span class="mi">199</span>        <span class="mi">48</span>    <span class="mf">1951692.0</span>   <span class="mf">40660.2</span>     <span class="mf">59.3</span>          <span class="n">indemnite_residence</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s1">&#39;indemnite_residence&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 <span class="mi">737</span>        <span class="mi">48</span>    <span class="mf">1615270.0</span>   <span class="mf">33651.5</span>     <span class="mf">73.0</span>          <span class="n">_P</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Let&#8217;s find out where <code class="docutils literal"><span class="pre">parameters</span></code> is defined by modifying the code as follows:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="w">class indemnite_residence(Variable):</span>
+<p>Let’s find out where <code class="docutils literal notranslate"><span class="pre">parameters</span></code> is defined by modifying the code as follows:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w">class indemnite_residence(Variable):</span>
 <span class="w"> </span>   value_type = float<span class="w"></span>
 <span class="w"> </span>   entity = Individu<span class="w"></span>
 <span class="w"> </span>   label = &quot;Indemnité de résidence des fonctionnaires&quot;<span class="w"></span>
@@ -284,8 +273,8 @@
 <span class="gi">+       breakpoint()</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Then running <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code> with <a class="reference external" href="https://docs.python.org/3/library/pdb.html">The Python Debugger</a>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ openfisca test --pdb tests/formulas/irpp_prets_participatifs.yaml
+<p>Then running <code class="docutils literal notranslate"><span class="pre">openfisca</span> <span class="pre">test</span></code> with <a class="reference external" href="https://docs.python.org/3/library/pdb.html">The Python Debugger</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ openfisca test --pdb tests/formulas/irpp_prets_participatifs.yaml
 
 ...
 
@@ -294,8 +283,8 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">The <code class="docutils literal"><span class="pre">cotisations_salariales</span></code> branch:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time        Per Hit    % Time         Line Contents</span>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">cotisations_salariales</span></code> branch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time        Per Hit    % Time         Line Contents</span>
 <span class="o">====================================================================</span>
 
 <span class="mi">202</span>        <span class="mi">48</span>    <span class="mf">1054648.0</span>   <span class="mf">21971.8</span>     <span class="mf">32.0</span>          <span class="n">cotisations_salariales</span> <span class="o">=</span> <span class="n">individu</span><span class="p">(</span><span class="s1">&#39;cotisations_salariales&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
@@ -309,8 +298,8 @@
 <span class="mi">37</span>       <span class="mi">2532</span>     <span class="mf">359388.0</span>     <span class="mf">141.9</span>     <span class="mf">77.2</span>          <span class="n">round_base_decimals</span> <span class="o">=</span> <span class="n">round_base_decimals</span><span class="p">,</span>
 </pre></div>
 </div>
-<p>Performing a search to find the definition of <code class="docutils literal"><span class="pre">iter_cotisations</span></code> gives us the following:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">iter_cotisations</span><span class="p">():</span>
+<p>Performing a search to find the definition of <code class="docutils literal notranslate"><span class="pre">iter_cotisations</span></code> gives us the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">iter_cotisations</span><span class="p">():</span>
         <span class="c1"># ...</span>
 
             <span class="k">yield</span> <span class="n">bareme</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span>
@@ -320,8 +309,8 @@
                 <span class="p">)</span>
 </pre></div>
 </div>
-<p>Let&#8217;s find out where <code class="docutils literal"><span class="pre">bareme.calc</span></code> is defined by modifying the code as follows:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="w"> </span>   def iter_cotisations():<span class="w"></span>
+<p>Let’s find out where <code class="docutils literal notranslate"><span class="pre">bareme.calc</span></code> is defined by modifying the code as follows:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>   def iter_cotisations():<span class="w"></span>
 <span class="w"> </span>       # ...<span class="w"></span>
 
 <span class="gi">+           breakpoint()</span><span class="w"></span>
@@ -332,8 +321,8 @@
 <span class="w"> </span>               )<span class="w"></span>
 </pre></div>
 </div>
-<p>Then running <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code> with <a class="reference external" href="https://docs.python.org/3/library/pdb.html">The Python Debugger</a>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ openfisca test --pdb tests/formulas/irpp_prets_participatifs.yaml
+<p>Then running <code class="docutils literal notranslate"><span class="pre">openfisca</span> <span class="pre">test</span></code> with <a class="reference external" href="https://docs.python.org/3/library/pdb.html">The Python Debugger</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ openfisca test --pdb tests/formulas/irpp_prets_participatifs.yaml
 
 ...
 
@@ -343,27 +332,27 @@
 </div>
 </li>
 </ol>
-<p>Great! We&#8217;ve found two performance bottlenecks in OpenFisca-Core:</p>
+<p>Great! We’ve found two performance bottlenecks in OpenFisca-Core:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">TaxBenefitSystem.get_parameters_at_instant</span></code></li>
-<li><code class="docutils literal"><span class="pre">MarginalRateTaxScale.calc</span></code></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem.get_parameters_at_instant</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MarginalRateTaxScale.calc</span></code></p></li>
 </ul>
 <p>How do we proceed?</p>
-</div>
-<div class="section" id="follow-to-the-core">
-<span id="follow-to-the-core"></span><h2>Follow to the core<a class="headerlink" href="#follow-to-the-core" title="Permalink to this headline">¶</a></h2>
-<p>We&#8217;ll continue our profiling in core, following <code class="docutils literal"><span class="pre">TaxBenefitSystem.get_parameters_at_instant</span></code>.</p>
+</section>
+<section id="follow-to-the-core">
+<h2>Follow to the core<a class="headerlink" href="#follow-to-the-core" title="Permalink to this headline">¶</a></h2>
+<p>We’ll continue our profiling in core, following <code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem.get_parameters_at_instant</span></code>.</p>
 <p>For that, we need to install OpenFisca Core in editable mode:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">openfisca</span><span class="o">-</span><span class="n">core</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">openfisca</span><span class="o">-</span><span class="n">core</span>
 </pre></div>
 </div>
-<p>And as before we add the <code class="docutils literal"><span class="pre">&#64;profile</span></code> decorator:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@profile</span>
+<p>And as before we add the <code class="docutils literal notranslate"><span class="pre">&#64;profile</span></code> decorator:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@profile</span>
 <span class="k">def</span> <span class="nf">get_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
 </pre></div>
 </div>
-<p>Let&#8217;s see:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#      Hits         Time  Per Hit   % Time  Line Contents</span>
+<p>Let’s see:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#      Hits         Time  Per Hit   % Time  Line Contents</span>
 <span class="o">==============================================================</span>
    <span class="mi">337</span>                                               <span class="nd">@profile</span>
    <span class="mi">338</span>                                               <span class="k">def</span> <span class="nf">get_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
@@ -388,8 +377,8 @@
    <span class="mi">357</span>      <span class="mi">4351</span>       <span class="mf">1672.0</span>      <span class="mf">0.4</span>      <span class="mf">0.1</span>          <span class="k">return</span> <span class="n">parameters_at_instant</span>
 </pre></div>
 </div>
-<p>Let&#8217;s take a closer look at <code class="docutils literal"><span class="pre">parameters.get_at_instant</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AtInstantLike</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+<p>Let’s take a closer look at <code class="docutils literal notranslate"><span class="pre">parameters.get_at_instant</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AtInstantLike</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
     <span class="c1"># ...</span>
 
     <span class="nd">@profile</span>
@@ -399,7 +388,7 @@
 </pre></div>
 </div>
 <p>And the results of running the profiler:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#      Hits         Time  Per Hit   % Time  Line Contents</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#      Hits         Time  Per Hit   % Time  Line Contents</span>
 <span class="o">==============================================================</span>
     <span class="mi">14</span>                                               <span class="nd">@profile</span>
     <span class="mi">15</span>                                               <span class="k">def</span> <span class="nf">get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
@@ -407,8 +396,8 @@
     <span class="mi">17</span>     <span class="mi">54550</span>     <span class="mf">429057.0</span>      <span class="mf">7.9</span>     <span class="mf">38.6</span>          <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This is the whole snippet for the expensive <code class="docutils literal"><span class="pre">periods.instant</span></code> function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">):</span>
+<p>This is the whole snippet for the expensive <code class="docutils literal notranslate"><span class="pre">periods.instant</span></code> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">):</span>
     <span class="c1"># ... </span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -420,25 +409,25 @@
             <span class="p">)</span>
 </pre></div>
 </div>
-<p>We&#8217;ll refactor it as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fragments</span> <span class="o">=</span> <span class="n">instant</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+<p>We’ll refactor it as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fragments</span> <span class="o">=</span> <span class="n">instant</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
 <span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
 <span class="n">instant</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">(</span><span class="n">fragment</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>So as to see where the bottleneck is:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
 <span class="o">==================================================================</span>
 
 <span class="mi">40</span>     <span class="mi">44100</span>     <span class="mf">223427.0</span>      <span class="mf">5.1</span>     <span class="mf">31.4</span>          <span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Perfect!</p>
-</div>
-<div class="section" id="isolate-the-bottleneck">
-<span id="isolate-the-bottleneck"></span><h2>Isolate the bottleneck<a class="headerlink" href="#isolate-the-bottleneck" title="Permalink to this headline">¶</a></h2>
-<p>Now we&#8217;re going to isolate it:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fragments</span> <span class="o">=</span> <span class="n">instant</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+</section>
+<section id="isolate-the-bottleneck">
+<h2>Isolate the bottleneck<a class="headerlink" href="#isolate-the-bottleneck" title="Permalink to this headline">¶</a></h2>
+<p>Now we’re going to isolate it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fragments</span> <span class="o">=</span> <span class="n">instant</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
 <span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
 <span class="n">instant</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">(</span><span class="n">fragments</span><span class="p">)</span>
 
@@ -450,42 +439,42 @@
 </pre></div>
 </div>
 <p>And profile it again:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
 <span class="o">==================================================================</span>
 
 <span class="mi">40</span>     <span class="mi">44100</span>     <span class="mf">442069.0</span>     <span class="mf">10.0</span>     <span class="mf">52.2</span>          <span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
 <span class="mi">210</span>   <span class="mi">132300</span>      <span class="mf">72826.0</span>      <span class="mf">0.6</span>    <span class="mf">100.0</span>          <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="elevate-the-bottleneck">
-<span id="elevate-the-bottleneck"></span><h2>Elevate the bottleneck<a class="headerlink" href="#elevate-the-bottleneck" title="Permalink to this headline">¶</a></h2>
-<p>Now we need to choose a strategy to reduce the bottleneck&#8217;s impact on performance.</p>
+</section>
+<section id="elevate-the-bottleneck">
+<h2>Elevate the bottleneck<a class="headerlink" href="#elevate-the-bottleneck" title="Permalink to this headline">¶</a></h2>
+<p>Now we need to choose a strategy to reduce the bottleneck’s impact on performance.</p>
 <p>We can either:</p>
 <ul class="simple">
-<li>reduce the impact per hit</li>
-<li>reduce the number of hits</li>
+<li><p>reduce the impact per hit</p></li>
+<li><p>reduce the number of hits</p></li>
 </ul>
 <p>Taking a look at the last line we profiled, we can see that:</p>
 <ul class="simple">
-<li>time per hit is very low —implementing a casting algorithm more efficient than the builtin <code class="docutils literal"><span class="pre">int</span></code> seems unlikely</li>
-<li>the range of reasonable values for the <code class="docutils literal"><span class="pre">fragment</span></code> argument is very low: 31 days, 12 months, 2021 → 2064</li>
-<li>there are 132300 hits, and that&#8217;s just for a single simulation (!)</li>
+<li><p>time per hit is very low —implementing a casting algorithm more efficient than the builtin <code class="docutils literal notranslate"><span class="pre">int</span></code> seems unlikely</p></li>
+<li><p>the range of reasonable values for the <code class="docutils literal notranslate"><span class="pre">fragment</span></code> argument is very low: 31 days, 12 months, 2021 → 2064</p></li>
+<li><p>there are 132300 hits, and that’s just for a single simulation (!)</p></li>
 </ul>
-<p>So let&#8217;s try to reduce the number of hits!</p>
+<p>So let’s try to reduce the number of hits!</p>
 <p>Once again, we could for example:</p>
 <ul class="simple">
-<li>reduce recursion</li>
-<li>create a lookup table</li>
+<li><p>reduce recursion</p></li>
+<li><p>create a lookup table</p></li>
 </ul>
 <p>In this case, creating a lookup table seems more cost-efficient:</p>
 <ul class="simple">
-<li>the function application has no side effects</li>
-<li>the range of reasonable values for <code class="docutils literal"><span class="pre">fragment</span></code> is very low</li>
-<li>return values are identical for identical values of <code class="docutils literal"><span class="pre">fragment</span></code></li>
+<li><p>the function application has no side effects</p></li>
+<li><p>the range of reasonable values for <code class="docutils literal notranslate"><span class="pre">fragment</span></code> is very low</p></li>
+<li><p>return values are identical for identical values of <code class="docutils literal notranslate"><span class="pre">fragment</span></code></p></li>
 </ul>
-<p>We&#8217;ll use <code class="docutils literal"><span class="pre">functools.lru_cache</span></code> for our lookup table:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">functools</span>
+<p>We’ll use <code class="docutils literal notranslate"><span class="pre">functools.lru_cache</span></code> for our lookup table:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">functools</span>
 
 <span class="c1"># ...</span>
 
@@ -494,8 +483,8 @@
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Let&#8217;s see how it does:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits   Time        Per Hit    % Time         Line Contents</span>
+<p>Let’s see how it does:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits   Time        Per Hit    % Time         Line Contents</span>
 <span class="o">==================================================================</span>
 
 <span class="mi">355</span>       <span class="mi">50</span>   <span class="mf">1809954.0</span>   <span class="mf">36199.1</span>     <span class="mf">99.0</span>          <span class="n">parameters_at_instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get_at_instant</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
@@ -504,14 +493,14 @@
 <span class="mi">212</span>       <span class="mi">17</span>        <span class="mf">40.0</span>       <span class="mf">2.4</span>    <span class="mf">100.0</span>          <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Wow! The number of hits to <code class="docutils literal"><span class="pre">parse_fragment</span></code> decreased by 99%, improving the generator performance by 353%!</p>
-<p>That&#8217;s it!</p>
-</div>
-<div class="section" id="caching-further">
-<span id="caching-further"></span><h2>Caching further<a class="headerlink" href="#caching-further" title="Permalink to this headline">¶</a></h2>
-<p>Once we know it works, can&#8217;t we go further?</p>
+<p>Wow! The number of hits to <code class="docutils literal notranslate"><span class="pre">parse_fragment</span></code> decreased by 99%, improving the generator performance by 353%!</p>
+<p>That’s it!</p>
+</section>
+<section id="caching-further">
+<h2>Caching further<a class="headerlink" href="#caching-further" title="Permalink to this headline">¶</a></h2>
+<p>Once we know it works, can’t we go further?</p>
 <p>With a couple of extra caches and code refactoring, we could end up with something like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="c1"># ...</span>
 
@@ -558,26 +547,30 @@
 
     <span class="k">return</span> <span class="nb">globals</span><span class="p">()[</span><span class="sa">f</span><span class="s2">&quot;instant_</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">](</span><span class="n">instant</span><span class="p">)</span>
 
+
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
+
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">instant_1</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">((</span><span class="n">instant</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
+
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">instant_2</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">((</span><span class="n">instant</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">instant</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">instant_3</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Please note that we&#8217;re importing <code class="docutils literal"><span class="pre">annotations</span></code> from <code class="docutils literal"><span class="pre">__future__</span></code> so as to postpone the evaluation of type annotations (<a class="reference external" href="https://www.python.org/dev/peps/pep-0484/">PEP484</a> and <a class="reference external" href="https://www.python.org/dev/peps/pep-0563/">PEP563</a>), in order to avoid <a class="reference external" href="https://discuss.python.org/t/how-to-add-type-hints-for/7459">cyclic imports</a>.</p>
-<p>Let&#8217;s profile again:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits    Time        Per Hit    % Time         Line Contents</span>
+<p>Please note that we’re importing <code class="docutils literal notranslate"><span class="pre">annotations</span></code> from <code class="docutils literal notranslate"><span class="pre">__future__</span></code> so as to postpone the evaluation of type annotations (<a class="reference external" href="https://www.python.org/dev/peps/pep-0484/">PEP484</a> and <a class="reference external" href="https://www.python.org/dev/peps/pep-0563/">PEP563</a>), in order to avoid <a class="reference external" href="https://discuss.python.org/t/how-to-add-type-hints-for/7459">cyclic imports</a>.</p>
+<p>Let’s profile again:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits    Time        Per Hit    % Time         Line Contents</span>
 <span class="o">===================================================================</span>
 
 <span class="mi">355</span>       <span class="mi">50</span>    <span class="mf">1787843.0</span>   <span class="mf">35756.9</span>     <span class="mf">98.8</span>          <span class="n">parameters_at_instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get_at_instant</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
@@ -587,7 +580,7 @@
 </pre></div>
 </div>
 <p>And overall?</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PYTEST_ADDOPTS</span><span class="o">=</span><span class="s2">&quot;$PYTEST_ADDOPTS --durations=3&quot;</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PYTEST_ADDOPTS</span><span class="o">=</span><span class="s2">&quot;$PYTEST_ADDOPTS --durations=3&quot;</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span>
 
 <span class="o">...</span>
 
@@ -597,29 +590,29 @@
 </pre></div>
 </div>
 <p>Looks promising!</p>
-</div>
-<div class="section" id="beware-of-context">
-<span id="beware-of-context"></span><h2>Beware of context!<a class="headerlink" href="#beware-of-context" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="beware-of-context">
+<h2>Beware of context!<a class="headerlink" href="#beware-of-context" title="Permalink to this headline">¶</a></h2>
 <p>So we tried reducing the number of hits, what about reducing the impact per hit?</p>
-<p>Looking back to <code class="docutils literal"><span class="pre">get_at_instant</span></code>, let&#8217;s follow the next function call:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
+<p>Looking back to <code class="docutils literal notranslate"><span class="pre">get_at_instant</span></code>, let’s follow the next function call:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
 <span class="o">===================================================================</span>
 
 <span class="mi">16</span>     <span class="mi">44100</span>      <span class="mf">76860.0</span>      <span class="mf">1.7</span>     <span class="mf">15.4</span>          <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
 <span class="mi">17</span>     <span class="mi">44100</span>     <span class="mf">421350.0</span>      <span class="mf">9.6</span>     <span class="mf">84.6</span>          <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Let&#8217;s look at that code closer:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+<p>Let’s look at that code closer:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">value_at_instant</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">value_at_instant</span><span class="o">.</span><span class="n">instant_str</span> <span class="o">&lt;=</span> <span class="n">instant</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value_at_instant</span><span class="o">.</span><span class="n">value</span>
     <span class="k">return</span> <span class="kc">None</span>
 </pre></div>
 </div>
-<p>A linear search! I know what you&#8217;re thinking, what if we do a binary search instead?</p>
-<p>Let&#8217;s try that out (naive implementation):</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+import sortedcontainers</span><span class="w"></span>
+<p>A linear search! I know what you’re thinking, what if we do a binary search instead?</p>
+<p>Let’s try that out (naive implementation):</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+import sortedcontainers</span><span class="w"></span>
 
 <span class="w"># ...</span>
 
@@ -642,6 +635,7 @@
 
 <span class="w"> </span>       # ...<span class="w"></span>
 
+
 <span class="w"> </span>   def _get_at_instant(self, instant):<span class="w"></span>
 <span class="gd">-       for value_at_instant in self.values_list:</span><span class="w"></span>
 <span class="gd">-           if value_at_instant.instant_str &lt;= instant:</span><span class="w"></span>
@@ -656,7 +650,7 @@
 </pre></div>
 </div>
 <p>And performance wise?</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
 <span class="o">===================================================================</span>
 
 <span class="mi">16</span>     <span class="mi">44100</span>      <span class="mf">82468.0</span>      <span class="mf">1.9</span>     <span class="mf">10.6</span>          <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
@@ -664,15 +658,15 @@
 <span class="mi">177</span>   <span class="mi">196150</span>     <span class="mf">596129.0</span>      <span class="mf">3.0</span>     <span class="mf">65.8</span>          <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_dict</span><span class="o">.</span><span class="n">bisect_right</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>It&#8217;s actually worse... but why?</p>
+<p>It’s actually worse… but why?</p>
 <p>One hypothesis is, even if, compared to a linear search with complexity <em>O(n)</em>, a binary search should be more efficient in that it has a complexity of <em>O(log(n))</em>, it will actually be more efficient for large numbers of <em>n</em>, which is not usually the case here.</p>
-<p>In fact, creating a lookup table for parameters would be theoretically more efficient. That would require refactoring, as the current <code class="docutils literal"><span class="pre">values_list</span></code> object is not hashable. Indeed, even using a more appropiate data structure could lead to better performance.</p>
-</div>
-<div class="section" id="wrap-up">
-<span id="wrap-up"></span><h2>Wrap up<a class="headerlink" href="#wrap-up" title="Permalink to this headline">¶</a></h2>
-<p>Finally, let&#8217;s run our base &amp; proposed scenarios several times so as to have something more statistically sound.</p>
-<p>IPython&#8217;s <code class="docutils literal"><span class="pre">%timeit</span></code> comes handy:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>pip install ipython
+<p>In fact, creating a lookup table for parameters would be theoretically more efficient. That would require refactoring, as the current <code class="docutils literal notranslate"><span class="pre">values_list</span></code> object is not hashable. Indeed, even using a more appropiate data structure could lead to better performance.</p>
+</section>
+<section id="wrap-up">
+<h2>Wrap up<a class="headerlink" href="#wrap-up" title="Permalink to this headline">¶</a></h2>
+<p>Finally, let’s run our base &amp; proposed scenarios several times so as to have something more statistically sound.</p>
+<p>IPython’s <code class="docutils literal notranslate"><span class="pre">%timeit</span></code> comes handy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pip install ipython
 ipython
 %timeit -n 10 -r 3 !openfisca test --country-package openfisca_france tests/formulas/irpp_prets_participatifs.yaml
 
@@ -687,9 +681,9 @@ ipython
 </div>
 <p>Statistically irrelevant :/ but hey! Life is about the journey, not the destination :)</p>
 <p>But now what? Reduce recursion? But how? Split-Apply-Combine?</p>
-<p>To be continued...</p>
-</div>
-</div>
+<p>To be continued…</p>
+</section>
+</section>
 
 
           </div>
@@ -713,7 +707,8 @@ ipython
           <a href="replicate-simulation-inputs.html" title="Replicating a situation along axes"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-chart-pie"></i> Running a simulation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-chart-pie"></i> Running a simulation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">How to profile the performance of a simulation</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Types &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="openfisca test" href="openfisca_test.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="errors.html" title="Errors"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Types</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -150,24 +139,23 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="module-openfisca_core.types">
+  <section id="module-openfisca_core.types">
 <span id="types"></span><h1>Types<a class="headerlink" href="#module-openfisca_core.types" title="Permalink to this headline">¶</a></h1>
 <p>Data types and protocols used by OpenFisca Core.</p>
 <p>The type definitions included in this sub-package are intented for
 contributors, to help them better understand and document contracts
 and expected behaviours.</p>
-<dl class="docutils">
-<dt>Official Public API:</dt>
-<dd><ul class="first last simple">
-<li><code class="docutils literal"><span class="pre">ArrayLike</span></code></li>
-<li><a class="reference internal" href="#openfisca_core.types.ArrayType" title="openfisca_core.types.ArrayType"><code class="xref py py-attr docutils literal"><span class="pre">ArrayType</span></code></a></li>
+<dl class="simple">
+<dt>Official Public API:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ArrayLike</span></code></p></li>
+<li><p><a class="reference internal" href="#openfisca_core.types.ArrayType" title="openfisca_core.types.ArrayType"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ArrayType</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>How imports are being used today:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># Bad</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># Bad</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.types.data_types.arrays</span> <span class="kn">import</span> <span class="n">ArrayLike</span>  <span class="c1"># Bad</span>
 </pre></div>
 </div>
@@ -175,57 +163,63 @@ and expected behaviours.</p>
 from modularizing the different components of the library, so as to make
 them easier to test and to maintain.</p>
 <p>How could them be used after the next major release:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="n">ArrayLike</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="n">ArrayLike</span>
 
 <span class="n">ArrayLike</span> <span class="c1"># Good: import types as publicly exposed</span>
 </pre></div>
 </div>
-<div class="last admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#imports">PEP8#Imports</a> and <a class="reference external" href="https://github.com/openfisca/openfisca-core/blob/master/STYLEGUIDE.md">OpenFisca&#8217;s Styleguide</a>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#imports">PEP8#Imports</a> and <a class="reference external" href="https://github.com/openfisca/openfisca-core/blob/master/STYLEGUIDE.md">OpenFisca’s Styleguide</a>.</p>
 </div>
 </div>
-<dl class="attribute">
-<dt id="openfisca_core.types.ArrayType">
-<code class="descclassname">openfisca_core.types.</code><code class="descname">ArrayType</code><a class="headerlink" href="#openfisca_core.types.ArrayType" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">NDArray</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.types.ArrayType">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">ArrayType</span></span><a class="headerlink" href="#openfisca_core.types.ArrayType" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">nptyping.types._ndarray.NDArray</span></code></p>
 </dd></dl>
 
-<span class="target" id="module-openfisca_core.types.data_types.arrays"></span><dl class="data">
-<dt id="openfisca_core.types.data_types.arrays.ArrayLike">
-<code class="descclassname">openfisca_core.types.data_types.arrays.</code><code class="descname">ArrayLike</code><em class="property"> = typing.Union[nptyping.types._ndarray.NDArray, typing.Sequence[~T]]</em><a class="headerlink" href="#openfisca_core.types.data_types.arrays.ArrayLike" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.10)"><code class="xref py py-obj docutils literal"><span class="pre">typing.Generic</span></code></a> &#8211; Type of any castable to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</p>
-<p>These include any <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a> and sequences (like
-<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal"><span class="pre">list</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code></a>, and so on).</p>
+<span class="target" id="module-openfisca_core.types.data_types.arrays"></span><dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.data_types.arrays.ArrayLike">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.data_types.arrays.</span></span><span class="sig-name descname"><span class="pre">ArrayLike</span></span><a class="headerlink" href="#openfisca_core.types.data_types.arrays.ArrayLike" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of any castable to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>.</p>
+<p>These include any <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> and sequences (like
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></a>, and so on).</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
 <span class="go">typing.Union[numpy.ndarray, typing.Sequence[float]]</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 <span class="go">typing.Union[numpy.ndarray, typing.Sequence[str]]</span>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>It is possible since numpy version 1.21 to specify the type of an
 array, thanks to <a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">numpy.typing.NDArray</a>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
 <span class="n">NDArray</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
 </pre></div>
 </div>
-<p class="last"><a class="reference external" href="https://mypy.readthedocs.io/en/stable/">mypy</a> provides <a class="reference external" href="https://mypy.readthedocs.io/en/stable/duck_type_compatibility.html">duck type compatibility</a>, so an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-obj docutils literal"><span class="pre">int</span></code></a> is
-considered to be valid whenever a <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-obj docutils literal"><span class="pre">float</span></code></a> is expected.</p>
+<p><a class="reference external" href="https://mypy.readthedocs.io/en/stable/">mypy</a> provides <a class="reference external" href="https://mypy.readthedocs.io/en/stable/duck_type_compatibility.html">duck type compatibility</a>, so an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> is
+considered to be valid whenever a <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a> is expected.</p>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 35.5.0.</span></p>
+<p><span class="versionmodified added">New in version 35.5.0.</span></p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 35.6.0: </span>Moved to <a class="reference internal" href="#module-openfisca_core.types" title="openfisca_core.types"><code class="xref py py-mod docutils literal"><span class="pre">types</span></code></a></p>
+<p><span class="versionmodified changed">Changed in version 35.6.0: </span>Moved to <a class="reference internal" href="#module-openfisca_core.types" title="openfisca_core.types"><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code></a></p>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">typing.Generic</span></code></a></p>
+</dd>
+</dl>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">nptyping.types._ndarray.NDArray</span></code>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">openfisca_core.types.data_types.arrays.T</span></code>]]</p>
 </dd></dl>
 
-</div>
+</section>
 
 
           </div>
@@ -249,7 +243,8 @@ considered to be valid whenever a <a class="reference external" href="https://do
           <a href="errors.html" title="Errors"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fab fa-python"></i> Openfisca Python API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Types</a></li> 
       </ul>
     </div>
 <script type="text/javascript">

@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   
   
@@ -18,25 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Writing YAML tests &#8212; OpenFisca  documentation</title>
-    
-    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Parameters" href="legislation_parameters.html" />
@@ -44,8 +33,7 @@
   
    
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,7 +50,8 @@
           <a href="inferences.html" title="Inferences"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-code"></i> From law to code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i class="fas fa-code"></i> From law to code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Writing YAML tests</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -145,16 +134,17 @@
           
           <div class="document clearer body">
             
-  <div class="section" id="writing-yaml-tests">
-<span id="writing-yaml-tests"></span><h1>Writing YAML tests<a class="headerlink" href="#writing-yaml-tests" title="Permalink to this headline">¶</a></h1>
+  <section id="writing-yaml-tests">
+<h1>Writing YAML tests<a class="headerlink" href="#writing-yaml-tests" title="Permalink to this headline">¶</a></h1>
 <p>The recommended way to write tests is to use YAML tests.</p>
 <p>Each formula should be tested at least with one test, and better with specific boundary values (thresholds for example).</p>
 <blockquote>
-<div>Terminology: Python dictionaries are called associative arrays in YAML.</div></blockquote>
-<div class="section" id="example">
-<span id="example"></span><h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>In <a class="reference external" href="https://github.com/openfisca/openfisca-france/blob/29.3.7/tests/formulas/irpp.yaml"><code class="docutils literal"><span class="pre">irpp.yaml</span></code></a> we see:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span><span class="w"></span>
+<div><p>Terminology: Python dictionaries are called associative arrays in YAML.</p>
+</div></blockquote>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>In <a class="reference external" href="https://github.com/openfisca/openfisca-france/blob/29.3.7/tests/formulas/irpp.yaml"><code class="docutils literal notranslate"><span class="pre">irpp.yaml</span></code></a> we see:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2012</span><span class="w"></span>
 <span class="w">  </span><span class="nt">absolute_error_margin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w"></span>
 <span class="w">  </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
@@ -163,47 +153,47 @@
 <span class="w">    </span><span class="nt">irpp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1181</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="common-keys">
-<span id="common-keys"></span><h2>Common keys<a class="headerlink" href="#common-keys" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="common-keys">
+<h2>Common keys<a class="headerlink" href="#common-keys" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">name</span></code> (string)</li>
-<li><code class="docutils literal"><span class="pre">period</span></code> (string with period syntax)</li>
-<li><code class="docutils literal"><span class="pre">keywords</span></code>  (list of strings, optional)</li>
-<li><code class="docutils literal"><span class="pre">description</span></code> (string, optional, multiline)</li>
-<li><code class="docutils literal"><span class="pre">absolute_error_margin</span></code> (number, optional)</li>
-<li><code class="docutils literal"><span class="pre">relative_error_margin</span></code> (number, optional)</li>
-<li><code class="docutils literal"><span class="pre">input</span></code> (associative array, keys are variable names, values are numbers)</li>
-<li><code class="docutils literal"><span class="pre">output</span></code> (associative array, keys are variable names, values are numbers)</li>
-<li><code class="docutils literal"><span class="pre">reforms</span></code> (list of openfisca reform modules to be applied to the baseline tax-benefit system)</li>
-<li>other (any key defined in the model)</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">period</span></code> (string with period syntax)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keywords</span></code>  (list of strings, optional)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> (string, optional, multiline)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">absolute_error_margin</span></code> (number, optional)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">relative_error_margin</span></code> (number, optional)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input</span></code> (associative array, keys are variable names, values are numbers)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code> (associative array, keys are variable names, values are numbers)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reforms</span></code> (list of openfisca reform modules to be applied to the baseline tax-benefit system)</p></li>
+<li><p>other (any key defined in the model)</p></li>
 </ul>
-</div>
-<div class="section" id="syntax">
-<span id="syntax"></span><h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="testing-formulas-by-giving-input-variables">
-<span id="testing-formulas-by-giving-input-variables"></span><h3>Testing formulas by giving input variables<a class="headerlink" href="#testing-formulas-by-giving-input-variables" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<section id="testing-formulas-by-giving-input-variables">
+<h3>Testing formulas by giving input variables<a class="headerlink" href="#testing-formulas-by-giving-input-variables" title="Permalink to this headline">¶</a></h3>
 <p>This is the simplest way to test formulas when you only need to give input values for only one individual.</p>
 <ul class="simple">
-<li>First, name your test. Start a test with <code class="docutils literal"><span class="pre">-</span></code>, which is the YAML list separator, followed by a space, the field <code class="docutils literal"><span class="pre">name</span></code>, and the test name as a string.</li>
+<li><p>First, name your test. Start a test with <code class="docutils literal notranslate"><span class="pre">-</span> </code>, which is the YAML list separator, followed by a space, the field <code class="docutils literal notranslate"><span class="pre">name</span></code>, and the test name as a string.</p></li>
 </ul>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>Then add the other relevant keys to your test. Usually, one defines the keys <code class="docutils literal"><span class="pre">period</span></code>, <code class="docutils literal"><span class="pre">keywords</span></code>, <code class="docutils literal"><span class="pre">description</span></code>, <code class="docutils literal"><span class="pre">absolute_error_margin</span></code> (or <code class="docutils literal"><span class="pre">relative_error_margin</span></code>) and their associated chosen values as follows:</li>
+<li><p>Then add the other relevant keys to your test. Usually, one defines the keys <code class="docutils literal notranslate"><span class="pre">period</span></code>, <code class="docutils literal notranslate"><span class="pre">keywords</span></code>, <code class="docutils literal notranslate"><span class="pre">description</span></code>, <code class="docutils literal notranslate"><span class="pre">absolute_error_margin</span></code> (or <code class="docutils literal notranslate"><span class="pre">relative_error_margin</span></code>) and their associated chosen values as follows:</p></li>
 </ul>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2012</span><span class="w"></span>
 <span class="w">  </span><span class="nt">absolute_error_margin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>Create nested dictionaries within the keys <code class="docutils literal"><span class="pre">input</span></code> and <code class="docutils literal"><span class="pre">output</span></code>,
+<li><p>Create nested dictionaries within the keys <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">output</span></code>,
 which keys are variable names and values are numbers, respectively input and expected values.
-For instance:</li>
+For instance:</p></li>
 </ul>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2012</span><span class="w"></span>
 <span class="w">  </span><span class="nt">absolute_error_margin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w"></span>
 <span class="w">  </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
@@ -214,12 +204,12 @@ For instance:</li>
 </pre></div>
 </div>
 <ul class="simple">
-<li>If variables are defined for different periods, you can
+<li><p>If variables are defined for different periods, you can
 override the default period specified for the test by providing
 periodic values.
-For instance:</li>
+For instance:</p></li>
 </ul>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Income below 50,000 and Age at or over 55 qualifies</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Income below 50,000 and Age at or over 55 qualifies</span><span class="w"></span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2021-12-01</span><span class="w"></span>
 <span class="w">  </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">55</span><span class="w"> </span><span class="c1"># Defined with the period DAY</span><span class="w"></span>
@@ -229,17 +219,18 @@ For instance:</li>
 <span class="w">    </span><span class="nt">eligible</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="testing-formulas-by-giving-a-test-case">
-<span id="testing-formulas-by-giving-a-test-case"></span><h3>Testing formulas by giving a test case<a class="headerlink" href="#testing-formulas-by-giving-a-test-case" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="testing-formulas-by-giving-a-test-case">
+<h3>Testing formulas by giving a test case<a class="headerlink" href="#testing-formulas-by-giving-a-test-case" title="Permalink to this headline">¶</a></h3>
 <p>This is the simplest way to test formulas when you need to give input values for many individuals
 which are dispatched into entities.</p>
 <blockquote>
-<div>See the last test of <a class="reference external" href="https://github.com/openfisca/openfisca-france/blob/221147983dabb7d3971b7f1ed86d44346fca449a/tests/cotisations_sociales_simulateur_IPP.yaml#L186-244">cotisations_sociales_simulateur_IPP.yaml</a></div></blockquote>
+<div><p>See the last test of <a class="reference external" href="https://github.com/openfisca/openfisca-france/blob/221147983dabb7d3971b7f1ed86d44346fca449a/tests/cotisations_sociales_simulateur_IPP.yaml#L186-244">cotisations_sociales_simulateur_IPP.yaml</a></p>
+</div></blockquote>
 <p>In this case, there is another convention:</p>
 <ul>
-<li><p class="first">Do not include the variables directly as keys of the <code class="docutils literal"><span class="pre">input</span></code>. Instead, define new keys corresponding to the entities:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Famille</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span><span class="w"></span>
+<li><p>Do not include the variables directly as keys of the <code class="docutils literal notranslate"><span class="pre">input</span></code>. Instead, define new keys corresponding to the entities:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Famille</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2012</span><span class="w"></span>
 <span class="w">  </span><span class="nt">absolute_error_margin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w"></span>
 <span class="w">  </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
@@ -254,8 +245,8 @@ which are dispatched into entities.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Define the individuals with their <code class="docutils literal"><span class="pre">id</span></code> and their variables:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">individus</span><span class="p">:</span><span class="w"></span>
+<li><p>Define the individuals with their <code class="docutils literal notranslate"><span class="pre">id</span></code> and their variables:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">individus</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">parent1</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="nt">date_naissance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1972-01-01</span><span class="w"></span>
 <span class="w">      </span><span class="nt">depcom_entreprise</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;69381&quot;</span><span class="w"></span>
@@ -272,8 +263,8 @@ which are dispatched into entities.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Specify the relations between individuals and their entity:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">familles</span><span class="p">:</span><span class="w"></span>
+<li><p>Specify the relations between individuals and their entity:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">familles</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="nt">parents</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;parent1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;parent2&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
 <span class="w">      </span><span class="nt">enfants</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;enfant1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;enfant2&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
 <span class="w">  </span><span class="nt">menages</span><span class="p">:</span><span class="w"></span>
@@ -286,53 +277,52 @@ which are dispatched into entities.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Specifying all entities is not mandatory. For any entity that is not specified, all individuals are assumed to be in &#8220;a group of their own&#8221;. Which means if you do not specify any families, OpenFisca assumes that each individual is the lone member of a one-person family. This applies to Web API payloads as well as test cases.</p>
-</li>
-<li><p class="first">Finally, define a dictionary of the expected values of the output variables. Each output variable takes a list of length equal to the number of individuals defined in the test. E.g, for a family of four individuals with two working parents and two unemployed children, the output variable salaire_super_brut is defined as follows:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">output</span><span class="p">:</span><span class="w"></span>
+<li><p>Specifying all entities is not mandatory. For any entity that is not specified, all individuals are assumed to be in “a group of their own”. Which means if you do not specify any families, OpenFisca assumes that each individual is the lone member of a one-person family. This applies to Web API payloads as well as test cases.</p></li>
+<li><p>Finally, define a dictionary of the expected values of the output variables. Each output variable takes a list of length equal to the number of individuals defined in the test. E.g, for a family of four individuals with two working parents and two unemployed children, the output variable salaire_super_brut is defined as follows:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">output</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">salaire_super_brut</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">3500</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2500</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="testing-formulas-using-variables-defined-for-multiple-periods">
-<span id="testing-formulas-using-variables-defined-for-multiple-periods"></span><h3>Testing formulas using variables defined for multiple periods<a class="headerlink" href="#testing-formulas-using-variables-defined-for-multiple-periods" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="testing-formulas-using-variables-defined-for-multiple-periods">
+<h3>Testing formulas using variables defined for multiple periods<a class="headerlink" href="#testing-formulas-using-variables-defined-for-multiple-periods" title="Permalink to this headline">¶</a></h3>
 <p>Input or output variables can be defined for multiple periods by giving an associated array
 which keys are a period expression and values are the value for that period.</p>
 <p>Values can be arithmetic expressions too.</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">individus</span><span class="p">:</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">individus</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">salaire_de_base</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="nt">2013-01</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">35 * 52 / 12 * 9</span><span class="w"></span>
 <span class="w">      </span><span class="nt">2013-02</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">35 * 52 / 12 * 9</span><span class="w"></span>
 <span class="w">      </span><span class="nt">2013-03</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">35 * 52 / 12 * 9</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="testing-a-variable-using-a-reform">
-<span id="testing-a-variable-using-a-reform"></span><h3>Testing a variable using a reform<a class="headerlink" href="#testing-a-variable-using-a-reform" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="reforms.html"><span class="doc">Reforms</span></a> can be applied to the baseline tax and benefit system, in the reforms key, as a list.</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Combination</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">reforms&quot;</span><span class="w"></span>
+</section>
+<section id="testing-a-variable-using-a-reform">
+<h3>Testing a variable using a reform<a class="headerlink" href="#testing-a-variable-using-a-reform" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="reforms.html"><span class="doc std std-doc">Reforms</span></a> can be applied to the baseline tax and benefit system, in the reforms key, as a list.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Combination</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">reforms&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">reforms</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">module.of.first_reform</span><span class="w"></span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">module.of.second_reform</span><span class="w"></span>
 </pre></div>
 </div>
 <p>You can find examples of YAML tests of tax and benefit systems with reforms applied on the <a class="reference external" href="https://github.com/openfisca/country-template/tree/master/openfisca_country_template/tests/reforms">country template</a>.</p>
-</div>
-</div>
-<div class="section" id="running-a-test">
-<span id="running-a-test"></span><h2>Running a test<a class="headerlink" href="#running-a-test" title="Permalink to this headline">¶</a></h2>
-<p>To run YAML tests, use the command line tool <code class="docutils literal"><span class="pre">openfisca</span> <span class="pre">test</span></code>, documented <a class="reference external" href="../openfisca-python-api/openfisca_test.html">here</a>:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>openfisca <span class="nb">test</span> path/to/file.yaml
+</section>
+</section>
+<section id="running-a-test">
+<h2>Running a test<a class="headerlink" href="#running-a-test" title="Permalink to this headline">¶</a></h2>
+<p>To run YAML tests, use the command line tool <code class="docutils literal notranslate"><span class="pre">openfisca</span> <span class="pre">test</span></code>, documented <a class="reference internal" href="../openfisca-python-api/openfisca_test.html"><span class="doc std std-doc">here</span></a>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>openfisca <span class="nb">test</span> path/to/file.yaml
 </pre></div>
 </div>
-</div>
-<div class="section" id="next-steps">
-<span id="next-steps"></span><h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
-<p>Other kinds of tests exist, see <a class="reference internal" href="../contribute/tests.html"><span class="doc">contribute/tests</span></a>.</p>
-</div>
-</div>
+</section>
+<section id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>Other kinds of tests exist, see <a class="reference internal" href="../contribute/tests.html"><span class="doc std std-doc">contribute/tests</span></a>.</p>
+</section>
+</section>
 
 
           </div>
@@ -356,7 +346,8 @@ which keys are a period expression and values are the value for that period.</p>
           <a href="inferences.html" title="Inferences"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-code"></i> From law to code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i class="fas fa-code"></i> From law to code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Writing YAML tests</a></li> 
       </ul>
     </div>
 <script type="text/javascript">
