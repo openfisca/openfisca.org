@@ -123,9 +123,12 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.parameters.parameter</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">typing</span>
 
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">commons</span><span class="p">,</span> <span class="n">periods</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="kn">import</span> <span class="n">ParameterParsingError</span>
@@ -133,14 +136,18 @@
 
 
 <div class="viewcode-block" id="Parameter"><a class="viewcode-back" href="../../../openfisca-python-api/parameters.html#openfisca_core.parameters.Parameter">[docs]</a><span class="k">class</span> <span class="nc">Parameter</span><span class="p">(</span><span class="n">AtInstantLike</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A parameter of the legislation. Parameters can change over time.</span>
+    <span class="sd">&quot;&quot;&quot;A parameter of the legislation.</span>
 
-<span class="sd">    :param string name: Name of the parameter, e.g. &quot;taxes.some_tax.some_param&quot;</span>
-<span class="sd">    :param dict data: Data loaded from a YAML file.</span>
-<span class="sd">    :param string file_path: File the parameter was loaded from.</span>
-<span class="sd">    :param string documentation: Documentation describing parameter usage and context.</span>
+<span class="sd">    Parameters can change over time.</span>
 
+<span class="sd">    Attributes:</span>
+<span class="sd">        values_list: List of the values, in reverse chronological order.</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        name: Name of the parameter, e.g. &quot;taxes.some_tax.some_param&quot;.</span>
+<span class="sd">        data: Data loaded from a YAML file.</span>
+<span class="sd">        file_path: File the parameter was loaded from.</span>
 
 <span class="sd">    Instantiate a parameter without metadata:</span>
 
@@ -159,18 +166,15 @@
 <span class="sd">                }</span>
 <span class="sd">            })</span>
 
-<span class="sd">    .. attribute:: values_list</span>
-
-<span class="sd">       List of the values, in reverse chronological order</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">file_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">file_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">file_path</span>
         <span class="n">helpers</span><span class="o">.</span><span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data_type</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">values_history</span> <span class="o">=</span> <span class="bp">self</span>  <span class="c1"># Only for backward compatibility</span>
 
         <span class="c1"># Normal parameter declaration: the values are declared under the &#39;values&#39; key: parse the description and metadata.</span>
@@ -210,7 +214,7 @@
             <span class="n">value_at_instant</span> <span class="o">=</span> <span class="n">ParameterAtInstant</span><span class="p">(</span><span class="n">value_name</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">instant_info</span><span class="p">,</span> <span class="n">file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
             <span class="n">values_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value_at_instant</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">ParameterAtInstant</span><span class="p">]</span> <span class="o">=</span> <span class="n">values_list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ParameterAtInstant</span><span class="p">]</span> <span class="o">=</span> <span class="n">values_list</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>

@@ -158,7 +158,8 @@
 <dd><p>A modified TaxBenefitSystem</p>
 <p>All reforms must subclass <cite>Reform</cite> and implement a method <cite>apply()</cite>.</p>
 <p>In this method, the reform can add or replace variables and call <cite>modify_parameters</cite> to modify the parameters of the legislation.</p>
-<p>Example:</p>
+<blockquote>
+<div><p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">reforms</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="kn">import</span> <span class="n">load_parameter_file</span>
 <span class="go">&gt;&gt;&gt;</span>
@@ -179,16 +180,17 @@
 <span class="gp">&gt;&gt;&gt; </span>       <span class="bp">self</span><span class="o">.</span><span class="n">modify_parameters</span><span class="p">(</span><span class="n">modifier_function</span> <span class="o">=</span> <span class="n">modify_my_parameters</span><span class="p">)</span>
 </pre></div>
 </div>
+</div></blockquote>
 <dl class="method">
 <dt id="openfisca_core.reforms.Reform.modify_parameters">
 <code class="descname">modify_parameters</code><span class="sig-paren">(</span><em>modifier_function</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/reforms/reform.html#Reform.modify_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openfisca_core.reforms.Reform.modify_parameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make modifications on the parameters of the legislation</p>
+<dd><p>Make modifications on the parameters of the legislation.</p>
 <p>Call this function in <cite>apply()</cite> if the reform asks for legislation parameter modifications.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>modifier_function</strong> &#8211; A function that takes an object of type <a class="reference internal" href="parameters.html#openfisca_core.parameters.ParameterNode" title="openfisca_core.parameters.ParameterNode"><code class="xref any py py-class docutils literal"><span class="pre">ParameterNode</span></code></a> and should return an object of the same type.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>modifier_function</strong> &#8211; A function that takes a <a class="reference internal" href="parameters.html#openfisca_core.parameters.ParameterNode" title="openfisca_core.parameters.ParameterNode"><code class="xref py py-obj docutils literal"><span class="pre">ParameterNode</span></code></a> and should return an object of the same type.</td>
 </tr>
 </tbody>
 </table>
