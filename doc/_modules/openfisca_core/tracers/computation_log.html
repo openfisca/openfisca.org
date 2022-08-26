@@ -143,64 +143,22 @@
 
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">max_line_width</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">_get_node_log</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">lines</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">node</span><span class="p">:</span> <span class="n">tracers</span><span class="o">.</span><span class="n">TraceNode</span><span class="p">,</span>
-            <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">aggregate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="n">aggregate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="n">max_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-
-        <span class="k">def</span> <span class="nf">print_line</span><span class="p">(</span><span class="n">depth</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">tracers</span><span class="o">.</span><span class="n">TraceNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-            <span class="n">indent</span> <span class="o">=</span> <span class="s1">&#39;  &#39;</span> <span class="o">*</span> <span class="n">depth</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">value</span>
-
-            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">formatted_value</span> <span class="o">=</span> <span class="s2">&quot;{&#39;avg&#39;: &#39;?&#39;, &#39;max&#39;: &#39;?&#39;, &#39;min&#39;: &#39;?&#39;}&quot;</span>
-
-            <span class="k">elif</span> <span class="n">aggregate</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">formatted_value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">({</span>
-                        <span class="s1">&#39;avg&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
-                        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
-                        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
-                        <span class="p">})</span>
-
-                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-                    <span class="n">formatted_value</span> <span class="o">=</span> <span class="s2">&quot;{&#39;avg&#39;: &#39;?&#39;, &#39;max&#39;: &#39;?&#39;, &#39;min&#39;: &#39;?&#39;}&quot;</span>
-
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">formatted_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">indent</span><span class="si">}{</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">period</span><span class="si">}</span><span class="s2">&gt; &gt;&gt; </span><span class="si">{</span><span class="n">formatted_value</span><span class="si">}</span><span class="s2">&quot;</span>
-
-        <span class="n">node_log</span> <span class="o">=</span> <span class="p">[</span><span class="n">print_line</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">node</span><span class="p">)]</span>
-
-        <span class="n">children_logs</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_get_node_log</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">child</span>
-            <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span>
-            <span class="p">]</span>
-
-        <span class="k">return</span> <span class="n">node_log</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flatten</span><span class="p">(</span><span class="n">children_logs</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_flatten</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">list_of_lists</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
-            <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">_list</span> <span class="ow">in</span> <span class="n">list_of_lists</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_list</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="nf">lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span>
 
         <span class="n">lines_by_tree</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_get_node_log</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_node_log</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">node</span>
             <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_full_tracer</span><span class="o">.</span><span class="n">trees</span>
             <span class="p">]</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flatten</span><span class="p">(</span><span class="n">lines_by_tree</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ComputationLog.print_log"><a class="viewcode-back" href="../../../openfisca-python-api/tracer.html#openfisca_core.tracers.ComputationLog.print_log">[docs]</a>    <span class="k">def</span> <span class="nf">print_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aggregate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="ComputationLog.print_log"><a class="viewcode-back" href="../../../openfisca-python-api/tracer.html#openfisca_core.tracers.ComputationLog.print_log">[docs]</a>    <span class="k">def</span> <span class="nf">print_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aggregate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">max_depth</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print the computation log of a simulation.</span>
 
@@ -211,9 +169,70 @@
 <span class="sd">        average value of each computed vector.</span>
 
 <span class="sd">        This mode is more suited for simulations on a large population.</span>
+
+<span class="sd">        If ``max_depth`` is ``None`` (default), print the entire computation.</span>
+
+<span class="sd">        If ``max_depth`` is set, for example to ``3``, only print computed</span>
+<span class="sd">        vectors up to a depth of ``max_depth``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">(</span><span class="n">aggregate</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>  <span class="c1"># noqa T001</span></div></div>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">(</span><span class="n">aggregate</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>  <span class="c1"># noqa T001</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_node_log</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">node</span><span class="p">:</span> <span class="n">tracers</span><span class="o">.</span><span class="n">TraceNode</span><span class="p">,</span>
+            <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">aggregate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="n">max_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+            <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+        <span class="k">if</span> <span class="n">max_depth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">depth</span> <span class="o">&gt;</span> <span class="n">max_depth</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+
+        <span class="n">node_log</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_print_line</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">)]</span>
+
+        <span class="n">children_logs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_node_log</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">child</span>
+            <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span>
+            <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">node_log</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flatten</span><span class="p">(</span><span class="n">children_logs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_print_line</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">node</span><span class="p">:</span> <span class="n">tracers</span><span class="o">.</span><span class="n">TraceNode</span><span class="p">,</span>
+            <span class="n">aggregate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="n">max_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+            <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">indent</span> <span class="o">=</span> <span class="s1">&#39;  &#39;</span> <span class="o">*</span> <span class="n">depth</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">formatted_value</span> <span class="o">=</span> <span class="s2">&quot;{&#39;avg&#39;: &#39;?&#39;, &#39;max&#39;: &#39;?&#39;, &#39;min&#39;: &#39;?&#39;}&quot;</span>
+
+        <span class="k">elif</span> <span class="n">aggregate</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">formatted_value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">({</span>
+                    <span class="s1">&#39;avg&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
+                    <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
+                    <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
+                    <span class="p">})</span>
+
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="n">formatted_value</span> <span class="o">=</span> <span class="s2">&quot;{&#39;avg&#39;: &#39;?&#39;, &#39;max&#39;: &#39;?&#39;, &#39;min&#39;: &#39;?&#39;}&quot;</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">formatted_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">indent</span><span class="si">}{</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">period</span><span class="si">}</span><span class="s2">&gt; &gt;&gt; </span><span class="si">{</span><span class="n">formatted_value</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_flatten</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">lists</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+            <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">list_</span> <span class="ow">in</span> <span class="n">lists</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_</span><span class="p">]</span></div>
 </pre></div>
 
           </div>
