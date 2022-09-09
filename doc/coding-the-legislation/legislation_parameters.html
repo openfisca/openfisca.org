@@ -106,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i class="fas fa-cloud"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i class="fas fa-hands-helping"></i> Find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../licence.html"><i class="fab fa-creative-commons"></i> Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
 </ul>
 
@@ -230,7 +230,7 @@
 <section id="naming-conventions-and-reserved-words">
 <h3>Naming conventions and reserved words<a class="headerlink" href="#naming-conventions-and-reserved-words" title="Permalink to this headline">¶</a></h3>
 <p>Names should begin with a lowercase letter and should contain only lowercase letters and the underscore (<code class="docutils literal notranslate"><span class="pre">_</span></code>).</p>
-<p>The following keywords are reserved and should not be used as names : <code class="docutils literal notranslate"><span class="pre">description</span></code>, <code class="docutils literal notranslate"><span class="pre">reference</span></code>, <code class="docutils literal notranslate"><span class="pre">values</span></code>, <code class="docutils literal notranslate"><span class="pre">brackets</span></code>.</p>
+<p>The following keywords are reserved and should not be used as names: <code class="docutils literal notranslate"><span class="pre">description</span></code>, <code class="docutils literal notranslate"><span class="pre">reference</span></code>, <code class="docutils literal notranslate"><span class="pre">values</span></code>, <code class="docutils literal notranslate"><span class="pre">brackets</span></code>.</p>
 <p>YAML parameter files should not be name <code class="docutils literal notranslate"><span class="pre">index.yaml</span></code>.</p>
 </section>
 <section id="advanced-uses">
@@ -310,7 +310,7 @@
 </ul>
 </li>
 </ul>
-<p>Example: <a class="reference external" href="https://fr.openfisca.org/legislation/impot_revenu.bareme">the french tax scale on income</a></p>
+<p>Example: <a class="reference external" href="https://fr.openfisca.org/legislation/impot_revenu.bareme">the French tax scale on income</a></p>
 </section>
 <section id="computing-a-parameter-that-depends-on-a-variable-fancy-indexing">
 <h4>Computing a parameter that depends on a variable (fancy indexing)<a class="headerlink" href="#computing-a-parameter-that-depends-on-a-variable-fancy-indexing" title="Permalink to this headline">¶</a></h4>
@@ -384,7 +384,7 @@
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">parameters(period).housing_benefit[zone]</span></code> return the parameters for the zone corresponding to the household.</p>
-<p>If there are many households in your simulation, this parameter will be <strong>vectorial</strong> : it may have a different value for each household of your entity.</p>
+<p>If there are many households in your simulation, this parameter will be <strong>vectorial</strong>: it may have a different value for each household of your entity.</p>
 <p>To be able to use this notation, all the children node of the parameter node <code class="docutils literal notranslate"><span class="pre">housing_benefit</span></code> must be <strong>homogenous</strong>. In the previous example, <code class="docutils literal notranslate"><span class="pre">housing_benefit.zone_1</span></code>, <code class="docutils literal notranslate"><span class="pre">housing_benefit.zone_2</span></code>, <code class="docutils literal notranslate"><span class="pre">housing_benefit.zone_3</span></code> are homogenous, as they have the same subnodes.</p>
 <p>However, let’s imagine that <code class="docutils literal notranslate"><span class="pre">housing_benefit.yaml</span></code> had another subnode named <code class="docutils literal notranslate"><span class="pre">coeff_furnished</span></code>, which described a coefficient to apply to the benefit is the accomodation is rented furnished:</p>
 <p><code class="docutils literal notranslate"><span class="pre">housing_benefit.yaml</span></code> content:</p>
@@ -429,7 +429,7 @@
 <h2>How to navigate the parameters in Python<a class="headerlink" href="#how-to-navigate-the-parameters-in-python" title="Permalink to this headline">¶</a></h2>
 <p>Set-up your python file by importing a <code class="docutils literal notranslate"><span class="pre">country</span> <span class="pre">package</span></code> and building the <code class="docutils literal notranslate"><span class="pre">tax</span> <span class="pre">and</span> <span class="pre">benefit</span> <span class="pre">system</span></code></p>
 <blockquote>
-<div><p>Example :</p>
+<div><p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openfisca_country_template</span>
 <span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">openfisca_country_template</span><span class="o">.</span><span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
 </pre></div>
@@ -439,7 +439,7 @@
 <h3>Access a parameter for all periods<a class="headerlink" href="#access-a-parameter-for-all-periods" title="Permalink to this headline">¶</a></h3>
 <p>To access a point in the parameter tree, call <code class="docutils literal notranslate"><span class="pre">tax_benefit_system.parameters</span></code></p>
 <blockquote>
-<div><p>Example :
+<div><p>Example:
 Access the <code class="docutils literal notranslate"><span class="pre">benefit</span></code> branch of the <code class="docutils literal notranslate"><span class="pre">openfisca-country-template</span></code> legislation</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">benefits</span>
 </pre></div>

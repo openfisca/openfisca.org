@@ -106,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i class="fas fa-cloud"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i class="fas fa-hands-helping"></i> Find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../licence.html"><i class="fab fa-creative-commons"></i> Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
 </ul>
 
@@ -235,7 +235,7 @@
 <section id="periods-in-variable-definitions">
 <h2>Periods in variable definitions<a class="headerlink" href="#periods-in-variable-definitions" title="Permalink to this headline">¶</a></h2>
 <p>With OpenFisca you can calculate variables such as <code class="docutils literal notranslate"><span class="pre">salary</span></code> that can change over time. You can also evaluate the impact of this <code class="docutils literal notranslate"><span class="pre">salary</span></code> on the <code class="docutils literal notranslate"><span class="pre">income_tax</span></code>.</p>
-<p>These variables can evolve through time at a diffent periodicity. Here for example, <code class="docutils literal notranslate"><span class="pre">salary</span></code> changes from month to month while the <code class="docutils literal notranslate"><span class="pre">income_tax</span></code> is calculated on a yearly basis.</p>
+<p>These variables can evolve through time at a different periodicity. Here for example, <code class="docutils literal notranslate"><span class="pre">salary</span></code> changes from month to month while the <code class="docutils literal notranslate"><span class="pre">income_tax</span></code> is calculated on a yearly basis.</p>
 <p>Therefore, all OpenFisca variables have a <code class="docutils literal notranslate"><span class="pre">definition_period</span></code> attribute:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">DAY</span></code>: The variable may have a different value each day.</p></li>
@@ -269,7 +269,7 @@
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">YEAR</span>
 
     <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>  <span class="c1"># period is a year because definition_period = YEAR</span>
-        <span class="n">salary_past_year</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>  <span class="c1"># salary is a montly variable. This will cause an error.</span>
+        <span class="n">salary_past_year</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>  <span class="c1"># salary is a monthly variable. This will cause an error.</span>
         <span class="o">...</span>
 </pre></div>
 </div>
@@ -375,7 +375,7 @@
 <h2>Automatically process variable inputs defined for periods not matching the <code class="docutils literal notranslate"><span class="pre">definition_period</span></code><a class="headerlink" href="#automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period" title="Permalink to this headline">¶</a></h2>
 <p>By default, when you provide a simulation input, you won’t be able to set a variable value for a period that doesn’t match its <code class="docutils literal notranslate"><span class="pre">definition_period</span></code>.</p>
 <p>For instance, if the <code class="docutils literal notranslate"><span class="pre">definition_period</span></code> of <code class="docutils literal notranslate"><span class="pre">salary</span></code> is <code class="docutils literal notranslate"><span class="pre">MONTH</span></code>, and you input a value for <code class="docutils literal notranslate"><span class="pre">salary</span></code> for <code class="docutils literal notranslate"><span class="pre">2015</span></code> or more than one month, an error will be raised.</p>
-<p>It is however possible to define an automatic behaviour to cast yearly inputs into monthy values. To do this, add a <code class="docutils literal notranslate"><span class="pre">set_input</span></code> class attribute to a variable.</p>
+<p>It is however possible to define an automatic behaviour to cast yearly inputs into monthly values. To do this, add a <code class="docutils literal notranslate"><span class="pre">set_input</span></code> class attribute to a variable.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">set_input</span> <span class="pre">=</span> <span class="pre">set_input_divide_by_period</span></code>: the 12 months are set equal to 1/12th of the input value,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">set_input</span> <span class="pre">=</span> <span class="pre">set_input_dispatch_by_period</span></code>: the 12 months are set equal to input value.</p></li>

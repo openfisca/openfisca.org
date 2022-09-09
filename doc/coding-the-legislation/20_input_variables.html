@@ -106,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i class="fas fa-cloud"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i class="fas fa-hands-helping"></i> Find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../licence.html"><i class="fab fa-creative-commons"></i> Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
 </ul>
 
@@ -208,7 +208,7 @@
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Legal housing situation of the household concerning their main residence&quot;</span>
 </pre></div>
 </div>
-<p>You can now use the enum in variable formulas !</p>
+<p>You can now use the enum in variable formulas!</p>
 <p>For instance, assuming the enumeration and the formula using it are defined in the same file:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">housing_tax</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
@@ -236,7 +236,7 @@
     <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">legislation</span><span class="p">):</span>
         <span class="n">accommodation_size</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;accomodation_size&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="n">housing_occupancy_status</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;housing_occupancy_status&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
-        <span class="n">HousingOccupancyStatus</span> <span class="o">=</span> <span class="n">housing_occupancy_status</span><span class="o">.</span><span class="n">possible_values</span>  <span class="c1"># &quot;Import&quot; the enum type. Careful: do not use python imports accross variables files: comparisons would not work !</span>
+        <span class="n">HousingOccupancyStatus</span> <span class="o">=</span> <span class="n">housing_occupancy_status</span><span class="o">.</span><span class="n">possible_values</span>  <span class="c1"># &quot;Import&quot; the enum type. Careful: do not use python imports accross variables files: comparisons would not work!</span>
         <span class="n">tenant</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_occupancy_status</span> <span class="o">==</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">tenant</span><span class="p">)</span>
         <span class="n">owner</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_occupancy_status</span> <span class="o">==</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">owner</span><span class="p">)</span>
 
