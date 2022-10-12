@@ -1,5 +1,6 @@
 ---
 title: "Mentions légales"
+url: "/fr/mentions-legales"
 layout: legal-notice
 editor:
   title: Éditeur

@@ -1,5 +1,6 @@
 ---
 title: "Cookies et option de retrait"
+url: "/fr/statistiques-d-usages"
 layout: tracking
 
 introduction: "Lorsque vous visitez ce site web, nous laissons un petit fichier texte (un \"cookie\") sur votre ordinateur. Cela nous permet de mesurer combien de visites nous avons et quelles sont les pages les plus regardées."
