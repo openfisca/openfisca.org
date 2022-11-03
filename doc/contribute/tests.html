@@ -143,29 +143,30 @@
 <section id="run-tests">
 <h2>Run tests<a class="headerlink" href="#run-tests" title="Permalink to this headline">¶</a></h2>
 <p>OpenFisca uses <a class="reference external" href="https://nose.readthedocs.org/">nose</a> to run its unit tests. Here are some useful commands.</p>
-<ul>
-<li><p>Run the whole test suite:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">test</span>
-</pre></div>
-</div>
-<p>which is available at least in Core, France and Web-API repositories.</p>
-</li>
-<li><p>Run a specific test:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nosetests</span> <span class="n">openfisca_france</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">test_parameters</span><span class="o">.</span><span class="n">py</span>
-</pre></div>
-</div>
-</li>
-<li><p>Hide log of failing test:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nosetests</span> <span class="o">--</span><span class="n">nologcapture</span> <span class="n">openfisca_france</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">test_parameters</span><span class="o">.</span><span class="n">py</span>
-</pre></div>
-</div>
-</li>
-<li><p>Display log of successful test:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nosetests</span> <span class="o">--</span><span class="n">debug</span><span class="o">=</span><span class="n">openfisca_core</span> <span class="n">openfisca_france</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">test_parameters</span><span class="o">.</span><span class="n">py</span>
-</pre></div>
-</div>
-</li>
+<ul class="simple">
+<li><p>Run the whole test suite:</p></li>
 </ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make <span class="nb">test</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Run a specific test:</p></li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>nosetests openfisca_france/tests/test_parameters.py
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Hide log of failing test:</p></li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>nosetests --nologcapture openfisca_france/tests/test_parameters.py
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Display log of successful test:</p></li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>nosetests --debug<span class="o">=</span>openfisca_core openfisca_france/tests/test_parameters.py
+</pre></div>
+</div>
 </section>
 <section id="yaml-tests">
 <h2>YAML tests<a class="headerlink" href="#yaml-tests" title="Permalink to this headline">¶</a></h2>
@@ -174,12 +175,12 @@
 <section id="ipdb-debugger">
 <h2>ipdb debugger<a class="headerlink" href="#ipdb-debugger" title="Permalink to this headline">¶</a></h2>
 <p>If a test fails, you can execute it with the <a class="reference external" href="https://nose.readthedocs.org/en/latest/plugins/debug.html">debug</a> nose plugin:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nosetests --pdb openfisca_core/tests/test_tax_scales.py
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>nosetests --pdb openfisca_core/tests/test_tax_scales.py
 </pre></div>
 </div>
 <p>You’ll be dropped in the <code class="docutils literal notranslate"><span class="pre">pdf</span></code> debugger shell when an error occurs.</p>
 <p>You can <a class="reference external" href="https://nose.readthedocs.org/en/latest/usage.html#selecting-tests">specify the exact test to launch</a>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nosetests --pdb openfisca_core/tests/test_tax_scales.py:test_linear_average_rate_tax_scale
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>nosetests --pdb openfisca_core/tests/test_tax_scales.py:test_linear_average_rate_tax_scale
 </pre></div>
 </div>
 <blockquote>
@@ -190,7 +191,7 @@ See also the <code class="docutils literal notranslate"><span class="pre">--ipdb
 </div></blockquote>
 <p>In case you want to set a breakpoint manually, in order to enter the debugger shell before an errors occurs,
 copy-paste this line in your code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nose.tools</span><span class="p">;</span> <span class="n">nose</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">set_trace</span><span class="p">();</span> <span class="kn">import</span> <span class="nn">ipdb</span><span class="p">;</span> <span class="n">ipdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nose.tools</span><span class="p">;</span> <span class="n">nose</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">set_trace</span><span class="p">();</span> <span class="kn">import</span> <span class="nn">ipdb</span><span class="p">;</span> <span class="n">ipdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>This needs <a class="reference external" href="https://github.com/gotcha/ipdb">ipdb</a> to be installed.</p>

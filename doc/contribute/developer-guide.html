@@ -146,18 +146,18 @@
 <section id="debugging-code">
 <h2>Debugging code<a class="headerlink" href="#debugging-code" title="Permalink to this headline">¶</a></h2>
 <p>If you install <a class="reference external" href="https://github.com/gotcha/ipdb">ipdb</a> (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">ipdb</span></code>) the API server will drop you into a debugger when an exception occurs:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ paster serve --reload development-france.ini
-Starting server in PID 3815.
-serving on 0.0.0.0:2000 view at http://127.0.0.1:2000
-model.py(52)get_cached_composed_reform()
-     51
----&gt; 52     full_key = &#39;.&#39;.join(
-     53         tax_benefit_system.full_key + reform_keys
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ paster serve --reload development-france.ini
+Starting server <span class="k">in</span> PID <span class="m">3815</span>.
+serving on <span class="m">0</span>.0.0.0:2000 view at http://127.0.0.1:2000
+model.py<span class="o">(</span><span class="m">52</span><span class="o">)</span>get_cached_composed_reform<span class="o">()</span>
+     <span class="m">51</span>
+---&gt; <span class="m">52</span>     <span class="nv">full_key</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>.join<span class="o">(</span>
+     <span class="m">53</span>         tax_benefit_system.full_key + reform_keys
 
 ipdb&gt; tax_benefit_system
 &lt;openfisca_web_api.environment.TaxBenefitSystem object at 0x7f7eb8e88d10&gt;
 ipdb&gt; tax_benefit_system.full_key
-u&#39;paris&#39;
+u<span class="s1">&#39;paris&#39;</span>
 ipdb&gt;
 </pre></div>
 </div>
@@ -180,7 +180,7 @@ To prevent it to be overwritten, generate a dynamic name with <a class="referenc
 <p>Then you can use the <a class="reference external" href="http://www.vrplumber.com/programming/runsnakerun/">runsnakerun</a> GUI to inspect the profile data.</p>
 <blockquote>
 <div><p>Under Debian GNU/Linux:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>aptitude install runsnakerun
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>aptitude install runsnakerun
 </pre></div>
 </div>
 </div></blockquote>

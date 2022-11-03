@@ -140,7 +140,7 @@
 <p>A test case describes persons and other entities with their variables values.
 It’s the usual solution to define a small number of situations.</p>
 <p>Here is an example of test case (in Python):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">BASIC_TEST_CASE</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">BASIC_TEST_CASE</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}},</span>
     <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;h1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
@@ -159,7 +159,7 @@ For example, <code class="docutils literal notranslate"><span class="pre">Ari</s
 </ul>
 <p>Let’s say that we want to add a salary to <code class="docutils literal notranslate"><span class="pre">Ari</span></code> and a <code class="docutils literal notranslate"><span class="pre">rent</span></code> to <code class="docutils literal notranslate"><span class="pre">h1</span></code>.
 Here is the updated test case:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_CASE</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_CASE</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;salary&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;2011-01&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">}</span>
@@ -196,7 +196,7 @@ You have to follow these steps:</p>
 <li><p>Calculate the <a class="reference external" href="https://demo.openfisca.org/legislation/housing_allowance">housing_allowance</a> and print its value for every test case household.</p></li>
 </ol>
 <p>Which gives:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="kn">import</span> <span class="n">SimulationBuilder</span>
 <span class="kn">from</span> <span class="nn">openfisca_country_template</span> <span class="kn">import</span> <span class="n">CountryTaxBenefitSystem</span>
@@ -232,19 +232,19 @@ This data could come from a survey with aggregated data, data files extracted fr
 <div><p>Here is a <a class="reference external" href="https://www.casd.eu/en/source/tax-and-social-incomes-survey/">survey example</a>. It typically goes from 50 000 households to 500 000.</p>
 </div></blockquote>
 <p>Here is a minimal example of data (in CSV format):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">person_id</span><span class="p">,</span><span class="n">household_id</span><span class="p">,</span><span class="n">person_salary</span><span class="p">,</span><span class="n">person_age</span>
-<span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="mi">2694</span><span class="p">,</span><span class="mi">40</span>
-<span class="mi">2</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="mi">2720</span><span class="p">,</span><span class="mi">43</span>
-<span class="mi">3</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">3865</span><span class="p">,</span><span class="mi">45</span>
-<span class="mi">4</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">1300</span><span class="p">,</span><span class="mi">23</span>
-<span class="mi">5</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span>
-<span class="mi">6</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">14</span>
-<span class="mi">7</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="mi">2884</span><span class="p">,</span><span class="mi">44</span>
-<span class="mi">12</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">38</span>
-<span class="mi">8</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="mi">3386</span><span class="p">,</span><span class="mi">27</span>
-<span class="mi">9</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="mi">2929</span><span class="p">,</span><span class="mi">28</span>
-<span class="mi">10</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span>
-<span class="mi">11</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="mi">1600</span><span class="p">,</span><span class="mi">35</span>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>person_id,household_id,person_salary,person_age
+1,a,2694,40
+2,a,2720,43
+3,b,3865,45
+4,b,1300,23
+5,c,0,12
+6,c,0,14
+7,c,2884,44
+12,e,1200,38
+8,d,3386,27
+9,d,2929,28
+10,e,0,10
+11,e,1600,35
 </pre></div>
 </div>
 <p>As for the <em>test case</em> content, you will need the following information:</p>
@@ -275,31 +275,31 @@ the reference period isn’t in the CSV file but it might, for example, come fro
 <h4>Application: calculate persons income tax from a CSV file<a class="headerlink" href="#application-calculate-persons-income-tax-from-a-csv-file" title="Permalink to this headline">¶</a></h4>
 <p>Let’s say you are using the <a class="reference external" href="https://github.com/openfisca/country-template">country-template</a>, which describes the legislation of a yet to be country.</p>
 <p>Let’s also say you have the following <code class="docutils literal notranslate"><span class="pre">data.csv</span></code> and that you want to calculate <a class="reference external" href="https://demo.openfisca.org/legislation/income_tax">income_tax</a> for all persons:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">person_id</span><span class="p">,</span><span class="n">person_salary</span><span class="p">,</span><span class="n">person_age</span>
-<span class="mi">1</span><span class="p">,</span><span class="mi">2694</span><span class="p">,</span><span class="mi">40</span>
-<span class="mi">2</span><span class="p">,</span><span class="mi">2720</span><span class="p">,</span><span class="mi">43</span>
-<span class="mi">3</span><span class="p">,</span><span class="mi">3865</span><span class="p">,</span><span class="mi">45</span>
-<span class="mi">4</span><span class="p">,</span><span class="mi">1300</span><span class="p">,</span><span class="mi">23</span>
-<span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span>
-<span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">14</span>
-<span class="mi">7</span><span class="p">,</span><span class="mi">2884</span><span class="p">,</span><span class="mi">44</span>
-<span class="mi">12</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">38</span>
-<span class="mi">8</span><span class="p">,</span><span class="mi">3386</span><span class="p">,</span><span class="mi">27</span>
-<span class="mi">9</span><span class="p">,</span><span class="mi">2929</span><span class="p">,</span><span class="mi">28</span>
-<span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span>
-<span class="mi">11</span><span class="p">,</span><span class="mi">1600</span><span class="p">,</span><span class="mi">35</span>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>person_id,person_salary,person_age
+1,2694,40
+2,2720,43
+3,3865,45
+4,1300,23
+5,0,12
+6,0,14
+7,2884,44
+12,1200,38
+8,3386,27
+9,2929,28
+10,0,10
+11,1600,35
 </pre></div>
 </div>
 <p>In the following example, we will use the <a class="reference external" href="https://pandas.pydata.org">pandas</a> library to access the data.</p>
 <ol class="arabic">
 <li><p>Install the required libraries, by running in your console:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ python --version <span class="c1"># Python 3.7.0 or greater should be installed on your computer</span>
-$ pip install --upgrade pip openfisca_country_template pandas
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python --version <span class="c1"># Python 3.7.0 or greater should be installed on your computer</span>
+pip install --upgrade pip openfisca_country_template pandas
 </pre></div>
 </div>
 </li>
 <li><p>Load the <code class="docutils literal notranslate"><span class="pre">country-template</span></code> legislation and the content of the <code class="docutils literal notranslate"><span class="pre">data.csv</span></code> file with the <a class="reference external" href="https://pandas.pydata.org">pandas</a> library:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
 <span class="kn">from</span> <span class="nn">openfisca_country_template</span> <span class="kn">import</span> <span class="n">CountryTaxBenefitSystem</span>
 
 <span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
@@ -309,7 +309,7 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </pre></div>
 </div>
 <p>You can now access the <code class="docutils literal notranslate"><span class="pre">data.person_salary</span></code> column values and get:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">person_salary</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">person_salary</span><span class="p">)</span>
 
 <span class="go">0     2694</span>
 <span class="go">1     2720</span>
@@ -328,7 +328,7 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </div>
 </li>
 <li><p>Build a simulation according to your data’s length with <code class="docutils literal notranslate"><span class="pre">SimulationBuilder</span></code> and configure the simulation:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="kn">import</span> <span class="n">SimulationBuilder</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="kn">import</span> <span class="n">SimulationBuilder</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 
 <span class="c1"># ...step 2 code...</span>
@@ -342,11 +342,11 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </li>
 </ol>
 <p>You are all set! You can now calculate the <a class="reference external" href="https://demo.openfisca.org/legislation/income_tax">income_tax</a> variable for each person of your <code class="docutils literal notranslate"><span class="pre">data.csv</span></code> file for the same period:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">income_tax</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;income_tax&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">income_tax</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;income_tax&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">income_tax</span></code> is an instance of <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> as you can see with:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">income_tax</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">income_tax</span><span class="p">)</span>
 
 <span class="go">array([404.1     408.00003      579.75    195.00002   0.        0.      432.6</span>
 <span class="go">       1.        507.90002      439.35      0.      240.00002],</span>
@@ -354,13 +354,13 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </pre></div>
 </div>
 <p>And, persons’ order is kept:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">person_id</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">person_id</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 
 <span class="go">array([ 1  2  3  4  5  6  7 12  8  9 10 11])</span>
 </pre></div>
 </div>
 <p>Thus, you can get the calculated <code class="docutils literal notranslate"><span class="pre">income_tax</span></code> of one person. For example, get its value for the 8th person in the list with:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">income_tax</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>  <span class="c1"># person_id == 12</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">income_tax</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>  <span class="c1"># person_id == 12</span>
 
 <span class="go">180.0</span>
 </pre></div>
@@ -372,29 +372,29 @@ $ pip install --upgrade pip openfisca_country_template pandas
 <p>Let’s say that our persons and households lists are defined in distinct files:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">data_persons.csv</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">person_id</span><span class="p">,</span><span class="n">household_id</span><span class="p">,</span><span class="n">person_role_in_household</span><span class="p">,</span><span class="n">person_salary</span><span class="p">,</span><span class="n">person_age</span>
-<span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">first_parent</span><span class="p">,</span><span class="mi">2694</span><span class="p">,</span><span class="mi">40</span>
-<span class="mi">2</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">second_parent</span><span class="p">,</span><span class="mi">2720</span><span class="p">,</span><span class="mi">43</span>
-<span class="mi">3</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">first_parent</span><span class="p">,</span><span class="mi">3865</span><span class="p">,</span><span class="mi">45</span>
-<span class="mi">4</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">child</span><span class="p">,</span><span class="mi">1300</span><span class="p">,</span><span class="mi">23</span>
-<span class="mi">5</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">child</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span>
-<span class="mi">6</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">child</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">14</span>
-<span class="mi">7</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">first_parent</span><span class="p">,</span><span class="mi">2884</span><span class="p">,</span><span class="mi">44</span>
-<span class="mi">12</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">second_parent</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">38</span>
-<span class="mi">8</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">first_parent</span><span class="p">,</span><span class="mi">3386</span><span class="p">,</span><span class="mi">27</span>
-<span class="mi">9</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">second_parent</span><span class="p">,</span><span class="mi">2929</span><span class="p">,</span><span class="mi">28</span>
-<span class="mi">10</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">child</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span>
-<span class="mi">11</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">unknown</span><span class="p">,</span><span class="mi">1600</span><span class="p">,</span><span class="mi">35</span>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>person_id,household_id,person_role_in_household,person_salary,person_age
+1,a,first_parent,2694,40
+2,a,second_parent,2720,43
+3,b,first_parent,3865,45
+4,b,child,1300,23
+5,c,child,0,12
+6,c,child,0,14
+7,c,first_parent,2884,44
+12,e,second_parent,1200,38
+8,d,first_parent,3386,27
+9,d,second_parent,2929,28
+10,e,child,0,10
+11,e,unknown,1600,35
 </pre></div>
 </div>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">data_households.csv</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">household_id</span><span class="p">,</span><span class="n">rent</span><span class="p">,</span><span class="n">accommodation_size</span>
-<span class="n">b</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">64</span>
-<span class="n">a</span><span class="p">,</span><span class="mi">700</span><span class="p">,</span><span class="mi">39</span>
-<span class="n">d</span><span class="p">,</span><span class="mi">750</span><span class="p">,</span><span class="mi">31</span>
-<span class="n">e</span><span class="p">,</span><span class="mi">840</span><span class="p">,</span><span class="mi">37</span>
-<span class="n">c</span><span class="p">,</span><span class="mi">1100</span><span class="p">,</span><span class="mi">68</span>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>household_id,rent,accommodation_size
+b,1200,64
+a,700,39
+d,750,31
+e,840,37
+c,1100,68
 </pre></div>
 </div>
 </li>
@@ -402,13 +402,13 @@ $ pip install --upgrade pip openfisca_country_template pandas
 <p>where <code class="docutils literal notranslate"><span class="pre">household_id</span></code> is used as pivot item linking these files contents.</p>
 <ol class="arabic">
 <li><p>Install the required libraries, by running in your console:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ python --version <span class="c1"># Python 3.7.0 or greater should be installed on your computer</span>
-$ pip install --upgrade pip openfisca_country_template pandas
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python --version <span class="c1"># Python 3.7.0 or greater should be installed on your computer</span>
+pip install --upgrade pip openfisca_country_template pandas
 </pre></div>
 </div>
 </li>
 <li><p>Load the <code class="docutils literal notranslate"><span class="pre">country-template</span></code> legislation and the content of the CSV files with the <a class="reference external" href="https://pandas.pydata.org">pandas</a> library:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
 <span class="kn">from</span> <span class="nn">openfisca_country_template</span> <span class="kn">import</span> <span class="n">CountryTaxBenefitSystem</span>
 
 <span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
@@ -418,13 +418,13 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </pre></div>
 </div>
 <p>You can now access the entity identifiers columns values:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">persons_ids</span> <span class="o">=</span> <span class="n">data_persons</span><span class="o">.</span><span class="n">person_id</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">persons_ids</span> <span class="o">=</span> <span class="n">data_persons</span><span class="o">.</span><span class="n">person_id</span>
 <span class="n">households_ids</span> <span class="o">=</span> <span class="n">data_households</span><span class="o">.</span><span class="n">household_id</span>
 </pre></div>
 </div>
 </li>
 <li><p>Initialise a simulation builder with the <code class="docutils literal notranslate"><span class="pre">Person</span></code> entity. All you need is the list of persons identifiers:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="kn">import</span> <span class="n">SimulationBuilder</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="kn">import</span> <span class="n">SimulationBuilder</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">numpy</span>
 
 <span class="c1"># ...step 2 code...</span>
@@ -438,7 +438,7 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </div>
 </li>
 <li><p>Configure the simulation builder with your group entity <code class="docutils literal notranslate"><span class="pre">Household</span></code>. All you need here is the list of households identifiers and the role of each person member of the households:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...step 3 code...</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...step 3 code...</span>
 
 <span class="c1"># Instanciate the household entity:</span>
 <span class="n">households_ids</span> <span class="o">=</span> <span class="n">data_households</span><span class="o">.</span><span class="n">household_id</span>
@@ -452,7 +452,7 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </div>
 </li>
 <li><p>Create a simulation from the configured builder and set other inputs to your calculation like <code class="docutils literal notranslate"><span class="pre">salary</span></code> values:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span>
 
 <span class="n">period</span> <span class="o">=</span> <span class="s1">&#39;2019-03&#39;</span>
 <span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">data_persons</span><span class="o">.</span><span class="n">person_salary</span><span class="p">)</span>
@@ -461,7 +461,7 @@ $ pip install --upgrade pip openfisca_country_template pandas
 </li>
 </ol>
 <p>You are all set! You can now calculate the <a class="reference external" href="https://demo.openfisca.org/legislation/total_taxes">total_taxes</a> variable for each household of your <code class="docutils literal notranslate"><span class="pre">data_households.csv</span></code> file and the same period:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">total_taxes</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;total_taxes&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">total_taxes</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;total_taxes&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 </pre></div>
 </div>
 <blockquote>

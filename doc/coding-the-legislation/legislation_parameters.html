@@ -388,37 +388,37 @@
 <p>To be able to use this notation, all the children node of the parameter node <code class="docutils literal notranslate"><span class="pre">housing_benefit</span></code> must be <strong>homogenous</strong>. In the previous example, <code class="docutils literal notranslate"><span class="pre">housing_benefit.zone_1</span></code>, <code class="docutils literal notranslate"><span class="pre">housing_benefit.zone_2</span></code>, <code class="docutils literal notranslate"><span class="pre">housing_benefit.zone_3</span></code> are homogenous, as they have the same subnodes.</p>
 <p>However, let’s imagine that <code class="docutils literal notranslate"><span class="pre">housing_benefit.yaml</span></code> had another subnode named <code class="docutils literal notranslate"><span class="pre">coeff_furnished</span></code>, which described a coefficient to apply to the benefit is the accomodation is rented furnished:</p>
 <p><code class="docutils literal notranslate"><span class="pre">housing_benefit.yaml</span></code> content:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">coeff_furnished</span><span class="p">:</span>
-  <span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Coefficient to apply if the accomodation is rented furnished&quot;</span>
-    <span class="n">values</span><span class="p">:</span>
-      <span class="mi">2015</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="p">:</span>
-        <span class="n">value</span><span class="p">:</span> <span class="mf">0.75</span>
-<span class="n">zone_1</span><span class="p">:</span>
-  <span class="n">single</span><span class="p">:</span>
-    <span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Amount of housing benefit for a single person, in zone 1&quot;</span>
-    <span class="n">values</span><span class="p">:</span>
-      <span class="mi">2015</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="p">:</span>
-        <span class="n">value</span><span class="p">:</span> <span class="mi">150</span>
-<span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coeff_furnished</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Coefficient</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">apply</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">accomodation</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">rented</span><span class="nv"> </span><span class="s">furnished&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.75</span><span class="w"></span>
+<span class="nt">zone_1</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">single</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">(...)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In this case, <code class="docutils literal notranslate"><span class="pre">parameters(period).housing_benefit[zone]</span></code> would raise en error, whatever <code class="docutils literal notranslate"><span class="pre">zone</span></code> contains, as <strong>the homogeneity condition is not respected</strong>: <code class="docutils literal notranslate"><span class="pre">housing_benefit.zone_1</span></code> is a node, while <code class="docutils literal notranslate"><span class="pre">housing_benefit.coeff_furnished</span></code> is a parameter.</p>
 <p>To solve this issue, the good practice would be to create an intermediate node <code class="docutils literal notranslate"><span class="pre">amount_by_zone</span></code>:</p>
 <p><code class="docutils literal notranslate"><span class="pre">housing_benefit.yaml</span></code> content:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">coeff_furnished</span><span class="p">:</span>
-  <span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Coefficient to apply if the accomodation is rented furnished&quot;</span>
-    <span class="n">values</span><span class="p">:</span>
-      <span class="mi">2015</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="p">:</span>
-        <span class="n">value</span><span class="p">:</span> <span class="mf">0.75</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coeff_furnished</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Coefficient</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">apply</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">accomodation</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">rented</span><span class="nv"> </span><span class="s">furnished&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.75</span><span class="w"></span>
 
-<span class="n">amount_by_zone</span><span class="p">:</span>
-  <span class="n">zone_1</span><span class="p">:</span>
-    <span class="n">single</span><span class="p">:</span>
-      <span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Amount of housing benefit for a single person, in zone 1&quot;</span>
-      <span class="n">values</span><span class="p">:</span>
-        <span class="mi">2015</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="p">:</span>
-          <span class="n">value</span><span class="p">:</span> <span class="mi">150</span>
-  <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="nt">amount_by_zone</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">zone_1</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">single</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(...)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>And then to get <code class="docutils literal notranslate"><span class="pre">parameters(period).housing_benefit.amount_by_zone[zone]</span></code></p>
@@ -430,7 +430,7 @@
 <p>Set-up your python file by importing a <code class="docutils literal notranslate"><span class="pre">country</span> <span class="pre">package</span></code> and building the <code class="docutils literal notranslate"><span class="pre">tax</span> <span class="pre">and</span> <span class="pre">benefit</span> <span class="pre">system</span></code></p>
 <blockquote>
 <div><p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openfisca_country_template</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openfisca_country_template</span>
 <span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">openfisca_country_template</span><span class="o">.</span><span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
 </pre></div>
 </div>

@@ -175,7 +175,7 @@
 <p>The reform is applied for a certain fixed period. To define the period for which you want to apply the reform, it’s necessary to import <code class="docutils literal notranslate"><span class="pre">periods</span></code> from <code class="docutils literal notranslate"><span class="pre">openfisca_core</span></code>.</p>
 <section id="update-the-value-of-a-parameter">
 <h4>Update the value of a parameter<a class="headerlink" href="#update-the-value-of-a-parameter" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">periods</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">periods</span>
 
 <span class="k">def</span> <span class="nf">modify_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
     <span class="n">reform_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s2">&quot;2015&quot;</span><span class="p">)</span>
@@ -194,7 +194,7 @@
 <section id="add-new-parameters">
 <h4>Add new parameters<a class="headerlink" href="#add-new-parameters" title="Permalink to this headline">¶</a></h4>
 <p>You can load new parameters from a directory containing YAML files and add them to the reference parameters.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="kn">import</span> <span class="n">load_parameter_file</span>
 
 <span class="n">dir_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
@@ -215,7 +215,7 @@
 <h4>Add new parameters dynamically<a class="headerlink" href="#add-new-parameters-dynamically" title="Permalink to this headline">¶</a></h4>
 <p>In some cases, loading new parameters from YAML files is not practical. For example, you may want to add parameters from values computed dynamically. In such cases you can use the python objects defined in the <a class="reference internal" href="../openfisca-python-api/parameters.html"><span class="doc std std-doc">parameters module</span></a>
 :</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="kn">import</span> <span class="n">ParameterNode</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="kn">import</span> <span class="n">ParameterNode</span>
 
 <span class="k">def</span> <span class="nf">modify_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
     <span class="n">reform_parameters_subtree</span> <span class="o">=</span> <span class="n">ParameterNode</span><span class="p">(</span><span class="s1">&#39;new_tax&#39;</span><span class="p">,</span> <span class="n">validated_yaml</span> <span class="o">=</span> <span class="p">{</span>

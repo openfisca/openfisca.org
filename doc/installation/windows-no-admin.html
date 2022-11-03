@@ -144,21 +144,21 @@
 <ul class="simple">
 <li><p>Download miniconda from <a class="reference external" href="https://conda.io/miniconda">https://conda.io/miniconda</a>. Make sure to choose the <strong>Python 3.7</strong> version for Windows. If you don’t know if your system is 32-bit or 64-bit, pick 32-bit.</p></li>
 <li><p>Install it. At some point, the installer will ask you for a “Destination Folder”. You can keep the default or choose another one, but in all case <strong>copy paste the path to this folder somewhere</strong>. It will be useful later. For instance, this path may look like <code class="docutils literal notranslate"><span class="pre">C:\Users\my-name\AppData\Local\Miniconda2</span></code>.</p></li>
-<li><p>Run the program “Git Bash” from the “Start” menu (“Démarrer”). This should open a command line. Copy and paste the following lines in the console, after <strong>adapting the first line using the path you noted in the last step</strong>:</p></li>
+<li><p>Run the program “Git Bash” from the “Start” menu. This should open a command line. Copy and paste the following lines in the console, after <strong>adapting the first line using the path you noted in the last step</strong>:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s1">&#39;MINICONDA_PATH=&quot;C:\Users</span><span class="se">\f</span><span class="s1">orm\AppData\Local\Miniconda2&quot;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">.</span><span class="n">bashrc</span>
-<span class="n">echo</span> <span class="s1">&#39;function convert { echo /$1  | sed &#39;</span>\<span class="s1">&#39;&#39;</span><span class="n">s</span><span class="o">/</span>\\<span class="o">/</span>\<span class="o">//</span><span class="n">g</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="n">s</span><span class="o">/</span><span class="p">:</span><span class="o">//</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="p">;</span> <span class="p">}</span><span class="s1">&#39; &gt;&gt; .bashrc</span>
-<span class="n">echo</span> <span class="s1">&#39;function add { export PATH=$(convert $1):$PATH ;}&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">.</span><span class="n">bashrc</span>
-<span class="n">echo</span> <span class="s1">&#39;add $MINICONDA_PATH&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">.</span><span class="n">bashrc</span>
-<span class="n">echo</span> <span class="s1">&#39;add &quot;$MINICONDA_PATH/Scripts&quot;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">.</span><span class="n">bashrc</span>
-<span class="n">source</span> <span class="o">.</span><span class="n">bashrc</span>
-<span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">openfisca</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.7</span>  <span class="o">--</span><span class="n">offline</span> <span class="o">--</span><span class="n">yes</span>
-<span class="n">echo</span> <span class="s1">&#39;source activate openfisca&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">.</span><span class="n">bashrc</span>
-<span class="n">source</span> <span class="n">activate</span> <span class="n">openfisca</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;MINICONDA_PATH=&quot;C:\Users\form\AppData\Local\Miniconda2&quot;&#39;</span> &gt;&gt; .bashrc
+<span class="nb">echo</span> <span class="s1">&#39;function convert { echo /$1  | sed &#39;</span><span class="se">\&#39;</span><span class="s1">&#39;s/\\/\//g&#39;</span><span class="se">\&#39;</span><span class="s1">&#39; | sed &#39;</span><span class="se">\&#39;</span><span class="s1">&#39;s/://&#39;</span><span class="se">\&#39;</span><span class="s1">&#39; ; }&#39;</span> &gt;&gt; .bashrc
+<span class="nb">echo</span> <span class="s1">&#39;function add { export PATH=$(convert $1):$PATH ;}&#39;</span> &gt;&gt; .bashrc
+<span class="nb">echo</span> <span class="s1">&#39;add $MINICONDA_PATH&#39;</span> &gt;&gt; .bashrc
+<span class="nb">echo</span> <span class="s1">&#39;add &quot;$MINICONDA_PATH/Scripts&quot;&#39;</span> &gt;&gt; .bashrc
+<span class="nb">source</span> .bashrc
+conda create -n openfisca <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7  --offline --yes
+<span class="nb">echo</span> <span class="s1">&#39;source activate openfisca&#39;</span> &gt;&gt; .bashrc
+<span class="nb">source</span> activate openfisca
 </pre></div>
 </div>
 <p>To check that everything worked correctly, type in Git Bash:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="o">--</span><span class="n">version</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip --version
 </pre></div>
 </div>
 <p>A version number should be printed, and no error message should appear. Congrats, you just set up a Python working environment!</p>
@@ -172,7 +172,7 @@
 <li><p>Run the command <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">*</span></code></p></li>
 </ul>
 <p>To check that everything worked correctly, type in Git Bash:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;from openfisca_france import CountryTaxBenefitSystem; CountryTaxBenefitSystem()&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python -c <span class="s2">&quot;from openfisca_france import CountryTaxBenefitSystem; CountryTaxBenefitSystem()&quot;</span>
 </pre></div>
 </div>
 <p>No error message should appear. Congrats, you just installed OpenFisca-France!</p>
