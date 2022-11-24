@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  hugo: circleci/hugo@0.3.1
+  hugo: circleci/hugo@1.3.0
 
 jobs:
   test:
@@ -48,8 +48,8 @@ workflows:
     jobs:
       - test
       - hugo/build:
-          version: '0.37'
-          html-proofer: true
+          version: '0.106'
+          html-proofer: false
       - deploy:
           requires:
             - test
