@@ -3,31 +3,13 @@
 		<div class="footer_baseline"><§> #RulesAsCode</div>
 		<nav class="footer_nav">
 			<ul class="footer_nav_items">
-				<li class="footer_nav_item">
-					<a class="footer_nav_link" href="#">
-						Contact us
-					</a>
-				</li>
-				<li class="footer_nav_item">
-					<a class="footer_nav_link" href="#">
-						Services status
-					</a>
-				</li>
-				<li class="footer_nav_item">
-					<a class="footer_nav_link" href="#">
-						Improve this page
-					</a>
-				</li>
-				<li class="footer_nav_item">
-					<a class="footer_nav_link" href="#">
-						Analytics policy
-					</a>
-				</li>
-				<li class="footer_nav_item">
-					<a class="footer_nav_link" href="#">
-						Legal notice
-					</a>
-				</li>
+				{{ range .Site.Menus.footer }}
+					<li class="footer_nav_item ">
+						<a class="footer_nav_link {{ if eq .Identifier "contribute" }}footer_nav_link-contribute{{ end }}" href="{{ absLangURL .URL }}">
+							{{ .Name }}
+						</a>
+					</li>
+				{{ end }}
 			</ul>
 		</nav>
 	</div>

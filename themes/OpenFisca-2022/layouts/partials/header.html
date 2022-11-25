@@ -12,18 +12,13 @@
 		</div>
 		<nav class="header_nav">
 			<ul class="header_nav_items">
-				<li class="header_nav_item">
-					<a href="#" class="header_nav_link">Showcase</a>
-				</li>
-				<li>
-					<a href="#" class="header_nav_link">Packages</a>
-				</li>
-				<li>
-					<a href="#" class="header_nav_link">Documentation</a>
-				</li>
-				<li>
-					<a href="#" class="header_nav_link">Community</a>
-				</li>
+				{{ range .Site.Menus.header }}
+					<li>
+						<a class="header_nav_link" href="{{ absLangURL .URL }}">
+							{{ .Name }}
+						</a>
+					</li>
+				{{ end }}
 			</ul>
 		</nav>
 		<nav class="header_social">
