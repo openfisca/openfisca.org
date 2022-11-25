@@ -23,6 +23,20 @@ jobs:
           name: Run tests
           command: npm test
 
+  html_validate:
+    docker:
+      - image: cimg/ruby:3.1.2-browsers
+    steps:
+      - checkout
+      - run:
+          name: Install html-proofer
+          command: gem install html-proofer
+      - attach_workspace:
+          at: .
+      - run:
+          name: Check HTML common mistakes
+          command: exec htmlproofer ./public --assume-extension .html --check-sri --disable-external --ignore-empty-alt
+
   deploy:
     docker:
       - image: circleci/node:lts
@@ -50,10 +64,14 @@ workflows:
       - hugo/build:
           version: '0.106'
           html-proofer: false
+      - html_validate:
+          requires:
+            - hugo/build
       - deploy:
           requires:
             - test
             - hugo/build
+            - html_validate
           filters:
             branches:
               only: master
