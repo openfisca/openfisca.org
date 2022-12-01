@@ -145,7 +145,8 @@
 <dt class="sig sig-object py" id="openfisca_core.taxbenefitsystems.TaxBenefitSystem">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.taxbenefitsystems.</span></span><span class="sig-name descname"><span class="pre">TaxBenefitSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entities</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/taxbenefitsystems/tax_benefit_system.html#TaxBenefitSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.taxbenefitsystems.TaxBenefitSystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents the legislation.</p>
-<p>It stores parameters (values defined for everyone) and variables (values defined for some given entity e.g. a person).</p>
+<p>It stores parameters (values defined for everyone) and variables (values
+defined for some given entity e.g. a person).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="openfisca_core.taxbenefitsystems.TaxBenefitSystem.parameters">
 <span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#openfisca_core.taxbenefitsystems.TaxBenefitSystem.parameters" title="Permalink to this definition">¶</a></dt>
@@ -218,16 +219,16 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.taxbenefitsystems.TaxBenefitSystem.get_package_metadata">
 <span class="sig-name descname"><span class="pre">get_package_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/taxbenefitsystems/tax_benefit_system.html#TaxBenefitSystem.get_package_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.taxbenefitsystems.TaxBenefitSystem.get_package_metadata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets metatada relative to the country package the tax and benefit system is built from.</p>
+<dd><p>Gets metadata relative to the country package.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Country package metadata</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary with the country package metadata</p>
 </dd>
 </dl>
-<p>Example:</p>
+<p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_package_metadata</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">{</span>
 <span class="gp">&gt;&gt;&gt; </span>   <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;/path/to/dir/containing/package&#39;</span><span class="p">,</span>
@@ -245,13 +246,13 @@
 <dd><p>Get the parameters of the legislation at a given instant</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>instant</strong> – <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> of the format ‘YYYY-MM-DD’ or <a class="reference internal" href="periods.html#openfisca_core.periods.Instant" title="openfisca_core.periods.Instant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instant</span></code></a> instance.</p>
+<dd class="field-odd"><p><strong>instant</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference internal" href="periods.html#openfisca_core.periods.Period" title="openfisca_core.periods.period_.Period"><code class="xref py py-class docutils literal notranslate"><span class="pre">Period</span></code></a>, <a class="reference internal" href="periods.html#openfisca_core.periods.Instant" title="openfisca_core.periods.instant_.Instant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instant</span></code></a>]) – <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> formatted “YYYY-MM-DD” or <a class="reference internal" href="periods.html#openfisca_core.periods.Instant" title="openfisca_core.periods.Instant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instant</span></code></a>.</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The parameters of the legislation at a given instant.</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="types.html#openfisca_core.types.ParameterNodeAtInstant" title="openfisca_core.types._domain.ParameterNodeAtInstant"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParameterNodeAtInstant</span></code></a>]</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="parameters.html#openfisca_core.parameters.ParameterNodeAtInstant" title="openfisca_core.parameters.ParameterNodeAtInstant"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParameterNodeAtInstant</span></code></a></p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The parameters of the legislation at a given instant.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -263,9 +264,12 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>variable_name</strong> – Name of the requested variable.</p></li>
-<li><p><strong>check_existence</strong> – If True, raise an error if the requested variable does not exist.</p></li>
+<li><p><strong>variable_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the requested variable.</p></li>
+<li><p><strong>check_existence</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If True, raise an error if the requested variable does not exist.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="variables.html#openfisca_core.variables.Variable" title="openfisca_core.variables.variable.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -276,13 +280,13 @@
 <dd><p>Gets all variables contained in a tax and benefit system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>entity</strong> (<a class="reference internal" href="entities.html#openfisca_core.entities.Entity" title="openfisca_core.entities.Entity"><em>Entity</em></a>) – If set, returns only the variable defined for the given entity.</p>
+<dd class="field-odd"><p><strong>entity</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="entities.html#openfisca_core.entities.Entity" title="openfisca_core.entities.entity.Entity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entity</span></code></a>]) – If set, returns the variable defined for the given entity.</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A dictionary, indexed by variable names.</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="variables.html#openfisca_core.variables.Variable" title="openfisca_core.variables.variable.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a>]</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary, indexed by variable names.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -324,12 +328,16 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.taxbenefitsystems.TaxBenefitSystem.replace_variable">
 <span class="sig-name descname"><span class="pre">replace_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/taxbenefitsystems/tax_benefit_system.html#TaxBenefitSystem.replace_variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.taxbenefitsystems.TaxBenefitSystem.replace_variable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Replaces an existing OpenFisca variable in the tax and benefit system by a new one.</p>
+<dd><p>Replaces an existing variable by a new one.</p>
 <p>The new variable must have the same name than the replaced one.</p>
-<p>If no variable with the given name exists in the tax and benefit system, no error will be raised and the new variable will be simply added.</p>
+<p>If no variable with the given name exists in the Tax-Benefit system, no
+error will be raised and the new variable will be simply added.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>variable</strong> (<a class="reference internal" href="variables.html#openfisca_core.variables.Variable" title="openfisca_core.variables.Variable"><em>Variable</em></a>) – New variable to add. Must be a subclass of Variable.</p>
+<dd class="field-odd"><p><strong>variable</strong> (<a class="reference internal" href="variables.html#openfisca_core.variables.Variable" title="openfisca_core.variables.variable.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a>) – The variable to replace.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -337,13 +345,22 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.taxbenefitsystems.TaxBenefitSystem.update_variable">
 <span class="sig-name descname"><span class="pre">update_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/taxbenefitsystems/tax_benefit_system.html#TaxBenefitSystem.update_variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.taxbenefitsystems.TaxBenefitSystem.update_variable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Updates an existing OpenFisca variable in the tax and benefit system.</p>
-<p>All attributes of the updated variable that are not explicitely overridden by the new <code class="docutils literal notranslate"><span class="pre">variable</span></code> will stay unchanged.</p>
+<dd><p>Update an existing variable in the Tax-Benefit system.</p>
+<p>All attributes of the updated variable that are not explicitly
+overridden by the new <code class="docutils literal notranslate"><span class="pre">variable</span></code> will stay unchanged.</p>
 <p>The new variable must have the same name than the updated one.</p>
-<p>If no variable with the given name exists in the tax and benefit system, no error will be raised and the new variable will be simply added.</p>
+<p>If no variable with the given name exists in the tax and benefit
+system, no error will be raised and the new variable will be simply
+added.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>variable</strong> (<a class="reference internal" href="variables.html#openfisca_core.variables.Variable" title="openfisca_core.variables.Variable"><em>Variable</em></a>) – Variable to add. Must be a subclass of Variable.</p>
+<dd class="field-odd"><p><strong>variable</strong> (<a class="reference internal" href="variables.html#openfisca_core.variables.Variable" title="openfisca_core.variables.variable.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a>) – Variable to add. Must be a subclass of Variable.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="variables.html#openfisca_core.variables.Variable" title="openfisca_core.variables.variable.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The added variable.</p>
 </dd>
 </dl>
 </dd></dl>

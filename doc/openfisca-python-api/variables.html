@@ -262,14 +262,18 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.variables.Variable.get_formula">
 <span class="sig-name descname"><span class="pre">get_formula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/variables/variable.html#Variable.get_formula"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.variables.Variable.get_formula" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the formula used to compute the variable at the given period.</p>
-<p>If no period is given and the variable has several formula, return the oldest formula.</p>
+<dd><p>Returns the formula to compute the variable at the given period.</p>
+<p>If no period is given and the variable has several formulas, the method
+returns the oldest formula.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Formula used to compute the variable</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>period</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="types.html#openfisca_core.types.Instant" title="openfisca_core.types._domain.Instant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instant</span></code></a>, <a class="reference internal" href="periods.html#openfisca_core.periods.Period" title="openfisca_core.periods.period_.Period"><code class="xref py py-class docutils literal notranslate"><span class="pre">Period</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – The period to get the formula.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="#openfisca_core.variables.typing.Formula" title="openfisca_core.variables.typing.Formula"><code class="xref any py py-data docutils literal notranslate"><span class="pre">Formula</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="types.html#openfisca_core.types.Formula" title="openfisca_core.types._domain.Formula"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formula</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Formula used to compute the variable.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -328,27 +332,6 @@ When annualized, a variable’s formula is only called for a January calculation
 <span class="sig-prename descclassname"><span class="pre">openfisca_core.variables.helpers.</span></span><span class="sig-name descname"><span class="pre">get_neutralized_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/variables/helpers.html#get_neutralized_variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.variables.helpers.get_neutralized_variable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new neutralized variable (to be used by reforms).
 A neutralized variable always returns its default value, and does not cache anything.</p>
-</dd></dl>
-
-<span class="target" id="module-openfisca_core.variables.typing"></span><dl class="py data">
-<dt class="sig sig-object py" id="openfisca_core.variables.typing.Formula">
-<span class="sig-prename descclassname"><span class="pre">openfisca_core.variables.typing.</span></span><span class="sig-name descname"><span class="pre">Formula</span></span><a class="headerlink" href="#openfisca_core.variables.typing.Formula" title="Permalink to this definition">¶</a></dt>
-<dd><p>A callable defining a calculation, or a rule, on a system.</p>
-<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code>[[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="populations.html#openfisca_core.populations.Population" title="openfisca_core.populations.population.Population"><code class="xref py py-class docutils literal notranslate"><span class="pre">openfisca_core.populations.population.Population</span></code></a>, <a class="reference internal" href="populations.html#openfisca_core.populations.GroupPopulation" title="openfisca_core.populations.group_population.GroupPopulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">openfisca_core.populations.group_population.GroupPopulation</span></code></a>], <a class="reference internal" href="periods.html#openfisca_core.periods.Period" title="openfisca_core.periods.period_.Period"><code class="xref py py-class docutils literal notranslate"><span class="pre">openfisca_core.periods.period_.Period</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code>[[<a class="reference internal" href="periods.html#openfisca_core.periods.Instant" title="openfisca_core.periods.instant_.Instant"><code class="xref py py-class docutils literal notranslate"><span class="pre">openfisca_core.periods.instant_.Instant</span></code></a>], <a class="reference internal" href="parameters.html#openfisca_core.parameters.ParameterNodeAtInstant" title="openfisca_core.parameters.parameter_node_at_instant.ParameterNodeAtInstant"><code class="xref py py-class docutils literal notranslate"><span class="pre">openfisca_core.parameters.parameter_node_at_instant.ParameterNodeAtInstant</span></code></a>]], <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.23)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>]</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="openfisca_core.variables.typing.Params">
-<span class="sig-prename descclassname"><span class="pre">openfisca_core.variables.typing.</span></span><span class="sig-name descname"><span class="pre">Params</span></span><a class="headerlink" href="#openfisca_core.variables.typing.Params" title="Permalink to this definition">¶</a></dt>
-<dd><p>A callable to get the parameters for the given instant.</p>
-<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code>[[<a class="reference internal" href="periods.html#openfisca_core.periods.Instant" title="openfisca_core.periods.instant_.Instant"><code class="xref py py-class docutils literal notranslate"><span class="pre">openfisca_core.periods.instant_.Instant</span></code></a>], <a class="reference internal" href="parameters.html#openfisca_core.parameters.ParameterNodeAtInstant" title="openfisca_core.parameters.parameter_node_at_instant.ParameterNodeAtInstant"><code class="xref py py-class docutils literal notranslate"><span class="pre">openfisca_core.parameters.parameter_node_at_instant.ParameterNodeAtInstant</span></code></a>]</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="openfisca_core.variables.typing.People">
-<span class="sig-prename descclassname"><span class="pre">openfisca_core.variables.typing.</span></span><span class="sig-name descname"><span class="pre">People</span></span><a class="headerlink" href="#openfisca_core.variables.typing.People" title="Permalink to this definition">¶</a></dt>
-<dd><p>A collection of <a class="reference internal" href="entities.html#openfisca_core.entities.Entity" title="openfisca_core.entities.Entity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Entity</span></code></a> or <a class="reference internal" href="entities.html#openfisca_core.entities.GroupEntity" title="openfisca_core.entities.GroupEntity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GroupEntity</span></code></a>.</p>
-<p>alias of <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="populations.html#openfisca_core.populations.Population" title="openfisca_core.populations.population.Population"><code class="xref py py-class docutils literal notranslate"><span class="pre">openfisca_core.populations.population.Population</span></code></a>, <a class="reference internal" href="populations.html#openfisca_core.populations.GroupPopulation" title="openfisca_core.populations.group_population.GroupPopulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">openfisca_core.populations.group_population.GroupPopulation</span></code></a>]</p>
 </dd></dl>
 
 <span class="target" id="module-openfisca_core.variables.config"></span></section>

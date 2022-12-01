@@ -133,13 +133,10 @@
     <span class="n">period_size</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">size</span>
     <span class="n">period_unit</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span>
 
-    <span class="k">if</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
-        <span class="n">cached_period_unit</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span>
-    <span class="k">elif</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
-        <span class="n">cached_period_unit</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;set_input_dispatch_by_period can be used only for yearly or monthly variables.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;set_input_dispatch_by_period can&#39;t be used for eternal variables.&quot;</span><span class="p">)</span>
 
+    <span class="n">cached_period_unit</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span>
     <span class="n">after_instant</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="n">period_size</span><span class="p">,</span> <span class="n">period_unit</span><span class="p">)</span>
 
     <span class="c1"># Cache the input data, skipping the existing cached months</span>
@@ -168,13 +165,10 @@
     <span class="n">period_size</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">size</span>
     <span class="n">period_unit</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span>
 
-    <span class="k">if</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
-        <span class="n">cached_period_unit</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span>
-    <span class="k">elif</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
-        <span class="n">cached_period_unit</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;set_input_divide_by_period can be used only for yearly or monthly variables.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;set_input_divide_by_period can&#39;t be used for eternal variables.&quot;</span><span class="p">)</span>
 
+    <span class="n">cached_period_unit</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span>
     <span class="n">after_instant</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="n">period_size</span><span class="p">,</span> <span class="n">period_unit</span><span class="p">)</span>
 
     <span class="c1"># Count the number of elementary periods to change, and the difference with what is already known.</span>

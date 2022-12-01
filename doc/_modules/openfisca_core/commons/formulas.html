@@ -115,16 +115,16 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">ArrayType</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">Array</span>
 
 <span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="apply_thresholds"><a class="viewcode-back" href="../../../openfisca-python-api/commons.html#openfisca_core.commons.apply_thresholds">[docs]</a><span class="k">def</span> <span class="nf">apply_thresholds</span><span class="p">(</span>
-        <span class="nb">input</span><span class="p">:</span> <span class="n">ArrayType</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+        <span class="nb">input</span><span class="p">:</span> <span class="n">Array</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
         <span class="n">thresholds</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
         <span class="n">choices</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArrayType</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Makes a choice based on an input and thresholds.</span>
 
 <span class="sd">    From a list of ``choices``, this function selects one of these values</span>
@@ -153,7 +153,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">condlist</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ArrayType</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span>
+    <span class="n">condlist</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Array</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span>
     <span class="n">condlist</span> <span class="o">=</span> <span class="p">[</span><span class="nb">input</span> <span class="o">&lt;=</span> <span class="n">threshold</span> <span class="k">for</span> <span class="n">threshold</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">condlist</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
@@ -170,7 +170,7 @@
     <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">condlist</span><span class="p">,</span> <span class="n">choices</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="concat"><a class="viewcode-back" href="../../../openfisca-python-api/commons.html#openfisca_core.commons.concat">[docs]</a><span class="k">def</span> <span class="nf">concat</span><span class="p">(</span><span class="n">this</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">that</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ArrayType</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="concat"><a class="viewcode-back" href="../../../openfisca-python-api/commons.html#openfisca_core.commons.concat">[docs]</a><span class="k">def</span> <span class="nf">concat</span><span class="p">(</span><span class="n">this</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">that</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Concatenates the values of two arrays.</span>
 
 <span class="sd">    Args:</span>
@@ -203,9 +203,9 @@
 
 
 <div class="viewcode-block" id="switch"><a class="viewcode-back" href="../../../openfisca-python-api/commons.html#openfisca_core.commons.switch">[docs]</a><span class="k">def</span> <span class="nf">switch</span><span class="p">(</span>
-        <span class="n">conditions</span><span class="p">:</span> <span class="n">ArrayType</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+        <span class="n">conditions</span><span class="p">:</span> <span class="n">Array</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
         <span class="n">value_by_condition</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">],</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArrayType</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Mimicks a switch statement.</span>
 
 <span class="sd">    Given an array of conditions, returns an array of the same size,</span>

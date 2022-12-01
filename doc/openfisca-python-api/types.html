@@ -142,13 +142,26 @@
   <section id="module-openfisca_core.types">
 <span id="types"></span><h1>Types<a class="headerlink" href="#module-openfisca_core.types" title="Permalink to this headline">¶</a></h1>
 <p>Data types and protocols used by OpenFisca Core.</p>
-<p>The type definitions included in this sub-package are intented for
+<p>The type definitions included in this sub-package are intended for
 contributors, to help them better understand and document contracts
 and expected behaviours.</p>
 <dl class="simple">
 <dt>Official Public API:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#openfisca_core.types.Array" title="openfisca_core.types.Array"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Array</span></code></a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ArrayLike</span></code></p></li>
-<li><p><a class="reference internal" href="#openfisca_core.types.ArrayType" title="openfisca_core.types.ArrayType"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ArrayType</span></code></a></p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Cache</span></code></p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Entity</span></code></p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Formula</span></code></p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Holder</span></code></p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Instant</span></code></p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">ParameterNodeAtInstant</span></code></p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Params</span></code></p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Period</span></code></p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Population</span></code></p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Role</span></code>,</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Simulation</span></code>,</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">TaxBenefitSystem</span></code></p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Variable</span></code></p></li>
 </ul>
 </dd>
 </dl>
@@ -174,49 +187,246 @@ them easier to test and to maintain.</p>
 </div>
 </div>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="openfisca_core.types.ArrayType">
-<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">ArrayType</span></span><a class="headerlink" href="#openfisca_core.types.ArrayType" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="openfisca_core.types.Array">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Array</span></span><a class="headerlink" href="#openfisca_core.types.Array" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">nptyping.types._ndarray.NDArray</span></code></p>
 </dd></dl>
 
-<span class="target" id="module-openfisca_core.types.data_types.arrays"></span><dl class="py data">
-<dt class="sig sig-object py" id="openfisca_core.types.data_types.arrays.ArrayLike">
-<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.data_types.arrays.</span></span><span class="sig-name descname"><span class="pre">ArrayLike</span></span><a class="headerlink" href="#openfisca_core.types.data_types.arrays.ArrayLike" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of any castable to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.23)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>.</p>
-<p>These include any <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.23)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> and sequences (like
-<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></a>, and so on).</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
-<span class="go">typing.Union[numpy.ndarray, typing.Sequence[float]]</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-<span class="go">typing.Union[numpy.ndarray, typing.Sequence[str]]</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It is possible since numpy version 1.21 to specify the type of an
-array, thanks to <a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">numpy.typing.NDArray</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
-<span class="n">NDArray</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
-</pre></div>
-</div>
-<p><a class="reference external" href="https://mypy.readthedocs.io/en/stable/">mypy</a> provides <a class="reference external" href="https://mypy.readthedocs.io/en/stable/duck_type_compatibility.html">duck type compatibility</a>, so an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> is
-considered to be valid whenever a <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a> is expected.</p>
-</div>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 35.5.0.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 35.6.0: </span>Moved to <a class="reference internal" href="#module-openfisca_core.types" title="openfisca_core.types"><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code></a></p>
-</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.Entity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entity protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Entity.check_role_validity">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_role_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Entity.check_role_validity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Entity.check_role_validity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">typing.Generic</span></code></a></p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
-<p>alias of <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">nptyping.types._ndarray.NDArray</span></code>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">openfisca_core.types.data_types.arrays.T</span></code>]]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Entity.check_variable_defined_for_entity">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_variable_defined_for_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Entity.check_variable_defined_for_entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Entity.check_variable_defined_for_entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Entity.get_variable">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_existence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Ellipsis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Entity.get_variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Entity.get_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.Formula">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Formula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Formula"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formula protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Formula.__call__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">population</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Formula.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Formula.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.23)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.Holder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Holder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Holder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Holder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holder protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Holder.clone">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">population</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Holder.clone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Holder.clone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#openfisca_core.types.Holder" title="openfisca_core.types._domain.Holder"><code class="xref py py-class docutils literal notranslate"><span class="pre">Holder</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Holder.get_memory_usage">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_memory_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Holder.get_memory_usage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Holder.get_memory_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.Instant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Instant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Instant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Instant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instant protocol.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.ParameterNodeAtInstant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">ParameterNodeAtInstant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#ParameterNodeAtInstant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.ParameterNodeAtInstant" title="Permalink to this definition">¶</a></dt>
+<dd><p>ParameterNodeAtInstant protocol.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.Params">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Params protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Params.__call__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instant</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Params.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Params.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#openfisca_core.types.ParameterNodeAtInstant" title="openfisca_core.types._domain.ParameterNodeAtInstant"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParameterNodeAtInstant</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.Period">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Period"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Period protocol.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.types.Period.start">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#openfisca_core.types.Period.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.types.Period.unit">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#openfisca_core.types.Period.unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.Population">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Population</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Population"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Population" title="Permalink to this definition">¶</a></dt>
+<dd><p>Population protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Population.get_holder">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_holder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Population.get_holder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Population.get_holder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.Role">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Role" title="Permalink to this definition">¶</a></dt>
+<dd><p>Role protocol.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.Simulation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulation protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Simulation.calculate">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Simulation.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Simulation.calculate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Simulation.calculate_add">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Simulation.calculate_add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Simulation.calculate_add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Simulation.calculate_divide">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_divide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Simulation.calculate_divide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Simulation.calculate_divide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.Simulation.get_population">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_population</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plural</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Simulation.get_population"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Simulation.get_population" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.TaxBenefitSystem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">TaxBenefitSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#TaxBenefitSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.TaxBenefitSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>TaxBenefitSystem protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.types.TaxBenefitSystem.get_variable">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_existence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Ellipsis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#TaxBenefitSystem.get_variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.TaxBenefitSystem.get_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.Variable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types/_domain.html#Variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Variable protocol.</p>
 </dd></dl>
 
 </section>
