@@ -4,131 +4,20 @@
     <p>{{ $.Param "definition" }}</p>
     <p>{{ $.Param "introduction" }}</p>
 
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "ci" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-ci"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/openfisca/openfisca-cote-d-ivoire">GitHub</a>.
-            </p> 
-        </div>
-    </section>
-
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "fr" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-fr"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/openfisca/openfisca-france">GitHub</a>.
-            </p> 
-        </div>
-        <a href="https://fr.openfisca.org/legislation" class="cta">{{ $.Param "explore" }}</a>
-    </section>
-
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "it" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-it"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/openfisca/openfisca-italy">GitHub</a>.
-            </p> 
-        </div>
-    </section>
-
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "ml" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-ml"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/openfisca/openfisca-mali">GitHub</a>.
-            </p> 
-        </div>
-    </section>
-
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "nz" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-nz"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/ServiceInnovationLab/openfisca-aotearoa">GitHub</a>.
-            </p> 
-        </div>
-        <a href="https://nz.openfisca.org" class="cta">{{ $.Param "explore" }}</a>
-    </section>
-
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "sn" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-sn"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/openfisca/senegal">GitHub</a>.
-            </p>
-        </div>
-    </section>
-
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "tn" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-tn"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/openfisca/openfisca-tunisia">GitHub</a>.
-            </p>
-        </div>
-        <a href="https://legislation.openfisca.tn" class="cta">{{ $.Param "explore" }}</a>
-    </section>
-
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "uk" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-uk"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/PolicyEngine/openfisca-uk">GitHub</a>.
-            </p>
-        </div>
-        <a href="https://policyengine.org/uk/api-explorer" class="cta">{{ $.Param "explore" }}</a>
-    </section>
-
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "us" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-us"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/PolicyEngine/openfisca-us">GitHub</a>.
-            </p>
-        </div>
-        <a href="https://policyengine.org/us/api-explorer" class="cta">{{ $.Param "explore" }}</a>
-    </section>
-
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "uy" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-uy"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/AGESIC-UY/openfisca-uy">Github</a>.
-            </p>
-        </div>
-    </section>
-
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "bcn" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-bcn"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/lesmevesajudes/openfisca-barcelona">GitHub</a>.
-            </p> 
-        </div>
-    </section>
-
-    <section class="row">
-        <div class="left-col">
-            <h3>{{ $.Param "nsw" }}</h3>
-            <div role="presentation" class="country-gradient" id="gradient-nsw"></div>
-            <p>
-                {{ $.Param "sources_introduction" }} <a href="https://github.com/digitalnsw/openfisca-nsw">GitHub</a>.
-            </p> 
-        </div>
-        <a href="https://nsw-rules.herokuapp.com/" class="cta">{{ $.Param "explore" }}</a>
-    </section>
+    {{ range $.Site.Data.packages }}
+        <section class="row">
+            <div class="left-col">
+                <h3>{{ index .title $.Site.Language.Lang }}</h3>
+                <div role="presentation" class="country-gradient" id="gradient-{{ .jurisdiction | lower }}"></div>
+                <p>
+                    {{ $.Param "sources_introduction" }} <a href="{{ .source }}">GitHub</a>.
+                </p> 
+            </div>
+            {{ if .website }}
+                <a href="{{ .website }}" class="cta">{{ $.Param "explore" }}</a>
+            {{ end }}
+        </section>
+    {{ end }}
 
     <section class="row">
         <h3 class="left-col">{{ $.Param "others" }}</h3>
