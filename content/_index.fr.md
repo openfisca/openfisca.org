@@ -4,32 +4,15 @@ get_started: Commencer
 products: Propulsés par OpenFisca
 
 usecases:
-  mes_aides:
+  citizens_rights:
     title: Calculer les droits des citoyens
     description: Calculez toute règle de la législation à partir d’une situation individuelle.
-    caption_1: utilise OpenFisca et sa
-    caption_2: pour informer les citoyens français de leur éligibilité aux aides nationales et locales.
 
-  les_meves_ajudes:
-    caption_1: utilise OpenFisca et sa
-    caption_2: pour informer les citoyens de Barcelone de leur éligibilité aux aides sociales.
-
-  leximpact:
+  public_policy:
     title: Déterminer l’impact des politiques publiques
     description: Comparez la législation telle qu’elle est et telle qu’elle pourrait être.
-    caption_1: utilise OpenFisca et sa
-    caption_2: pour simuler l'impact des politiques publiques sur les ménages, grâce à un simulateur dédié à l'impôt sur le revenu.
 
-  reforms:
-    caption_1: du Mouvement Français pour un Revenu de Base qui utilise OpenFisca et sa
-    caption_2: pour évaluer le coût et les bénéfices d'une réforme qui instaurerait un revenu de base en France.
-
-  rapu_ture:
+  explore_the_rules:
     title: Explorer la législation
     description: Modélisez les règles de la législation, explorez-les, et en évaluez l'éligibilité des citoyens.
-    caption: (Exploring the Rules) utilise OpenFisca pour permettre aux citoyens, aux agents publics, aux experts métier, et aux développeurs d'explorer les règles de la législation néo-zélandaise.
-
-  legexp_nsw:
-    caption_1: utilise OpenFisca et son
-    caption_2: pour permettre aux citoyens, aux agents publics, aux experts métier, et aux développeurs d'explorer la législation.
 ---
