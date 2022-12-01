@@ -115,8 +115,8 @@
 
 <span class="kn">import</span> <span class="nn">calendar</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">periods</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">helpers</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">helpers</span>
+<span class="kn">from</span> <span class="nn">.instant_</span> <span class="kn">import</span> <span class="n">Instant</span>
 
 
 <div class="viewcode-block" id="Period"><a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.Period">[docs]</a><span class="k">class</span> <span class="nc">Period</span><span class="p">(</span><span class="nb">tuple</span><span class="p">):</span>
@@ -125,6 +125,7 @@
 
 <span class="sd">    A period is a triple (unit, start, size), where unit is either &quot;month&quot; or &quot;year&quot;, where start format is a</span>
 <span class="sd">    (year, month, day) triple, and where size is an integer &gt; 1.</span>
+
 
 <span class="sd">    Since a period is a triple it can be used as a dictionary key.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -485,7 +486,7 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot calculate number of days in </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instant</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the first day of the period as an Instant instance.</span>
 
@@ -495,7 +496,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instant</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the last day of the period as an Instant instance.</span>
 
@@ -523,7 +524,7 @@
         <span class="n">unit</span><span class="p">,</span> <span class="n">start_instant</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="bp">self</span>
         <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span> <span class="o">=</span> <span class="n">start_instant</span>
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">config</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="n">Instant</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;day&#39;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">day</span> <span class="o">+=</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
@@ -559,41 +560,46 @@
                         <span class="n">year</span> <span class="o">+=</span> <span class="mi">1</span>
                         <span class="n">month</span> <span class="o">=</span> <span class="mi">1</span>
                     <span class="n">day</span> <span class="o">-=</span> <span class="n">month_last_day</span>
-        <span class="k">return</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">((</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">Instant</span><span class="p">((</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">))</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="c1"># Reference periods</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">last_3_months</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_month</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">last_month</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">last_month</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Period</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_month</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">last_year</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">last_3_months</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Period</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_month</span><span class="o">.</span><span class="n">start</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">config</span><span class="o">.</span><span class="n">MONTH</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">n_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">last_year</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Period</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">&quot;first-of&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">YEAR</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">config</span><span class="o">.</span><span class="n">YEAR</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">this_year</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">n_2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Period</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">&quot;first-of&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">YEAR</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">config</span><span class="o">.</span><span class="n">YEAR</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">first_month</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s1">&#39;first-of&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">this_year</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Period</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">&quot;first-of&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">YEAR</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">config</span><span class="o">.</span><span class="n">YEAR</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">first_day</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">first_month</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Period</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">&quot;first-of&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">MONTH</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">config</span><span class="o">.</span><span class="n">MONTH</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">first_day</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Period</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">config</span><span class="o">.</span><span class="n">DAY</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
 </pre></div>
 
           </div>
