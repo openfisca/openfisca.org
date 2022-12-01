@@ -209,27 +209,19 @@
             <span class="n">scale</span> <span class="o">=</span> <span class="n">LinearAverageRateTaxScale</span><span class="p">()</span>
 
             <span class="k">for</span> <span class="n">bracket</span> <span class="ow">in</span> <span class="n">brackets</span><span class="p">:</span>
-                <span class="k">if</span> <span class="s1">&#39;base&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span><span class="p">:</span>
-                    <span class="n">base</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">base</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">base</span> <span class="o">=</span> <span class="mf">1.</span>
                 <span class="k">if</span> <span class="s1">&#39;average_rate&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span> <span class="ow">and</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span><span class="p">:</span>
                     <span class="n">average_rate</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">average_rate</span>
                     <span class="n">threshold</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">threshold</span>
-                    <span class="n">scale</span><span class="o">.</span><span class="n">add_bracket</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">average_rate</span> <span class="o">*</span> <span class="n">base</span><span class="p">)</span>
+                    <span class="n">scale</span><span class="o">.</span><span class="n">add_bracket</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">average_rate</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">scale</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">scale</span> <span class="o">=</span> <span class="n">MarginalRateTaxScale</span><span class="p">()</span>
 
             <span class="k">for</span> <span class="n">bracket</span> <span class="ow">in</span> <span class="n">brackets</span><span class="p">:</span>
-                <span class="k">if</span> <span class="s1">&#39;base&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span><span class="p">:</span>
-                    <span class="n">base</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">base</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">base</span> <span class="o">=</span> <span class="mf">1.</span>
                 <span class="k">if</span> <span class="s1">&#39;rate&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span> <span class="ow">and</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">in</span> <span class="n">bracket</span><span class="o">.</span><span class="n">_children</span><span class="p">:</span>
                     <span class="n">rate</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">rate</span>
                     <span class="n">threshold</span> <span class="o">=</span> <span class="n">bracket</span><span class="o">.</span><span class="n">threshold</span>
-                    <span class="n">scale</span><span class="o">.</span><span class="n">add_bracket</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">rate</span> <span class="o">*</span> <span class="n">base</span><span class="p">)</span>
+                    <span class="n">scale</span><span class="o">.</span><span class="n">add_bracket</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">rate</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">scale</span></div>
 </pre></div>
 
