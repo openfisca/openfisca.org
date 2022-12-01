@@ -61,7 +61,7 @@
       </div>
   <div id="left-column">
     <div class="sphinxsidebar"><div class="sphinxsidebar caption">
-    <img src="/_static/img/logo_mini.svg" />
+    <img src="https://cdn.rawgit.com/openfisca/openfisca-doc/master/source/static/img/logo_mini.svg" alt="OpenFisca"/>
     
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
@@ -82,7 +82,7 @@
     <div class="sidebar-toc">
         <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html"><i class="fas fa-home"></i> Before you start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../architecture.html"><i class="fas fa-cubes"></i> Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html"><i class="fas fa-cubes"></i> Architecture of OpenFisca</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation/index.html"><i class="fas fa-cogs"></i> Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../key-concepts/index.html"><i class="fas fa-dice-d6"></i> Key concepts</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html"><i class="fas fa-code"></i> From law to code</a><ul class="current">
@@ -104,7 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulate/index.html"><i class="fas fa-chart-pie"></i> Running a simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i class="fab fa-python"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i class="fas fa-cloud"></i> OpenFisca web API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i class="fas fa-hands-helping"></i> Find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i class="fas fa-hands-helping"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
@@ -150,7 +150,7 @@
         <span class="k">return</span> <span class="n">salary</span> <span class="o">*</span> <span class="mf">0.25</span>
 </pre></div>
 </div>
-<p>Let’s explain in details the different parts of the code:</p>
+<p>Let’s explain in detail the different parts of the code:</p>
 <section id="the-variable-name">
 <h3>The variable name<a class="headerlink" href="#the-variable-name" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">flat_tax_on_salary(Variable):</span></code> declares a new variable named <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code>.  You can check out our recommended <a class="reference internal" href="../contribute/variables-naming.html"><span class="doc std std-doc">naming conventions</span></a>.</p>
@@ -159,29 +159,29 @@
 <h3>The variable attributes<a class="headerlink" href="#the-variable-attributes" title="Permalink to this headline">¶</a></h3>
 <p>All variables have a set of attributes.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">value_type</span></code> defines the type of the formula output. Possible types are the basic Python types.
+<li><p>The <code class="docutils literal notranslate"><span class="pre">value_type</span></code> defines the type of the formula output. Possible types are the basic Python types.
 Note however that OpenFisca uses NumPy to <a class="reference internal" href="25_vectorial_computing.html"><span class="doc std std-doc">run calculations vectorially</span></a>,
 so the actual type of data may be slightly different from the built-in Python ones.
 Available types are:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">bool</span></code>: boolean</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">date</span></code>: date</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Enum</span></code>: discrete value (from an enumerable). <a class="reference internal" href="20_input_variables.html"><span class="doc std std-doc">See details</span></a> in the next section.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Enum</span></code>: discrete value (from an enumerable). <a class="reference internal" href="20_input_variables.html"><span class="doc std std-doc">See details</span></a> in the next section</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">float</span></code>: float (Note that to reduce memory usage, float are stored on 32 bits using NumPy’s <code class="docutils literal notranslate"><span class="pre">float32</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: integer</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">str</span></code>: string</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">entity</span></code> defines who or what group the variable concerns, e.g. individuals, households, families.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">definition_period</span></code> defines the period on which the variable is calculated. It can be <code class="docutils literal notranslate"><span class="pre">MONTH</span></code> (e.g. salary), <code class="docutils literal notranslate"><span class="pre">YEAR</span></code> (e.g. income taxes), or ETERNITY (e.g. date of birth).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">label</span></code> is a human friendly way to describe the variable.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">reference</span></code> is a list of relevant legislative reference for this variables (usually URLs the text of the law or another trustworthy source).</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">entity</span></code> defines who or what group the variable concerns, e.g. individuals, households, and families.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">definition_period</span></code> defines the period on which the variable is calculated. It can be <code class="docutils literal notranslate"><span class="pre">MONTH</span></code> (e.g. salary), <code class="docutils literal notranslate"><span class="pre">YEAR</span></code> (e.g. income taxes), or ETERNITY (e.g. date of birth).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">label</span></code> is a human-friendly way to describe the variable.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">reference</span></code> is a list of relevant legislative references for a variable (usually URLs the text of the law or another trustworthy source).</p></li>
 </ul>
 </section>
 <section id="the-formula">
 <h3>The formula<a class="headerlink" href="#the-formula" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">formula(person,</span> <span class="pre">period):</span></code> declares the formula that will be used to calculate the <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> for a given <code class="docutils literal notranslate"><span class="pre">person</span></code> at a given <code class="docutils literal notranslate"><span class="pre">period</span></code>. Because <code class="docutils literal notranslate"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">MONTH</span></code>, <code class="docutils literal notranslate"><span class="pre">period</span></code> is constrained to be a month.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">formula(person,</span> <span class="pre">period):</span></code> declares the formula that will be used to calculate the <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> for a given <code class="docutils literal notranslate"><span class="pre">person</span></code> at a given <code class="docutils literal notranslate"><span class="pre">period</span></code>. Because <code class="docutils literal notranslate"><span class="pre">definition_period</span> <span class="pre">=</span> <span class="pre">MONTH</span></code> the <code class="docutils literal notranslate"><span class="pre">period</span></code> is constrained to be a month.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">salary</span> <span class="pre">=</span> <span class="pre">person('salary',</span> <span class="pre">period)</span></code> calculates the salary of the person, for the given month. This will, of course, work only if <code class="docutils literal notranslate"><span class="pre">salary</span></code> is another variable in the tax and benefit system.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">salary</span> <span class="pre">*</span> <span class="pre">0.25</span></code> returns the result for the given period.</p></li>
 <li><p><a class="reference internal" href="40_legislation_evolutions.html"><span class="doc std std-doc">Dated Formulas</span></a> have a start and/or an end date.</p></li>
@@ -190,7 +190,7 @@ Available types are:</p>
 </section>
 <section id="testing-a-formula">
 <h2>Testing a formula<a class="headerlink" href="#testing-a-formula" title="Permalink to this headline">¶</a></h2>
-<p>To make sure that the formula you have just written works the way you expect, you have to test it. Tests about legislation are written in a <a class="reference internal" href="writing_yaml_tests.html"><span class="doc std std-doc">YAML syntax</span></a>. The <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> formula can for instance be tested with the following test file:</p>
+<p>To make sure that the formula you have just written works the way you expect, you have to test it. Tests about the legislation are written in a <a class="reference internal" href="writing_yaml_tests.html"><span class="doc std std-doc">YAML syntax</span></a>. The <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> formula can for instance be tested with the following test file:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Flax</span><span class="nv"> </span><span class="s">tax</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">salary</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">No</span><span class="nv"> </span><span class="s">income&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017-01</span><span class="w"></span>
 <span class="w">  </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
@@ -210,7 +210,7 @@ Available types are:</p>
 </section>
 <section id="example-with-legislation-parameters">
 <h2>Example with legislation parameters<a class="headerlink" href="#example-with-legislation-parameters" title="Permalink to this headline">¶</a></h2>
-<p>To access a common legislation parameter, a third parameter can be added to the function signature. The previous formulas could thus be rewritten:</p>
+<p>To access a common legislation parameter, a third parameter can be added to the function signature. The previous formulas could thus be rewritten as:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">flat_tax_on_salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
@@ -223,7 +223,7 @@ Available types are:</p>
         <span class="k">return</span> <span class="n">salary</span> <span class="o">*</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">taxes</span><span class="o">.</span><span class="n">salary</span><span class="o">.</span><span class="n">rate</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">parameters</span></code> is here a function that be be called for a given period, and returns the whole legislation parameters (in a hierarchical tree structure). You can get the parameter you are interested in by navigating this tree with the <code class="docutils literal notranslate"><span class="pre">.</span></code> notation.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">parameters</span></code> is a function that can be called for a given period that returns the whole legislation parameters (in a hierarchical tree structure). You can access the specific parameter you are interested in by navigating the tree structure with the <code class="docutils literal notranslate"><span class="pre">.</span></code> notation.</p>
 </section>
 </section>
 
