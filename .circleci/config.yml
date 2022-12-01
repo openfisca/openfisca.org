@@ -30,12 +30,12 @@ jobs:
       - checkout
       - run:
           name: Install html-proofer
-          command: gem install html-proofer
+          command: gem install html-proofer --version 5
       - attach_workspace:
           at: .
       - run:
           name: Check HTML common mistakes
-          command: exec htmlproofer ./public --assume-extension .html --check-sri --disable-external --ignore-empty-alt
+          command: exec htmlproofer ./public --assume-extension .html --check-sri true --disable-external true --ignore-empty-alt true
 
   deploy:
     docker:
