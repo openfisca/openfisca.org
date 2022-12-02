@@ -48,6 +48,23 @@
         {{ $tags = $tags | append "tempus pellentesque eros facilisis quis" }}
 
         <div class="wrapper">
+            <div class="grid grid-hasPadding">
+                <h2 class="grid_col-12 grid_col-center">Built with OpenFisca</h2>
+                <div class="cards">
+                    {{ range $slug := .Param "homepage_featured" }}
+                        {{ $showcase := index $.Site.Data.showcase $slug }}
+                        {{ $description := index $showcase.description $.Site.Language.Lang }}
+                        {{ partial "card.html" (dict "title" $showcase.title "description" $description "country" $showcase.country "website" $showcase.website) . }}
+                    {{ end }}
+                    {{ partial "card.html" (dict "title" "Laboris nisi ut aliquip" "description" "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." "country" "FR" "website" "https://www.openfisca.org" "tags" $tags) . }}
+                </div>
+                <div class="grid_col-12 grid_col-center mt-L">
+                    <a href="#"></a><button>Browse all</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper">
             <div class="grid">
                 <div class="grid_col-12">
                     <h1>The most widely adopted free and open-source engine to write rules as code</h1>
