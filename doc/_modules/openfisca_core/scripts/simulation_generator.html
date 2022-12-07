@@ -111,7 +111,7 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.scripts.simulation_generator</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span>
 
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.simulations</span> <span class="kn">import</span> <span class="n">Simulation</span>
@@ -130,14 +130,14 @@
 <span class="sd">        &gt;&gt;&gt; simulation.calculate(&#39;revenu_disponible&#39;, 2017)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">simulation</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">)</span>
+    <span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">)</span>
     <span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">nb_persons</span>
     <span class="n">adults</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nb_persons</span><span class="p">),</span> <span class="n">nb_groups</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 
-    <span class="n">members_entity_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+    <span class="n">members_entity_id</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
 
     <span class="c1"># A legacy role is an index that every person within an entity has. For instance, the &#39;demandeur&#39; has legacy role 0, the &#39;conjoint&#39; 1, the first &#39;child&#39; 2, the second 3, etc.</span>
-    <span class="n">members_legacy_role</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+    <span class="n">members_legacy_role</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
 
     <span class="n">id_group</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">for</span> <span class="n">id_person</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">):</span>
@@ -153,7 +153,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">entity</span><span class="o">.</span><span class="n">is_person</span><span class="p">:</span>
             <span class="n">entity</span><span class="o">.</span><span class="n">members_entity_id</span> <span class="o">=</span> <span class="n">members_entity_id</span>
             <span class="n">entity</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">nb_groups</span>
-            <span class="n">entity</span><span class="o">.</span><span class="n">members_role</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">members_legacy_role</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">entity</span><span class="o">.</span><span class="n">members_role</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">members_legacy_role</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">simulation</span></div>
 
 
@@ -175,7 +175,7 @@
         <span class="n">condition</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">variable</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
     <span class="n">population</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">get_variable_population</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">population</span><span class="o">.</span><span class="n">count</span><span class="p">)</span> <span class="o">*</span> <span class="n">max_value</span> <span class="o">*</span> <span class="n">condition</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">population</span><span class="o">.</span><span class="n">count</span><span class="p">)</span> <span class="o">*</span> <span class="n">max_value</span> <span class="o">*</span> <span class="n">condition</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
     <span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
 </pre></div>
 
