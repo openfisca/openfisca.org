@@ -39,6 +39,14 @@
 
         {{ partial "hero.html" (dict "title" "The most widely adopted free and open-source engine to write rules as code" "subtitle" "OpenFisca enables modelling law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists." "dark" "true" "testimonials" $testimonials "bg" "true") . }}
 
+        {{ $tags := slice }}
+        {{ $tags = $tags | append "cases" }}
+        {{ $tags = $tags | append "survey" }}
+        {{ $tags = $tags | append "research_paper" }}
+        {{ $tags = $tags | append "Nam at viverra purus" }}
+        {{ $tags = $tags | append "Suspendisse facilisis lorem leo" }}
+        {{ $tags = $tags | append "tempus pellentesque eros facilisis quis" }}
+
         <div class="wrapper">
             <div class="grid">
                 <div class="grid_col-12">
@@ -47,6 +55,11 @@
                     <h2 class="h2-alternate">OpenFisca enables modelling law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists.</h2>
                     <h3>Improve the model</h3>
                     <h4>Policy experts and governments</h4>
+                    <ul class="tags">
+                        {{ range $tags }}
+                            <li class="tag">{{ . }}</li>
+                        {{ end }}
+                    </ul>
                 </div>
             </div>
         </div>
