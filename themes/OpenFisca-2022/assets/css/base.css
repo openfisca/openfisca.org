@@ -17,3 +17,102 @@ body {
   color: var(--colorGray700);
   line-height: 2.6rem;
 }
+
+.wrapper{
+  @mixin wrapper;
+}
+
+.grid{
+  @mixin grid;
+}
+
+.grid-hasPadding{
+  padding-top:var(--XL5);
+	padding-bottom:var(--XL5);
+
+  @media (--tabletSmall) {
+		padding-top:var(--XL3);
+		padding-bottom:var(--XL3);
+	}
+}
+
+.grid-hasPaddingTop{
+  padding-top:var(--XL5);
+
+  @media (--tabletSmall) {
+		padding-top:var(--XL3);
+	}
+}
+
+.grid-hasPaddingBottom{
+  padding-bottom:var(--XL5);
+
+  @media (--tabletSmall) {
+		padding-bottom:var(--XL3);
+	}
+}
+
+.flex{
+  @mixin flex;
+}
+
+.grid_col-12{
+  grid-column: auto / span 12;
+  max-width:100%; /* Fix Firefox overflow text breaks in grid cell, see https://bugzilla.mozilla.org/show_bug.cgi?id=1528030 */
+}
+
+.grid_col-10{
+  grid-column: auto / span 10;
+}
+
+.grid_col-8{
+  grid-column: auto / span 8;
+}
+
+.grid_col-6{
+  grid-column: auto / span 6;
+  max-width:100%;
+
+  @media (--tabletSmall) {
+		grid-column: auto / span 12;
+	}
+}
+
+.grid_col-4{
+  grid-column: auto / span 4;
+  max-width:100%;
+
+  @media (--tabletLarge) {
+		grid-column: auto / span 6;
+	}
+
+  @media (--tabletSmall) {
+		grid-column: auto / span 12;
+	}
+}
+
+.grid_col-3{
+  grid-column: auto / span 3;
+  max-width:100%;
+
+  @media (--tabletLarge) {
+		grid-column: auto / span 4;
+	}
+
+  @media (--tabletSmall) {
+		grid-column: auto / span 6;
+	}
+}
+
+.grid_col-2{
+  grid-column: auto / span 2;
+  max-width:100%;
+
+  @media (--tabletSmall) {
+		grid-column: auto / span 6;
+	}
+}
+
+.grid_col-center{
+  margin:auto;
+}
