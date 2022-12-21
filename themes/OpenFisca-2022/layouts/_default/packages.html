@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.Language }}">
+
+    {{ partial "head.html" . }}
+
+    <body>
+        {{ partial "sprite.svg" . }}
+
+        {{ partial "header.html" . }}
+
+        {{ partial "hero.html" (dict "title" .Params.hero.title "subtitle" .Params.hero.subtitle "center" true ) . }}
+
+         <div class="wrapper">
+            <div class="grid grid-hasPaddingBottom">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{ i18n "packages.jurisdiction" }}</th>
+                            <th>{{ i18n "packages.title" }}</th>
+                            <th>{{ i18n "packages.website" }}</th>
+                            <th>{{ i18n "packages.source" }}</th>
+                            <th>{{ i18n "packages.legislation_explorer" }}</th>
+                            <th>{{ i18n "packages.openapi_spec" }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ range $.Site.Data.packages }}
+                            <tr>
+                                <td data-column="{{ i18n "packages.jurisdiction" }}">
+                                    {{ if eq .jurisdiction "ZZ" }}
+                                        <span style="color:var(--colorGray500)">…</span>
+                                    {{ else }}
+                                        <div class="flag flag-{{ .jurisdiction }}">{{ .jurisdiction }}</div>
+                                    {{ end }}
+                                </td>
+                                <td data-column="{{ i18n "packages.title" }}">
+                                    {{ index .title $.Site.Language.Lang }}
+                                </td>
+                                <td data-column="{{ i18n "packages.website" }}" class="td-isTruncated">
+                                    {{ with .website }}
+                                        <a href="{{ . }}" target="_blank">{{ . }}</a>
+                                    {{ else }}
+                                        <span style="color:var(--colorGray500)">…</span>
+                                    {{ end }}
+                                </td>
+                                <td data-column="{{ i18n "packages.source" }}" class="td-isTruncated">
+                                    {{ with .source }}
+                                        <a href="{{ . }}" target="_blank">{{ . }}</a>
+                                    {{ else }}
+                                        <span style="color:var(--colorGray500)">…</span>
+                                    {{ end }}
+                                </td>
+                                <td data-column="{{ i18n "packages.legislation_explorer" }}" class="td-isTruncated">
+                                    {{ with .legislation_explorer }}
+                                        <a href="{{ . }}" target="_blank">{{ . }}</a>
+                                    {{ else }}
+                                        <span style="color:var(--colorGray500)">…</span>
+                                    {{ end }}
+                                </td>
+                                <td data-column="{{ i18n "packages.openapi_spec" }}" class="td-isTruncated">
+                                    {{ with .openapi_spec }}
+                                        <a href="{{ . }}" target="_blank">{{ . }}</a>
+                                    {{ else }}
+                                        <span style="color:var(--colorGray500)">…</span>
+                                    {{ end }}
+                                </td>
+                            </tr>
+                        {{ end }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {{ partial "footer.html" . }}
+    </body>
+
+</html>
