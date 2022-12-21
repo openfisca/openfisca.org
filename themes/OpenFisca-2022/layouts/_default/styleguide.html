@@ -292,6 +292,35 @@
         {{ partial "cta.html" (dict "title" "Magna duis id cillum aute aliquip aute dolor eu in quis ipsum mollit fugiat reprehenderit" "subtitle" "Consequat non amet ad occaecat cillum qui est aliquip consequat aliqua proident. Duis et nostrud in exercitation. Ad dolore ipsum dolore enim qui aute mollit esse commodo amet. Laborum consequat proident ullamco in. Eu incididunt nulla occaecat elit culpa irure anim sit culpa.") . }}
         {{ partial "cta.html" (dict "title" "A global contributive digital common" "subtitle" "OpenFisca is free and open source software. Any entity can reuse and build upon it, as long as it shares its improvements with the community. The product is built collaboratively by all those who use and contribute to it." "button" "About the project" "href" "/en/about") . }}
 
+        <div class="wrapper">
+            <div class="grid grid-hasPadding">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Jurisdiction</th>
+                            <th>Title</th>
+                            <th>Website</th>
+                            <th>Source</th>
+                            <th>Legislation explorer</th>
+                            <th>OpenAPI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ range $.Site.Data.packages }}
+                            <tr>
+                                <td data-column="Jurisdiction">{{ if eq .jurisdiction "ZZ" }}<span style="color:var(--colorGray500)">…</span>{{ else }}<div class="flag flag-{{ .jurisdiction }}">{{ .jurisdiction }}</div>{{ end }}</td>
+                                <td data-column="Title">{{ index .title $.Site.Language.Lang }}</td>
+                                <td data-column="Website" class="td-isTruncated">{{ with .website }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
+                                <td data-column="Source" class="td-isTruncated">{{ with .source }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
+                                <td data-column="Legislation explorer" class="td-isTruncated">{{ with .legislation_explorer }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
+                                <td data-column="OpenAPI" class="td-isTruncated">{{ with .openapi_spec }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
+                            </tr>
+                        {{ end }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         {{ partial "footer.html" . }}
     </body>
 </html>
