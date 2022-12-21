@@ -8,7 +8,18 @@
 
         {{ partial "header.html" . }}
 
-        {{ block "main" . }}{{ end }}
+        {{ partial "hero.html" (dict "title" .Params.hero.title "subtitle" .Params.hero.subtitle "center" true ) . }}
+
+        <div class="wrapper">
+            <div class="grid grid-hasPaddingBottom">
+                <div class="cards">
+                {{ range $.Site.Data.showcase }}
+                    {{ $description := index .description $.Site.Language.Lang }}
+                    {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website) . }}
+                {{ end }}
+                </div>
+            </div>
+        </div>
 
         {{ partial "footer.html" . }}
     </body>
