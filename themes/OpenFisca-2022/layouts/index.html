@@ -1,5 +1,70 @@
 {{ define "main" }}
 
-index.html
+   {{ partial "hero.html" (dict "title" .Params.hero.title "subtitle" .Params.hero.subtitle "dark" "true" "testimonials" .Params.hero.testimonials "bg" "true") . }}
+
+   {{ partial "columns.html" (dict "columns" .Params.for_who) . }}
+
+   <div class="wrapper">
+      <div class="grid grid-hasPadding">
+            <h2 class="grid_col-12 grid_col-center">{{ i18n "homepage.buildWith" }}</h2>
+            <div class="cards mt-XL2">
+               {{ range $slug := .Param "homepage_featured" }}
+                  {{ $showcase := index $.Site.Data.showcase $slug }}
+                  {{ $description := index $showcase.description $.Site.Language.Lang }}
+                  {{ partial "card.html" (dict "title" $showcase.title "description" $description "country" $showcase.country "website" $showcase.website) . }}
+               {{ end }}
+            </div>
+            <div class="grid_col-12 grid_col-center mt-XL2">
+               <a href="{{ relref . "showcase" }}"><button>{{ i18n "homepage.buildWith_cta" }}</button></a>
+            </div>
+      </div>
+   </div>
+
+   <div class="wrapper">
+      <div class="grid grid-hasPadding">
+         <h2 class="grid_col-12 grid_col-center">{{ i18n "homepage.howTo" }}</h2>
+         <div class="steps">
+            {{ range .Params.how_to }}
+               <div class="step {{ with .large }}step-isLarge{{ end }}">
+                  <div class="step_demo">
+                     {{ with .image }}<img src="/img/how-to/{{ . }}" alt="" />{{ end }}
+                     {{ with .tabs }}
+                        <div class="tabs">
+                           <ul class="tabs_nav">
+                              {{ range $index, $tab := . }}
+                                 <li class="tabs_nav_item"><a class="tabs_nav_link {{ if (eq $index 0) }}tabs_nav_link-isActive{{ end }}" href="#{{ $tab.title | urlize }}">{{ $tab.title }}</a></li>
+                              {{ end }}
+                           </ul>
+                           <div class="tabs_items">
+                              {{ range $index, $tab := . }}
+                                 <div class="tab {{ if (eq $index 0) }}tab-isActive{{ end }}" id="{{ $tab.title | urlize }}">
+                                    <script src="{{ $tab.gist }}"></script>
+                                 </div>
+                              {{ end }}
+                           </div>
+                        </div>
+                     {{ end }}
+                  </div>
+                  <div class="step_presentation">
+                     <h3 class="step_title">{{ .title }}</h3>
+                     <div class="step_description">{{ .description }}</div>
+                     {{ with .links }}
+                        <ul class="step_links">
+                           {{ range . }}
+                              <li class="step_link">
+                                 <a href="{{ .href }}" class="{{ with .icon }}link-hasIcon{{ end }}">
+                                    {{ with .icon }}<i icon-name="{{ . }}"></i>{{ end }}
+                                    {{ .label }}
+                                 </a>
+                              </li>
+                           {{ end }}
+                        </ul>
+                     {{ end }}
+                  </div>
+               </div>
+            {{ end }}
+         </div>
+      </div>
+   </div>
 
 {{ end }}

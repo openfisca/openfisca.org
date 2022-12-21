@@ -1,18 +1,51 @@
 ---
 title: "Write rules as code"
-get_started: Get started
-products: Powered by OpenFisca
-
-usecases:
-  citizens_rights:
-    title: Calculate citizens' rights
-    description: From an individual situation, calculate any rule of a tax and benefit system.
-
-  public_policy:
-    title: Evaluate the impact of public policy
-    description: Compare the legislation now to what it could be.
-
-  explore_the_rules:
-    title: Explore the Rules
-    description: Model any kind of government rule, explore them and evaluate who is eligible to what.
+hero:
+  title: "The most widely adopted free and open-source engine to write rules as code"
+  subtitle: "OpenFisca enables modelling law and regulation for any jurisdiction in the world and making i accessible over APIs for developers, datascientists and economists."
+  testimonials:
+    - image: "oecd.png"
+      title: "“Better policy outcomes and enhanced service delivery”"
+    - image: "dpg.png"
+      title: "Digital Public Good nominee"
+    - image: "joinup.png"
+      title: "“Most innovative open-source software” — Joinup, 2019"
+for_who:
+  - title: "Policy experts and governments"
+    description: "OpenFisca enables institutions to efficiently share regulation updates and to pool IT costs. Interconnecting rules across public bodies in the form of legible parameters and executable code provides algorithmic transparency and reduces the bill for the taxpayer."
+    icon: "landmark"
+  - title: "Developers and datascientists"
+    description: "OpenFisca enables developers to easily deliver apps calculating complex taxes and benefits through its JSON web API, and datascientists to compute large-scale through its vectorial Python API. Contributing formulas and coding extensions enables building services for any business."
+    icon: "terminal-square"
+  - title: "Economists and researchers"
+    description: "OpenFisca enables economists and researchers to use survey and administrative data to simulate the impact of any past, future, or hypothetical reform on the income of a given population. Linking all computed taxes and benefits enables analysing how multiple reforms interact."
+    icon: "line-chart"
+how_to:
+  - title: "Choose a package"
+    image: "choose-a-package.png"
+    description: "To define the properties of the people and legislation you want to use OpenFisca with."
+    links:
+      - href: "/en/packages"
+        label: "See all readily available models"
+        icon: "package"
+  - title: "Run a simulation"
+    large: true
+    description: "To calculate Tax and Benefit System variables on people’s situations. OpenFisca will work the same for one person or million in the modeled situation thanks to the vectorial computing."
+    links:
+      - href: "https://legislation.fr.openfisca.org/swagger"
+        label: Try the Python API
+      - href: "https://legislation.fr.openfisca.org/swagger"
+        label: Try the web API
+    tabs:
+      - title: "Python exemple"
+        gist: "https://gist.github.com/clementbiron/9b3c8f6c563a1187f1a50f128fea8a77.js"
+      - title: "JavaScript exemple"
+        gist: "https://gist.github.com/clementbiron/14fe80a88c4a2e33e73964434b537710.js"
+  - title: "Improve the model"
+    image: "improve-the-model.png"
+    description: "Collaborate with other contributors to model new laws, update legal values, handle edge cases, add real-world tests, improve the documentation… Country tax and benefit systems are open-source, so you’re never alone!"
+    links:
+      - href: "https://openfisca.slack.com"
+        label: "Join the Slack"
+        icon: "slack"
 ---
