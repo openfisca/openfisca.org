@@ -101,13 +101,17 @@ cd openfisca.org
 make install
 ```
 
+## Usage
 
-```
+### Building the site
+
+```sh
+make build
 ```
 
 The website will be built in the `public` directory.
 
-## Serving the app locally
+### Serving the app locally
 
 For development purposes:
 

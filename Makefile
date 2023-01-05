@@ -12,5 +12,8 @@ install:
 serve:
 	hugo serve --port ${PORT}
 
+build:
+	hugo
+
 test:
 	npm test
