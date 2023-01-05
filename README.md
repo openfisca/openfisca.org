@@ -121,8 +121,16 @@ make serve
 
 ### Linting JavaScript files
 
-To lint the javascript files use the following command:
+To lint the JavaScript files use the following command:
 
 ```sh
-npm run test -- --fix
-````
+npm run lint:js --fix
+```
+
+### Linting CSS files
+
+To lint the CSS files use the following command:
+
+```sh
+npm run lint:css --fix
+```
