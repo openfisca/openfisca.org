@@ -118,3 +118,11 @@ For development purposes:
 ```sh
 make serve
 ```
+
+### Linting JavaScript files
+
+To lint the javascript files use the following command:
+
+```sh
+npm run test -- --fix
+````
