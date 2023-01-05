@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-  $tabs = document.querySelectorAll('.tabs');
+  const $tabs = document.querySelectorAll('.tabs');
   $tabs.forEach(($tab) => {
-    $links = $tab.querySelectorAll('.tabs_nav_link');
+    const $links = $tab.querySelectorAll('.tabs_nav_link');
     $links.forEach(($link) => {
       $link.addEventListener('click', (e) => {
         $tab.querySelector('.tabs_nav_link-isActive').classList.toggle('tabs_nav_link-isActive');
