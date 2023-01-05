@@ -2,34 +2,35 @@
   outline: $size solid $color;
 }
 
-@define-mixin wrapper{
-  width:100%;
+@define-mixin wrapper {
+  width: 100%;
 }
 
-@define-mixin maxGridWidth $colsNumber:var(--gridColsNumber), $guttersNumber:var(--gridGuttersNumber){
+@define-mixin maxGridWidth $colsNumber:var(--gridColsNumber), $guttersNumber:var(--gridGuttersNumber) {
   max-width: calc((var(--gridColWidth) * $colsNumber) + (var(--gridGutterWidth) * $guttersNumber));
 }
 
-@define-mixin grid{
+@define-mixin grid {
   @mixin maxGridWidth;
+
   display: grid;
-  padding-right:var(--M);
-  padding-left:var(--M);
+  padding-right: var(--m);
+  padding-left: var(--m);
   grid-template-columns: repeat(var(--gridColsNumber), 1fr);
   gap: var(--gridGutterWidth);
-  justify-content:center;
-  margin:auto;
+  justify-content: center;
+  margin: auto;
 }
 
-@define-mixin flex{
+@define-mixin flex {
   @mixin maxGridWidth;
-  display: flex;
-  margin:0 auto;
-  width: 100%;
-  padding-right:var(--M);
-  padding-left:var(--M);
-}
 
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+  padding-right: var(--m);
+  padding-left: var(--m);
+}
 
 /* Read https://css-tricks.com/the-trick-to-viewport-units-on-mobile/ */
 @define-mixin height100vh {
@@ -38,17 +39,15 @@
 
 /* Read https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid */
 @define-mixin gridAutoFillSpace {
-  &:after {
-    content: '';
+  &::after {
+    content: "";
     flex: auto;
   }
 }
 
 /* Flex grid generator */
 @define-mixin flexCols $colNumber, $gutterNumber {
-  max-width: calc(
-    (var(--gridColWidth) * $(colNumber)) + (var(--gridGutterWidth) * $(gutterNumber))
-  );
+  max-width: calc((var(--gridColWidth) * $(colnumber)) + (var(--gridGutterWidth) * $(gutternumber)));
   width: 100%;
 }
 
