@@ -19,10 +19,10 @@
                     {{ range $.Site.Data.packages }}
                         <tr>
                             <td data-column="{{ i18n "packages.jurisdiction" }}">
-                                {{ if eq .jurisdiction "ZZ" }}
-                                    <span style="color:var(--colorGray500)">-</span>
+                                {{ with .jurisdiction }}
+                                    <div class="flag flag-{{ slicestr . 0 2 }}">{{ . }}</div>
                                 {{ else }}
-                                    <div class="flag flag-{{ slicestr .jurisdiction 0 2 }}">{{ .jurisdiction }}</div>
+                                    <span style="color:var(--colorGray500)">-</span>
                                 {{ end }}
                             </td>
                             <td data-column="{{ i18n "packages.title" }}">
