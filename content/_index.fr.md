@@ -38,9 +38,9 @@ how_to:
         label: "Essayez l'API web"
     tabs:
       - title: "Exemple en Python"
-        gist: "https://gist.github.com/clementbiron/9b3c8f6c563a1187f1a50f128fea8a77.js"
+        gist: "https://gist.github.com/openfisca-bot/128e09ee447dee4b7fb8df35833ba833.js"
       - title: "Exemple en JavaScript"
-        gist: "https://gist.github.com/clementbiron/14fe80a88c4a2e33e73964434b537710.js"
+        gist: "https://gist.github.com/openfisca-bot/409ae3837f14b7dc6a2563a2537beec1.js"
   - title: "Améliorer le modèle"
     image: "improve-the-model.png"
     description: "Collaborez avec d'autres contributeurs pour modéliser de nouvelles lois, mettre à jour les valeurs légales, gérer les cas limites, ajouter des tests du monde réel, améliorer la documentation... Les systèmes fiscaux et de prestations des pays sont des logiciels libres, vous n'êtes donc jamais seul !"

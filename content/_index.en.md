@@ -38,9 +38,9 @@ how_to:
         label: Try the web API
     tabs:
       - title: "Python exemple"
-        gist: "https://gist.github.com/clementbiron/9b3c8f6c563a1187f1a50f128fea8a77.js"
+        gist: "https://gist.github.com/openfisca-bot/128e09ee447dee4b7fb8df35833ba833.js"
       - title: "JavaScript exemple"
-        gist: "https://gist.github.com/clementbiron/14fe80a88c4a2e33e73964434b537710.js"
+        gist: "https://gist.github.com/openfisca-bot/409ae3837f14b7dc6a2563a2537beec1.js"
   - title: "Improve the model"
     image: "improve-the-model.png"
     description: "Collaborate with other contributors to model new laws, update legal values, handle edge cases, add real-world tests, improve the documentation… Country tax and benefit systems are open-source, so you’re never alone!"
