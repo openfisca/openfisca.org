@@ -33,14 +33,14 @@ how_to:
     description: "Pour calculer les variables du système d'imposition et de prestations sur les situations des personnes. OpenFisca fonctionnera de la même manière pour une personne ou un million dans la situation modélisée grâce au calcul vectoriel."
     links:
       - href: "https://legislation.fr.openfisca.org/swagger"
-        label: "Essayer l'API Python"
-      - href: "https://legislation.fr.openfisca.org/swagger"
         label: "Essayez l'API web"
+      - href: "https://legislation.fr.openfisca.org/swagger"
+        label: "Essayer l'API Python"
     tabs:
-      - title: "Exemple en Python"
-        gist: "https://gist.github.com/openfisca-bot/128e09ee447dee4b7fb8df35833ba833.js"
       - title: "Exemple en JavaScript"
         gist: "https://gist.github.com/openfisca-bot/409ae3837f14b7dc6a2563a2537beec1.js"
+      - title: "Exemple en Python"
+        gist: "https://gist.github.com/openfisca-bot/128e09ee447dee4b7fb8df35833ba833.js"
   - title: "Améliorer le modèle"
     image: "improve-the-model.png"
     description: "Collaborez avec d'autres contributeurs pour modéliser de nouvelles lois, mettre à jour les valeurs légales, gérer les cas limites, ajouter des tests du monde réel, améliorer la documentation... Les systèmes fiscaux et de prestations des pays sont des logiciels libres, vous n'êtes donc jamais seul !"
