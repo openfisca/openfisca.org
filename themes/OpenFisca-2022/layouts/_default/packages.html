@@ -7,12 +7,12 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>{{ i18n "packages.jurisdiction" }}</th>
+                        <th class="th-isMedium">{{ i18n "packages.jurisdiction" }}</th>
                         <th>{{ i18n "packages.title" }}</th>
                         <th>{{ i18n "packages.website" }}</th>
-                        <th>{{ i18n "packages.source" }}</th>
+                        <th class="th-isSmall">{{ i18n "packages.source" }}</th>
                         <th>{{ i18n "packages.legislation_explorer" }}</th>
-                        <th>{{ i18n "packages.openapi_spec" }}</th>
+                        <th class="th-isSmall">{{ i18n "packages.openapi_spec" }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,28 +30,46 @@
                             </td>
                             <td data-column="{{ i18n "packages.website" }}" class="td-isTruncated">
                                 {{ with .website }}
-                                    <a href="{{ . }}" target="_blank">{{ . }}</a>
+                                    {{ $url := urls.Parse . }}
+                                    <a href="{{ . }}" target="_blank">{{ replace $url.Host "www." "" }}</a>
                                 {{ else }}
                                     <span style="color:var(--colorGray500)">-</span>
                                 {{ end }}
                             </td>
                             <td data-column="{{ i18n "packages.source" }}" class="td-isTruncated">
                                 {{ with .source }}
-                                    <a href="{{ . }}" target="_blank">{{ . }}</a>
+                                    {{ $url := urls.Parse . }}
+                                    <a href="{{ . }}" target="_blank">
+                                        <button class="button-secondary button-small button-rounded">
+                                            {{ if strings.Contains $url.Host "github" }}
+                                                <i icon-name="github"></i>
+                                            {{ else }}
+                                                <i icon-name="file-code"></i>
+                                            {{ end }}
+                                        </button>
+                                    </a>
                                 {{ else }}
                                     <span style="color:var(--colorGray500)">-</span>
                                 {{ end }}
                             </td>
                             <td data-column="{{ i18n "packages.legislation_explorer" }}" class="td-isTruncated">
                                 {{ with .legislation_explorer }}
-                                    <a href="{{ . }}" target="_blank">{{ . }}</a>
+                                    <a href="{{ . }}" target="_blank">
+                                        <button class="button-secondary button-small button-rounded">
+                                            <i icon-name="link"></i>
+                                        </button>
+                                    </a>
                                 {{ else }}
                                     <span style="color:var(--colorGray500)">-</span>
                                 {{ end }}
                             </td>
                             <td data-column="{{ i18n "packages.openapi_spec" }}" class="td-isTruncated">
                                 {{ with .openapi_spec }}
-                                    <a href="{{ . }}" target="_blank">{{ . }}</a>
+                                    <a href="{{ . }}" target="_blank">
+                                        <button class="button-secondary button-small button-rounded">
+                                            <i icon-name="link"></i>
+                                        </button>
+                                    </a>
                                 {{ else }}
                                     <span style="color:var(--colorGray500)">-</span>
                                 {{ end }}

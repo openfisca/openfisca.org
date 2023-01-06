@@ -1,7 +1,9 @@
 import {
+  FileCode,
   Github,
   Landmark,
   LineChart,
+  Link,
   Menu,
   Package,
   Slack,
@@ -22,5 +24,7 @@ createIcons({
     TerminalSquare,
     LineChart,
     Package,
+    FileCode,
+    Link,
   },
 });

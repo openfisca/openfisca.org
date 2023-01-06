@@ -11,6 +11,7 @@
         text-align: left;
         font-weight: 500;
         background-color: var(--colorGray100);
+        width: auto;
 
         &:first-child {
           border-radius: 6px 0 0;
@@ -18,6 +19,24 @@
 
         &:last-child {
           border-radius: 0 6px 0 0;
+        }
+
+        &.th-isLarge {
+          width: 20rem;
+        }
+
+        &.th-isMedium {
+          width: 16rem;
+        }
+
+        &.th-isSmall {
+          width: 10rem;
+        }
+
+        &.th-isTruncated {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
@@ -39,6 +58,20 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  @media (--tabletLarge) {
+    & > thead {
+      & > tr {
+        & > th {
+          &.th-isLarge,
+          &.th-isMedium,
+          &.th-isSmall {
+            width: auto;
+          }
         }
       }
     }
