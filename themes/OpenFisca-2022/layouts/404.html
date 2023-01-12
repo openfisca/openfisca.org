@@ -1,0 +1,15 @@
+{{ define "main" }}
+  {{ with .Site.GetPage "/404" }}
+    {{if .Title }}
+      {{ partial "hero.html" (dict "title" .Title "center" "true" ) . }}
+    {{ end }}
+    <div class="wrapper">
+      <div class="grid grid-hasPaddingBottom">
+        <div class="grid_col-10 grid_col-center">
+          <div class="text text-center">
+            {{ .Content }}
+          </div>
+        </div>
+    </div>
+  {{ end }}
+{{ end }}

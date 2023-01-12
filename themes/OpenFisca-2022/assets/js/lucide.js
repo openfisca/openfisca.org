@@ -1,6 +1,7 @@
 import {
   FileCode,
   Github,
+  Home,
   Landmark,
   LineChart,
   Link,
@@ -26,5 +27,6 @@ createIcons({
     Package,
     FileCode,
     Link,
+    Home,
   },
 });
