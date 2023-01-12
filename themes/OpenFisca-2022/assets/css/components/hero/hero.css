@@ -1,83 +1,86 @@
-.hero{
-	@mixin wrapper;
-	overflow:hidden;
+.hero {
+  @mixin wrapper;
 
-	&.hero-isDark{
-		background-color:var(--colorPrimary);
+  overflow: hidden;
 
-		& .hero_content h1{
-			color:var(--colorWhite);
-		}
+  &.hero-isDark {
+    background-color: var(--colorPrimary);
 
-		& .hero_content .h2-alternate{
-			color:var(--colorGray100);
-		}
+    & .hero_content h1 {
+      color: var(--colorWhite);
+    }
 
-		& .testimonials{
-			& .testimonials_item_desc{
-				color:var(--colorGray300);
-			}
-		}
-	}
+    & .hero_content .h2-alternate {
+      color: var(--colorGray100);
+    }
 
-	&.hero-isCenter{
-		& > .hero_content{
-			align-items:center;
+    & .testimonials {
+      & .testimonials_item_desc {
+        color: var(--colorGray300);
+      }
+    }
+  }
 
-			& > h1{
-				text-align:center;
-			}
+  &.hero-isCenter {
+    & > .hero_content {
+      align-items: center;
 
-			& > h2{
-				text-align:center;
-			}
-		}
-	}
+      & > h1 {
+        text-align: center;
+      }
+
+      & > h2 {
+        text-align: center;
+      }
+    }
+  }
 }
 
-.hero_content{
-	@mixin flex;
-	flex-direction:column;
-	gap:var(--l);
-	padding-top:var(--xl5);
-	padding-bottom:var(--xl5);
-	position:relative;
+.hero_content {
+  @mixin flex;
 
-	& > h1{
-		z-index:2;
-		@mixin maxGridWidth 7,6;
-	}
+  flex-direction: column;
+  gap: var(--l);
+  padding-top: var(--xl5);
+  padding-bottom: var(--xl5);
+  position: relative;
 
-	& > h2{
-		z-index:2;
-		@mixin maxGridWidth 8,7;
-	}
+  & > h1 {
+    z-index: 2;
 
-	& > .testimonials{
-		z-index:2;
-		margin-top:var(--xl2);
-		margin-left:0;
-	}
+    @mixin maxGridWidth 7,6;
+  }
 
-	@media (--tabletSmall) {
-		padding-top:var(--xl3);
-		padding-bottom:var(--xl3);
-	}
+  & > h2 {
+    z-index: 2;
+
+    @mixin maxGridWidth 8,7;
+  }
+
+  & > .testimonials {
+    z-index: 2;
+    margin-top: var(--xl2);
+    margin-left: 0;
+  }
+
+  @media (--tabletSmall) {
+    padding-top: var(--xl3);
+    padding-bottom: var(--xl3);
+  }
 }
 
-.hero_bg{
-	position:absolute;
-	right:-400px;
-	top:-80px;
-	z-index:1;
+.hero_bg {
+  position: absolute;
+  right: -400px;
+  top: -80px;
+  z-index: 1;
 
-	& > svg {
-		width:943px;
-		height:951px;
-	}
+  & > svg {
+    width: 943px;
+    height: 951px;
+  }
 
-	@media (--tabletSmall) {
-		left: 50%;
-	}
+  @media (--tabletSmall) {
+    left: 50%;
+  }
 }
-

@@ -1,86 +1,87 @@
-.table{
-	grid-column: auto / span 12;
-	table-layout: fixed;
-	width: 100%;
-	border-collapse: collapse;
+.table {
+  grid-column: auto / span 12;
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
 
-	& > thead {
-		& > tr {
-			& > th {
-				padding: var(--s);
-				text-align:left;
-				font-weight: 500;
-				background-color: var(--colorGray100);
+  & > thead {
+    & > tr {
+      & > th {
+        padding: var(--s);
+        text-align: left;
+        font-weight: 500;
+        background-color: var(--colorGray100);
 
-				&:first-child{
-					border-radius:6px 0 0 0;
-				}
+        &:first-child {
+          border-radius: 6px 0 0;
+        }
 
-				&:last-child{
-					border-radius:0 6px 0 0;
-				}
-			}
-		}
-	}
+        &:last-child {
+          border-radius: 0 6px 0 0;
+        }
+      }
+    }
+  }
 
-	& > tbody {
-		& > tr {
-			border-bottom: 1px solid var(--colorGray100);
+  & > tbody {
+    & > tr {
+      border-bottom: 1px solid var(--colorGray100);
 
-			&:last-child{
-				border:none;
-			}
+      &:last-child {
+        border: none;
+      }
 
-			& > td {
-				padding: var(--s);
-				vertical-align: top;
+      & > td {
+        padding: var(--s);
+        vertical-align: top;
 
-				&.td-isTruncated{
-					overflow: hidden;
-					text-overflow: ellipsis;
-					white-space: nowrap;
-				}
-			}
-		}
-	}
+        &.td-isTruncated {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
 
-	@media (--tabletSmall) {
-		& > thead {
-			& > tr {
-				& > th {
-					display:none;
-				}
-			}
-		}
-		& > tbody {
-			& > tr {
-				display:block;
-				padding: var(--m) 0;
-				border-bottom: 1px solid var(--colorGray200);
+  @media (--tabletSmall) {
+    & > thead {
+      & > tr {
+        & > th {
+          display: none;
+        }
+      }
+    }
 
-				& > td {
-					display:flex;
-					flex-direction:row;
-					flex-wrap:0;
-					width:100%;
-					padding: var(--xs2) var(--s);
-					text-align:right;
+    & > tbody {
+      & > tr {
+        display: block;
+        padding: var(--m) 0;
+        border-bottom: 1px solid var(--colorGray200);
 
-					&:before {
-						content: attr(data-column);
-						flex-grow:1;
-						padding-right:var(--xs);
-						text-align:left;
-						font-weight: 500;
-					}
+        & > td {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: 0;
+          width: 100%;
+          padding: var(--xs2) var(--s);
+          text-align: right;
 
-					&.td-isTruncated{
-						overflow: visible;
-						text-overflow: none;
-						white-space: normal;
-					}
-				}
-			}
-		}
-	}
+          &::before {
+            content: attr(data-column);
+            flex-grow: 1;
+            padding-right: var(--xs);
+            text-align: left;
+            font-weight: 500;
+          }
+
+          &.td-isTruncated {
+            overflow: visible;
+            text-overflow: none;
+            white-space: normal;
+          }
+        }
+      }
+    }
+  }
 }
