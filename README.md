@@ -124,7 +124,13 @@ make serve
 To lint the JavaScript files use the following command:
 
 ```sh
-npm run lint:js --fix
+npm run lint:js
+```
+
+To apply automatic corrections use the following command:
+
+```sh
+npm run lint:js -- --fix
 ```
 
 ### Linting CSS files
@@ -132,5 +138,11 @@ npm run lint:js --fix
 To lint the CSS files use the following command:
 
 ```sh
-npm run lint:css --fix
+npm run lint:css
+```
+
+To apply automatic corrections use the following command:
+
+```sh
+npm run lint:css -- --fix
 ```
