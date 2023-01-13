@@ -1,7 +1,7 @@
 ---
-title: Showcase
+title: Vitrine
 hero:
-  title: Showcase
-  subtitle: Découvrez les produits construits avec OpenFisca
+  title: Vitrine
+  subtitle: Explorez des produits construits avec OpenFisca
 layout: showcase
 ---
