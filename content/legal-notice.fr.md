@@ -25,13 +25,4 @@ San Francisco, CA 94107 - United States
 
 ## Accessibilité
 
-La conformité aux normes d’accessibilité numérique est un objectif ultérieur mais nous tâchons de rendre ce site accessible à toutes et à tous.
-
-### Signaler un dysfonctionnement
-
-Si vous rencontrez un défaut d’accessibilité vous empêchant d’accéder à un contenu ou une fonctionnalité du site, merci de nous en faire part. Si vous n’obtenez pas de réponse rapide de notre part, vous êtes en droit de faire parvenir vos doléances ou une demande de saisine au Défenseur des droits.
-
-### En savoir plus
-
-Pour en savoir plus sur la politique d’accessibilité numérique de l’État : [https://references.modernisation.gouv.fr/accessibilite-numerique](https://references.modernisation.gouv.fr/accessibilite-numerique)
-
+Ce site n'a pas encore été audité pour vérifier sa conformité aux normes d’accessibilité numérique. Si vous rencontrez un défaut d’accessibilité vous empêchant d’accéder à un contenu ou une fonctionnalité du site, merci de [nous en faire part](mailto:contact@openfica.org?subject=Accessibilite). Si vous n'obtenez pas de réponse satisfaisante de notre part, vous êtes en droit de saisir le Défenseur des droits, comme l'indique [la politique d'accessibilité numérique de l’État français](https://references.modernisation.gouv.fr/accessibilite-numerique).

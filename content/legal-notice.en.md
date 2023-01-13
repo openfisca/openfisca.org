@@ -24,13 +24,4 @@ San Francisco, CA 94107 - United States
 
 ## Accessibility
 
-Compliance with digital accessibility standards is a future goal, but we strive to make this site accessible to all.
-
-### Report a malfunction
-
-If you encounter an accessibility problem that prevents you from accessing a content or a functionality of the site, please let us know. If you do not receive a quick response from us, you are entitled to send your complaints or a request for referral to the Human Rights Defender.
-
-### Learn more
-
-To find out more about the State's digital accessibility policy: [https://references.modernisation.gouv.fr/accessibilite-numerique](https://references.modernisation.gouv.fr/accessibilite-numerique)
-
+This website has not yet been audited for compliance with digital accessibility standards. If you encounter an accessibility problem that prevents you from accessing a content or a functionality of the site, please [let us know](mailto:contact@openfisca.org?subject=Accessibility). If you do not receive a satisfactory response from us, you are entitled to send a complaint to the _Défenseur des droits_, as set forth in [the French State's digital accessibility policy](https://references.modernisation.gouv.fr/accessibilite-numerique).
