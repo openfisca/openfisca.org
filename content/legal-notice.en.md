@@ -13,7 +13,7 @@ TSA 10717
 +33 1 85 58 60 00
 
 **Editorial director**
-Bérengère Aujard
+Caroline Corbal
 
 ## Hosting provider
 

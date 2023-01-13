@@ -14,7 +14,7 @@ TSA 10717
 +33 1 85 58 60 00
 
 **Directrice de la publication**
-Bérengère Aujard
+Caroline Corbal
 
 ## Hébergeur
 
