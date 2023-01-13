@@ -17,5 +17,8 @@ Notre outil de suivi, [Matomo](https://matomo.org), est configuré en conformit�
 
 Bien sûr ! Les données d'usage du site web d'OpenFisca sont [publiques](https://stats.data.gouv.fr/index.php?module=CoreHome&action=index&idSite=4&period=range&date=previous30#?module=Dashboard&action=embeddedIndex&idSite=4&period=range&date=previous30&idDashboard=1).
 
+## Moteur de calcul
 
+OpenFisca ne collecte ni ne traite aucune donnée personnelle.
 
+Les applications construites avec OpenFisca peuvent, elles, collecter des données personnelles et en transmettre une partie à OpenFisca pour effectuer des simulations. Le moteur de calcul n'enregistre pas, ni ne transfère, les données qui lui sont transmises.

@@ -16,5 +16,8 @@ Out tracking tool, [Matomo](https://matomo.org), is set up in compliance with th
 
 Of course! The usage data for the OpenFisca website is [public](https://stats.data.gouv.fr/index.php?module=CoreHome&action=index&idSite=4&period=range&date=previous30#?module=Dashboard&action=embeddedIndex&idSite=4&period=range&date=previous30&idDashboard=1).
 
+## Engine
 
+OpenFisca does not collect nor handle any personal information.
 
+Applications built with OpenFisca may collect personal information and send some of it to OpenFisca for the purpose of calculations. The engine does not store, nor transfer, the data it is sent.
