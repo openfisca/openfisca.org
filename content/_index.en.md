@@ -5,11 +5,17 @@ hero:
   subtitle: "Government departments, lawmakers and civil society finally share a common language to debate and activate social and fiscal policies: OpenFisca enables collaboratively modelling laws and regulations and making them computable over open APIs for developers, datascientists and researchers."
   testimonials:
     - image: oecd.png
-      title: “Better policy outcomes and enhanced service delivery”
+      author: OECD Observatory of Public Service Innovation
+      title: Rules as Code enables “better policy outcomes and enhanced service delivery”
+      link: https://oecd-opsi.org/publications/cracking-the-code/
     - image: dpg.png
-      title: Digital Public Good nominee
+      author: Digital Public Goods Alliance
+      title: Digital Public Good Nominee
+      link:
     - image: joinup.png
-      title: “Most innovative open-source software” — Joinup, 2019
+      author: European Commission Joinup programme
+      title: Recognised as “Most innovative open-source software” in 2019
+      link: https://joinup.ec.europa.eu/collection/sharing-and-reuse-it-solutions/sharing-reuse-awards-2019-results#oss-inno
 for_who:
   - title: Policy experts and governments
     description: OpenFisca enables institutions to efficiently share regulation updates and to pool IT costs. Interconnecting rules across public bodies in the form of legible parameters and executable code provides algorithmic transparency and reduces the bill for the taxpayer.

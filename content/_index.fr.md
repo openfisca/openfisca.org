@@ -5,11 +5,17 @@ hero:
   subtitle: "Les administrations, les parlementaires et la société civile partagent enfin un langage commun pour débattre et actionner les politiques sociales et fiscales : OpenFisca permet de modéliser collaborativement les lois et règlementations et de les mettre à disposition des développeurs, des experts de la donnée et des chercheurs grâce à des API ouvertes."
   testimonials:
     - image: oecd.png
-      title: « De meilleurs résultats politiques et une meilleure prestation de services »
+      author: Observatoire de l'innovation dans le service public de l'OCDE
+      title: Transformer la loi en code « améliore l'impact des politiques publiques et la fourniture de service »
+      link: https://oecd-opsi.org/publications/cracking-the-code/
     - image: dpg.png
-      title: Candidat au titre de bien public numérique
+      author: Digital Public Goods Alliance
+      title: Bien public numérique candidat
+      link:
     - image: joinup.png
-      title: « Logiciel open-source le plus innovant » - Joinup, 2019
+      author: Programme Joinup de la Commission européenne
+      title: Désigné « Logiciel open-source le plus innovant » en 2019
+      link: https://joinup.ec.europa.eu/collection/sharing-and-reuse-it-solutions/sharing-reuse-awards-2019-results#oss-inno
 for_who:
   - title: Les experts politiques et les gouvernements
     description: OpenFisca permet aux institutions de partager efficacement les mises à jour de la réglementation et de mutualiser les coûts informatiques. L'interconnexion des règles entre les organismes publics sous la forme de paramètres lisibles et de code exécutable offre une transparence algorithmique et réduit la facture pour le contribuable.
