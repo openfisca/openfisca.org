@@ -17,14 +17,14 @@ hero:
       title: Désigné « Logiciel open-source le plus innovant » en 2019
       link: https://joinup.ec.europa.eu/collection/sharing-and-reuse-it-solutions/sharing-reuse-awards-2019-results#oss-inno
 for_who:
-  - title: Les experts politiques et les gouvernements
-    description: OpenFisca permet aux institutions de partager efficacement les mises à jour de la réglementation et de mutualiser les coûts informatiques. L'interconnexion des règles entre les organismes publics sous la forme de paramètres lisibles et de code exécutable offre une transparence algorithmique et réduit la facture pour le contribuable.
+  - title: Administrations et cabinets
+    description: OpenFisca permet aux institutions de partager efficacement les mises à jour de la réglementation et de mutualiser les coûts. L'interconnexion des règles entre les organismes publics sous la forme de paramètres lisibles et de code exécutable offre une transparence algorithmique minimale immédiate et réduit les frais pour le contribuable.
     icon: landmark
-  - title: Développeurs et scientifiques des données
-    description: OpenFisca permet aux développeurs de fournir facilement des applications calculant des impôts et des prestations complexes grâce à son API web JSON, et aux scientifiques des données de calculer à grande échelle grâce à son API Python vectorielle. La contribution de formules et d'extensions de codage permet de construire des services pour n'importe quelle entreprise.
+  - title: Développeurs et datascientists
+    description: OpenFisca permet aux développeurs de produire facilement des applications calculant des taxes et prestations complexes grâce à son API web JSON, et aux datascientists de travailler à grande échelle grâce à son API Python vectorielle. La contribution de formules et le système d'extensions permet de produire des services pour n'importe quel contexte métier.
     icon: terminal-square
   - title: Économistes et chercheurs
-    description: OpenFisca permet aux économistes et aux chercheurs d'utiliser des données d'enquête et administratives pour simuler l'impact de toute réforme passée, future ou hypothétique sur le revenu d'une population donnée. La mise en relation de tous les impôts et prestations calculés permet d'analyser l'interaction de plusieurs réformes.
+    description: OpenFisca permet aux économistes et aux chercheurs d'utiliser des données administratives ou de recensement pour simuler l'impact de toute réforme passée ou future sur la distribution des revenus d'une population donnée. La mise en relation de toutes les prestations calculées permet d'analyser les interactions entre plusieurs réformes.
     icon: line-chart
 how_to:
   - title: Choisir un paquet

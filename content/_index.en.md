@@ -24,7 +24,7 @@ for_who:
     description: OpenFisca enables developers to easily deliver apps calculating complex taxes and benefits through its JSON web API, and datascientists to compute large-scale through its vectorial Python API. Contributing formulas and coding extensions enables building services for any business.
     icon: terminal-square
   - title: Economists and researchers
-    description: OpenFisca enables economists and researchers to use survey and administrative data to simulate the impact of any past, future, or hypothetical reform on the income of a given population. Linking all computed taxes and benefits enables analysing how multiple reforms interact.
+    description: OpenFisca enables economists and researchers to use survey and administrative data to simulate the impact of any past or future reform on the income distribution of a given population. Linking all computed taxes and benefits enables analysing how multiple reforms interact.
     icon: line-chart
 how_to:
   - title: Choose a package
