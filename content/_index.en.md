@@ -2,7 +2,7 @@
 title: Write rules as code
 hero:
   title: The most widely adopted free and open-source engine to write rules as code
-  subtitle: OpenFisca enables modelling law and regulation for any jurisdiction in the world and making i accessible over APIs for developers, datascientists and economists.
+  subtitle: "Government departments, lawmakers and civil society finally share a common language to debate and activate social and fiscal policies: OpenFisca enables collaboratively modelling laws and regulations and making them computable over open APIs for developers, datascientists and researchers."
   testimonials:
     - image: oecd.png
       title: “Better policy outcomes and enhanced service delivery”

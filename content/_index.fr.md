@@ -1,8 +1,8 @@
 ---
 title: Transformer le code législatif en code logiciel
 hero:
-  title: Le moteur libre et open-source le plus largement adopté pour écrire les règles en code logiciel
-  subtitle: OpenFisca permet de modéliser le droit et la réglementation pour n'importe quelle juridiction dans le monde et de rendre i accessible sur des API pour les développeurs, les scientifiques des données et les économistes.
+  title: Le moteur libre et open-source le plus utilisé pour transformer la loi en code
+  subtitle: "Les administrations, les parlementaires et la société civile partagent enfin un langage commun pour débattre et actionner les politiques sociales et fiscales : OpenFisca permet de modéliser collaborativement les lois et règlementations et de les mettre à disposition des développeurs, des experts de la donnée et des chercheurs grâce à des API ouvertes."
   testimonials:
     - image: oecd.png
       title: « De meilleurs résultats politiques et une meilleure prestation de services »
