@@ -27,31 +27,31 @@ for_who:
     description: OpenFisca enables economists and researchers to use survey and administrative data to simulate the impact of any past or future reform on the income distribution of a given population. Linking all computed taxes and benefits enables analysing how multiple reforms interact.
     icon: line-chart
 how_to:
-  - title: Choose a package
+  - title: Choose a country package
     image: choose-a-package.png
-    description: To define the properties of the people and legislation you want to use OpenFisca with.
+    description: Define the jurisdiction in which you operate and access its rules model.
     links:
       - href: /en/packages
-        label: See all readily available models
+        label: See all available packages
         icon: package
   - title: Run a simulation
     large: true
-    description: To calculate Tax and Benefit System variables on people’s situations. OpenFisca will work the same for one person or million in the modeled situation thanks to the vectorial computing.
+    description: Calculate values on situations you provide, of one person or of millions.
     links:
       - href: https://legislation.fr.openfisca.org/swagger
         label: Try the web API
       - href: https://legislation.fr.openfisca.org/swagger
         label: Try the Python API
     tabs:
-      - title: JavaScript exemple
+      - title: Web API example
         gist: https://gist.github.com/openfisca-bot/409ae3837f14b7dc6a2563a2537beec1.js
-      - title: Python exemple
+      - title: Python API example
         gist: https://gist.github.com/openfisca-bot/128e09ee447dee4b7fb8df35833ba833.js
   - title: Improve the model
     image: improve-the-model.png
-    description: Collaborate with other contributors to model new laws, update legal values, handle edge cases, add real-world tests, improve the documentation… Country tax and benefit systems are open-source, so you’re never alone!
+    description: Collaborate with other contributors to model new laws, update legal values, handle edge cases, add tests, improve documentation… Country packages are open-source, so you're never alone!
     links:
       - href: https://openfisca.slack.com
-        label: Join the Slack
+        label: Join the OpenFisca Slack space
         icon: slack
 ---
