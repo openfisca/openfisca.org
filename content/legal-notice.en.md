@@ -34,6 +34,3 @@ If you encounter an accessibility problem that prevents you from accessing a con
 
 To find out more about the State's digital accessibility policy: [https://references.modernisation.gouv.fr/accessibilite-numerique](https://references.modernisation.gouv.fr/accessibilite-numerique)
 
-## Security
-
-The site is protected by an electronic certificate, represented for the vast majority of browsers by a padlock. This protection contributes to the confidentiality of exchanges. Under no circumstances will the services associated with the platform be the source of emails requesting the entry of personal information.

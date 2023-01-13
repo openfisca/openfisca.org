@@ -35,6 +35,3 @@ Si vous rencontrez un défaut d’accessibilité vous empêchant d’accéder à
 
 Pour en savoir plus sur la politique d’accessibilité numérique de l’État : [https://references.modernisation.gouv.fr/accessibilite-numerique](https://references.modernisation.gouv.fr/accessibilite-numerique)
 
-## Sécurité
-
-Le site est protégé par un certificat électronique, matérialisé pour la grande majorité des navigateurs par un cadenas. Cette protection participe à la confidentialité des échanges. En aucun cas les services associés à la plateforme ne seront à l’origine d’envoi de courriels pour demander la saisie d’informations personnelles.
