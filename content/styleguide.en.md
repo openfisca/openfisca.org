@@ -1,4 +1,4 @@
 ---
-title: "Styleguide"
-layout: "styleguide"
+title: Styleguide
+layout: styleguide
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Legal notice"
+title: Legal notice
 ---
 
 ## Editor

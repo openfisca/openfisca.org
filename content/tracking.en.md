@@ -1,5 +1,5 @@
 ---
-title: "Cookies and opt-out"
+title: Cookies and opt-out
 ---
 
 When you visit this website, we leave a small text file (a \"cookie\") on your computer. This helps us measure how many visits we've had and which pages are most viewed.

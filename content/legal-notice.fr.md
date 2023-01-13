@@ -1,6 +1,6 @@
 ---
-title: "Mentions légales"
-url: "/fr/mentions-legales"
+title: Mentions légales
+url: /fr/mentions-legales
 ---
 
 ## Éditeur
