@@ -33,7 +33,7 @@ how_to:
     links:
       - href: /fr/packages
         label: Voir tous les modèles
-        icon: paquet
+        icon: package
   - title: Exécuter une simulation
     large: true
     description: Pour calculer les variables du système d'imposition et de prestations sur les situations des personnes. OpenFisca fonctionnera de la même manière pour une personne ou un million dans la situation modélisée grâce au calcul vectoriel.
