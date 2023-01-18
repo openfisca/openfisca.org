@@ -1,326 +1,317 @@
-<!DOCTYPE html>
-<html lang="{{ $.Site.Language }}">
+{{ define "main" }}
 
-    {{ partial "head.html" . }}
-    <body>
-        {{ partial "sprite.svg" . }}
+    {{ $columns := slice }}
+    {{ $columns = $columns | append (dict "title" "Policy experts and governments" "description" "OpenFisca enables institutions to efficiently share regulation updates and to pool IT costs. Interconnecting rules across public bodies in the form of legible parameters and executable code provides algorithmic transparency and reduces the bill for the taxpayer.") }}
+    {{ $columns = $columns | append (dict "title" "Developers and datascientists" "description" "OpenFisca enables developers to easily deliver apps calculating complex taxes and benefits through its JSON web API, and datascientists to compute large-scale through its vectorial Python API. Contributing formulas and coding extensions enables building services for any business.") }}
+    {{ $columns = $columns | append (dict "title" "Economists and researchers" "description" "OpenFisca enables economists and researchers to use survey and administrative data to simulate the impact of any past, future, or hypothetical reform on the income of a given population. Linking all computed taxes and benefits enables analysing how multiple reforms interact.") }}
+    {{ partial "columns.html" (dict "columns" $columns) . }}
 
-        {{ partial "header.html" . }}
+    {{ $columns := slice }}
+    {{ $columns = $columns | append (dict "title" "Policy experts and governments" "description" "OpenFisca enables institutions to efficiently share regulation updates and to pool IT costs. Interconnecting rules across public bodies in the form of legible parameters and executable code provides algorithmic transparency and reduces the bill for the taxpayer." "icon" "landmark") }}
+    {{ $columns = $columns | append (dict "title" "Developers and datascientists" "description" "OpenFisca enables developers to easily deliver apps calculating complex taxes and benefits through its JSON web API, and datascientists to compute large-scale through its vectorial Python API. Contributing formulas and coding extensions enables building services for any business." "icon" "terminal-square") }}
+    {{ $columns = $columns | append (dict "title" "Economists and researchers" "description" "OpenFisca enables economists and researchers to use survey and administrative data to simulate the impact of any past, future, or hypothetical reform on the income of a given population. Linking all computed taxes and benefits enables analysing how multiple reforms interact." "icon" "line-chart") }}
+    {{ partial "columns.html" (dict "columns" $columns) . }}
 
-        {{ $columns := slice }}
-        {{ $columns = $columns | append (dict "title" "Policy experts and governments" "description" "OpenFisca enables institutions to efficiently share regulation updates and to pool IT costs. Interconnecting rules across public bodies in the form of legible parameters and executable code provides algorithmic transparency and reduces the bill for the taxpayer.") }}
-        {{ $columns = $columns | append (dict "title" "Developers and datascientists" "description" "OpenFisca enables developers to easily deliver apps calculating complex taxes and benefits through its JSON web API, and datascientists to compute large-scale through its vectorial Python API. Contributing formulas and coding extensions enables building services for any business.") }}
-        {{ $columns = $columns | append (dict "title" "Economists and researchers" "description" "OpenFisca enables economists and researchers to use survey and administrative data to simulate the impact of any past, future, or hypothetical reform on the income of a given population. Linking all computed taxes and benefits enables analysing how multiple reforms interact.") }}
-        {{ partial "columns.html" (dict "columns" $columns) . }}
+    {{ $columns := slice }}
+    {{ $columns = $columns | append (dict "title" "Policy experts and governments" "description" "OpenFisca enables institutions to efficiently share regulation updates and to pool IT costs. Interconnecting rules across public bodies in the form of legible parameters and executable code provides algorithmic transparency and reduces the bill for the taxpayer." "colsize" 3) }}
+    {{ $columns = $columns | append (dict "title" "Developers and datascientists" "description" "OpenFisca enables developers to easily deliver apps calculating complex taxes and benefits through its JSON web API, and datascientists to compute large-scale through its vectorial Python API. Contributing formulas and coding extensions enables building services for any business." "colsize" 3) }}
+    {{ $columns = $columns | append (dict "title" "Economists and researchers" "description" "OpenFisca enables economists and researchers to use survey and administrative data to simulate the impact of any past, future, or hypothetical reform on the income of a given population. Linking all computed taxes and benefits enables analysing how multiple reforms interact." "colsize" 3) }}
+    {{ $columns = $columns | append (dict "title" "Maecenas pretium varius arcu, vitae suscipit mauris pulvinar vel." "desc" " Etiam eu vestibulum tellus. In hac habitasse platea dictumst. In mattis diam sed nisl venenatis, vitae aliquet neque blandit. Sed mollis, libero vitae mattis lobortis, felis orci mattis massa, ut placerat lorem dolor et tellus. Mauris elementum lacinia est sed tempor. Suspendisse potenti. Duis scelerisque porttitor diam, id egestas arcu feugiat tempor." "colsize" 3) }}
+    {{ partial "columns.html" (dict "columns" $columns) . }}
 
-        {{ $columns := slice }}
-        {{ $columns = $columns | append (dict "title" "Policy experts and governments" "description" "OpenFisca enables institutions to efficiently share regulation updates and to pool IT costs. Interconnecting rules across public bodies in the form of legible parameters and executable code provides algorithmic transparency and reduces the bill for the taxpayer." "icon" "landmark") }}
-        {{ $columns = $columns | append (dict "title" "Developers and datascientists" "description" "OpenFisca enables developers to easily deliver apps calculating complex taxes and benefits through its JSON web API, and datascientists to compute large-scale through its vectorial Python API. Contributing formulas and coding extensions enables building services for any business." "icon" "terminal-square") }}
-        {{ $columns = $columns | append (dict "title" "Economists and researchers" "description" "OpenFisca enables economists and researchers to use survey and administrative data to simulate the impact of any past, future, or hypothetical reform on the income of a given population. Linking all computed taxes and benefits enables analysing how multiple reforms interact." "icon" "line-chart") }}
-        {{ partial "columns.html" (dict "columns" $columns) . }}
+    {{ $testimonials := slice }}
+    {{ $testimonials = $testimonials | append (dict "title" "“Better policy outcomes and enhanced service delivery”" "image" "oecd.png") }}
+    {{ $testimonials = $testimonials | append (dict "title" "Digital Public Good nominee" "image" "dpg.png") }}
+    {{ $testimonials = $testimonials | append (dict "title" "“Most innovative open-source software” — Joinup, 2019" "image" "joinup.png") }}
+    {{ partial "testimonials.html" (dict "testimonials" $testimonials) . }}
 
-        {{ $columns := slice }}
-        {{ $columns = $columns | append (dict "title" "Policy experts and governments" "description" "OpenFisca enables institutions to efficiently share regulation updates and to pool IT costs. Interconnecting rules across public bodies in the form of legible parameters and executable code provides algorithmic transparency and reduces the bill for the taxpayer." "colsize" 3) }}
-        {{ $columns = $columns | append (dict "title" "Developers and datascientists" "description" "OpenFisca enables developers to easily deliver apps calculating complex taxes and benefits through its JSON web API, and datascientists to compute large-scale through its vectorial Python API. Contributing formulas and coding extensions enables building services for any business." "colsize" 3) }}
-        {{ $columns = $columns | append (dict "title" "Economists and researchers" "description" "OpenFisca enables economists and researchers to use survey and administrative data to simulate the impact of any past, future, or hypothetical reform on the income of a given population. Linking all computed taxes and benefits enables analysing how multiple reforms interact." "colsize" 3) }}
-        {{ $columns = $columns | append (dict "title" "Maecenas pretium varius arcu, vitae suscipit mauris pulvinar vel." "desc" " Etiam eu vestibulum tellus. In hac habitasse platea dictumst. In mattis diam sed nisl venenatis, vitae aliquet neque blandit. Sed mollis, libero vitae mattis lobortis, felis orci mattis massa, ut placerat lorem dolor et tellus. Mauris elementum lacinia est sed tempor. Suspendisse potenti. Duis scelerisque porttitor diam, id egestas arcu feugiat tempor." "colsize" 3) }}
-        {{ partial "columns.html" (dict "columns" $columns) . }}
+    {{ partial "hero.html" (dict "title" "The most widely adopted free and open-source engine to write rules as code") . }}
+    {{ partial "hero.html" (dict "title" "The most widely adopted free and open-source engine to write rules as code" "dark" "true") . }}
+    {{ partial "hero.html" (dict "title" "The most widely adopted free and open-source engine to write rules as code" "subtitle" "OpenFisca enables modelling law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists.") . }}
+    {{ partial "hero.html" (dict "title" "The most widely adopted free and open-source engine to write rules as code" "subtitle" "OpenFisca enables modelling law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists.") . }}
+    {{ partial "hero.html" (dict "title" "The most widely adopted free and open-source engine to write rules as code" "subtitle" "OpenFisca enables modelling law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists." "dark" "true" "testimonials" $testimonials "bg" "true") . }}
 
-        {{ $testimonials := slice }}
-        {{ $testimonials = $testimonials | append (dict "title" "“Better policy outcomes and enhanced service delivery”" "image" "oecd.png") }}
-        {{ $testimonials = $testimonials | append (dict "title" "Digital Public Good nominee" "image" "dpg.png") }}
-        {{ $testimonials = $testimonials | append (dict "title" "“Most innovative open-source software” — Joinup, 2019" "image" "joinup.png") }}
-        {{ partial "testimonials.html" (dict "testimonials" $testimonials) . }}
+    {{ $tags := slice }}
+    {{ $tags = $tags | append "cases" }}
+    {{ $tags = $tags | append "survey" }}
+    {{ $tags = $tags | append "research_paper" }}
+    {{ $tags = $tags | append "Nam at viverra purus" }}
+    {{ $tags = $tags | append "Suspendisse facilisis lorem leo" }}
+    {{ $tags = $tags | append "tempus pellentesque eros facilisis quis" }}
 
-        {{ partial "hero.html" (dict "title" "The most widely adopted free and open-source engine to write rules as code") . }}
-        {{ partial "hero.html" (dict "title" "The most widely adopted free and open-source engine to write rules as code" "dark" "true") . }}
-        {{ partial "hero.html" (dict "title" "The most widely adopted free and open-source engine to write rules as code" "subtitle" "OpenFisca enables modelling law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists.") . }}
-        {{ partial "hero.html" (dict "title" "The most widely adopted free and open-source engine to write rules as code" "subtitle" "OpenFisca enables modelling law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists.") . }}
-        {{ partial "hero.html" (dict "title" "The most widely adopted free and open-source engine to write rules as code" "subtitle" "OpenFisca enables modelling law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists." "dark" "true" "testimonials" $testimonials "bg" "true") . }}
-
-        {{ $tags := slice }}
-        {{ $tags = $tags | append "cases" }}
-        {{ $tags = $tags | append "survey" }}
-        {{ $tags = $tags | append "research_paper" }}
-        {{ $tags = $tags | append "Nam at viverra purus" }}
-        {{ $tags = $tags | append "Suspendisse facilisis lorem leo" }}
-        {{ $tags = $tags | append "tempus pellentesque eros facilisis quis" }}
-
-        <div class="wrapper">
-            <div class="grid grid-hasPadding">
-                <h2 class="grid_col-12 grid_col-center">Built with OpenFisca</h2>
-                <div class="cards">
-                    {{ range $slug := .Param "homepage_featured" }}
-                        {{ $showcase := index $.Site.Data.showcase $slug }}
-                        {{ $description := index $showcase.description $.Site.Language.Lang }}
-                        {{ partial "card.html" (dict "title" $showcase.title "description" $description "country" $showcase.country "website" $showcase.website) . }}
-                    {{ end }}
-                    {{ partial "card.html" (dict "title" "Laboris nisi ut aliquip" "description" "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." "country" "FR" "website" "https://www.openfisca.org" "tags" $tags) . }}
-                </div>
-                <div class="grid_col-12 grid_col-center mt-l">
-                    <a href="#"></a><button>Browse all</button></a>
-                </div>
+    <div class="wrapper">
+        <div class="grid grid-hasPadding">
+            <h2 class="grid_col-12 grid_col-center">Built with OpenFisca</h2>
+            <div class="cards">
+                {{ range $slug := .Param "homepage_featured" }}
+                    {{ $showcase := index $.Site.Data.showcase $slug }}
+                    {{ $description := index $showcase.description $.Site.Language.Lang }}
+                    {{ partial "card.html" (dict "title" $showcase.title "description" $description "country" $showcase.country "website" $showcase.website) . }}
+                {{ end }}
+                {{ partial "card.html" (dict "title" "Laboris nisi ut aliquip" "description" "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." "country" "FR" "website" "https://www.openfisca.org" "tags" $tags) . }}
+            </div>
+            <div class="grid_col-12 grid_col-center mt-l">
+                <a href="#"></a><button>Browse all</button></a>
             </div>
         </div>
-
-         <div class="wrapper">
-            <div class="grid grid-hasPadding">
-                 <div class="grid_col-12">
-                    <div class="tabs">
-                        <ul class="tabs_nav">
-                            <li class="tabs_nav_item"><a class="tabs_nav_link tabs_nav_link-isActive" href="#tab1">Tab 1</a></li>
-                            <li class="tabs_nav_item"><a class="tabs_nav_link" href="#tab2">Tab 2</a></li>
-                            <li class="tabs_nav_item"><a class="tabs_nav_link" href="#tab3">Tab 3</a></li>
-                            <li class="tabs_nav_item"><a class="tabs_nav_link" href="#tab4">Tab 4</a></li>
-                            <li class="tabs_nav_item"><a class="tabs_nav_link" href="#tab5">Tab 5</a></li>
-                            <li class="tabs_nav_item"><a class="tabs_nav_link" href="#tab6">Tab 6</a></li>
-                        </ul>
-                        <div class="tabs_items">
-                            <div class="tab tab-isActive" id="tab1">
-                                <script src="https://gist.github.com/clementbiron/9b3c8f6c563a1187f1a50f128fea8a77.js"></script>
-                            </div>
-                            <div class="tab" id="tab2">
-                                <script src="https://gist.github.com/clementbiron/14fe80a88c4a2e33e73964434b537710.js"></script>
-                            </div>
-                            <div class="tab" id="tab3">
-                                <div class="text">
-                                    <p>Reprehenderit fugiat excepteur qui velit id reprehenderit culpa adipisicing non veniam dolor mollit. Culpa dolore officia enim aliquip voluptate ad. Aute consectetur consectetur elit labore labore adipisicing duis ut do elit commodo ea enim. Anim quis id culpa voluptate nisi enim. Ad fugiat eiusmod velit incididunt deserunt ipsum consequat dolor cillum non aliqua sint. Dolor ipsum Lorem officia et cupidatat magna culpa eu dolor id.</p>
-                                </div>
-                            </div>
-                            <div class="tab" id="tab4">
-                                <div class="text">
-                                    <h4>Tab 4</h4>
-                                    <p>Nulla incididunt anim sint veniam culpa qui. Tempor mollit culpa fugiat sit consectetur veniam et ut fugiat aliqua. Dolore laboris ea nulla quis elit anim aute aliqua cillum minim. Irure elit deserunt incididunt nulla incididunt irure aliqua adipisicing est nostrud.</p>
-                                    <p>Occaecat ut elit nostrud labore dolore ipsum quis ex. Laboris nulla exercitation fugiat occaecat aute sint. Esse deserunt qui ad Lorem commodo ut. Ipsum duis adipisicing dolor nisi pariatur anim in consectetur magna consequat.</p>
-                                    <p>Dolore ipsum cillum eiusmod aute ad ipsum sint duis ad aliqua. Nisi esse labore non sit ipsum minim exercitation mollit reprehenderit esse velit officia. Esse id irure do qui do anim id irure. Laborum adipisicing eu aliquip sunt non incididunt veniam nostrud aliquip amet incididunt.</p>
-                                    <p>Cillum et aliquip aute cupidatat fugiat sit ut ipsum nulla. Dolore ipsum veniam sit eiusmod nulla. Ipsum eu et nisi officia do anim do consectetur cupidatat mollit ea reprehenderit est aliqua. Eiusmod tempor cupidatat nulla amet magna aliqua laboris tempor laborum. Aliqua nulla commodo quis magna ullamco aute pariatur proident nostrud in deserunt aliquip nulla ea. In cillum voluptate laboris sit labore fugiat proident quis tempor aute.</p>
-                                </div>
-                            </div>
-                            <div class="tab" id="tab5">
-                                <div class="text">
-                                    <h4>Tab 5</h4>
-                                    <p>Nulla incididunt anim sint veniam culpa qui. Tempor mollit culpa fugiat sit consectetur veniam et ut fugiat aliqua. Dolore laboris ea nulla quis elit anim aute aliqua cillum minim. Irure elit deserunt incididunt nulla incididunt irure aliqua adipisicing est nostrud.</p>
-                                    <p>Occaecat ut elit nostrud labore dolore ipsum quis ex. Laboris nulla exercitation fugiat occaecat aute sint. Esse deserunt qui ad Lorem commodo ut. Ipsum duis adipisicing dolor nisi pariatur anim in consectetur magna consequat.</p>
-                                    <p>Dolore ipsum cillum eiusmod aute ad ipsum sint duis ad aliqua. Nisi esse labore non sit ipsum minim exercitation mollit reprehenderit esse velit officia. Esse id irure do qui do anim id irure. Laborum adipisicing eu aliquip sunt non incididunt veniam nostrud aliquip amet incididunt.</p>
-                                    <p>Cillum et aliquip aute cupidatat fugiat sit ut ipsum nulla. Dolore ipsum veniam sit eiusmod nulla. Ipsum eu et nisi officia do anim do consectetur cupidatat mollit ea reprehenderit est aliqua. Eiusmod tempor cupidatat nulla amet magna aliqua laboris tempor laborum. Aliqua nulla commodo quis magna ullamco aute pariatur proident nostrud in deserunt aliquip nulla ea. In cillum voluptate laboris sit labore fugiat proident quis tempor aute.</p>
-                                </div>
-                            </div>
-                            <div class="tab" id="tab6">
-                                <div class="text">
-                                    <h4>Tab 6</h4>
-                                    <p>Nulla incididunt anim sint veniam culpa qui. Tempor mollit culpa fugiat sit consectetur veniam et ut fugiat aliqua. Dolore laboris ea nulla quis elit anim aute aliqua cillum minim. Irure elit deserunt incididunt nulla incididunt irure aliqua adipisicing est nostrud.</p>
-                                    <p>Occaecat ut elit nostrud labore dolore ipsum quis ex. Laboris nulla exercitation fugiat occaecat aute sint. Esse deserunt qui ad Lorem commodo ut. Ipsum duis adipisicing dolor nisi pariatur anim in consectetur magna consequat.</p>
-                                    <p>Dolore ipsum cillum eiusmod aute ad ipsum sint duis ad aliqua. Nisi esse labore non sit ipsum minim exercitation mollit reprehenderit esse velit officia. Esse id irure do qui do anim id irure. Laborum adipisicing eu aliquip sunt non incididunt veniam nostrud aliquip amet incididunt.</p>
-                                    <p>Cillum et aliquip aute cupidatat fugiat sit ut ipsum nulla. Dolore ipsum veniam sit eiusmod nulla. Ipsum eu et nisi officia do anim do consectetur cupidatat mollit ea reprehenderit est aliqua. Eiusmod tempor cupidatat nulla amet magna aliqua laboris tempor laborum. Aliqua nulla commodo quis magna ullamco aute pariatur proident nostrud in deserunt aliquip nulla ea. In cillum voluptate laboris sit labore fugiat proident quis tempor aute.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-            </div>
-        </div>
+    </div>
 
         <div class="wrapper">
-            <div class="grid grid-hasPadding">
-                <h2 class="grid_col-12 grid_col-center">How to use OpenFisca</h2>
-                <div class="steps">
-                    <div class="step">
-                        <div class="step_demo">
-                            <img src="/img/how-to/choose-a-package.png" alt="" />
-                        </div>
-                        <div class="step_presentation">
-                            <h3 class="step_title">Choose a package</h3>
-                            <div class="step_description">To define the properties of the people and legislation you want to use OpenFisca with.</div>
-                            <ul class="step_links">
-                                <li class="step_link"><a href="#" class="link-hasIcon"><i icon-name="package"></i>See all readily available models</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="step step-isLarge">
-                        <div class="step_presentation">
-                            <h3 class="step_title">Run a simulation</h3>
-                            <div class="step_description">To calculate Tax and Benefit System variables on people’s situations. OpenFisca will work the same for one person or million in the modeled situation thanks to the vectorial computing.</div>
-                            <ul class="step_links">
-                                <li class="step_link"><a href="#">Try the web API</a></li>
-                                <li class="step_link"><a href="#">Try the Python API</a></li>
-                            </ul>
-                        </div>
-                        <div class="step_demo hide-onMobile">
-                            <div class="tabs">
-                                <ul class="tabs_nav">
-                                    <li class="tabs_nav_item"><a class="tabs_nav_link tabs_nav_link-isActive" href="#python-simulation">Python exemple</a></li>
-                                    <li class="tabs_nav_item"><a class="tabs_nav_link" href="#javascript-simulation">JavaScript exemple</a></li>
-                                </ul>
-                                <div class="tabs_items">
-                                    <div class="tab tab-isActive" id="python-simulation">
-                                        <script src="https://gist.github.com/clementbiron/9b3c8f6c563a1187f1a50f128fea8a77.js"></script>
-                                    </div>
-                                    <div class="tab" id="javascript-simulation">
-                                        <script src="https://gist.github.com/clementbiron/14fe80a88c4a2e33e73964434b537710.js"></script>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step_demo">
-                            <img src="/img/how-to/improve-the-model.png" alt="" />
-                        </div>
-                        <div class="step_presentation">
-                            <h3 class="step_title">Improve the model</h3>
-                            <div class="step_description">Collaborate with other contributors to model new laws, update legal values, handle edge cases, add real-world tests, improve the documentation… Country tax and benefit systems are open-source, so you’re never alone!</div>
-                            <ul class="step_links">
-                                <li class="step_link"><a href="#" class="link-hasIcon"><i icon-name="slack"></i>Join the Slack</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrapper">
-            <div class="grid">
+        <div class="grid grid-hasPadding">
                 <div class="grid_col-12">
-                    <h1>The most widely adopted free and open-source engine to write rules as code</h1>
-                    <h2>Built with OpenFisca</h2>
-                    <h2 class="h2-alternate">OpenFisca enables modelling law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists.</h2>
-                    <h3>Improve the model</h3>
-                    <h4>Policy experts and governments</h4>
-                    <ul class="tags">
-                        {{ range $tags }}
-                            <li class="tag">{{ . }}</li>
-                        {{ end }}
+                <div class="tabs">
+                    <ul class="tabs_nav">
+                        <li class="tabs_nav_item"><a class="tabs_nav_link tabs_nav_link-isActive" href="#tab1">Tab 1</a></li>
+                        <li class="tabs_nav_item"><a class="tabs_nav_link" href="#tab2">Tab 2</a></li>
+                        <li class="tabs_nav_item"><a class="tabs_nav_link" href="#tab3">Tab 3</a></li>
+                        <li class="tabs_nav_item"><a class="tabs_nav_link" href="#tab4">Tab 4</a></li>
+                        <li class="tabs_nav_item"><a class="tabs_nav_link" href="#tab5">Tab 5</a></li>
+                        <li class="tabs_nav_item"><a class="tabs_nav_link" href="#tab6">Tab 6</a></li>
                     </ul>
-                    <div class="flag flag-FR">FR</div>
-                    <div class="flag flag-AD">AD</div>
-                    <div class="flag flag-AI">AI</div>
-                    <div class="flag flag-IQ">IQ</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrapper">
-            <div class="grid">
-                <div class="grid_col-12">
-                    <p>OpenFisca <a href="#">enables modelling</a> law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists.</p>
-                    <p>Anim enim <strong>incididunt cupidatat voluptate sunt</strong> id occaecat pariatur enim ipsum mollit officia. Culpa incididunt velit in exercitation mollit et quis pariatur aliqua et reprehenderit proident ipsum. Veniam eiusmod cupidatat nostrud quis mollit eu elit deserunt. Duis occaecat cillum sint voluptate cupidatat laborum minim.</p>
-                    <p>Amet ex est occaecat nostrud ipsum laborum. Elit in elit adipisicing anim. Amet sit nostrud excepteur aliqua nulla nisi irure. Incididunt mollit culpa ipsum voluptate. Magna pariatur nulla exercitation amet ipsum esse sunt ea voluptate velit voluptate qui.</p>
-                    <p>Dolore irure commodo in deserunt fugiat ipsum ut id. <a href="#">Officia non consectetur esse aliquip voluptate. Occaecat voluptate aliquip qui ut. enables modelling law and regulation for any jurisdiction</a> in the world and making it accessible over APIs for developers, datascientists and economists.</p>
-                    <p>Et cupidatat id commodo adipisicing tempor. Enim duis incididunt ex aliqua Lorem deserunt sunt exercitation adipisicing culpa veniam consequat aliqua. Quis laboris culpa amet pariatur. Voluptate qui elit qui sunt magna culpa adipisicing sunt deserunt commodo nulla anim ex proident. et culpa do.</p>
-                    <p><a href="#" class="link-hasIcon"><i icon-name="slack"></i>Join the Slack</a></p>
-                    <p><a href="#" class="link-hasIcon"><i icon-name="package"></i>See all readily available models</a></p>
-                    <div class="iconWrapper">
-                        <i class="" icon-name="landmark"></i>
+                    <div class="tabs_items">
+                        <div class="tab tab-isActive" id="tab1">
+                            <script src="https://gist.github.com/clementbiron/9b3c8f6c563a1187f1a50f128fea8a77.js"></script>
+                        </div>
+                        <div class="tab" id="tab2">
+                            <script src="https://gist.github.com/clementbiron/14fe80a88c4a2e33e73964434b537710.js"></script>
+                        </div>
+                        <div class="tab" id="tab3">
+                            <div class="text">
+                                <p>Reprehenderit fugiat excepteur qui velit id reprehenderit culpa adipisicing non veniam dolor mollit. Culpa dolore officia enim aliquip voluptate ad. Aute consectetur consectetur elit labore labore adipisicing duis ut do elit commodo ea enim. Anim quis id culpa voluptate nisi enim. Ad fugiat eiusmod velit incididunt deserunt ipsum consequat dolor cillum non aliqua sint. Dolor ipsum Lorem officia et cupidatat magna culpa eu dolor id.</p>
+                            </div>
+                        </div>
+                        <div class="tab" id="tab4">
+                            <div class="text">
+                                <h4>Tab 4</h4>
+                                <p>Nulla incididunt anim sint veniam culpa qui. Tempor mollit culpa fugiat sit consectetur veniam et ut fugiat aliqua. Dolore laboris ea nulla quis elit anim aute aliqua cillum minim. Irure elit deserunt incididunt nulla incididunt irure aliqua adipisicing est nostrud.</p>
+                                <p>Occaecat ut elit nostrud labore dolore ipsum quis ex. Laboris nulla exercitation fugiat occaecat aute sint. Esse deserunt qui ad Lorem commodo ut. Ipsum duis adipisicing dolor nisi pariatur anim in consectetur magna consequat.</p>
+                                <p>Dolore ipsum cillum eiusmod aute ad ipsum sint duis ad aliqua. Nisi esse labore non sit ipsum minim exercitation mollit reprehenderit esse velit officia. Esse id irure do qui do anim id irure. Laborum adipisicing eu aliquip sunt non incididunt veniam nostrud aliquip amet incididunt.</p>
+                                <p>Cillum et aliquip aute cupidatat fugiat sit ut ipsum nulla. Dolore ipsum veniam sit eiusmod nulla. Ipsum eu et nisi officia do anim do consectetur cupidatat mollit ea reprehenderit est aliqua. Eiusmod tempor cupidatat nulla amet magna aliqua laboris tempor laborum. Aliqua nulla commodo quis magna ullamco aute pariatur proident nostrud in deserunt aliquip nulla ea. In cillum voluptate laboris sit labore fugiat proident quis tempor aute.</p>
+                            </div>
+                        </div>
+                        <div class="tab" id="tab5">
+                            <div class="text">
+                                <h4>Tab 5</h4>
+                                <p>Nulla incididunt anim sint veniam culpa qui. Tempor mollit culpa fugiat sit consectetur veniam et ut fugiat aliqua. Dolore laboris ea nulla quis elit anim aute aliqua cillum minim. Irure elit deserunt incididunt nulla incididunt irure aliqua adipisicing est nostrud.</p>
+                                <p>Occaecat ut elit nostrud labore dolore ipsum quis ex. Laboris nulla exercitation fugiat occaecat aute sint. Esse deserunt qui ad Lorem commodo ut. Ipsum duis adipisicing dolor nisi pariatur anim in consectetur magna consequat.</p>
+                                <p>Dolore ipsum cillum eiusmod aute ad ipsum sint duis ad aliqua. Nisi esse labore non sit ipsum minim exercitation mollit reprehenderit esse velit officia. Esse id irure do qui do anim id irure. Laborum adipisicing eu aliquip sunt non incididunt veniam nostrud aliquip amet incididunt.</p>
+                                <p>Cillum et aliquip aute cupidatat fugiat sit ut ipsum nulla. Dolore ipsum veniam sit eiusmod nulla. Ipsum eu et nisi officia do anim do consectetur cupidatat mollit ea reprehenderit est aliqua. Eiusmod tempor cupidatat nulla amet magna aliqua laboris tempor laborum. Aliqua nulla commodo quis magna ullamco aute pariatur proident nostrud in deserunt aliquip nulla ea. In cillum voluptate laboris sit labore fugiat proident quis tempor aute.</p>
+                            </div>
+                        </div>
+                        <div class="tab" id="tab6">
+                            <div class="text">
+                                <h4>Tab 6</h4>
+                                <p>Nulla incididunt anim sint veniam culpa qui. Tempor mollit culpa fugiat sit consectetur veniam et ut fugiat aliqua. Dolore laboris ea nulla quis elit anim aute aliqua cillum minim. Irure elit deserunt incididunt nulla incididunt irure aliqua adipisicing est nostrud.</p>
+                                <p>Occaecat ut elit nostrud labore dolore ipsum quis ex. Laboris nulla exercitation fugiat occaecat aute sint. Esse deserunt qui ad Lorem commodo ut. Ipsum duis adipisicing dolor nisi pariatur anim in consectetur magna consequat.</p>
+                                <p>Dolore ipsum cillum eiusmod aute ad ipsum sint duis ad aliqua. Nisi esse labore non sit ipsum minim exercitation mollit reprehenderit esse velit officia. Esse id irure do qui do anim id irure. Laborum adipisicing eu aliquip sunt non incididunt veniam nostrud aliquip amet incididunt.</p>
+                                <p>Cillum et aliquip aute cupidatat fugiat sit ut ipsum nulla. Dolore ipsum veniam sit eiusmod nulla. Ipsum eu et nisi officia do anim do consectetur cupidatat mollit ea reprehenderit est aliqua. Eiusmod tempor cupidatat nulla amet magna aliqua laboris tempor laborum. Aliqua nulla commodo quis magna ullamco aute pariatur proident nostrud in deserunt aliquip nulla ea. In cillum voluptate laboris sit labore fugiat proident quis tempor aute.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="iconWrapper">
-                        <i class="" icon-name="terminal-square"></i>
+                </div>
+                </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="grid grid-hasPadding">
+            <h2 class="grid_col-12 grid_col-center">How to use OpenFisca</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step_demo">
+                        <img src="/img/how-to/choose-a-package.png" alt="" />
                     </div>
-                    <div class="iconWrapper">
-                        <i class="" icon-name="line-chart"></i>
+                    <div class="step_presentation">
+                        <h3 class="step_title">Choose a package</h3>
+                        <div class="step_description">To define the properties of the people and legislation you want to use OpenFisca with.</div>
+                        <ul class="step_links">
+                            <li class="step_link"><a href="#" class="link-hasIcon"><i icon-name="package"></i>See all readily available models</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step step-isLarge">
+                    <div class="step_presentation">
+                        <h3 class="step_title">Run a simulation</h3>
+                        <div class="step_description">To calculate Tax and Benefit System variables on people’s situations. OpenFisca will work the same for one person or million in the modeled situation thanks to the vectorial computing.</div>
+                        <ul class="step_links">
+                            <li class="step_link"><a href="#">Try the web API</a></li>
+                            <li class="step_link"><a href="#">Try the Python API</a></li>
+                        </ul>
+                    </div>
+                    <div class="step_demo hide-onMobile">
+                        <div class="tabs">
+                            <ul class="tabs_nav">
+                                <li class="tabs_nav_item"><a class="tabs_nav_link tabs_nav_link-isActive" href="#python-simulation">Python exemple</a></li>
+                                <li class="tabs_nav_item"><a class="tabs_nav_link" href="#javascript-simulation">JavaScript exemple</a></li>
+                            </ul>
+                            <div class="tabs_items">
+                                <div class="tab tab-isActive" id="python-simulation">
+                                    <script src="https://gist.github.com/clementbiron/9b3c8f6c563a1187f1a50f128fea8a77.js"></script>
+                                </div>
+                                <div class="tab" id="javascript-simulation">
+                                    <script src="https://gist.github.com/clementbiron/14fe80a88c4a2e33e73964434b537710.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step_demo">
+                        <img src="/img/how-to/improve-the-model.png" alt="" />
+                    </div>
+                    <div class="step_presentation">
+                        <h3 class="step_title">Improve the model</h3>
+                        <div class="step_description">Collaborate with other contributors to model new laws, update legal values, handle edge cases, add real-world tests, improve the documentation… Country tax and benefit systems are open-source, so you’re never alone!</div>
+                        <ul class="step_links">
+                            <li class="step_link"><a href="#" class="link-hasIcon"><i icon-name="slack"></i>Join the Slack</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="wrapper">
-            <div class="grid grid-hasPadding">
-                <div class="grid_col-12 grid_col-center">
-                    <button class="button-secondary">Esse elit sunt fugiat</button>
-                    <a href="#"><button>Esse elit sunt fugiat</button></a>
-                    <a href="#"><button class="button-secondary">Esse elit sunt fugiat</button></a>
+    <div class="wrapper">
+        <div class="grid">
+            <div class="grid_col-12">
+                <h1>The most widely adopted free and open-source engine to write rules as code</h1>
+                <h2>Built with OpenFisca</h2>
+                <h2 class="h2-alternate">OpenFisca enables modelling law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists.</h2>
+                <h3>Improve the model</h3>
+                <h4>Policy experts and governments</h4>
+                <ul class="tags">
+                    {{ range $tags }}
+                        <li class="tag">{{ . }}</li>
+                    {{ end }}
+                </ul>
+                <div class="flag flag-FR">FR</div>
+                <div class="flag flag-AD">AD</div>
+                <div class="flag flag-AI">AI</div>
+                <div class="flag flag-IQ">IQ</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="grid">
+            <div class="grid_col-12">
+                <p>OpenFisca <a href="#">enables modelling</a> law and regulation for any jurisdiction in the world and making it accessible over APIs for developers, datascientists and economists.</p>
+                <p>Anim enim <strong>incididunt cupidatat voluptate sunt</strong> id occaecat pariatur enim ipsum mollit officia. Culpa incididunt velit in exercitation mollit et quis pariatur aliqua et reprehenderit proident ipsum. Veniam eiusmod cupidatat nostrud quis mollit eu elit deserunt. Duis occaecat cillum sint voluptate cupidatat laborum minim.</p>
+                <p>Amet ex est occaecat nostrud ipsum laborum. Elit in elit adipisicing anim. Amet sit nostrud excepteur aliqua nulla nisi irure. Incididunt mollit culpa ipsum voluptate. Magna pariatur nulla exercitation amet ipsum esse sunt ea voluptate velit voluptate qui.</p>
+                <p>Dolore irure commodo in deserunt fugiat ipsum ut id. <a href="#">Officia non consectetur esse aliquip voluptate. Occaecat voluptate aliquip qui ut. enables modelling law and regulation for any jurisdiction</a> in the world and making it accessible over APIs for developers, datascientists and economists.</p>
+                <p>Et cupidatat id commodo adipisicing tempor. Enim duis incididunt ex aliqua Lorem deserunt sunt exercitation adipisicing culpa veniam consequat aliqua. Quis laboris culpa amet pariatur. Voluptate qui elit qui sunt magna culpa adipisicing sunt deserunt commodo nulla anim ex proident. et culpa do.</p>
+                <p><a href="#" class="link-hasIcon"><i icon-name="slack"></i>Join the Slack</a></p>
+                <p><a href="#" class="link-hasIcon"><i icon-name="package"></i>See all readily available models</a></p>
+                <div class="iconWrapper">
+                    <i class="" icon-name="landmark"></i>
                 </div>
-                <div class="grid_col-12 grid_col-center">
-                    <a href="#"><button><i icon-name="slack"></i>Esse elit sunt fugiat</button></a>
-                    <a href="#"><button class="button-secondary"><i icon-name="slack"></i>Esse elit sunt fugiat</button></a>
+                <div class="iconWrapper">
+                    <i class="" icon-name="terminal-square"></i>
+                </div>
+                <div class="iconWrapper">
+                    <i class="" icon-name="line-chart"></i>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="wrapper">
-            <div class="grid">
-                <div class="grid_col-12">1</div>
+    <div class="wrapper">
+        <div class="grid grid-hasPadding">
+            <div class="grid_col-12 grid_col-center">
+                <button class="button-secondary">Esse elit sunt fugiat</button>
+                <a href="#"><button>Esse elit sunt fugiat</button></a>
+                <a href="#"><button class="button-secondary">Esse elit sunt fugiat</button></a>
+            </div>
+            <div class="grid_col-12 grid_col-center">
+                <a href="#"><button><i icon-name="slack"></i>Esse elit sunt fugiat</button></a>
+                <a href="#"><button class="button-secondary"><i icon-name="slack"></i>Esse elit sunt fugiat</button></a>
             </div>
         </div>
-        <div class="wrapper">
-            <div class="grid">
-                <div class="grid_col-6">1</div>
-                <div class="grid_col-6">2</div>
-            </div>
-        </div>
-        <div class="wrapper">
-            <div class="grid">
-                <div class="grid_col-4">1</div>
-                <div class="grid_col-4">2</div>
-                <div class="grid_col-4">3</div>
-            </div>
-        </div>
-        <div class="wrapper">
-            <div class="grid">
-                <div class="grid_col-3">1</div>
-                <div class="grid_col-3">2</div>
-                <div class="grid_col-3">3</div>
-                <div class="grid_col-3">4</div>
-            </div>
-        </div>
-        <div class="wrapper">
-            <div class="grid">
-                <div class="grid_col-2">1</div>
-                <div class="grid_col-2">2</div>
-                <div class="grid_col-2">3</div>
-                <div class="grid_col-2">4</div>
-                <div class="grid_col-2">5</div>
-                <div class="grid_col-2">6</div>
-            </div>
-        </div>
-        <div class="wrapper">
-            <div class="grid">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
-                <div>5</div>
-                <div>6</div>
-                <div>7</div>
-                <div>8</div>
-                <div>9</div>
-                <div>10</div>
-                <div>11</div>
-                <div>12</div>
-            </div>
-        </div>
+    </div>
 
-        {{ partial "cta.html" (dict "title" "Magna duis id cillum aute aliquip aute dolor eu in quis ipsum mollit fugiat reprehenderit" "subtitle" "Consequat non amet ad occaecat cillum qui est aliquip consequat aliqua proident. Duis et nostrud in exercitation. Ad dolore ipsum dolore enim qui aute mollit esse commodo amet. Laborum consequat proident ullamco in. Eu incididunt nulla occaecat elit culpa irure anim sit culpa.") . }}
-        {{ partial "cta.html" (dict "title" "A global contributive digital common" "subtitle" "OpenFisca is free and open source software. Any entity can reuse and build upon it, as long as it shares its improvements with the community. The product is built collaboratively by all those who use and contribute to it." "button" "About the project" "href" "/en/about") . }}
+    <div class="wrapper">
+        <div class="grid">
+            <div class="grid_col-12">1</div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="grid">
+            <div class="grid_col-6">1</div>
+            <div class="grid_col-6">2</div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="grid">
+            <div class="grid_col-4">1</div>
+            <div class="grid_col-4">2</div>
+            <div class="grid_col-4">3</div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="grid">
+            <div class="grid_col-3">1</div>
+            <div class="grid_col-3">2</div>
+            <div class="grid_col-3">3</div>
+            <div class="grid_col-3">4</div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="grid">
+            <div class="grid_col-2">1</div>
+            <div class="grid_col-2">2</div>
+            <div class="grid_col-2">3</div>
+            <div class="grid_col-2">4</div>
+            <div class="grid_col-2">5</div>
+            <div class="grid_col-2">6</div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="grid">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+        </div>
+    </div>
 
-        <div class="wrapper">
-            <div class="grid grid-hasPadding">
-                <table class="table">
-                    <thead>
+    {{ partial "cta.html" (dict "title" "Magna duis id cillum aute aliquip aute dolor eu in quis ipsum mollit fugiat reprehenderit" "subtitle" "Consequat non amet ad occaecat cillum qui est aliquip consequat aliqua proident. Duis et nostrud in exercitation. Ad dolore ipsum dolore enim qui aute mollit esse commodo amet. Laborum consequat proident ullamco in. Eu incididunt nulla occaecat elit culpa irure anim sit culpa.") . }}
+    {{ partial "cta.html" (dict "title" "A global contributive digital common" "subtitle" "OpenFisca is free and open source software. Any entity can reuse and build upon it, as long as it shares its improvements with the community. The product is built collaboratively by all those who use and contribute to it." "button" "About the project" "href" "/en/about") . }}
+
+    <div class="wrapper">
+        <div class="grid grid-hasPadding">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Jurisdiction</th>
+                        <th>Title</th>
+                        <th>Website</th>
+                        <th>Source</th>
+                        <th>Legislation explorer</th>
+                        <th>OpenAPI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range $.Site.Data.packages }}
                         <tr>
-                            <th>Jurisdiction</th>
-                            <th>Title</th>
-                            <th>Website</th>
-                            <th>Source</th>
-                            <th>Legislation explorer</th>
-                            <th>OpenAPI</th>
+                            <td data-column="Jurisdiction">{{ if eq .jurisdiction "ZZ" }}<span style="color:var(--colorGray500)">…</span>{{ else }}<div class="flag flag-{{ .jurisdiction }}">{{ .jurisdiction }}</div>{{ end }}</td>
+                            <td data-column="Title">{{ index .title $.Site.Language.Lang }}</td>
+                            <td data-column="Website" class="td-isTruncated">{{ with .website }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
+                            <td data-column="Source" class="td-isTruncated">{{ with .source }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
+                            <td data-column="Legislation explorer" class="td-isTruncated">{{ with .legislation_explorer }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
+                            <td data-column="OpenAPI" class="td-isTruncated">{{ with .openapi_spec }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {{ range $.Site.Data.packages }}
-                            <tr>
-                                <td data-column="Jurisdiction">{{ if eq .jurisdiction "ZZ" }}<span style="color:var(--colorGray500)">…</span>{{ else }}<div class="flag flag-{{ .jurisdiction }}">{{ .jurisdiction }}</div>{{ end }}</td>
-                                <td data-column="Title">{{ index .title $.Site.Language.Lang }}</td>
-                                <td data-column="Website" class="td-isTruncated">{{ with .website }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
-                                <td data-column="Source" class="td-isTruncated">{{ with .source }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
-                                <td data-column="Legislation explorer" class="td-isTruncated">{{ with .legislation_explorer }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
-                                <td data-column="OpenAPI" class="td-isTruncated">{{ with .openapi_spec }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
-                            </tr>
-                        {{ end }}
-                    </tbody>
-                </table>
-            </div>
+                    {{ end }}
+                </tbody>
+            </table>
         </div>
+    </div>
 
-        {{ partial "footer.html" . }}
-    </body>
-</html>
+{{ end }}
