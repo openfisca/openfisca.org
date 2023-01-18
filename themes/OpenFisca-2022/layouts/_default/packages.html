@@ -7,28 +7,28 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="th-isMedium">{{ i18n "packages.jurisdiction" }}</th>
-                        <th>{{ i18n "packages.title" }}</th>
-                        <th>{{ i18n "packages.website" }}</th>
-                        <th class="th-isSmall">{{ i18n "packages.source" }}</th>
-                        <th>{{ i18n "packages.legislation_explorer" }}</th>
-                        <th class="th-isSmall">{{ i18n "packages.openapi_spec" }}</th>
+                        <th class="th-isMedium">{{ .Params.columns.jurisdiction }}</th>
+                        <th>{{ .Params.columns.title }}</th>
+                        <th>{{ .Params.columns.website }}</th>
+                        <th class="th-isSmall">{{ .Params.columns.source }}</th>
+                        <th>{{ .Params.columns.legislation_explorer }}</th>
+                        <th class="th-isSmall">{{ .Params.columns.openapi_spec }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{ range $.Site.Data.packages }}
                         <tr>
-                            <td data-column="{{ i18n "packages.jurisdiction" }}">
+                            <td data-column="{{ .Params.columns.jurisdiction }}">
                                 {{ with .jurisdiction }}
                                     <div class="flag flag-{{ slicestr . 0 2 }}">{{ . }}</div>
                                 {{ else }}
                                     <span style="color:var(--colorGray500)">-</span>
                                 {{ end }}
                             </td>
-                            <td data-column="{{ i18n "packages.title" }}">
+                            <td data-column="{{ .Params.columns.title }}">
                                 {{ index .title $.Site.Language.Lang }}
                             </td>
-                            <td data-column="{{ i18n "packages.website" }}" class="td-isTruncated">
+                            <td data-column="{{ .Params.columns.website }}" class="td-isTruncated">
                                 {{ with .website }}
                                     {{ $url := urls.Parse . }}
                                     <a href="{{ . }}" target="_blank">{{ replace $url.Host "www." "" }}</a>
@@ -36,7 +36,7 @@
                                     <span style="color:var(--colorGray500)">-</span>
                                 {{ end }}
                             </td>
-                            <td data-column="{{ i18n "packages.source" }}" class="td-isTruncated">
+                            <td data-column="{{ .Params.columns.source }}" class="td-isTruncated">
                                 {{ with .source }}
                                     {{ $url := urls.Parse . }}
                                     <a href="{{ . }}" target="_blank">
@@ -52,7 +52,7 @@
                                     <span style="color:var(--colorGray500)">-</span>
                                 {{ end }}
                             </td>
-                            <td data-column="{{ i18n "packages.legislation_explorer" }}" class="td-isTruncated">
+                            <td data-column="{{ .Params.columns.legislation_explorer }}" class="td-isTruncated">
                                 {{ with .legislation_explorer }}
                                     <a href="{{ . }}" target="_blank">
                                         <button class="button-secondary button-small button-rounded">
@@ -63,7 +63,7 @@
                                     <span style="color:var(--colorGray500)">-</span>
                                 {{ end }}
                             </td>
-                            <td data-column="{{ i18n "packages.openapi_spec" }}" class="td-isTruncated">
+                            <td data-column="{{ .Params.columns.openapi_spec }}" class="td-isTruncated">
                                 {{ with .openapi_spec }}
                                     <a href="{{ . }}" target="_blank">
                                         <button class="button-secondary button-small button-rounded">
