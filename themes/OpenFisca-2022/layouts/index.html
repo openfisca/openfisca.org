@@ -6,7 +6,7 @@
 
    <div class="wrapper">
       <div class="grid grid-hasPadding">
-            <h2 class="grid_col-12 text-center">{{ i18n "homepage.buildWith" }}</h2>
+            <h2 class="grid_col-12 text-center">{{ .Params.build_with.title }}</h2>
             <div class="cards mt-xl2">
                {{ range $slug := .Param "homepage_featured" }}
                   {{ $showcase := index $.Site.Data.showcase $slug }}
@@ -15,16 +15,16 @@
                {{ end }}
             </div>
             <div class="grid_col-12 text-center mt-xl2">
-               <a href="{{ relref . "showcase" }}"><button>{{ i18n "homepage.buildWith_cta" }}</button></a>
+               <a href="{{ relref . "showcase" }}"><button>{{ .Params.build_with.cta }}</button></a>
             </div>
       </div>
    </div>
 
    <div class="wrapper">
       <div class="grid grid-hasPadding">
-         <h2 class="grid_col-12 text-center">{{ i18n "homepage.howTo" }}</h2>
+         <h2 class="grid_col-12 text-center">{{ .Params.how_to.title  }}</h2>
          <div class="steps">
-            {{ range .Params.how_to }}
+            {{ range .Params.how_to.steps }}
                <div class="step {{ with .large }}step-isLarge{{ end }}">
                   <div class="step_demo">
                      {{ with .image }}<img src="/img/how-to/{{ . }}" alt="" />{{ end }}
