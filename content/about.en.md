@@ -14,7 +14,7 @@ As contributors to a common, we collectively do our best to make our community a
 
 The development of OpenFisca began in May 2011 at the French [_Centre d'analyse stratégique_](https://strategie.gouv.fr/) (renamed _France Stratégie_ in April 2013), with the support of the [<abbr title="Institut d'économie publique">IDEP</abbr>](https://www.idep-fr.org/).
 
-OpenFisca was originally developed as a desktop application using the [Qt](http://www.qt.io/) library with a Python API. This source code was released under a free software (AGPL) license in November 2011.
+OpenFisca was originally developed as a desktop application using the [Qt](https://www.qt.io/) library with a Python API. This source code was released under a free software (AGPL) license in November 2011.
 
 In early 2014, the French Prime Minister task force for open data, [Etalab](https://www.etalab.gouv.fr/), started using OpenFisca and soon became a major contributor. After organising a [hackathon](https://www.eventbrite.fr/e/billets-hackathon-openfisca-10751826001) to give more visibility to the product, its team decided to:
 
