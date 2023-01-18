@@ -43,9 +43,9 @@ how_to:
       large: true
       description: Calculez des valeurs sur les situations que vous fournissez, d'une personne ou de plusieurs millions.
       links:
-        - href: https://legislation.fr.openfisca.org/swagger
+        - href: https://legislation.demo.openfisca.org/swagger
           label: Essayer l'API web
-        - href: https://legislation.fr.openfisca.org/swagger
+        - href: https://openfisca.org/doc/installation/howto-web-no-local-install.html
           label: Essayer l'API Python
       tabs:
         - title: Exemple avec l'API Web
