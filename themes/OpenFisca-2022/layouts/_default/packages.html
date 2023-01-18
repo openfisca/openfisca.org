@@ -1,0 +1,84 @@
+{{ define "main" }}
+
+    {{ partial "hero.html" (dict "title" .Params.hero.title "subtitle" .Params.hero.subtitle "center" true ) . }}
+
+    <div class="wrapper">
+        <div class="grid grid-hasPaddingBottom">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="th-isMedium">{{ .Params.columns.jurisdiction }}</th>
+                        <th>{{ .Params.columns.title }}</th>
+                        <th>{{ .Params.columns.website }}</th>
+                        <th class="th-isSmall">{{ .Params.columns.source }}</th>
+                        <th>{{ .Params.columns.legislation_explorer }}</th>
+                        <th class="th-isSmall">{{ .Params.columns.openapi_spec }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range $.Site.Data.packages }}
+                        <tr>
+                            <td data-column="{{ .Params.columns.jurisdiction }}">
+                                {{ with .jurisdiction }}
+                                    <div class="flag flag-{{ slicestr . 0 2 }}">{{ . }}</div>
+                                {{ else }}
+                                    <span style="color:var(--colorGray500)">-</span>
+                                {{ end }}
+                            </td>
+                            <td data-column="{{ .Params.columns.title }}">
+                                {{ index .title $.Site.Language.Lang }}
+                            </td>
+                            <td data-column="{{ .Params.columns.website }}" class="td-isTruncated">
+                                {{ with .website }}
+                                    {{ $url := urls.Parse . }}
+                                    <a href="{{ . }}" target="_blank">{{ replace $url.Host "www." "" }}</a>
+                                {{ else }}
+                                    <span style="color:var(--colorGray500)">-</span>
+                                {{ end }}
+                            </td>
+                            <td data-column="{{ .Params.columns.source }}" class="td-isTruncated">
+                                {{ with .source }}
+                                    {{ $url := urls.Parse . }}
+                                    <a href="{{ . }}" target="_blank">
+                                        <button class="button-secondary button-small button-rounded">
+                                            {{ if strings.Contains $url.Host "github" }}
+                                                <i icon-name="github"></i>
+                                            {{ else }}
+                                                <i icon-name="file-code"></i>
+                                            {{ end }}
+                                        </button>
+                                    </a>
+                                {{ else }}
+                                    <span style="color:var(--colorGray500)">-</span>
+                                {{ end }}
+                            </td>
+                            <td data-column="{{ .Params.columns.legislation_explorer }}" class="td-isTruncated">
+                                {{ with .legislation_explorer }}
+                                    <a href="{{ . }}" target="_blank">
+                                        <button class="button-secondary button-small button-rounded">
+                                            <i icon-name="link"></i>
+                                        </button>
+                                    </a>
+                                {{ else }}
+                                    <span style="color:var(--colorGray500)">-</span>
+                                {{ end }}
+                            </td>
+                            <td data-column="{{ .Params.columns.openapi_spec }}" class="td-isTruncated">
+                                {{ with .openapi_spec }}
+                                    <a href="{{ . }}" target="_blank">
+                                        <button class="button-secondary button-small button-rounded">
+                                            <i icon-name="link"></i>
+                                        </button>
+                                    </a>
+                                {{ else }}
+                                    <span style="color:var(--colorGray500)">-</span>
+                                {{ end }}
+                            </td>
+                        </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{{ end }}

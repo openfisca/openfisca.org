@@ -1,0 +1,10 @@
+{{ if .Get "href" }}
+  {{ $href := .Get "href" }}
+  {{ $relreflink := relref . $href }}
+  <a href="{{ $relreflink }}">
+{{ end }}
+  <button class="{{ with .Get "type" }}button-{{ . }}{{ end }}{{ with .Get "size" }} button-{{ . }}{{ end }}{{ with .Get "shape" }} button-{{ . }}{{ end }}{{ with .Get "class" }}{{ . }}{{ end }}">
+    {{ with .Get "icon" }}<i icon-name="{{ . }}"></i>{{ end }}
+    {{ with .Get "text" }}{{ . }}{{ end }}
+  </button>
+{{ if .Get "href" }}</a>{{ end }}

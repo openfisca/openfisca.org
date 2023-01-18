@@ -1,0 +1,18 @@
+<div class="hero {{ with .dark }}hero-isDark{{ end }}{{ with .center }}hero-isCenter{{ end }}">
+	 <div class="hero_content">
+		{{ if .bg }}
+			<div class="hero_bg">
+				<svg><use href="#bg"></use></svg>
+			</div>
+		{{ end }}
+		{{ if .title }}
+			<h1>{{ .title }}</h1>
+		{{ end }}
+		{{ if .subtitle }}
+			<h2 class="h2-alternate">{{ .subtitle }}</h2>
+		{{ end }}
+		{{ if .testimonials }}
+			{{ partial "testimonials.html" (dict "testimonials" .testimonials) . }}
+		{{ end }}
+	</div>
+</div>

@@ -1,0 +1,26 @@
+<footer class="footer">
+	<div class="footer_content">
+		<div class="footer_baseline">&lt;§&gt; #RulesAsCode</div>
+		<nav class="footer_nav">
+			<ul class="footer_nav_items">
+				{{ range .Site.Menus.footer }}
+					<li class="footer_nav_item ">
+						<a class="footer_nav_link {{ if eq .Identifier "contribute" }}footer_nav_link-contribute{{ end }}" href="{{ absLangURL .URL }}">
+							{{ .Name }}
+						</a>
+					</li>
+				{{ end }}
+			</ul>
+		</nav>
+	</div>
+
+</footer>
+
+{{ $lucideJs := resources.Get "js/lucide.js" | js.Build }}
+<script src="{{ $lucideJs.RelPermalink }}"></script>
+
+{{ $headerJs := resources.Get "js/header.js" | js.Build }}
+<script src="{{ $headerJs.RelPermalink }}"></script>
+
+{{ $tabsJs := resources.Get "js/tabs.js" | js.Build }}
+<script src="{{ $tabsJs.RelPermalink }}"></script>

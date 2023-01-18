@@ -1,12 +1,14 @@
 ---
-title: "Packages disponibles"
+title: Packages disponibles
+hero:
+  title: Packages disponibles
+  subtitle: Les Packages sont les modules de base d'OpenFisca. Ils définissent les Paramètres, Entités et Variables d'un pays.
+columns:
+  jurisdiction: Juridiction
+  title: Nom
+  website: Site web
+  source: Source
+  legislation_explorer: Explorateur de législation
+  openapi_spec: OpenAPI
 layout: packages
-
-definition: "Les Packages sont les modules de base d'OpenFisca. Ils définissent les Paramètres, Entités et Variables d'un pays."
-introduction: "Il existe une modélisation des systèmes socio-fiscaux pour les pays suivants :"
-sources_introduction: "Retrouvez le code source de ce projet sur"
-
-others: "Le vôtre n'y est pas ?"
-explore: "Explorez"
-modelize: "Modélisez-le!"
 ---

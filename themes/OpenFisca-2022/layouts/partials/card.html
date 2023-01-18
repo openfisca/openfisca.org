@@ -1,0 +1,29 @@
+{{ $imageSrc := "/img/showcase/default.png" }}
+{{ $imageSlug := .title | urlize }}
+{{ $newImageSrc := printf "/img/showcase/%s.jpg" $imageSlug }}
+{{ if ( os.FileExists ( printf "/static%s" $newImageSrc ) ) }}
+	{{ $imageSrc = $newImageSrc}}
+{{ end }}
+
+<div class="card {{ if .website }}card-hasLink{{ end }}">
+	<div class="card_image">
+		<img class="screenshot" src="{{ $imageSrc }}" alt="{{ .title }}" />
+	</div>
+	<div class="card_titleWrapper">
+		<h3 class="card_title">{{ .title }}</h3>
+		<div class="card_flag flag flag-{{ .country }}">{{ .country }}</div>
+	</div>
+	<div class="card_desc">
+		{{ .description }}
+	</div>
+	{{ with .tags }}
+		<div class="card_tags">
+			<ul class="tags">
+				{{ range . }}
+					<li class="tag">{{ . }}</li>
+				{{ end }}
+			</ul>
+		</div>
+	{{ end }}
+	<a class="card_link" target="_blank" href="{{ .website | safeURL }}">{{ .website | safeURL }}</a>
+</div>
