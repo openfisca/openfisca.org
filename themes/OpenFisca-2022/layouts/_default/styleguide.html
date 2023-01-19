@@ -184,10 +184,10 @@
                         <li class="tag">{{ . }}</li>
                     {{ end }}
                 </ul>
-                <div class="flag flag-FR">FR</div>
-                <div class="flag flag-AD">AD</div>
-                <div class="flag flag-AI">AI</div>
-                <div class="flag flag-IQ">IQ</div>
+                <div class="flag flag-FR"><span>FR</span></div>
+                <div class="flag flag-AD"><span>AD</span></div>
+                <div class="flag flag-AI"><span>AI</span></div>
+                <div class="flag flag-IQ"><span>IQ</span></div>
             </div>
         </div>
     </div>
@@ -317,7 +317,7 @@
                 <tbody>
                     {{ range $.Site.Data.packages }}
                         <tr>
-                            <td data-column="Jurisdiction">{{ if eq .jurisdiction "ZZ" }}<span style="color:var(--colorGray500)">…</span>{{ else }}<div class="flag flag-{{ .jurisdiction }}">{{ .jurisdiction }}</div>{{ end }}</td>
+                            <td data-column="Jurisdiction">{{ if eq .jurisdiction "ZZ" }}<span style="color:var(--colorGray500)">…</span>{{ else }}<div class="flag flag-{{ .jurisdiction }}"><span>{{ .jurisdiction }}</span></div>{{ end }}</td>
                             <td data-column="Title">{{ index .title $.Site.Language.Lang }}</td>
                             <td data-column="Website" class="td-isTruncated">{{ with .website }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
                             <td data-column="Source" class="td-isTruncated">{{ with .source }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
