@@ -26,4 +26,14 @@
 		</div>
 	{{ end }}
 	<a class="card_link" target="_blank" href="{{ .website | safeURL }}">{{ .website | safeURL }}</a>
+	{{ with .author }}
+		<div class="card_author">
+			<div class="card_author_icon iconWrapper iconWrapper-rounded">
+					<i icon-name="user"></i>
+			</div>
+			<div class="card_author_name">
+				{{ with $.author.name }}{{ . }}{{ end }}
+			</div>
+		</div>
+	{{ end }}
 </div>

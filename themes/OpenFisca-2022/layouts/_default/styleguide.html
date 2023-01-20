@@ -43,10 +43,9 @@
         <div class="grid grid-hasPadding">
             <h2 class="grid_col-12 text-center">Built with OpenFisca</h2>
             <div class="cards">
-                {{ range $slug := .Param "homepage_featured" }}
-                    {{ $showcase := index $.Site.Data.showcase $slug }}
-                    {{ $description := index $showcase.description $.Site.Language.Lang }}
-                    {{ partial "card.html" (dict "title" $showcase.title "description" $description "country" $showcase.country "website" $showcase.website) . }}
+                 {{ range $.Site.Data.showcase }}
+                    {{ $description := index .description $.Site.Language.Lang }}
+                    {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author) . }}
                 {{ end }}
                 {{ partial "card.html" (dict "title" "Laboris nisi ut aliquip" "description" "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." "country" "FR" "website" "https://www.openfisca.org" "tags" $tags) . }}
             </div>
