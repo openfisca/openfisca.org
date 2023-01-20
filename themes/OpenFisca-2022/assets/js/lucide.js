@@ -10,6 +10,7 @@ import {
   Slack,
   TerminalSquare,
   Twitter,
+  User,
   X,
   createIcons,
 } from 'lucide';
@@ -28,5 +29,6 @@ createIcons({
     FileCode,
     Link,
     Home,
+    User,
   },
 });
