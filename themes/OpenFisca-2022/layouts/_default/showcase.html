@@ -15,4 +15,18 @@
         </div>
     </div>
 
+    <div class="wrapper">
+        <div class="grid grid-hasPaddingBottom">
+            <h2 class="grid_col-12">{{ .Params.previous_reuses }}</h2>
+            <div class="cards cards-isUntil">
+            {{ range sort $.Site.Data.showcase ".until" }}
+                {{ if .until }}
+                    {{ $description := index .description $.Site.Language.Lang }}
+                    {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "until" .until) . }}
+                {{ end }}
+            {{ end }}
+            </div>
+        </div>
+    </div>
+
 {{ end }}

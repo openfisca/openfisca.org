@@ -5,12 +5,15 @@
 	{{ $imageSrc = $newImageSrc}}
 {{ end }}
 
-<div class="card {{ if .website }}card-hasLink{{ end }}">
-	<div class="card_image">
-		<img class="screenshot" src="{{ $imageSrc }}" alt="{{ .title }}" />
-	</div>
+<div class="card{{ if .website }} card-hasLink{{ end }}{{ with .until }} card-isUntil{{ end }}">
+	{{ if not .until }}
+		<div class="card_image">
+			<img class="screenshot" src="{{ $imageSrc }}" alt="{{ .title }}" />
+		</div>
+	{{ end }}
 	<div class="card_titleWrapper">
-		<h3 class="card_title">{{ .title }}</h3>
+		{{ if not .until }}<h3 class="card_title">{{ .title }}</h3>{{ end }}
+		{{ if .until }}<h4 class="card_title">{{ .title }}</h4>{{ end }}
 		<div class="card_flag flag flag-{{ .country }}"><span>{{ .country }}</span></div>
 	</div>
 	<div class="card_desc">
@@ -25,5 +28,6 @@
 			</ul>
 		</div>
 	{{ end }}
-	<a class="card_link" target="_blank" href="{{ .website | safeURL }}">{{ .website | safeURL }}</a>
+	{{ if .until }}<p class="text-small"><span class="text-grayness">{{ .until | time.Format "January 2006" }} - </span><a href="{{ .website | safeURL }}" class="link-isDisabled" rel="noFollow">{{ .website }}</a></p>{{ end }}
+	{{ if not .until }}<a class="card_link" target="_blank" href="{{ .website | safeURL }}">{{ .website | safeURL }}</a>{{ end }}
 </div>

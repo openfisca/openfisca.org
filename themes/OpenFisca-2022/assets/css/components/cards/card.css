@@ -6,12 +6,30 @@
   gap: var(--s);
   padding: var(--l) var(--l) var(--xl) var(--l);
 
-  &.card-hasLink {
+  &.card-hasLink:not(.card-isUntil) {
     cursor: pointer;
     position: relative;
 
     &:hover {
       border: 1px solid var(--colorSecondary);
+    }
+  }
+
+  &.card-isUntil {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--m) 0;
+    gap: var(--xs2);
+    border: none;
+    border-radius: 0;
+    border-top: 1px solid var(--colorGray200);
+
+    &:last-child {
+      border-bottom: 1px solid var(--colorGray200);
+    }
+
+    & > .card_desc {
+      margin-bottom: 0;
     }
   }
 }
