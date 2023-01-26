@@ -3,6 +3,6 @@ title: Showcase
 hero:
   title: Showcase
   subtitle: Discover products built with OpenFisca
-previous_reuses: Previous reuses
+previous_reuses: Disused products
 layout: showcase
 ---
