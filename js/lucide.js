@@ -102,6 +102,49 @@
     "stroke-linejoin": "round"
   };
 
+  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/building.js
+  var Building = ["svg", defaultAttributes_default, [["rect", {
+    x: "4",
+    y: "2",
+    width: "16",
+    height: "20",
+    rx: "2",
+    ry: "2"
+  }], ["path", {
+    d: "M9 22v-4h6v4"
+  }], ["path", {
+    d: "M8 6h.01"
+  }], ["path", {
+    d: "M16 6h.01"
+  }], ["path", {
+    d: "M12 6h.01"
+  }], ["path", {
+    d: "M12 10h.01"
+  }], ["path", {
+    d: "M12 14h.01"
+  }], ["path", {
+    d: "M16 10h.01"
+  }], ["path", {
+    d: "M16 14h.01"
+  }], ["path", {
+    d: "M8 10h.01"
+  }], ["path", {
+    d: "M8 14h.01"
+  }]]];
+  var building_default = Building;
+
+  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/factory.js
+  var Factory = ["svg", defaultAttributes_default, [["path", {
+    d: "M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"
+  }], ["path", {
+    d: "M17 18h1"
+  }], ["path", {
+    d: "M12 18h1"
+  }], ["path", {
+    d: "M7 18h1"
+  }]]];
+  var factory_default = Factory;
+
   // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/file-code.js
   var FileCode = ["svg", defaultAttributes_default, [["path", {
     d: "M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"
@@ -121,6 +164,29 @@
     d: "M9 18c-4.51 2-5-2-7-2"
   }]]];
   var github_default = Github;
+
+  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/globe.js
+  var Globe = ["svg", defaultAttributes_default, [["circle", {
+    cx: "12",
+    cy: "12",
+    r: "10"
+  }], ["line", {
+    x1: "2",
+    y1: "12",
+    x2: "22",
+    y2: "12"
+  }], ["path", {
+    d: "M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+  }]]];
+  var globe_default = Globe;
+
+  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/graduation-cap.js
+  var GraduationCap = ["svg", defaultAttributes_default, [["path", {
+    d: "M22 10v6M2 10l10-5 10 5-10 5z"
+  }], ["path", {
+    d: "M6 12v5c3 3 9 3 12 0v-5"
+  }]]];
+  var graduation_cap_default = GraduationCap;
 
   // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/home.js
   var Home = ["svg", defaultAttributes_default, [["path", {
@@ -271,6 +337,30 @@
   }]]];
   var twitter_default = Twitter;
 
+  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/user.js
+  var User = ["svg", defaultAttributes_default, [["path", {
+    d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"
+  }], ["circle", {
+    cx: "12",
+    cy: "7",
+    r: "4"
+  }]]];
+  var user_default = User;
+
+  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/users.js
+  var Users = ["svg", defaultAttributes_default, [["path", {
+    d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+  }], ["circle", {
+    cx: "9",
+    cy: "7",
+    r: "4"
+  }], ["path", {
+    d: "M22 21v-2a4 4 0 0 0-3-3.87"
+  }], ["path", {
+    d: "M16 3.13a4 4 0 0 1 0 7.75"
+  }]]];
+  var users_default = Users;
+
   // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/x.js
   var X = ["svg", defaultAttributes_default, [["line", {
     x1: "18",
@@ -318,7 +408,13 @@
       Package: package_default,
       FileCode: file_code_default,
       Link: link_default,
-      Home: home_default
+      Home: home_default,
+      User: user_default,
+      Users: users_default,
+      Globe: globe_default,
+      GraduationCap: graduation_cap_default,
+      Factory: factory_default,
+      Building: building_default
     }
   });
 })();
