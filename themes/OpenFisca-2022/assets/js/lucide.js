@@ -1,6 +1,10 @@
 import {
+  Building,
+  Factory,
   FileCode,
   Github,
+  Globe,
+  GraduationCap,
   Home,
   Landmark,
   LineChart,
@@ -10,6 +14,8 @@ import {
   Slack,
   TerminalSquare,
   Twitter,
+  User,
+  Users,
   X,
   createIcons,
 } from 'lucide';
@@ -28,5 +34,11 @@ createIcons({
     FileCode,
     Link,
     Home,
+    User,
+    Users,
+    Globe,
+    GraduationCap,
+    Factory,
+    Building,
   },
 });

@@ -43,12 +43,11 @@
         <div class="grid grid-hasPadding">
             <h2 class="grid_col-12 text-center">Built with OpenFisca</h2>
             <div class="cards">
-                {{ range $slug := .Param "homepage_featured" }}
-                    {{ $showcase := index $.Site.Data.showcase $slug }}
-                    {{ $description := index $showcase.description $.Site.Language.Lang }}
-                    {{ partial "card.html" (dict "title" $showcase.title "description" $description "country" $showcase.country "website" $showcase.website) . }}
+                 {{ range $.Site.Data.showcase }}
+                    {{ $description := index .description $.Site.Language.Lang }}
+                    {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
                 {{ end }}
-                {{ partial "card.html" (dict "title" "Laboris nisi ut aliquip" "description" "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." "country" "FR" "website" "https://www.openfisca.org" "tags" $tags) . }}
+                {{ partial "card.html" (dict "title" "Laboris nisi ut aliquip" "description" "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." "country" "FR" "website" "https://www.openfisca.org" "tags" $tags "Site" $.Site) }}
             </div>
             <div class="grid_col-12 text-center mt-l">
                 <a href="#"></a><button>Browse all</button></a>
@@ -56,7 +55,7 @@
         </div>
     </div>
 
-        <div class="wrapper">
+    <div class="wrapper">
         <div class="grid grid-hasPadding">
                 <div class="grid_col-12">
                 <div class="tabs">
@@ -203,13 +202,19 @@
                 <p><a href="#" class="link-hasIcon"><i icon-name="slack"></i>Join the Slack</a></p>
                 <p><a href="#" class="link-hasIcon"><i icon-name="package"></i>See all readily available models</a></p>
                 <div class="iconWrapper">
-                    <i class="" icon-name="landmark"></i>
+                    <i icon-name="landmark"></i>
                 </div>
                 <div class="iconWrapper">
-                    <i class="" icon-name="terminal-square"></i>
+                    <i icon-name="terminal-square"></i>
                 </div>
                 <div class="iconWrapper">
-                    <i class="" icon-name="line-chart"></i>
+                    <i icon-name="line-chart"></i>
+                </div>
+                <div class="iconWrapper">
+                    <i icon-name="user"></i>
+                </div>
+                <div class="iconWrapper iconWrapper-rounded">
+                    <i icon-name="user"></i>
                 </div>
             </div>
         </div>

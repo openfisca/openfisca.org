@@ -5,6 +5,10 @@
 	{{ $imageSrc = $newImageSrc}}
 {{ end }}
 
+{{ $authorType := .Site.Params.showcase.author.types.icons.default }}
+{{ with .author }}{{ with .type }}{{ $authorType = . }}{{ end }}{{ end }}
+{{ $authorTypeIcon := index .Site.Params.showcase.author.types.icons $authorType }}
+
 <div class="card {{ if .website }}card-hasLink{{ end }}">
 	<div class="card_image">
 		<img class="screenshot" src="{{ $imageSrc }}" alt="{{ .title }}" />
@@ -26,4 +30,14 @@
 		</div>
 	{{ end }}
 	<a class="card_link" target="_blank" href="{{ .website | safeURL }}">{{ .website | safeURL }}</a>
+	{{ with .author }}{{ with .name }}
+		<div class="card_author">
+				<div class="card_author_icon iconWrapper iconWrapper-rounded">
+					<i icon-name="{{ $authorTypeIcon }}"></i>
+				</div>			
+				<div class="card_author_name">
+					{{ . }}
+				</div>		
+		</div>
+	{{ end }}{{ end }}
 </div>
