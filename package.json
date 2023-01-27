@@ -10,6 +10,7 @@
     "stylelint-config-standard": "^29.0.0",
     "yaml-schema-validator": "^1.2.3"
   },
+  "type": "module",
   "engines": {
     "node": ">10"
   },
@@ -24,7 +25,7 @@
   "homepage": "https://github.com/openfisca/openfisca.org#readme",
   "scripts": {
     "test": "npm run lint:js && npm run lint:css",
-    "test:showcase": "for entry in data/showcase/* ; do echo $entry; schema validate --schema test/showcase/schema.yml --filePath $entry; done",
+    "test:showcase": "node test/showcase/validate.js",
     "lint:js": "./node_modules/.bin/eslint publish.js themes/OpenFisca-2022/assets/js/",
     "lint:css": "./node_modules/.bin/stylelint \"themes/OpenFisca-2022/assets/css/**/*.css\"",
     "publish": "node publish.js"
