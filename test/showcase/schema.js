@@ -4,13 +4,13 @@ export default {
     required: true,
     length: {
       min: 2,
-      max: 80
+      max: 80,
     },
   },
   website: {
     type: String,
     required: true,
-    use: { isUrl }
+    use: {isUrl},
   },
   author: {
     name: {
@@ -18,18 +18,18 @@ export default {
       required: true,
       length: {
         min: 3,
-        max: 120
+        max: 120,
       },
     },
     contact: {
       type: String,
       required: true,
-      use: { isEmailAddress }
+      use: {isEmailAddress},
     },
     link: {
       type: String,
-      use: { isUrl }
-    }
+      use: {isUrl},
+    },
   },
   description: {
     en: {
@@ -37,32 +37,31 @@ export default {
       required: true,
       length: {
         min: 20,
-        max: 200
-      }
+        max: 200,
+      },
     },
     fr: {
       type: String,
       required: true,
       length: {
         min: 20,
-        max: 200
-      }
-    }
+        max: 200,
+      },
+    },
   },
   country: {
     type: String,
     required: true,
     length: {
       min: 2,
-      max: 2
-    }
+      max: 2,
+    },
   },
   until: {
     type: String,
-    use: { isISOdate }
-  }
+    use: {isISOdate},
+  },
 };
-
 
 
 function isUrl(value) {
@@ -74,9 +73,9 @@ function isUrl(value) {
 }
 
 function isEmailAddress(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);  // source: https://stackoverflow.com/a/9204568/594053
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); // source: https://stackoverflow.com/a/9204568/594053
 }
 
 function isISOdate(value) {
-  return isNaN(new Date(value));  // source: https://stackoverflow.com/a/67410020/594053
+  return isNaN(new Date(value)); // source: https://stackoverflow.com/a/67410020/594053
 }

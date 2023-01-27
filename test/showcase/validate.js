@@ -1,4 +1,4 @@
-import { readdir } from 'node:fs/promises';
+import {readdir} from 'node:fs/promises';
 
 import validateSchema from 'yaml-schema-validator';
 
@@ -9,10 +9,10 @@ const SHOWCASE_DIR = 'data/showcase';
 
 const entries = await readdir(SHOWCASE_DIR);
 
-const errorCount = entries.map(entry => {
+const errorCount = entries.map((entry) => {
   console.log(entry);
   return validateSchema(`${SHOWCASE_DIR}/${entry}`, {
-    schema: showcaseEntrySchema
+    schema: showcaseEntrySchema,
   });
 }).reduce((errorCount, validationHasError) => {
   if (validationHasError) return errorCount + 1;
