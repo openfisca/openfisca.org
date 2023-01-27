@@ -89,31 +89,60 @@ For each type in the [user taxonomy](https://github.com/openfisca/openfisca-core
 
 ## Installation
 
-This website is built using [Hugo](https://gohugo.io), a static website editor.
+### Dependencies
 
-To build it, [install Hugo](https://gohugo.io/getting-started/installing/), and then:
+This website is built using [Hugo](https://gohugo.io), a static website editor, and uses [Node.js](https://nodejs.org).
 
-```
+To build it, [install Hugo](https://gohugo.io/getting-started/installing/) and [Node.js](https://nodejs.org), and then:
+
+```sh
 git clone https://github.com/openfisca/openfisca.org
 cd openfisca.org
-git submodule update --init --recursive
-hugo server
+make install
 ```
 
-And, to regenerate the site, use the following instructions:
+## Usage
 
-```
-cd openfisca.org
-rm -rf public/
-hugo
+### Building the site
+
+```sh
+make build
 ```
 
 The website will be built in the `public` directory.
 
-## Serving the app locally
+### Serving the app locally
 
-To run hugo in developpement mode, run:
+For development purposes:
 
+```sh
+make serve
 ```
-hugo serve
+
+### Linting JavaScript files
+
+To lint the JavaScript files use the following command:
+
+```sh
+npm run lint:js
+```
+
+To apply automatic corrections use the following command:
+
+```sh
+npm run lint:js -- --fix
+```
+
+### Linting CSS files
+
+To lint the CSS files use the following command:
+
+```sh
+npm run lint:css
+```
+
+To apply automatic corrections use the following command:
+
+```sh
+npm run lint:css -- --fix
 ```

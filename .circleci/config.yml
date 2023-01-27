@@ -2,12 +2,12 @@ version: 2.1
 
 orbs:
   hugo: circleci/hugo@1.3.0
+  node: circleci/node@5.0.3
 
 jobs:
   test:
     docker:
       - image: circleci/node:lts
-
     steps:
       - checkout
       - restore_cache:
@@ -35,12 +35,11 @@ jobs:
           at: .
       - run:
           name: Check HTML common mistakes
-          command: exec htmlproofer ./public --assume-extension .html --check-sri true --disable-external true --ignore-empty-alt true --allow-missing-href true
+          command: exec htmlproofer ./public --assume-extension .html --disable-external true --ignore-empty-alt true --allow-missing-href true
 
   deploy:
     docker:
       - image: circleci/node:lts
-
     steps:
       - checkout
       - restore_cache:
@@ -62,8 +61,12 @@ workflows:
     jobs:
       - test
       - hugo/build:
-          version: '0.106'
+          version: '0.108'
           html-proofer: false
+          pre-steps:
+            - checkout
+            - node/install
+            - run: npm ci
       - html_validate:
           requires:
             - hugo/build

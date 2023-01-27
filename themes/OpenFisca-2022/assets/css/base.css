@@ -1,0 +1,165 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* set base font-size to equiv "10px", which is adapted to rem unit */
+  font-size: 62.5%;
+  /* IE9-IE11 math fixing. See http://bit.ly/1g4X0bX */
+  font-size: calc(1em * 0.625);
+}
+
+body {
+  background-color: var(--colorWhite);
+  font-family: var(--defaultFontFamily);
+  font-size: var(--defaultFontSize);
+  font-weight: 400;
+  color: var(--colorGray700);
+  line-height: 2.6rem;
+}
+
+.wrapper {
+  @mixin wrapper;
+}
+
+.grid {
+  @mixin grid;
+}
+
+.grid-hasPadding {
+  padding-top: var(--xl5);
+  padding-bottom: var(--xl5);
+
+  @media (--tabletSmall) {
+    padding-top: var(--xl3);
+    padding-bottom: var(--xl3);
+  }
+}
+
+.grid-hasPaddingTop {
+  padding-top: var(--xl5);
+
+  @media (--tabletSmall) {
+    padding-top: var(--xl3);
+  }
+}
+
+.grid-hasPaddingBottom {
+  padding-bottom: var(--xl5);
+
+  @media (--tabletSmall) {
+    padding-bottom: var(--xl3);
+  }
+}
+
+.flex {
+  @mixin flex;
+}
+
+.grid_col-12 {
+  grid-column: auto / span 12;
+  /* Fix Firefox overflow text breaks in grid cell, see https://bugzilla.mozilla.org/show_bug.cgi?id=1528030 */
+  max-width: 100%;
+}
+
+.grid_col-10 {
+  grid-column: auto / span 10;
+
+  &.grid_col-center {
+    grid-column-start: 2;
+  }
+}
+
+.grid_col-8 {
+  grid-column: auto / span 8;
+
+  &.grid_col-center {
+    grid-column-start: 3;
+  }
+}
+
+.grid_col-6 {
+  grid-column: auto / span 6;
+  max-width: 100%;
+
+  &.grid_col-center {
+    grid-column-start: 4;
+  }
+
+  @media (--tabletSmall) {
+    grid-column: auto / span 12;
+
+    &.grid_col-center {
+      grid-column-start: auto;
+    }
+  }
+}
+
+.grid_col-4 {
+  grid-column: auto / span 4;
+  max-width: 100%;
+
+  &.grid_col-center {
+    grid-column-start: 5;
+  }
+
+  @media (--tabletLarge) {
+    grid-column: auto / span 6;
+
+    &.grid_col-center {
+      grid-column-start: 4;
+    }
+  }
+
+  @media (--tabletSmall) {
+    grid-column: auto / span 12;
+
+    &.grid_col-center {
+      grid-column-start: auto;
+    }
+  }
+}
+
+.grid_col-3 {
+  grid-column: auto / span 3;
+  max-width: 100%;
+
+  &.grid_col-center {
+    grid-column-start: 5;
+  }
+
+  @media (--tabletLarge) {
+    grid-column: auto / span 4;
+
+    &.grid_col-center {
+      grid-column-start: 5;
+    }
+  }
+
+  @media (--tabletSmall) {
+    grid-column: auto / span 6;
+
+    &.grid_col-center {
+      grid-column-start: 4;
+    }
+  }
+}
+
+.grid_col-2 {
+  grid-column: auto / span 2;
+  max-width: 100%;
+
+  &.grid_col-center {
+    grid-column-start: 6;
+  }
+
+  @media (--tabletSmall) {
+    grid-column: auto / span 6;
+
+    &.grid_col-center {
+      grid-column-start: 4;
+    }
+  }
+}

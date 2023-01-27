@@ -1,0 +1,137 @@
+.header {
+  @mixin wrapper;
+
+  background-color: var(--colorPrimary);
+  border-bottom: 1px solid var(--colorGray700);
+}
+
+.header_content {
+  @mixin flex;
+
+  padding-top: var(--m);
+  padding-bottom: var(--m);
+  align-items: center;
+  flex-wrap: nowrap;
+
+  @media (--tabletLarge) {
+    flex-wrap: wrap;
+  }
+}
+
+.header_logo_link {
+  display: flex;
+}
+
+.header_nav {
+  flex-grow: 1;
+
+  @media (--tabletLarge) {
+    width: 100%;
+    margin-top: var(--m);
+    display: none;
+  }
+}
+
+.header_nav-open {
+  display: block;
+}
+
+.header_nav_items {
+  display: flex;
+  column-gap: var(--l);
+  justify-content: center;
+  padding-left: var(--m);
+  padding-right: var(--m);
+
+  @media (--tabletLarge) {
+    flex-direction: column;
+    row-gap: var(--m);
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.header_nav_link {
+  @extend .link-hasDarkBG;
+
+  @media (--tabletLarge) {
+    display: block;
+  }
+}
+
+.header_social {
+  margin-left: auto;
+
+  @media (--tabletLarge) {
+    width: 100%;
+    margin-left: 0;
+    margin-top: var(--l);
+    border-top: 1px solid var(--colorGray600);
+    display: none;
+  }
+}
+
+.header_social-open {
+  display: block;
+}
+
+.header_social_items {
+  display: flex;
+}
+
+.header_social_item {
+  display: inline-flex;
+}
+
+.header_social_link {
+  @extend .link-hasDarkBG;
+
+  display: inline-flex;
+  width: 3.6rem;
+  height: 4.4rem;
+}
+
+.header_social_icon {
+  margin: auto;
+  stroke: var(--colorGray400);
+  stroke-width: 1px;
+  width: 2rem;
+  height: 2rem;
+}
+
+.header_collapse {
+  align-items: center;
+  padding-left: var(--m);
+  gap: var(--xs2);
+  color: var(--colorWhite);
+  cursor: pointer;
+  height: 4.4rem;
+
+  @extend .link;
+  @extend .link-hasDarkBG;
+
+  display: none;
+  margin-left: auto;
+
+  @media (--tabletLarge) {
+    display: flex;
+  }
+}
+
+.header_collapse_icon {
+  stroke: var(--colorGray400);
+}
+
+.header_collapse_icon-close {
+  display: none;
+}
+
+.header_collapse-open {
+  & > .header_collapse_icon-open {
+    display: none;
+  }
+
+  & > .header_collapse_icon-close {
+    display: block;
+  }
+}

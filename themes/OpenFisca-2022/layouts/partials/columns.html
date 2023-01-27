@@ -1,0 +1,19 @@
+<div class="columns">
+	<div class="columns_content">
+		{{ range .columns }}
+			<div class="column grid_col-{{ if .colsize }}{{ .colsize }}{{ else }}4{{ end }}">
+				{{ if .icon }}
+					<div class="column_icon">
+						<div class="iconWrapper">
+							<i class="column_icon" icon-name="{{ .icon }}"></i>
+						</div>
+					</div>
+				{{ end }}
+				<div class="colum_content">
+					{{ if .title }}<h4 class="colum_title">{{ .title }}</h4>{{ end }}
+					<p>{{ .description }}</p>
+				</div>
+			</div>
+		{{ end }}
+	</div>
+</div>

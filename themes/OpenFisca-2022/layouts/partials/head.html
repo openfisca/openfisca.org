@@ -1,0 +1,21 @@
+<head>
+	<meta charset="utf-8" />
+	<title>{{ .Title }} - OpenFisca</title>
+	<meta name="description" content="{{ .Description }}" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	{{ $loader := resources.Get "css/loader.css" | toCSS }}
+	{{ $styles := $loader | resources.PostCSS (dict "config" "themes/OpenFisca-2022/assets/css") }}
+	{{ if .Site.IsServer }}
+		<link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+	{{ else }}
+		{{ $styles := $styles | minify | fingerprint | resources.PostProcess }}
+		<link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
+	{{ end }}
+	<link rel="apple-touch-icon" sizes="180x180" href={{ "favicon/apple-touch-icon.png" | absURL }}>
+	<link rel="icon" type="image/png" sizes="32x32" href={{ "favicon/favicon-32x32.png" | absURL }}>
+	<link rel="icon" type="image/png" sizes="16x16" href={{ "favicon/favicon-16x16.png" | absURL }}>
+	<link rel="manifest" href={{ "favicon/site.webmanifest" | absURL }}>
+	<link rel="mask-icon" href={{ "favicon/safari-pinned-tab.svg" | absURL }} color="#240b36">
+	<meta name="msapplication-TileColor" content="#240b36">
+	<meta name="theme-color" content="#240b36">
+</head>
