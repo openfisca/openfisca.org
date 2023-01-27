@@ -29,7 +29,14 @@
 	{{ with .author }}
 		<div class="card_author">
 			<div class="card_author_icon iconWrapper iconWrapper-rounded">
-					<i icon-name="user"></i>
+					{{ $iconClass := "user" }}
+					{{ with (eq $.author.type "collective") }} {{ $iconClass = "users" }} {{ end }}
+					{{ with (eq $.author.type "ngo") }} {{ $iconClass = "globe" }} {{ end }}
+					{{ with (eq $.author.type "research_center") }} {{ $iconClass = "graduation-cap" }} {{ end }}
+					{{ with (eq $.author.type "business") }} {{ $iconClass = "factory" }} {{ end }}
+					{{ with (eq $.author.type "local_government") }} {{ $iconClass = "building" }} {{ end }}
+					{{ with (eq $.author.type "national_government") }} {{ $iconClass = "landmark" }} {{ end }}
+					<i icon-name="{{ $iconClass }}"></i>
 			</div>
 			<div class="card_author_name">
 				{{ with $.author.name }}{{ . }}{{ end }}
