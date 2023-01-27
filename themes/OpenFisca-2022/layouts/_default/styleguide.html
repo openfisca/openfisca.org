@@ -45,9 +45,9 @@
             <div class="cards">
                  {{ range $.Site.Data.showcase }}
                     {{ $description := index .description $.Site.Language.Lang }}
-                    {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author) . }}
+                    {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
                 {{ end }}
-                {{ partial "card.html" (dict "title" "Laboris nisi ut aliquip" "description" "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." "country" "FR" "website" "https://www.openfisca.org" "tags" $tags) . }}
+                {{ partial "card.html" (dict "title" "Laboris nisi ut aliquip" "description" "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." "country" "FR" "website" "https://www.openfisca.org" "tags" $tags "Site" $.Site) }}
             </div>
             <div class="grid_col-12 text-center mt-l">
                 <a href="#"></a><button>Browse all</button></a>
