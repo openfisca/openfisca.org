@@ -2,15 +2,7 @@
   "name": "openfisca.org",
   "version": "1.0.0",
   "description": "The public-facing website of OpenFisca for an international audience.",
-  "devDependencies": {
-    "eslint": "^8.31.0",
-    "eslint-config-google": "^0.14.0",
-    "gh-pages": "^4.0.0",
-    "stylelint": "^14.16.1",
-    "stylelint-config-standard": "^29.0.0",
-    "yaml-schema-validator": "^1.2.3"
-  },
-  "type": "module",
+  "license": "AGPL-3.0",
   "engines": {
     "node": ">10"
   },
@@ -18,26 +10,34 @@
     "type": "git",
     "url": "git+https://github.com/openfisca/openfisca.org.git"
   },
-  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/openfisca/openfisca.org/issues"
   },
   "homepage": "https://github.com/openfisca/openfisca.org#readme",
+  "type": "module",
   "scripts": {
-    "test": "npm run test:showcase && npm run lint:js && npm run lint:css",
-    "test:showcase": "node test/showcase/validate.js",
-    "lint:js": "eslint publish.js themes/OpenFisca-2022/assets/js/ test/**/*.js",
     "lint:css": "stylelint themes/OpenFisca-2022/assets/css/**/*.css",
-    "publish": "node publish.js"
+    "lint:js": "eslint publish.js themes/OpenFisca-2022/assets/js/ test/**/*.js",
+    "publish": "node publish.js",
+    "test": "npm run test:showcase && npm run lint:js && npm run lint:css",
+    "test:showcase": "node test/showcase/validate.js"
   },
   "dependencies": {
     "lucide": "^0.100.0",
     "minireset.css": "^0.0.7",
     "postcss": "^8.4.14",
     "postcss-cli": "^10.0.0",
+    "postcss-extend": "^1.0.5",
     "postcss-import": "^14.1.0",
     "postcss-mixins": "^9.0.3",
-    "postcss-preset-env": "^7.7.2",
-    "postcss-extend": "^1.0.5"
+    "postcss-preset-env": "^7.7.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-google": "^0.14.0",
+    "gh-pages": "^4.0.0",
+    "stylelint": "^14.16.1",
+    "stylelint-config-standard": "^29.0.0",
+    "yaml-schema-validator": "^1.2.3"
   }
 }
