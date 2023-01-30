@@ -1,17 +1,16 @@
-Thank you for wanting to contribute to OpenFisca! :smiley:
-
-Feel free to contact us or send us pull requests over GitHub.
-For more information on how to do so, please see our [contribution guidelines](https://openfisca.org/doc/contribute/index.html).
+Thank you for wanting to contribute to OpenFisca! :smiley: For general information on how to do so, please see our [contribution guidelines](https://openfisca.org/doc/contribute/index.html).
 
 ## Referencing your reuse in the showcase
 
-If you have built a product with OpenFisca, we would love to reference it in the [public showcase](https://openfisca.org/en/showcase/)! This is a good way for you to gain more visibility, but it is also a very important contribution to OpenFisca. Doing so helps the core team raise funds for maintaining the ecosystem alive and adding features to the software, and making connection between similar reusers. It also helps maintainers of the country packages you depend on know how useful their efforts are, and focus on the most used parts of legislation.
+If you have built a product with OpenFisca, we would love to reference it in the [public showcase](https://openfisca.org/en/showcase/)!
+
+This is a good way for you to gain more visibility, but it is also a very important contribution to OpenFisca. Doing so helps the Core team make connections between similar reusers and raise funds for maintaining the ecosystem alive and adding features to the software. It also helps maintainers of the country packages you depend on know how useful their efforts are, and focus on the most used parts of legislation.
 
 Referencing your reuse is fast and easy. Follow the instructions below and [contact us](mailto:contact@openfisca.org?subject=Referencing%20reuse) if you encounter any problem!
 
 ### Describe your reuse
 
-Add a YAML file to the [`content/showcase/` folder](https://github.com/openfisca/openfisca.org/tree/master/data/showcase), in [snake case](https://en.wikipedia.org/wiki/Snake_case). For example, if your product is called “Legislation Explorer”, you would create a file named `legislation_explorer.yml`.
+Create a YAML file in the [`content/showcase/` folder](https://github.com/openfisca/openfisca.org/tree/master/data/showcase), in [snake case](https://en.wikipedia.org/wiki/Snake_case). For example, if your product is called “Legislation Explorer”, you would create a file named `legislation_explorer.yml`.
 
 Fill in that file with information following the template below:
 
@@ -31,7 +30,7 @@ author:
 
 #### Disused reuses
 
-If the reuse become disused, it should still be referenced for historical purposes. This is done by adding the date at which it became disused in an `until` entry.
+If a reuse becomes disused, it should still be referenced for historical purposes. This is done by adding the date at which it became disused in an `until` entry.
 
 ```yml
 until: 2022-12-31  # optional, YYYY-MM-DD format
@@ -39,10 +38,12 @@ until: 2022-12-31  # optional, YYYY-MM-DD format
 
 ### Add an illustration
 
-Add a PNG image to the [`static/img/showcase/` folder](https://github.com/openfisca/openfisca.org/tree/master/static/img/showcase), with the same name as the `.yml` file. For example: `legislation_explorer.png`. The file should be in 16:9 format, at least 1280 × 720 pixels and at most 2560 × 1440 pixels.
+Add an image in the PNG format to the [`static/img/showcase/` folder](https://github.com/openfisca/openfisca.org/tree/master/static/img/showcase), with the same name as the `.yml` file. For example: `legislation_explorer.png`.
 
-It is strongly recommended to use a image compression tool to to significantly reduce the weight of your image. [ImageOptim](https://imageoptim.com) is a good solution - choose “lossy” settings that usually give more than 50% compression gains, but do not remove image metadata. To ensure fast loading and minimise the environmental impact of the OpenFisca website, the maximum allowed picture weight is 400 kB.
+The file should be in 16:9 format, at least 1280 × 720 pixels and at most 2560 × 1440 pixels. To ensure fast loading and minimise the environmental impact of the OpenFisca website, the maximum allowed picture weight is 400 kB.
+
+It is strongly recommended to use an image compression tool such as [ImageOptim](https://imageoptim.com) to reduce the image weight. Choosing “lossy” settings at 90% quality will usually yield over 50% compression gains.
 
 ### License
 
-By publishing your reuse, you publish the description, illustration and all associated metadata under a [Creative commons Attribution](https://creativecommons.org/licenses/by/4.0/) (CC-BY) license. This enables the Core team and other contributors to easily feature your product in, for example, yearly activity reports, conferences, social media, and other public events.
+By publishing your reuse, you publish the description, illustration and all associated metadata under a [Creative Commons Attribution](https://creativecommons.org/licenses/by/4.0/) (CC-BY) license. This enables the Core team and other contributors to easily feature your product in, for example, yearly activity reports, conferences, social media, and other public events.
