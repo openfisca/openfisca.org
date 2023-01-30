@@ -6,8 +6,10 @@
         <div class="grid grid-hasPaddingBottom">
             <div class="cards">
             {{ range $.Site.Data.showcase }}
-                {{ $description := index .description $.Site.Language.Lang }}
-                {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
+                {{ if not .until }}
+                    {{ $description := index .description $.Site.Language.Lang }}
+                    {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
+                {{ end }}
             {{ end }}
             </div>
         </div>
