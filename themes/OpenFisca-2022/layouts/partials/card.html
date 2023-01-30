@@ -1,6 +1,5 @@
 {{ $imageSrc := "/img/showcase/default.png" }}
-{{ $imageSlug := .title | urlize }}
-{{ $newImageSrc := printf "/img/showcase/%s.png" $imageSlug }}
+{{ $newImageSrc := printf "/img/showcase/%s.png" .id }}
 {{ if ( os.FileExists ( printf "/static%s" $newImageSrc ) ) }}
 	{{ $imageSrc = $newImageSrc}}
 {{ end }}

@@ -5,9 +5,9 @@
     <div class="wrapper">
         <div class="grid grid-hasPaddingBottom">
             <div class="cards">
-            {{ range $.Site.Data.showcase }}
+            {{ range $id, $entry := $.Site.Data.showcase }}
                 {{ $description := index .description $.Site.Language.Lang }}
-                {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
+                {{ partial "card.html" (dict "id" $id "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
             {{ end }}
             </div>
         </div>
