@@ -1,3 +1,8 @@
+import fs from 'fs';
+
+import YAML from 'yaml';
+
+
 export default {
   title: {
     type: String,
@@ -25,6 +30,11 @@ export default {
       type: String,
       required: true,
       use: {isEmailAddress},
+    },
+    type: {
+      type: String,
+      required: true,
+      use: {isValidAuthorType},
     },
     link: {
       type: String,
@@ -64,6 +74,9 @@ export default {
 };
 
 
+const CONFIG = YAML.parse(fs.readFileSync('./config/_default/params.yaml', 'utf8'));
+
+
 function isUrl(value) {
   try {
     return new URL(value);
@@ -78,4 +91,11 @@ function isEmailAddress(value) {
 
 function isISOdate(value) {
   return isNaN(new Date(value)); // source: https://stackoverflow.com/a/67410020/594053
+}
+
+
+const VALID_AUTHOR_TYPES = Object.keys(CONFIG.showcase.author.types.icons);
+
+function isValidAuthorType(value) {
+  return VALID_AUTHOR_TYPES.includes(value);
 }
