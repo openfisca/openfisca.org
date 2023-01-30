@@ -20,8 +20,14 @@ jobs:
           paths:
             - node_modules
       - run:
-          name: Run tests
-          command: npm test
+          name: Check showcase data
+          command: npm run test:showcase
+      - run:
+          name: Lint CSS
+          command: npm run lint:css
+      - run:
+          name: Lint JavaScript
+          command: npm run lint:js
 
   html_validate:
     docker:
