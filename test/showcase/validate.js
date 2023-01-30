@@ -14,8 +14,8 @@ const errorCount = entries.map((entry) => {
   return validateSchema(`${SHOWCASE_DIR}/${entry}`, {
     schema: showcaseEntrySchema,
   });
-}).reduce((errorCount, validationHasError) => {
-  if (validationHasError) return errorCount + 1;
+}).reduce((errorCount, errors) => {
+  return errorCount + errors.length;
 }, 0);
 
 process.exitCode = errorCount;
