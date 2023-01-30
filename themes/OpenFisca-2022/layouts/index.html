@@ -11,7 +11,7 @@
                {{ range $slug := .Param "homepage_featured" }}
                   {{ $showcase := index $.Site.Data.showcase $slug }}
                   {{ $description := index $showcase.description $.Site.Language.Lang }}
-                  {{ partial "card.html" (dict "title" $showcase.title "description" $description "country" $showcase.country "website" $showcase.website "author" $showcase.author "Site" $.Site) }}
+                  {{ partial "card.html" (dict "id" $slug "title" $showcase.title "description" $description "country" $showcase.country "website" $showcase.website "author" $showcase.author "Site" $.Site) }}
                {{ end }}
             </div>
             <div class="grid_col-12 text-center mt-xl2">

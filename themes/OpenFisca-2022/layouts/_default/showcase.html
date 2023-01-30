@@ -5,10 +5,11 @@
     <div class="wrapper">
         <div class="grid grid-hasPaddingBottom">
             <div class="cards">
-                {{ $sortedShowcase := sort $.Site.Data.showcase "title" }}
-                {{ range where $sortedShowcase "until" "==" nil }}
-                    {{ $description := index .description $.Site.Language.Lang }}
-                    {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
+                {{ range $id, $entry := $.Site.Data.showcase }}
+                    {{ if not .until }}
+                        {{ $description := index .description $.Site.Language.Lang }}
+                        {{ partial "card.html" (dict "id" $id "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
+                    {{ end }}
                 {{ end }}
             </div>
         </div>
@@ -18,10 +19,11 @@
         <div class="grid grid-hasPaddingBottom">
             <h2 class="grid_col-12">{{ .Params.disused_reuses }}</h2>
             <div class="cards mt-l">
-                {{ $sortedShowcase := sort $.Site.Data.showcase "until" "desc" }}
-                {{ range where $sortedShowcase "until" "!=" nil }}
-                    {{ $description := index .description $.Site.Language.Lang }}
-                    {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author "until" .until "Site" $.Site) }}                    
+                {{ range $id, $entry := $.Site.Data.showcase }}
+                    {{ if .until }}
+                        {{ $description := index .description $.Site.Language.Lang }}
+                        {{ partial "card.html" (dict "id" $id "title" .title "description" $description "country" .country "website" .website "author" .author "until" .until "Site" $.Site) }}
+                    {{ end }}
                 {{ end }}
             </div>
         </div>

@@ -146,3 +146,8 @@ To apply automatic corrections use the following command:
 ```sh
 npm run lint:css -- --fix
 ```
+
+## License
+
+The source code in this repository is licensed under an AGPL v3 license.
+The content in the showcase is licensed under a CC-BY license by contributors.
