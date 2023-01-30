@@ -3,7 +3,9 @@ Thank you for wanting to contribute to OpenFisca! :smiley:
 Feel free to contact us or send us pull requests over GitHub.
 For more information on how to do so, please see our [contribution guidelines](https://openfisca.org/doc/contribute/index.html).
 
-## How to reference a reuse in the showcase
+## Referencing your reuse in the showcase
+
+If you have built a product with OpenFisca, we would love to reference it in the [public showcase](https://openfisca.org/en/showcase/)! This is a good way for you to gain more visibility, but it is also a very important contribution to OpenFisca. Doing so helps the core team raise funds for maintaining the ecosystem alive and adding features to the software, and making connection between similar reusers. It also helps maintainers of the country packages you depend on know how useful their efforts are, and focus on the most used parts of legislation.
 
 ### Complete the reuse information 
 
