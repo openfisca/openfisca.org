@@ -5,12 +5,11 @@
     <div class="wrapper">
         <div class="grid grid-hasPaddingBottom">
             <div class="cards">
-            {{ range $.Site.Data.showcase }}
-                {{ if not .until }}
+                {{ $sortedShowcase := sort $.Site.Data.showcase "title" }}
+                {{ range where $sortedShowcase "until" "==" nil }}
                     {{ $description := index .description $.Site.Language.Lang }}
                     {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
                 {{ end }}
-            {{ end }}
             </div>
         </div>
     </div>
@@ -19,12 +18,11 @@
         <div class="grid grid-hasPaddingBottom">
             <h2 class="grid_col-12">{{ .Params.disused_reuses }}</h2>
             <div class="cards mt-l">
-            {{ range sort $.Site.Data.showcase ".until" }}
-                {{ if .until }}
+                {{ $sortedShowcase := sort $.Site.Data.showcase "until" "desc" }}
+                {{ range where $sortedShowcase "until" "!=" nil }}
                     {{ $description := index .description $.Site.Language.Lang }}
-                    {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author "until" .until "Site" $.Site) }}
+                    {{ partial "card.html" (dict "title" .title "description" $description "country" .country "website" .website "author" .author "until" .until "Site" $.Site) }}                    
                 {{ end }}
-            {{ end }}
             </div>
         </div>
     </div>
