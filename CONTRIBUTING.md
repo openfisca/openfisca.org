@@ -36,3 +36,7 @@ until: 2020-03-01 # optional, YYYY-MM-DD
 Add an PNG image to the `static/img/showcase/` folder, named as the `.yml` file, exemple `legislation_explorer.png`. It must be in 1280 × 720 pixels dimension. 
 
 It is strongly recommended to use a image compression tool to to significantly reduce the weight of your image. [ImageOptim](https://imageoptim.com) is a good solution - choose "lossy" settings that usually give more than 50% compression gains, but do not remove image metadata.
+
+### License
+
+By publishing your reuse, you publish the description, illustration and all associated metadata under a [Creative commons Attribution](https://creativecommons.org/licenses/by/4.0/) (CC-BY) license. This enables the Core team and other contributors to easily feature your product in, for example, yearly activity reports, conferences, social media, and other public events.
