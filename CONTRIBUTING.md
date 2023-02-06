@@ -27,8 +27,8 @@ author:
   contact: contact@openfisca.org  # this email address will only be used by the Core team for questions related to the reuse
   link: https://openfisca.org  # optional URL of the author organisation
 source:
-  repository: https://github.com/openfisca/legislation-explorer # optional URL
-  license: AGPL-3.0-only # optional SPDX license identifier, see https://spdx.org/licenses/
+  repository: https://github.com/openfisca/legislation-explorer  # URL of the source code
+  license: AGPL-3.0-only  # SPDX license identifier, see https://spdx.org/licenses/
 ```
 
 #### Disused reuses
@@ -41,7 +41,7 @@ until: 2022-12-31  # optional, YYYY-MM-DD format
 
 #### Proprietary source
 
-If the source is proprietary, please indicate it as a comment with the following format:
+If the source code of your reuse is not open, do not fill in the `source` parameter and indicate it as a comment with the following format:
 
 ```yml
 # source: proprietary
