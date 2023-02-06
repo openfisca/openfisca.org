@@ -1,5 +1,6 @@
-import {readdir} from 'node:fs/promises';
+import {readdirSync} from 'node:fs';
 
+import expect from 'expect.js';
 import validateSchema from 'yaml-schema-validator';
 
 import showcaseEntrySchema from './schema.js';
@@ -7,15 +8,16 @@ import showcaseEntrySchema from './schema.js';
 
 const SHOWCASE_DIR = 'data/showcase';
 
-const entries = await readdir(SHOWCASE_DIR);
-
-const errorCount = entries.map((entry) => {
-  console.log(entry);
-  return validateSchema(`${SHOWCASE_DIR}/${entry}`, {
-    schema: showcaseEntrySchema,
+describe('Showcase entries', () => {
+  const entries = readdirSync(SHOWCASE_DIR);
+  entries.forEach(entry => {
+    describe(entry, () => {
+      it('has a valid description', () => {
+        const validationErrors = validateSchema(`${SHOWCASE_DIR}/${entry}`, {
+          schema: showcaseEntrySchema,
+        });
+        expect(validationErrors).to.be.empty();
+      });
+    });
   });
-}).reduce((errorCount, errors) => {
-  return errorCount + errors.length;
-}, 0);
-
-process.exitCode = errorCount;
+});
