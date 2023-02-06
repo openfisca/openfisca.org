@@ -40,7 +40,7 @@ until: 2022-12-31  # optional, YYYY-MM-DD format
 
 Add an image in the PNG format to the [`static/img/showcase/` folder](https://github.com/openfisca/openfisca.org/tree/master/static/img/showcase), with the same name as the `.yml` file. For example: `legislation_explorer.png`.
 
-The file should be in 16:9 format, at least 1280 × 720 pixels and at most 2560 × 1440 pixels. To ensure fast loading and minimise the environmental impact of the OpenFisca website, the maximum allowed picture weight is 400 kB.
+The file should be in 16:9 format, at least 1280 × 720 pixels. To ensure fast loading and minimise the environmental impact of the OpenFisca website, the maximum allowed picture weight is 400 kB.
 
 It is strongly recommended to use an image compression tool such as [ImageOptim](https://imageoptim.com) to reduce the image weight. Choosing “lossy” settings at 90% quality will usually yield over 50% compression gains.
 
