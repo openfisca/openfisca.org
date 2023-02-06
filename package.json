@@ -19,8 +19,8 @@
     "lint:css": "stylelint themes/OpenFisca-2022/assets/css/**/*.css",
     "lint:js": "eslint publish.js themes/OpenFisca-2022/assets/js/ test/**/*.js",
     "publish": "node publish.js",
-    "test": "npm run test:showcase && npm run lint:js && npm run lint:css",
-    "test:showcase": "node test/showcase/validate.js"
+    "test": "npm run lint:js && npm run lint:css && npm run test:showcase",
+    "test:showcase": "mocha test/showcase/validate.js"
   },
   "dependencies": {
     "lucide": "^0.100.0",
@@ -35,7 +35,10 @@
   "devDependencies": {
     "eslint": "^8.31.0",
     "eslint-config-google": "^0.14.0",
+    "expect.js": "^0.3.1",
     "gh-pages": "^4.0.0",
+    "image-size": "^1.0.2",
+    "mocha": "^10.2.0",
     "stylelint": "^14.16.1",
     "stylelint-config-standard": "^29.0.0",
     "yaml": "^2.2.1",
