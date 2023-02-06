@@ -1,4 +1,4 @@
-import {readdirSync} from 'node:fs';
+import {readdirSync, statSync} from 'node:fs';
 import {basename} from 'node:path'
 
 import expect from 'expect.js';
@@ -9,7 +9,7 @@ import showcaseEntrySchema from './schema.js';
 
 
 const SHOWCASE_DIR = 'data/showcase';
-const IMAGE_DIR = 'static/img/showcase';
+const ILLUSTRATIONS_DIR = 'static/img/showcase';
 
 describe('Showcase entries', () => {
   const entries = readdirSync(SHOWCASE_DIR);
@@ -25,11 +25,24 @@ describe('Showcase entries', () => {
         expect(validationErrors).to.be.empty();
       });
 
-      it('has a valid image', () => {
-        const dimensions = imageSize(`${IMAGE_DIR}/${entry}.png`);
-        expect(dimensions.width).to.be.greaterThan(1279);
-        expect(dimensions.height).to.be.greaterThan(719);
-        expect(dimensions.width / dimensions.height).to.be.within(1.7, 1.8);  // expect a 16:9 ratio
+      describe('illustration', () => {
+        const path = `${ILLUSTRATIONS_DIR}/${entry}.png`;
+        let stats;
+
+        it('exists', () => {
+          stats = statSync(path);
+        });
+
+        it('is not too heavy', () => {
+          expect(stats.size).to.be.below(400 * 1024);  // 400 kiB
+        })
+
+        it('is large enough', () => {
+          const dimensions = imageSize(path);
+          expect(dimensions.width).to.be.greaterThan(1279);
+          expect(dimensions.height).to.be.greaterThan(719);
+          expect(dimensions.width / dimensions.height).to.be.within(1.7, 1.8);  // expect a 16:9 ratio
+        });
       });
     });
   });
