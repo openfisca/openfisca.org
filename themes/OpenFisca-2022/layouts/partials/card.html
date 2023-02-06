@@ -8,7 +8,7 @@
 {{ with .author }}{{ with .type }}{{ $authorType = . }}{{ end }}{{ end }}
 {{ $authorTypeIcon := index .Site.Params.showcase.author.types.icons $authorType }}
 
-<div class="card {{ if .website }}card-hasLink{{ end }}">
+<div class="card {{ if .website }}{{ if not .until }}card-hasLink{{ end }}{{ end }}">
 	<div class="card_image">
 		<img class="screenshot" src="{{ $imageSrc }}" alt="{{ .title }}" />
 	</div>
@@ -28,7 +28,11 @@
 			</ul>
 		</div>
 	{{ end }}
-	<a class="card_link" target="_blank" href="{{ .website | safeURL }}">{{ .website | safeURL }}</a>
+	{{ with .website }}
+		{{ if not $.until }}
+				<a class="card_link" target="_blank" href="{{ . | safeURL }}">{{ . | safeURL }}</a>
+		{{ end }}
+	{{ end }}
 	{{ with .author }}{{ with .name }}
 		<div class="card_author">
 				<div class="card_author_icon iconWrapper iconWrapper-rounded">

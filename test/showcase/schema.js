@@ -68,7 +68,8 @@ export default {
     },
   },
   until: {
-    type: String,
+    type: Date,
+    required: false,
     use: {isISOdate},
   },
 };
@@ -90,7 +91,7 @@ function isEmailAddress(value) {
 }
 
 function isISOdate(value) {
-  return isNaN(new Date(value)); // source: https://stackoverflow.com/a/67410020/594053
+  return !isNaN(new Date(value)); // source: https://stackoverflow.com/a/67410020/594053
 }
 
 

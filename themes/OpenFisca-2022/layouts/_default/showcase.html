@@ -2,13 +2,36 @@
 
     {{ partial "hero.html" (dict "title" .Params.hero.title "subtitle" .Params.hero.subtitle "center" true ) . }}
 
+    {{ range $id, $entry := $.Site.Data.showcase }}
+        {{ $showcaseEntry := merge . (dict "id" $id) }}
+        {{ if not .until }}
+            {{ $.Scratch.SetInMap "entries" $id $showcaseEntry }}
+        {{ else }}
+            {{ $.Scratch.SetInMap "obsoleteEntries" $id $showcaseEntry }}
+        {{ end }}
+    {{ end }}
+
     <div class="wrapper">
         <div class="grid grid-hasPaddingBottom">
             <div class="cards">
-            {{ range $id, $entry := $.Site.Data.showcase }}
-                {{ $description := index .description $.Site.Language.Lang }}
-                {{ partial "card.html" (dict "id" $id "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
-            {{ end }}
+                {{ $showcase := sort (.Scratch.Get "entries") "title" }}
+                {{ range $showcase }}
+                    {{ $description := index .description $.Site.Language.Lang }}
+                    {{ partial "card.html" (dict "id" .id "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
+                {{ end }}
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="grid grid-hasPaddingBottom">
+            <h2 class="grid_col-12">{{ .Params.disused_reuses }}</h2>
+            <div class="cards mt-l">
+                {{ $obsoleteShowcase := sort (.Scratch.Get "obsoleteEntries") "until" "desc" }}
+                {{ range $obsoleteShowcase }}
+                    {{ $description := index .description $.Site.Language.Lang }}
+                    {{ partial "card.html" (dict "id" .id "title" .title "description" $description "country" .country "website" .website "author" .author "until" .until "Site" $.Site) }}
+                {{ end }}
             </div>
         </div>
     </div>
