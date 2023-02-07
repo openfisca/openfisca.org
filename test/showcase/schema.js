@@ -59,12 +59,12 @@ export default {
       },
     },
   },
-  country: {
+  package: {
     type: String,
     required: true,
     length: {
       min: 2,
-      max: 2,
+      max: 200,
     },
   },
   until: {
