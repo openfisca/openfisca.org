@@ -95,7 +95,8 @@ const SPDXLicenseIds = JSON.parse(fs.readFileSync('./node_modules/spdx-license-i
 
 function isUrl(value) {
   try {
-    return new URL(value);
+    const url = new URL(value);
+    return url.protocol == 'https:';
   } catch (_) {
     return false;
   }
