@@ -19,7 +19,7 @@ title: Legislation Explorer  # 80 characters max
 description:  # in both languages, 200 characters max
   en: Explore legislation formulas and parameters modelled with OpenFisca.
   fr: Explorez les formules et les paramètres de la législation modélisée.  # deepl.com can be used for automated translation
-package: france  # the name of the OpenFisca country package used by this reuse
+package: template  # the name of the OpenFisca country package used by this reuse
 website: https://legislation.demo.openfisca.org  # prefer HTTPS over HTTP
 author:
   type: collective # one of individual, collective, ngo, research_center, business, local_government, or national_government
@@ -57,4 +57,4 @@ It is strongly recommended to use an image compression tool such as [ImageOptim]
 
 ### License
 
-By publishing your reuse, you publish the description, illustration and all associated metadata under a [Creative Commons Attribution](https://creativecommons.org/licenses/by/4.0/) (CC-BY) license. This enables the Core team and other contributors to easily feature your product in, for example, yearly activity reports, conferences, social media, and other public events.
+By publishing your reuse, you publish the description, illustration and all associated metadata under a [Creative Commons Attribution](https://creativecommons.org/licenses/by/4.0/) (CC-BY) license, attributed to the `author` listed in the document. This enables the Core team and other contributors to easily feature your product in, for example, yearly activity reports, conferences, social media, and other public events.
