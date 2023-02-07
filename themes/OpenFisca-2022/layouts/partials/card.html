@@ -17,7 +17,7 @@
 	<div class="card_titleWrapper">
 		<h3 class="card_title">{{ .title }}</h3>
 		{{ with $package }}{{ with $package.jurisdiction }}
-			<div class="card_flag flag flag-{{ . }}"><span>{{ . }}</span></div>
+			{{ partial "flag.html" (dict "jurisdiction" . "class" "card_flag") }}
 		{{ end }}{{ end }}
 	</div>
 	<div class="card_desc">

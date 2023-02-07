@@ -20,7 +20,7 @@
                         <tr>
                             <td data-column="{{ .Params.columns.jurisdiction }}">
                                 {{ with .jurisdiction }}
-                                    <div class="flag flag-{{ slicestr . 0 2 }}"><span>{{ . }}</span></div>
+                                    {{ partial "flag.html" (dict "jurisdiction" . ) }}
                                 {{ else }}
                                     <span style="color:var(--colorGray500)">-</span>
                                 {{ end }}
