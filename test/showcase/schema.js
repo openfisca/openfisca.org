@@ -66,6 +66,7 @@ export default {
       min: 2,
       max: 200,
     },
+    use: {isValidPackage},
   },
   until: {
     type: Date,
@@ -119,4 +120,10 @@ function isValidAuthorType(value) {
 
 function isSPDX(value) {
   return SPDXLicenseIds.includes(value);
+}
+
+const packagesFilenames = fs.readdirSync('./data/packages').map((file) => file.replace('.yml', ''));
+
+function isValidPackage(value) {
+  return packagesFilenames.includes(value);
 }
