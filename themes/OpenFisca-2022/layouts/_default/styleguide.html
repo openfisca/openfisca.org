@@ -55,9 +55,9 @@
                  {{ $showcase := sort (.Scratch.Get "showcaseEntries") "title" }}
                  {{ range $showcase }}
                     {{ $description := index .description $.Site.Language.Lang }}
-                    {{ partial "card.html" (dict "id" .id "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
+                    {{ partial "card.html" (dict "id" .id "title" .title "description" $description "package" .package "website" .website "author" .author "Site" $.Site) }}
                 {{ end }}
-                {{ partial "card.html" (dict "title" "Laboris nisi ut aliquip" "description" "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." "country" "FR" "website" "https://www.openfisca.org" "tags" $tags "Site" $.Site) }}
+                {{ partial "card.html" (dict "title" "Laboris nisi ut aliquip" "description" "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." "package" "france" "website" "https://www.openfisca.org" "tags" $tags "Site" $.Site) }}
             </div>
             <div class="grid_col-12 text-center mt-l">
                 <a href="#"></a><button>Browse all</button></a>
@@ -193,10 +193,10 @@
                         <li class="tag">{{ . }}</li>
                     {{ end }}
                 </ul>
-                <div class="flag flag-FR"><span>FR</span></div>
-                <div class="flag flag-AD"><span>AD</span></div>
-                <div class="flag flag-AI"><span>AI</span></div>
-                <div class="flag flag-IQ"><span>IQ</span></div>
+                {{ partial "flag.html" (dict "jurisdiction" "FR") }}
+                {{ partial "flag.html" (dict "jurisdiction" "AD") }}
+                {{ partial "flag.html" (dict "jurisdiction" "AI") }}
+                {{ partial "flag.html" (dict "jurisdiction" "IQ") }}
             </div>
         </div>
     </div>
@@ -332,7 +332,7 @@
                 <tbody>
                     {{ range $.Site.Data.packages }}
                         <tr>
-                            <td data-column="Jurisdiction">{{ if eq .jurisdiction "ZZ" }}<span style="color:var(--colorGray500)">…</span>{{ else }}<div class="flag flag-{{ .jurisdiction }}"><span>{{ .jurisdiction }}</span></div>{{ end }}</td>
+                            <td data-column="Jurisdiction">{{ if eq .jurisdiction "ZZ" }}<span style="color:var(--colorGray500)">…</span>{{ else }}{{ partial "flag.html" (dict "jurisdiction" .jurisdiction) }}{{ end }}</td>
                             <td data-column="Title">{{ index .title $.Site.Language.Lang }}</td>
                             <td data-column="Website" class="td-isTruncated">{{ with .website }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
                             <td data-column="Source" class="td-isTruncated">{{ with .source }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
