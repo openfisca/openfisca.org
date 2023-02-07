@@ -62,10 +62,6 @@ export default {
   package: {
     type: String,
     required: true,
-    length: {
-      min: 2,
-      max: 200,
-    },
     use: {isValidPackage},
   },
   until: {
