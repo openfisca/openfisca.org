@@ -83,7 +83,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i class="fas fa-hands-helping"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
 </ul>
 
     </div>
@@ -119,10 +118,10 @@
 <span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">importlib_metadata</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pkg_resources</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 <span class="kn">import</span> <span class="nn">typing</span>
@@ -141,7 +140,7 @@
 
 
 <div class="viewcode-block" id="TaxBenefitSystem"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem">[docs]</a><span class="k">class</span> <span class="nc">TaxBenefitSystem</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Represents the legislation.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the legislation.</span>
 
 <span class="sd">    It stores parameters (values defined for everyone) and variables (values</span>
 <span class="sd">    defined for some given entity e.g. a person).</span>
@@ -259,7 +258,7 @@
         <span class="k">return</span> <span class="n">variable</span>
 
 <div class="viewcode-block" id="TaxBenefitSystem.add_variable"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.add_variable">[docs]</a>    <span class="k">def</span> <span class="nf">add_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variable</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Adds an OpenFisca variable to the tax and benefit system.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds an OpenFisca variable to the tax and benefit system.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            variable: The variable to add. Must be a subclass of Variable.</span>
@@ -271,7 +270,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_variable</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">update</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TaxBenefitSystem.replace_variable"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.replace_variable">[docs]</a>    <span class="k">def</span> <span class="nf">replace_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Replaces an existing variable by a new one.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Replaces an existing variable by a new one.</span>
 
 <span class="sd">        The new variable must have the same name than the replaced one.</span>
 
@@ -290,7 +289,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">load_variable</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">update</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TaxBenefitSystem.update_variable"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.update_variable">[docs]</a>    <span class="k">def</span> <span class="nf">update_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variable</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Update an existing variable in the Tax-Benefit system.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update an existing variable in the Tax-Benefit system.</span>
 
 <span class="sd">        All attributes of the updated variable that are not explicitly</span>
 <span class="sd">        overridden by the new ``variable`` will stay unchanged.</span>
@@ -312,7 +311,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_variable</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">update</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TaxBenefitSystem.add_variables_from_file"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.add_variables_from_file">[docs]</a>    <span class="k">def</span> <span class="nf">add_variables_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds all OpenFisca variables contained in a given file to the tax and benefit system.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -341,7 +340,7 @@
             <span class="k">raise</span></div>
 
 <div class="viewcode-block" id="TaxBenefitSystem.add_variables_from_directory"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.add_variables_from_directory">[docs]</a>    <span class="k">def</span> <span class="nf">add_variables_from_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Recursively explores a directory, and adds all OpenFisca variables found there to the tax and benefit system.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">py_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="s2">&quot;*.py&quot;</span><span class="p">))</span>
@@ -352,7 +351,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">add_variables_from_directory</span><span class="p">(</span><span class="n">subdirectory</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TaxBenefitSystem.add_variables"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.add_variables">[docs]</a>    <span class="k">def</span> <span class="nf">add_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">variables</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds a list of OpenFisca Variables to the `TaxBenefitSystem`.</span>
 
 <span class="sd">        See also :any:`add_variable`</span>
@@ -361,7 +360,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TaxBenefitSystem.load_extension"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.load_extension">[docs]</a>    <span class="k">def</span> <span class="nf">load_extension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Loads an extension to the tax and benefit system.</span>
 
 <span class="sd">        :param str extension: The extension to load. Can be an absolute path pointing to an extension directory, or the name of an OpenFisca extension installed as a pip package.</span>
@@ -385,7 +384,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">extension_parameters</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TaxBenefitSystem.apply_reform"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.apply_reform">[docs]</a>    <span class="k">def</span> <span class="nf">apply_reform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reform_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;TaxBenefitSystem&quot;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Generates a new tax and benefit system applying a reform to the tax and benefit system.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates a new tax and benefit system applying a reform to the tax and benefit system.</span>
 
 <span class="sd">        The current tax and benefit system is **not** mutated.</span>
 
@@ -425,7 +424,7 @@
             <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="n">check_existence</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Variable</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a variable from the tax and benefit system.</span>
 
 <span class="sd">        :param variable_name: Name of the requested variable.</span>
@@ -443,7 +442,7 @@
         <span class="k">raise</span> <span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TaxBenefitSystem.neutralize_variable"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.neutralize_variable">[docs]</a>    <span class="k">def</span> <span class="nf">neutralize_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Neutralizes an OpenFisca variable existing in the tax and benefit system.</span>
 
 <span class="sd">        A neutralized variable always returns its default value when computed.</span>
@@ -472,7 +471,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">variable_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">annualised_variable</span>
 
 <div class="viewcode-block" id="TaxBenefitSystem.load_parameters"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.load_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">load_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_to_yaml_dir</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Loads the legislation parameter for a directory containing YAML parameters files.</span>
 
 <span class="sd">        :param path_to_yaml_dir: Absolute path towards the YAML parameter directory.</span>
@@ -500,7 +499,7 @@
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">instant</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Period</span><span class="p">,</span> <span class="n">Instant</span><span class="p">],</span>
             <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParameterNodeAtInstant</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Get the parameters of the legislation at a given instant</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the parameters of the legislation at a given instant</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            instant: :obj:`str` formatted &quot;YYYY-MM-DD&quot; or :class:`~openfisca_core.periods.Instant`.</span>
@@ -532,7 +531,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get_at_instant</span><span class="p">(</span><span class="n">key</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TaxBenefitSystem.get_package_metadata"><a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.get_package_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">get_package_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Gets metadata relative to the country package.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets metadata relative to the country package.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A dictionary with the country package metadata</span>
@@ -570,8 +569,9 @@
         <span class="n">package_name</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">__package__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">distribution</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">get_distribution</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">DistributionNotFound</span><span class="p">:</span>
+            <span class="n">distribution</span> <span class="o">=</span> <span class="n">importlib_metadata</span><span class="o">.</span><span class="n">distribution</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">importlib_metadata</span><span class="o">.</span><span class="n">PackageNotFoundError</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">fallback_metadata</span>
 
         <span class="n">source_file</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsourcefile</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
@@ -582,17 +582,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">location</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
-        <span class="n">home_page_metadatas</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">metadata</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">metadata</span> <span class="ow">in</span> <span class="n">distribution</span><span class="o">.</span><span class="n">_get_metadata</span><span class="p">(</span><span class="n">distribution</span><span class="o">.</span><span class="n">PKG_INFO</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-            <span class="k">if</span> <span class="s1">&#39;Home-page&#39;</span> <span class="ow">in</span> <span class="n">metadata</span>
-            <span class="p">]</span>
-        <span class="n">repository_url</span> <span class="o">=</span> <span class="n">home_page_metadatas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">home_page_metadatas</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">metadata</span>
 
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">distribution</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
             <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">distribution</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
-            <span class="s1">&#39;repository_url&#39;</span><span class="p">:</span> <span class="n">repository_url</span><span class="p">,</span>
+            <span class="s1">&#39;repository_url&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;Home-page&quot;</span><span class="p">],</span>
             <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
             <span class="p">}</span></div>
 
@@ -600,7 +595,7 @@
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">entity</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Entity</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Gets all variables contained in a tax and benefit system.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets all variables contained in a tax and benefit system.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            entity: If set, returns the variable defined for the given entity.</span>

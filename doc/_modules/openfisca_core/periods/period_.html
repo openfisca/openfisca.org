@@ -83,7 +83,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i class="fas fa-hands-helping"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
 </ul>
 
     </div>
@@ -120,7 +119,7 @@
 
 
 <div class="viewcode-block" id="Period"><a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.Period">[docs]</a><span class="k">class</span> <span class="nc">Period</span><span class="p">(</span><span class="nb">tuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Toolbox to handle date intervals.</span>
 
 <span class="sd">    A period is a triple (unit, start, size), where unit is either &quot;month&quot; or &quot;year&quot;, where start format is a</span>
@@ -131,7 +130,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Transform period to to its Python representation as a string.</span>
 
 <span class="sd">        &gt;&gt;&gt; repr(period(&#39;year&#39;, 2014))</span>
@@ -141,10 +140,10 @@
 <span class="sd">        &gt;&gt;&gt; repr(period(&#39;day&#39;, &#39;2014-2-3&#39;))</span>
 <span class="sd">        &quot;Period((&#39;day&#39;, Instant((2014, 2, 3)), 1))&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">(</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">super</span><span class="p">(</span><span class="n">Period</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">())</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">(</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">super</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Transform period to a string.</span>
 
 <span class="sd">        &gt;&gt;&gt; str(period(YEAR, 2014))</span>
@@ -206,7 +205,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">days</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Count the number of days in period.</span>
 
 <span class="sd">        &gt;&gt;&gt; period(&#39;day&#39;, 2014).days</span>
@@ -273,7 +272,7 @@
             <span class="p">))</span>
 
 <div class="viewcode-block" id="Period.get_subperiods"><a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.Period.get_subperiods">[docs]</a>    <span class="k">def</span> <span class="nf">get_subperiods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the list of all the periods of unit ``unit`` contained in self.</span>
 
 <span class="sd">        Examples:</span>
@@ -297,7 +296,7 @@
             <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">first_day</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">DAY</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size_in_days</span><span class="p">)]</span></div>
 
 <div class="viewcode-block" id="Period.offset"><a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.Period.offset">[docs]</a>    <span class="k">def</span> <span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Increment (or decrement) the given period with offset units.</span>
 
 <span class="sd">        &gt;&gt;&gt; period(&#39;day&#39;, 2014).offset(1)</span>
@@ -434,14 +433,14 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">unit</span><span class="p">),</span> <span class="bp">self</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span></div>
 
 <div class="viewcode-block" id="Period.contains"><a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.Period.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Period</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns ``True`` if the period contains ``other``. For instance, ``period(2015)`` contains ``period(2015-01)``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">start</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">stop</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the size of the period.</span>
 
 <span class="sd">        &gt;&gt;&gt; period(&#39;month&#39;, &#39;2012-2-29&#39;, 4).size</span>
@@ -451,7 +450,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">size_in_months</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the size of the period in months.</span>
 
 <span class="sd">        &gt;&gt;&gt; period(&#39;month&#39;, &#39;2012-2-29&#39;, 4).size_in_months</span>
@@ -467,7 +466,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">size_in_days</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the size of the period in days.</span>
 
 <span class="sd">        &gt;&gt;&gt; period(&#39;month&#39;, &#39;2012-2-29&#39;, 4).size_in_days</span>
@@ -487,7 +486,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instant</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the first day of the period as an Instant instance.</span>
 
 <span class="sd">        &gt;&gt;&gt; period(&#39;month&#39;, &#39;2012-2-29&#39;, 4).start</span>
@@ -497,7 +496,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instant</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the last day of the period as an Instant instance.</span>
 
 <span class="sd">        &gt;&gt;&gt; period(&#39;year&#39;, 2014).stop</span>

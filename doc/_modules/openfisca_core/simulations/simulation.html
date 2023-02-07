@@ -83,7 +83,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i class="fas fa-hands-helping"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
 </ul>
 
     </div>
@@ -130,7 +129,7 @@
 
 
 <div class="viewcode-block" id="Simulation"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation">[docs]</a><span class="k">class</span> <span class="nc">Simulation</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a simulation, and handles the calculation logic</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -143,7 +142,7 @@
             <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span>
             <span class="n">populations</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Population</span><span class="p">],</span>
             <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This constructor is reserved for internal use; see :any:`SimulationBuilder`,</span>
 <span class="sd">        which is the preferred way to obtain a Simulation initialized with a consistent</span>
 <span class="sd">        set of Entities.</span>
@@ -191,7 +190,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">data_storage_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Temporary folder used to store intermediate calculation data in case the memory is saturated</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -206,7 +205,7 @@
     <span class="c1"># ----- Calculation methods ----- #</span>
 
 <div class="viewcode-block" id="Simulation.calculate"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.calculate">[docs]</a>    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculate ``variable_name`` for ``period``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate ``variable_name`` for ``period``.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">Period</span><span class="p">):</span>
             <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
@@ -223,7 +222,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">purge_cache_of_invalid_values</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">Period</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate the variable ``variable_name`` for the period ``period``, using the variable formula if it exists.</span>
 
 <span class="sd">        :returns: A numpy array containing the result of the calculation</span>
@@ -332,7 +331,7 @@
             <span class="n">period</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">calculate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate the value of a variable using the ``calculate_output`` attribute of the variable.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -355,7 +354,7 @@
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_run_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find the ``variable`` formula for the given ``period`` if it exists, and apply it to ``population``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -376,7 +375,7 @@
         <span class="k">return</span> <span class="n">array</span>
 
     <span class="k">def</span> <span class="nf">_check_period_consistency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check that a period matches the variable definition_period</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">:</span>
@@ -417,7 +416,7 @@
     <span class="c1"># ----- Handle circular dependencies in a calculation ----- #</span>
 
     <span class="k">def</span> <span class="nf">_check_for_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Raise an exception in the case of a circular definition, where evaluating a variable for</span>
 <span class="sd">        a given period loops around to evaluating the same variable/period pair. Also guards, as</span>
 <span class="sd">        a heuristic, against &quot;quasicircles&quot;, where the evaluation of a variable at a period involves</span>
@@ -452,7 +451,7 @@
     <span class="c1"># ----- Methods to access stored values ----- #</span>
 
 <div class="viewcode-block" id="Simulation.get_array"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_array">[docs]</a>    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the value of ``variable_name`` for ``period``, if this value is alreay in the cache (if it has been set as an input or previously calculated).</span>
 
 <span class="sd">        Unlike :meth:`.calculate`, this method *does not* trigger calculations and *does not* use any formula.</span>
@@ -462,11 +461,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="n">period</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Simulation.get_holder"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_holder">[docs]</a>    <span class="k">def</span> <span class="nf">get_holder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the holder associated with the variable.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the holder associated with the variable.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable_population</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Simulation.get_memory_usage"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_memory_usage">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get data about the virtual memory usage of the simulation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
@@ -482,7 +481,7 @@
     <span class="c1"># ----- Misc ----- #</span>
 
     <span class="k">def</span> <span class="nf">delete_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete a variable&#39;s value for a given period</span>
 
 <span class="sd">        :param variable: the variable to be set</span>
@@ -511,7 +510,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span><span class="o">.</span><span class="n">delete_arrays</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_known_periods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a list variable&#39;s known period, i.e. the periods where a value has been initialized and</span>
 
 <span class="sd">        :param variable: the variable to be set</span>
@@ -528,7 +527,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span><span class="o">.</span><span class="n">get_known_periods</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set a variable&#39;s value for a given period</span>
 
 <span class="sd">        :param variable: the variable to be set</span>
@@ -580,7 +579,7 @@
         <span class="k">return</span> <span class="p">{</span><span class="n">population</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">:</span> <span class="n">population</span><span class="o">.</span><span class="n">ids</span> <span class="k">for</span> <span class="n">population</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">()}</span>
 
     <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">trace</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Copy the simulation just enough to be able to run the copy without modifying the original simulation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new</span> <span class="o">=</span> <span class="n">commons</span><span class="o">.</span><span class="n">empty_clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>

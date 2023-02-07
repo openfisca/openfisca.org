@@ -99,7 +99,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i class="fas fa-hands-helping"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
 </ul>
 
     </div>
@@ -135,23 +134,23 @@
 <h2>On the machine with Internet access<a class="headerlink" href="#on-the-machine-with-internet-access" title="Permalink to this headline">¶</a></h2>
 <p>We are going to create a first virtualenv in which we’ll use <code class="docutils literal notranslate"><span class="pre">pip</span></code> to download the <code class="docutils literal notranslate"><span class="pre">.whl</span></code> files in a specific directory.</p>
 <p>Here we use <a class="reference external" href="https://github.com/berdario/pew">pew</a> to simplify virtualenv management.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install pew
-pew new openfisca-packages --python<span class="o">=</span>python3.7
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pew
+pew<span class="w"> </span>new<span class="w"> </span>openfisca-packages<span class="w"> </span>--python<span class="o">=</span>python3.7
 
 <span class="c1"># Upgrade pip itself</span>
-pip install --upgrade pip
-pip --version
+pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+pip<span class="w"> </span>--version
 <span class="c1"># Should print at least 9.0 at the time we write this doc.</span>
 
-mkdir ~/openfisca-packages
-<span class="nb">cd</span> ~/openfisca-packages
-pip download OpenFisca-France
+mkdir<span class="w"> </span>~/openfisca-packages
+<span class="nb">cd</span><span class="w"> </span>~/openfisca-packages
+pip<span class="w"> </span>download<span class="w"> </span>OpenFisca-France
 <span class="c1"># You should see the downloaded files in the current directory.</span>
 </pre></div>
 </div>
 <p>Now copy these files on the server (say in the <code class="docutils literal notranslate"><span class="pre">~/openfisca-packages</span></code> directory), either via a USB stick, or with <code class="docutils literal notranslate"><span class="pre">scp</span></code>, or any other way.</p>
 <p>Example with <code class="docutils literal notranslate"><span class="pre">scp</span></code>:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scp -r ~/openfisca-packages user@server:
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scp<span class="w"> </span>-r<span class="w"> </span>~/openfisca-packages<span class="w"> </span>user@server:
 </pre></div>
 </div>
 </section>
@@ -160,19 +159,19 @@ pip download OpenFisca-France
 <p>Starting from here we assume you copied the packages on the server, say in <code class="docutils literal notranslate"><span class="pre">~/openfisca-packages</span></code>.</p>
 <p>The following commands show how to install Python packages without any Internet access.
 If you already have a virtualenv, activate it. Otherwise create a new one following the same instructions as above (for example with <code class="docutils literal notranslate"><span class="pre">pew</span> <span class="pre">new</span></code>).</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install ~/openfisca-packages/*
-    Processing ./isodate-0.5.4.tar.gz
-    <span class="o">[</span>...<span class="o">]</span>
-    Installing collected packages: pytz, Babel, Biryani, numpy, PyYAML, OpenFisca-Core, requests, OpenFisca-France, isodate
-    Successfully installed Babel-2.3.4 Biryani-0.10.4 OpenFisca-Core-7.0.0 OpenFisca-France-15.1.0 PyYAML-3.12 isodate-0.5.4 numpy-1.12.0 pytz-2016.10 requests-2.13.0
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>~/openfisca-packages/*
+<span class="w">    </span>Processing<span class="w"> </span>./isodate-0.5.4.tar.gz
+<span class="w">    </span><span class="o">[</span>...<span class="o">]</span>
+<span class="w">    </span>Installing<span class="w"> </span>collected<span class="w"> </span>packages:<span class="w"> </span>pytz,<span class="w"> </span>Babel,<span class="w"> </span>Biryani,<span class="w"> </span>numpy,<span class="w"> </span>PyYAML,<span class="w"> </span>OpenFisca-Core,<span class="w"> </span>requests,<span class="w"> </span>OpenFisca-France,<span class="w"> </span>isodate
+<span class="w">    </span>Successfully<span class="w"> </span>installed<span class="w"> </span>Babel-2.3.4<span class="w"> </span>Biryani-0.10.4<span class="w"> </span>OpenFisca-Core-7.0.0<span class="w"> </span>OpenFisca-France-15.1.0<span class="w"> </span>PyYAML-3.12<span class="w"> </span>isodate-0.5.4<span class="w"> </span>numpy-1.12.0<span class="w"> </span>pytz-2016.10<span class="w"> </span>requests-2.13.0
 
-pip list <span class="p">|</span> grep OpenFisca-France
-    OpenFisca-France <span class="m">15</span>.1.0
+pip<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>OpenFisca-France
+<span class="w">    </span>OpenFisca-France<span class="w"> </span><span class="m">15</span>.1.0
 </pre></div>
 </div>
 <p>Run the basic tests which confirm that OpenFisca-France is correctly installed:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python -m openfisca_france.tests.test_basics
-OpenFisca-France basic <span class="nb">test</span> was executed successfully.
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>openfisca_france.tests.test_basics
+OpenFisca-France<span class="w"> </span>basic<span class="w"> </span><span class="nb">test</span><span class="w"> </span>was<span class="w"> </span>executed<span class="w"> </span>successfully.
 </pre></div>
 </div>
 </section>

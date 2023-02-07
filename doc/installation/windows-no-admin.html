@@ -99,7 +99,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i class="fas fa-hands-helping"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
 </ul>
 
     </div>
@@ -146,19 +145,19 @@
 <li><p>Install it. At some point, the installer will ask you for a “Destination Folder”. You can keep the default or choose another one, but in all case <strong>copy paste the path to this folder somewhere</strong>. It will be useful later. For instance, this path may look like <code class="docutils literal notranslate"><span class="pre">C:\Users\my-name\AppData\Local\Miniconda2</span></code>.</p></li>
 <li><p>Run the program “Git Bash” from the “Start” menu. This should open a command line. Copy and paste the following lines in the console, after <strong>adapting the first line using the path you noted in the last step</strong>:</p></li>
 </ul>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;MINICONDA_PATH=&quot;C:\Users\form\AppData\Local\Miniconda2&quot;&#39;</span> &gt;&gt; .bashrc
-<span class="nb">echo</span> <span class="s1">&#39;function convert { echo /$1  | sed &#39;</span><span class="se">\&#39;</span><span class="s1">&#39;s/\\/\//g&#39;</span><span class="se">\&#39;</span><span class="s1">&#39; | sed &#39;</span><span class="se">\&#39;</span><span class="s1">&#39;s/://&#39;</span><span class="se">\&#39;</span><span class="s1">&#39; ; }&#39;</span> &gt;&gt; .bashrc
-<span class="nb">echo</span> <span class="s1">&#39;function add { export PATH=$(convert $1):$PATH ;}&#39;</span> &gt;&gt; .bashrc
-<span class="nb">echo</span> <span class="s1">&#39;add $MINICONDA_PATH&#39;</span> &gt;&gt; .bashrc
-<span class="nb">echo</span> <span class="s1">&#39;add &quot;$MINICONDA_PATH/Scripts&quot;&#39;</span> &gt;&gt; .bashrc
-<span class="nb">source</span> .bashrc
-conda create -n openfisca <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7  --offline --yes
-<span class="nb">echo</span> <span class="s1">&#39;source activate openfisca&#39;</span> &gt;&gt; .bashrc
-<span class="nb">source</span> activate openfisca
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;MINICONDA_PATH=&quot;C:\Users\form\AppData\Local\Miniconda2&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;function convert { echo /$1  | sed &#39;</span><span class="se">\&#39;</span><span class="s1">&#39;s/\\/\//g&#39;</span><span class="se">\&#39;</span><span class="s1">&#39; | sed &#39;</span><span class="se">\&#39;</span><span class="s1">&#39;s/://&#39;</span><span class="se">\&#39;</span><span class="s1">&#39; ; }&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;function add { export PATH=$(convert $1):$PATH ;}&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;add $MINICONDA_PATH&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;add &quot;$MINICONDA_PATH/Scripts&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<span class="nb">source</span><span class="w"> </span>.bashrc
+conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>openfisca<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7<span class="w">  </span>--offline<span class="w"> </span>--yes
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;source activate openfisca&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>openfisca
 </pre></div>
 </div>
 <p>To check that everything worked correctly, type in Git Bash:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip --version
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>--version
 </pre></div>
 </div>
 <p>A version number should be printed, and no error message should appear. Congrats, you just set up a Python working environment!</p>
@@ -172,7 +171,7 @@ conda create -n openfisca <span class="nv">python</span><span class="o">=</span>
 <li><p>Run the command <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">*</span></code></p></li>
 </ul>
 <p>To check that everything worked correctly, type in Git Bash:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python -c <span class="s2">&quot;from openfisca_france import CountryTaxBenefitSystem; CountryTaxBenefitSystem()&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from openfisca_france import CountryTaxBenefitSystem; CountryTaxBenefitSystem()&quot;</span>
 </pre></div>
 </div>
 <p>No error message should appear. Congrats, you just installed OpenFisca-France!</p>
@@ -189,7 +188,7 @@ conda create -n openfisca <span class="nv">python</span><span class="o">=</span>
 <p>You can now write your own scripts, such as <a class="reference external" href="https://raw.githubusercontent.com/Anna-Livia/formation-OF/master/calculer_param_reforme.py">this tutorial</a>.</p>
 <p>To edit a script, open it with atom.</p>
 <p>To run it, save your modifications, go to the directory containing it, right click and choose “Git Bash Here”. Then type:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python name-of-the-script.py
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>name-of-the-script.py
 </pre></div>
 </div>
 <p>In case you run into a problem, please <a class="reference external" href="https://github.com/openfisca/openfisca-core/issues/new">open an issue</a>.</p>

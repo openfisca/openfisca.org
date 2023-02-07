@@ -83,7 +83,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i class="fas fa-hands-helping"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
 </ul>
 
     </div>
@@ -153,7 +152,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">axes_roles</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Entity</span><span class="o">.</span><span class="n">plural</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="SimulationBuilder.build_from_dict"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.build_from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">build_from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">input_dict</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Build a simulation from ``input_dict``</span>
 
 <span class="sd">            This method uses :any:`build_from_entities` if entities are fully specified, or :any:`build_from_variables` if not.</span>
@@ -169,7 +168,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_from_variables</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">input_dict</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SimulationBuilder.build_from_entities"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.build_from_entities">[docs]</a>    <span class="k">def</span> <span class="nf">build_from_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">input_dict</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Build a simulation from a Python dict ``input_dict`` fully specifying entities.</span>
 
 <span class="sd">            Examples:</span>
@@ -238,7 +237,7 @@
         <span class="k">return</span> <span class="n">simulation</span></div>
 
 <div class="viewcode-block" id="SimulationBuilder.build_from_variables"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.build_from_variables">[docs]</a>    <span class="k">def</span> <span class="nf">build_from_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">input_dict</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Build a simulation from a Python dict ``input_dict`` describing variables values without expliciting entities.</span>
 
 <span class="sd">            This method uses :any:`build_default_simulation` to infer an entity structure</span>
@@ -263,7 +262,7 @@
         <span class="k">return</span> <span class="n">simulation</span></div>
 
 <div class="viewcode-block" id="SimulationBuilder.build_default_simulation"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.build_default_simulation">[docs]</a>    <span class="k">def</span> <span class="nf">build_default_simulation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Build a simulation where:</span>
 <span class="sd">                - There are ``count`` persons</span>
 <span class="sd">                - There are ``count`` instances of each group entity, containing one person</span>
@@ -316,7 +315,7 @@
         <span class="k">return</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SimulationBuilder.explicit_singular_entities"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.explicit_singular_entities">[docs]</a>    <span class="k">def</span> <span class="nf">explicit_singular_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">input_dict</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Preprocess ``input_dict`` to explicit entities defined using the single-entity shortcut</span>
 
 <span class="sd">            Example:</span>
@@ -344,7 +343,7 @@
         <span class="k">return</span> <span class="n">result</span></div>
 
     <span class="k">def</span> <span class="nf">add_person_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">instances_json</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Add the simulation&#39;s instances of the persons entity as described in ``instances_json``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">helpers</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="n">instances_json</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">])</span>
@@ -367,7 +366,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">persons_count</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">add_group_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_plural</span><span class="p">,</span> <span class="n">persons_ids</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">instances_json</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Add all instances of one of the model&#39;s entities as described in ``instances_json``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">helpers</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="n">instances_json</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">])</span>

@@ -107,7 +107,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i class="fas fa-hands-helping"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../manifest-history.html"><i class="fab fa-angellist"></i> Manifesto &amp; history</a></li>
 </ul>
 
     </div>
@@ -200,18 +199,18 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">values</span></code>: Value of the parameter for several dates.</p></li>
 </ul>
 <p>Sample file <code class="docutils literal notranslate"><span class="pre">parameters/universal_income/amount.yaml</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Universal income</span><span class="w"></span>
-<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">currency</span><span class="w"></span>
-<span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">1993-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span><span class="w"></span>
-<span class="w">  </span><span class="nt">2010-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1500</span><span class="w"></span>
-<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">reference</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://law.reference.org/universal_income</span><span class="w"></span>
-<span class="w">  </span><span class="nt">2020-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">expected</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1700</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Universal income</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">currency</span>
+<span class="nt">values</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">1993-01-01</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">  </span><span class="nt">2010-01-01</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1500</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">reference</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://law.reference.org/universal_income</span>
+<span class="w">  </span><span class="nt">2020-01-01</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">expected</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1700</span>
 </pre></div>
 </div>
 <p>In this example, the parameter <code class="docutils literal notranslate"><span class="pre">universal_income.amount</span></code> is:</p>
@@ -239,17 +238,17 @@
 <h4>Defining parameter nodes in a YAML file<a class="headerlink" href="#defining-parameter-nodes-in-a-yaml-file" title="Permalink to this headline">¶</a></h4>
 <p>A node can be defined with a YAML file instead of a directory. In such a case, the name of the file defines the name of the node. Such a file can define children nodes (which can define grandchildren…).</p>
 <p>Sample file <code class="docutils literal notranslate"><span class="pre">parameters/tax_on_salary.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tax on salaries</span><span class="w"></span>
-<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">reference</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://fiscaladministration.government/tax_on_salaries.html</span><span class="w"></span>
-<span class="nt">tax_scale</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">bracket</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<span class="nt">public_sector</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tax on salaries for public sector</span><span class="w"></span>
-<span class="w">  </span><span class="nt">rate</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tax on salaries</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">reference</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://fiscaladministration.government/tax_on_salaries.html</span>
+<span class="nt">tax_scale</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">bracket</span><span class="p">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="nt">public_sector</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tax on salaries for public sector</span>
+<span class="w">  </span><span class="nt">rate</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">...</span>
 </pre></div>
 </div>
 </section>
@@ -258,26 +257,26 @@
 <p>Scales are complex parameters constituted of brackets. They offer convenient built-in tools for recurring calculation patterns.</p>
 <p>For instance, a marginal rate test scale can be defined in a YAML file with:</p>
 <p>Sample file <code class="docutils literal notranslate"><span class="pre">parameters/tax_on_salary/tax_scale.yaml</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scale for tax on salaries</span><span class="w"></span>
-<span class="nt">brackets</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">rate</span><span class="p">:</span><span class="w"> </span><span class="c1"># Define a 1st bracket</span><span class="w"></span>
-<span class="w">      </span><span class="nt">1950-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w">  </span><span class="c1"># The rate applied to the first bracket was 0% from 1950 to 2009</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2010-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.02</span><span class="w">  </span><span class="c1"># The rate applied to the first bracket has changed to 2% in 2010</span><span class="w"></span>
-<span class="w">    </span><span class="nt">threshold</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">1950-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">rate</span><span class="p">:</span><span class="w"> </span><span class="c1"># Define a 2nd bracket</span><span class="w"></span>
-<span class="w">      </span><span class="nt">1950-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span><span class="w">  </span><span class="c1"># The rate applied to the second bracket has been 20% since 1950</span><span class="w"></span>
-<span class="w">    </span><span class="nt">threshold</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">1950-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000</span><span class="w">  </span><span class="c1"># The 2nd bracket starts for wages beyond 2000</span><span class="w"></span>
-<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">marginal_rate</span><span class="w"></span>
-<span class="w">  </span><span class="nt">threshold_unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">currency-EUR</span><span class="w"></span>
-<span class="w">  </span><span class="nt">rate_unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/1</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scale for tax on salaries</span>
+<span class="nt">brackets</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">rate</span><span class="p">:</span><span class="w"> </span><span class="c1"># Define a 1st bracket</span>
+<span class="w">      </span><span class="nt">1950-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w">  </span><span class="c1"># The rate applied to the first bracket was 0% from 1950 to 2009</span>
+<span class="w">      </span><span class="nt">2010-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.02</span><span class="w">  </span><span class="c1"># The rate applied to the first bracket has changed to 2% in 2010</span>
+<span class="w">    </span><span class="nt">threshold</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">1950-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">rate</span><span class="p">:</span><span class="w"> </span><span class="c1"># Define a 2nd bracket</span>
+<span class="w">      </span><span class="nt">1950-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span><span class="w">  </span><span class="c1"># The rate applied to the second bracket has been 20% since 1950</span>
+<span class="w">    </span><span class="nt">threshold</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">1950-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000</span><span class="w">  </span><span class="c1"># The 2nd bracket starts for wages beyond 2000</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">marginal_rate</span>
+<span class="w">  </span><span class="nt">threshold_unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">currency-EUR</span>
+<span class="w">  </span><span class="nt">rate_unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/1</span>
 </pre></div>
 </div>
 <p>It can then be used in a formula with:</p>
@@ -322,54 +321,54 @@
 <li><p>The amount also depends on the composition of the household.</p></li>
 </ul>
 <p>The parameters of this benefit can be defined in a <code class="docutils literal notranslate"><span class="pre">housing_benefit.yaml</span></code> sample file:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">zone_1</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">single</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span><span class="w"></span>
-<span class="w">  </span><span class="nt">couple</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">couple,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">250</span><span class="w"></span>
-<span class="w">  </span><span class="nt">per_child</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">child,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span><span class="w"></span>
-<span class="nt">zone_2</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">single</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">2&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span><span class="w"></span>
-<span class="w">  </span><span class="nt">couple</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">couple,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">2&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">220</span><span class="w"></span>
-<span class="w">  </span><span class="nt">per_child</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">child,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">2&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span><span class="w"></span>
-<span class="nt">zone_3</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">single</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">3&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w"></span>
-<span class="w">  </span><span class="nt">couple</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">couple,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">3&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">180</span><span class="w"></span>
-<span class="w">  </span><span class="nt">per_child</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">child,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">3&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span><span class="w"></span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">zone_1</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">single</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span>
+<span class="w">  </span><span class="nt">couple</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">couple,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">250</span>
+<span class="w">  </span><span class="nt">per_child</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">child,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="nt">zone_2</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">single</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">2&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
+<span class="w">  </span><span class="nt">couple</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">couple,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">2&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">220</span>
+<span class="w">  </span><span class="nt">per_child</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">child,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">2&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<span class="nt">zone_3</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">single</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">3&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">  </span><span class="nt">couple</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">couple,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">3&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">180</span>
+<span class="w">  </span><span class="nt">per_child</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">child,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">3&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
 </pre></div>
 </div>
 <p>Then the formula calculting <code class="docutils literal notranslate"><span class="pre">housing_benefit</span></code> can be implemented with:</p>
@@ -388,37 +387,37 @@
 <p>To be able to use this notation, all the children node of the parameter node <code class="docutils literal notranslate"><span class="pre">housing_benefit</span></code> must be <strong>homogenous</strong>. In the previous example, <code class="docutils literal notranslate"><span class="pre">housing_benefit.zone_1</span></code>, <code class="docutils literal notranslate"><span class="pre">housing_benefit.zone_2</span></code>, <code class="docutils literal notranslate"><span class="pre">housing_benefit.zone_3</span></code> are homogenous, as they have the same subnodes.</p>
 <p>However, let’s imagine that <code class="docutils literal notranslate"><span class="pre">housing_benefit.yaml</span></code> had another subnode named <code class="docutils literal notranslate"><span class="pre">coeff_furnished</span></code>, which described a coefficient to apply to the benefit is the accomodation is rented furnished:</p>
 <p><code class="docutils literal notranslate"><span class="pre">housing_benefit.yaml</span></code> content:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coeff_furnished</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Coefficient</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">apply</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">accomodation</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">rented</span><span class="nv"> </span><span class="s">furnished&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.75</span><span class="w"></span>
-<span class="nt">zone_1</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">single</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span><span class="w"></span>
-<span class="l l-Scalar l-Scalar-Plain">(...)</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coeff_furnished</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Coefficient</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">apply</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">accomodation</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">rented</span><span class="nv"> </span><span class="s">furnished&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.75</span>
+<span class="nt">zone_1</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">single</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span>
+<span class="l l-Scalar l-Scalar-Plain">(...)</span>
 </pre></div>
 </div>
 <p>In this case, <code class="docutils literal notranslate"><span class="pre">parameters(period).housing_benefit[zone]</span></code> would raise en error, whatever <code class="docutils literal notranslate"><span class="pre">zone</span></code> contains, as <strong>the homogeneity condition is not respected</strong>: <code class="docutils literal notranslate"><span class="pre">housing_benefit.zone_1</span></code> is a node, while <code class="docutils literal notranslate"><span class="pre">housing_benefit.coeff_furnished</span></code> is a parameter.</p>
 <p>To solve this issue, the good practice would be to create an intermediate node <code class="docutils literal notranslate"><span class="pre">amount_by_zone</span></code>:</p>
 <p><code class="docutils literal notranslate"><span class="pre">housing_benefit.yaml</span></code> content:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coeff_furnished</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Coefficient</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">apply</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">accomodation</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">rented</span><span class="nv"> </span><span class="s">furnished&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.75</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coeff_furnished</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Coefficient</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">apply</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">accomodation</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">rented</span><span class="nv"> </span><span class="s">furnished&quot;</span>
+<span class="w">    </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.75</span>
 
-<span class="nt">amount_by_zone</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">zone_1</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">single</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="nt">values</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">2015-01-01</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span><span class="w"></span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(...)</span><span class="w"></span>
+<span class="nt">amount_by_zone</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">zone_1</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">single</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Amount</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">housing</span><span class="nv"> </span><span class="s">benefit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">person,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">zone</span><span class="nv"> </span><span class="s">1&quot;</span>
+<span class="w">      </span><span class="nt">values</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">2015-01-01</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(...)</span>
 </pre></div>
 </div>
 <p>And then to get <code class="docutils literal notranslate"><span class="pre">parameters(period).housing_benefit.amount_by_zone[zone]</span></code></p>
@@ -446,10 +445,10 @@ Access the <code class="docutils literal notranslate"><span class="pre">benefit<
 </div>
 <p>Returns:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>basic_income:
-    <span class="m">2015</span>-12-01: <span class="m">600</span>.0
+<span class="w">    </span><span class="m">2015</span>-12-01:<span class="w"> </span><span class="m">600</span>.0
 housing_allowance:
-  <span class="m">2016</span>-12-01: None
-  <span class="m">2010</span>-01-01: <span class="m">0</span>.25
+<span class="w">  </span><span class="m">2016</span>-12-01:<span class="w"> </span>None
+<span class="w">  </span><span class="m">2010</span>-01-01:<span class="w"> </span><span class="m">0</span>.25
 </pre></div>
 </div>
 <p>Access <code class="docutils literal notranslate"><span class="pre">basic_income</span></code>, a parameter of the <code class="docutils literal notranslate"><span class="pre">benefits</span></code> branch.</p>
@@ -457,7 +456,7 @@ housing_allowance:
 </pre></div>
 </div>
 <p>Returns:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="m">2015</span>-12-01: <span class="m">600</span>.0
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="m">2015</span>-12-01:<span class="w"> </span><span class="m">600</span>.0
 </pre></div>
 </div>
 </div></blockquote>
@@ -477,8 +476,8 @@ housing_allowance:
 </pre></div>
 </div>
 <p>Returns:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="m">2017</span>-01-01: <span class="m">2000</span>
-<span class="m">2015</span>-12-01: <span class="m">600</span>.0
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="m">2017</span>-01-01:<span class="w"> </span><span class="m">2000</span>
+<span class="m">2015</span>-12-01:<span class="w"> </span><span class="m">600</span>.0
 </pre></div>
 </div>
 </div></blockquote>
