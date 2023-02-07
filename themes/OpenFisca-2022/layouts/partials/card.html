@@ -8,13 +8,17 @@
 {{ with .author }}{{ with .type }}{{ $authorType = . }}{{ end }}{{ end }}
 {{ $authorTypeIcon := index .Site.Params.showcase.author.types.icons $authorType }}
 
+{{ $package := index $.Site.Data.packages .package }}
+
 <div class="card {{ if .website }}{{ if not .until }}card-hasLink{{ end }}{{ end }}">
 	<div class="card_image">
 		<img class="screenshot" src="{{ $imageSrc }}" alt="{{ .title }}" />
 	</div>
 	<div class="card_titleWrapper">
 		<h3 class="card_title">{{ .title }}</h3>
-		<div class="card_flag flag flag-{{ .country }}"><span>{{ .country }}</span></div>
+		{{ with $package }}{{ with $package.jurisdiction }}
+			<div class="card_flag flag flag-{{ . }}"><span>{{ . }}</span></div>
+		{{ end }}{{ end }}
 	</div>
 	<div class="card_desc">
 		{{ .description }}

@@ -17,7 +17,7 @@
                 {{ $showcase := sort (.Scratch.Get "entries") "title" }}
                 {{ range $showcase }}
                     {{ $description := index .description $.Site.Language.Lang }}
-                    {{ partial "card.html" (dict "id" .id "title" .title "description" $description "country" .country "website" .website "author" .author "Site" $.Site) }}
+                    {{ partial "card.html" (dict "id" .id "title" .title "description" $description "package" .package "website" .website "author" .author "Site" $.Site) }}
                 {{ end }}
             </div>
         </div>
@@ -30,7 +30,7 @@
                 {{ $obsoleteShowcase := sort (.Scratch.Get "obsoleteEntries") "until" "desc" }}
                 {{ range $obsoleteShowcase }}
                     {{ $description := index .description $.Site.Language.Lang }}
-                    {{ partial "card.html" (dict "id" .id "title" .title "description" $description "country" .country "website" .website "author" .author "until" .until "Site" $.Site) }}
+                    {{ partial "card.html" (dict "id" .id "title" .title "description" $description "package" .package "website" .website "author" .author "until" .until "Site" $.Site) }}
                 {{ end }}
             </div>
         </div>
