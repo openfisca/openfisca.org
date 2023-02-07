@@ -19,7 +19,7 @@ title: Legislation Explorer  # 80 characters max
 description:  # in both languages, 200 characters max
   en: Explore legislation formulas and parameters modelled with OpenFisca.
   fr: Explorez les formules et les paramètres de la législation modélisée.  # deepl.com can be used for automated translation
-country: ZZ  # ISO 3166-2 format, see https://en.wikipedia.org/wiki/ISO_3166-2
+package: france  # the name of the OpenFisca country package used by this reuse
 website: https://legislation.demo.openfisca.org  # prefer HTTPS over HTTP
 author:
   type: collective # one of individual, collective, ngo, research_center, business, local_government, or national_government
