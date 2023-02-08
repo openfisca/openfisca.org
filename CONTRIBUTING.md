@@ -27,7 +27,7 @@ author:
   contact: contact@openfisca.org  # this email address will only be used by the Core team for questions related to the reuse
   link: https://openfisca.org  # optional URL of the author organisation
 source:
-  repository: https://github.com/openfisca/legislation-explorer  # URL of the source code
+  repository: https://github.com/openfisca/legislation-explorer  # URL of the source code; if you have several repositories, choose the one that interfaces most with OpenFisca APIs and add others in a comment
   license: AGPL-3.0-only  # SPDX license identifier, see https://spdx.org/licenses/
 ```
 
