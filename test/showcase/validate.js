@@ -17,6 +17,10 @@ describe('Showcase entries', () => {
   entries.forEach((entry) => {
     entry = basename(entry, '.yml');
 
+    if (entry == '.DS_Store') {
+      return;
+    }
+
     describe(entry, () => {
       it('has a valid description', () => {
         const validationErrors = validateSchema(`${SHOWCASE_DIR}/${entry}.yml`, {
