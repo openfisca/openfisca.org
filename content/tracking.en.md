@@ -1,5 +1,6 @@
 ---
 title: Privacy
+url: /en/privacy
 ---
 
 ## Website
