@@ -1,4 +1,5 @@
-import { iso31662 } from 'iso-3166';
+import {isUrl} from '../uses.js';
+import {iso31662} from 'iso-3166';
 
 export default {
   package_name: {
@@ -53,15 +54,6 @@ export default {
 
 function isIso31662(value) {
   return iso31662.some((entry) => {
-    return (entry.code === value) || (entry.parent === value) || (value === 'ZZ')
-  })
-}
-
-function isUrl(value) {
-  try {
-    const url = new URL(value);
-    return url.protocol == 'https:';
-  } catch (_) {
-    return false;
-  }
+    return (entry.code === value) || (entry.parent === value) || (value === 'ZZ');
+  });
 }
