@@ -61,20 +61,20 @@ By referencing your package on the [dedicated page](https://openfisca.org/en/pac
 
 ### Describe your package
 
-Create a YAML file in the [`content/packages/` folder](https://github.com/openfisca/openfisca.org/tree/master/data/packages) with the following syntax: `${jurisdiction}.yml` where jurisdiction is a valid [ISO 3166-2 format](https://en.wikipedia.org/wiki/ISO_3166-2), e.g: `ZZ.yml` (note that this format accepts subdivisions, for example `ES-B`). In case several packages are available for the same jurisdiction, you can add a modifier with the following syntax `${jurisdiction}_${modifier}.yml`, e.g: `ES-B_mining.yml`.
+Create a YAML file in the [`content/packages/` folder](https://github.com/openfisca/openfisca.org/tree/master/data/packages) with the following syntax: `${jurisdiction}.yml` where jurisdiction is a valid [ISO 3166-2 format](https://en.wikipedia.org/wiki/ISO_3166-2), e.g: `ZZ.yml` (note that this format accepts subdivisions, for example `ES-B` for Barcelona, Spain). In case several packages are available for the same jurisdiction, you can add a modifier with the following syntax `${jurisdiction}_${modifier}.yml`, e.g: `ES-B_mining.yml`.
 
 Fill in that file with information following the template below:
 
 ```yml
-package_name: OpenFisca-Country-Template  # 200 characters max
-title:  # in both languages, 200 characters max
+package_name: OpenFisca-Country-Template  # name of the package on package managers, i.e. what you would `pip install`
+title:  # usually just the name of the jurisdiction, but can be more precise for specific cases
   en: Country Template
   fr: Modèle de pays  # deepl.com can be used for automated translation
 jurisdiction: ZZ  # ISO 3166-2 format, see https://en.wikipedia.org/wiki/ISO_3166-2
 source: https://github.com/openfisca/country-template  # URL of the source code
-website: https://openfisca.org # optional, prefer HTTPS over HTTP
-legislation_explorer: https://legislation.demo.openfisca.org/ # optional URL to an interactive user interface for navigating implemented legislation
-openapi_spec: https://api.demo.openfisca.org/latest/spec # optional URL to an OpenAPI specification file
+website: https://openfisca.org  # optional URL of a website describing the model and its community
+legislation_explorer: https://legislation.demo.openfisca.org/  # optional URL of an interactive user interface for navigating implemented legislation
+openapi_spec: https://api.demo.openfisca.org/latest/spec  # optional URL of an OpenAPI specification file
 ```
 
 ### License
