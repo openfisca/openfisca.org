@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+  
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Running a simulation &#8212; OpenFisca  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to run a simulation" href="run-simulation.html" />
+    <link rel="prev" title="Bootstraping a new country package" href="../coding-the-legislation/bootstrapping_a_new_country_package.html" />
+  
+   
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="run-simulation.html" title="How to run a simulation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../coding-the-legislation/bootstrapping_a_new_country_package.html" title="Bootstraping a new country package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><i class="fas fa-chart-pie"></i> Running a simulation</a></li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><div class="sphinxsidebar caption">
+    <img src="https://cdn.rawgit.com/openfisca/openfisca-doc/master/source/static/img/logo_mini.svg" alt="OpenFisca"/>
+    
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div> <!-- Template defined by the guzzle theme-->
+</div>
+
+<div class="sidebar-block">
+    <div class="sidebar-toc">
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html"><i class="fas fa-home"></i> Before you start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html"><i class="fas fa-cubes"></i> Architecture of OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html"><i class="fas fa-cogs"></i> Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts/index.html"><i class="fas fa-dice-d6"></i> Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding-the-legislation/index.html"><i class="fas fa-code"></i> From law to code</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><i class="fas fa-chart-pie"></i> Running a simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="run-simulation.html">How to run a simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyse-simulation.html">Analysing or debugging a simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="replicate-simulation-inputs.html">Replicating a situation along axes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profile-simulation.html">How to profile the performance of a simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i class="fab fa-python"></i> OpenFisca Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i class="fas fa-cloud"></i> OpenFisca web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i class="fas fa-hands-helping"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i class="fas fa-users"></i> Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i class="fab fa-creative-commons"></i> License</a></li>
+</ul>
+
+    </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+  <ul class="buttons-header">
+    <li><a class="button-appearance" href="https://github.com/openfisca"><i class="fab fa-github"></i> GitHub</a></li>
+    <li><a class="button-appearance" href="https://openfisca.org/"><i class="fas fa-home"></i> OpenFisca</a></li>
+  </ul>
+  
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+              <li><i class="fas fa-chart-pie"></i> Running a simulation</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <section id="i-class-fas-fa-chart-pie-i-running-a-simulation">
+<h1><i class="fas fa-chart-pie"></i> Running a simulation<a class="headerlink" href="#i-class-fas-fa-chart-pie-i-running-a-simulation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>To calculate Tax and Benefit System variables on people’s situations, you need to create and run a new <em>Simulation</em>.</p>
+<p>OpenFisca will work the same if there is one person, seven, or seven million in the modelled situation.</p>
+<blockquote>
+<div><p>Technically speaking, OpenFisca uses <a class="reference internal" href="../coding-the-legislation/25_vectorial_computing.html"><span class="doc std std-doc">vector computing</span></a> via the <a class="reference external" href="http://www.numpy.org/">NumPy</a> package for performance reasons.</p>
+</div></blockquote>
+<!-- The below text is confusing and needs clarification-->
+<p>Nevertheless, you won’t have the same experience defining those various situation sizes and linking them to your simulation. So, multiple options could be used to describe this information:</p>
+<!---The below text is confusing here and needs clear wording-->
+<ul class="simple">
+<li><p>either <a class="reference internal" href="run-simulation.html#test-cases"><span class="std std-doc">test cases</span></a>: you simulate the legislation for a small number of persons,</p></li>
+<li><p>or <a class="reference internal" href="run-simulation.html#data"><span class="std std-doc">bulk data</span></a>: you provide a population (survey with aggregated data, CSV files with bulk data, etc.) on which you want to apply the legislation.</p></li>
+</ul>
+<p>Then, when you have a defined situation and need to replicate an input in a range of values (e.g. a <code class="docutils literal notranslate"><span class="pre">salary</span></code> in [0, 100 000]), you can define an axis as described in <a class="reference internal" href="replicate-simulation-inputs.html"><span class="doc std std-doc">the axes section</span></a>.</p>
+<p>Finally, you might want to understand how your simulation result was calculated. To do so, you can use the <code class="docutils literal notranslate"><span class="pre">trace</span></code> feature described in <a class="reference internal" href="analyse-simulation.html"><span class="doc std std-doc">this section</span></a>.</p>
+</section>
+
+
+          </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="run-simulation.html" title="How to run a simulation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../coding-the-legislation/bootstrapping_a_new_country_package.html" title="Bootstraping a new country package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><i class="fas fa-chart-pie"></i> Running a simulation</a></li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>
