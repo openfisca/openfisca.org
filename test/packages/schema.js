@@ -1,4 +1,4 @@
-import {isUrl} from '../uses.js';
+import {isUrl} from '../validators.js';
 import {iso31662} from 'iso-3166';
 
 export default {

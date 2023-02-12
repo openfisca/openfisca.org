@@ -2,7 +2,7 @@ import fs from 'fs';
 
 import YAML from 'yaml';
 
-import {isUrl, isEmailAddress, isISOdate} from '../uses.js';
+import {isUrl, isEmailAddress, isISOdate} from '../validators.js';
 
 export default {
   title: {
