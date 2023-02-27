@@ -9,7 +9,7 @@ hero:
       title: Transformer la loi en code « améliore l'impact des politiques publiques et la fourniture de service »
       link: https://oecd-opsi.org/publications/cracking-the-code/
     - image: wgs.png
-      author: World Governement Submit
+      author: World Government Summit
       title: Lauréat du prix Edge of Government 2023
       link: https://edge.worldgovernmentsummit.org
     - image: joinup.png

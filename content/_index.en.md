@@ -9,8 +9,8 @@ hero:
       title: Rules as Code enables “better policy outcomes and enhanced service delivery”
       link: https://oecd-opsi.org/publications/cracking-the-code/
     - image: wgs.png
-      author: World Governement Submit
-      title: Winner of the Edge of Government Award 2023
+      author: World Government Summit
+      title: Edge of Government Innovation Award 2023
       link: https://edge.worldgovernmentsummit.org
     - image: joinup.png
       author: European Commission Joinup programme
