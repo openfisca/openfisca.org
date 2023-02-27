@@ -7,7 +7,8 @@ url: /en/privacy
 
 When you visit this website, a small text file (a “cookie”) gets saved on your computer. This enables us to measure the number of visits and which pages are most read.
 
-<iframe class="optout" src="https://stats.data.gouv.fr/index.php?module=CoreAdminHome&action=optOut&language=en"></iframe>
+<div id="matomo-opt-out" class="mb-xl"></div>
+<script src="https://stats.data.gouv.fr/index.php?module=CoreAdminHome&action=optOutJS&divId=matomo-opt-out&language=en&backgroundColor=fff&fontColor=333&fontSize=16px&fontFamily=Inter var&showIntro=1"></script>
 
 ### This website does not show a consent banner for cookies, why?
 
