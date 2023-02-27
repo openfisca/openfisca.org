@@ -7,7 +7,8 @@ url: /fr/privacy
 
 Lorsque vous visitez ce site web, un petit fichier texte (un « cookie ») est enregistré sur votre ordinateur. Cela nous permet de mesurer le nombre de visites et quelles pages sont les plus lues.
 
-<iframe class="optout" src="https://stats.data.gouv.fr/index.php?module=CoreAdminHome&action=optOut&language=fr"></iframe>
+<div id="matomo-opt-out" class="mb-xl"></div>
+<script src="https://stats.data.gouv.fr/index.php?module=CoreAdminHome&action=optOutJS&divId=matomo-opt-out&language=fr&backgroundColor=fff&fontColor=333&fontSize=16px&fontFamily=Inter var&showIntro=1"></script>
 
 ### Ce site web n'indique pas de bannière de consentement aux cookies. Pourquoi ?
 
