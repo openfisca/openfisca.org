@@ -1,10 +1,12 @@
 <div class="testimonials">
 	{{ range .testimonials }}
+		{{ $alt := .title }}
+		{{ if .author }}{{ $alt = .author }}{{ end }}
 		{{ with .link }}<a href="{{ . }} ">{{ end }}
 			<div class="testimonials_item">
 				{{ if .image }}
 					<div class="testimonials_item_img">
-						<img src="/img/testimonials/{{ .image }}" {{ with .author }}alt="{{ . }}" title="{{ . }}"{{ end }} />
+						<img src="/img/testimonials/{{ .image }}" alt="{{ $alt }}" title="{{ $alt }}" />
 					</div>
 				{{ end }}
 				{{ with .title }}
