@@ -66,7 +66,7 @@ Create a YAML file in the [`content/packages/` folder](https://github.com/openfi
 Fill in that file with information following the template below:
 
 ```yml
-package_name: OpenFisca-Country-Template  # name of the package on package managers, i.e. what you would `pip install`
+name: OpenFisca-Country-Template  # name of the package on package managers, i.e. what you would `pip install`
 title:  # usually just the name of the jurisdiction, but can be more precise for specific cases
   en: Country Template
   fr: Modèle de pays  # deepl.com can be used for automated translation
