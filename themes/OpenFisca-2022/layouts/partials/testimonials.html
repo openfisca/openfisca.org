@@ -1,15 +1,18 @@
 <div class="testimonials">
 	{{ range .testimonials }}
-		<a href="{{ .link }} ">
+		{{ with .link }}<a href="{{ . }} ">{{ end }}
 			<div class="testimonials_item">
-				<div class="testimonials_item_img">
-					<img src="/img/testimonials/{{ .image }}" alt="{{ .author }}" title="{{ .author }}" />
-				</div>
-				<p class="testimonials_item_desc">
-					{{ .title }}
-				</p>
+				{{ if .image }}
+					<div class="testimonials_item_img">
+						<img src="/img/testimonials/{{ .image }}" {{ with .author }}alt="{{ . }}" title="{{ . }}"{{ end }} />
+					</div>
+				{{ end }}
+				{{ with .title }}
+					<p class="testimonials_item_desc">
+						{{ . }}
+					</p>
+				{{ end }}
 			</div>
-		</a>
+		{{ with .link }}</a>{{ end }}
 	{{ end }}
 </div>
-
