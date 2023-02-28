@@ -11,7 +11,7 @@ hero:
     - image: wgs.png
       author: World Government Summit
       title: Lauréat du prix Edge of Government 2023
-      link: https://edge.worldgovernmentsummit.org
+      link: https://www.khaleejtimes.com/uae/abu-dhabi-expands-green-corner-initiative-to-cut-water-electricity-consumption-by-20
     - image: joinup.png
       author: Programme Joinup de la Commission européenne
       title: Désigné « Logiciel open-source le plus innovant » en 2019
