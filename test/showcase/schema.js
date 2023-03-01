@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 import YAML from 'yaml';
 
@@ -93,8 +94,12 @@ function isValidAuthorType(value) {
   return VALID_AUTHOR_TYPES.includes(value);
 }
 
-const packagesFilenames = fs.readdirSync('./data/packages').map((file) => file.replace('.yml', ''));
+const PACKAGES_PATH = './data/packages';
+const packagesFiles = fs.readdirSync(PACKAGES_PATH);
 
 function isValidPackage(value) {
-  return packagesFilenames.includes(value);
+  return packagesFiles.some((file) => {
+    const packageDoc = YAML.parse(fs.readFileSync(path.join(PACKAGES_PATH, file), 'utf8'));
+    return packageDoc.hasOwnProperty('name') && (packageDoc['name'] === value);
+  });
 }

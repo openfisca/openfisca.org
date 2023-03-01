@@ -8,7 +8,12 @@
 {{ with .author }}{{ with .type }}{{ $authorType = . }}{{ end }}{{ end }}
 {{ $authorTypeIcon := index .Site.Params.showcase.author.types.icons $authorType }}
 
-{{ $package := index $.Site.Data.packages .package }}
+{{ $package := dict }}
+{{ range $.Site.Data.packages }}
+	{{ if eq .name $.package }}
+		{{ $package = . }}
+	{{ end }}
+{{ end }}
 
 <div class="card {{ if .website }}{{ if not .until }}card-hasLink{{ end }}{{ end }}">
 	<div class="card_image">
