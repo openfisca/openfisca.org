@@ -8,10 +8,10 @@ hero:
       author: OECD Observatory of Public Service Innovation
       title: Rules as Code enables “better policy outcomes and enhanced service delivery”
       link: https://oecd-opsi.org/publications/cracking-the-code/
-    - image: dpg.png
-      author: Digital Public Goods Alliance
-      title: Digital Public Good Nominee
-      link:
+    - image: wgs.png
+      author: World Government Summit
+      title: Edge of Government Innovation Award 2023
+      link: https://www.khaleejtimes.com/uae/abu-dhabi-expands-green-corner-initiative-to-cut-water-electricity-consumption-by-20
     - image: joinup.png
       author: European Commission Joinup programme
       title: Recognised as “Most innovative open-source software” in 2019
