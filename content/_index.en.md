@@ -11,7 +11,7 @@ hero:
     - image: wgs.png
       author: World Government Summit
       title: Edge of Government Innovation Award 2023
-      link: https://www.khaleejtimes.com/uae/abu-dhabi-expands-green-corner-initiative-to-cut-water-electricity-consumption-by-20
+      link: https://www.khaleejtimes.com/uae/sheikh-saif-honours-french-governments-openfisca-project
     - image: joinup.png
       author: European Commission Joinup programme
       title: Recognised as “Most innovative open-source software” in 2019
