@@ -77,7 +77,7 @@ legislation_explorer: https://legislation.demo.openfisca.org/  # optional URL of
 openapi_spec: https://api.demo.openfisca.org/latest/spec  # optional URL of an OpenAPI specification file
 ```
 
-> For future reference: we decided to go with ISO-3166-2 in package filenames instead of using the package manager identifier because the filesystem and package manager identifiers have different constraints. In particular, package managers respect case (even though they might resolve differently-cased names to the same package), while many filesystems do not. A secondary reason is that most package manager IDs are prefixed with OpenFisca, which does not make much sense in the context of the OpenFisca website. Going with ISO-3166-2 enables package maintainers to be creative with their package names while maintaining clear discoverability for Core maintainers.
+> ISO-3166-2 is used in package filenames rather than the package manager identifier because the filesystem and package manager identifiers have different constraints. In particular, package managers respect case (even though they might resolve differently-cased names to the same package), while many filesystems do not. A secondary reason is that most package manager IDs are prefixed with `OpenFisca`, which does not make much sense in the context of the OpenFisca website. Going with ISO-3166-2 enables package maintainers to be creative with their package names while maintaining clear discoverability for Core maintainers.
 
 ### License
 
