@@ -1,5 +1,4 @@
-import {isUrl} from '../validators.js';
-import {iso31662} from 'iso-3166';
+import {isUrl, isIso31662} from '../validators.js';
 
 export default {
   name: {
@@ -51,9 +50,3 @@ export default {
     use: {isUrl},
   },
 };
-
-function isIso31662(value) {
-  return iso31662.some((entry) => {
-    return (entry.code === value) || (entry.parent === value) || (value === 'ZZ');
-  });
-}

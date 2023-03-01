@@ -3,6 +3,7 @@ import {basename} from 'node:path';
 import expect from 'expect.js';
 import validateSchema from 'yaml-schema-validator';
 import packageSchema from './schema.js';
+import {isIso31662} from '../validators.js';
 
 const PACKAGES_DIR = 'data/packages';
 
@@ -25,16 +26,8 @@ describe('packages entries', () => {
       });
 
       it('is well named', () => {
-        // ^             start of the string
-        // [A-Z]{2}      two uppercase characters (ISO 3166-2)
-        // (-            optional: dash
-        // [A-Z0-9]{1,3} 1 to 3 alphanumeric characters (ISO 3166-2 subdivision)
-        // )?            end of optional
-        // (_            optional: underscore
-        // [A-Za-z0-9]+  at least 1 alphanumeric string
-        // )?            end of optional
-        // $             end of the string
-        expect(entry).to.match(/^[A-Z]{2}(-[A-Z0-9]{1,3})?(_[A-Za-z0-9]+)?$/);
+        expect(isIso31662(entry.split('_')[0])).to.be(true);
+        expect(entry.split('_')[1]).to.match(/^[A-Za-z0-9]+$/);
       });
     });
   });
