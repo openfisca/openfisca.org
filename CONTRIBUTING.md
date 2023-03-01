@@ -71,7 +71,9 @@ title:  # usually just the name of the jurisdiction, but can be more precise for
   en: Country Template
   fr: Modèle de pays  # deepl.com can be used for automated translation
 jurisdiction: ZZ  # ISO 3166-2 format, see https://en.wikipedia.org/wiki/ISO_3166-2
-source: https://github.com/openfisca/country-template  # URL of the source code
+source:
+  repository: https://github.com/openfisca/country-template  # URL of the source code
+  licence: AGPL-3.0-only  # SPDX license identifier, see https://spdx.org/licenses/
 website: https://openfisca.org  # optional URL of a website describing the model and its community
 legislation_explorer: https://legislation.demo.openfisca.org/  # optional URL of an interactive user interface for navigating implemented legislation
 openapi_spec: https://api.demo.openfisca.org/latest/spec  # optional URL of an OpenAPI specification file

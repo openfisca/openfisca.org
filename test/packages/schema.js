@@ -1,4 +1,4 @@
-import {isUrl, isIso31662} from '../validators.js';
+import {isUrl, isIso31662, isSPDX} from '../validators.js';
 
 export default {
   name: {
@@ -33,9 +33,16 @@ export default {
     use: {isIso31662},
   },
   source: {
-    type: String,
-    required: true,
-    use: {isUrl},
+    repository: {
+      type: String,
+      required: true,
+      use: {isUrl},
+    },
+    license: {
+      type: String,
+      required: true,
+      use: {isSPDX},
+    },
   },
   website: {
     type: String,

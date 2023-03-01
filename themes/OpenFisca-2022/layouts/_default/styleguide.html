@@ -335,7 +335,7 @@
                             <td data-column="Jurisdiction">{{ if eq .jurisdiction "ZZ" }}<span style="color:var(--colorGray500)">…</span>{{ else }}{{ partial "flag.html" (dict "jurisdiction" .jurisdiction) }}{{ end }}</td>
                             <td data-column="Title">{{ index .title $.Site.Language.Lang }}</td>
                             <td data-column="Website" class="td-isTruncated">{{ with .website }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
-                            <td data-column="Source" class="td-isTruncated">{{ with .source }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
+                            <td data-column="Source" class="td-isTruncated">{{ with .source.repository }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
                             <td data-column="Legislation explorer" class="td-isTruncated">{{ with .legislation_explorer }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
                             <td data-column="OpenAPI" class="td-isTruncated">{{ with .openapi_spec }}<a href="{{ . }}" target="_blank">{{ . }}</a>{{ else }}<span style="color:var(--colorGray500)">…</span>{{ end }}</td>
                         </tr>
