@@ -57,7 +57,7 @@ It is strongly recommended to use an image compression tool such as [ImageOptim]
 
 ## Referencing your package
 
-By referencing your package on the [dedicated page](https://openfisca.org/en/packages/) of the OpenFisca website you give it visibility so that others can use it. We do our best to make this process as easy as possible, [contact us]((mailto:contact@openfisca.org?subject=Referencing%20package)) if you need.
+By referencing your package on the [dedicated page](https://openfisca.org/en/packages/) of the OpenFisca website you give it visibility so that others can use it. We do our best to make this process as easy as possible, [contact us](mailto:contact@openfisca.org?subject=Referencing%20package) if you need.
 
 ### Describe your package
 
