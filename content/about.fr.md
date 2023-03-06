@@ -19,11 +19,11 @@ OpenFisca a été initialement développé comme une application de bureau utili
 
 Début 2014, [Etalab](https://www.etalab.gouv.fr/) a commencé à utiliser OpenFisca et est rapidement devenu un contributeur majeur. Après avoir organisé un [hackathon](https://www.eventbrite.fr/e/billets-hackathon-openfisca-10751826001) pour donner plus de visibilité au produit, son équipe a décidé de :
 
-- arrêter le développement de la [version Qt](https://github.com/openfisca/openfisca-qt) ;
-- séparer le moteur de calcul de son interface utilisateur de bureau ;
-- proposer une API web en plus de l'API Python ;
-- démontrer la valeur de l'API web en développant des applications incluant une interface web ;
-- offrir un accès public à cette API web.
+* arrêter le développement de la [version Qt](https://github.com/openfisca/openfisca-qt) ;
+* séparer le moteur de calcul de son interface utilisateur de bureau ;
+* proposer une API web en plus de l'API Python ;
+* démontrer la valeur de l'API web en développant des applications incluant une interface web ;
+* offrir un accès public à cette API web.
 
 Le moteur a été largement amélioré par Etalab, tandis que le modèle français a été amélioré et mis à jour par le [Commissariat général à la stratégie et à la prospective (CGSP)](https://www.strategie.gouv.fr/) avec l'aide de l'<abbr title="Institut d'économie publique">IDEP</abbr> et de l'[Institut des politiques publiques (IPP)](https://www.ipp.eu/). Quelques mois plus tard, [beta.gouv.fr](https://beta.gouv.fr) a commencé à utiliser l'API et à étendre le modèle pour fournir des services publics numériques, en déployant un premier outil consolidé d'évaluation des prestations destiné aux citoyens, _Mes Aides_, et un calculateur de bulletin de salaire.
 
