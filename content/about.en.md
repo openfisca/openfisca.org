@@ -12,7 +12,7 @@ As contributors to a common, we collectively do our best to make our community a
 
 ## History
 
-The development of OpenFisca began in May 2011 at the French [_Centre d'analyse stratégique_](https://strategie.gouv.fr/) (renamed _France Stratégie_ in April 2013), with the support of the [<abbr title="Institut d'économie publique">IDEP</abbr>](https://www.idep-fr.org/).
+The development of OpenFisca began in May 2011 at the French [_Centre d'analyse stratégique_](https://www.strategie.gouv.fr/) (renamed _France Stratégie_ in April 2013), with the support of the [<abbr title="Institut d'économie publique">IDEP</abbr>](https://www.idep-fr.org/).
 
 OpenFisca was originally developed as a desktop application using the [Qt](https://www.qt.io/) library with a Python API. This source code was released under a free software (AGPL) license in November 2011.
 
@@ -24,7 +24,7 @@ In early 2014, the French Prime Minister task force for open data, [Etalab](http
 - demonstrate the value of the web API by developing sample applications including a web interface to simulate personal cases;
 - offer public access to this web API.
 
-The core was improved extensively by Etalab, while the French model was improved and updated by the [_Commissariat général à la stratégie et à la prospective (CGSP)_](https://strategie.gouv.fr/) with the help of the [_Institut d'économie publique (IDEP)_](https://www.idep-fr.org/) and the [_Institut des politiques publiques (IPP)_](https://www.ipp.eu/). A few months later, the French [State Startups incubator](https://beta.gouv.fr) started using the API and extending the model for digital public services purposes, delivering a first consolidated benefits assessment tool targeting citizens, _Mes Aides_, and a payroll simulator.
+The core was improved extensively by Etalab, while the French model was improved and updated by the [_Commissariat général à la stratégie et à la prospective (CGSP)_](https://www.strategie.gouv.fr/) with the help of the [_Institut d'économie publique (IDEP)_](https://www.idep-fr.org/) and the [_Institut des politiques publiques (IPP)_](https://www.ipp.eu/). A few months later, the French [State Startups incubator](https://beta.gouv.fr) started using the API and extending the model for digital public services purposes, delivering a first consolidated benefits assessment tool targeting citizens, _Mes Aides_, and a payroll simulator.
 
 In 2016, the Open Government Partnership (OGP) Paris Summit demonstrated the international value of OpenFisca when a small team of OpenFisca France maintainers and OpenFisca Tunisia volunteers managed to model Sénégal's income revenue tax in under 36 hours, with a simulator shipped complete with a web UI during the OGP hackathon, winning the team the first prize.
 
