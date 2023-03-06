@@ -40,3 +40,5 @@ In 2020, considering the growing adoption across administrations and the critica
 In 2021, members of civil society started modelling British and then USA legislation, leading to the creation of [PolicyEngine](https://policyengine.org).
 
 In 2022, as usage grew in several countries without clear contributions to an increasingly outdated engine, means for sustained operation of OpenFisca independently from any single State were assessed by the core team on the ANCT funds.
+
+In 2023, OpenFisca community gets the [Edge of Government Award](https://www.worldgovernmentsummit.org/awards/edge-of-government) at the World Government Summit.

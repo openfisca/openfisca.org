@@ -41,3 +41,5 @@ En 2020, compte tenu de l'adoption croissante dans les administrations et de la 
 En 2021, des membres de la société civile ont commencé à modéliser la législation britannique, puis américaine, ce qui a conduit à la création de [PolicyEngine](https://policyengine.org).
 
 En 2022, alors que l'utilisation augmentait dans plusieurs pays sans contribution claire à un moteur de plus en plus obsolète, les moyens d'un fonctionnement durable d'OpenFisca indépendamment de tout État ont été évalués par l'équipe centrale sur les fonds ANCT.
+
+En 2023, la communauté OpenFisca reçoit le prix des [Créations gouvernementales innovantes](https://www.worldgovernmentsummit.org/awards/edge-of-government) au Sommet Mondial des Governements.
