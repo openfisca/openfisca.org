@@ -13,7 +13,7 @@ En tant que contributeurs à un commun, nous faisons collectivement de notre mie
 
 ## Histoire
 
-Le développement d'OpenFisca a commencé en mai 2011 au [Centre d'analyse stratégique](https://www.strategie.gouv.fr/) (renommé _France Stratégie_ en avril 2013), avec le soutien de l'<abbr title="Institut d'économie publique">IDEP</abbr>.
+Le développement d'OpenFisca a commencé en mai 2011 au [Centre d'analyse stratégique](https://www.strategie.gouv.fr/) (renommé _France Stratégie_ en avril 2013), avec le soutien de l'_Institut d'économie publique (IDEP, Aix-Marseille)_.
 
 OpenFisca a été initialement développé comme une application de bureau utilisant la bibliothèque [Qt](https://www.qt.io/) avec une API Python. Son code source a été publié sous une licence de logiciel libre (AGPL) en novembre 2011.
 
@@ -25,7 +25,7 @@ Début 2014, [Etalab](https://www.etalab.gouv.fr/) a commencé à utiliser OpenF
 - démontrer la valeur de l'API web en développant des applications incluant une interface web ;
 - offrir un accès public à cette API web.
 
-Le moteur a été largement amélioré par Etalab, tandis que le modèle français a été amélioré et mis à jour par le [Commissariat général à la stratégie et à la prospective (CGSP)](https://www.strategie.gouv.fr/) avec l'aide de l'Institut d'économie publique (IDEP) et de l'[Institut des politiques publiques (IPP)](https://www.ipp.eu/). Quelques mois plus tard, [beta.gouv.fr](https://beta.gouv.fr) a commencé à utiliser l'API et à étendre le modèle pour fournir des services publics numériques, en déployant un premier outil consolidé d'évaluation des prestations destiné aux citoyens, _Mes Aides_, et un calculateur de bulletin de salaire.
+Le moteur a été largement amélioré par Etalab, tandis que le modèle français a été amélioré et mis à jour par le [Commissariat général à la stratégie et à la prospective (CGSP)](https://www.strategie.gouv.fr/) avec l'aide de l'<abbr title="Institut d'économie publique">IDEP</abbr> et de l'[Institut des politiques publiques (IPP)](https://www.ipp.eu/). Quelques mois plus tard, [beta.gouv.fr](https://beta.gouv.fr) a commencé à utiliser l'API et à étendre le modèle pour fournir des services publics numériques, en déployant un premier outil consolidé d'évaluation des prestations destiné aux citoyens, _Mes Aides_, et un calculateur de bulletin de salaire.
 
 En 2016, le Sommet de l'Open Government Partnership (OGP) à Paris a démontré la valeur internationale d'OpenFisca : une petite équipe de mainteneurs d'OpenFisca France et de volontaires d'OpenFisca Tunisie a réussi à modéliser l'impôt sur le revenu du Sénégal en moins de 36 heures, en livrant un simulateur complet doté d'une interface web pendant le hackathon de l'OGP, remportant le premier prix.
 
