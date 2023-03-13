@@ -41,4 +41,4 @@ In 2021, members of civil society started modelling British and then USA legisla
 
 In 2022, as usage grew in several countries without clear contributions to an increasingly outdated engine, means for sustained operation of OpenFisca independently from any single State were assessed by the core team on the ANCT funds.
 
-In 2023, OpenFisca community gets the [Edge of Government Award](https://www.worldgovernmentsummit.org/awards/edge-of-government) at the World Government Summit.
+In 2023, the OpenFisca community is distinguished among over 1,000 candidates screened by the OECD and is awarded the [Edge of Government Innovation Award](https://www.worldgovernmentsummit.org/awards/edge-of-government) at the World Government Summit.

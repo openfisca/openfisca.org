@@ -42,4 +42,4 @@ En 2021, des membres de la société civile ont commencé à modéliser la légi
 
 En 2022, alors que l'utilisation augmentait dans plusieurs pays sans contribution claire à un moteur de plus en plus obsolète, les moyens d'un fonctionnement durable d'OpenFisca indépendamment de tout État ont été évalués par l'équipe centrale sur les fonds ANCT.
 
-En 2023, la communauté OpenFisca reçoit le prix des [Créations gouvernementales innovantes](https://www.worldgovernmentsummit.org/awards/edge-of-government) au Sommet Mondial des Governements.
+En 2023, la communauté OpenFisca est sélectionnée parmi plus de 1 000 candidats sélectionnés par l'OCDE et reçoit le prix d'innovation [Edge of Government](https://www.worldgovernmentsummit.org/awards/edge-of-government) au World Government Summit.
