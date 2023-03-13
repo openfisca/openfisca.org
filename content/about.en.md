@@ -18,13 +18,11 @@ OpenFisca was originally developed as a desktop application using the [Qt](https
 
 In early 2014, the French Prime Minister task force for open data, [Etalab](https://www.etalab.gouv.fr/), started using OpenFisca and soon became a major contributor. After organising a [hackathon](https://www.eventbrite.fr/e/billets-hackathon-openfisca-10751826001) to give more visibility to the product, its team decided to:
 
-<ul>
-    <li>stop the development of the [Qt version](https://github.com/openfisca/openfisca-qt);</li>
-    <li>separate the computing engine from its desktop user interface;</li>
-    <li>offer a web API in addition to the Python API;</li>
-    <li>demonstrate the value of the web API by developing sample applications including a web interface to simulate personal cases;</li>
-    <li>offer public access to this web API.</li>
-</ul>
+- stop the development of the [Qt version](https://github.com/openfisca/openfisca-qt);
+- separate the computing engine from its desktop user interface;
+- offer a web API in addition to the Python API;
+- demonstrate the value of the web API by developing sample applications including a web interface to simulate personal cases;
+- offer public access to this web API.
 
 The core was improved extensively by Etalab, while the French model was improved and updated by the [_Commissariat général à la stratégie et à la prospective (CGSP)_](https://www.strategie.gouv.fr/) with the help of the <abbr title="Institut d'économie publique">IDEP</abbr> and the [_Institut des politiques publiques (IPP)_](https://www.ipp.eu/). A few months later, the French [State Startups incubator](https://beta.gouv.fr) started using the API and extending the model for digital public services purposes, delivering a first consolidated benefits assessment tool targeting citizens, _Mes Aides_, and a payroll simulator.
 
