@@ -27,7 +27,7 @@ describe('packages entries', () => {
 
       it('is well named', () => {
         expect(isIso31662(entry.split('_')[0])).to.be(true);
-        expect(entry.split('_')[1]).to.match(/^[A-Za-z0-9]+$/);
+        expect(entry.split('_')[1]).to.match(/^[A-Za-z0-9-]+$/);
       });
     });
   });
