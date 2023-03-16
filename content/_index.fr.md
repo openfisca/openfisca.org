@@ -8,10 +8,10 @@ hero:
       author: Observatoire de l'innovation dans le service public de l'OCDE
       title: Transformer la loi en code « améliore l'impact des politiques publiques et la fourniture de service »
       link: https://oecd-opsi.org/publications/cracking-the-code/
-    - image: dpg.png
-      author: Digital Public Goods Alliance
-      title: Bien public numérique candidat
-      link:
+    - image: wgs.png
+      author: World Government Summit
+      title: Lauréat du prix Edge of Government 2023
+      link: https://www.khaleejtimes.com/uae/sheikh-saif-honours-french-governments-openfisca-project
     - image: joinup.png
       author: Programme Joinup de la Commission européenne
       title: Désigné « Logiciel open-source le plus innovant » en 2019

@@ -22,7 +22,7 @@ description:  # in both languages, 200 characters max
 package: OpenFisca-Country-Template  # name of the Python package that this reuse depends on
 website: https://legislation.demo.openfisca.org  # prefer HTTPS over HTTP
 author:
-  type: collective # one of individual, collective, ngo, research_center, business, local_government, or national_government
+  type: collective # one of individual, collective, ngo, research_center, business, local_institution, or state_institution
   name: OpenFisca  # 120 characters max
   contact: contact@openfisca.org  # this email address will only be used by the Core team for questions related to the reuse
   link: https://openfisca.org  # optional URL of the author organisation
