@@ -5,7 +5,7 @@ import expect from 'expect.js';
 import imageSize from 'image-size';
 import validateSchema from 'yaml-schema-validator';
 
-import showcaseEntrySchema from './schema.js';
+import showcaseSchema from './schema.js';
 
 
 const SHOWCASE_DIR = 'data/showcase';
@@ -24,7 +24,7 @@ describe('Showcase entries', () => {
     describe(entry, () => {
       it('has a valid description', () => {
         const validationErrors = validateSchema(`${SHOWCASE_DIR}/${entry}.yml`, {
-          schema: showcaseEntrySchema,
+          schema: showcaseSchema,
         });
         expect(validationErrors).to.be.empty();
       });

@@ -1,7 +1,9 @@
 import fs from 'fs';
+import path from 'path';
 
 import YAML from 'yaml';
 
+import {isUrl, isEmailAddress, isISOdate, isSPDX} from '../validators.js';
 
 export default {
   title: {
@@ -86,40 +88,18 @@ export default {
 
 const CONFIG = YAML.parse(fs.readFileSync('./config/_default/params.yaml', 'utf8'));
 
-// This module is not compatible with the Module specification yet, and JSON imports are experimental at the time of writing
-// <https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#import-assertions>
-const SPDXLicenseIds = JSON.parse(fs.readFileSync('./node_modules/spdx-license-ids/index.json', 'utf-8'));
-
-function isUrl(value) {
-  try {
-    const url = new URL(value);
-    return url.protocol == 'https:';
-  } catch (_) {
-    return false;
-  }
-}
-
-function isEmailAddress(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); // source: https://stackoverflow.com/a/9204568/594053
-}
-
-function isISOdate(value) {
-  return !isNaN(new Date(value)); // source: https://stackoverflow.com/a/67410020/594053
-}
-
-
 const VALID_AUTHOR_TYPES = Object.keys(CONFIG.showcase.author.types.icons);
 
 function isValidAuthorType(value) {
   return VALID_AUTHOR_TYPES.includes(value);
 }
 
-function isSPDX(value) {
-  return SPDXLicenseIds.includes(value);
-}
-
-const packagesFilenames = fs.readdirSync('./data/packages').map((file) => file.replace('.yml', ''));
+const PACKAGES_PATH = './data/packages';
+const packagesFiles = fs.readdirSync(PACKAGES_PATH);
 
 function isValidPackage(value) {
-  return packagesFilenames.includes(value);
+  return packagesFiles.some((file) => {
+    const packageDoc = YAML.parse(fs.readFileSync(path.join(PACKAGES_PATH, file), 'utf8'));
+    return packageDoc.hasOwnProperty('name') && (packageDoc['name'] === value);
+  });
 }
