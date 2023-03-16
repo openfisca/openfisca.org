@@ -25,7 +25,7 @@ describe('packages entries', () => {
         expect(validationErrors).to.be.empty();
       });
 
-      it('is well named', () => {
+      it('is in a properly named file', () => {
         expect(isIso31662(entry.split('_')[0])).to.be(true);
         expect(entry.split('_')[1]).to.match(/^[a-z0-9-]+$/);
       });
