@@ -16,6 +16,10 @@ hero:
       author: European Commission Joinup programme
       title: Recognised as “Most innovative open-source software” in 2019
       link: https://joinup.ec.europa.eu/collection/sharing-and-reuse-it-solutions/sharing-reuse-awards-2019-results#oss-inno
+    - image: dpg.png
+      author: Digital Public Goods Alliance
+      title: Recognised as Digital Public Good by UNDP, UNICEF and Norad
+      link: https://app.digitalpublicgoods.net/a/10318
 for_who:
   - title: Policy experts and governments
     description: OpenFisca enables institutions to efficiently share regulation updates and to pool IT costs. Interconnecting rules across public bodies in the form of legible parameters and executable code provides algorithmic transparency and reduces the bill for the taxpayer.
