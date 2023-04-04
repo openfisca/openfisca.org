@@ -14,7 +14,7 @@ hero:
       link: https://www.khaleejtimes.com/uae/sheikh-saif-honours-french-governments-openfisca-project
     - image: joinup.png
       author: European Commission Joinup programme
-      title: Recognised as “Most innovative open-source software” in 2019
+      title: Most Innovative Open-Source Software Award 2019
       link: https://joinup.ec.europa.eu/collection/sharing-and-reuse-it-solutions/sharing-reuse-awards-2019-results#oss-inno
     - image: dpg.png
       author: Digital Public Goods Alliance
