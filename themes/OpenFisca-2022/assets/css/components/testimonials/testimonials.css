@@ -2,13 +2,20 @@
   display: grid;
   max-width: calc((var(--gridColWidth) * 10 ) + (var(--gridGutterWidth) * 11));
   margin: auto;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   column-gap: var(--gridColWidth);
   row-gap: var(--m);
+
+  @media (--tabletLarge) {
+    column-gap: var(--l);
+  }
 
   @media (--tabletSmall) {
     column-gap: var(--m);
     grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    width: 100%;
+    row-gap: var(--xl2);
   }
 }
 
@@ -32,4 +39,9 @@
 .testimonials_item_desc {
   text-align: center;
   font-weight: 300;
+
+  @media (--tabletLarge) {
+    max-width:280px;
+    margin:0 auto;
+  }
 }
