@@ -16,7 +16,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Installation &#8212; OpenFisca  documentation</title>
+    <title>Getting started &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
     <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
@@ -26,7 +26,7 @@
     <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="On the web" href="howto-web-no-local-install.html" />
+    <link rel="next" title="Call an existing web API" href="call-existing-web-api.html" />
     <link rel="prev" title="Architecture of OpenFisca" href="../architecture.html" />
   
    
@@ -42,13 +42,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="howto-web-no-local-install.html" title="On the web"
+          <a href="call-existing-web-api.html" title="Call an existing web API"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../architecture.html" title="Architecture of OpenFisca"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><i icon-name="download"></i> Installation</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><i icon-name="download"></i> Getting started</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -89,12 +89,16 @@
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html"><i icon-name="home"></i> Before you start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html"><i icon-name="boxes"></i> Architecture of OpenFisca</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#"><i icon-name="download"></i> Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="howto-web-no-local-install.html">On the web</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto_docker.html">With Docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="offline-environment.html">In an offline environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="windows-no-admin.html">On Windows without admin rights</a></li>
-<li class="toctree-l2"><a class="reference internal" href="test_situations.html">How to test your changes on “ready to use” situations (for OpenFisca-France)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><i icon-name="download"></i> Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="call-existing-web-api.html">Call an existing web API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation-requirements.html">Installation requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-country-web-api.html">Install a country web API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-country-package.html">Install a country package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python-api-browser.html">Python API in the browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access-countrys-source-code.html">Access a country’s source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-with-docker.html">Install with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offline-environment.html">Edge Case: Offline environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows-no-admin.html">Edge Case: Windows (not administrator)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../key-concepts/index.html"><i icon-name="lightbulb"></i> Key concepts</a></li>
@@ -118,28 +122,62 @@
             <ol class="breadcrumb">
               <li><a href="../summary.html">Docs</a></li>
               
-              <li><i icon-name="download"></i> Installation</li>
+              <li><i icon-name="download"></i> Getting started</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <section id="installation">
-<h1><i icon-name="download"></i> Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
+  <section id="getting-started">
+<h1><i icon-name="download"></i> Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p>As the OpenFisca community becomes larger, issues that only affect a small percentage of users arise.</p>
-<p>The purpose of this section is to bring together the clever solutions the community came up with and share them with all OpenFisca users.</p>
+<p>This section is a guide to the various methods of accessing or installing OpenFisca. Follow the guide below to establish what the use case is and get directed to the appropriate section(s).</p>
+<section id="identify-the-country-package">
+<h2>1) Identify the country package<a class="headerlink" href="#identify-the-country-package" title="Link to this heading">¶</a></h2>
+<p>The most common approach involves a specific country or jurisdiction package and so in this scenario it’s important to identify if that package exists and then continue to step 2 <em>“Clarify use case”</em>.
+If the goal is contributing to OpenFisca directly (such as this documentation); have a look at the <a class="reference internal" href="../contribute/index.html"><span class="std std-doc">Contribute</span></a> section of this site and also the <a class="reference external" href="https://github.com/openfisca/">OpenFisca Github repositories</a>.</p>
+</section>
+<section id="clarify-use-case">
+<h2>2) Clarify use case<a class="headerlink" href="#clarify-use-case" title="Link to this heading">¶</a></h2>
+<p>With a specific country or jurisdiction package in mind; ask whether the use case requires <a class="reference internal" href="#contributing-to-the-rules"><span class="std std-ref">contributions to the rules</span></a>, or intends to just <a class="reference internal" href="#utilising-existing-rules"><span class="std std-ref">utilise existing rules</span></a> (for example: run simulations).</p>
+<section id="utilising-existing-rules">
+<h3>Utilising existing rules<a class="headerlink" href="#utilising-existing-rules" title="Link to this heading">¶</a></h3>
+<p>If the goal is just to utilise existing rules (rather than contributing to the rules) then consider the following options.</p>
+<section id="web-api">
+<h4>Web API<a class="headerlink" href="#web-api" title="Link to this heading">¶</a></h4>
+<p>Best for online web applications. The two options are:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="howto-web-no-local-install.html"><span class="std std-doc">How to use OpenFisca on the web (no installation required on your computer)</span></a></p></li>
-<li><p><a class="reference internal" href="howto_docker.html"><span class="std std-doc">How to use OpenFisca with Docker</span></a></p></li>
-<li><p><a class="reference internal" href="offline-environment.html"><span class="std std-doc">How to install OpenFisca in an offline environment</span></a></p></li>
-<li><p><a class="reference internal" href="windows-no-admin.html"><span class="std std-doc">How to work on OpenFisca on a Windows without being administrator</span></a></p></li>
-<li><p><a class="reference internal" href="test_situations.html"><span class="std std-doc">How to test your changes on “ready to use” situations</span></a></p></li>
+<li><p>If it exists, <a class="reference internal" href="call-existing-web-api.html"><span class="std std-doc">call an existing web API</span></a> for your country (no installation necessarily), or</p></li>
+<li><p><a class="reference internal" href="install-country-web-api.html"><span class="std std-doc">Install a country web API</span></a> to operate your own web API with no usage limitations (see also <a class="reference internal" href="install-with-docker.html"><span class="std std-doc">Install with Docker</span></a>).</p></li>
 </ul>
-<blockquote>
-<div><p>You’re welcome to share your tips on how to solve technical issues! Please update <a class="reference external" href="https://github.com/openfisca/openfisca-doc/edit/master/recipes.md">this section</a> (in English) or this <a class="reference external" href="https://github.com/openfisca/tutorial/wiki">wiki FAQ</a> in your preferred language.</p>
-</div></blockquote>
+</section>
+<section id="python-api">
+<h4>Python API<a class="headerlink" href="#python-api" title="Link to this heading">¶</a></h4>
+<p>Suitable for “desktop” processing and running large simulations:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="install-country-package.html"><span class="std std-doc">Install a country package</span></a> in a local environment (see also <a class="reference internal" href="install-with-docker.html"><span class="std std-doc">Install with Docker</span></a>).</p></li>
+<li><p>Alternatively, access the <a class="reference internal" href="python-api-browser.html"><span class="std std-doc">Python API in the browser</span></a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="contributing-to-the-rules">
+<h3>Contributing to the rules<a class="headerlink" href="#contributing-to-the-rules" title="Link to this heading">¶</a></h3>
+<p>If the goal includes contributing to the rules of a country package:</p>
+<ul class="simple">
+<li><p>When it already exists, <a class="reference internal" href="access-countrys-source-code.html"><span class="std std-doc">access a country’s source code</span></a>.</p></li>
+<li><p>Otherwise, <a class="reference internal" href="../coding-the-legislation/bootstrapping_a_new_country_package.html"><span class="std std-doc">bootstrap a new country package</span></a></p></li>
+</ul>
+</section>
+</section>
+<section id="edge-cases">
+<h2>Edge cases<a class="headerlink" href="#edge-cases" title="Link to this heading">¶</a></h2>
+<p>Finally, some specific edge cases have been described by the OpenFisca community as follows:</p>
+<ul class="simple">
+<li><p>Installing a specific country OpenFisca package in an <a class="reference internal" href="offline-environment.html"><span class="std std-doc">offline environment</span></a>.</p></li>
+<li><p>Installing a specific country OpenFisca package on a <a class="reference internal" href="windows-no-admin.html"><span class="std std-doc">Windows machine without administrative rights</span></a>.</p></li>
+</ul>
+</section>
 </section>
 
 
@@ -157,13 +195,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="howto-web-no-local-install.html" title="On the web"
+          <a href="call-existing-web-api.html" title="Call an existing web API"
              >next</a> |</li>
         <li class="right" >
           <a href="../architecture.html" title="Architecture of OpenFisca"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><i icon-name="download"></i> Installation</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><i icon-name="download"></i> Getting started</a></li> 
       </ul>
     </div>
   

@@ -16,7 +16,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>How to test your changes on “ready to use” situations (for OpenFisca-France) &#8212; OpenFisca  documentation</title>
+    <title>Install a country package &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
     <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
@@ -26,8 +26,8 @@
     <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Key concepts" href="../key-concepts/index.html" />
-    <link rel="prev" title="On Windows without admin rights" href="windows-no-admin.html" />
+    <link rel="next" title="Python API in the browser" href="python-api-browser.html" />
+    <link rel="prev" title="Install a country web API" href="install-country-web-api.html" />
   
    
 
@@ -42,14 +42,14 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../key-concepts/index.html" title="Key concepts"
+          <a href="python-api-browser.html" title="Python API in the browser"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="windows-no-admin.html" title="On Windows without admin rights"
+          <a href="install-country-web-api.html" title="Install a country web API"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="download"></i> Installation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">How to test your changes on “ready to use” situations (for OpenFisca-France)</a></li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="download"></i> Getting started</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Install a country package</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -90,12 +90,16 @@
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html"><i icon-name="home"></i> Before you start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html"><i icon-name="boxes"></i> Architecture of OpenFisca</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html"><i icon-name="download"></i> Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="howto-web-no-local-install.html">On the web</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto_docker.html">With Docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="offline-environment.html">In an offline environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="windows-no-admin.html">On Windows without admin rights</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">How to test your changes on “ready to use” situations (for OpenFisca-France)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html"><i icon-name="download"></i> Getting started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="call-existing-web-api.html">Call an existing web API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation-requirements.html">Installation requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-country-web-api.html">Install a country web API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Install a country package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python-api-browser.html">Python API in the browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access-countrys-source-code.html">Access a country’s source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-with-docker.html">Install with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offline-environment.html">Edge Case: Offline environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows-no-admin.html">Edge Case: Windows (not administrator)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../key-concepts/index.html"><i icon-name="lightbulb"></i> Key concepts</a></li>
@@ -119,20 +123,35 @@
             <ol class="breadcrumb">
               <li><a href="../summary.html">Docs</a></li>
               
-                <li><a href="index.html"><i icon-name="download"></i> Installation</a></li>
+                <li><a href="index.html"><i icon-name="download"></i> Getting started</a></li>
               
-              <li>How to test your changes on “ready to use” situations (for OpenFisca-France)</li>
+              <li>Install a country package</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <section id="how-to-test-your-changes-on-ready-to-use-situations-for-openfisca-france">
-<h1>How to test your changes on “ready to use” situations (for OpenFisca-France)<a class="headerlink" href="#how-to-test-your-changes-on-ready-to-use-situations-for-openfisca-france" title="Link to this heading">¶</a></h1>
-<p>Often, when making changes to legislation, you need to test it on a situation that works with your country’s tax and benefit system.
-Sometimes, these situations can be quite complicated to model (such as roomates).
-Instead of re-writing them everytime, we have pre-packaged a few in a Python Package.</p>
-<p>You can find the package along with a usage example in the <a class="reference external" href="https://github.com/openfisca/tutorial/tree/master/python/scripts/generate_situation_examples">Tutorial repository</a></p>
+  <section id="install-a-country-package">
+<h1>Install a country package<a class="headerlink" href="#install-a-country-package" title="Link to this heading">¶</a></h1>
+<p>This section is a guide on how to install the <code class="docutils literal notranslate"><span class="pre">OpenFisca-Country-Template</span></code> <a class="reference external" href="https://pypi.org/project/OpenFisca-Country-Template/">packaged library</a>.</p>
+<p>These instructions should be able to be followed for any OpenFisca country package that has published their package on <a class="reference external" href="https://pypi.org/">https://pypi.org/</a></p>
+<p>It’s the minimal installation required to run a country package without the intention of contributing to it. If the use case also requires contributing to the model, please follow the <a class="reference internal" href="access-countrys-source-code.html"><span class="std std-doc">access a country’s source code</span></a> section.</p>
+<section id="install-openfisca-country-template-packaged-library">
+<h2>Install OpenFisca-Country-Template packaged library<a class="headerlink" href="#install-openfisca-country-template-packaged-library" title="Link to this heading">¶</a></h2>
+<p>OpenFisca runs with <a class="reference external" href="https://www.python.org/">Python</a>. The following steps call <a class="reference external" href="https://pypi.org/project/pip/">pip package installer</a> which requires a <code class="docutils literal notranslate"><span class="pre">Python</span></code> installation. To check its installation or install it, first check the <a class="reference internal" href="installation-requirements.html"><span class="std std-doc">Installation requirements</span></a>.</p>
+<blockquote>
+<div><p>When other Python projects exist in the intended environment, it is recommended to create a new virtual environment to avoid dependency conflicts. <a class="reference external" href="https://github.com/openfisca/country-template#setting-up-a-virtual-environment-with-venv">Here is more information</a> from <code class="docutils literal notranslate"><span class="pre">OpenFisca-Country-Template</span></code> documentation.</p>
+</div></blockquote>
+<p>To install the latest OpenFisca-Country-Template <a class="reference external" href="https://pypi.org/project/OpenFisca-Country-Template/#history">published revision</a>, run the following command in the environment’s terminal:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>OpenFisca-Country-Template
+</pre></div>
+</div>
+<p>It should complete without any errors. To check the installed packages run the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>list
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">OpenFisca-Country-Template</span></code> should be in the list indicating that it is installed and ready to run simulations.</p>
+</section>
 </section>
 
 
@@ -150,14 +169,14 @@ Instead of re-writing them everytime, we have pre-packaged a few in a Python Pac
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../key-concepts/index.html" title="Key concepts"
+          <a href="python-api-browser.html" title="Python API in the browser"
              >next</a> |</li>
         <li class="right" >
-          <a href="windows-no-admin.html" title="On Windows without admin rights"
+          <a href="install-country-web-api.html" title="Install a country web API"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="download"></i> Installation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">How to test your changes on “ready to use” situations (for OpenFisca-France)</a></li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="download"></i> Getting started</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Install a country package</a></li> 
       </ul>
     </div>
   

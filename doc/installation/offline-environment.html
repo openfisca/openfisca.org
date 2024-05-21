@@ -16,7 +16,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>In an offline environment &#8212; OpenFisca  documentation</title>
+    <title>Edge Case: Offline environment &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
     <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
@@ -26,8 +26,8 @@
     <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="On Windows without admin rights" href="windows-no-admin.html" />
-    <link rel="prev" title="With Docker" href="howto_docker.html" />
+    <link rel="next" title="Edge Case: Windows (not administrator)" href="windows-no-admin.html" />
+    <link rel="prev" title="Install with Docker" href="install-with-docker.html" />
   
    
 
@@ -42,14 +42,14 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="windows-no-admin.html" title="On Windows without admin rights"
+          <a href="windows-no-admin.html" title="Edge Case: Windows (not administrator)"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="howto_docker.html" title="With Docker"
+          <a href="install-with-docker.html" title="Install with Docker"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="download"></i> Installation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">In an offline environment</a></li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="download"></i> Getting started</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Edge Case: Offline environment</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -90,12 +90,16 @@
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html"><i icon-name="home"></i> Before you start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html"><i icon-name="boxes"></i> Architecture of OpenFisca</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html"><i icon-name="download"></i> Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="howto-web-no-local-install.html">On the web</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto_docker.html">With Docker</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">In an offline environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="windows-no-admin.html">On Windows without admin rights</a></li>
-<li class="toctree-l2"><a class="reference internal" href="test_situations.html">How to test your changes on “ready to use” situations (for OpenFisca-France)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html"><i icon-name="download"></i> Getting started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="call-existing-web-api.html">Call an existing web API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation-requirements.html">Installation requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-country-web-api.html">Install a country web API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-country-package.html">Install a country package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python-api-browser.html">Python API in the browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access-countrys-source-code.html">Access a country’s source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-with-docker.html">Install with Docker</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Edge Case: Offline environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows-no-admin.html">Edge Case: Windows (not administrator)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../key-concepts/index.html"><i icon-name="lightbulb"></i> Key concepts</a></li>
@@ -119,35 +123,63 @@
             <ol class="breadcrumb">
               <li><a href="../summary.html">Docs</a></li>
               
-                <li><a href="index.html"><i icon-name="download"></i> Installation</a></li>
+                <li><a href="index.html"><i icon-name="download"></i> Getting started</a></li>
               
-              <li>In an offline environment</li>
+              <li>Edge Case: Offline environment</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <section id="in-an-offline-environment">
-<h1>In an offline environment<a class="headerlink" href="#in-an-offline-environment" title="Link to this heading">¶</a></h1>
-<p>If you need to install OpenFisca on a server with no Internet access, here is how to do it.</p>
-<p>The big picture: download Python packages on a machine with Internet access, copy them to the server and install them in a <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">virtualenv</a>.</p>
-<p>We assume that it is possible to copy files to the server, for example via a USB stick. Or perhaps the server filters only outgoing connections, but accepts incoming connections allowing to copy the files.</p>
+  <section id="edge-case-offline-environment">
+<h1>Edge Case: Offline environment<a class="headerlink" href="#edge-case-offline-environment" title="Link to this heading">¶</a></h1>
+<p>If there is a need to install OpenFisca on a server with no internet access, the following is how that can be achieved.</p>
+<p>The big picture: download Python packages on a machine with internet access, copy them to the server and install them in a <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">virtualenv</a>.</p>
+<p>It’s assumed that it is possible to copy files to the server, i.e. via a USB stick.</p>
 <section id="on-the-machine-with-internet-access">
 <h2>On the machine with Internet access<a class="headerlink" href="#on-the-machine-with-internet-access" title="Link to this heading">¶</a></h2>
-<p>We are going to create a first virtualenv in which we’ll use <code class="docutils literal notranslate"><span class="pre">pip</span></code> to download the <code class="docutils literal notranslate"><span class="pre">.whl</span></code> files in a specific directory.</p>
-<p>Here we use <a class="reference external" href="https://github.com/berdario/pew">pew</a> to simplify virtualenv management.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pew
-pew<span class="w"> </span>new<span class="w"> </span>openfisca-packages<span class="w"> </span>--python<span class="o">=</span>python3.7
+<p>First create a virtual environment and use <code class="docutils literal notranslate"><span class="pre">pip</span></code> to download the <code class="docutils literal notranslate"><span class="pre">.whl</span></code> files to a specific directory.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>mkdir<span class="w"> </span>~/openfisca-packages
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>~/openfisca-packages
 
-<span class="c1"># Upgrade pip itself</span>
-pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-pip<span class="w"> </span>--version
-<span class="c1"># Should print at least 9.0 at the time we write this doc.</span>
+<span class="w">    </span><span class="c1"># Create and instigate a virtual environment</span>
+<span class="w">    </span>python3.11<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<span class="w">    </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
 
-mkdir<span class="w"> </span>~/openfisca-packages
-<span class="nb">cd</span><span class="w"> </span>~/openfisca-packages
-pip<span class="w"> </span>download<span class="w"> </span>OpenFisca-France
-<span class="c1"># You should see the downloaded files in the current directory.</span>
+<span class="w">    </span><span class="c1"># Upgrade pip itself</span>
+<span class="w">    </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+<span class="w">    </span>pip<span class="w"> </span>--version
+<span class="w">    </span><span class="c1"># Prints 24.0 at the time this doc was written.</span>
+
+<span class="w">    </span>mkdir<span class="w"> </span>country-template
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>country-template
+<span class="w">    </span>pip<span class="w"> </span>download<span class="w"> </span>OpenFisca-Country-Template
+<span class="w">    </span><span class="c1"># You should see the downloaded files in the current directory.</span>
+</pre></div>
+</div>
+<p>Copy the files in the <code class="docutils literal notranslate"><span class="pre">~/openfisca-packages/country-template</span></code> directory to the server via a USB stick, or for example with <code class="docutils literal notranslate"><span class="pre">scp</span></code>.</p>
+<p>Example with <code class="docutils literal notranslate"><span class="pre">scp</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>scp<span class="w"> </span>-r<span class="w"> </span>~/openfisca-packages/country-template<span class="w"> </span>user@server:
+</pre></div>
+</div>
+</section>
+<section id="on-the-server">
+<h2>On the server<a class="headerlink" href="#on-the-server" title="Link to this heading">¶</a></h2>
+<p>The following assumes the files are now stored in <code class="docutils literal notranslate"><span class="pre">~/openfisca-packages/country-template</span></code> on the server.</p>
+<p>The following commands show how to install Python packages without any Internet access.
+If you already have a virtual environment, activate it. Otherwise create a new one following the same instructions as above.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>pip<span class="w"> </span>install<span class="w"> </span>~/openfisca-packages/country-template/*
+<span class="w">    </span>Processing<span class="w"> </span>./isodate-0.5.4.tar.gz
+<span class="w">    </span><span class="o">[</span>...<span class="o">]</span>
+<span class="w">    </span>Installing<span class="w"> </span>collected<span class="w"> </span>packages:<span class="w"> </span>StrEnum,<span class="w"> </span>sortedcontainers,<span class="w"> </span>typing-extensions...<span class="w"> </span>openfisca-country-template
+<span class="w">    </span>Successfully<span class="w"> </span>installed<span class="w"> </span>StrEnum,<span class="w"> </span>sortedcontainers,<span class="w"> </span>typing-extensions...<span class="w"> </span>openfisca-country-template
+
+<span class="w">    </span><span class="c1"># Step completed, the following can be utilised to confirm success and versions of the packages installed.</span>
+<span class="w">    </span>pip<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>openfisca-country_template
+<span class="w">    </span>openfisca-country_template<span class="w"> </span><span class="m">7</span>.1.1
+
+<span class="w">    </span>pip<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>OpenFisca-Core
+<span class="w">    </span>OpenFisca-Core<span class="w"> </span><span class="m">41</span>.4.5
 </pre></div>
 </div>
 <p>Now copy these files on the server (say in the <code class="docutils literal notranslate"><span class="pre">~/openfisca-packages</span></code> directory), either via a USB stick, or with <code class="docutils literal notranslate"><span class="pre">scp</span></code>, or any other way.</p>
@@ -155,27 +187,11 @@ pip<span class="w"> </span>download<span class="w"> </span>OpenFisca-France
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scp<span class="w"> </span>-r<span class="w"> </span>~/openfisca-packages<span class="w"> </span>user@server:
 </pre></div>
 </div>
-</section>
-<section id="on-the-server">
-<h2>On the server<a class="headerlink" href="#on-the-server" title="Link to this heading">¶</a></h2>
-<p>Starting from here we assume you copied the packages on the server, say in <code class="docutils literal notranslate"><span class="pre">~/openfisca-packages</span></code>.</p>
-<p>The following commands show how to install Python packages without any Internet access.
-If you already have a virtualenv, activate it. Otherwise create a new one following the same instructions as above (for example with <code class="docutils literal notranslate"><span class="pre">pew</span> <span class="pre">new</span></code>).</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>~/openfisca-packages/*
-<span class="w">    </span>Processing<span class="w"> </span>./isodate-0.5.4.tar.gz
-<span class="w">    </span><span class="o">[</span>...<span class="o">]</span>
-<span class="w">    </span>Installing<span class="w"> </span>collected<span class="w"> </span>packages:<span class="w"> </span>pytz,<span class="w"> </span>Babel,<span class="w"> </span>Biryani,<span class="w"> </span>numpy,<span class="w"> </span>PyYAML,<span class="w"> </span>OpenFisca-Core,<span class="w"> </span>requests,<span class="w"> </span>OpenFisca-France,<span class="w"> </span>isodate
-<span class="w">    </span>Successfully<span class="w"> </span>installed<span class="w"> </span>Babel-2.3.4<span class="w"> </span>Biryani-0.10.4<span class="w"> </span>OpenFisca-Core-7.0.0<span class="w"> </span>OpenFisca-France-15.1.0<span class="w"> </span>PyYAML-3.12<span class="w"> </span>isodate-0.5.4<span class="w"> </span>numpy-1.12.0<span class="w"> </span>pytz-2016.10<span class="w"> </span>requests-2.13.0
-
-pip<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>OpenFisca-France
-<span class="w">    </span>OpenFisca-France<span class="w"> </span><span class="m">15</span>.1.0
+<p>To check that everything works correctly, run the following command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from openfisca_country_template import CountryTaxBenefitSystem; CountryTaxBenefitSystem()&quot;</span>
 </pre></div>
 </div>
-<p>Run the basic tests which confirm that OpenFisca-France is correctly installed:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>openfisca_france.tests.test_basics
-OpenFisca-France<span class="w"> </span>basic<span class="w"> </span><span class="nb">test</span><span class="w"> </span>was<span class="w"> </span>executed<span class="w"> </span>successfully.
-</pre></div>
-</div>
+<p>No error message should appear. You can now utilise this environment to <a class="reference internal" href="../simulate/run-simulation.html"><span class="std std-doc">run simulations</span></a>.</p>
 </section>
 </section>
 
@@ -194,14 +210,14 @@ OpenFisca-France<span class="w"> </span>basic<span class="w"> </span><span class
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="windows-no-admin.html" title="On Windows without admin rights"
+          <a href="windows-no-admin.html" title="Edge Case: Windows (not administrator)"
              >next</a> |</li>
         <li class="right" >
-          <a href="howto_docker.html" title="With Docker"
+          <a href="install-with-docker.html" title="Install with Docker"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="download"></i> Installation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">In an offline environment</a></li> 
+          <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="download"></i> Getting started</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Edge Case: Offline environment</a></li> 
       </ul>
     </div>
   
