@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,14 +16,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>openfisca_core.parameters.parameter_at_instant &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -91,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -114,23 +112,26 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.parameters.parameter_at_instant</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">typing</span>
+<span></span><span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
 
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">commons</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="kn">import</span> <span class="n">ParameterParsingError</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">helpers</span>
 
 
-<div class="viewcode-block" id="ParameterAtInstant"><a class="viewcode-back" href="../../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterAtInstant">[docs]</a><span class="k">class</span> <span class="nc">ParameterAtInstant</span><span class="p">:</span>
+<div class="viewcode-block" id="ParameterAtInstant">
+<a class="viewcode-back" href="../../../openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterAtInstant">[docs]</a>
+<span class="k">class</span> <span class="nc">ParameterAtInstant</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A value of a parameter at a given instant.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility</span>
-    <span class="n">_allowed_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">])</span>
+    <span class="n">_allowed_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span> <span class="s2">&quot;reference&quot;</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">file_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param str name: name of the parameter, e.g. &quot;taxes.some_tax.some_param&quot;</span>
 <span class="sd">        :param str instant_str: Date of the value in the format `YYYY-MM-DD`.</span>
@@ -147,30 +148,37 @@
             <span class="k">return</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>  <span class="c1"># Inherit metadata from Parameter</span>
         <span class="n">helpers</span><span class="o">.</span><span class="n">_set_backward_compatibility_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="p">{}))</span>
 
     <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="n">helpers</span><span class="o">.</span><span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data_type</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">allowed_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allowed_keys</span><span class="p">)</span>
+        <span class="n">helpers</span><span class="o">.</span><span class="n">_validate_parameter</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span> <span class="n">allowed_keys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_allowed_keys</span>
+        <span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
-                <span class="s2">&quot;Missing &#39;value&#39; property for </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;Missing &#39;value&#39; property for </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">ALLOWED_PARAM_TYPES</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
-                <span class="s2">&quot;Value in </span><span class="si">{}</span><span class="s2"> has type </span><span class="si">{}</span><span class="s2">, which is not one of the allowed types (</span><span class="si">{}</span><span class="s2">): </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">config</span><span class="o">.</span><span class="n">ALLOWED_PARAM_TYPES</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;Value in </span><span class="si">{}</span><span class="s2"> has type </span><span class="si">{}</span><span class="s2">, which is not one of the allowed types (</span><span class="si">{}</span><span class="s2">): </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">config</span><span class="o">.</span><span class="n">ALLOWED_PARAM_TYPES</span><span class="p">,</span> <span class="n">value</span>
+                <span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">,</span>
+            <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instant_str</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">instant_str</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instant_str</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">instant_str</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;ParameterAtInstant(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">({</span><span class="bp">self</span><span class="o">.</span><span class="n">instant_str</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">})</span>
@@ -180,6 +188,7 @@
         <span class="n">clone</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">clone</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">clone</span></div>
+
 </pre></div>
 
           </div>

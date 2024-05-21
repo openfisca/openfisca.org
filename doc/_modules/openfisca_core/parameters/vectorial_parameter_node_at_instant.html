@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,14 +16,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>openfisca_core.parameters.vectorial_parameter_node_at_instant &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -91,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -122,7 +120,9 @@
 <span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="kn">import</span> <span class="n">helpers</span>
 
 
-<div class="viewcode-block" id="VectorialParameterNodeAtInstant"><a class="viewcode-back" href="../../../openfisca-python-api/parameters.html#openfisca_core.parameters.VectorialParameterNodeAtInstant">[docs]</a><span class="k">class</span> <span class="nc">VectorialParameterNodeAtInstant</span><span class="p">:</span>
+<div class="viewcode-block" id="VectorialParameterNodeAtInstant">
+<a class="viewcode-back" href="../../../openfisca-python-api/parameters.html#openfisca_core.parameters.VectorialParameterNodeAtInstant">[docs]</a>
+<span class="k">class</span> <span class="nc">VectorialParameterNodeAtInstant</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameter node of the legislation at a given instant which has been vectorized.</span>
 <span class="sd">    Vectorized parameters allow requests such as parameters.housing_benefit[zipcode], where zipcode is a vector</span>
@@ -131,78 +131,99 @@
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">build_from_node</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
         <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">check_node_vectorisable</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-        <span class="n">subnodes_name</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_children</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="n">subnodes_name</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">_children</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="c1"># Recursively vectorize the children of the node</span>
-        <span class="n">vectorial_subnodes</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span>
-            <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">build_from_node</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">subnode_name</span><span class="p">])</span><span class="o">.</span><span class="n">vector</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">subnode_name</span><span class="p">],</span> <span class="n">parameters</span><span class="o">.</span><span class="n">ParameterNodeAtInstant</span><span class="p">)</span> <span class="k">else</span> <span class="n">node</span><span class="p">[</span><span class="n">subnode_name</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">subnode_name</span> <span class="ow">in</span> <span class="n">subnodes_name</span>
-            <span class="p">])</span>
+        <span class="n">vectorial_subnodes</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">build_from_node</span><span class="p">(</span>
+                    <span class="n">node</span><span class="p">[</span><span class="n">subnode_name</span><span class="p">]</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">vector</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">subnode_name</span><span class="p">],</span> <span class="n">parameters</span><span class="o">.</span><span class="n">ParameterNodeAtInstant</span><span class="p">)</span>
+                <span class="k">else</span> <span class="n">node</span><span class="p">[</span><span class="n">subnode_name</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">subnode_name</span> <span class="ow">in</span> <span class="n">subnodes_name</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
         <span class="c1"># A vectorial node is a wrapper around a numpy recarray</span>
         <span class="c1"># We first build the recarray</span>
         <span class="n">recarray</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
             <span class="p">[</span><span class="n">vectorial_subnodes</span><span class="p">],</span>
-            <span class="n">dtype</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="p">(</span><span class="n">subnode_name</span><span class="p">,</span> <span class="n">subnode</span><span class="o">.</span><span class="n">dtype</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subnode</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">recarray</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;float&#39;</span><span class="p">)</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">(</span>
+                    <span class="n">subnode_name</span><span class="p">,</span>
+                    <span class="n">subnode</span><span class="o">.</span><span class="n">dtype</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subnode</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">recarray</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;float&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
                 <span class="k">for</span> <span class="p">(</span><span class="n">subnode_name</span><span class="p">,</span> <span class="n">subnode</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">subnodes_name</span><span class="p">,</span> <span class="n">vectorial_subnodes</span><span class="p">)</span>
-                <span class="p">]</span>
-            <span class="p">)</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">recarray</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">recarray</span><span class="p">),</span> <span class="n">node</span><span class="o">.</span><span class="n">_instant_str</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="p">(</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">recarray</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">recarray</span><span class="p">),</span> <span class="n">node</span><span class="o">.</span><span class="n">_instant_str</span>
+        <span class="p">)</span>
 
-<div class="viewcode-block" id="VectorialParameterNodeAtInstant.check_node_vectorisable"><a class="viewcode-back" href="../../../openfisca-python-api/parameters.html#openfisca_core.parameters.VectorialParameterNodeAtInstant.check_node_vectorisable">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="VectorialParameterNodeAtInstant.check_node_vectorisable">
+<a class="viewcode-back" href="../../../openfisca-python-api/parameters.html#openfisca_core.parameters.VectorialParameterNodeAtInstant.check_node_vectorisable">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">check_node_vectorisable</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check that a node can be casted to a vectorial node, in order to be able to use fancy indexing.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">MESSAGE_PART_1</span> <span class="o">=</span> <span class="s2">&quot;Cannot use fancy indexing on parameter node &#39;</span><span class="si">{}</span><span class="s2">&#39;, as&quot;</span>
-        <span class="n">MESSAGE_PART_3</span> <span class="o">=</span> <span class="s2">&quot;To use fancy indexing on parameter node, its children must be homogenous.&quot;</span>
+        <span class="n">MESSAGE_PART_3</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;To use fancy indexing on parameter node, its children must be homogenous.&quot;</span>
+        <span class="p">)</span>
         <span class="n">MESSAGE_PART_4</span> <span class="o">=</span> <span class="s2">&quot;See more at &lt;https://openfisca.org/doc/coding-the-legislation/legislation_parameters#computing-a-parameter-that-depends-on-a-variable-fancy-indexing&gt;.&quot;</span>
 
         <span class="k">def</span> <span class="nf">raise_key_inhomogeneity_error</span><span class="p">(</span><span class="n">node_with_key</span><span class="p">,</span> <span class="n">node_without_key</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">):</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                <span class="n">MESSAGE_PART_1</span><span class="p">,</span>
-                <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; exists, but &#39;</span><span class="si">{}</span><span class="s2">&#39; doesn&#39;t.&quot;</span><span class="p">,</span>
-                <span class="n">MESSAGE_PART_3</span><span class="p">,</span>
-                <span class="n">MESSAGE_PART_4</span><span class="p">,</span>
-                <span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">MESSAGE_PART_1</span><span class="p">,</span>
+                    <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; exists, but &#39;</span><span class="si">{}</span><span class="s2">&#39; doesn&#39;t.&quot;</span><span class="p">,</span>
+                    <span class="n">MESSAGE_PART_3</span><span class="p">,</span>
+                    <span class="n">MESSAGE_PART_4</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
-                <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">node_with_key</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">]),</span>
-                <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">node_without_key</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">]),</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">node_with_key</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">]),</span>
+                <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">node_without_key</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">]),</span>
+            <span class="p">)</span>
 
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">raise_type_inhomogeneity_error</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="n">non_node_name</span><span class="p">):</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                <span class="n">MESSAGE_PART_1</span><span class="p">,</span>
-                <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; is a node, but &#39;</span><span class="si">{}</span><span class="s2">&#39; is not.&quot;</span><span class="p">,</span>
-                <span class="n">MESSAGE_PART_3</span><span class="p">,</span>
-                <span class="n">MESSAGE_PART_4</span><span class="p">,</span>
-                <span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">MESSAGE_PART_1</span><span class="p">,</span>
+                    <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; is a node, but &#39;</span><span class="si">{}</span><span class="s2">&#39; is not.&quot;</span><span class="p">,</span>
+                    <span class="n">MESSAGE_PART_3</span><span class="p">,</span>
+                    <span class="n">MESSAGE_PART_4</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
                 <span class="n">node_name</span><span class="p">,</span>
                 <span class="n">non_node_name</span><span class="p">,</span>
-                <span class="p">)</span>
+            <span class="p">)</span>
 
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">raise_not_implemented</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="n">node_type</span><span class="p">):</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                <span class="n">MESSAGE_PART_1</span><span class="p">,</span>
-                <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; is a &#39;</span><span class="si">{}</span><span class="s2">&#39;, and fancy indexing has not been implemented yet on this kind of parameters.&quot;</span><span class="p">,</span>
-                <span class="n">MESSAGE_PART_4</span><span class="p">,</span>
-                <span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">MESSAGE_PART_1</span><span class="p">,</span>
+                    <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; is a &#39;</span><span class="si">{}</span><span class="s2">&#39;, and fancy indexing has not been implemented yet on this kind of parameters.&quot;</span><span class="p">,</span>
+                    <span class="n">MESSAGE_PART_4</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
                 <span class="n">node_name</span><span class="p">,</span>
                 <span class="n">node_type</span><span class="p">,</span>
-                <span class="p">)</span>
+            <span class="p">)</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">extract_named_children</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
             <span class="k">return</span> <span class="p">{</span>
-                <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">]):</span> <span class="n">value</span>
+                <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">]):</span> <span class="n">value</span>
                 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">_children</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-                <span class="p">}</span>
+            <span class="p">}</span>
 
         <span class="k">def</span> <span class="nf">check_nodes_homogeneous</span><span class="p">(</span><span class="n">named_nodes</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
@@ -222,9 +243,13 @@
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">first_node_keys</span> <span class="o">==</span> <span class="n">node_keys</span><span class="p">:</span>
                         <span class="n">missing_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">first_node_keys</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">node_keys</span><span class="p">)</span>
                         <span class="k">if</span> <span class="n">missing_keys</span><span class="p">:</span>  <span class="c1"># If the first_node has a key that node hasn&#39;t</span>
-                            <span class="n">raise_key_inhomogeneity_error</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">missing_keys</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+                            <span class="n">raise_key_inhomogeneity_error</span><span class="p">(</span>
+                                <span class="n">first_name</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">missing_keys</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                            <span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>  <span class="c1"># If If the node has a key that first_node doesn&#39;t have</span>
-                            <span class="n">missing_key</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">node_keys</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">first_node_keys</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                            <span class="n">missing_key</span> <span class="o">=</span> <span class="p">(</span>
+                                <span class="nb">set</span><span class="p">(</span><span class="n">node_keys</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">first_node_keys</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                            <span class="p">)</span>
                             <span class="n">raise_key_inhomogeneity_error</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">missing_key</span><span class="p">)</span>
                     <span class="n">children</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extract_named_children</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
                 <span class="n">check_nodes_homogeneous</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
@@ -242,8 +267,8 @@
 
         <span class="n">check_nodes_homogeneous</span><span class="p">(</span><span class="n">extract_named_children</span><span class="p">(</span><span class="n">node</span><span class="p">))</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">):</span>
 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span> <span class="o">=</span> <span class="n">instant_str</span>
@@ -264,26 +289,42 @@
                 <span class="c1"># In case the key is not a string vector, stringify it</span>
                 <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">object</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">Enum</span><span class="p">):</span>
                     <span class="n">enum</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                    <span class="n">key</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">key</span> <span class="o">==</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">],</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">])</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+                        <span class="p">[</span><span class="n">key</span> <span class="o">==</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">],</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">]</span>
+                    <span class="p">)</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">):</span>
                     <span class="n">enum</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">possible_values</span>
-                    <span class="n">key</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">key</span> <span class="o">==</span> <span class="n">item</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">],</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">])</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+                        <span class="p">[</span><span class="n">key</span> <span class="o">==</span> <span class="n">item</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">],</span>
+                        <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">],</span>
+                    <span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
-            <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">)</span>  <span class="c1"># Get all the names of the subnodes, e.g. [&#39;zone_1&#39;, &#39;zone_2&#39;]</span>
-            <span class="n">default</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>  <span class="c1"># In case of unexpected key, we will set the corresponding value to NaN.</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span>
+            <span class="p">)</span>  <span class="c1"># Get all the names of the subnodes, e.g. [&#39;zone_1&#39;, &#39;zone_2&#39;]</span>
+            <span class="n">default</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span>
+            <span class="p">)</span>  <span class="c1"># In case of unexpected key, we will set the corresponding value to NaN.</span>
             <span class="n">conditions</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="o">==</span> <span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
             <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">helpers</span><span class="o">.</span><span class="n">contains_nan</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
                 <span class="n">unexpected_key</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-                <span class="k">raise</span> <span class="n">ParameterNotFoundError</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">unexpected_key</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">ParameterNotFoundError</span><span class="p">(</span>
+                    <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">unexpected_key</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span>
+                <span class="p">)</span>
 
             <span class="c1"># If the result is not a leaf, wrap the result in a vectorial node.</span>
-            <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">record</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">recarray</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">record</span><span class="p">)</span> <span class="ow">or</span> <span class="n">numpy</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">void</span>
+            <span class="p">):</span>
+                <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">recarray</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span>
+                <span class="p">)</span>
 
             <span class="k">return</span> <span class="n">result</span></div>
+
 </pre></div>
 
           </div>

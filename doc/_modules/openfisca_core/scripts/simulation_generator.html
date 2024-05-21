@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,14 +16,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>openfisca_core.scripts.simulation_generator &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -91,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -114,33 +112,36 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.scripts.simulation_generator</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
 
-<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
 <span class="kn">from</span> <span class="nn">openfisca_core.simulations</span> <span class="kn">import</span> <span class="n">Simulation</span>
 
 
-<div class="viewcode-block" id="make_simulation"><a class="viewcode-back" href="../../../openfisca-python-api/simulation_generator.html#openfisca_core.scripts.simulation_generator.make_simulation">[docs]</a><span class="k">def</span> <span class="nf">make_simulation</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">nb_persons</span><span class="p">,</span> <span class="n">nb_groups</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="make_simulation">
+<a class="viewcode-back" href="../../../openfisca-python-api/simulation_generator.html#openfisca_core.scripts.simulation_generator.make_simulation">[docs]</a>
+<span class="k">def</span> <span class="nf">make_simulation</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">nb_persons</span><span class="p">,</span> <span class="n">nb_groups</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate a simulation containing nb_persons persons spread in nb_groups groups.</span>
+<span class="sd">    Generate a simulation containing nb_persons persons spread in nb_groups groups.</span>
 
-<span class="sd">        Example:</span>
+<span class="sd">    Example:</span>
 
-<span class="sd">        &gt;&gt;&gt; from openfisca_core.scripts.simulation_generator import make_simulation</span>
-<span class="sd">        &gt;&gt;&gt; from openfisca_france import CountryTaxBenefitSystem</span>
-<span class="sd">        &gt;&gt;&gt; tbs = CountryTaxBenefitSystem()</span>
-<span class="sd">        &gt;&gt;&gt; simulation = make_simulation(tbs, 400, 100)  # Create a simulation with 400 persons, spread among 100 families</span>
-<span class="sd">        &gt;&gt;&gt; simulation.calculate(&#39;revenu_disponible&#39;, 2017)</span>
+<span class="sd">    &gt;&gt;&gt; from openfisca_core.scripts.simulation_generator import make_simulation</span>
+<span class="sd">    &gt;&gt;&gt; from openfisca_france import CountryTaxBenefitSystem</span>
+<span class="sd">    &gt;&gt;&gt; tbs = CountryTaxBenefitSystem()</span>
+<span class="sd">    &gt;&gt;&gt; simulation = make_simulation(tbs, 400, 100)  # Create a simulation with 400 persons, spread among 100 families</span>
+<span class="sd">    &gt;&gt;&gt; simulation.calculate(&#39;revenu_disponible&#39;, 2017)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">simulation</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">simulation</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="o">=</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">)</span>
     <span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">nb_persons</span>
     <span class="n">adults</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nb_persons</span><span class="p">),</span> <span class="n">nb_groups</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 
-    <span class="n">members_entity_id</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+    <span class="n">members_entity_id</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="c1"># A legacy role is an index that every person within an entity has. For instance, the &#39;demandeur&#39; has legacy role 0, the &#39;conjoint&#39; 1, the first &#39;child&#39; 2, the second 3, etc.</span>
-    <span class="n">members_legacy_role</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+    <span class="n">members_legacy_role</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="n">id_group</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">for</span> <span class="n">id_person</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_persons</span><span class="p">):</span>
@@ -156,30 +157,42 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">entity</span><span class="o">.</span><span class="n">is_person</span><span class="p">:</span>
             <span class="n">entity</span><span class="o">.</span><span class="n">members_entity_id</span> <span class="o">=</span> <span class="n">members_entity_id</span>
             <span class="n">entity</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">nb_groups</span>
-            <span class="n">entity</span><span class="o">.</span><span class="n">members_role</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">members_legacy_role</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">entity</span><span class="o">.</span><span class="n">members_role</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">members_legacy_role</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">entity</span><span class="o">.</span><span class="n">flattened_roles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="p">)</span>
     <span class="k">return</span> <span class="n">simulation</span></div>
 
 
-<div class="viewcode-block" id="randomly_init_variable"><a class="viewcode-back" href="../../../openfisca-python-api/simulation_generator.html#openfisca_core.scripts.simulation_generator.randomly_init_variable">[docs]</a><span class="k">def</span> <span class="nf">randomly_init_variable</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">max_value</span><span class="p">,</span> <span class="n">condition</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="randomly_init_variable">
+<a class="viewcode-back" href="../../../openfisca-python-api/simulation_generator.html#openfisca_core.scripts.simulation_generator.randomly_init_variable">[docs]</a>
+<span class="k">def</span> <span class="nf">randomly_init_variable</span><span class="p">(</span>
+    <span class="n">simulation</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">max_value</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialise a variable with random values (from 0 to max_value) for the given period.</span>
-<span class="sd">        If a condition vector is provided, only set the value of persons or groups for which condition is True.</span>
+<span class="sd">    Initialise a variable with random values (from 0 to max_value) for the given period.</span>
+<span class="sd">    If a condition vector is provided, only set the value of persons or groups for which condition is True.</span>
 
-<span class="sd">        Example:</span>
+<span class="sd">    Example:</span>
 
-<span class="sd">        &gt;&gt;&gt; from openfisca_core.scripts.simulation_generator import make_simulation, randomly_init_variable</span>
-<span class="sd">        &gt;&gt;&gt; from openfisca_france import CountryTaxBenefitSystem</span>
-<span class="sd">        &gt;&gt;&gt; tbs = CountryTaxBenefitSystem()</span>
-<span class="sd">        &gt;&gt;&gt; simulation = make_simulation(tbs, 400, 100)  # Create a simulation with 400 persons, spread among 100 families</span>
-<span class="sd">        &gt;&gt;&gt; randomly_init_variable(simulation, &#39;salaire_net&#39;, 2017, max_value = 50000, condition = simulation.persons.has_role(simulation.famille.DEMANDEUR))  # Randomly set a salaire_net for all persons between 0 and 50000?</span>
-<span class="sd">        &gt;&gt;&gt; simulation.calculate(&#39;revenu_disponible&#39;, 2017)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; from openfisca_core.scripts.simulation_generator import make_simulation, randomly_init_variable</span>
+<span class="sd">    &gt;&gt;&gt; from openfisca_france import CountryTaxBenefitSystem</span>
+<span class="sd">    &gt;&gt;&gt; tbs = CountryTaxBenefitSystem()</span>
+<span class="sd">    &gt;&gt;&gt; simulation = make_simulation(tbs, 400, 100)  # Create a simulation with 400 persons, spread among 100 families</span>
+<span class="sd">    &gt;&gt;&gt; randomly_init_variable(simulation, &#39;salaire_net&#39;, 2017, max_value = 50000, condition = simulation.persons.has_role(simulation.famille.DEMANDEUR))  # Randomly set a salaire_net for all persons between 0 and 50000?</span>
+<span class="sd">    &gt;&gt;&gt; simulation.calculate(&#39;revenu_disponible&#39;, 2017)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">condition</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">condition</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">variable</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
     <span class="n">population</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">get_variable_population</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">population</span><span class="o">.</span><span class="n">count</span><span class="p">)</span> <span class="o">*</span> <span class="n">max_value</span> <span class="o">*</span> <span class="n">condition</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">population</span><span class="o">.</span><span class="n">count</span><span class="p">)</span> <span class="o">*</span> <span class="n">max_value</span> <span class="o">*</span> <span class="n">condition</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span>
+        <span class="n">variable</span><span class="o">.</span><span class="n">dtype</span>
+    <span class="p">)</span>
     <span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
 </pre></div>
 
           </div>

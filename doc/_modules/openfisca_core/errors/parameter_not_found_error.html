@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,14 +16,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>openfisca_core.errors.parameter_not_found_error &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -91,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -114,12 +112,14 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.errors.parameter_not_found_error</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="ParameterNotFoundError"><a class="viewcode-back" href="../../../openfisca-python-api/errors.html#openfisca_core.errors.ParameterNotFoundError">[docs]</a><span></span><span class="k">class</span> <span class="nc">ParameterNotFoundError</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">):</span>
+<div class="viewcode-block" id="ParameterNotFoundError">
+<a class="viewcode-back" href="../../../openfisca-python-api/errors.html#openfisca_core.errors.ParameterNotFoundError">[docs]</a>
+<span></span><span class="k">class</span> <span class="nc">ParameterNotFoundError</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Exception raised when a parameter is not found in the parameters.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">,</span> <span class="n">variable_name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">,</span> <span class="n">variable_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param name: Name of the parameter</span>
 <span class="sd">        :param instant_str: Instant where the parameter does not exist, in the format `YYYY-MM-DD`.</span>
@@ -131,10 +131,11 @@
         <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;The parameter &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">variable_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">+=</span> <span class="s2">&quot; requested by variable &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-        <span class="n">message</span> <span class="o">+=</span> <span class="p">(</span>
-            <span class="s2">&quot; was not found in the </span><span class="si">{}</span><span class="s2"> tax and benefit system.&quot;</span>
-            <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">instant_str</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="p">(</span><span class="s2">&quot; was not found in the </span><span class="si">{}</span><span class="s2"> tax and benefit system.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">instant_str</span>
+        <span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ParameterNotFoundError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
 </pre></div>
 
           </div>

@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,14 +16,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>openfisca_core.simulations.simulation &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -91,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -116,23 +114,21 @@
   <h1>Source code for openfisca_core.simulations.simulation</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="n">Population</span><span class="p">,</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span> <span class="n">Variable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span>
 
 <span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">commons</span><span class="p">,</span> <span class="n">periods</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="kn">import</span> <span class="n">CycleError</span><span class="p">,</span> <span class="n">SpiralError</span><span class="p">,</span> <span class="n">VariableNotFoundError</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.indexed_enums</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="kn">import</span> <span class="n">Period</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.tracers</span> <span class="kn">import</span> <span class="n">FullTracer</span><span class="p">,</span> <span class="n">SimpleTracer</span><span class="p">,</span> <span class="n">TracingParameterNodeAtInstant</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="n">Population</span><span class="p">,</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span> <span class="n">Variable</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.warnings</span> <span class="kn">import</span> <span class="n">TempfileWarning</span>
+<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">commons</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="n">indexed_enums</span><span class="p">,</span> <span class="n">periods</span><span class="p">,</span> <span class="n">tracers</span>
+<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">warnings</span> <span class="k">as</span> <span class="n">core_warnings</span>
 
 
-<div class="viewcode-block" id="Simulation"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation">[docs]</a><span class="k">class</span> <span class="nc">Simulation</span><span class="p">:</span>
+<div class="viewcode-block" id="Simulation">
+<a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation">[docs]</a>
+<span class="k">class</span> <span class="nc">Simulation</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a simulation, and handles the calculation logic</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -142,10 +138,10 @@
     <span class="n">invalidated_caches</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">Cache</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span>
-            <span class="n">populations</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Population</span><span class="p">],</span>
-            <span class="p">):</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span>
+        <span class="n">populations</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Population</span><span class="p">],</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This constructor is reserved for internal use; see :any:`SimulationBuilder`,</span>
 <span class="sd">        which is the preferred way to obtain a Simulation initialized with a consistent</span>
@@ -163,7 +159,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">SimpleTracer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">tracers</span><span class="o">.</span><span class="n">SimpleTracer</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">opt_out_cache</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="c1"># controls the spirals detection; check for performance impact if &gt; 1</span>
@@ -179,9 +175,9 @@
     <span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_trace</span> <span class="o">=</span> <span class="n">trace</span>
         <span class="k">if</span> <span class="n">trace</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">FullTracer</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">tracers</span><span class="o">.</span><span class="n">FullTracer</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">SimpleTracer</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">tracers</span><span class="o">.</span><span class="n">SimpleTracer</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">link_to_entities_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">_key</span><span class="p">,</span> <span class="n">entity_instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -198,20 +194,26 @@
 <span class="sd">        Temporary folder used to store intermediate calculation data in case the memory is saturated</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;openfisca_&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;openfisca_&quot;</span><span class="p">)</span>
             <span class="n">message</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="p">(</span><span class="s2">&quot;Intermediate results will be stored on disk in </span><span class="si">{}</span><span class="s2"> in case of memory overflow.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span><span class="p">),</span>
-                <span class="s2">&quot;You should remove this directory once you&#39;re done with your simulation.&quot;</span>
-                <span class="p">]</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">TempfileWarning</span><span class="p">)</span>
+                <span class="p">(</span>
+                    <span class="s2">&quot;Intermediate results will be stored on disk in </span><span class="si">{}</span><span class="s2"> in case of memory overflow.&quot;</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span><span class="p">),</span>
+                <span class="s2">&quot;You should remove this directory once you&#39;re done with your simulation.&quot;</span><span class="p">,</span>
+            <span class="p">]</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">core_warnings</span><span class="o">.</span><span class="n">TempfileWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span>
+            <span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span>
 
     <span class="c1"># ----- Calculation methods ----- #</span>
 
-<div class="viewcode-block" id="Simulation.calculate"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.calculate">[docs]</a>    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+<div class="viewcode-block" id="Simulation.calculate">
+<a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.calculate">[docs]</a>
+    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate ``variable_name`` for ``period``.&quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">Period</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
             <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_start</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
@@ -225,7 +227,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_end</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">purge_cache_of_invalid_values</span><span class="p">()</span></div>
 
-    <span class="k">def</span> <span class="nf">_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">Period</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate the variable ``variable_name`` for the period ``period``, using the variable formula if it exists.</span>
 
@@ -235,10 +238,12 @@
 
         <span class="n">population</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable_population</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
         <span class="n">holder</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
-        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span>
+            <span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">variable</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_period_consistency</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span>
 
@@ -261,7 +266,7 @@
             <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cast_formula_result</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span>
             <span class="n">holder</span><span class="o">.</span><span class="n">put_in_cache</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
-        <span class="k">except</span> <span class="n">SpiralError</span><span class="p">:</span>
+        <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">SpiralError</span><span class="p">:</span>
             <span class="n">array</span> <span class="o">=</span> <span class="n">holder</span><span class="o">.</span><span class="n">default_array</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">array</span>
@@ -270,7 +275,7 @@
         <span class="c1"># We wait for the end of calculate(), signalled by an empty stack, before purging the cache</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">_period</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">invalidated_caches</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">_name</span><span class="p">,</span> <span class="n">_period</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">invalidated_caches</span><span class="p">:</span>
             <span class="n">holder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">_name</span><span class="p">)</span>
             <span class="n">holder</span><span class="o">.</span><span class="n">delete_arrays</span><span class="p">(</span><span class="n">_period</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">invalidated_caches</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -278,61 +283,117 @@
     <span class="k">def</span> <span class="nf">calculate_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="n">variable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Variable</span><span class="p">]</span>
 
-        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span>
+            <span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">variable</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">Period</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
             <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 
         <span class="c1"># Check that the requested period matches definition_period</span>
-        <span class="k">if</span> <span class="n">periods</span><span class="o">.</span><span class="n">unit_weight</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">unit_weight</span><span class="p">(</span><span class="n">period</span><span class="o">.</span><span class="n">unit</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unable to compute variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; for period </span><span class="si">{1}</span><span class="s2">: &#39;</span><span class="si">{0}</span><span class="s2">&#39; can only be computed for </span><span class="si">{2}</span><span class="s2">-long periods. You can use the DIVIDE option to get an estimate of </span><span class="si">{0}</span><span class="s2"> by dividing the yearly value by 12, or change the requested period to &#39;period.this_year&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="n">period</span><span class="p">,</span>
-                <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span>
-                <span class="p">))</span>
+        <span class="k">if</span> <span class="n">periods</span><span class="o">.</span><span class="n">unit_weight</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">unit_weight</span><span class="p">(</span>
+            <span class="n">period</span><span class="o">.</span><span class="n">unit</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Unable to compute variable &#39;</span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; for period &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">period</span><span class="si">}</span><span class="s2">: &#39;</span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; can only be computed for &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span><span class="si">}</span><span class="s2">-long periods. You can use the &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;DIVIDE option to get an estimate of </span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">periods</span><span class="o">.</span><span class="n">DAY</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unable to sum constant variable &#39;</span><span class="si">{}</span><span class="s2">&#39; over period </span><span class="si">{}</span><span class="s2">: only variables defined daily, monthly, or yearly can be summed over time.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="n">period</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">isoformat</span> <span class="o">+</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">isocalendar</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Unable to ADD constant variable &#39;</span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; over &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;the period </span><span class="si">{</span><span class="n">period</span><span class="si">}</span><span class="s2">: eternal variables can&#39;t be summed &quot;</span>
+                <span class="s2">&quot;over time.&quot;</span>
+            <span class="p">)</span>
 
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">sub_period</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">sub_period</span> <span class="ow">in</span> <span class="n">period</span><span class="o">.</span><span class="n">get_subperiods</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span><span class="p">)</span>
-            <span class="p">)</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">calculate_divide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="n">variable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Variable</span><span class="p">]</span>
 
-        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span>
+            <span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">variable</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">Period</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
             <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 
-        <span class="c1"># Check that the requested period matches definition_period</span>
-        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">!=</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unable to divide the value of &#39;</span><span class="si">{}</span><span class="s2">&#39; over time on period </span><span class="si">{}</span><span class="s2">: only variables defined yearly can be divided over time.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">variable_name</span><span class="p">,</span>
-                <span class="n">period</span><span class="p">))</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">periods</span><span class="o">.</span><span class="n">unit_weight</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span><span class="p">)</span>
+            <span class="o">&lt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">unit_weight</span><span class="p">(</span><span class="n">period</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="n">period</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Can&#39;t calculate variable &#39;</span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; for period &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">period</span><span class="si">}</span><span class="s2">: &#39;</span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; can only be computed for &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span><span class="si">}</span><span class="s2">-long periods. You can use the &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;ADD option to get an estimate of </span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">period</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;DIVIDE option can only be used for a one-year or a one-month requested period&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">isoformat</span> <span class="o">+</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">isocalendar</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Unable to DIVIDE constant variable &#39;</span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; over &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;the period </span><span class="si">{</span><span class="n">period</span><span class="si">}</span><span class="s2">: eternal variables can&#39;t be divided &quot;</span>
+                <span class="s2">&quot;over time.&quot;</span>
+            <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
-            <span class="n">computation_period</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">this_year</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="n">computation_period</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.</span>
-        <span class="k">elif</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">period</span><span class="o">.</span><span class="n">unit</span>
+            <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">isoformat</span> <span class="o">+</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">isocalendar</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="n">period</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="mi">1</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Unable to DIVIDE constant variable &#39;</span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; over &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;the period </span><span class="si">{</span><span class="n">period</span><span class="si">}</span><span class="s2">: eternal variables can&#39;t be used &quot;</span>
+                <span class="s2">&quot;as a denominator to divide a variable over time.&quot;</span>
+            <span class="p">)</span>
 
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unable to divide the value of &#39;</span><span class="si">{}</span><span class="s2">&#39; to match period </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">variable_name</span><span class="p">,</span>
-            <span class="n">period</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
+            <span class="n">calculation_period</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">this_year</span>
+
+        <span class="k">elif</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
+            <span class="n">calculation_period</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">first_month</span>
+
+        <span class="k">elif</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">DAY</span><span class="p">:</span>
+            <span class="n">calculation_period</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">first_day</span>
+
+        <span class="k">elif</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">:</span>
+            <span class="n">calculation_period</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">first_week</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">calculation_period</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">first_weekday</span>
+
+        <span class="k">if</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
+            <span class="n">denominator</span> <span class="o">=</span> <span class="n">calculation_period</span><span class="o">.</span><span class="n">size_in_years</span>
+
+        <span class="k">elif</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
+            <span class="n">denominator</span> <span class="o">=</span> <span class="n">calculation_period</span><span class="o">.</span><span class="n">size_in_months</span>
+
+        <span class="k">elif</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">DAY</span><span class="p">:</span>
+            <span class="n">denominator</span> <span class="o">=</span> <span class="n">calculation_period</span><span class="o">.</span><span class="n">size_in_days</span>
+
+        <span class="k">elif</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">:</span>
+            <span class="n">denominator</span> <span class="o">=</span> <span class="n">calculation_period</span><span class="o">.</span><span class="n">size_in_weeks</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">denominator</span> <span class="o">=</span> <span class="n">calculation_period</span><span class="o">.</span><span class="n">size_in_weekdays</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">calculation_period</span><span class="p">)</span> <span class="o">/</span> <span class="n">denominator</span>
 
     <span class="k">def</span> <span class="nf">calculate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -341,10 +402,12 @@
 
         <span class="n">variable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Variable</span><span class="p">]</span>
 
-        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span>
+            <span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">variable</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">calculate_output</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
@@ -352,10 +415,10 @@
         <span class="k">return</span> <span class="n">variable</span><span class="o">.</span><span class="n">calculate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">trace_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula_period</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">TracingParameterNodeAtInstant</span><span class="p">(</span>
+        <span class="k">return</span> <span class="n">tracers</span><span class="o">.</span><span class="n">TracingParameterNodeAtInstant</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_parameters_at_instant</span><span class="p">(</span><span class="n">formula_period</span><span class="p">),</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span>
-            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_run_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -382,30 +445,50 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check that a period matches the variable definition_period</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">:</span>
             <span class="k">return</span>  <span class="c1"># For variables which values are constant in time, all periods are accepted</span>
 
-        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span> <span class="ow">and</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unable to compute variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; for period </span><span class="si">{1}</span><span class="s2">: &#39;</span><span class="si">{0}</span><span class="s2">&#39; must be computed for a whole month. You can use the ADD option to sum &#39;</span><span class="si">{0}</span><span class="s2">&#39; over the requested period, or change the requested period to &#39;period.first_month&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="n">period</span>
-                <span class="p">))</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span>
+            <span class="ow">and</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Unable to compute variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; for period </span><span class="si">{1}</span><span class="s2">: &#39;</span><span class="si">{0}</span><span class="s2">&#39; must be computed for a whole year. You can use the DIVIDE option to get an estimate of </span><span class="si">{0}</span><span class="s2"> by dividing the yearly value by 12, or change the requested period to &#39;period.this_year&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span> <span class="ow">and</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="n">periods</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unable to compute variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; for period </span><span class="si">{1}</span><span class="s2">: &#39;</span><span class="si">{0}</span><span class="s2">&#39; must be computed for a whole year. You can use the DIVIDE option to get an estimate of </span><span class="si">{0}</span><span class="s2"> by dividing the yearly value by 12, or change the requested period to &#39;period.this_year&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="n">period</span>
-                <span class="p">))</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span>
+            <span class="ow">and</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Unable to compute variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; for period </span><span class="si">{1}</span><span class="s2">: &#39;</span><span class="si">{0}</span><span class="s2">&#39; must be computed for a whole month. You can use the ADD option to sum &#39;</span><span class="si">{0}</span><span class="s2">&#39; over the requested period, or change the requested period to &#39;period.first_month&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span>
+            <span class="ow">and</span> <span class="n">period</span><span class="o">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Unable to compute variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; for period </span><span class="si">{1}</span><span class="s2">: &#39;</span><span class="si">{0}</span><span class="s2">&#39; must be computed for a whole week. You can use the ADD option to sum &#39;</span><span class="si">{0}</span><span class="s2">&#39; over the requested period, or change the requested period to &#39;period.first_week&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">period</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unable to compute variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; for period </span><span class="si">{1}</span><span class="s2">: &#39;</span><span class="si">{0}</span><span class="s2">&#39; must be computed for a whole </span><span class="si">{2}</span><span class="s2">. You can use the ADD option to sum &#39;</span><span class="si">{0}</span><span class="s2">&#39; over the requested period.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="n">period</span><span class="p">,</span>
-                <span class="s1">&#39;month&#39;</span> <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span> <span class="k">else</span> <span class="s1">&#39;year&#39;</span>
-                <span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Unable to compute variable &#39;</span><span class="si">{0}</span><span class="s2">&#39; for period </span><span class="si">{1}</span><span class="s2">: &#39;</span><span class="si">{0}</span><span class="s2">&#39; must be computed for a whole </span><span class="si">{2}</span><span class="s2">. You can use the ADD option to sum &#39;</span><span class="si">{0}</span><span class="s2">&#39; over the requested period.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_cast_formula_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">Enum</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">indexed_enums</span><span class="o">.</span><span class="n">Enum</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">value</span><span class="p">,</span> <span class="n">indexed_enums</span><span class="o">.</span><span class="n">EnumArray</span>
+        <span class="p">):</span>
             <span class="k">return</span> <span class="n">variable</span><span class="o">.</span><span class="n">possible_values</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
@@ -427,14 +510,22 @@
 <span class="sd">        the same variable at a different period.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># The last frame is the current calculation, so it should be ignored from cycle detection</span>
-        <span class="n">previous_periods</span> <span class="o">=</span> <span class="p">[</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">frame</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">variable</span><span class="p">]</span>
+        <span class="n">previous_periods</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">frame</span><span class="p">[</span><span class="s2">&quot;period&quot;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">frame</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">variable</span>
+        <span class="p">]</span>
         <span class="k">if</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">previous_periods</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">CycleError</span><span class="p">(</span><span class="s2">&quot;Circular definition detected on formula </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">CycleError</span><span class="p">(</span>
+                <span class="s2">&quot;Circular definition detected on formula </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+            <span class="p">)</span>
         <span class="n">spiral</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">previous_periods</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_spiral_loops</span>
         <span class="k">if</span> <span class="n">spiral</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">invalidate_spiral_variables</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Quasicircular definition detected on formula </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2"> involving </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">SpiralError</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Quasicircular definition detected on formula </span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2"> involving </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span>
+            <span class="p">)</span>
+            <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">SpiralError</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">invalidate_cache_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">invalidated_caches</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Cache</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">))</span>
@@ -446,45 +537,51 @@
         <span class="c1"># for deletion from the cache once the calculation ends.</span>
         <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">invalidate_cache_entry</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]),</span> <span class="n">frame</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">])</span>
-            <span class="k">if</span> <span class="n">frame</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">variable</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">invalidate_cache_entry</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">frame</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]),</span> <span class="n">frame</span><span class="p">[</span><span class="s2">&quot;period&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">frame</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">variable</span><span class="p">:</span>
                 <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_spiral_loops</span><span class="p">:</span>
                     <span class="k">break</span>
 
     <span class="c1"># ----- Methods to access stored values ----- #</span>
 
-<div class="viewcode-block" id="Simulation.get_array"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_array">[docs]</a>    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+<div class="viewcode-block" id="Simulation.get_array">
+<a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_array">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the value of ``variable_name`` for ``period``, if this value is alreay in the cache (if it has been set as an input or previously calculated).</span>
 
 <span class="sd">        Unlike :meth:`.calculate`, this method *does not* trigger calculations and *does not* use any formula.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">Period</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
             <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="n">period</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Simulation.get_holder"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_holder">[docs]</a>    <span class="k">def</span> <span class="nf">get_holder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Simulation.get_holder">
+<a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_holder">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_holder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the holder associated with the variable.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable_population</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Simulation.get_memory_usage"><a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_memory_usage">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Simulation.get_memory_usage">
+<a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_memory_usage">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get data about the virtual memory usage of the simulation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-            <span class="n">total_nb_bytes</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="n">by_variable</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">total_nb_bytes</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">by_variable</span><span class="o">=</span><span class="p">{})</span>
         <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="n">entity_memory_usage</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get_memory_usage</span><span class="p">(</span><span class="n">variables</span> <span class="o">=</span> <span class="n">variables</span><span class="p">)</span>
-            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;total_nb_bytes&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">entity_memory_usage</span><span class="p">[</span><span class="s1">&#39;total_nb_bytes&#39;</span><span class="p">]</span>
-            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;by_variable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">entity_memory_usage</span><span class="p">[</span><span class="s1">&#39;by_variable&#39;</span><span class="p">])</span>
+            <span class="n">entity_memory_usage</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get_memory_usage</span><span class="p">(</span><span class="n">variables</span><span class="o">=</span><span class="n">variables</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;total_nb_bytes&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">entity_memory_usage</span><span class="p">[</span><span class="s2">&quot;total_nb_bytes&quot;</span><span class="p">]</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;by_variable&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">entity_memory_usage</span><span class="p">[</span><span class="s2">&quot;by_variable&quot;</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">result</span></div>
+
 
     <span class="c1"># ----- Misc ----- #</span>
 
-    <span class="k">def</span> <span class="nf">delete_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">delete_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete a variable&#39;s value for a given period</span>
 
@@ -549,40 +646,54 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">variable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Variable</span><span class="p">]</span>
 
-        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span>
+            <span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">variable</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
 
         <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">((</span><span class="n">variable</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">period</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">date</span> <span class="o">&gt;</span> <span class="n">variable</span><span class="o">.</span><span class="n">end</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">period</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">date</span> <span class="o">&gt;</span> <span class="n">variable</span><span class="o">.</span><span class="n">end</span><span class="p">):</span>
             <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_variable_population</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Population</span><span class="p">:</span>
         <span class="n">variable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Variable</span><span class="p">]</span>
 
-        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span>
+            <span class="n">variable_name</span><span class="p">,</span> <span class="n">check_existence</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">variable</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">VariableNotFoundError</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="p">[</span><span class="n">variable</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">get_population</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plural</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Population</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="nb">next</span><span class="p">((</span><span class="n">population</span> <span class="k">for</span> <span class="n">population</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span> <span class="o">==</span> <span class="n">plural</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="n">population</span>
+                <span class="k">for</span> <span class="n">population</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span> <span class="o">==</span> <span class="n">plural</span>
+            <span class="p">),</span>
+            <span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_entity</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">plural</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Population</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">plural</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Population</span><span class="p">]:</span>
         <span class="n">population</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_population</span><span class="p">(</span><span class="n">plural</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">population</span> <span class="ow">and</span> <span class="n">population</span><span class="o">.</span><span class="n">entity</span>
 
     <span class="k">def</span> <span class="nf">describe_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span><span class="n">population</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">:</span> <span class="n">population</span><span class="o">.</span><span class="n">ids</span> <span class="k">for</span> <span class="n">population</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">()}</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">population</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">:</span> <span class="n">population</span><span class="o">.</span><span class="n">ids</span>
+            <span class="k">for</span> <span class="n">population</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">trace</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Copy the simulation just enough to be able to run the copy without modifying the original simulation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -590,7 +701,7 @@
         <span class="n">new_dict</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="vm">__dict__</span>
 
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="s1">&#39;trace&#39;</span><span class="p">,</span> <span class="s1">&#39;tracer&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span> <span class="s2">&quot;trace&quot;</span><span class="p">,</span> <span class="s2">&quot;tracer&quot;</span><span class="p">):</span>
                 <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
         <span class="n">new</span><span class="o">.</span><span class="n">persons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
@@ -600,7 +711,9 @@
         <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">group_entities</span><span class="p">:</span>
             <span class="n">population</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
             <span class="n">new</span><span class="o">.</span><span class="n">populations</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">population</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span>  <span class="c1"># create shortcut simulation.household (for instance)</span>
+            <span class="nb">setattr</span><span class="p">(</span>
+                <span class="n">new</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">population</span>
+            <span class="p">)</span>  <span class="c1"># create shortcut simulation.household (for instance)</span>
 
         <span class="n">new</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
         <span class="n">new</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="n">trace</span>
@@ -608,9 +721,10 @@
         <span class="k">return</span> <span class="n">new</span></div>
 
 
+
 <span class="k">class</span> <span class="nc">Cache</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">period</span><span class="p">:</span> <span class="n">Period</span>
+    <span class="n">period</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span>
 </pre></div>
 
           </div>

@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>openfisca_core.errors.situation_parsing_error &#8212; OpenFisca  documentation</title>
+    <title>openfisca_core.entities.helpers &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
@@ -40,7 +40,7 @@
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">openfisca_core.errors.situation_parsing_error</a></li> 
+        <li class="nav-item nav-item-this"><a href="">openfisca_core.entities.helpers</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -105,41 +105,112 @@
               
                 <li><a href="../../index.html">Module code</a></li>
               
-              <li>openfisca_core.errors.situation_parsing_error</li>
+              <li>openfisca_core.entities.helpers</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <h1>Source code for openfisca_core.errors.situation_parsing_error</h1><div class="highlight"><pre>
+  <h1>Source code for openfisca_core.entities.helpers</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">.entity</span> <span class="kn">import</span> <span class="n">Entity</span>
+<span class="kn">from</span> <span class="nn">.group_entity</span> <span class="kn">import</span> <span class="n">GroupEntity</span>
+<span class="kn">from</span> <span class="nn">.typing</span> <span class="kn">import</span> <span class="n">Role</span>
 
-<span class="kn">import</span> <span class="nn">dpath.util</span>
+
+<span class="k">def</span> <span class="nf">build_entity</span><span class="p">(</span>
+    <span class="n">key</span><span class="p">,</span>
+    <span class="n">plural</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
+    <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">roles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">is_person</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">class_override</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">containing_entities</span><span class="o">=</span><span class="p">(),</span>
+<span class="p">):</span>
+    <span class="k">if</span> <span class="n">is_person</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Entity</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">GroupEntity</span><span class="p">(</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">roles</span><span class="p">,</span> <span class="n">containing_entities</span><span class="o">=</span><span class="n">containing_entities</span>
+        <span class="p">)</span>
 
 
-<div class="viewcode-block" id="SituationParsingError">
-<a class="viewcode-back" href="../../../openfisca-python-api/errors.html#openfisca_core.errors.SituationParsingError">[docs]</a>
-<span class="k">class</span> <span class="nc">SituationParsingError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Exception raised when the situation provided as an input for a simulation cannot be parsed</span>
+<div class="viewcode-block" id="find_role">
+<a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.helpers.find_role">[docs]</a>
+<span class="k">def</span> <span class="nf">find_role</span><span class="p">(</span>
+    <span class="n">roles</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Role</span><span class="p">],</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Role</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find a Role in a GroupEntity.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        group_entity (GroupEntity): The entity to search in.</span>
+<span class="sd">        key (str): The key of the role to find. Defaults to `None`.</span>
+<span class="sd">        total (int | None): The `max` attribute of the role to find.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Role | None: The role if found, else `None`.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; from openfisca_core.entities.typing import RoleParams</span>
+
+<span class="sd">        &gt;&gt;&gt; principal = RoleParams(</span>
+<span class="sd">        ...     key=&quot;principal&quot;,</span>
+<span class="sd">        ...     label=&quot;Principal&quot;,</span>
+<span class="sd">        ...     doc=&quot;Person focus of a calculation in a family context.&quot;,</span>
+<span class="sd">        ...     max=1,</span>
+<span class="sd">        ... )</span>
+
+<span class="sd">        &gt;&gt;&gt; partner = RoleParams(</span>
+<span class="sd">        ...     key=&quot;partner&quot;,</span>
+<span class="sd">        ...     plural=&quot;partners&quot;,</span>
+<span class="sd">        ...     label=&quot;Partners&quot;,</span>
+<span class="sd">        ...     doc=&quot;Persons partners of the principal.&quot;,</span>
+<span class="sd">        ... )</span>
+
+<span class="sd">        &gt;&gt;&gt; parent = RoleParams(</span>
+<span class="sd">        ...     key=&quot;parent&quot;,</span>
+<span class="sd">        ...     plural=&quot;parents&quot;,</span>
+<span class="sd">        ...     label=&quot;Parents&quot;,</span>
+<span class="sd">        ...     doc=&quot;Persons parents of children of the principal&quot;,</span>
+<span class="sd">        ...     subroles=[&quot;first_parent&quot;, &quot;second_parent&quot;],</span>
+<span class="sd">        ... )</span>
+
+<span class="sd">        &gt;&gt;&gt; group_entity = build_entity(</span>
+<span class="sd">        ...     key=&quot;family&quot;,</span>
+<span class="sd">        ...     plural=&quot;families&quot;,</span>
+<span class="sd">        ...     label=&quot;Family&quot;,</span>
+<span class="sd">        ...     doc=&quot;A Family represents a collection of related persons.&quot;,</span>
+<span class="sd">        ...     roles=[principal, partner, parent],</span>
+<span class="sd">        ... )</span>
+
+<span class="sd">        &gt;&gt;&gt; find_role(group_entity.roles, &quot;principal&quot;, total=1)</span>
+<span class="sd">        Role(principal)</span>
+
+<span class="sd">        &gt;&gt;&gt; find_role(group_entity.roles, &quot;partner&quot;)</span>
+<span class="sd">        Role(partner)</span>
+
+<span class="sd">        &gt;&gt;&gt; find_role(group_entity.roles, &quot;parent&quot;, total=2)</span>
+<span class="sd">        Role(parent)</span>
+
+<span class="sd">        &gt;&gt;&gt; find_role(group_entity.roles, &quot;first_parent&quot;, total=1)</span>
+<span class="sd">        Role(first_parent)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">dpath_path</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">path</span><span class="p">])</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
-        <span class="n">dpath</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="n">dpath_path</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">code</span>
-        <span class="ne">Exception</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">roles</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">subrole</span> <span class="ow">in</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">subrole</span><span class="o">.</span><span class="n">max</span> <span class="o">==</span> <span class="n">total</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">subrole</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="n">subrole</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">max</span> <span class="o">==</span> <span class="n">total</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">role</span>
+
+    <span class="k">return</span> <span class="kc">None</span></div>
 
 </pre></div>
 
@@ -158,7 +229,7 @@
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">openfisca_core.errors.situation_parsing_error</a></li> 
+        <li class="nav-item nav-item-this"><a href="">openfisca_core.entities.helpers</a></li> 
       </ul>
     </div>
   

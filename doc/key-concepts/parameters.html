@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,17 +17,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Parameters &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Person, entities, role" href="person%2C_entities%2C_role.html" />
+    <link rel="next" title="Person, entities, role" href="person_entities_role.html" />
     <link rel="prev" title="Variables and formulas" href="variables.html" />
   
    
@@ -44,7 +42,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="person%2C_entities%2C_role.html" title="Person, entities, role"
+          <a href="person_entities_role.html" title="Person, entities, role"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="variables.html" title="Variables and formulas"
@@ -97,8 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="tax_and_benefit_system.html">Tax and Benefit System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables and formulas</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="person%2C_entities%2C_role.html">Person, entities, role</a></li>
-<li class="toctree-l2"><a class="reference internal" href="periodsinstants.html">Periods, Instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="person_entities_role.html">Person, entities, role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="periods_instants.html">Periods, Instants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulation.html">Simulation, Computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
 </ul>
@@ -109,7 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -132,9 +130,9 @@
           <div class="document clearer body">
             
   <section id="parameters">
-<h1>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h1>
+<h1>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h1>
 <p>A parameter is a property of the legislation that changes over time.</p>
-<p>Unlike a <a class="reference internal" href="variables.html"><span class="doc std std-doc">variable</span></a>, a parameter is <strong>not</strong> specific to a specific entity (person, household…).</p>
+<p>Unlike a <a class="reference internal" href="variables.html"><span class="std std-doc">variable</span></a>, a parameter is <strong>not</strong> specific to a specific entity (person, household…).</p>
 <p>For instance:</p>
 <ul class="simple">
 <li><p>the amount of the minimum wage;</p></li>
@@ -143,8 +141,9 @@
 <li><p>the maximum age at which a person is entitled to some benefits;</p></li>
 <li><p>the list of regions in which a tax is applicable…</p></li>
 </ul>
-<p>Parameters are used in <a class="reference internal" href="variables.html#formulas"><span class="std std-doc">formulas</span></a> to calculate variable values.</p>
-<p><a class="reference internal" href="../coding-the-legislation/legislation_parameters.html"><span class="doc std std-doc">Read more about their implementation in OpenFisca</span></a>.</p>
+<p>Parameters are used in <a class="reference internal" href="variables.html#formulas"><span class="std std-ref">formulas</span></a> to calculate variable values.</p>
+<p>It is always advisable when modelling legislation in OpenFisca to create a parameter for any number described in the law and used in formulas rather than “hard coding” the number within a formula. Thus, if the parameter changes over time, OpenFisca will automatically retrieve the right parameter value for your calculation period.</p>
+<p><a class="reference internal" href="../coding-the-legislation/legislation_parameters.html"><span class="std std-doc">Read more about their implementation in OpenFisca</span></a>.</p>
 </section>
 
 
@@ -162,7 +161,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="person%2C_entities%2C_role.html" title="Person, entities, role"
+          <a href="person_entities_role.html" title="Person, entities, role"
              >next</a> |</li>
         <li class="right" >
           <a href="variables.html" title="Variables and formulas"

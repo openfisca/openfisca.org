@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Legislation evolutions &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Entities" href="50_entities.html" />
@@ -113,7 +111,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -136,19 +134,19 @@
           <div class="document clearer body">
             
   <section id="legislation-evolutions">
-<h1>Legislation evolutions<a class="headerlink" href="#legislation-evolutions" title="Permalink to this headline">¶</a></h1>
+<h1>Legislation evolutions<a class="headerlink" href="#legislation-evolutions" title="Link to this heading">¶</a></h1>
 <p>OpenFisca handles the fact that the legislation changes over time.</p>
 <section id="parameter-evolution">
-<h2>Parameter evolution<a class="headerlink" href="#parameter-evolution" title="Permalink to this headline">¶</a></h2>
+<h2>Parameter evolution<a class="headerlink" href="#parameter-evolution" title="Link to this heading">¶</a></h2>
 <p>Many legislation parameters are regularly re-evaluated while the variables using them stay the same.</p>
 <blockquote>
 <div><p>Example: the <code class="docutils literal notranslate"><span class="pre">taxes</span></code> parameter can change without altering the code of the <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> variable that uses that parameter.</p>
 </div></blockquote>
 <p>In that case, add the new parameter values and their start dates in the appropriate parameter files.</p>
 <section id="how-to-update-a-parameter">
-<h3>How to update a parameter<a class="headerlink" href="#how-to-update-a-parameter" title="Permalink to this headline">¶</a></h3>
+<h3>How to update a parameter<a class="headerlink" href="#how-to-update-a-parameter" title="Link to this heading">¶</a></h3>
 <section id="open-the-file-where-the-parameter-is-described">
-<h4>Open the file where the parameter is described<a class="headerlink" href="#open-the-file-where-the-parameter-is-described" title="Permalink to this headline">¶</a></h4>
+<h4>Open the file where the parameter is described<a class="headerlink" href="#open-the-file-where-the-parameter-is-described" title="Link to this heading">¶</a></h4>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">taxes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">salary</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">rate</span><span class="p">:</span>
@@ -164,7 +162,7 @@
 </div>
 </section>
 <section id="add-a-new-value-to-this-parameter">
-<h4>Add a new value to this parameter<a class="headerlink" href="#add-a-new-value-to-this-parameter" title="Permalink to this headline">¶</a></h4>
+<h4>Add a new value to this parameter<a class="headerlink" href="#add-a-new-value-to-this-parameter" title="Link to this heading">¶</a></h4>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">taxes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">salary</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">rate</span><span class="p">:</span>
@@ -187,12 +185,12 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">parameters('2017-01').taxes.salary.rate</span></code> is <code class="docutils literal notranslate"><span class="pre">0.3</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">parameters('2022-01').taxes.salary.rate</span></code> is <code class="docutils literal notranslate"><span class="pre">0.3</span></code></p></li>
 </ul>
-<p><a class="reference internal" href="legislation_parameters.html"><span class="doc std std-doc">Read more about how to code parameters</span></a>.</p>
+<p><a class="reference internal" href="legislation_parameters.html"><span class="std std-doc">Read more about how to code parameters</span></a>.</p>
 </section>
 </section>
 </section>
 <section id="formula-evolution">
-<h2>Formula evolution<a class="headerlink" href="#formula-evolution" title="Permalink to this headline">¶</a></h2>
+<h2>Formula evolution<a class="headerlink" href="#formula-evolution" title="Link to this heading">¶</a></h2>
 <p>Some fiscal or benefit mechanism significantly evolve over time and call for a change in the formula that computes them. In this case, a simple parameter adjustement is not enough.</p>
 <p>For instance, let’s assume that from the 1st of Jan. 2017, the <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> is not applied anymore on the first <code class="docutils literal notranslate"><span class="pre">1000</span></code> earned by a person.</p>
 <p>We implement this rule by adding a new formula to our variable, and <em>dating</em> it:</p>
@@ -233,7 +231,7 @@
 <li><p>For instance, <code class="docutils literal notranslate"><span class="pre">formula</span></code> is active on <code class="docutils literal notranslate"><span class="pre">2010</span></code>.</p></li>
 </ul>
 </li>
-<li><p>A formula is active until another formula, starting later, becomes active and replaces it (or until the <a class="reference internal" href="#ending-a-variable-at-a-specific-date"><span class="std std-doc">variable <code class="docutils literal notranslate"><span class="pre">end</span></code> date</span></a> is reached).</p>
+<li><p>A formula is active until another formula, starting later, becomes active and replaces it (or until the <a class="reference internal" href="#ending-a-variable-at-a-specific-date">variable <code class="docutils literal notranslate"><span class="pre">end</span></code> date</a> is reached).</p>
 <ul>
 <li><p>For instance, <code class="docutils literal notranslate"><span class="pre">formula</span></code> is active until <code class="docutils literal notranslate"><span class="pre">2016-12-31</span></code> (included). On the day after, <code class="docutils literal notranslate"><span class="pre">2017-01-01</span></code>, <code class="docutils literal notranslate"><span class="pre">formula_2017</span></code> becomes active, and <code class="docutils literal notranslate"><span class="pre">formula</span></code> becomes inactive.</p></li>
 </ul>
@@ -241,7 +239,7 @@
 </ul>
 </section>
 <section id="formula-introduction">
-<h2>Formula introduction<a class="headerlink" href="#formula-introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Formula introduction<a class="headerlink" href="#formula-introduction" title="Link to this heading">¶</a></h2>
 <p>In our previous example, we assumed that <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> had <em>always</em> had a formula, since the dawn of time. This is a reasonable hypothesis if we are only interested in running computations for recent years.</p>
 <p>But most fiscal and benefit mechanisms have been introduced at some point. Let’s for instance assume that our <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> only appeared in our legislation on the 1st of June 2005.</p>
 <p>This is easily implemented by <em>dating</em> the two formulas:</p>
@@ -263,10 +261,10 @@
 </pre></div>
 </div>
 <p>Only a few characters changed in comparison with the last example: the suffix <code class="docutils literal notranslate"><span class="pre">_2005_06</span></code> has been added to the second formula name.</p>
-<p>Note that if <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> is calculated <strong>before</strong> <code class="docutils literal notranslate"><span class="pre">2005-05-31</span></code> (included), <em>none</em> of the two formulas is used, as they are <em>both inactive</em> at this time. Instead, <strong>the variable <a class="reference internal" href="../key-concepts/variables.html#default-values"><span class="std std-doc">default value</span></a> is returned</strong>.</p>
+<p>Note that if <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> is calculated <strong>before</strong> <code class="docutils literal notranslate"><span class="pre">2005-05-31</span></code> (included), <em>none</em> of the two formulas is used, as they are <em>both inactive</em> at this time. Instead, <strong>the variable <a class="reference internal" href="../key-concepts/variables.html#default-values"><span class="std std-ref">default value</span></a> is returned</strong>.</p>
 </section>
 <section id="ending-a-variable-at-a-specific-date">
-<h2>Ending a variable at a specific date<a class="headerlink" href="#ending-a-variable-at-a-specific-date" title="Permalink to this headline">¶</a></h2>
+<h2>Ending a variable at a specific date<a class="headerlink" href="#ending-a-variable-at-a-specific-date" title="Link to this heading">¶</a></h2>
 <p>As legislation evolves, some fiscal or benefit mechanisms disappear.</p>
 <p>Let’s for instance assume that a <code class="docutils literal notranslate"><span class="pre">progressive_income_tax</span></code> used to exist before the <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> was introduced. This progressive tax then disappeared on the 1st of June 2005.</p>
 <p>This is implemented with an <code class="docutils literal notranslate"><span class="pre">end</span></code> attribute that defines the <em>last day</em> a variable can be calculated:</p>
@@ -283,7 +281,7 @@
 </pre></div>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">progressive_income_tax</span></code> is called <strong>before</strong> <code class="docutils literal notranslate"><span class="pre">2005-05-31</span></code>(included), <code class="docutils literal notranslate"><span class="pre">formula</span></code> will be used.</p>
-<p>However, if <code class="docutils literal notranslate"><span class="pre">progressive_income_tax</span></code> is calculated <strong>after</strong> <code class="docutils literal notranslate"><span class="pre">2005-06-01</span></code> (included), <code class="docutils literal notranslate"><span class="pre">formula</span></code> is <strong>not</strong> used, as it is not active anymore at this time. Instead, <strong>the variable <a class="reference internal" href="../key-concepts/variables.html#default-values"><span class="std std-doc">default value</span></a> is returned</strong>.</p>
+<p>However, if <code class="docutils literal notranslate"><span class="pre">progressive_income_tax</span></code> is calculated <strong>after</strong> <code class="docutils literal notranslate"><span class="pre">2005-06-01</span></code> (included), <code class="docutils literal notranslate"><span class="pre">formula</span></code> is <strong>not</strong> used, as it is not active anymore at this time. Instead, <strong>the variable <a class="reference internal" href="../key-concepts/variables.html#default-values"><span class="std std-ref">default value</span></a> is returned</strong>.</p>
 <p>Note that:</p>
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">end</span></code> day is <strong>inclusive</strong>: it is the last day a variable and its formulas are active (and not the first day it is not active anymore).</p></li>
@@ -292,7 +290,7 @@
 </ul>
 </section>
 <section id="ending-a-parameter-at-a-specific-date">
-<h2>Ending a parameter at a specific date<a class="headerlink" href="#ending-a-parameter-at-a-specific-date" title="Permalink to this headline">¶</a></h2>
+<h2>Ending a parameter at a specific date<a class="headerlink" href="#ending-a-parameter-at-a-specific-date" title="Link to this heading">¶</a></h2>
 <p>Like variables, parameters tend to disappear as legislation evolves.</p>
 <p>For instance, let’s assume that the <code class="docutils literal notranslate"><span class="pre">housing_allowance</span></code> parameter is only defined from 2010 (1st of January) to the end of 2016 (31st of December).</p>
 <p>We can end <code class="docutils literal notranslate"><span class="pre">housing_allowance</span></code> at a specific date by simply assigning <code class="docutils literal notranslate"><span class="pre">null</span></code> as a value for that date (<code class="docutils literal notranslate"><span class="pre">2017-01-01</span></code> in this case).</p>
@@ -321,7 +319,7 @@
 </div>
 </div></blockquote>
 <section id="ending-a-scale-at-a-specific-date">
-<h3>Ending a scale at a specific date<a class="headerlink" href="#ending-a-scale-at-a-specific-date" title="Permalink to this headline">¶</a></h3>
+<h3>Ending a scale at a specific date<a class="headerlink" href="#ending-a-scale-at-a-specific-date" title="Link to this heading">¶</a></h3>
 <p>The same thing can be done for a scale by assigning a <code class="docutils literal notranslate"><span class="pre">null</span></code> value for the end date across all brackets.</p>
 <p>The following example of <code class="docutils literal notranslate"><span class="pre">social_security_contribution</span></code> ends as of the 1st of January 2017.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Social security contribution tax scale</span>

@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,14 +16,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>openfisca_core.entities.role &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -91,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -114,22 +112,153 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.entities.role</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">textwrap</span>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">import</span> <span class="nn">dataclasses</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+
+<span class="kn">from</span> <span class="nn">.typing</span> <span class="kn">import</span> <span class="n">Entity</span>
 
 
-<div class="viewcode-block" id="Role"><a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.Role">[docs]</a><span class="k">class</span> <span class="nc">Role</span><span class="p">:</span>
+<div class="viewcode-block" id="Role">
+<a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.Role">[docs]</a>
+<span class="k">class</span> <span class="nc">Role</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The role of an Entity within a GroupEntity.</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
+<span class="sd">    Each Entity related to a GroupEntity has a Role. For example, if you have</span>
+<span class="sd">    a family, its roles could include a parent, a child, and so on. Or if you</span>
+<span class="sd">    have a tax household, its roles could include the taxpayer, a spouse,</span>
+<span class="sd">    several dependents, and the like.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        entity (Entity): The Entity the Role belongs to.</span>
+<span class="sd">        description (_Description): A description of the Role.</span>
+<span class="sd">        max (int): Max number of members.</span>
+<span class="sd">        subroles (list[Role]): A list of subroles.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        description (dict): A description of the Role.</span>
+<span class="sd">        entity (Entity): The Entity to which the Role belongs.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; role = Role({&quot;key&quot;: &quot;parent&quot;}, object())</span>
+
+<span class="sd">        &gt;&gt;&gt; repr(Role)</span>
+<span class="sd">        &quot;&lt;class &#39;openfisca_core.entities.role.Role&#39;&gt;&quot;</span>
+
+<span class="sd">        &gt;&gt;&gt; repr(role)</span>
+<span class="sd">        &#39;Role(parent)&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; str(role)</span>
+<span class="sd">        &#39;Role(parent)&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; {role}</span>
+<span class="sd">        {Role(parent)}</span>
+
+<span class="sd">        &gt;&gt;&gt; role.key</span>
+<span class="sd">        &#39;parent&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: The Entity the Role belongs to.</span>
+    <span class="n">entity</span><span class="p">:</span> <span class="n">Entity</span>
+
+    <span class="c1">#: A description of the Role.</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">_Description</span>
+
+    <span class="c1">#: Max number of members.</span>
+    <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: A list of subroles.</span>
+    <span class="n">subroles</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Role</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A key to identify the Role.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">key</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">plural</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ``key``, pluralised.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">plural</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A summary description.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">label</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">doc</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A full description, non-indented.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">doc</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">entity</span><span class="p">:</span> <span class="n">Entity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">_Description</span><span class="p">(</span>
+            <span class="o">**</span><span class="p">{</span>
+                <span class="n">key</span><span class="p">:</span> <span class="n">value</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">description</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="s2">&quot;plural&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="s2">&quot;doc&quot;</span><span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="n">entity</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">plural</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;plural&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;doc&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">subroles</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;Role(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Role(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">_Description</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A Role&#39;s description.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; data = {</span>
+<span class="sd">        ...     &quot;key&quot;: &quot;parent&quot;,</span>
+<span class="sd">        ...     &quot;label&quot;: &quot;Parents&quot;,</span>
+<span class="sd">        ...     &quot;plural&quot;: &quot;parents&quot;,</span>
+<span class="sd">        ...     &quot;doc&quot;: &quot;\t\t\tThe one/two adults in charge of the household.&quot;,</span>
+<span class="sd">        ... }</span>
+
+<span class="sd">        &gt;&gt;&gt; description = _Description(**data)</span>
+
+<span class="sd">        &gt;&gt;&gt; repr(_Description)</span>
+<span class="sd">        &quot;&lt;class &#39;openfisca_core.entities.role._Description&#39;&gt;&quot;</span>
+
+<span class="sd">        &gt;&gt;&gt; repr(description)</span>
+<span class="sd">        &quot;_Description(key=&#39;parent&#39;, plural=&#39;parents&#39;, label=&#39;Parents&#39;, ...)&quot;</span>
+
+<span class="sd">        &gt;&gt;&gt; str(description)</span>
+<span class="sd">        &quot;_Description(key=&#39;parent&#39;, plural=&#39;parents&#39;, label=&#39;Parents&#39;, ...)&quot;</span>
+
+<span class="sd">        &gt;&gt;&gt; {description}</span>
+<span class="sd">        {_Description(key=&#39;parent&#39;, plural=&#39;parents&#39;, label=&#39;Parents&#39;, doc=...}</span>
+
+<span class="sd">        &gt;&gt;&gt; description.key</span>
+<span class="sd">        &#39;parent&#39;</span>
+
+<span class="sd">    .. versionadded:: 41.0.1</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: A key to identify the Role.</span>
+    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="c1">#: The ``key``, pluralised.</span>
+    <span class="n">plural</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: A summary description.</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: A full description, non-indented.</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;doc&quot;</span><span class="p">,</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="p">))</span>
 </pre></div>
 
           </div>

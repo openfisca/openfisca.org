@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Reforms &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="From law to code" href="../coding-the-legislation/index.html" />
@@ -97,8 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="tax_and_benefit_system.html">Tax and Benefit System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables and formulas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="person%2C_entities%2C_role.html">Person, entities, role</a></li>
-<li class="toctree-l2"><a class="reference internal" href="periodsinstants.html">Periods, Instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="person_entities_role.html">Person, entities, role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="periods_instants.html">Periods, Instants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulation.html">Simulation, Computation</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Reforms</a></li>
 </ul>
@@ -109,7 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -132,20 +130,20 @@
           <div class="document clearer body">
             
   <section id="reforms">
-<h1>Reforms<a class="headerlink" href="#reforms" title="Permalink to this headline">¶</a></h1>
+<h1>Reforms<a class="headerlink" href="#reforms" title="Link to this heading">¶</a></h1>
 <p>OpenFisca can be used to evaluate the quantitative impact of legislation changes.</p>
-<p>You may for instance use it to determine who would win or lose from an income tax reform, what would be the impact of a social welfare redesign, or how to finance a universal basic income.</p>
-<p>To do so, we use OpenFisca <strong>reforms</strong>. A reform is a set of modifications to be applied to a <strong>reference</strong> tax and benefit system. It generates a reformed tax and benefit system that slightly differs from the original one. We can then run calculations on both of them, and compare results.</p>
-<p>To use reforms or code your own ones, check the <a class="reference internal" href="../coding-the-legislation/reforms.html"><span class="doc std std-doc">reform documentation</span></a>.</p>
+<p>Such as determining who would win or lose from an income tax reform, what the impact would be of a social welfare redesign, or how to finance a universal basic income.</p>
+<p>Within OpenFisca these are known as <strong>reforms</strong>. A reform is a set of modifications to be applied to a <strong>reference</strong> tax and benefit system. It generates a reformed tax and benefit system that differs from the original one. Calculations can be run on both of them and the results compared.</p>
+<p>To use reforms or code new ones, check the <a class="reference internal" href="../coding-the-legislation/reforms.html"><span class="std std-doc">reform documentation</span></a>.</p>
 <blockquote>
-<div><p>Note that OpenFisca simulates only the <em>mechanics</em> of taxes and benefits, but doesn’t take into account the retro-action of economic agents. For instance, you can estimate the increase of the households disposable income in case a universal basic income is introduced, but OpenFisca won’t tell you anything about the consumption increase this policy may generate.</p>
+<div><p>Note that OpenFisca simulates only the <em>mechanics</em> of taxes and benefits, it doesn’t take into account the retro-action of economic agents. For instance, it can estimate the increase of the households disposable income if a universal basic income is introduced, but a simulation won’t address the consumption increase this policy may generate. OpenFisca is a static microsimulation engine.</p>
 </div></blockquote>
 <section id="differences-between-reforms-and-extensions">
-<h2>Differences between reforms and extensions<a class="headerlink" href="#differences-between-reforms-and-extensions" title="Permalink to this headline">¶</a></h2>
-<p>Reforms are sometimes confused with another mechanism: <a class="reference internal" href="../contribute/extensions.html"><span class="doc std std-doc">extensions</span></a>. These two mechanisms do not have the same purpose:</p>
+<h2>Differences between reforms and extensions<a class="headerlink" href="#differences-between-reforms-and-extensions" title="Link to this heading">¶</a></h2>
+<p>Reforms are sometimes confused with another mechanism: <a class="reference internal" href="../contribute/extensions.html"><span class="std std-doc">extensions</span></a>. These two mechanisms do not have the same purpose:</p>
 <ul class="simple">
-<li><p>Use a reform if you want to modify a tax and benefit system in order to study the impact of a legislation change.</p></li>
-<li><p>Use an extension if you want to write formulas that are based on a main tax and benefit system, while keeping their code separated from the main country package (e.g. for local benefits).</p></li>
+<li><p>Use a reform to modify a tax and benefit system in order to study the impact of a legislation change.</p></li>
+<li><p>Use an extension to write formulas that are based on a main tax and benefit system, while keeping the code separated from the main country package (e.g. for local benefits).</p></li>
 </ul>
 </section>
 </section>

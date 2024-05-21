@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,18 +17,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Using the /calculate endpoint &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Using the /trace endpoint" href="trace-simulation.html" />
-    <link rel="prev" title="Endpoints" href="endpoints.html" />
+    <link rel="prev" title="API endpoints" href="endpoints.html" />
   
    
 
@@ -47,7 +45,7 @@
           <a href="trace-simulation.html" title="Using the /trace endpoint"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="endpoints.html" title="Endpoints"
+          <a href="endpoints.html" title="API endpoints"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="curly-braces"></i> OpenFisca web API</a> &#187;</li>
@@ -98,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulate/index.html"><i icon-name="cog"></i> Running a simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="endpoints.html">Endpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html">API endpoints</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Using the /calculate endpoint</a></li>
 <li class="toctree-l2"><a class="reference internal" href="trace-simulation.html">Using the /trace endpoint</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config-openapi.html">OpenAPI specification configuration</a></li>
@@ -106,7 +104,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -129,22 +127,24 @@
           <div class="document clearer body">
             
   <section id="using-the-calculate-endpoint">
-<h1>Using the /calculate endpoint<a class="headerlink" href="#using-the-calculate-endpoint" title="Permalink to this headline">¶</a></h1>
+<h1>Using the /calculate endpoint<a class="headerlink" href="#using-the-calculate-endpoint" title="Link to this heading">¶</a></h1>
 <blockquote>
 <div><p>All the examples provided here are from the <a class="reference external" href="https://github.com/openfisca/country-template">country package template</a>.</p>
 </div></blockquote>
-<p>In order to run a computation on the web API, you will need to send information to the API concerning:</p>
+<p>In order to run a computation on the web API, you need to send the following information to the API in the JSON format:</p>
 <ul class="simple">
-<li><p>The situation, meaning describe the <a class="reference internal" href="../key-concepts/person%2C_entities%2C_role.html"><span class="doc std std-doc">entities</span></a> (e.g. individuals, households) that you want to base your calculations on.</p></li>
+<li><p>The situation that describes the <a class="reference internal" href="../key-concepts/person_entities_role.html"><span class="std std-doc">entities</span></a> (e.g. individuals, households) that you want to base your calculations on.</p></li>
 <li><p>The variable you need to compute.</p></li>
 </ul>
 <section id="describing-the-situation">
-<h2>Describing the situation<a class="headerlink" href="#describing-the-situation" title="Permalink to this headline">¶</a></h2>
+<h2>Describing the situation<a class="headerlink" href="#describing-the-situation" title="Link to this heading">¶</a></h2>
 <section id="describing-entities">
-<h3>Describing entities<a class="headerlink" href="#describing-entities" title="Permalink to this headline">¶</a></h3>
-<p>The most important rule in describing a situation in OpenFisca is:</p>
-<p>Every person has to belong to one of each group entity (e.g. household).
-Every person in a group entity needs a role (e.g. parent)</p>
+<h3>Describing entities<a class="headerlink" href="#describing-entities" title="Link to this heading">¶</a></h3>
+<p>When describing situations to OpenFisca, follow these two rules:</p>
+<ol class="arabic simple">
+<li><p>Every person has to belong to one of each group entity (e.g. household).</p></li>
+<li><p>Every person in a group entity needs a role (e.g. parent)</p></li>
+</ol>
 <blockquote>
 <div><p>For example, if you wish to run a calculation on 2 households:</p>
 <ul class="simple">
@@ -179,13 +179,13 @@ Every person in a group entity needs a role (e.g. parent)</p>
 </div>
 </section>
 <section id="adding-information-to-entities">
-<h3>Adding information to entities<a class="headerlink" href="#adding-information-to-entities" title="Permalink to this headline">¶</a></h3>
-<p>To run a precise calculation, you can provide information on each person and group entity.</p>
-<p>These are the input <a class="reference internal" href="../key-concepts/variables.html"><span class="doc std std-doc">variables</span></a> of your simulation.</p>
-<p>To provide an input variable, insert the value in the json, for the corresponding time period (e.g. ‘2015-06’) and entity (e.g. ‘person’, ‘household’).</p>
-<p>The time period must respect the <a class="reference internal" href="../coding-the-legislation/35_periods.html"><span class="doc std std-doc">definition period</span></a> of the variable, and the entity must be the one the variable is defined for.</p>
+<h3>Adding information to entities<a class="headerlink" href="#adding-information-to-entities" title="Link to this heading">¶</a></h3>
+<p>To run a precise calculation, you should provide information on each person and group entity.</p>
+<p>These are the input <a class="reference internal" href="../key-concepts/variables.html"><span class="std std-doc">variables</span></a> of your simulation.</p>
+<p>To provide an input variable, insert the value in the json, for the corresponding time period (e.g. <code class="docutils literal notranslate"><span class="pre">2015-06</span></code>) and entity (e.g. <code class="docutils literal notranslate"><span class="pre">person</span></code>, <code class="docutils literal notranslate"><span class="pre">household</span></code>).</p>
+<p>The time period must respect the <a class="reference internal" href="../coding-the-legislation/35_periods.html"><span class="std std-doc">definition period</span></a> of the variable, and the entity must be the one the variable is defined for.</p>
 <blockquote>
-<div><p>For example, if Ricarda has a salary (defined monthly for a Person) of 3500/month until september 2016, and 4000/month after that and if household_2 were tenant and became homeowners in march 2016 (housing_occupancy_status is defined monthly for a household) of the 57 sqm apartment they live in, you would write:</p>
+<div><p>For example, if Ricarda has a salary (defined monthly for a Person) of 3500/month until september 2016, and 4000/month after that and if <code class="docutils literal notranslate"><span class="pre">household_2</span></code> were tenants and became homeowners in March 2016 (<code class="docutils literal notranslate"><span class="pre">housing_occupancy_status</span></code> is defined monthly for a household) of the 57 sqm apartment they live in, you would write:</p>
 </div></blockquote>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;persons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -255,11 +255,11 @@ Every person in a group entity needs a role (e.g. parent)</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Note that due to the default value system in OpenFisca, the variables that have not been defined explicitly are either calculated or take on their <a class="reference internal" href="../key-concepts/variables.html#default-values"><span class="std std-doc">default value</span></a>.</strong></p>
+<p><strong>Note that due to the default value system in OpenFisca, the variables that have not been defined explicitly are either calculated or take on their <a class="reference internal" href="../key-concepts/variables.html#default-values"><span class="std std-ref">default value</span></a>.</strong></p>
 </section>
 </section>
 <section id="computing-a-variable">
-<h2>Computing a variable<a class="headerlink" href="#computing-a-variable" title="Permalink to this headline">¶</a></h2>
+<h2>Computing a variable<a class="headerlink" href="#computing-a-variable" title="Link to this heading">¶</a></h2>
 <p>Once you have described the situation, you can compute all variables in the Country Package.</p>
 <p>To indicate you want a variable computed, insert the variable in the corresponding entity and indicate the time period followed by the term <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
 <blockquote>
@@ -341,8 +341,8 @@ Every person in a group entity needs a role (e.g. parent)</p>
 </div>
 </section>
 <section id="understanding-the-result">
-<h2>Understanding the result<a class="headerlink" href="#understanding-the-result" title="Permalink to this headline">¶</a></h2>
-<p>The API will return an identical JSON file where all the <code class="docutils literal notranslate"><span class="pre">null</span></code> (the variable that you asked OpenFisca to compute, see above for details) have been replace by the computed value.</p>
+<h2>Understanding the result<a class="headerlink" href="#understanding-the-result" title="Link to this heading">¶</a></h2>
+<p>The API will return an identical JSON file where all the <code class="docutils literal notranslate"><span class="pre">null</span></code> values (the variables that you asked OpenFisca to compute) have been replaced with their computed values.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;persons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;Ricarda&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -419,7 +419,7 @@ Every person in a group entity needs a role (e.g. parent)</p>
 </pre></div>
 </div>
 <blockquote>
-<div><p>Note that elements might appear in a different order in the response. However the structure of the file stays the same.</p>
+<div><p>Note that elements might appear in a different order in the response. However the structure of the JSON stays the same.</p>
 </div></blockquote>
 </section>
 </section>
@@ -442,7 +442,7 @@ Every person in a group entity needs a role (e.g. parent)</p>
           <a href="trace-simulation.html" title="Using the /trace endpoint"
              >next</a> |</li>
         <li class="right" >
-          <a href="endpoints.html" title="Endpoints"
+          <a href="endpoints.html" title="API endpoints"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="curly-braces"></i> OpenFisca web API</a> &#187;</li>

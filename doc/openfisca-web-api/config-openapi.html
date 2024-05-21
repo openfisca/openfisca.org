@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>OpenAPI specification configuration &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="To find help" href="../find-help.html" />
@@ -98,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulate/index.html"><i icon-name="cog"></i> Running a simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="endpoints.html">Endpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html">API endpoints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input-output-data.html">Using the /calculate endpoint</a></li>
 <li class="toctree-l2"><a class="reference internal" href="trace-simulation.html">Using the /trace endpoint</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">OpenAPI specification configuration</a></li>
@@ -106,7 +104,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -129,16 +127,16 @@
           <div class="document clearer body">
             
   <section id="openapi-specification-configuration">
-<h1>OpenAPI specification configuration<a class="headerlink" href="#openapi-specification-configuration" title="Permalink to this headline">¶</a></h1>
+<h1>OpenAPI specification configuration<a class="headerlink" href="#openapi-specification-configuration" title="Link to this heading">¶</a></h1>
 <p>The OpenFisca web API exposes a <code class="docutils literal notranslate"><span class="pre">/spec</span></code> route that documents how to use the API, using the OpenAPI standard.</p>
-<p>Most the the <code class="docutils literal notranslate"><span class="pre">/spec</span></code> content is automatically built for you. However, some minimal configuration can make the provided examples more complete and relevant, and improve the <a class="reference external" href="http://demo.openfisca.org/legislation/swagger">Swagger interactive documentation packaged in the Legislation Explorer</a>.</p>
+<p>Most of the <code class="docutils literal notranslate"><span class="pre">/spec</span></code> content is automatically built for you. However, some minimal configuration can make the provided examples more complete and relevant, and improve the <a class="reference external" href="http://demo.openfisca.org/legislation/swagger">Swagger interactive documentation packaged in the Legislation Explorer</a>.</p>
 <p>This configuration is done in the initialisation of your <code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem</span></code>. For example, in the <a class="reference external" href="https://github.com/openfisca/country-template/blob/3.5.0/openfisca_country_template/__init__.py#L28-L33">country package template</a>, you can see:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span>  <span class="c1"># We define which variable, parameter and simulation example will be used in the OpenAPI specification</span>
   <span class="bp">self</span><span class="o">.</span><span class="n">open_api_config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;variable_example&quot;</span><span class="p">:</span> <span class="s2">&quot;disposable_income&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;parameter_example&quot;</span><span class="p">:</span> <span class="s2">&quot;taxes.income_tax_rate&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;simulation_example&quot;</span><span class="p">:</span> <span class="n">couple</span><span class="p">,</span>
-    <span class="p">}</span>
+      <span class="s2">&quot;variable_example&quot;</span><span class="p">:</span> <span class="s2">&quot;disposable_income&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;parameter_example&quot;</span><span class="p">:</span> <span class="s2">&quot;taxes.income_tax_rate&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;simulation_example&quot;</span><span class="p">:</span> <span class="n">couple</span><span class="p">,</span>
+      <span class="p">}</span>
 </pre></div>
 </div>
 <p>This defines:</p>

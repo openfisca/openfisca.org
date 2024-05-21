@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Variables and formulas &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Parameters" href="parameters.html" />
@@ -97,8 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="tax_and_benefit_system.html">Tax and Benefit System</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Variables and formulas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="person%2C_entities%2C_role.html">Person, entities, role</a></li>
-<li class="toctree-l2"><a class="reference internal" href="periodsinstants.html">Periods, Instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="person_entities_role.html">Person, entities, role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="periods_instants.html">Periods, Instants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulation.html">Simulation, Computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
 </ul>
@@ -109,7 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -132,49 +130,50 @@
           <div class="document clearer body">
             
   <section id="variables-and-formulas">
-<h1>Variables and formulas<a class="headerlink" href="#variables-and-formulas" title="Permalink to this headline">¶</a></h1>
-<p>A variable is property of a person, or an entity (e.g. a family).</p>
+<h1>Variables and formulas<a class="headerlink" href="#variables-and-formulas" title="Link to this heading">¶</a></h1>
+<p>The legislation of a country contains entities characteristics and computable rules. Entities characteristics are modelled into <strong>input variables</strong>. Computable rules can be modelled into <strong>variables with formulas</strong>.</p>
+<p>A <strong>variable</strong> is property of a <em>person</em>, or a <em>group entity</em> (e.g. a <em>family</em>).</p>
 <p>For instance:</p>
 <ul class="simple">
-<li><p>The <em>birth date</em> of a person</p></li>
-<li><p>The amount of <em>basic income</em> (in France, <em>RSA</em>) a family can get in a month.</p></li>
-<li><p>The amount of <em>income tax</em> a household has to pay in a year.</p></li>
-<li><p>Whether a family is <em>living in Paris</em>, or not.</p></li>
+<li><p>The <strong>birth date</strong> of a <em>person</em></p></li>
+<li><p>The amount of <strong>basic income</strong> a <em>family</em> can get in a month.</p></li>
+<li><p>The amount of <strong>income tax</strong> a <em>household</em> has to pay in a year.</p></li>
+<li><p>Whether a <em>family</em> is <strong>living in Paris</strong>, or not.</p></li>
 </ul>
 <section id="input-variables">
-<h2>Input variables<a class="headerlink" href="#input-variables" title="Permalink to this headline">¶</a></h2>
-<p>Some variables can only be given as inputs of a simulation. For instance, the <em>birth date</em> of a person.</p>
+<h2>Input variables<a class="headerlink" href="#input-variables" title="Link to this heading">¶</a></h2>
+<p>Some variables can only be given as inputs of a simulation. For instance, the <strong>birth date</strong> of a <em>person</em>.</p>
 </section>
 <section id="formulas">
-<h2>Formulas<a class="headerlink" href="#formulas" title="Permalink to this headline">¶</a></h2>
+<h2>Formulas<a class="headerlink" href="#formulas" title="Link to this heading">¶</a></h2>
 <p>Other variables can be calculated thanks to a <strong>formula</strong>.</p>
-<p>A formula is a <strong>function</strong> that calculates the value of given variable, for a given period. To do so, it performs (usually arithmetic) operations on the values of other variables, the formula <strong>dependencies</strong>.</p>
+<p>A formula is a <strong>function</strong> that calculates the value of a given variable, for a given period. To do so, it performs (usually arithmetic) operations on the values of other variables, the formula’s <strong>dependencies</strong>.</p>
 <p>For instance:</p>
 <ul class="simple">
-<li><p>The <em>basic income</em> of a family can be calculated from its income, and some other information about its situation.</p></li>
-<li><p>The <em>income tax</em> of a tax household can be calculated the same way.</p></li>
+<li><p>The <strong>basic income</strong> of a <em>family</em> can be calculated from its <strong>income</strong>, and some other information about its situation.</p></li>
+<li><p>The <strong>income tax</strong> of a tax <em>household</em> can be calculated the same way.</p></li>
 </ul>
-<p>It is important to note that <strong>all variables can be used as inputs</strong>. This means that even if the <em>basic income</em> can be calculated from other variables, I can, for a given simulation, provide it as an input. Then, if another formula asks for the value of <em>basic income</em> for a month, the input value will be returned, and the <em>basic income</em> formula <strong>won’t be executed.</strong></p>
+<p>It is important to note that <strong>all variables can be used as inputs</strong>. This means that even if the <strong>basic income</strong> can be calculated from other variables, it can, for a given simulation, be provided as an input. In this situation if another formula asks for the value of <strong>basic income</strong> for a month, the input value will be returned, and the <strong>basic income</strong> formula <em>won’t be executed</em>.</p>
 </section>
 <section id="default-values">
-<h2>Default values<a class="headerlink" href="#default-values" title="Permalink to this headline">¶</a></h2>
+<h2>Default values<a class="headerlink" href="#default-values" title="Link to this heading">¶</a></h2>
 <p>When OpenFisca is not able to calculate the value of a variable for a requested period, it returns a <strong>default value</strong>.</p>
 <p>The default value of a variable is returned:</p>
 <ul>
-<li><p>When the value of an input variables is requested, if this variable has not been set in the input for the requested period.</p>
+<li><p>When the value of an input variable is requested and this variable has not been set in the input for the requested period.</p>
 <blockquote>
 <div><p>For example:
-Let’s assume the input variable <code class="docutils literal notranslate"><span class="pre">student</span></code> default value is <code class="docutils literal notranslate"><span class="pre">False</span></code>. If the value of <code class="docutils literal notranslate"><span class="pre">student</span></code> for <code class="docutils literal notranslate"><span class="pre">2017-09</span></code> has <strong>not</strong> been set in the input of the simulation, then computing <code class="docutils literal notranslate"><span class="pre">student</span></code> for <code class="docutils literal notranslate"><span class="pre">2017-09</span></code> will return <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+Let’s assume the default value of the input variable <code class="docutils literal notranslate"><span class="pre">student</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>. If the value of <code class="docutils literal notranslate"><span class="pre">student</span></code> for <code class="docutils literal notranslate"><span class="pre">2017-09</span></code> has <strong>not</strong> been set in the input of the simulation, then computing <code class="docutils literal notranslate"><span class="pre">student</span></code> for <code class="docutils literal notranslate"><span class="pre">2017-09</span></code> will return <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </div></blockquote>
 </li>
-<li><p>When the value of a variable with formulas is requested, if no formula is defined for the requested period.</p>
+<li><p>When the value of a variable with a formula is requested and no formula is defined for the requested period.</p>
 <blockquote>
 <div><p>For example:
-Let’s assume the variable <code class="docutils literal notranslate"><span class="pre">basic_income</span></code>’s formula is defined starting <code class="docutils literal notranslate"><span class="pre">2015-01-01</span></code>, and its default value is <code class="docutils literal notranslate"><span class="pre">0</span></code>. Computing <code class="docutils literal notranslate"><span class="pre">basic_income</span></code> for <code class="docutils literal notranslate"><span class="pre">2014-01-01</span></code> will return <code class="docutils literal notranslate"><span class="pre">0</span></code>, while computing <code class="docutils literal notranslate"><span class="pre">basic_income</span></code> for <code class="docutils literal notranslate"><span class="pre">2015-01-01</span></code> will use the formula.</p>
+Let’s assume the formula for the variable <code class="docutils literal notranslate"><span class="pre">basic_income</span></code> is defined as starting in <code class="docutils literal notranslate"><span class="pre">2015-01-01</span></code> and its default value is <code class="docutils literal notranslate"><span class="pre">0</span></code>. Computing <code class="docutils literal notranslate"><span class="pre">basic_income</span></code> for <code class="docutils literal notranslate"><span class="pre">2014-01-01</span></code> will return <code class="docutils literal notranslate"><span class="pre">0</span></code>, while computing <code class="docutils literal notranslate"><span class="pre">basic_income</span></code> for <code class="docutils literal notranslate"><span class="pre">2015-01-01</span></code> will use the formula.</p>
 </div></blockquote>
 </li>
 </ul>
-<p>Legislation writers can <a class="reference internal" href="../coding-the-legislation/20_input_variables.html#setting-a-default-value"><span class="std std-doc">define a specific default value</span></a> for each variable.</p>
+<p>Legislation modellers can <a class="reference internal" href="../coding-the-legislation/20_input_variables.html#setting-a-default-value"><span class="std std-ref">define a specific default value</span></a> for each variable.</p>
 </section>
 </section>
 

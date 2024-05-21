@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Periods &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Legislation evolutions" href="40_legislation_evolutions.html" />
@@ -113,7 +111,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -136,12 +134,12 @@
           <div class="document clearer body">
             
   <section id="periods">
-<h1>Periods<a class="headerlink" href="#periods" title="Permalink to this headline">¶</a></h1>
+<h1>Periods<a class="headerlink" href="#periods" title="Link to this heading">¶</a></h1>
 <p>When you run an OpenFisca simulation to compute a variable, you need to define the period of interest for this variable.</p>
 <p>OpenFisca gives you a convenient string syntax to define periods.</p>
-<p>The general structure is <code class="docutils literal notranslate"><span class="pre">unit:instant:quantity</span></code> (see the <a class="reference internal" href="../key-concepts/periodsinstants.html"><span class="doc std std-doc">definition of a period</span></a>). Some of the structure can be omitted.</p>
+<p>The general structure is <code class="docutils literal notranslate"><span class="pre">unit:instant:quantity</span></code> (see the <a class="reference internal" href="../key-concepts/periods_instants.html"><span class="std std-doc">definition of a period</span></a>). Some of the structure can be omitted.</p>
 <p>The main valid period formats are referenced in this table:</p>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Period format</p></th>
 <th class="head"><p>Period type</p></th>
@@ -223,7 +221,7 @@
 </ul>
 </div></blockquote>
 <section id="using-periods-in-a-simulation">
-<h2>Using periods in a simulation<a class="headerlink" href="#using-periods-in-a-simulation" title="Permalink to this headline">¶</a></h2>
+<h2>Using periods in a simulation<a class="headerlink" href="#using-periods-in-a-simulation" title="Link to this heading">¶</a></h2>
 <p>As an example, here is how to calculate a <code class="docutils literal notranslate"><span class="pre">housing_allowance</span></code> on a given month:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-05&#39;</span><span class="p">)</span>
 </pre></div>
@@ -234,7 +232,7 @@
 </div>
 </section>
 <section id="periods-in-variable-definitions">
-<h2>Periods in variable definitions<a class="headerlink" href="#periods-in-variable-definitions" title="Permalink to this headline">¶</a></h2>
+<h2>Periods in variable definitions<a class="headerlink" href="#periods-in-variable-definitions" title="Link to this heading">¶</a></h2>
 <p>With OpenFisca you can calculate variables such as <code class="docutils literal notranslate"><span class="pre">salary</span></code> that can change over time. You can also evaluate the impact of this <code class="docutils literal notranslate"><span class="pre">salary</span></code> on the <code class="docutils literal notranslate"><span class="pre">income_tax</span></code>.</p>
 <p>These variables can evolve through time at a different periodicity. Here for example, <code class="docutils literal notranslate"><span class="pre">salary</span></code> changes from month to month while the <code class="docutils literal notranslate"><span class="pre">income_tax</span></code> is calculated on a yearly basis.</p>
 <p>Therefore, all OpenFisca variables have a <code class="docutils literal notranslate"><span class="pre">definition_period</span></code> attribute:</p>
@@ -259,9 +257,9 @@
 <p>Each formula calculates the value of a variable for a period the size of <strong>the given definition period</strong>. This period is always the second argument of the formulas.</p>
 </section>
 <section id="periods-in-formulas">
-<h2>Periods in formulas<a class="headerlink" href="#periods-in-formulas" title="Permalink to this headline">¶</a></h2>
+<h2>Periods in formulas<a class="headerlink" href="#periods-in-formulas" title="Link to this heading">¶</a></h2>
 <section id="calculate-dependencies-for-a-period-different-than-the-variable-s-definition-period">
-<h3>Calculate dependencies for a period different than the variable’s <code class="docutils literal notranslate"><span class="pre">definition_period</span></code><a class="headerlink" href="#calculate-dependencies-for-a-period-different-than-the-variable-s-definition-period" title="Permalink to this headline">¶</a></h3>
+<h3>Calculate dependencies for a period different than the variable’s <code class="docutils literal notranslate"><span class="pre">definition_period</span></code><a class="headerlink" href="#calculate-dependencies-for-a-period-different-than-the-variable-s-definition-period" title="Link to this heading">¶</a></h3>
 <p>Calling a formula with a period that is incompatible with the attribute <code class="docutils literal notranslate"><span class="pre">definition_period</span></code> will cause an error. For instance, if we assume that a person <code class="docutils literal notranslate"><span class="pre">salary</span></code> is paid monthly:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
@@ -306,7 +304,7 @@
 </div>
 </section>
 <section id="calculate-dependencies-for-a-specific-period">
-<h3>Calculate dependencies for a specific period<a class="headerlink" href="#calculate-dependencies-for-a-specific-period" title="Permalink to this headline">¶</a></h3>
+<h3>Calculate dependencies for a specific period<a class="headerlink" href="#calculate-dependencies-for-a-specific-period" title="Link to this heading">¶</a></h3>
 <p>It happens that the formula to calculate a variable at a given period needs the value of another variable for another period. Usually, the second period is defined relatively to the first one (previous month, last three month, current year).</p>
 <p>For instance, we want to compute an unemployment benefit that equals half of last year’s salary, if the person had no income for the past 3 months.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">unemployment_benefit</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
@@ -324,7 +322,7 @@
 </pre></div>
 </div>
 <p>You can generate any period with the following properties and methods:</p>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Period</p></th>
 <th class="head"><p>Meaning</p></th>
@@ -373,7 +371,7 @@
 </section>
 </section>
 <section id="automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period">
-<h2>Automatically process variable inputs defined for periods not matching the <code class="docutils literal notranslate"><span class="pre">definition_period</span></code><a class="headerlink" href="#automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period" title="Permalink to this headline">¶</a></h2>
+<h2>Automatically process variable inputs defined for periods not matching the <code class="docutils literal notranslate"><span class="pre">definition_period</span></code><a class="headerlink" href="#automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period" title="Link to this heading">¶</a></h2>
 <p>By default, when you provide a simulation input, you won’t be able to set a variable value for a period that doesn’t match its <code class="docutils literal notranslate"><span class="pre">definition_period</span></code>.</p>
 <p>For instance, if the <code class="docutils literal notranslate"><span class="pre">definition_period</span></code> of <code class="docutils literal notranslate"><span class="pre">salary</span></code> is <code class="docutils literal notranslate"><span class="pre">MONTH</span></code>, and you input a value for <code class="docutils literal notranslate"><span class="pre">salary</span></code> for <code class="docutils literal notranslate"><span class="pre">2015</span></code> or more than one month, an error will be raised.</p>
 <p>It is however possible to define an automatic behaviour to cast yearly inputs into monthly values. To do this, add a <code class="docutils literal notranslate"><span class="pre">set_input</span></code> class attribute to a variable.</p>
@@ -402,7 +400,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">one_month_salaries</span><span class="p">)</span>  <span class="c1"># prints [1666.6666 1666.6666]</span>
 </pre></div>
 </div>
-<p>This syntax is also available in <a class="reference internal" href="writing_yaml_tests.html"><span class="doc std std-doc">YAML tests</span></a>:</p>
+<p>This syntax is also available in <a class="reference internal" href="writing_yaml_tests.html"><span class="std std-doc">YAML tests</span></a>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Income tax over time</span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2016-01</span>
 <span class="w">  </span><span class="nt">input</span><span class="p">:</span>

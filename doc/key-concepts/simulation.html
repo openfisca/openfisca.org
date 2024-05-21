@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,18 +17,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Simulation, Computation &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Reforms" href="reforms.html" />
-    <link rel="prev" title="Periods, Instants" href="periodsinstants.html" />
+    <link rel="prev" title="Periods, Instants" href="periods_instants.html" />
   
    
 
@@ -47,7 +45,7 @@
           <a href="reforms.html" title="Reforms"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="periodsinstants.html" title="Periods, Instants"
+          <a href="periods_instants.html" title="Periods, Instants"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="lightbulb"></i> Key concepts</a> &#187;</li>
@@ -97,8 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="tax_and_benefit_system.html">Tax and Benefit System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables and formulas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="person%2C_entities%2C_role.html">Person, entities, role</a></li>
-<li class="toctree-l2"><a class="reference internal" href="periodsinstants.html">Periods, Instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="person_entities_role.html">Person, entities, role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="periods_instants.html">Periods, Instants</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Simulation, Computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
 </ul>
@@ -109,7 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -132,29 +130,29 @@
           <div class="document clearer body">
             
   <section id="simulation-computation">
-<h1>Simulation, Computation<a class="headerlink" href="#simulation-computation" title="Permalink to this headline">¶</a></h1>
+<h1>Simulation, Computation<a class="headerlink" href="#simulation-computation" title="Link to this heading">¶</a></h1>
 <section id="definition">
-<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h2>
+<h2>Definition<a class="headerlink" href="#definition" title="Link to this heading">¶</a></h2>
 <p>A <em>Simulation</em> is basically the OpenFisca frame for calculating taxes or benefits.</p>
-<p>To calculate any variable you need to create a <em>Simulation</em> from the <em>TaxBenefitSystem</em> that is to say the framework where you will compute your result.</p>
+<p>To calculate any variable, create a <em>Simulation</em> from the <em>TaxBenefitSystem</em> and add input data.</p>
 <blockquote>
 <div><p>Technically speaking it is the cache of input data and previously computed results.</p>
 </div></blockquote>
 <p>It’s possible to run many independent simulations using the same <code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem</span></code>.</p>
 </section>
 <section id="computing-variables">
-<h2>Computing variables<a class="headerlink" href="#computing-variables" title="Permalink to this headline">¶</a></h2>
-<p>To compute taxes and benefits, you need to define on whom you want to do that and what you already know about those persons or groups of persons. This is what you will set as input data for your <em>Simulation</em>.</p>
-<p>Then, be aware of the period over which you want to have your result. Some measures are calculated on a monthly basis other an annual one.</p>
-<p>Now all the settings are given to run computation of taxes or benefits.</p>
+<h2>Computing variables<a class="headerlink" href="#computing-variables" title="Link to this heading">¶</a></h2>
+<p>To compute taxes and benefits, define whom it will focus on and what is already know about those persons or groups of persons. This is what decides the input data for a <em>Simulation</em>.</p>
+<p>Once this is all established a simulation can be run to computate the results.</p>
 <blockquote>
-<div><p>For further information: see how to run a simulation in <a class="reference internal" href="../simulate/run-simulation.html"><span class="doc std std-doc">this section</span></a> and the following <a class="reference external" href="http://mybinder.org:/repo/openfisca/tutorial">tutorial</a> “How to handle periods”</p>
+<div><p>For further information: see how to run a simulation in <a class="reference internal" href="../simulate/run-simulation.html"><span class="std std-doc">this section</span></a> and the following <a class="reference external" href="http://mybinder.org:/repo/openfisca/tutorial">tutorial</a> “How to handle periods”</p>
 </div></blockquote>
 <section id="application-how-to-calculate-a-variable">
-<h3>Application: how to calculate a variable<a class="headerlink" href="#application-how-to-calculate-a-variable" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcul of the &#39;impot sur le revenu des personnes physiques&#39;</span>
-<span class="n">impot</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;irpp&#39;</span><span class="p">,</span> <span class="s1">&#39;2015&#39;</span><span class="p">)</span>
-<span class="n">allocations_familiales</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;af&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-01&#39;</span><span class="p">)</span>
+<h3>Application: how to calculate a variable<a class="headerlink" href="#application-how-to-calculate-a-variable" title="Link to this heading">¶</a></h3>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculation of &#39;personal income tax&#39; with openfisca-france</span>
+<span class="n">tax</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;impot_revenu_restant_a_payer&#39;</span><span class="p">,</span> <span class="s1">&#39;2015&#39;</span><span class="p">)</span>
+<span class="c1"># Calculation of &#39;family allowances&#39; with openfisca-france</span>
+<span class="n">family_allowances</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;af&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-01&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <blockquote>
@@ -162,10 +160,10 @@
 </div></blockquote>
 <p>The output is an array:</p>
 <ul class="simple">
-<li><p>positive if it is an amount the <em>entity</em> receives from the state.</p></li>
-<li><p>negative if it is an amount the <em>entity</em> has to pay.</p></li>
+<li><p>positive means it’s an amount the <em>entity</em> receives from the state.</p></li>
+<li><p>negative means it’s an amount the <em>entity</em> has to pay to the state.</p></li>
 </ul>
-<p><a class="reference internal" href="../simulate/run-simulation.html"><span class="doc std std-doc">Read more about how to run a simulation</span></a>.</p>
+<p><a class="reference internal" href="../simulate/run-simulation.html"><span class="std std-doc">Read more about how to run a simulation</span></a>.</p>
 </section>
 </section>
 </section>
@@ -188,7 +186,7 @@
           <a href="reforms.html" title="Reforms"
              >next</a> |</li>
         <li class="right" >
-          <a href="periodsinstants.html" title="Periods, Instants"
+          <a href="periods_instants.html" title="Periods, Instants"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="lightbulb"></i> Key concepts</a> &#187;</li>

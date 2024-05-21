@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>OpenFisca extensions &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Developer guide" href="developer-guide.html" />
@@ -112,7 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="release-process.html">Release process</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -135,15 +133,15 @@
           <div class="document clearer body">
             
   <section id="openfisca-extensions">
-<h1>OpenFisca extensions<a class="headerlink" href="#openfisca-extensions" title="Permalink to this headline">¶</a></h1>
-<p>Extensions allow you to define new variables or parameters for a tax and benefit system, while keeping their code separated from the main country package. They can only <em>add</em> variables and parameters to the tax and benefit system: they cannot <em>modify</em> or <em>neutralize</em> existing ones.</p>
+<h1>OpenFisca extensions<a class="headerlink" href="#openfisca-extensions" title="Link to this heading">¶</a></h1>
+<p>Extensions allow you to define new variables or parameters for a tax and benefit system, while keeping their code separated from the main country package. They can only <em>add</em> variables and parameters to the tax and benefit system: they cannot <em>modify</em> or <em>neutralise</em> existing ones.</p>
 <p>They are for instance used to code local benefits.</p>
 <blockquote>
-<div><p>Extensions are sometimes confused with another mechanism: reforms. <a class="reference internal" href="../key-concepts/reforms.html#differences-between-reforms-and-extensions"><span class="std std-doc">Read more about their respective uses</span></a>.</p>
+<div><p>Extensions are sometimes confused with another mechanism: reforms. <a class="reference internal" href="../key-concepts/reforms.html#differences-between-reforms-and-extensions"><span class="std std-ref">Read more about their respective uses</span></a>.</p>
 </div></blockquote>
 <p>Extensions can be manually loaded to a tax and benefit system using the <a class="reference internal" href="../openfisca-python-api/tax-benefit-system.html"><span class="doc std std-doc">load_extension</span></a> method.</p>
 <section id="extension-architecture">
-<h2>Extension architecture<a class="headerlink" href="#extension-architecture" title="Permalink to this headline">¶</a></h2>
+<h2>Extension architecture<a class="headerlink" href="#extension-architecture" title="Link to this heading">¶</a></h2>
 <p>The architecture of an extension folder is the following:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>extension_name<span class="o">}</span>/<span class="w"> </span><span class="c1"># The folder name is by convention the name of the extension.</span>
 <span class="w">    </span><span class="o">{</span>extension_name<span class="o">}</span>/__init__.py<span class="w"> </span><span class="c1"># Empty file.</span>
@@ -158,7 +156,7 @@
 </div>
 <p>All python files located directly in <code class="docutils literal notranslate"><span class="pre">{extension_name}/</span></code> are imported in the tax and benefit system.</p>
 <p>The syntax of the formulas within extension python files is the same than in the general country package formulas (e.g. <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">openfisca_france.model.base</span> <span class="pre">import</span> <span class="pre">*</span></code>).</p>
-<p>Variables inside an extension should not have the same name than any existing formula, nor than any formula in another extension being used.</p>
+<p>Variables inside an extension should not have the same name as any existing formula, nor as any formula in another extension being used.</p>
 </section>
 </section>
 

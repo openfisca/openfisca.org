@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Entities &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Reforms" href="reforms.html" />
@@ -113,7 +111,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -136,15 +134,15 @@
           <div class="document clearer body">
             
   <section id="entities">
-<h1>Entities<a class="headerlink" href="#entities" title="Permalink to this headline">¶</a></h1>
-<p>Every variable is defined for a type of <a class="reference internal" href="../key-concepts/person%2C_entities%2C_role.html"><span class="doc std std-doc">entity</span></a>: for instance persons or households.</p>
+<h1>Entities<a class="headerlink" href="#entities" title="Link to this heading">¶</a></h1>
+<p>Every variable is defined for a type of <a class="reference internal" href="../key-concepts/person_entities_role.html"><span class="std std-doc">entity</span></a>: for instance persons or households.</p>
 <p>However, I may for instance:</p>
 <ul class="simple">
 <li><p>in a formula defined for a person, want to know some property of their household.</p></li>
 <li><p>in a formula defined for a household, want to know some property of the household members.</p></li>
 </ul>
 <section id="group-entity-composition">
-<h2>Group entity composition<a class="headerlink" href="#group-entity-composition" title="Permalink to this headline">¶</a></h2>
+<h2>Group entity composition<a class="headerlink" href="#group-entity-composition" title="Link to this heading">¶</a></h2>
 <p>You can get the number of person with a given role in an entity with the <code class="docutils literal notranslate"><span class="pre">nb_persons(role)</span></code> method. If no role is given, it will return the numbers of people in the entity.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="n">nb_persons</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">()</span>
@@ -155,7 +153,7 @@
 <p>Note that roles are constants that can be accessed from their entity with the notation <code class="docutils literal notranslate"><span class="pre">Entity.ROLE</span></code> (in uppercase).</p>
 </section>
 <section id="check-if-a-person-has-a-given-role">
-<h2>Check if a person has a given role<a class="headerlink" href="#check-if-a-person-has-a-given-role" title="Permalink to this headline">¶</a></h2>
+<h2>Check if a person has a given role<a class="headerlink" href="#check-if-a-person-has-a-given-role" title="Link to this heading">¶</a></h2>
 <p>You can know whether a person has a certain role with the <code class="docutils literal notranslate"><span class="pre">has_role(role)</span></code> method:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="n">is_adult</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">ADULT</span><span class="p">)</span>
@@ -164,7 +162,7 @@
 </div>
 </section>
 <section id="aggregation">
-<h2>Aggregation<a class="headerlink" href="#aggregation" title="Permalink to this headline">¶</a></h2>
+<h2>Aggregation<a class="headerlink" href="#aggregation" title="Link to this heading">¶</a></h2>
 <p>For an entity, several methods allow you to aggregate the values of a quantity defined for its members.</p>
 <p><code class="docutils literal notranslate"><span class="pre">entity.members('variable_name',</span> <span class="pre">period)</span></code> allows you to calculate the value of a variable for all members of an entity.</p>
 <p><code class="docutils literal notranslate"><span class="pre">entity.sum(result)</span></code> sums previously calculated results. Similar functions such as <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">any</span></code>, and <code class="docutils literal notranslate"><span class="pre">all</span></code> work the same way.</p>
@@ -193,7 +191,7 @@
 </div>
 </section>
 <section id="projection">
-<h2>Projection<a class="headerlink" href="#projection" title="Permalink to this headline">¶</a></h2>
+<h2>Projection<a class="headerlink" href="#projection" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">person.entity('variable_name',</span> <span class="pre">period)</span></code> allows you to get the value of <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> for the entity containing <code class="docutils literal notranslate"><span class="pre">person</span></code>.</p>
 <p>Let’s for example consider that any college student whose family benefits from the basic income will also individually be granted a scholarship of 100€ per month:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">college_scholarship</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>

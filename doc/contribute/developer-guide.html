@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Developer guide &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Tests" href="tests.html" />
@@ -112,7 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="release-process.html">Release process</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -135,17 +133,22 @@
           <div class="document clearer body">
             
   <section id="developer-guide">
-<h1>Developer guide<a class="headerlink" href="#developer-guide" title="Permalink to this headline">¶</a></h1>
+<h1>Developer guide<a class="headerlink" href="#developer-guide" title="Link to this heading">¶</a></h1>
 <section id="source-code-repositories">
-<h2>Source code repositories<a class="headerlink" href="#source-code-repositories" title="Permalink to this headline">¶</a></h2>
-<p>The OpenFisca project is distributed across many Git repositories:</p>
+<h2>Source code repositories<a class="headerlink" href="#source-code-repositories" title="Link to this heading">¶</a></h2>
+<p>OpenFisca is distributed across many Git repositories. There are two types of repositories, those shared by everyone and country/jurisdiction specific repositories.</p>
+<p>Here are some of the main repositories shared by everyone:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/openfisca/openfisca-core">OpenFisca-Core</a></p></li>
-<li><p><a class="reference external" href="https://github.com/openfisca/openfisca-france">OpenFisca-France</a></p></li>
+<li><p><a class="reference external" href="https://github.com/openfisca/country-template">Country-Template</a></p></li>
+<li><p><a class="reference external" href="https://github.com/openfisca/legislation-explorer">Legislation-Explorer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/openfisca/openfisca-survey-manager">OpenFisca-Survey-Manager</a></p></li>
+<li><p><a class="reference external" href="https://github.com/openfisca/openfisca-doc">OpenFisca Documentation (this site)</a></p></li>
 </ul>
+<p>These can all be found at <a class="reference external" href="https://github.com/openfisca">https://github.com/openfisca</a>.</p>
 </section>
 <section id="debugging-code">
-<h2>Debugging code<a class="headerlink" href="#debugging-code" title="Permalink to this headline">¶</a></h2>
+<h2>Debugging code<a class="headerlink" href="#debugging-code" title="Link to this heading">¶</a></h2>
 <p>If you install <a class="reference external" href="https://github.com/gotcha/ipdb">ipdb</a> (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">ipdb</span></code>) the API server will drop you into a debugger when an exception occurs:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>paster<span class="w"> </span>serve<span class="w"> </span>--reload<span class="w"> </span>development-france.ini
 Starting<span class="w"> </span>server<span class="w"> </span><span class="k">in</span><span class="w"> </span>PID<span class="w"> </span><span class="m">3815</span>.
@@ -164,7 +167,7 @@ ipdb&gt;
 </div>
 </section>
 <section id="profiling-code">
-<h2>Profiling code<a class="headerlink" href="#profiling-code" title="Permalink to this headline">¶</a></h2>
+<h2>Profiling code<a class="headerlink" href="#profiling-code" title="Link to this heading">¶</a></h2>
 <p>To profile the execution of a portion of code, wrap it with these lines:</p>
 <div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+    import cProfile</span>
 <span class="gi">+    pr = cProfile.Profile()</span>
@@ -177,7 +180,7 @@ ipdb&gt;
 </pre></div>
 </div>
 <p>Each time you call the endpoint a <code class="docutils literal notranslate"><span class="pre">result.profile</span></code> file is written.
-To prevent it to be overwritten, generate a dynamic name with <a class="reference external" href="https://docs.python.org/2/library/tempfile.html#tempfile.mkstemp"><code class="docutils literal notranslate"><span class="pre">tempfile.mkstemp</span></code></a>.</p>
+To prevent it from being overwritten, generate a dynamic name with <a class="reference external" href="https://docs.python.org/2/library/tempfile.html#tempfile.mkstemp"><code class="docutils literal notranslate"><span class="pre">tempfile.mkstemp</span></code></a>.</p>
 <p>Then you can use the <a class="reference external" href="http://www.vrplumber.com/programming/runsnakerun/">runsnakerun</a> GUI to inspect the profile data.</p>
 <blockquote>
 <div><p>Under Debian GNU/Linux:</p>
@@ -185,7 +188,7 @@ To prevent it to be overwritten, generate a dynamic name with <a class="referenc
 </pre></div>
 </div>
 </div></blockquote>
-<p>For a throughout example on profiling and debugging please take a look at <a class="reference internal" href="../simulate/profile-simulation.html"><span class="doc std std-doc">How to profile the performance of a simulation</span></a>.</p>
+<p>For a throughout example on profiling and debugging please take a look at <a class="reference internal" href="../simulate/profile-simulation.html"><span class="std std-doc">How to profile the performance of a simulation</span></a>.</p>
 </section>
 </section>
 

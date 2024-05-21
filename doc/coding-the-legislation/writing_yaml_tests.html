@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Writing YAML tests &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Parameters" href="legislation_parameters.html" />
@@ -113,7 +111,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -136,14 +134,14 @@
           <div class="document clearer body">
             
   <section id="writing-yaml-tests">
-<h1>Writing YAML tests<a class="headerlink" href="#writing-yaml-tests" title="Permalink to this headline">¶</a></h1>
+<h1>Writing YAML tests<a class="headerlink" href="#writing-yaml-tests" title="Link to this heading">¶</a></h1>
 <p>The recommended way to write tests is to use YAML tests.</p>
 <p>Each formula should be tested at least with one test, and better with specific boundary values (thresholds for example).</p>
 <blockquote>
 <div><p>Terminology: Python dictionaries are called associative arrays in YAML.</p>
 </div></blockquote>
 <section id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h2>
 <p>In <a class="reference external" href="https://github.com/openfisca/openfisca-france/blob/29.3.7/tests/formulas/irpp.yaml"><code class="docutils literal notranslate"><span class="pre">irpp.yaml</span></code></a> we see:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IRPP</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Célibataire</span><span class="nv"> </span><span class="s">ayant</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">revenus</span><span class="nv"> </span><span class="s">salariaux</span><span class="nv"> </span><span class="s">(1AJ)</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">000</span><span class="nv"> </span><span class="s">€&quot;</span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2012</span>
@@ -156,7 +154,7 @@
 </div>
 </section>
 <section id="common-keys">
-<h2>Common keys<a class="headerlink" href="#common-keys" title="Permalink to this headline">¶</a></h2>
+<h2>Common keys<a class="headerlink" href="#common-keys" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">period</span></code> (string with period syntax)</p></li>
@@ -171,9 +169,9 @@
 </ul>
 </section>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Link to this heading">¶</a></h2>
 <section id="testing-formulas-by-giving-input-variables">
-<h3>Testing formulas by giving input variables<a class="headerlink" href="#testing-formulas-by-giving-input-variables" title="Permalink to this headline">¶</a></h3>
+<h3>Testing formulas by giving input variables<a class="headerlink" href="#testing-formulas-by-giving-input-variables" title="Link to this heading">¶</a></h3>
 <p>This is the simplest way to test formulas when you only need to give input values for only one individual.</p>
 <ul class="simple">
 <li><p>First, name your test. Start a test with <code class="docutils literal notranslate"><span class="pre">-</span></code>, which is the YAML list separator, followed by a space, the field <code class="docutils literal notranslate"><span class="pre">name</span></code>, and the test name as a string.</p></li>
@@ -222,7 +220,7 @@ For instance:</p></li>
 </div>
 </section>
 <section id="testing-formulas-by-giving-a-test-case">
-<h3>Testing formulas by giving a test case<a class="headerlink" href="#testing-formulas-by-giving-a-test-case" title="Permalink to this headline">¶</a></h3>
+<h3>Testing formulas by giving a test case<a class="headerlink" href="#testing-formulas-by-giving-a-test-case" title="Link to this heading">¶</a></h3>
 <p>This is the simplest way to test formulas when you need to give input values for many individuals
 which are dispatched into entities.</p>
 <blockquote>
@@ -288,7 +286,7 @@ which are dispatched into entities.</p>
 </ul>
 </section>
 <section id="testing-formulas-using-variables-defined-for-multiple-periods">
-<h3>Testing formulas using variables defined for multiple periods<a class="headerlink" href="#testing-formulas-using-variables-defined-for-multiple-periods" title="Permalink to this headline">¶</a></h3>
+<h3>Testing formulas using variables defined for multiple periods<a class="headerlink" href="#testing-formulas-using-variables-defined-for-multiple-periods" title="Link to this heading">¶</a></h3>
 <p>Input or output variables can be defined for multiple periods by giving an associated array
 which keys are a period expression and values are the value for that period.</p>
 <p>Values can be arithmetic expressions too.</p>
@@ -301,8 +299,8 @@ which keys are a period expression and values are the value for that period.</p>
 </div>
 </section>
 <section id="testing-a-variable-using-a-reform">
-<h3>Testing a variable using a reform<a class="headerlink" href="#testing-a-variable-using-a-reform" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="reforms.html"><span class="doc std std-doc">Reforms</span></a> can be applied to the baseline tax and benefit system, in the reforms key, as a list.</p>
+<h3>Testing a variable using a reform<a class="headerlink" href="#testing-a-variable-using-a-reform" title="Link to this heading">¶</a></h3>
+<p><a class="reference internal" href="reforms.html"><span class="std std-doc">Reforms</span></a> can be applied to the baseline tax and benefit system, in the reforms key, as a list.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Combination</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">reforms&quot;</span>
 <span class="w">  </span><span class="nt">reforms</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">module.of.first_reform</span>
@@ -313,15 +311,15 @@ which keys are a period expression and values are the value for that period.</p>
 </section>
 </section>
 <section id="running-a-test">
-<h2>Running a test<a class="headerlink" href="#running-a-test" title="Permalink to this headline">¶</a></h2>
+<h2>Running a test<a class="headerlink" href="#running-a-test" title="Link to this heading">¶</a></h2>
 <p>To run YAML tests, use the command line tool <code class="docutils literal notranslate"><span class="pre">openfisca</span> <span class="pre">test</span></code>, documented <a class="reference internal" href="../openfisca-python-api/openfisca_test.html"><span class="doc std std-doc">here</span></a>:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>openfisca<span class="w"> </span><span class="nb">test</span><span class="w"> </span>path/to/file.yaml
 </pre></div>
 </div>
 </section>
 <section id="next-steps">
-<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
-<p>Other kinds of tests exist, see <a class="reference internal" href="../contribute/tests.html"><span class="doc std std-doc">contribute/tests</span></a>.</p>
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading">¶</a></h2>
+<p>Other kinds of tests exist, see <a class="reference internal" href="../contribute/tests.html"><span class="std std-doc">contribute/tests</span></a>.</p>
 </section>
 </section>
 

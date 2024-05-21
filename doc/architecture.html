@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Architecture of OpenFisca &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=0b2b57e4" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation" href="installation/index.html" />
@@ -99,7 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -119,19 +117,19 @@
           
           <div class="document clearer body">
             
-  <section id="i-icon-name-boxes-i-architecture-of-openfisca">
-<h1><i icon-name="boxes"></i> Architecture of OpenFisca<a class="headerlink" href="#i-icon-name-boxes-i-architecture-of-openfisca" title="Permalink to this headline">¶</a></h1>
+  <section id="architecture-of-openfisca">
+<h1><i icon-name="boxes"></i> Architecture of OpenFisca<a class="headerlink" href="#architecture-of-openfisca" title="Link to this heading">¶</a></h1>
 <p>Depending on your goals, you will interact with one or several components of OpenFisca.</p>
 <p><a class="reference external" href="https://github.com/openfisca/openfisca-doc/blob/master/source/static/img/architecture.svg"><img alt="OpenFisca architecture" src="https://cdn.rawgit.com/openfisca/openfisca-doc/master/source/static/img/architecture.svg" /></a></p>
 <section id="country-packages">
-<h2>Country Packages<a class="headerlink" href="#country-packages" title="Permalink to this headline">¶</a></h2>
-<p>Country packages are what most users will interact with when using OpenFisca. They model the rules of a jurisdiction by defining <a class="reference internal" href="key-concepts/parameters.html"><span class="doc std std-doc">Parameters</span></a>, <a class="reference internal" href="key-concepts/variables.html"><span class="doc std std-doc">Variables</span></a> and <a class="reference internal" href="key-concepts/person%2C_entities%2C_role.html"><span class="doc std std-doc">Entities</span></a>.</p>
+<h2>Country Packages<a class="headerlink" href="#country-packages" title="Link to this heading">¶</a></h2>
+<p>Country packages are what most users will interact with when using OpenFisca. They model the rules of a jurisdiction by defining <a class="reference internal" href="key-concepts/parameters.html"><span class="std std-doc">Parameters</span></a>, <a class="reference internal" href="key-concepts/variables.html"><span class="std std-doc">Variables</span></a> and <a class="reference internal" href="key-concepts/person_entities_role.html"><span class="std std-doc">Entities</span></a>.</p>
 <blockquote>
 <div><p>For example, <a class="reference external" href="https://github.com/openfisca/openfisca-france"><code class="docutils literal notranslate"><span class="pre">openfisca-france</span></code></a> models French law.</p>
 </div></blockquote>
 </section>
 <section id="extensions-packages">
-<h2>Extensions Packages<a class="headerlink" href="#extensions-packages" title="Permalink to this headline">¶</a></h2>
+<h2>Extensions Packages<a class="headerlink" href="#extensions-packages" title="Link to this heading">¶</a></h2>
 <p>Extensions add functionalities to a country package while maintaining situation description compatibility, by adding or redefining parameters and variables but not entities.</p>
 <p>This architecture enables communities to maintain subsets of the rules of a country, especially those that are too specific to be of interest to the broader OpenFisca community of that country.</p>
 <blockquote>
@@ -139,13 +137,13 @@
 </div></blockquote>
 </section>
 <section id="core">
-<h2>Core<a class="headerlink" href="#core" title="Permalink to this headline">¶</a></h2>
+<h2>Core<a class="headerlink" href="#core" title="Link to this heading">¶</a></h2>
 <p>OpenFisca Core provides the API, domain-specific language (DSL) and testing tools. The country and extension packages are constructed with the Core.</p>
-<p>The core defines the <a class="reference internal" href="openfisca-python-api/index.html"><span class="doc std std-doc">Python API</span></a> through which the country packages can be queried.</p>
-<p>The Core also includes an optional <a class="reference internal" href="openfisca-web-api/index.html"><span class="doc std std-doc">web API</span></a>, which makes it possible to expose <a class="reference internal" href="key-concepts/parameters.html"><span class="doc std std-doc">Parameters</span></a> and calculate <a class="reference internal" href="key-concepts/variables.html"><span class="doc std std-doc">Variables</span></a> over HTTP and JSON.</p>
+<p>The core defines the <a class="reference internal" href="openfisca-python-api/index.html"><span class="std std-doc">Python API</span></a> through which the country packages can be queried.</p>
+<p>The Core also includes an optional <a class="reference internal" href="openfisca-web-api/index.html"><span class="std std-doc">web API</span></a>, which makes it possible to expose <a class="reference internal" href="key-concepts/parameters.html"><span class="std std-doc">Parameters</span></a> and calculate <a class="reference internal" href="key-concepts/variables.html"><span class="std std-doc">Variables</span></a> over HTTP and JSON.</p>
 </section>
 <section id="templates">
-<h2>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<h2>Templates<a class="headerlink" href="#templates" title="Link to this heading">¶</a></h2>
 <p>Country and extension packages are maintained by different communities and depend on their legal and cultural contexts. OpenFisca includes two neutral templates aimed at demonstrating their capabilities independently from these contexts: <a class="reference external" href="https://github.com/openfisca/country-template/"><code class="docutils literal notranslate"><span class="pre">country-template</span></code></a> and <a class="reference external" href="https://github.com/openfisca/extension-template/"><code class="docutils literal notranslate"><span class="pre">extension-template</span></code></a>. These templates can also be used as boilerplate for creating a new country or extension package.</p>
 <p>Code examples throughout the OpenFisca documentation use rules defined in both <code class="docutils literal notranslate"><span class="pre">country-template</span></code> and <code class="docutils literal notranslate"><span class="pre">extension-template</span></code>.</p>
 </section>

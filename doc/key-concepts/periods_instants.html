@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -17,19 +16,18 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Person, entities, role &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <title>Periods, Instants &#8212; OpenFisca  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Periods, Instants" href="periodsinstants.html" />
-    <link rel="prev" title="Parameters" href="parameters.html" />
+    <link rel="next" title="Simulation, Computation" href="simulation.html" />
+    <link rel="prev" title="Person, entities, role" href="person_entities_role.html" />
   
    
 
@@ -44,14 +42,14 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="periodsinstants.html" title="Periods, Instants"
+          <a href="simulation.html" title="Simulation, Computation"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="parameters.html" title="Parameters"
+          <a href="person_entities_role.html" title="Person, entities, role"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="lightbulb"></i> Key concepts</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Person, entities, role</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Periods, Instants</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -97,8 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="tax_and_benefit_system.html">Tax and Benefit System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables and formulas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Person, entities, role</a></li>
-<li class="toctree-l2"><a class="reference internal" href="periodsinstants.html">Periods, Instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="person_entities_role.html">Person, entities, role</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Periods, Instants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulation.html">Simulation, Computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
 </ul>
@@ -109,7 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -125,47 +123,32 @@
               
                 <li><a href="index.html"><i icon-name="lightbulb"></i> Key concepts</a></li>
               
-              <li>Person, entities, role</li>
+              <li>Periods, Instants</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <section id="person-entities-role">
-<h1>Person, entities, role<a class="headerlink" href="#person-entities-role" title="Permalink to this headline">¶</a></h1>
-<p>Taxes and benefits can be calculated for different entities: persons, household, companies, etc.</p>
-<section id="person">
-<h2>Person<a class="headerlink" href="#person" title="Permalink to this headline">¶</a></h2>
-<p>Some OpenFisca variables are defined for a <em>person</em>.</p>
-<p>Example: a <a class="reference external" href="https://fr.openfisca.org/legislation/salaire_net">“salary”</a> is defined as the individual level.</p>
-</section>
-<section id="group-entities">
-<h2>Group entities<a class="headerlink" href="#group-entities" title="Permalink to this headline">¶</a></h2>
-<p><em>Group entities</em> are clusters of <em>persons</em> such as the family, the household or the company.
-A tax and benefit system can define several entities and specifies each time which tax and benefit applies to which entity.</p>
-<p>In France the legislation has these <em>group entities</em>:</p>
+  <section id="periods-instants">
+<h1>Periods, Instants<a class="headerlink" href="#periods-instants" title="Link to this heading">¶</a></h1>
+<p>Most of the values calculated in OpenFisca, such as an <strong>income tax</strong>, or <strong>housing allowance</strong>, can change over time.</p>
+<p>In <a class="reference internal" href="simulation.html"><span class="std std-doc">simulations</span></a>, parameters and variables, OpenFisca handles time via <em>periods</em> and <em>instants</em>.</p>
+<p>In OpenFisca context, a period consists of:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;familles&quot;</span></code>,  (families)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;foyers_fiscaux&quot;</span></code> (tax homes) and</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;menages&quot;</span></code> (households).</p></li>
+<li><p>a starting instant (the atomic unit is a day, so instants are day dates),</p></li>
+<li><p>a unit (day, weekday, week, month or year),</p></li>
+<li><p>a quantity of that unit.</p></li>
 </ul>
-<p>Example: the  <a class="reference external" href="https://fr.openfisca.org/legislation/taxe_habitation">“local tax”</a> is calculated over the <code class="docutils literal notranslate"><span class="pre">&quot;menages&quot;</span></code>.</p>
-<section id="roles">
-<h3>Roles<a class="headerlink" href="#roles" title="Permalink to this headline">¶</a></h3>
-<p>Each person related to a <em>group entity</em> has a <em>role</em> inside this entity.</p>
-<p>The <em>roles</em> are:</p>
+<p>Let’s look at some examples:</p>
 <ul class="simple">
-<li><p>for ‘<code class="docutils literal notranslate"><span class="pre">familles</span></code>’: <code class="docutils literal notranslate"><span class="pre">parents</span></code> and <code class="docutils literal notranslate"><span class="pre">enfants</span></code> (children),</p></li>
-<li><p>for ‘<code class="docutils literal notranslate"><span class="pre">foyers_fiscaux</span></code>’: <code class="docutils literal notranslate"><span class="pre">declarants</span></code> (registrants) and <code class="docutils literal notranslate"><span class="pre">personnes_a_charge</span></code> (dependants),</p></li>
-<li><p>for ‘<code class="docutils literal notranslate"><span class="pre">menages</span></code>’: <code class="docutils literal notranslate"><span class="pre">personne_de_reference</span></code> (reference person), <code class="docutils literal notranslate"><span class="pre">conjoint</span></code>, <code class="docutils literal notranslate"><span class="pre">enfants</span></code>and <code class="docutils literal notranslate"><span class="pre">autres</span></code> (other).</p></li>
+<li><p>here is an instant: the 15th June 2015</p></li>
+<li><p>and here are some periods: <code class="docutils literal notranslate"><span class="pre">July</span> <span class="pre">2015</span></code> is a month starting on its 1st day, <code class="docutils literal notranslate"><span class="pre">2015</span></code> is a year starting on its 1st day,</p></li>
+<li><p>we can also define a period of several months, <code class="docutils literal notranslate"><span class="pre">July</span> <span class="pre">and</span> <span class="pre">August</span> <span class="pre">2015</span></code>, or a period overlapping different months, <code class="docutils literal notranslate"><span class="pre">one</span> <span class="pre">month</span> <span class="pre">starting</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">15th</span> <span class="pre">of</span> <span class="pre">July</span></code>,</p></li>
+<li><p>and we can also define a period of weeks like the <code class="docutils literal notranslate"><span class="pre">first</span> <span class="pre">6</span> <span class="pre">weeks</span> <span class="pre">of</span> <span class="pre">2015</span></code>.</p></li>
 </ul>
-<p>You can define as many entities as you want and dispatch persons into them.</p>
-<section id="application-module-used-by-openfisca">
-<h4>Application: module used by OpenFisca<a class="headerlink" href="#application-module-used-by-openfisca" title="Permalink to this headline">¶</a></h4>
-<p>The entities definitions are closely related to a country, therefore they are defined in a Python package (OpenFisca-France) independent from the core engine (OpenFisca-Core).</p>
-</section>
-</section>
-</section>
+<p>The smallest unit for OpenFisca periods is the <strong>day</strong>.</p>
+<p>The largest OpenFisca unit is the <strong>eternity</strong>, which is used for variables that are constant over time, e.g. a date of birth.</p>
+<p><a class="reference internal" href="../coding-the-legislation/35_periods.html"><span class="std std-doc">Read more about periods implementation in OpenFisca</span></a>.</p>
 </section>
 
 
@@ -183,14 +166,14 @@ A tax and benefit system can define several entities and specifies each time whi
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="periodsinstants.html" title="Periods, Instants"
+          <a href="simulation.html" title="Simulation, Computation"
              >next</a> |</li>
         <li class="right" >
-          <a href="parameters.html" title="Parameters"
+          <a href="person_entities_role.html" title="Person, entities, role"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="lightbulb"></i> Key concepts</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Person, entities, role</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Periods, Instants</a></li> 
       </ul>
     </div>
   

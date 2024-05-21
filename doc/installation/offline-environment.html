@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>In an offline environment &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="On Windows without admin rights" href="windows-no-admin.html" />
@@ -107,7 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -130,12 +128,12 @@
           <div class="document clearer body">
             
   <section id="in-an-offline-environment">
-<h1>In an offline environment<a class="headerlink" href="#in-an-offline-environment" title="Permalink to this headline">¶</a></h1>
+<h1>In an offline environment<a class="headerlink" href="#in-an-offline-environment" title="Link to this heading">¶</a></h1>
 <p>If you need to install OpenFisca on a server with no Internet access, here is how to do it.</p>
 <p>The big picture: download Python packages on a machine with Internet access, copy them to the server and install them in a <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">virtualenv</a>.</p>
 <p>We assume that it is possible to copy files to the server, for example via a USB stick. Or perhaps the server filters only outgoing connections, but accepts incoming connections allowing to copy the files.</p>
 <section id="on-the-machine-with-internet-access">
-<h2>On the machine with Internet access<a class="headerlink" href="#on-the-machine-with-internet-access" title="Permalink to this headline">¶</a></h2>
+<h2>On the machine with Internet access<a class="headerlink" href="#on-the-machine-with-internet-access" title="Link to this heading">¶</a></h2>
 <p>We are going to create a first virtualenv in which we’ll use <code class="docutils literal notranslate"><span class="pre">pip</span></code> to download the <code class="docutils literal notranslate"><span class="pre">.whl</span></code> files in a specific directory.</p>
 <p>Here we use <a class="reference external" href="https://github.com/berdario/pew">pew</a> to simplify virtualenv management.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pew
@@ -159,7 +157,7 @@ pip<span class="w"> </span>download<span class="w"> </span>OpenFisca-France
 </div>
 </section>
 <section id="on-the-server">
-<h2>On the server<a class="headerlink" href="#on-the-server" title="Permalink to this headline">¶</a></h2>
+<h2>On the server<a class="headerlink" href="#on-the-server" title="Link to this heading">¶</a></h2>
 <p>Starting from here we assume you copied the packages on the server, say in <code class="docutils literal notranslate"><span class="pre">~/openfisca-packages</span></code>.</p>
 <p>The following commands show how to install Python packages without any Internet access.
 If you already have a virtualenv, activate it. Otherwise create a new one following the same instructions as above (for example with <code class="docutils literal notranslate"><span class="pre">pew</span> <span class="pre">new</span></code>).</p>

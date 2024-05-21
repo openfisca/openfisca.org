@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -17,19 +16,18 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>How to profile the performance of a simulation &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <title>Profiling a simulation’s performance &#8212; OpenFisca  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="OpenFisca Python API" href="../openfisca-python-api/index.html" />
-    <link rel="prev" title="Replicating a situation along axes" href="replicate-simulation-inputs.html" />
+    <link rel="prev" title="Analysing or debugging a simulation" href="analyse-simulation.html" />
   
    
 
@@ -47,11 +45,11 @@
           <a href="../openfisca-python-api/index.html" title="OpenFisca Python API"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="replicate-simulation-inputs.html" title="Replicating a situation along axes"
+          <a href="analyse-simulation.html" title="Analysing or debugging a simulation"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="cog"></i> Running a simulation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">How to profile the performance of a simulation</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Profiling a simulation’s performance</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -97,16 +95,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../coding-the-legislation/index.html"><i icon-name="terminal"></i> From law to code</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html"><i icon-name="cog"></i> Running a simulation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="run-simulation.html">How to run a simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="analyse-simulation.html">Analysing or debugging a simulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate-simulation-inputs.html">Replicating a situation along axes</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">How to profile the performance of a simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyse-simulation.html">Analysing or debugging a simulation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Profiling a simulation’s performance</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -122,24 +120,24 @@
               
                 <li><a href="index.html"><i icon-name="cog"></i> Running a simulation</a></li>
               
-              <li>How to profile the performance of a simulation</li>
+              <li>Profiling a simulation’s performance</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <section id="how-to-profile-the-performance-of-a-simulation">
-<h1>How to profile the performance of a simulation<a class="headerlink" href="#how-to-profile-the-performance-of-a-simulation" title="Permalink to this headline">¶</a></h1>
-<p>Your simulation is way too slow, and you want to know why? We’ve got you covered! :)</p>
-<p>Since <a class="reference external" href="https://github.com/openfisca/openfisca-core/pull/895">34.4.0</a> you can generate a time performance flame graph in a web page to view the time taken by every calculation in a simulation.</p>
-<p>In the following examples, we use <a class="reference external" href="https://github.com/openfisca/openfisca-france">OpenFisca-France</a>, but the profiling applies to any country package using <code class="docutils literal notranslate"><span class="pre">openfisca</span> <span class="pre">test</span></code>.</p>
+  <section id="profiling-a-simulation-s-performance">
+<h1>Profiling a simulation’s performance<a class="headerlink" href="#profiling-a-simulation-s-performance" title="Link to this heading">¶</a></h1>
+<p>The following outlines how to tackle a simulation that is running too slow.</p>
+<p>Since <a class="reference external" href="https://github.com/openfisca/openfisca-core/pull/895">34.4.0</a> it is possible to generate a time performance flame graph in a web page to view the time taken by every calculation in a simulation.</p>
+<p>The following examples utilise the <a class="reference external" href="https://github.com/openfisca/openfisca-france">OpenFisca-France</a> package but the profiling is available to any package.</p>
 <section id="identify-a-slow-simulation">
-<h2>Identify a slow simulation<a class="headerlink" href="#identify-a-slow-simulation" title="Permalink to this headline">¶</a></h2>
-<p>The easier way to spot a slow simulation is to profile your test suite, as follows:</p>
+<h2>Identify a slow simulation<a class="headerlink" href="#identify-a-slow-simulation" title="Link to this heading">¶</a></h2>
+<p>The easier way to spot a slow simulation is to profile a test suite, as follows:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">PYTEST_ADDOPTS</span><span class="o">=</span><span class="s2">&quot;$PYTEST_ADDOPTS --durations=10&quot;</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span>
 
 <span class="o">...</span>
-<span class="n">Which</span> <span class="n">gives</span> <span class="n">you</span> <span class="n">the</span> <span class="mi">10</span> <span class="n">slowest</span> <span class="n">tests</span><span class="p">:</span>
+<span class="n">This</span> <span class="n">returns</span> <span class="n">the</span> <span class="mi">10</span> <span class="n">slowest</span> <span class="n">tests</span><span class="p">:</span>
 <span class="mf">9.69</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">test_basics</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_basics</span><span class="p">[</span><span class="n">scenario_arguments12</span><span class="p">]</span>
 <span class="mf">9.02</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">reforms</span><span class="o">/</span><span class="n">test_plf2016_ayrault_muet</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_plf2016_ayrault_muet</span>
 <span class="mf">8.91</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">test_basics</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_basics</span><span class="p">[</span><span class="n">scenario_arguments11</span><span class="p">]</span>
@@ -152,7 +150,7 @@
 <span class="mf">8.17</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">test_tax_rates</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_marginal_tax_rate</span>
 </pre></div>
 </div>
-<p>Now, let’s take a closer look at this test <code class="docutils literal notranslate"><span class="pre">tests/formulas/irpp_prets_participatifs.yaml</span></code>:</p>
+<p>Profile <code class="docutils literal notranslate"><span class="pre">tests/formulas/irpp_prets_participatifs.yaml</span></code> from the above results:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">PYTEST_ADDOPTS</span><span class="o">=</span><span class="s2">&quot;$PYTEST_ADDOPTS --durations=3&quot;</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span>
 
 <span class="o">...</span>
@@ -162,12 +160,12 @@
 <span class="mf">3.02</span><span class="n">s</span> <span class="n">call</span>     <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span><span class="p">::</span>
 </pre></div>
 </div>
-<p>Terrific! We now know that the first test in <code class="docutils literal notranslate"><span class="pre">tests/formulas/irpp_prets_participatifs.yaml</span></code> is the slowest, compared to the others.</p>
+<p>This indicates the first test in <code class="docutils literal notranslate"><span class="pre">tests/formulas/irpp_prets_participatifs.yaml</span></code> is the slowest, compared to the others.</p>
 </section>
 <section id="generate-the-flame-graph">
-<h2>Generate the flame graph<a class="headerlink" href="#generate-the-flame-graph" title="Permalink to this headline">¶</a></h2>
-<p>To generate the flame graph, just pass the <a class="reference external" href="https://openfisca.org/doc/openfisca-python-api/openfisca-run-test.html"><code class="docutils literal notranslate"><span class="pre">--performance</span></code></a> option to <code class="docutils literal notranslate"><span class="pre">openfisca</span> <span class="pre">test</span></code>.</p>
-<p>We’ll also use the <a class="reference external" href="https://openfisca.org/doc/openfisca-python-api/openfisca-run-test.html"><code class="docutils literal notranslate"><span class="pre">--name_filter</span></code></a> option to profile the first test only.</p>
+<h2>Generate the flame graph<a class="headerlink" href="#generate-the-flame-graph" title="Link to this heading">¶</a></h2>
+<p>To generate the flame graph, pass the <a class="reference external" href="https://openfisca.org/doc/openfisca-python-api/openfisca_test.html"><code class="docutils literal notranslate"><span class="pre">--performance</span></code></a> option to <code class="docutils literal notranslate"><span class="pre">openfisca</span> <span class="pre">test</span></code>.</p>
+<p>It is also possible to supply the <a class="reference external" href="https://openfisca.org/doc/openfisca-python-api/openfisca_test.html"><code class="docutils literal notranslate"><span class="pre">--name_filter</span></code></a> option to profile specific tests only.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">performance</span> <span class="o">--</span><span class="n">name_filter</span> <span class="n">ir_prets_participatifs_2016</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span>
 <span class="n">git</span> <span class="n">status</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">html</span>
 
@@ -178,8 +176,8 @@
 </div>
 </section>
 <section id="open-the-flame-graph">
-<h2>Open the flame graph<a class="headerlink" href="#open-the-flame-graph" title="Permalink to this headline">¶</a></h2>
-<p>Now, you can open the file with your favorite browser.</p>
+<h2>Open the flame graph<a class="headerlink" href="#open-the-flame-graph" title="Link to this heading">¶</a></h2>
+<p>Now, you can open the file with your favourite browser.</p>
 <p>For example, in OS X:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="n">performance_graph</span><span class="o">.</span><span class="n">html</span>
 </pre></div>
@@ -190,7 +188,7 @@
 <p>The question is, why?</p>
 </section>
 <section id="find-the-bottleneck">
-<h2>Find the bottleneck<a class="headerlink" href="#find-the-bottleneck" title="Permalink to this headline">¶</a></h2>
+<h2>Find the bottleneck<a class="headerlink" href="#find-the-bottleneck" title="Link to this heading">¶</a></h2>
 <p>In order to identify why the simulation is slow, we need to find the bottleneck. We’ll use a line profiler to figure it out.</p>
 <p>We’ll start by installing <code class="docutils literal notranslate"><span class="pre">line_profiler</span></code>:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">line_profiler</span>
@@ -222,7 +220,7 @@
 <p>Another formula… so we’ll have to follow the breadcrumbs.</p>
 </section>
 <section id="follow-the-breadcrumbs">
-<h2>Follow the breadcrumbs<a class="headerlink" href="#follow-the-breadcrumbs" title="Permalink to this headline">¶</a></h2>
+<h2>Follow the breadcrumbs<a class="headerlink" href="#follow-the-breadcrumbs" title="Link to this heading">¶</a></h2>
 <p>We’ll repeat the same operation until we find the culprit! You’ll see that the results are coherent with the flame graph:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#   Hits    Time      Per Hit      % Time         Line Contents</span>
 <span class="o">====================================================================</span>
@@ -265,7 +263,7 @@
 </pre></div>
 </div>
 <p>Let’s find out where <code class="docutils literal notranslate"><span class="pre">parameters</span></code> is defined by modifying the code as follows:</p>
-<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w">class indemnite_residence(Variable):</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>class indemnite_residence(Variable):
 <span class="w"> </span>   value_type = float
 <span class="w"> </span>   entity = Individu
 <span class="w"> </span>   label = &quot;Indemnité de résidence des fonctionnaires&quot;
@@ -277,12 +275,12 @@
 </pre></div>
 </div>
 <p>Then running <code class="docutils literal notranslate"><span class="pre">openfisca</span> <span class="pre">test</span></code> with <a class="reference external" href="https://docs.python.org/3/library/pdb.html">The Python Debugger</a>:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span>$ openfisca test --pdb tests/formulas/irpp_prets_participatifs.yaml
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">pdb</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span>
 
-...
+<span class="o">...</span>
 
-(Pdb) parameters.__qualname__
-&#39;TaxBenefitSystem.get_parameters_at_instant&#39;
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">parameters</span><span class="o">.</span><span class="vm">__qualname__</span>
+<span class="s1">&#39;TaxBenefitSystem.get_parameters_at_instant&#39;</span>
 </pre></div>
 </div>
 </li>
@@ -325,12 +323,12 @@
 </pre></div>
 </div>
 <p>Then running <code class="docutils literal notranslate"><span class="pre">openfisca</span> <span class="pre">test</span></code> with <a class="reference external" href="https://docs.python.org/3/library/pdb.html">The Python Debugger</a>:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span>$ openfisca test --pdb tests/formulas/irpp_prets_participatifs.yaml
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">pdb</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span>
 
-...
+<span class="o">...</span>
 
-(Pdb) bareme.calc.__qualname__
-&#39;MarginalRateTaxScale.calc&#39;
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">bareme</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="vm">__qualname__</span>
+<span class="s1">&#39;MarginalRateTaxScale.calc&#39;</span>
 </pre></div>
 </div>
 </li>
@@ -343,7 +341,7 @@
 <p>How do we proceed?</p>
 </section>
 <section id="follow-to-the-core">
-<h2>Follow to the core<a class="headerlink" href="#follow-to-the-core" title="Permalink to this headline">¶</a></h2>
+<h2>Follow to the core<a class="headerlink" href="#follow-to-the-core" title="Link to this heading">¶</a></h2>
 <p>We’ll continue our profiling in core, following <code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem.get_parameters_at_instant</span></code>.</p>
 <p>For that, we need to install OpenFisca Core in editable mode:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">openfisca</span><span class="o">-</span><span class="n">core</span>
@@ -428,7 +426,7 @@
 <p>Perfect!</p>
 </section>
 <section id="isolate-the-bottleneck">
-<h2>Isolate the bottleneck<a class="headerlink" href="#isolate-the-bottleneck" title="Permalink to this headline">¶</a></h2>
+<h2>Isolate the bottleneck<a class="headerlink" href="#isolate-the-bottleneck" title="Link to this heading">¶</a></h2>
 <p>Now we’re going to isolate it:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">fragments</span> <span class="o">=</span> <span class="n">instant</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
 <span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="k">for</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">]</span>
@@ -451,7 +449,7 @@
 </div>
 </section>
 <section id="elevate-the-bottleneck">
-<h2>Elevate the bottleneck<a class="headerlink" href="#elevate-the-bottleneck" title="Permalink to this headline">¶</a></h2>
+<h2>Elevate the bottleneck<a class="headerlink" href="#elevate-the-bottleneck" title="Link to this heading">¶</a></h2>
 <p>Now we need to choose a strategy to reduce the bottleneck’s impact on performance.</p>
 <p>We can either:</p>
 <ul class="simple">
@@ -500,7 +498,7 @@
 <p>That’s it!</p>
 </section>
 <section id="caching-further">
-<h2>Caching further<a class="headerlink" href="#caching-further" title="Permalink to this headline">¶</a></h2>
+<h2>Caching further<a class="headerlink" href="#caching-further" title="Link to this heading">¶</a></h2>
 <p>Once we know it works, can’t we go further?</p>
 <p>With a couple of extra caches and code refactoring, we could end up with something like this:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
@@ -595,7 +593,7 @@
 <p>Looks promising!</p>
 </section>
 <section id="beware-of-context">
-<h2>Beware of context<a class="headerlink" href="#beware-of-context" title="Permalink to this headline">¶</a></h2>
+<h2>Beware of context<a class="headerlink" href="#beware-of-context" title="Link to this heading">¶</a></h2>
 <p>So we tried reducing the number of hits, what about reducing the impact per hit?</p>
 <p>Looking back to <code class="docutils literal notranslate"><span class="pre">get_at_instant</span></code>, let’s follow the next function call:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#  Hits     Time      Per Hit    % Time         Line Contents</span>
@@ -617,9 +615,9 @@
 <p>Let’s try that out (naive implementation):</p>
 <div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+import sortedcontainers</span>
 
-<span class="w"># ...</span>
+# ...
 
-<span class="w">class Parameter(AtInstantLike):</span>
+class Parameter(AtInstantLike):
 <span class="w"> </span>   # ...
 
 <span class="w"> </span>   def __init__(self, name, data, file_path = None):
@@ -663,19 +661,19 @@
 </div>
 <p>It’s actually worse… but why?</p>
 <p>One hypothesis is, even if, compared to a linear search with complexity <em>O(n)</em>, a binary search should be more efficient in that it has a complexity of <em>O(log(n))</em>, it will actually be more efficient for large numbers of <em>n</em>, which is not usually the case here.</p>
-<p>In fact, creating a lookup table for parameters would be theoretically more efficient. That would require refactoring, as the current <code class="docutils literal notranslate"><span class="pre">values_list</span></code> object is not hashable. Indeed, even using a more appropiate data structure could lead to better performance.</p>
+<p>In fact, creating a lookup table for parameters would be theoretically more efficient. That would require refactoring, as the current <code class="docutils literal notranslate"><span class="pre">values_list</span></code> object is not hashable. Indeed, even using a more appropriate data structure could lead to better performance.</p>
 </section>
 <section id="wrap-up">
-<h2>Wrap up<a class="headerlink" href="#wrap-up" title="Permalink to this headline">¶</a></h2>
+<h2>Wrap up<a class="headerlink" href="#wrap-up" title="Link to this heading">¶</a></h2>
 <p>Finally, let’s run our base &amp; proposed scenarios several times so as to have something more statistically sound.</p>
 <p>IPython’s <code class="docutils literal notranslate"><span class="pre">%timeit</span></code> comes handy:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span>pip install ipython
-ipython
-%timeit -n 10 -r 3 !openfisca test --country-package openfisca_france tests/formulas/irpp_prets_participatifs.yaml
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">ipython</span>
+<span class="n">ipython</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">r</span> <span class="mi">3</span> <span class="n">openfisca</span> <span class="n">test</span> <span class="o">--</span><span class="n">country</span><span class="o">-</span><span class="n">package</span> <span class="n">openfisca_france</span> <span class="n">tests</span><span class="o">/</span><span class="n">formulas</span><span class="o">/</span><span class="n">irpp_prets_participatifs</span><span class="o">.</span><span class="n">yaml</span>
 
-...
-
-# Before
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Before
 17.2 s ± 261 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
 
 # After
@@ -706,11 +704,11 @@ ipython
           <a href="../openfisca-python-api/index.html" title="OpenFisca Python API"
              >next</a> |</li>
         <li class="right" >
-          <a href="replicate-simulation-inputs.html" title="Replicating a situation along axes"
+          <a href="analyse-simulation.html" title="Analysing or debugging a simulation"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="cog"></i> Running a simulation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">How to profile the performance of a simulation</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Profiling a simulation’s performance</a></li> 
       </ul>
     </div>
   

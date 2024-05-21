@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,18 +17,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Replicating a situation along axes &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="How to profile the performance of a simulation" href="profile-simulation.html" />
-    <link rel="prev" title="Analysing or debugging a simulation" href="analyse-simulation.html" />
+    <link rel="next" title="Analysing or debugging a simulation" href="analyse-simulation.html" />
+    <link rel="prev" title="How to run a simulation" href="run-simulation.html" />
   
    
 
@@ -44,10 +42,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="profile-simulation.html" title="How to profile the performance of a simulation"
+          <a href="analyse-simulation.html" title="Analysing or debugging a simulation"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="analyse-simulation.html" title="Analysing or debugging a simulation"
+          <a href="run-simulation.html" title="How to run a simulation"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="cog"></i> Running a simulation</a> &#187;</li>
@@ -97,16 +95,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../coding-the-legislation/index.html"><i icon-name="terminal"></i> From law to code</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html"><i icon-name="cog"></i> Running a simulation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="run-simulation.html">How to run a simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="analyse-simulation.html">Analysing or debugging a simulation</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Replicating a situation along axes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="profile-simulation.html">How to profile the performance of a simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyse-simulation.html">Analysing or debugging a simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profile-simulation.html">Profiling a simulation’s performance</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -129,19 +127,19 @@
           <div class="document clearer body">
             
   <section id="replicating-a-situation-along-axes">
-<h1>Replicating a situation along axes<a class="headerlink" href="#replicating-a-situation-along-axes" title="Permalink to this headline">¶</a></h1>
-<p>So far we’ve seen two ways of populating a Simulation object with data:</p>
+<h1>Replicating a situation along axes<a class="headerlink" href="#replicating-a-situation-along-axes" title="Link to this heading">¶</a></h1>
+<p>Further to the two ways of populating a Simulation object with data:</p>
 <ul class="simple">
-<li><p>either describe a <a class="reference internal" href="run-simulation.html#test-cases"><span class="std std-doc">small population</span></a> with fine control over input variables and over the relationship between individuals and group entities;</p></li>
-<li><p>or provide <a class="reference internal" href="run-simulation.html#data"><span class="std std-doc">inputs in bulk</span></a>, typically using tabular data (CSV, Excel, etc.)</p></li>
+<li><p>either describe a <a class="reference internal" href="run-simulation.html#test-cases"><span class="std std-ref">small population</span></a> with fine control over input variables and over the relationship between individuals and group entities;</p></li>
+<li><p>or provide <a class="reference internal" href="run-simulation.html#data"><span class="std std-ref">inputs in bulk</span></a>, typically using tabular data (CSV, Excel, etc.)</p></li>
 </ul>
-<p>A third possibility exists: you can set up a small-scale situation, as in test cases; and use it to generate a number of “copies” of this situation, in which one or more variables of your choice take on a range of values.</p>
-<p>We do this by adding an “axes” entry to a test case:</p>
+<p>a third possibility also exists. Suitable for small-scale situations such as test cases; it is possible to generate a number of “copies” of this situation, in which one or more variables of your choice take on a range of values.</p>
+<p>The following example does this by adding an “axes” entry to a test case:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">WITH_AXES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}},</span>
     <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;h1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
-        <span class="s1">&#39;h2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+        <span class="s1">&#39;household_1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;household_2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
         <span class="p">},</span>
     <span class="s1">&#39;axes&#39;</span><span class="p">:</span> <span class="p">[[{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">3000</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span><span class="s1">&#39;2018-11&#39;</span><span class="p">}]]</span>
     <span class="p">}</span>
@@ -150,14 +148,15 @@
 <span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation_builder</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">WITH_AXES</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Be careful to note the structure of the “axes” field: an <strong>array of arrays</strong> of axis objects. We will come back to this, but for now let’s investigate the effects of adding this single axis.</p>
-<p>As before, <code class="docutils literal notranslate"><span class="pre">BASIC_TEST_CASE</span></code> describes one household with two parents and one child, and a second household which is in fact a single adult person. However, the specification of an axis results in something quite different now:</p>
+<p>Be careful to note the structure of the “axes” field: an <strong>array of arrays</strong> of axis objects.</p>
+<p>This example describes one household with two parents and one child, plus a second household which is in fact a single adult person.
+With this simulation the following code indicates that there will be 40 results:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">))</span>
 <span class="go">40</span>
 </pre></div>
 </div>
-<p>We started with a “prototype” situation containing 4 individuals, and we specified an axis which replicates this situation 10 times. And so, as expected, we end up with a simulation containing 4 times 10 individuals.</p>
-<p>What happened with respect to the data? It’s easier to represent if we first “reshape” the computed data to reflect this structure of 10 groups of 4 individuals:</p>
+<p>The “prototype” situation contains 4 individuals, the axis replicates this situation 10 times which results in a simulation containing 4 times 10 individuals.</p>
+<p>What happened with respect to the data? It’s easier to represent by “reshaping” the computed data to reflect the structure of 10 groups of 4 individuals:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">),(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">array([[   0.     ,    0.     ,    0.     ,    0.     ],</span>
 <span class="go">       [ 333.33334,    0.     ,    0.     ,    0.     ],</span>
@@ -171,21 +170,21 @@
 <span class="go">       [3000.     ,    0.     ,    0.     ,    0.     ]], dtype=float32)</span>
 </pre></div>
 </div>
-<p>We can see that, for the requested period, the variable <code class="docutils literal notranslate"><span class="pre">salary</span></code> <strong>of the first individual in each group</strong> is varying in increments from 0 to 3000.</p>
+<p>This shows that for the requested period, the variable <code class="docutils literal notranslate"><span class="pre">salary</span></code> <strong>of the first individual in each group</strong> is varying in increments from 0 to 3000.</p>
 <section id="targeting-individuals">
-<h2>Targeting individuals<a class="headerlink" href="#targeting-individuals" title="Permalink to this headline">¶</a></h2>
-<p>The control provided by an axis is fine-grained and targets one individual. If you wanted to set Javier’s salary instead of Ari’s, you could do so by providing the <em>index</em> of Javier in the original situation; since our indices are 0-based, this is 3:</p>
+<h2>Targeting individuals<a class="headerlink" href="#targeting-individuals" title="Link to this heading">¶</a></h2>
+<p>The control provided by an axis is fine-grained and targets one individual. To set Javier’s salary instead of Ari’s, provide the <em>index</em> of Javier in the original situation; since the indices are 0-based, this is 3:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">WITH_AXES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}},</span>
     <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;h1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
-        <span class="s1">&#39;h2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+        <span class="s1">&#39;household_1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;household_2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
         <span class="p">},</span>
     <span class="s1">&#39;axes&#39;</span><span class="p">:</span> <span class="p">[[{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">3000</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span><span class="s1">&#39;2018-11&#39;</span><span class="p">}]]</span>
     <span class="p">}</span>
 </pre></div>
 </div>
-<p>And the result is now:</p>
+<p>This leads to the result:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">),(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">array([[   0.     ,    0.     ,    0.     ,    0.     ],</span>
 <span class="go">       [   0.     ,    0.     ,    0.     ,  333.33334],</span>
@@ -199,17 +198,17 @@
 <span class="go">       [   0.     ,    0.     ,    0.     , 3000.     ]], dtype=float32)</span>
 </pre></div>
 </div>
-<p>Axes are particularly interesting when you want to chart how one variable relates to another, as in <a class="reference external" href="https://mybinder.org/v2/gh/openfisca/tutorial/master?filepath=notebooks/how_to_handle_axes.ipynb">this tutorial notebook</a>.</p>
+<p>Axes are particularly for charting how one variable relates to another, as in <a class="reference external" href="https://mybinder.org/v2/gh/openfisca/tutorial/master?filepath=notebooks/how_to_handle_axes.ipynb">this tutorial notebook</a>.</p>
 </section>
 <section id="adding-axes-parallel-axes">
-<h2>Adding axes: parallel axes<a class="headerlink" href="#adding-axes-parallel-axes" title="Permalink to this headline">¶</a></h2>
-<p>We noted above that the “axes” are in fact an array of arrays, which allows us to use several axes at once : parallel <strong>or</strong> perpendicular axes.</p>
+<h2>Adding axes: parallel axes<a class="headerlink" href="#adding-axes-parallel-axes" title="Link to this heading">¶</a></h2>
+<p>As noted above, the “axes” are in fact an array of arrays making it possible to implement several parallel <strong>or</strong> perpendicular axes at once.</p>
 <p>Sets of axes in the inner array are “parallel”. They allow additional variables to be generated in increments. For instance (again take careful note of the position of the square brackets):</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">WITH_PARALLEL_AXES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}},</span>
     <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;h1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
-        <span class="s1">&#39;h2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+        <span class="s1">&#39;household_1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;household_2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
         <span class="p">},</span>
     <span class="s1">&#39;axes&#39;</span><span class="p">:</span> <span class="p">[[</span>
         <span class="p">{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">78</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span><span class="s1">&#39;2018-11&#39;</span><span class="p">},</span>
@@ -248,13 +247,13 @@
 <p>For this to work, the <code class="docutils literal notranslate"><span class="pre">count</span></code> values of parallel axes must be the same. An error will be raised if they are different.</p>
 </section>
 <section id="adding-axes-perpendicular-axes">
-<h2>Adding axes: perpendicular axes<a class="headerlink" href="#adding-axes-perpendicular-axes" title="Permalink to this headline">¶</a></h2>
-<p>Sets of axes in the outer array are “perpendicular”, that is, they result in independent variation. For instance, we might have:</p>
+<h2>Adding axes: perpendicular axes<a class="headerlink" href="#adding-axes-perpendicular-axes" title="Link to this heading">¶</a></h2>
+<p>Sets of axes in the outer array are “perpendicular” resulting in independent variations. For instance:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">WITH_PERPENDICULAR_AXES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}},</span>
     <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;h1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
-        <span class="s1">&#39;h2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+        <span class="s1">&#39;household_1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;household_2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
         <span class="p">},</span>
     <span class="s1">&#39;axes&#39;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">[{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">78</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span><span class="s1">&#39;2018-11&#39;</span><span class="p">}],</span>
@@ -263,15 +262,15 @@
     <span class="p">}</span>
 </pre></div>
 </div>
-<p>Note the difference in nesting: we no longer have an inner set of two axes, but two sets of one axis each. The result is more complex:</p>
+<p>Note the difference in nesting; there is no longer an inner set of two axes, but two sets of one axis each. The result is more complex:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">simulation_builder</span> <span class="o">=</span> <span class="n">SimulationBuilder</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation_builder</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">WITH_PERPENDICULAR_AXES</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">))</span>
 <span class="go">64</span>
 </pre></div>
 </div>
-<p>Why? Because we are varying <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">salary</span></code> independently, and each axis results in multiplying by 4 our original population of 4, resulting in 4 times 4 times 4 individuals, which is indeed 64.</p>
-<p>What does the data look like?</p>
+<p>Why? Because <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">salary</span></code> are varying independently and each axis results in multiplying by 4 the original population of 4. This results in 4 times 4 times 4 individuals, equalling 64.</p>
+<p>The results are as follows:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-11&#39;</span><span class="p">),(</span><span class="mi">16</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">array([[   0.,    0.,    0.,    0.],</span>
 <span class="go">       [   0.,    0.,    0.,    0.],</span>
@@ -308,8 +307,8 @@
 <span class="go">       [78,  0,  0,  0]], dtype=int32)</span>
 </pre></div>
 </div>
-<p>We can see that both the <code class="docutils literal notranslate"><span class="pre">age</span></code> and the <code class="docutils literal notranslate"><span class="pre">salary</span></code> variables vary by increments, so that <strong>all combinations are present</strong>: for each <code class="docutils literal notranslate"><span class="pre">age</span></code> increment, there exists a variant with each <code class="docutils literal notranslate"><span class="pre">salary</span></code> increment.</p>
-<p>This allows us to use OpenFisca for <code class="docutils literal notranslate"><span class="pre">multivariate</span> <span class="pre">observation</span></code>: charting how two variables interact to control a third, as in <a class="reference external" href="https://mybinder.org/v2/gh/adrienpacifico/adrienpacifico.github.io/master?filepath=Notebooks/plotly_openfisca_cohabitants.ipynb">this example</a>.</p>
+<p>Both the <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">salary</span></code> variables vary by increments, this means <strong>all combinations are present</strong>. For each <code class="docutils literal notranslate"><span class="pre">age</span></code> increment there exists a variant of each <code class="docutils literal notranslate"><span class="pre">salary</span></code> increment.</p>
+<p>This allows OpenFisca to be used for <code class="docutils literal notranslate"><span class="pre">multivariate</span> <span class="pre">observation</span></code>: charting how two variables interact to control a third, as in <a class="reference external" href="https://mybinder.org/v2/gh/adrienpacifico/adrienpacifico.github.io/master?filepath=Notebooks/plotly_openfisca_cohabitants.ipynb">this example</a>.</p>
 </section>
 </section>
 
@@ -328,10 +327,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="profile-simulation.html" title="How to profile the performance of a simulation"
+          <a href="analyse-simulation.html" title="Analysing or debugging a simulation"
              >next</a> |</li>
         <li class="right" >
-          <a href="analyse-simulation.html" title="Analysing or debugging a simulation"
+          <a href="run-simulation.html" title="How to run a simulation"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="cog"></i> Running a simulation</a> &#187;</li>

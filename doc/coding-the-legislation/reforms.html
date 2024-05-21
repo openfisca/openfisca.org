@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Reforms &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Inferences" href="inferences.html" />
@@ -113,7 +111,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -136,13 +134,13 @@
           <div class="document clearer body">
             
   <section id="reforms">
-<h1>Reforms<a class="headerlink" href="#reforms" title="Permalink to this headline">¶</a></h1>
-<p>A <a class="reference internal" href="../key-concepts/reforms.html"><span class="doc std std-doc">reform</span></a> is a set of modifications to be applied to a tax and benefit system, usually to study the quantitative impact of a possible change of the law.</p>
+<h1>Reforms<a class="headerlink" href="#reforms" title="Link to this heading">¶</a></h1>
+<p>A <a class="reference internal" href="../key-concepts/reforms.html"><span class="std std-doc">reform</span></a> is a set of modifications to be applied to a tax and benefit system, usually to study the quantitative impact of a possible change of the law.</p>
 <blockquote>
 <div><p>See the reference documentation of the class <a class="reference internal" href="../openfisca-python-api/reforms.html"><span class="doc std std-doc">Reform</span></a>.</p>
 </div></blockquote>
 <section id="writing-a-reform">
-<h2>Writing a reform<a class="headerlink" href="#writing-a-reform" title="Permalink to this headline">¶</a></h2>
+<h2>Writing a reform<a class="headerlink" href="#writing-a-reform" title="Link to this heading">¶</a></h2>
 <p>Let’s for instance assume that we want to simulate the effect of a reform that changes the way the <code class="docutils literal notranslate"><span class="pre">income_tax</span></code> is calculated.</p>
 <p>We would write such a reform this way:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">income_tax</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
@@ -166,7 +164,7 @@
 <p>All the <a class="reference internal" href="../openfisca-python-api/tax-benefit-system.html"><span class="doc std std-doc">methods</span></a> used to build a tax and benefit system can also be used to reform it.</p>
 <p>A reform that modifies a formula (such as our <code class="docutils literal notranslate"><span class="pre">income_tax_reform</span></code> example) is called a <em>structural reform</em>. It redefines the way a variable is calculated.</p>
 <section id="parametric-reforms">
-<h3>Parametric reforms<a class="headerlink" href="#parametric-reforms" title="Permalink to this headline">¶</a></h3>
+<h3>Parametric reforms<a class="headerlink" href="#parametric-reforms" title="Link to this heading">¶</a></h3>
 <p>A reform that apply changes to legislation parameters is called a <em>parametric reform</em>.</p>
 <blockquote>
 <div><p>Note that a reform can be both structural and parametric, modifying and/or adding variables <em>and</em> parameters. In that case, it is common practice to call it a structural reform anyway, the structural part outweighting the parametric one.</p>
@@ -175,7 +173,7 @@
 <p>This function performs the modifications you want to apply to the legislation. It takes as a parameter a copy of the reference tax and benefit system parameters: <code class="docutils literal notranslate"><span class="pre">parameters</span></code>. You can then modify and return <code class="docutils literal notranslate"><span class="pre">parameters</span></code>.</p>
 <p>The reform is applied for a certain fixed period. To define the period for which you want to apply the reform, it’s necessary to import <code class="docutils literal notranslate"><span class="pre">periods</span></code> from <code class="docutils literal notranslate"><span class="pre">openfisca_core</span></code>.</p>
 <section id="update-the-value-of-a-parameter">
-<h4>Update the value of a parameter<a class="headerlink" href="#update-the-value-of-a-parameter" title="Permalink to this headline">¶</a></h4>
+<h4>Update the value of a parameter<a class="headerlink" href="#update-the-value-of-a-parameter" title="Link to this heading">¶</a></h4>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">periods</span>
 
 <span class="k">def</span> <span class="nf">modify_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
@@ -193,7 +191,7 @@
 </div>
 </section>
 <section id="add-new-parameters">
-<h4>Add new parameters<a class="headerlink" href="#add-new-parameters" title="Permalink to this headline">¶</a></h4>
+<h4>Add new parameters<a class="headerlink" href="#add-new-parameters" title="Link to this heading">¶</a></h4>
 <p>You can load new parameters from a directory containing YAML files and add them to the reference parameters.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="kn">import</span> <span class="n">load_parameter_file</span>
@@ -213,7 +211,7 @@
 </div>
 </section>
 <section id="add-new-parameters-dynamically">
-<h4>Add new parameters dynamically<a class="headerlink" href="#add-new-parameters-dynamically" title="Permalink to this headline">¶</a></h4>
+<h4>Add new parameters dynamically<a class="headerlink" href="#add-new-parameters-dynamically" title="Link to this heading">¶</a></h4>
 <p>In some cases, loading new parameters from YAML files is not practical. For example, you may want to add parameters from values computed dynamically. In such cases you can use the python objects defined in the <a class="reference internal" href="../openfisca-python-api/parameters.html"><span class="doc std std-doc">parameters module</span></a>
 :</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="kn">import</span> <span class="n">ParameterNode</span>
@@ -246,7 +244,7 @@
 </section>
 </section>
 <section id="using-a-reform-in-python">
-<h2>Using a reform in Python<a class="headerlink" href="#using-a-reform-in-python" title="Permalink to this headline">¶</a></h2>
+<h2>Using a reform in Python<a class="headerlink" href="#using-a-reform-in-python" title="Link to this heading">¶</a></h2>
 <p>Reforms can be applied in Python with the following syntax:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfica_france</span> <span class="kn">import</span> <span class="n">CountryTaxBenefitSystem</span>
 
@@ -279,7 +277,7 @@
 </div></blockquote>
 </section>
 <section id="real-examples">
-<h2>Real examples<a class="headerlink" href="#real-examples" title="Permalink to this headline">¶</a></h2>
+<h2>Real examples<a class="headerlink" href="#real-examples" title="Link to this heading">¶</a></h2>
 <p>Examples can be found on the <a class="reference external" href="https://github.com/openfisca/openfisca-france/tree/master/openfisca_france/reforms">OpenFisca-France reforms directory</a>.</p>
 </section>
 </section>

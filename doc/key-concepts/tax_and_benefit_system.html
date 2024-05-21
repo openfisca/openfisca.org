@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Tax and Benefit System &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Variables and formulas" href="variables.html" />
@@ -97,8 +95,8 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Tax and Benefit System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables and formulas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="person%2C_entities%2C_role.html">Person, entities, role</a></li>
-<li class="toctree-l2"><a class="reference internal" href="periodsinstants.html">Periods, Instants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="person_entities_role.html">Person, entities, role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="periods_instants.html">Periods, Instants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulation.html">Simulation, Computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reforms.html">Reforms</a></li>
 </ul>
@@ -109,7 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -132,29 +130,20 @@
           <div class="document clearer body">
             
   <section id="tax-and-benefit-system">
-<h1>Tax and Benefit System<a class="headerlink" href="#tax-and-benefit-system" title="Permalink to this headline">¶</a></h1>
+<h1>Tax and Benefit System<a class="headerlink" href="#tax-and-benefit-system" title="Link to this heading">¶</a></h1>
 <section id="definition">
-<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h2>
-<p>The tax and benefit system is the higher-level instance in OpenFisca.
-Its goal is to model the legislation of a country.</p>
-<p>Basically a tax and benefit system contains simulation <a class="reference internal" href="variables.html"><span class="doc std std-doc">variables</span></a> (source code) and <a class="reference internal" href="parameters.html"><span class="doc std std-doc">legislation parameters</span></a> (data).</p>
-<p>This instance may host as many versions as there are countries in the world.</p>
+<h2>Definition<a class="headerlink" href="#definition" title="Link to this heading">¶</a></h2>
+<p>The tax and benefit system is the higher-level instance in OpenFisca.</p>
+<p>Its goal is to model the legislation of a country (or a more specific domain or jurisdiction) and all the countries in the world can have their own OpenFisca tax and benefit system.</p>
+<p>A tax and benefit system contains simulation <a class="reference internal" href="variables.html"><span class="std std-doc">variables</span></a> (source code) and <a class="reference internal" href="parameters.html"><span class="std std-doc">legislation parameters</span></a> (data).</p>
+<p>All the tax and benefit system instances depend on the OpenFisca core engine.</p>
 <blockquote>
-<div><p>The OpenFisca core engine is able to simulate any country legislation once it is (partially) represented as source code.</p>
+<div><p>The OpenFisca core engine is able to simulate any country’s legislation once it is (partially) represented as source code.</p>
 </div></blockquote>
-<p>Therefore you have to instantiate and use the version corresponding to your country of interest.</p>
-<section id="application-how-to-call-the-python-module">
-<h3>Application: how to call the Python module<a class="headerlink" href="#application-how-to-call-the-python-module" title="Permalink to this headline">¶</a></h3>
-<p>The system for France is currently the only one well implemented, so your first action should be:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call module describing the French System</span>
-<span class="kn">from</span> <span class="nn">openfisca_france</span> <span class="kn">import</span> <span class="n">FranceTaxBenefitSystem</span>
-
-<span class="c1"># Initialize the legislation</span>
-<span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">FranceTaxBenefitSystem</span><span class="p">()</span>
-
-</pre></div>
-</div>
-</section>
+<p>To instantiate and use OpenFisca requires choosing or creating a version that corresponds to your country, jurisdiction or domain of interest.</p>
+<p>You can find a selection of existing OpenFisca models at: <a class="reference external" href="https://openfisca.org/en/packages/">https://openfisca.org/en/packages/</a>.</p>
+<p>Note that there are both country and state level models.</p>
+<p>Each instance of OpenFisca is managed and published as open source digital infrastructure by teams positioned within, or linked to, the countries or jurisdictions they are modelling. Each maintains their own instances and as they are able, contributes to <code class="docutils literal notranslate"><span class="pre">OpenFisca</span> <span class="pre">Core</span></code> and the wider OpenFisca ecology.</p>
 </section>
 </section>
 

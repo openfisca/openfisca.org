@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -18,14 +17,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <title>Running a simulation &#8212; OpenFisca  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="How to run a simulation" href="run-simulation.html" />
@@ -96,16 +94,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../coding-the-legislation/index.html"><i icon-name="terminal"></i> From law to code</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#"><i icon-name="cog"></i> Running a simulation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="run-simulation.html">How to run a simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="analyse-simulation.html">Analysing or debugging a simulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate-simulation-inputs.html">Replicating a situation along axes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="profile-simulation.html">How to profile the performance of a simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyse-simulation.html">Analysing or debugging a simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profile-simulation.html">Profiling a simulation’s performance</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
 
 </div>
@@ -125,24 +123,23 @@
           
           <div class="document clearer body">
             
-  <section id="i-icon-name-cog-i-running-a-simulation">
-<h1><i icon-name="cog"></i> Running a simulation<a class="headerlink" href="#i-icon-name-cog-i-running-a-simulation" title="Permalink to this headline">¶</a></h1>
+  <section id="running-a-simulation">
+<h1><i icon-name="cog"></i> Running a simulation<a class="headerlink" href="#running-a-simulation" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p>To calculate Tax and Benefit System variables on people’s situations, you need to create and run a new <em>Simulation</em>.</p>
+<p>To calculate Tax and Benefit System variables relating to populations’ situations, you need to create and run a <em>Simulation</em>.</p>
 <p>OpenFisca will work the same if there is one person, seven, or seven million in the modelled situation.</p>
 <blockquote>
-<div><p>Technically speaking, OpenFisca uses <a class="reference internal" href="../coding-the-legislation/25_vectorial_computing.html"><span class="doc std std-doc">vector computing</span></a> via the <a class="reference external" href="http://www.numpy.org/">NumPy</a> package for performance reasons.</p>
+<div><p>Technically speaking, OpenFisca uses <a class="reference internal" href="../coding-the-legislation/25_vectorial_computing.html"><span class="std std-doc">vector computing</span></a> via the <a class="reference external" href="http://www.numpy.org/">NumPy</a> package. In simple terms this allows it to process large datasets in one go instead of sequentially processing one line of data at a time.</p>
 </div></blockquote>
-<!-- The below text is confusing and needs clarification-->
-<p>Nevertheless, you won’t have the same experience defining those various situation sizes and linking them to your simulation. So, multiple options could be used to describe this information:</p>
-<!---The below text is confusing here and needs clear wording-->
+<p>This allows for a wide range of use cases, from calculating a single entitlement for a person utilising a web service, to modelling population wide simulations and reforms for policy and research purposes.
+In this section the focus is on simulations and the two approaches that can be taken. They are</p>
 <ul class="simple">
-<li><p>either <a class="reference internal" href="run-simulation.html#test-cases"><span class="std std-doc">test cases</span></a>: you simulate the legislation for a small number of persons,</p></li>
-<li><p>or <a class="reference internal" href="run-simulation.html#data"><span class="std std-doc">bulk data</span></a>: you provide a population (survey with aggregated data, CSV files with bulk data, etc.) on which you want to apply the legislation.</p></li>
+<li><p><a class="reference internal" href="run-simulation.html#test-cases"><span class="std std-ref">test cases</span></a>: that utilise small structured data for input,</p></li>
+<li><p><a class="reference internal" href="run-simulation.html#data"><span class="std std-ref">bulk data</span></a>: in the form of aggregated data, CSV files, etc.</p></li>
 </ul>
-<p>Then, when you have a defined situation and need to replicate an input in a range of values (e.g. a <code class="docutils literal notranslate"><span class="pre">salary</span></code> in [0, 100 000]), you can define an axis as described in <a class="reference internal" href="replicate-simulation-inputs.html"><span class="doc std std-doc">the axes section</span></a>.</p>
-<p>Finally, you might want to understand how your simulation result was calculated. To do so, you can use the <code class="docutils literal notranslate"><span class="pre">trace</span></code> feature described in <a class="reference internal" href="analyse-simulation.html"><span class="doc std std-doc">this section</span></a>.</p>
+<p>It’s also possible to extend <em>Simulations</em> by defining an axis which is covered in detail in the section <a class="reference internal" href="replicate-simulation-inputs.html"><span class="std std-doc">Replicating a situation along axes</span></a>.</p>
+<p>When running Simulations it is also possible to activate the <a class="reference internal" href="analyse-simulation.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">trace</span></code> feature</span></a> which provides a way to analyse how the simulation achieved its results. Similarly there are options to trouble-shoot <a class="reference internal" href="profile-simulation.html"><span class="std std-doc">Simulation performance</span></a>.</p>
 </section>
 
 
