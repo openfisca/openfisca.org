@@ -10,7 +10,7 @@ Referencing your reuse is fast and easy. Follow the instructions below and [cont
 
 ### Describe your reuse
 
-Create a YAML file in the [`content/showcase/` folder](https://github.com/openfisca/openfisca.org/tree/master/data/showcase), in [snake case](https://en.wikipedia.org/wiki/Snake_case). For example, if your product is called “Legislation Explorer”, you would create a file named `legislation_explorer.yml`.
+Create a YAML file in the [`content/showcase/` folder](https://github.com/openfisca/openfisca.org/tree/main/data/showcase), in [snake case](https://en.wikipedia.org/wiki/Snake_case). For example, if your product is called “Legislation Explorer”, you would create a file named `legislation_explorer.yml`.
 
 Fill in that file with information following the template below:
 
@@ -49,7 +49,7 @@ If the source code of your reuse is not open, do not fill in the `source` parame
 
 ### Add an illustration
 
-Add an image in the PNG format to the [`static/img/showcase/` folder](https://github.com/openfisca/openfisca.org/tree/master/static/img/showcase), with the same name as the `.yml` file. For example: `legislation_explorer.png`.
+Add an image in the PNG format to the [`static/img/showcase/` folder](https://github.com/openfisca/openfisca.org/tree/main/static/img/showcase), with the same name as the `.yml` file. For example: `legislation_explorer.png`.
 
 The file should be in 16:9 format, at least 1280 × 720 pixels. To ensure fast loading and minimise the environmental impact of the OpenFisca website, the maximum allowed picture weight is 400 kB.
 
@@ -61,7 +61,7 @@ By referencing your package on the [dedicated page](https://openfisca.org/en/pac
 
 ### Describe your package
 
-Create a YAML file in the [`data/packages/` folder](https://github.com/openfisca/openfisca.org/tree/master/data/packages) with the following syntax: `${jurisdiction}.yml` where jurisdiction is a valid [ISO 3166-2 format](https://en.wikipedia.org/wiki/ISO_3166-2), e.g: `ZZ.yml` (note that this format accepts subdivisions, for example `ES-B` for Barcelona, Spain). In case several packages are available for the same jurisdiction, you can add a modifier with the following syntax `${jurisdiction}_${modifier}.yml`, e.g: `ES-B_mining.yml`.
+Create a YAML file in the [`data/packages/` folder](https://github.com/openfisca/openfisca.org/tree/main/data/packages) with the following syntax: `${jurisdiction}.yml` where jurisdiction is a valid [ISO 3166-2 format](https://en.wikipedia.org/wiki/ISO_3166-2), e.g: `ZZ.yml` (note that this format accepts subdivisions, for example `ES-B` for Barcelona, Spain). In case several packages are available for the same jurisdiction, you can add a modifier with the following syntax `${jurisdiction}_${modifier}.yml`, e.g: `ES-B_mining.yml`.
 
 Fill in that file with information following the template below:
 
