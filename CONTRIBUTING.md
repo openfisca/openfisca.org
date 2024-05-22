@@ -61,7 +61,7 @@ By referencing your package on the [dedicated page](https://openfisca.org/en/pac
 
 ### Describe your package
 
-Create a YAML file in the [`content/packages/` folder](https://github.com/openfisca/openfisca.org/tree/master/data/packages) with the following syntax: `${jurisdiction}.yml` where jurisdiction is a valid [ISO 3166-2 format](https://en.wikipedia.org/wiki/ISO_3166-2), e.g: `ZZ.yml` (note that this format accepts subdivisions, for example `ES-B` for Barcelona, Spain). In case several packages are available for the same jurisdiction, you can add a modifier with the following syntax `${jurisdiction}_${modifier}.yml`, e.g: `ES-B_mining.yml`.
+Create a YAML file in the [`data/packages/` folder](https://github.com/openfisca/openfisca.org/tree/master/data/packages) with the following syntax: `${jurisdiction}.yml` where jurisdiction is a valid [ISO 3166-2 format](https://en.wikipedia.org/wiki/ISO_3166-2), e.g: `ZZ.yml` (note that this format accepts subdivisions, for example `ES-B` for Barcelona, Spain). In case several packages are available for the same jurisdiction, you can add a modifier with the following syntax `${jurisdiction}_${modifier}.yml`, e.g: `ES-B_mining.yml`.
 
 Fill in that file with information following the template below:
 
