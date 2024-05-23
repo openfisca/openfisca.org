@@ -53,13 +53,14 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Publish openfisca.org
+          name: Publish to openfisca.org
           command: |
             touch public/.nojekyll # Bypass Jekyll processing on GitHub Pages
+            git checkout gh-pages
+            cp -R doc /tmp/doc
+            git checkout -
+            mv /tmp/doc public/doc
             npm run publish
-      - run:
-          name: Publish openfisca.org/doc
-          command: ./publish-doc.sh
 
 workflows:
   version: 2
