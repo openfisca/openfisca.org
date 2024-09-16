@@ -159,7 +159,11 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="c1"># If fancy indexing is used wit a datetime64, cast to a vectorial node supporting datetime64</span>
             <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">datetime64</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">parameters</span><span class="o">.</span><span class="n">VectorialAsofDateParameterNodeAtInstant</span><span class="o">.</span><span class="n">build_from_node</span><span class="p">(</span><span class="bp">self</span><span class="p">)[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">return</span> <span class="p">(</span>
+                    <span class="n">parameters</span><span class="o">.</span><span class="n">VectorialAsofDateParameterNodeAtInstant</span><span class="o">.</span><span class="n">build_from_node</span><span class="p">(</span>
+                        <span class="bp">self</span>
+                    <span class="p">)[</span><span class="n">key</span><span class="p">]</span>
+                <span class="p">)</span>
 
             <span class="k">return</span> <span class="n">parameters</span><span class="o">.</span><span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">build_from_node</span><span class="p">(</span><span class="bp">self</span><span class="p">)[</span><span class="n">key</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_children</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
