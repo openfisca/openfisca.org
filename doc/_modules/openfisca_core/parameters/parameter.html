@@ -114,8 +114,6 @@
   <h1>Source code for openfisca_core.parameters.parameter</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
-
 <span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -162,20 +160,22 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">file_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">file_path</span>
         <span class="n">helpers</span><span class="o">.</span><span class="n">_validate_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">values_history</span> <span class="o">=</span> <span class="bp">self</span>  <span class="c1"># Only for backward compatibility</span>
 
         <span class="c1"># Normal parameter declaration: the values are declared under the &#39;values&#39; key: parse the description and metadata.</span>
         <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;values&quot;</span><span class="p">):</span>
             <span class="c1"># &#39;unit&#39; and &#39;reference&#39; are only listed here for backward compatibility</span>
             <span class="n">helpers</span><span class="o">.</span><span class="n">_validate_parameter</span><span class="p">(</span>
-                <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">allowed_keys</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">COMMON_KEYS</span><span class="o">.</span><span class="n">union</span><span class="p">({</span><span class="s2">&quot;values&quot;</span><span class="p">})</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="n">data</span><span class="p">,</span>
+                <span class="n">allowed_keys</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">COMMON_KEYS</span><span class="o">.</span><span class="n">union</span><span class="p">({</span><span class="s2">&quot;values&quot;</span><span class="p">}),</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
 
@@ -191,16 +191,16 @@
             <span class="n">values</span> <span class="o">=</span> <span class="n">data</span>
 
         <span class="n">instants</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
-            <span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span>
+            <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span>  <span class="c1"># sort in reverse chronological order</span>
 
         <span class="n">values_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">instant_str</span> <span class="ow">in</span> <span class="n">instants</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">periods</span><span class="o">.</span><span class="n">INSTANT_PATTERN</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">instant_str</span><span class="p">):</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Invalid property &#39;</span><span class="si">{</span><span class="n">instant_str</span><span class="si">}</span><span class="s2">&#39; in &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;. Properties must be valid YYYY-MM-DD instants, such as 2017-01-15.&quot;</span>
                 <span class="k">raise</span> <span class="n">ParameterParsingError</span><span class="p">(</span>
-                    <span class="s2">&quot;Invalid property &#39;</span><span class="si">{}</span><span class="s2">&#39; in &#39;</span><span class="si">{}</span><span class="s2">&#39;. Properties must be valid YYYY-MM-DD instants, such as 2017-01-15.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">instant_str</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-                    <span class="p">),</span>
+                    <span class="n">msg</span><span class="p">,</span>
                     <span class="n">file_path</span><span class="p">,</span>
                 <span class="p">)</span>
 
@@ -224,9 +224,9 @@
             <span class="p">)</span>
             <span class="n">values_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value_at_instant</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ParameterAtInstant</span><span class="p">]</span> <span class="o">=</span> <span class="n">values_list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ParameterAtInstant</span><span class="p">]</span> <span class="o">=</span> <span class="n">values_list</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="p">[</span>
                 <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -234,7 +234,7 @@
                     <span class="n">value</span><span class="o">.</span><span class="n">value</span> <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span>
-            <span class="p">]</span>
+            <span class="p">],</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -252,9 +252,8 @@
 
 <div class="viewcode-block" id="Parameter.update">
 <a class="viewcode-back" href="../../../openfisca-python-api/parameters.html#openfisca_core.parameters.Parameter.update">[docs]</a>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Change the value for a given period.</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Change the value for a given period.</span>
 
 <span class="sd">        :param period: Period where the value is modified. If set, `start` and `stop` should be `None`.</span>
 <span class="sd">        :param start: Start of the period. Instance of `openfisca_core.periods.Instant`. If set, `period` should be `None`.</span>
@@ -263,15 +262,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">stop</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Wrong input for &#39;update&#39; method: use either &#39;update(period, value = value)&#39; or &#39;update(start = start, stop = stop, value = value)&#39;. You cannot both use &#39;period&#39; and &#39;start&#39; or &#39;stop&#39;.&quot;</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                    <span class="s2">&quot;Wrong input for &#39;update&#39; method: use either &#39;update(period, value = value)&#39; or &#39;update(start = start, stop = stop, value = value)&#39;. You cannot both use &#39;period&#39; and &#39;start&#39; or &#39;stop&#39;.&quot;</span>
+                    <span class="n">msg</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
             <span class="n">start</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">start</span>
             <span class="n">stop</span> <span class="o">=</span> <span class="n">period</span><span class="o">.</span><span class="n">stop</span>
         <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You must provide either a start or a period&quot;</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;You must provide either a start or a period&quot;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="n">start_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
         <span class="n">stop_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">stop</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">))</span> <span class="k">if</span> <span class="n">stop</span> <span class="k">else</span> <span class="kc">None</span>
 
@@ -290,20 +291,23 @@
         <span class="k">if</span> <span class="n">stop_str</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">new_values</span> <span class="ow">and</span> <span class="p">(</span><span class="n">stop_str</span> <span class="o">==</span> <span class="n">new_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">instant_str</span><span class="p">):</span>
                 <span class="k">pass</span>  <span class="c1"># such interval is empty</span>
+            <span class="k">elif</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+                <span class="n">overlapped_value</span> <span class="o">=</span> <span class="n">old_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+                <span class="n">value_name</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">_compose_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">item_name</span><span class="o">=</span><span class="n">stop_str</span><span class="p">)</span>
+                <span class="n">new_interval</span> <span class="o">=</span> <span class="n">ParameterAtInstant</span><span class="p">(</span>
+                    <span class="n">value_name</span><span class="p">,</span>
+                    <span class="n">stop_str</span><span class="p">,</span>
+                    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">overlapped_value</span><span class="p">},</span>
+                <span class="p">)</span>
+                <span class="n">new_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_interval</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-                    <span class="n">overlapped_value</span> <span class="o">=</span> <span class="n">old_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
-                    <span class="n">value_name</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">_compose_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">item_name</span><span class="o">=</span><span class="n">stop_str</span><span class="p">)</span>
-                    <span class="n">new_interval</span> <span class="o">=</span> <span class="n">ParameterAtInstant</span><span class="p">(</span>
-                        <span class="n">value_name</span><span class="p">,</span> <span class="n">stop_str</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">overlapped_value</span><span class="p">}</span>
-                    <span class="p">)</span>
-                    <span class="n">new_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_interval</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">value_name</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">_compose_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">item_name</span><span class="o">=</span><span class="n">stop_str</span><span class="p">)</span>
-                    <span class="n">new_interval</span> <span class="o">=</span> <span class="n">ParameterAtInstant</span><span class="p">(</span>
-                        <span class="n">value_name</span><span class="p">,</span> <span class="n">stop_str</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
-                    <span class="p">)</span>
-                    <span class="n">new_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_interval</span><span class="p">)</span>
+                <span class="n">value_name</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">_compose_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">item_name</span><span class="o">=</span><span class="n">stop_str</span><span class="p">)</span>
+                <span class="n">new_interval</span> <span class="o">=</span> <span class="n">ParameterAtInstant</span><span class="p">(</span>
+                    <span class="n">value_name</span><span class="p">,</span>
+                    <span class="n">stop_str</span><span class="p">,</span>
+                    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+                <span class="p">)</span>
+                <span class="n">new_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_interval</span><span class="p">)</span>
 
         <span class="c1"># Insert new interval</span>
         <span class="n">value_name</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">_compose_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">item_name</span><span class="o">=</span><span class="n">start_str</span><span class="p">)</span>

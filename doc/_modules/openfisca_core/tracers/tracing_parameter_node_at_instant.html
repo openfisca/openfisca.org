@@ -121,8 +121,6 @@
 
 <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">parameters</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">tracers</span>
-
 <span class="n">ParameterNode</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span>
     <span class="n">parameters</span><span class="o">.</span><span class="n">VectorialParameterNodeAtInstant</span><span class="p">,</span>
     <span class="n">parameters</span><span class="o">.</span><span class="n">ParameterNodeAtInstant</span><span class="p">,</span>
@@ -130,6 +128,8 @@
 
 <span class="k">if</span> <span class="n">typing</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">ArrayLike</span>
+
+    <span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">tracers</span>
 
     <span class="n">Child</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">ParameterNode</span><span class="p">,</span> <span class="n">ArrayLike</span><span class="p">]</span>
 
@@ -148,7 +148,7 @@
     <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">TracingParameterNodeAtInstant</span><span class="p">,</span> <span class="n">Child</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TracingParameterNodeAtInstant</span> <span class="o">|</span> <span class="n">Child</span><span class="p">:</span>
         <span class="n">child</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter_node_at_instant</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_traced_child</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 
@@ -160,16 +160,16 @@
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ArrayLike</span><span class="p">],</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">TracingParameterNodeAtInstant</span><span class="p">,</span> <span class="n">Child</span><span class="p">]:</span>
+        <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">ArrayLike</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TracingParameterNodeAtInstant</span> <span class="o">|</span> <span class="n">Child</span><span class="p">:</span>
         <span class="n">child</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_node_at_instant</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_traced_child</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_traced_child</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">child</span><span class="p">:</span> <span class="n">Child</span><span class="p">,</span>
-        <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ArrayLike</span><span class="p">],</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">TracingParameterNodeAtInstant</span><span class="p">,</span> <span class="n">Child</span><span class="p">]:</span>
+        <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">ArrayLike</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TracingParameterNodeAtInstant</span> <span class="o">|</span> <span class="n">Child</span><span class="p">:</span>
         <span class="n">period</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_node_at_instant</span><span class="o">.</span><span class="n">_instant_str</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span>
@@ -191,9 +191,9 @@
             <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_node_at_instant</span><span class="o">.</span><span class="n">_name</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter_node_at_instant</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">])</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter_node_at_instant</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,)</span> <span class="o">+</span> <span class="n">parameters</span><span class="o">.</span><span class="n">ALLOWED_PARAM_TYPES</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">*</span><span class="n">parameters</span><span class="o">.</span><span class="n">ALLOWED_PARAM_TYPES</span><span class="p">)):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">record_parameter_access</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">child</span></div>

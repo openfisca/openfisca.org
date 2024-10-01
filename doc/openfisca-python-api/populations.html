@@ -149,14 +149,12 @@
 <dt class="sig sig-object py" id="openfisca_core.populations.Population.__call__">
 <span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/populations/population.html#Population.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.populations.Population.__call__" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the variable <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> for the entity and the period <code class="docutils literal notranslate"><span class="pre">period</span></code>, using the variable formula if it exists.</p>
-<p>Example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2017-04&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="mf">300.</span><span class="p">])</span>
-</pre></div>
-</div>
+<p>Example:
+&gt;&gt;&gt; person(“salary”, “2017-04”)
+&gt;&gt;&gt; array([300.0])</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]]]</span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A numpy array containing the result of the calculation</p>
@@ -170,36 +168,34 @@
 <dd><p>Get the rank of a person within an entity according to a criteria.
 The person with rank 0 has the minimum value of criteria.
 If condition is specified, then the persons who don’t respect it are not taken into account and their rank is -1.</p>
-<p>Example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">age</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>  <span class="c1"># e.g [32, 34, 2, 8, 1]</span>
+<p>Example:
+&gt;&gt;&gt; age = person(“age”, period)  # e.g [32, 34, 2, 8, 1]
+&gt;&gt;&gt; person.get_rank(household, age)
+&gt;&gt;&gt; [3, 4, 0, 2, 1]</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_child</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">Household</span><span class="o">.</span><span class="n">CHILD</span>
+<span class="gp">... </span><span class="p">)</span>  <span class="c1"># [False, False, True, True, True]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">get_rank</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">household</span><span class="p">,</span> <span class="o">-</span><span class="n">age</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="n">is_child</span>
 <span class="go">:rtype: :sphinx_autodoc_typehints_type:`\:py\:class\:\`\~numpy.ndarray\`\\ \\\[\:py\:data\:\`\~typing.Any\`\, \:py\:class\:\`\~numpy.dtype\`\\ \\\[\:py\:class\:\`int\`\]\]`</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">get_rank</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_child</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">CHILD</span><span class="p">)</span>  <span class="c1"># [False, False, True, True, True]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">get_rank</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="o">-</span> <span class="n">age</span><span class="p">,</span> <span class="n">condition</span> <span class="o">=</span> <span class="n">is_child</span><span class="p">)</span>  <span class="c1"># Sort in reverse order so that the eldest child gets the rank 0.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-</pre></div>
-</div>
+<p>… )  # Sort in reverse order so that the eldest child gets the rank 0.
+&gt;&gt;&gt; [-1, -1, 1, 0, 2]</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.populations.Population.has_role">
 <span class="sig-name descname"><span class="pre">has_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/populations/population.html#Population.has_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.populations.Population.has_role" title="Link to this definition">¶</a></dt>
-<dd><p>Check if a person has a given role within its <cite>GroupEntity</cite></p>
-<p>Example:</p>
+<dd><p>Check if a person has a given role within its <cite>GroupEntity</cite>.</p>
+<p>Example:
+&gt;&gt;&gt; person.has_role(Household.CHILD)
+&gt;&gt;&gt; array([False])</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]]]</span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">CHILD</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="kc">False</span><span class="p">])</span>
-</pre></div>
-</div>
 </dd></dl>
 
 </dd></dl>
@@ -213,12 +209,12 @@ If condition is specified, then the persons who don’t respect it are not taken
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">array</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> for all members of the entity.</p>
 <p><code class="docutils literal notranslate"><span class="pre">array</span></code> must have the dimension of the number of persons in the simulation</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">role</span></code> is provided, only the entity member with the given role are taken into account.</p>
-<p>Example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-01&#39;</span><span class="p">)</span>  <span class="c1"># e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">salaries</span> <span class="o">&gt;=</span> <span class="mi">1800</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="kc">False</span><span class="p">])</span>
-</pre></div>
-</div>
+<p>Example:
+&gt;&gt;&gt; salaries = household.members(
+…     “salary”, “2018-01”
+… )  # e.g. [2000, 1500, 0, 0, 0]
+&gt;&gt;&gt; household.all(salaries &gt;= 1800)
+&gt;&gt;&gt; array([False])</p>
 </dd></dl>
 
 <dl class="py method">
@@ -227,12 +223,12 @@ If condition is specified, then the persons who don’t respect it are not taken
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">array</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> for any members of the entity.</p>
 <p><code class="docutils literal notranslate"><span class="pre">array</span></code> must have the dimension of the number of persons in the simulation</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">role</span></code> is provided, only the entity member with the given role are taken into account.</p>
-<p>Example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-01&#39;</span><span class="p">)</span>  <span class="c1"># e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">salaries</span> <span class="o">&gt;=</span> <span class="mi">1800</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">])</span>
-</pre></div>
-</div>
+<p>Example:
+&gt;&gt;&gt; salaries = household.members(
+…     “salary”, “2018-01”
+… )  # e.g. [2000, 1500, 0, 0, 0]
+&gt;&gt;&gt; household.any(salaries &gt;= 1800)
+&gt;&gt;&gt; array([True])</p>
 </dd></dl>
 
 <dl class="py method">
@@ -241,12 +237,12 @@ If condition is specified, then the persons who don’t respect it are not taken
 <dd><p>Return the maximum value of <code class="docutils literal notranslate"><span class="pre">array</span></code> for the entity members.</p>
 <p><code class="docutils literal notranslate"><span class="pre">array</span></code> must have the dimension of the number of persons in the simulation</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">role</span></code> is provided, only the entity member with the given role are taken into account.</p>
-<p>Example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-01&#39;</span><span class="p">)</span>  <span class="c1"># e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">salaries</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="mi">2000</span><span class="p">])</span>
-</pre></div>
-</div>
+<p>Example:
+&gt;&gt;&gt; salaries = household.members(
+…     “salary”, “2018-01”
+… )  # e.g. [2000, 1500, 0, 0, 0]
+&gt;&gt;&gt; household.max(salaries)
+&gt;&gt;&gt; array([2000])</p>
 </dd></dl>
 
 <dl class="py method">
@@ -255,14 +251,16 @@ If condition is specified, then the persons who don’t respect it are not taken
 <dd><p>Return the minimum value of <code class="docutils literal notranslate"><span class="pre">array</span></code> for the entity members.</p>
 <p><code class="docutils literal notranslate"><span class="pre">array</span></code> must have the dimension of the number of persons in the simulation</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">role</span></code> is provided, only the entity member with the given role are taken into account.</p>
-<p>Example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-01&#39;</span><span class="p">)</span>  <span class="c1"># e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">salaries</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">salaries</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">Household</span><span class="o">.</span><span class="n">PARENT</span><span class="p">)</span>  <span class="c1"># Assuming the 1st two persons are parents</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="mi">1500</span><span class="p">])</span>
-</pre></div>
-</div>
+<p>Example:
+&gt;&gt;&gt; salaries = household.members(
+…     “salary”, “2018-01”
+… )  # e.g. [2000, 1500, 0, 0, 0]
+&gt;&gt;&gt; household.min(salaries)
+&gt;&gt;&gt; array([0])
+&gt;&gt;&gt; household.min(
+…     salaries, role=Household.PARENT
+… )  # Assuming the 1st two persons are parents
+&gt;&gt;&gt; array([1500])</p>
 </dd></dl>
 
 <dl class="py method">
@@ -278,12 +276,12 @@ If condition is specified, then the persons who don’t respect it are not taken
 <dd><p>Return the sum of <code class="docutils literal notranslate"><span class="pre">array</span></code> for the members of the entity.</p>
 <p><code class="docutils literal notranslate"><span class="pre">array</span></code> must have the dimension of the number of persons in the simulation</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">role</span></code> is provided, only the entity member with the given role are taken into account.</p>
-<p>Example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-01&#39;</span><span class="p">)</span>  <span class="c1"># e.g. [2000, 1500, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">household</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">salaries</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">array</span><span class="p">([</span><span class="mi">3500</span><span class="p">])</span>
-</pre></div>
-</div>
+<p>Example:
+&gt;&gt;&gt; salaries = household.members(
+…     “salary”, “2018-01”
+… )  # e.g. [2000, 1500, 0, 0, 0]
+&gt;&gt;&gt; household.sum(salaries)
+&gt;&gt;&gt; array([3500])</p>
 </dd></dl>
 
 </dd></dl>

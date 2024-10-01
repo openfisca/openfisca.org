@@ -146,14 +146,14 @@
 <dt class="sig sig-object py" id="openfisca_core.scripts.simulation_generator.make_simulation">
 <span class="sig-prename descclassname"><span class="pre">openfisca_core.scripts.simulation_generator.</span></span><span class="sig-name descname"><span class="pre">make_simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tax_benefit_system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_persons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_groups</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/scripts/simulation_generator.html#make_simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.scripts.simulation_generator.make_simulation" title="Link to this definition">¶</a></dt>
 <dd><p>Generate a simulation containing nb_persons persons spread in nb_groups groups.</p>
-<p>Example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core.scripts.simulation_generator</span> <span class="kn">import</span> <span class="n">make_simulation</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_france</span> <span class="kn">import</span> <span class="n">CountryTaxBenefitSystem</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tbs</span> <span class="o">=</span> <span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span> <span class="o">=</span> <span class="n">make_simulation</span><span class="p">(</span><span class="n">tbs</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Create a simulation with 400 persons, spread among 100 families</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;revenu_disponible&#39;</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
-</pre></div>
-</div>
+<p>Example:
+&gt;&gt;&gt; from openfisca_core.scripts.simulation_generator import make_simulation
+&gt;&gt;&gt; from openfisca_france import CountryTaxBenefitSystem
+&gt;&gt;&gt; tbs = CountryTaxBenefitSystem()
+&gt;&gt;&gt; simulation = make_simulation(
+…     tbs, 400, 100
+… )  # Create a simulation with 400 persons, spread among 100 families
+&gt;&gt;&gt; simulation.calculate(“revenu_disponible”, 2017)</p>
 </dd></dl>
 
 <dl class="py function">
@@ -161,15 +161,29 @@
 <span class="sig-prename descclassname"><span class="pre">openfisca_core.scripts.simulation_generator.</span></span><span class="sig-name descname"><span class="pre">randomly_init_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simulation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/scripts/simulation_generator.html#randomly_init_variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.scripts.simulation_generator.randomly_init_variable" title="Link to this definition">¶</a></dt>
 <dd><p>Initialise a variable with random values (from 0 to max_value) for the given period.
 If a condition vector is provided, only set the value of persons or groups for which condition is True.</p>
-<p>Example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core.scripts.simulation_generator</span> <span class="kn">import</span> <span class="n">make_simulation</span><span class="p">,</span> <span class="n">randomly_init_variable</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_france</span> <span class="kn">import</span> <span class="n">CountryTaxBenefitSystem</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tbs</span> <span class="o">=</span> <span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span> <span class="o">=</span> <span class="n">make_simulation</span><span class="p">(</span><span class="n">tbs</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Create a simulation with 400 persons, spread among 100 families</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">randomly_init_variable</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="s1">&#39;salaire_net&#39;</span><span class="p">,</span> <span class="mi">2017</span><span class="p">,</span> <span class="n">max_value</span> <span class="o">=</span> <span class="mi">50000</span><span class="p">,</span> <span class="n">condition</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">persons</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">famille</span><span class="o">.</span><span class="n">DEMANDEUR</span><span class="p">))</span>  <span class="c1"># Randomly set a salaire_net for all persons between 0 and 50000?</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;revenu_disponible&#39;</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
-</pre></div>
-</div>
+<p>Example:
+&gt;&gt;&gt; from openfisca_core.scripts.simulation_generator import (
+…     make_simulation,
+…     randomly_init_variable,
+… )
+&gt;&gt;&gt; from openfisca_france import CountryTaxBenefitSystem
+&gt;&gt;&gt; tbs = CountryTaxBenefitSystem()
+&gt;&gt;&gt; simulation = make_simulation(
+…     tbs, 400, 100
+… )  # Create a simulation with 400 persons, spread among 100 families
+&gt;&gt;&gt; randomly_init_variable(
+…     simulation,
+…     “salaire_net”,
+…     2017,
+…     max_value=50000,
+…     condition=simulation.persons.has_role(simulation.famille.DEMANDEUR),
+… )  # Randomly set a salaire_net for all persons between 0 and 50000?
+&gt;&gt;&gt; simulation.calculate(“revenu_disponible”, 2017)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

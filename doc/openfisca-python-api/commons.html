@@ -147,17 +147,18 @@
 to OpenFisca Core and to country packages.</p>
 <dl class="simple">
 <dt>Official Public API:</dt><dd><ul class="simple">
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">apply_thresholds()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">average_rate()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">empty_clone()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">marginal_rate()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">stringify_array()</span></code></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">switch()</span></code></p></li>
+<li><p><a class="reference internal" href="#openfisca_core.commons.apply_thresholds" title="openfisca_core.commons.apply_thresholds"><code class="xref py py-func docutils literal notranslate"><span class="pre">apply_thresholds()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#openfisca_core.commons.average_rate" title="openfisca_core.commons.average_rate"><code class="xref py py-func docutils literal notranslate"><span class="pre">average_rate()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#openfisca_core.commons.concat" title="openfisca_core.commons.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#openfisca_core.commons.empty_clone" title="openfisca_core.commons.empty_clone"><code class="xref py py-func docutils literal notranslate"><span class="pre">empty_clone()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#openfisca_core.commons.eval_expression" title="openfisca_core.commons.eval_expression"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval_expression()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#openfisca_core.commons.marginal_rate" title="openfisca_core.commons.marginal_rate"><code class="xref py py-func docutils literal notranslate"><span class="pre">marginal_rate()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#openfisca_core.commons.stringify_array" title="openfisca_core.commons.stringify_array"><code class="xref py py-func docutils literal notranslate"><span class="pre">stringify_array()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#openfisca_core.commons.switch" title="openfisca_core.commons.switch"><code class="xref py py-func docutils literal notranslate"><span class="pre">switch()</span></code></a></p></li>
 </ul>
 </dd>
 <dt>Deprecated:</dt><dd><ul class="simple">
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dummy</span></code></p></li>
+<li><p><a class="reference internal" href="#openfisca_core.commons.Dummy" title="openfisca_core.commons.Dummy"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dummy</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -179,17 +180,308 @@ major release.</p>
 from modularizing the different components of the library, which would make
 them easier to test and to maintain.</p>
 <p>How they could be used in a future release:</p>
-<blockquote>
-<div><p>from openfisca_core import commons
-from openfisca_core.commons import deprecated</p>
-<p>deprecated()  # Good: import classes as publicly exposed
-commons.switch()  # Good: use functions as publicly exposed</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">commons</span>
+<span class="kn">from</span> <span class="nn">openfisca_core.commons</span> <span class="kn">import</span> <span class="n">deprecated</span>
+
+<span class="n">deprecated</span><span class="p">()</span>  <span class="c1"># Good: import classes as publicly exposed</span>
+<span class="n">commons</span><span class="o">.</span><span class="n">switch</span><span class="p">()</span>  <span class="c1"># Good: use functions as publicly exposed</span>
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#imports">PEP8#Imports</a> and <a class="reference external" href="https://github.com/openfisca/openfisca-core/blob/master/STYLEGUIDE.md">OpenFisca’s Styleguide</a>.</p>
 </div>
 </div>
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.commons.Dummy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.commons.</span></span><span class="sig-name descname"><span class="pre">Dummy</span></span><a class="reference internal" href="../_modules/openfisca_core/commons/dummy.html#Dummy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.commons.Dummy" title="Link to this definition">¶</a></dt>
+<dd><p>A class that did nothing.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Dummy</span><span class="p">()</span>
+<span class="go">&lt;openfisca_core.commons.dummy.Dummy object...</span>
+</pre></div>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 34.7.0: </span><a class="reference internal" href="#openfisca_core.commons.Dummy" title="openfisca_core.commons.Dummy"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dummy</span></code></a> has been deprecated and it will be removed in the
+future.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.commons.apply_thresholds">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.commons.</span></span><span class="sig-name descname"><span class="pre">apply_thresholds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresholds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/commons/formulas.html#apply_thresholds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.commons.apply_thresholds" title="Link to this definition">¶</a></dt>
+<dd><p>Makes a choice based on an input and thresholds.</p>
+<p>From a list of <code class="docutils literal notranslate"><span class="pre">choices</span></code>, this function selects one of these values
+based on a list of inputs, depending on the value of each <code class="docutils literal notranslate"><span class="pre">input</span></code> within
+a list of <code class="docutils literal notranslate"><span class="pre">thresholds</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</span>) – A list of inputs to make a choice from.</p></li>
+<li><p><strong>thresholds</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – A list of thresholds to choose.</p></li>
+<li><p><strong>choices</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – A list of the possible values to choose from.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Array[numpy.float32]</strong> – A list of the values chosen.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AssertionError" title="(in Python v3.12)"><strong>AssertionError</strong></a> – When thresholds and choices are incompatible.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">thresholds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">choices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apply_thresholds</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">thresholds</span><span class="p">,</span> <span class="n">choices</span><span class="p">)</span>
+<span class="go">array([10, 10, 15, 15, 20])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.commons.average_rate">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.commons.</span></span><span class="sig-name descname"><span class="pre">average_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varying</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/commons/rates.html#average_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.commons.average_rate" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the average rate of a target net income.</p>
+<p>Given a <code class="docutils literal notranslate"><span class="pre">target</span></code> net income, and according to the <code class="docutils literal notranslate"><span class="pre">varying</span></code> gross
+income. Optionally, a <code class="docutils literal notranslate"><span class="pre">trim</span></code> can be applied consisting of the lower and
+upper bounds of the average rate to be computed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Usually, <code class="docutils literal notranslate"><span class="pre">target</span></code> and <code class="docutils literal notranslate"><span class="pre">varying</span></code> are the same size.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</span>) – The targeted net income.</p></li>
+<li><p><strong>varying</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – The varying gross income.</p></li>
+<li><p><strong>trim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – The lower and upper bounds of the average rate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Array[numpy.float32]</strong> – The average rate for each target. When <code class="docutils literal notranslate"><span class="pre">trim</span></code>
+is provided, values that are out of the provided bounds are
+replaced by <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v2.1)"><code class="xref any docutils literal notranslate"><span class="pre">numpy.nan</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">target</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">varying</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trim</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">average_rate</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">varying</span><span class="p">,</span> <span class="n">trim</span><span class="p">)</span>
+<span class="go">array([ nan,  0. , -0.5])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.commons.concat">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.commons.</span></span><span class="sig-name descname"><span class="pre">concat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">this</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">that</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/commons/formulas.html#concat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.commons.concat" title="Link to this definition">¶</a></dt>
+<dd><p>Concatenate the values of two arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>this</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.str_" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str_</span></code></a>]] | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – An array to concatenate.</p></li>
+<li><p><strong>that</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.str_" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str_</span></code></a>]] | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Another array to concatenate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Array[numpy.str_]</strong> – An array with the concatenated values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.str_" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str_</span></code></a>]]</span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;this&quot;</span><span class="p">,</span> <span class="s2">&quot;that&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">that</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concat</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">that</span><span class="p">)</span>
+<span class="go">array([&#39;this1.0&#39;, &#39;that2.5&#39;]...)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.commons.empty_clone">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.commons.</span></span><span class="sig-name descname"><span class="pre">empty_clone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/commons/misc.html#empty_clone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.commons.empty_clone" title="Link to this definition">¶</a></dt>
+<dd><p>Create an empty instance of the same class of the original object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>original</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></span>) – An object to clone.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>The cloned, empty, object.</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Foo</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s2">&quot;Foo&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,),</span> <span class="p">{})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span>
+<span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bar</span> <span class="o">=</span> <span class="n">empty_clone</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bar</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">Foo</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.commons.eval_expression">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.commons.</span></span><span class="sig-name descname"><span class="pre">eval_expression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/commons/misc.html#eval_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.commons.eval_expression" title="Link to this definition">¶</a></dt>
+<dd><p>Evaluate a string expression to a numpy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>expression</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – An expression to evaluate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Array</strong> – The result of the evaluation.</p></li>
+<li><p><strong>str</strong> – The expression if it couldn’t be evaluated.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> | <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool_</span></code>]] | <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int32</span></code>]] | <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eval_expression</span><span class="p">(</span><span class="s2">&quot;1 + 2&quot;</span><span class="p">)</span>
+<span class="go">array(3, dtype=int32)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eval_expression</span><span class="p">(</span><span class="s2">&quot;salary&quot;</span><span class="p">)</span>
+<span class="go">&#39;salary&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.commons.marginal_rate">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.commons.</span></span><span class="sig-name descname"><span class="pre">marginal_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varying</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/commons/rates.html#marginal_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.commons.marginal_rate" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the marginal rate of a target net income.</p>
+<p>Given a <code class="docutils literal notranslate"><span class="pre">target</span></code> net income, and according to the <code class="docutils literal notranslate"><span class="pre">varying</span></code> gross
+income. Optionally, a <code class="docutils literal notranslate"><span class="pre">trim</span></code> can be applied consisting of the lower and
+upper bounds of the marginal rate to be computed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Usually, <code class="docutils literal notranslate"><span class="pre">target</span></code> and <code class="docutils literal notranslate"><span class="pre">varying</span></code> are the same size.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</span>) – The targeted net income.</p></li>
+<li><p><strong>varying</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</span>) – The varying gross income.</p></li>
+<li><p><strong>trim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – The lower and upper bounds of the marginal rate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Array[numpy.float32]</strong> – The marginal rate for each target. When <code class="docutils literal notranslate"><span class="pre">trim</span></code></p></li>
+<li><p><strong>is provided, values that are out of the provided bounds are replaced by</strong></p></li>
+<li><p><strong>:any:`numpy.nan`.</strong></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">target</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">varying</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trim</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">marginal_rate</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">varying</span><span class="p">,</span> <span class="n">trim</span><span class="p">)</span>
+<span class="go">array([nan, 0.5])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.commons.stringify_array">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.commons.</span></span><span class="sig-name descname"><span class="pre">stringify_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/commons/misc.html#stringify_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.commons.stringify_array" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a clean string representation of a numpy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>array</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> | <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.generic" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">generic</span></code></a>]]</span>) – An array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>str</strong> – “None” if the <code class="docutils literal notranslate"><span class="pre">array</span></code> is None.</p></li>
+<li><p><strong>str</strong> – The stringified <code class="docutils literal notranslate"><span class="pre">array</span></code> otherwise.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stringify_array</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">&#39;None&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stringify_array</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="go">&#39;[10.0, 20.0]&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;10&quot;</span><span class="p">,</span> <span class="s2">&quot;Twenty&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stringify_array</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="go">&#39;[10, Twenty]&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(),</span> <span class="n">stringify_array</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stringify_array</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="go">&quot;[&lt;class &#39;list&#39;&gt;, {}, &lt;function stringify_array...]&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.commons.switch">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.commons.</span></span><span class="sig-name descname"><span class="pre">switch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conditions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_by_condition</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/commons/formulas.html#switch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.commons.switch" title="Link to this definition">¶</a></dt>
+<dd><p>Mimick a switch statement.</p>
+<p>Given an array of conditions, returns an array of the same size,
+replacing each condition item with the matching given value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conditions</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</span>) – An array of conditions.</p></li>
+<li><p><strong>value_by_condition</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Values to replace for each condition.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Array</strong> – An array with the replaced values.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AssertionError" title="(in Python v3.12)"><strong>AssertionError</strong></a> – When <code class="docutils literal notranslate"><span class="pre">value_by_condition</span></code> is empty.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conditions</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">value_by_condition</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">90</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">switch</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="n">value_by_condition</span><span class="p">)</span>
+<span class="go">array([80, 80, 80, 90])</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 

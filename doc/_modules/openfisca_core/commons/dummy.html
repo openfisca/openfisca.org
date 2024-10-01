@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>openfisca_core.entities.entity &#8212; OpenFisca  documentation</title>
+    <title>openfisca_core.commons.dummy &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
@@ -40,7 +40,7 @@
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">openfisca_core.entities.entity</a></li> 
+        <li class="nav-item nav-item-this"><a href="">openfisca_core.commons.dummy</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -105,58 +105,41 @@
               
                 <li><a href="../../index.html">Module code</a></li>
               
-              <li>openfisca_core.entities.entity</li>
+              <li>openfisca_core.commons.dummy</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <h1>Source code for openfisca_core.entities.entity</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">ClassVar</span>
-
-<span class="kn">import</span> <span class="nn">textwrap</span>
-
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
-<span class="kn">from</span> <span class="nn">._core_entity</span> <span class="kn">import</span> <span class="n">_CoreEntity</span>
+  <h1>Source code for openfisca_core.commons.dummy</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">warnings</span>
 
 
-<div class="viewcode-block" id="Entity">
-<a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.Entity">[docs]</a>
-<span class="k">class</span> <span class="nc">Entity</span><span class="p">(</span><span class="n">_CoreEntity</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;An entity (e.g. a person, a household) on which calculations can be run.</span>
+<div class="viewcode-block" id="Dummy">
+<a class="viewcode-back" href="../../../openfisca-python-api/commons.html#openfisca_core.commons.Dummy">[docs]</a>
+<span class="k">class</span> <span class="nc">Dummy</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class that did nothing.</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        key: A key to identify the ``Entity``.</span>
-<span class="sd">        plural: The ``key`` pluralised.</span>
-<span class="sd">        label: A summary description.</span>
-<span class="sd">        doc: A full description.</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; Dummy()</span>
+<span class="sd">        &lt;openfisca_core.commons.dummy.Dummy object...</span>
+
+<span class="sd">    .. deprecated:: 34.7.0</span>
+<span class="sd">        :class:`.Dummy` has been deprecated and it will be removed in the</span>
+<span class="sd">        future.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1">#: A key to identify the ``Entity``.</span>
-    <span class="n">key</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityKey</span>
-
-    <span class="c1">#: The ``key`` pluralised.</span>
-    <span class="n">plural</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityPlural</span>
-
-    <span class="c1">#: A summary description.</span>
-    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
-
-    <span class="c1">#: A full description.</span>
-    <span class="n">doc</span><span class="p">:</span> <span class="nb">str</span>
-
-    <span class="c1">#: Whether the ``Entity`` is a person or not.</span>
-    <span class="n">is_person</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">plural</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">doc</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityKey</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">plural</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityPlural</span><span class="p">(</span><span class="n">plural</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;The &#39;Dummy&#39; class has been deprecated since version 34.7.0,&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;and will be removed in the future.&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Entity&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Dummy&quot;</span><span class="p">]</span>
 </pre></div>
 
           </div>
@@ -174,7 +157,7 @@
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">openfisca_core.entities.entity</a></li> 
+        <li class="nav-item nav-item-this"><a href="">openfisca_core.commons.dummy</a></li> 
       </ul>
     </div>
   

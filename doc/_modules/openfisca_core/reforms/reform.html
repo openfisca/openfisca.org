@@ -123,23 +123,22 @@
 <div class="viewcode-block" id="Reform">
 <a class="viewcode-back" href="../../../openfisca-python-api/reforms.html#openfisca_core.reforms.Reform">[docs]</a>
 <span class="k">class</span> <span class="nc">Reform</span><span class="p">(</span><span class="n">TaxBenefitSystem</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A modified TaxBenefitSystem</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A modified TaxBenefitSystem.</span>
 
 <span class="sd">    All reforms must subclass `Reform` and implement a method `apply()`.</span>
 
 <span class="sd">    In this method, the reform can add or replace variables and call `modify_parameters` to modify the parameters of the legislation.</span>
 
-<span class="sd">        Example:</span>
-
+<span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; from openfisca_core import reforms</span>
 <span class="sd">        &gt;&gt;&gt; from openfisca_core.parameters import load_parameter_file</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; def modify_my_parameters(parameters):</span>
-<span class="sd">        &gt;&gt;&gt;     # Add new parameters</span>
+<span class="sd">        &gt;&gt;&gt; # Add new parameters</span>
 <span class="sd">        &gt;&gt;&gt;     new_parameters = load_parameter_file(name=&#39;reform_name&#39;, file_path=&#39;path_to_yaml_file.yaml&#39;)</span>
 <span class="sd">        &gt;&gt;&gt;     parameters.add_child(&#39;reform_name&#39;, new_parameters)</span>
 <span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt;     # Update a value</span>
+<span class="sd">        &gt;&gt;&gt; # Update a value</span>
 <span class="sd">        &gt;&gt;&gt;     parameters.taxes.some_tax.some_param.update(period=some_period, value=1000.0)</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt;    return parameters</span>
@@ -149,14 +148,13 @@
 <span class="sd">        &gt;&gt;&gt;        self.add_variable(some_variable)</span>
 <span class="sd">        &gt;&gt;&gt;        self.update_variable(some_other_variable)</span>
 <span class="sd">        &gt;&gt;&gt;        self.modify_parameters(modifier_function = modify_my_parameters)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :param baseline: Baseline TaxBenefitSystem.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:param baseline: Baseline TaxBenefitSystem.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">baseline</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span> <span class="o">=</span> <span class="n">baseline</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">baseline</span><span class="o">.</span><span class="n">parameters</span>
@@ -165,9 +163,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">decomposition_file_path</span> <span class="o">=</span> <span class="n">baseline</span><span class="o">.</span><span class="n">decomposition_file_path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;apply&quot;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
-                <span class="s2">&quot;Reform </span><span class="si">{}</span><span class="s2"> must define an `apply` function&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
-            <span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Reform </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2"> must define an `apply` function&quot;</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
@@ -176,12 +173,12 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">full_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
-        <span class="k">assert</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;key was not set for reform </span><span class="si">{}</span><span class="s2"> (name: </span><span class="si">{!r}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-        <span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;key was not set for reform </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> (name: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">!r}</span><span class="s2">)&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseline</span><span class="p">,</span> <span class="s2">&quot;key&quot;</span><span class="p">):</span>
             <span class="n">baseline_full_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span><span class="o">.</span><span class="n">full_key</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">baseline_full_key</span><span class="p">,</span> <span class="n">key</span><span class="p">])</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">baseline_full_key</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="n">key</span>
 
 <div class="viewcode-block" id="Reform.modify_parameters">
@@ -193,19 +190,18 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            modifier_function: A function that takes a :obj:`.ParameterNode` and should return an object of the same type.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">baseline_parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span><span class="o">.</span><span class="n">parameters</span>
         <span class="n">baseline_parameters_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">baseline_parameters</span><span class="p">)</span>
         <span class="n">reform_parameters</span> <span class="o">=</span> <span class="n">modifier_function</span><span class="p">(</span><span class="n">baseline_parameters_copy</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reform_parameters</span><span class="p">,</span> <span class="n">ParameterNode</span><span class="p">):</span>
             <span class="k">return</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;modifier_function </span><span class="si">{}</span><span class="s2"> in module </span><span class="si">{}</span><span class="s2"> must return a ParameterNode&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">modifier_function</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-                    <span class="n">modifier_function</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
-                <span class="p">)</span>
+                <span class="sa">f</span><span class="s2">&quot;modifier_function </span><span class="si">{</span><span class="n">modifier_function</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> in module </span><span class="si">{</span><span class="n">modifier_function</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s2"> must return a ParameterNode&quot;</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">reform_parameters</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_parameters_at_instant_cache</span> <span class="o">=</span> <span class="p">{}</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parameters_at_instant_cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
 </div>
 
 </pre></div>

@@ -118,36 +118,27 @@
 <div class="viewcode-block" id="VariableNotFoundError">
 <a class="viewcode-back" href="../../../openfisca-python-api/errors.html#openfisca_core.errors.VariableNotFoundError">[docs]</a>
 <span class="k">class</span> <span class="nc">VariableNotFoundError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Exception raised when a variable has been queried but is not defined in the TaxBenefitSystem.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception raised when a variable has been queried but is not defined in the TaxBenefitSystem.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :param variable_name: Name of the variable that was queried.</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:param variable_name: Name of the variable that was queried.</span>
 <span class="sd">        :param tax_benefit_system: Tax benefits system that does not contain `variable_name`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">country_package_metadata</span> <span class="o">=</span> <span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_package_metadata</span><span class="p">()</span>
         <span class="n">country_package_name</span> <span class="o">=</span> <span class="n">country_package_metadata</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
         <span class="n">country_package_version</span> <span class="o">=</span> <span class="n">country_package_metadata</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">country_package_version</span><span class="p">:</span>
-            <span class="n">country_package_id</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">country_package_name</span><span class="p">,</span> <span class="n">country_package_version</span>
-            <span class="p">)</span>
+            <span class="n">country_package_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">country_package_name</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">country_package_version</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">country_package_id</span> <span class="o">=</span> <span class="n">country_package_name</span>
         <span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="p">[</span>
-                <span class="s2">&quot;You tried to calculate or to set a value for variable &#39;</span><span class="si">{0}</span><span class="s2">&#39;, but it was not found in the loaded tax and benefit system (</span><span class="si">{1}</span><span class="s2">).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">variable_name</span><span class="p">,</span> <span class="n">country_package_id</span>
-                <span class="p">),</span>
-                <span class="s2">&quot;Are you sure you spelled &#39;</span><span class="si">{0}</span><span class="s2">&#39; correctly?&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">),</span>
+                <span class="sa">f</span><span class="s2">&quot;You tried to calculate or to set a value for variable &#39;</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&#39;, but it was not found in the loaded tax and benefit system (</span><span class="si">{</span><span class="n">country_package_id</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Are you sure you spelled &#39;</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&#39; correctly?&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;If this code used to work and suddenly does not, this is most probably linked to an update of the tax and benefit system.&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;Look at its changelog to learn about renames and removals and update your code. If it is an official package,&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;it is probably available on &lt;https://github.com/openfisca/</span><span class="si">{0}</span><span class="s2">/blob/master/CHANGELOG.md&gt;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">country_package_name</span>
-                <span class="p">),</span>
-            <span class="p">]</span>
+                <span class="sa">f</span><span class="s2">&quot;it is probably available on &lt;https://github.com/openfisca/</span><span class="si">{</span><span class="n">country_package_name</span><span class="si">}</span><span class="s2">/blob/master/CHANGELOG.md&gt;.&quot;</span><span class="p">,</span>
+            <span class="p">],</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variable_name</span> <span class="o">=</span> <span class="n">variable_name</span>

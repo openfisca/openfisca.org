@@ -112,15 +112,17 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.periods.instant_</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pendulum</span>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">import</span> <span class="nn">pendulum</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
 <span class="kn">from</span> <span class="nn">.date_unit</span> <span class="kn">import</span> <span class="n">DateUnit</span>
 
 
 <div class="viewcode-block" id="Instant">
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.Instant">[docs]</a>
-<span class="k">class</span> <span class="nc">Instant</span><span class="p">(</span><span class="nb">tuple</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Instant</span><span class="p">(</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;An instant in time (year, month, day).</span>
 
 <span class="sd">    An :class:`.Instant` represents the most atomic and indivisible</span>
@@ -128,10 +130,6 @@
 
 <span class="sd">    Current implementation considers this unit to be a day, so</span>
 <span class="sd">    :obj:`instants &lt;.Instant&gt;` can be thought of as &quot;day dates&quot;.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        (tuple(tuple(int, int, int))):</span>
-<span class="sd">            The ``year``, ``month``, and ``day``, accordingly.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; instant = Instant((2021, 9, 13))</span>
@@ -194,35 +192,57 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">InstantStr</span><span class="p">:</span>
         <span class="n">instant_str</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">str_by_instant_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">instant_str</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">str_by_instant_cache</span><span class="p">[</span><span class="bp">self</span><span class="p">]</span> <span class="o">=</span> <span class="n">instant_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+            <span class="n">instant_str</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">InstantStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">isoformat</span><span class="p">())</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">str_by_instant_cache</span><span class="p">[</span><span class="bp">self</span><span class="p">]</span> <span class="o">=</span> <span class="n">instant_str</span>
 
         <span class="k">return</span> <span class="n">instant_str</span>
 
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Instant</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__lt__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Instant</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__le__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">date</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pendulum</span><span class="o">.</span><span class="n">Date</span><span class="p">:</span>
         <span class="n">instant_date</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">date_by_instant_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">instant_date</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">date_by_instant_cache</span><span class="p">[</span><span class="bp">self</span><span class="p">]</span> <span class="o">=</span> <span class="n">instant_date</span> <span class="o">=</span> <span class="n">pendulum</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">instant_date</span> <span class="o">=</span> <span class="n">pendulum</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">date_by_instant_cache</span><span class="p">[</span><span class="bp">self</span><span class="p">]</span> <span class="o">=</span> <span class="n">instant_date</span>
 
         <span class="k">return</span> <span class="n">instant_date</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">day</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">day</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">month</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">month</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">unit</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">year</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_eternal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">eternity</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">DateUnit</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Increments/decrements the given instant with offset units.</span>
 
 <span class="sd">        Args:</span>
@@ -251,8 +271,7 @@
 <span class="sd">            Instant((2019, 12, 29))</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span>
 
         <span class="k">assert</span> <span class="n">unit</span> <span class="ow">in</span> <span class="p">(</span>
             <span class="n">DateUnit</span><span class="o">.</span><span class="n">isoformat</span> <span class="o">+</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">isocalendar</span>
@@ -262,57 +281,64 @@
             <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">year</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
-            <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
-            <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">:</span>
                 <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
                 <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">start_of</span><span class="p">(</span><span class="s2">&quot;week&quot;</span><span class="p">)</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-        <span class="k">elif</span> <span class="n">offset</span> <span class="o">==</span> <span class="s2">&quot;last-of&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">offset</span> <span class="o">==</span> <span class="s2">&quot;last-of&quot;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">year</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">))</span>
 
-            <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
                 <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
                 <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">end_of</span><span class="p">(</span><span class="s2">&quot;month&quot;</span><span class="p">)</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
 
-            <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">:</span>
                 <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
                 <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">end_of</span><span class="p">(</span><span class="s2">&quot;week&quot;</span><span class="p">)</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
-                <span class="n">offset</span><span class="p">,</span> <span class="nb">int</span>
-            <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Invalid offset: </span><span class="si">{</span><span class="n">offset</span><span class="si">}</span><span class="s2"> of type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">offset</span><span class="p">,</span>
+            <span class="nb">int</span><span class="p">,</span>
+        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Invalid offset: </span><span class="si">{</span><span class="n">offset</span><span class="si">}</span><span class="s2"> of type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
-            <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
-                <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
-                <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
 
-            <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
-                <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
-                <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
 
-            <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">:</span>
-                <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
-                <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">:</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
 
-            <span class="k">elif</span> <span class="n">unit</span> <span class="ow">in</span> <span class="p">(</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">DAY</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEKDAY</span><span class="p">):</span>
-                <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
-                <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="p">(</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">DAY</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEKDAY</span><span class="p">):</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">year</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">eternity</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return an eternity instant.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span></div>
 
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Instant&quot;</span><span class="p">]</span>
 </pre></div>
 
           </div>

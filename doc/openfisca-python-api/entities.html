@@ -143,67 +143,286 @@
   <section id="module-openfisca_core.entities">
 <span id="entities"></span><h1>Entities<a class="headerlink" href="#module-openfisca_core.entities" title="Link to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">Role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/role.html#Role"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>The role of an Entity within a GroupEntity.</p>
-<p>Each Entity related to a GroupEntity has a Role. For example, if you have
-a family, its roles could include a parent, a child, and so on. Or if you
-have a tax household, its roles could include the taxpayer, a spouse,
-several dependents, and the like.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">entity</span></span></dt>
-<dd><p>The Entity the Role belongs to.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#openfisca_core.entities.Entity" title="openfisca_core.entities.Entity">Entity</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">description</span></span></dt>
-<dd><p>A description of the Role.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>_Description</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">max</span></span></dt>
-<dd><p>Max number of members.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">subroles</span></span></dt>
-<dd><p>A list of subroles.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[Role]</p>
-</dd>
-</dl>
-</dd></dl>
-
+<dt class="sig sig-object py" id="openfisca_core.entities.Entity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">Entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plural</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/entity.html#Entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.Entity" title="Link to this definition">¶</a></dt>
+<dd><p>An entity (e.g. a person, a household) on which calculations can be run.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – A description of the Role.</p></li>
-<li><p><strong>entity</strong> (<a class="reference internal" href="#openfisca_core.entities.Entity" title="openfisca_core.entities.Entity"><em>Entity</em></a>) – The Entity to which the Role belongs.</p></li>
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – A key to identify the <code class="docutils literal notranslate"><span class="pre">Entity</span></code>.</p></li>
+<li><p><strong>plural</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The <code class="docutils literal notranslate"><span class="pre">key</span></code> pluralised.</p></li>
+<li><p><strong>label</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – A summary description.</p></li>
+<li><p><strong>doc</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – A full description.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.Entity.check_role_validity">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_role_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.Entity.check_role_validity" title="Link to this definition">¶</a></dt>
+<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">role</span></code> is an instance of  <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>role</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></span>) – Any object.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – When <code class="docutils literal notranslate"><span class="pre">role</span></code> is not a <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.Entity.check_variable_defined_for_entity">
+<span class="sig-name descname"><span class="pre">check_variable_defined_for_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.Entity.check_variable_defined_for_entity" title="Link to this definition">¶</a></dt>
+<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> is defined for <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>variable_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">VariableName</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span>) – The <code class="docutils literal notranslate"><span class="pre">Variable</span></code> to be found.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Variable</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists.</p></li>
+<li><p><strong>None</strong> – When the <code class="xref py py-attr docutils literal notranslate"><span class="pre">_tax_benefit_system</span></code> is not set.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists but is defined
+    for another <code class="docutils literal notranslate"><span class="pre">Entity</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.Entity.doc">
+<span class="sig-name descname"><span class="pre">doc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#openfisca_core.entities.Entity.doc" title="Link to this definition">¶</a></dt>
+<dd><p>A full description.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.Entity.get_variable">
+<span class="sig-name descname"><span class="pre">get_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_existence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.Entity.get_variable" title="Link to this definition">¶</a></dt>
+<dd><p>Get <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> from <code class="docutils literal notranslate"><span class="pre">variables</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">VariableName</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span>) – The <code class="docutils literal notranslate"><span class="pre">Variable</span></code> to be found.</p></li>
+<li><p><strong>check_existence</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Was the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> found?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Variable</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists.</p></li>
+<li><p><strong>None</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> doesn’t exist.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – When <code class="docutils literal notranslate"><span class="pre">check_existence</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and
+    the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> doesn’t exist.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="types.html#openfisca_core.types.Variable" title="openfisca_core.types.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.Entity.is_person">
+<span class="sig-name descname"><span class="pre">is_person</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#openfisca_core.entities.Entity.is_person" title="Link to this definition">¶</a></dt>
+<dd><p>Whether the <code class="docutils literal notranslate"><span class="pre">Entity</span></code> is a person or not.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.Entity.key">
+<span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a><span class="pre">(</span><code class="docutils literal notranslate"><span class="pre">EntityKey</span></code><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">)</span></em><a class="headerlink" href="#openfisca_core.entities.Entity.key" title="Link to this definition">¶</a></dt>
+<dd><p>A key to identify the <code class="docutils literal notranslate"><span class="pre">Entity</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.Entity.label">
+<span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#openfisca_core.entities.Entity.label" title="Link to this definition">¶</a></dt>
+<dd><p>A summary description.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.Entity.plural">
+<span class="sig-name descname"><span class="pre">plural</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a><span class="pre">(</span><code class="docutils literal notranslate"><span class="pre">EntityPlural</span></code><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">)</span></em><a class="headerlink" href="#openfisca_core.entities.Entity.plural" title="Link to this definition">¶</a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">key</span></code> pluralised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.Entity.set_tax_benefit_system">
+<span class="sig-name descname"><span class="pre">set_tax_benefit_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tax_benefit_system</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.Entity.set_tax_benefit_system" title="Link to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">_CoreEntity</span></code> belongs to a <code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">GroupEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plural</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">containing_entities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/group_entity.html#GroupEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity" title="Link to this definition">¶</a></dt>
+<dd><p>Represents an entity containing several others with different roles.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">GroupEntity</span></code> represents an <code class="docutils literal notranslate"><span class="pre">Entity</span></code> containing several other entities,
+with different roles, and on which calculations can be run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – A key to identify the <code class="docutils literal notranslate"><span class="pre">GroupEntity</span></code>.</p></li>
+<li><p><strong>plural</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The <code class="docutils literal notranslate"><span class="pre">key</span></code> pluralised.</p></li>
+<li><p><strong>label</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – A summary description.</p></li>
+<li><p><strong>doc</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – A full description.</p></li>
+<li><p><strong>roles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">RoleParams</span></code>]</span>) – The list of roles of the group entity.</p></li>
+<li><p><strong>containing_entities</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – The list of keys of group entities whose members
+are guaranteed to be a superset of this group’s entities.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.check_role_validity">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_role_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.GroupEntity.check_role_validity" title="Link to this definition">¶</a></dt>
+<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">role</span></code> is an instance of  <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>role</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></span>) – Any object.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – When <code class="docutils literal notranslate"><span class="pre">role</span></code> is not a <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.check_variable_defined_for_entity">
+<span class="sig-name descname"><span class="pre">check_variable_defined_for_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.GroupEntity.check_variable_defined_for_entity" title="Link to this definition">¶</a></dt>
+<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> is defined for <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>variable_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">VariableName</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span>) – The <code class="docutils literal notranslate"><span class="pre">Variable</span></code> to be found.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Variable</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists.</p></li>
+<li><p><strong>None</strong> – When the <code class="xref py py-attr docutils literal notranslate"><span class="pre">_tax_benefit_system</span></code> is not set.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists but is defined
+    for another <code class="docutils literal notranslate"><span class="pre">Entity</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.doc">
+<span class="sig-name descname"><span class="pre">doc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#openfisca_core.entities.GroupEntity.doc" title="Link to this definition">¶</a></dt>
+<dd><p>A full description.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.get_variable">
+<span class="sig-name descname"><span class="pre">get_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_existence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.GroupEntity.get_variable" title="Link to this definition">¶</a></dt>
+<dd><p>Get <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> from <code class="docutils literal notranslate"><span class="pre">variables</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">VariableName</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span>) – The <code class="docutils literal notranslate"><span class="pre">Variable</span></code> to be found.</p></li>
+<li><p><strong>check_existence</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Was the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> found?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Variable</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists.</p></li>
+<li><p><strong>None</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> doesn’t exist.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – When <code class="docutils literal notranslate"><span class="pre">check_existence</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and
+    the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> doesn’t exist.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="types.html#openfisca_core.types.Variable" title="openfisca_core.types.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.is_person">
+<span class="sig-name descname"><span class="pre">is_person</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#openfisca_core.entities.GroupEntity.is_person" title="Link to this definition">¶</a></dt>
+<dd><p>Whether the entity is a person or not.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.key">
+<span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a><span class="pre">(</span><code class="docutils literal notranslate"><span class="pre">EntityKey</span></code><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">)</span></em><a class="headerlink" href="#openfisca_core.entities.GroupEntity.key" title="Link to this definition">¶</a></dt>
+<dd><p>A key to identify the <code class="docutils literal notranslate"><span class="pre">Entity</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.label">
+<span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#openfisca_core.entities.GroupEntity.label" title="Link to this definition">¶</a></dt>
+<dd><p>A summary description.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.plural">
+<span class="sig-name descname"><span class="pre">plural</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a><span class="pre">(</span><code class="docutils literal notranslate"><span class="pre">EntityPlural</span></code><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">)</span></em><a class="headerlink" href="#openfisca_core.entities.GroupEntity.plural" title="Link to this definition">¶</a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">key</span></code> pluralised.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.roles">
+<span class="sig-name descname"><span class="pre">roles</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a><span class="pre">[</span><a class="reference internal" href="#openfisca_core.entities.Role" title="openfisca_core.entities.role.Role"><code class="xref py py-class docutils literal notranslate"><span class="pre">Role</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#openfisca_core.entities.GroupEntity.roles" title="Link to this definition">¶</a></dt>
+<dd><p>The list of roles of the <code class="docutils literal notranslate"><span class="pre">GroupEntity</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.set_tax_benefit_system">
+<span class="sig-name descname"><span class="pre">set_tax_benefit_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tax_benefit_system</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.GroupEntity.set_tax_benefit_system" title="Link to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">_CoreEntity</span></code> belongs to a <code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.entities.Role">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">Role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/role.html#Role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.Role" title="Link to this definition">¶</a></dt>
+<dd><p>The role of an <code class="docutils literal notranslate"><span class="pre">Entity</span></code> within a <code class="docutils literal notranslate"><span class="pre">GroupEntity</span></code>.</p>
+<p>Each <code class="docutils literal notranslate"><span class="pre">Entity</span></code> related to a <code class="docutils literal notranslate"><span class="pre">GroupEntity</span></code> has a <code class="docutils literal notranslate"><span class="pre">Role</span></code>. For example,
+if you have a family, its roles could include a parent, a child, and so on.
+Or if you have a tax household, its roles could include the taxpayer, a
+spouse, several dependents, and the like.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">RoleParams</span></code></span>) – A description of the Role.</p></li>
+<li><p><strong>entity</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="types.html#openfisca_core.types.GroupEntity" title="openfisca_core.types.GroupEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupEntity</span></code></a></span>) – The Entity to which the Role belongs.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">role</span> <span class="o">=</span> <span class="n">Role</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;parent&quot;</span><span class="p">},</span> <span class="nb">object</span><span class="p">())</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entity</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">GroupEntity</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="s2">&quot;plural&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="s2">&quot;doc&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">role</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">Role</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;parent&quot;</span><span class="p">},</span> <span class="n">entity</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">Role</span><span class="p">)</span>
@@ -227,104 +446,155 @@ several dependents, and the like.</p>
 </pre></div>
 </div>
 <dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">_Description</span></code></em></dt>
-<dd><p>A description of the Role.</p>
+<dt class="sig sig-object py" id="openfisca_core.entities.Role.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">_Description</span></code></em><a class="headerlink" href="#openfisca_core.entities.Role.description" title="Link to this definition">¶</a></dt>
+<dd><p>A description of the <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em></dt>
+<dt class="sig sig-object py" id="openfisca_core.entities.Role.doc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#openfisca_core.entities.Role.doc" title="Link to this definition">¶</a></dt>
 <dd><p>A full description, non-indented.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">entity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">Entity</span></code></em></dt>
-<dd><p>The Entity the Role belongs to.</p>
+<dt class="sig sig-object py" id="openfisca_core.entities.Role.entity">
+<span class="sig-name descname"><span class="pre">entity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="types.html#openfisca_core.types.GroupEntity" title="openfisca_core.types.GroupEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupEntity</span></code></a></em><a class="headerlink" href="#openfisca_core.entities.Role.entity" title="Link to this definition">¶</a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">GroupEntity</span></code> the Role belongs to.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em></dt>
-<dd><p>A key to identify the Role.</p>
+<dt class="sig sig-object py" id="openfisca_core.entities.Role.key">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="types.html#openfisca_core.types.RoleKey" title="openfisca_core.types.RoleKey"><span class="pre">RoleKey</span></a></em><a class="headerlink" href="#openfisca_core.entities.Role.key" title="Link to this definition">¶</a></dt>
+<dd><p>A key to identify the <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em></dt>
+<dt class="sig sig-object py" id="openfisca_core.entities.Role.label">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#openfisca_core.entities.Role.label" title="Link to this definition">¶</a></dt>
 <dd><p>A summary description.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">max</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> <span class="pre">|</span> <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em></dt>
+<dt class="sig sig-object py" id="openfisca_core.entities.Role.max">
+<span class="sig-name descname"><span class="pre">max</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> <span class="pre">|</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#openfisca_core.entities.Role.max" title="Link to this definition">¶</a></dt>
 <dd><p>Max number of members.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plural</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em></dt>
-<dd><p>The <code class="docutils literal notranslate"><span class="pre">key</span></code>, pluralised.</p>
+<dt class="sig sig-object py" id="openfisca_core.entities.Role.plural">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plural</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="types.html#openfisca_core.types.RolePlural" title="openfisca_core.types.RolePlural"><span class="pre">RolePlural</span></a></em><a class="headerlink" href="#openfisca_core.entities.Role.plural" title="Link to this definition">¶</a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">key</span></code> pluralised.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">subroles</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">Role</span></code><span class="pre">]</span> <span class="pre">|</span> <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em></dt>
+<dt class="sig sig-object py" id="openfisca_core.entities.Role.subroles">
+<span class="sig-name descname"><span class="pre">subroles</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> <span class="pre">|</span> <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a><span class="pre">[</span><a class="reference internal" href="#openfisca_core.entities.Role" title="openfisca_core.entities.role.Role"><code class="xref py py-class docutils literal notranslate"><span class="pre">Role</span></code></a><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#openfisca_core.entities.Role.subroles" title="Link to this definition">¶</a></dt>
 <dd><p>A list of subroles.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="openfisca_core.entities.Entity">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">Entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plural</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/entity.html#Entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.Entity" title="Link to this definition">¶</a></dt>
-<dd><p>Represents an entity (e.g. a person, a household, etc.) on which calculations can be run.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.SingleEntity">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">SingleEntity</span></span><a class="headerlink" href="#openfisca_core.entities.SingleEntity" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#openfisca_core.entities.Entity" title="openfisca_core.entities.entity.Entity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entity</span></code></a></p>
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">GroupEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plural</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">containing_entities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/group_entity.html#GroupEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.GroupEntity" title="Link to this definition">¶</a></dt>
-<dd><p>Represents an entity containing several others with different roles.</p>
-<p>A <a class="reference internal" href="#openfisca_core.entities.GroupEntity" title="openfisca_core.entities.GroupEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupEntity</span></code></a> represents an <a class="reference internal" href="#openfisca_core.entities.Entity" title="openfisca_core.entities.Entity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entity</span></code></a> containing
-several other <a class="reference internal" href="#openfisca_core.entities.Entity" title="openfisca_core.entities.Entity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entity</span></code></a> with different <code class="xref py py-class docutils literal notranslate"><span class="pre">Role</span></code>, and on
-which calculations can be run.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.entities.build_entity">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">build_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plural</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_person</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">containing_entities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/helpers.html#build_entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.build_entity" title="Link to this definition">¶</a></dt>
+<dd><p>Build an <code class="docutils literal notranslate"><span class="pre">Entity</span></code> or a <code class="docutils literal notranslate"><span class="pre">GroupEntity</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – A key to identify the group entity.</p></li>
-<li><p><strong>plural</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The <code class="docutils literal notranslate"><span class="pre">key</span></code>, pluralised.</p></li>
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Key to identify the <code class="docutils literal notranslate"><span class="pre">Entity</span></code> or <code class="docutils literal notranslate"><span class="pre">GroupEntity</span></code>.</p></li>
+<li><p><strong>plural</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The <code class="docutils literal notranslate"><span class="pre">key</span></code> pluralised.</p></li>
 <li><p><strong>label</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – A summary description.</p></li>
 <li><p><strong>doc</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – A full description.</p></li>
-<li><p><strong>roles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]</span>) – The list of <code class="xref py py-class docutils literal notranslate"><span class="pre">Role</span></code> of the group entity.</p></li>
-<li><p><strong>containing_entities</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – The list of keys of group entities whose members
-are guaranteed to be a superset of this group’s entities.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function" id="module-openfisca_core.entities.helpers">
-<dt class="sig sig-object py" id="openfisca_core.entities.helpers.find_role">
-<span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.helpers.</span></span><span class="sig-name descname"><span class="pre">find_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">roles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/helpers.html#find_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.helpers.find_role" title="Link to this definition">¶</a></dt>
-<dd><p>Find a Role in a GroupEntity.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>group_entity</strong> (<a class="reference internal" href="#openfisca_core.entities.GroupEntity" title="openfisca_core.entities.GroupEntity"><em>GroupEntity</em></a>) – The entity to search in.</p></li>
-<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The key of the role to find. Defaults to <cite>None</cite>.</p></li>
-<li><p><strong>total</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><em>None</em>) – The <cite>max</cite> attribute of the role to find.</p></li>
+<li><p><strong>roles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">RoleParams</span></code>]</span>) – A list of roles —if it’s a <code class="docutils literal notranslate"><span class="pre">GroupEntity</span></code>.</p></li>
+<li><p><strong>is_person</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – If is an individual, or not.</p></li>
+<li><p><strong>class_override</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></span>) – <p>?</p>
+</p></li>
+<li><p><strong>containing_entities</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Keys of contained entities.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The role if found, else <cite>None</cite>.</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Entity</strong> – When <code class="docutils literal notranslate"><span class="pre">is_person</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>GroupEntity</strong> – When <code class="docutils literal notranslate"><span class="pre">is_person</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Role | None</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.12)"><strong>NotImplementedError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">roles</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="types.html#openfisca_core.types.SingleEntity" title="openfisca_core.types.SingleEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleEntity</span></code></a> | <a class="reference internal" href="types.html#openfisca_core.types.GroupEntity" title="openfisca_core.types.GroupEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupEntity</span></code></a></span></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core.entities.typing</span> <span class="kn">import</span> <span class="n">RoleParams</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entity</span> <span class="o">=</span> <span class="n">build_entity</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;syndicate&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;syndicates&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;Banks loaning jointly.&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">roles</span><span class="o">=</span><span class="p">[],</span>
+<span class="gp">... </span>    <span class="n">containing_entities</span><span class="o">=</span><span class="p">(),</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entity</span>
+<span class="go">GroupEntity(syndicate)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">build_entity</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;company&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;companies&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;A small or medium company.&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">is_person</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">Entity(company)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">role</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">Role</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">},</span> <span class="n">entity</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">build_entity</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;syndicate&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;syndicates&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;Banks loaning jointly.&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">roles</span><span class="o">=</span><span class="p">[</span><span class="n">role</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">TypeError</span>: <span class="n">&#39;Role&#39; object is not subscriptable</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.entities.find_role">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">find_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">roles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/helpers.html#find_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.find_role" title="Link to this definition">¶</a></dt>
+<dd><p>Find a <code class="docutils literal notranslate"><span class="pre">Role</span></code> in a <code class="docutils literal notranslate"><span class="pre">GroupEntity</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>roles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="types.html#openfisca_core.types.Role" title="openfisca_core.types.Role"><code class="xref py py-class docutils literal notranslate"><span class="pre">Role</span></code></a>]</span>) – The roles to search.</p></li>
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">RoleKey</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span>) – The key of the role to find.</p></li>
+<li><p><strong>total</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – The <code class="docutils literal notranslate"><span class="pre">max</span></code> attribute of the role to find.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Role</strong> – The role if found</p></li>
+<li><p><strong>None</strong> – Else <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> | <a class="reference internal" href="types.html#openfisca_core.types.Role" title="openfisca_core.types.Role"><code class="xref py py-class docutils literal notranslate"><span class="pre">Role</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core.entities.types</span> <span class="kn">import</span> <span class="n">RoleParams</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">principal</span> <span class="o">=</span> <span class="n">RoleParams</span><span class="p">(</span>

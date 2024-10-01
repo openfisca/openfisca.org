@@ -114,22 +114,19 @@
   <h1>Source code for openfisca_core.variables.helpers</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
-
 <span class="kn">import</span> <span class="nn">sortedcontainers</span>
 
+<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">variables</span>
 <span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="kn">import</span> <span class="n">Period</span>
-
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">variables</span>
 
 
 <div class="viewcode-block" id="get_annualized_variable">
 <a class="viewcode-back" href="../../../openfisca-python-api/variables.html#openfisca_core.variables.helpers.get_annualized_variable">[docs]</a>
 <span class="k">def</span> <span class="nf">get_annualized_variable</span><span class="p">(</span>
-    <span class="n">variable</span><span class="p">:</span> <span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">,</span> <span class="n">annualization_period</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Period</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">variable</span><span class="p">:</span> <span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">,</span>
+    <span class="n">annualization_period</span><span class="p">:</span> <span class="n">Period</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns a clone of ``variable`` that is annualized for the period ``annualization_period``.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a clone of ``variable`` that is annualized for the period ``annualization_period``.</span>
 <span class="sd">    When annualized, a variable&#39;s formula is only called for a January calculation, and the results for other months are assumed to be identical.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -150,7 +147,7 @@
         <span class="p">{</span>
             <span class="n">key</span><span class="p">:</span> <span class="n">make_annual_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">annualization_period</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">formula</span> <span class="ow">in</span> <span class="n">variable</span><span class="o">.</span><span class="n">formulas</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-        <span class="p">}</span>
+        <span class="p">},</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">new_variable</span></div>
@@ -160,16 +157,17 @@
 <div class="viewcode-block" id="get_neutralized_variable">
 <a class="viewcode-back" href="../../../openfisca-python-api/variables.html#openfisca_core.variables.helpers.get_neutralized_variable">[docs]</a>
 <span class="k">def</span> <span class="nf">get_neutralized_variable</span><span class="p">(</span><span class="n">variable</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return a new neutralized variable (to be used by reforms).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a new neutralized variable (to be used by reforms).</span>
 <span class="sd">    A neutralized variable always returns its default value, and does not cache anything.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
     <span class="n">result</span><span class="o">.</span><span class="n">is_neutralized</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">result</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;[Neutralized]&quot;</span>
-        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span>
-        <span class="k">else</span> <span class="s2">&quot;[Neutralized] </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">label</span><span class="p">),</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;[Neutralized]&quot;</span>
+            <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;[Neutralized] </span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">),</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">result</span></div>

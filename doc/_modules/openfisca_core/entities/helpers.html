@@ -114,48 +114,117 @@
   <h1>Source code for openfisca_core.entities.helpers</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Sequence</span>
 
-<span class="kn">from</span> <span class="nn">.entity</span> <span class="kn">import</span> <span class="n">Entity</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
+<span class="kn">from</span> <span class="nn">.entity</span> <span class="kn">import</span> <span class="n">Entity</span> <span class="k">as</span> <span class="n">SingleEntity</span>
 <span class="kn">from</span> <span class="nn">.group_entity</span> <span class="kn">import</span> <span class="n">GroupEntity</span>
-<span class="kn">from</span> <span class="nn">.typing</span> <span class="kn">import</span> <span class="n">Role</span>
 
 
+<div class="viewcode-block" id="build_entity">
+<a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.build_entity">[docs]</a>
 <span class="k">def</span> <span class="nf">build_entity</span><span class="p">(</span>
-    <span class="n">key</span><span class="p">,</span>
-    <span class="n">plural</span><span class="p">,</span>
-    <span class="n">label</span><span class="p">,</span>
-    <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="n">roles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">is_person</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">class_override</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">containing_entities</span><span class="o">=</span><span class="p">(),</span>
-<span class="p">):</span>
+    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">plural</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">roles</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">RoleParams</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">is_person</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">class_override</span><span class="p">:</span> <span class="nb">object</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">containing_entities</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">SingleEntity</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">GroupEntity</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build an ``Entity`` or a ``GroupEntity``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: Key to identify the ``Entity`` or ``GroupEntity``.</span>
+<span class="sd">        plural: The ``key`` pluralised.</span>
+<span class="sd">        label: A summary description.</span>
+<span class="sd">        doc: A full description.</span>
+<span class="sd">        roles: A list of roles —if it&#39;s a ``GroupEntity``.</span>
+<span class="sd">        is_person: If is an individual, or not.</span>
+<span class="sd">        class_override: ?</span>
+<span class="sd">        containing_entities: Keys of contained entities.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Entity: When ``is_person`` is ``True``.</span>
+<span class="sd">        GroupEntity: When ``is_person`` is ``False``.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NotImplementedError: If ``roles`` is ``None``.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; from openfisca_core import entities</span>
+
+<span class="sd">        &gt;&gt;&gt; entity = build_entity(</span>
+<span class="sd">        ...     &quot;syndicate&quot;,</span>
+<span class="sd">        ...     &quot;syndicates&quot;,</span>
+<span class="sd">        ...     &quot;Banks loaning jointly.&quot;,</span>
+<span class="sd">        ...     roles=[],</span>
+<span class="sd">        ...     containing_entities=(),</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; entity</span>
+<span class="sd">        GroupEntity(syndicate)</span>
+
+<span class="sd">        &gt;&gt;&gt; build_entity(</span>
+<span class="sd">        ...     &quot;company&quot;,</span>
+<span class="sd">        ...     &quot;companies&quot;,</span>
+<span class="sd">        ...     &quot;A small or medium company.&quot;,</span>
+<span class="sd">        ...     is_person=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        Entity(company)</span>
+
+<span class="sd">        &gt;&gt;&gt; role = entities.Role({&quot;key&quot;: &quot;key&quot;}, entity)</span>
+
+<span class="sd">        &gt;&gt;&gt; build_entity(</span>
+<span class="sd">        ...     &quot;syndicate&quot;,</span>
+<span class="sd">        ...     &quot;syndicates&quot;,</span>
+<span class="sd">        ...     &quot;Banks loaning jointly.&quot;,</span>
+<span class="sd">        ...     roles=[role],</span>
+<span class="sd">        ... )</span>
+<span class="sd">        Traceback (most recent call last):</span>
+<span class="sd">        TypeError: &#39;Role&#39; object is not subscriptable</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">if</span> <span class="n">is_person</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Entity</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SingleEntity</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">roles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">GroupEntity</span><span class="p">(</span>
-            <span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">roles</span><span class="p">,</span> <span class="n">containing_entities</span><span class="o">=</span><span class="n">containing_entities</span>
+            <span class="n">key</span><span class="p">,</span>
+            <span class="n">plural</span><span class="p">,</span>
+            <span class="n">label</span><span class="p">,</span>
+            <span class="n">doc</span><span class="p">,</span>
+            <span class="n">roles</span><span class="p">,</span>
+            <span class="n">containing_entities</span><span class="o">=</span><span class="n">containing_entities</span><span class="p">,</span>
         <span class="p">)</span>
+
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 
 
 <div class="viewcode-block" id="find_role">
-<a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.helpers.find_role">[docs]</a>
+<a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.find_role">[docs]</a>
 <span class="k">def</span> <span class="nf">find_role</span><span class="p">(</span>
-    <span class="n">roles</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Role</span><span class="p">],</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Role</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find a Role in a GroupEntity.</span>
+    <span class="n">roles</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Role</span><span class="p">],</span>
+    <span class="n">key</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">RoleKey</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">total</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find a ``Role`` in a ``GroupEntity``.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        group_entity (GroupEntity): The entity to search in.</span>
-<span class="sd">        key (str): The key of the role to find. Defaults to `None`.</span>
-<span class="sd">        total (int | None): The `max` attribute of the role to find.</span>
+<span class="sd">        roles: The roles to search.</span>
+<span class="sd">        key: The key of the role to find.</span>
+<span class="sd">        total: The ``max`` attribute of the role to find.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Role | None: The role if found, else `None`.</span>
+<span class="sd">        Role: The role if found</span>
+<span class="sd">        None: Else ``None``.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; from openfisca_core.entities.typing import RoleParams</span>
+<span class="sd">        &gt;&gt;&gt; from openfisca_core.entities.types import RoleParams</span>
 
 <span class="sd">        &gt;&gt;&gt; principal = RoleParams(</span>
 <span class="sd">        ...     key=&quot;principal&quot;,</span>
@@ -200,7 +269,6 @@
 <span class="sd">        Role(first_parent)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">roles</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">subrole</span> <span class="ow">in</span> <span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">:</span>
@@ -212,6 +280,9 @@
 
     <span class="k">return</span> <span class="kc">None</span></div>
 
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;build_entity&quot;</span><span class="p">,</span> <span class="s2">&quot;find_role&quot;</span><span class="p">]</span>
 </pre></div>
 
           </div>

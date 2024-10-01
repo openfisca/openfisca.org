@@ -114,12 +114,13 @@
   <h1>Source code for openfisca_core.entities.group_entity</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">ClassVar</span>
 
 <span class="kn">import</span> <span class="nn">textwrap</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
 
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
 <span class="kn">from</span> <span class="nn">._core_entity</span> <span class="kn">import</span> <span class="n">_CoreEntity</span>
 <span class="kn">from</span> <span class="nn">.role</span> <span class="kn">import</span> <span class="n">Role</span>
 
@@ -129,20 +130,37 @@
 <span class="k">class</span> <span class="nc">GroupEntity</span><span class="p">(</span><span class="n">_CoreEntity</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an entity containing several others with different roles.</span>
 
-<span class="sd">    A :class:`.GroupEntity` represents an :class:`.Entity` containing</span>
-<span class="sd">    several other :class:`.Entity` with different :class:`.Role`, and on</span>
-<span class="sd">    which calculations can be run.</span>
+<span class="sd">    A ``GroupEntity`` represents an ``Entity`` containing several other entities,</span>
+<span class="sd">    with different roles, and on which calculations can be run.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        key: A key to identify the group entity.</span>
-<span class="sd">        plural: The ``key``, pluralised.</span>
+<span class="sd">        key: A key to identify the ``GroupEntity``.</span>
+<span class="sd">        plural: The ``key`` pluralised.</span>
 <span class="sd">        label: A summary description.</span>
 <span class="sd">        doc: A full description.</span>
-<span class="sd">        roles: The list of :class:`.Role` of the group entity.</span>
+<span class="sd">        roles: The list of roles of the group entity.</span>
 <span class="sd">        containing_entities: The list of keys of group entities whose members</span>
 <span class="sd">            are guaranteed to be a superset of this group&#39;s entities.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa RST301</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: A key to identify the ``Entity``.</span>
+    <span class="n">key</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityKey</span>
+
+    <span class="c1">#: The ``key`` pluralised.</span>
+    <span class="n">plural</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityPlural</span>
+
+    <span class="c1">#: A summary description.</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="c1">#: A full description.</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="c1">#: The list of roles of the ``GroupEntity``.</span>
+    <span class="n">roles</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Role</span><span class="p">]</span>
+
+    <span class="c1">#: Whether the entity is a person or not.</span>
+    <span class="n">is_person</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -150,34 +168,34 @@
         <span class="n">plural</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">doc</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">roles</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+        <span class="n">roles</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">RoleParams</span><span class="p">],</span>
         <span class="n">containing_entities</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityKey</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plural</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityPlural</span><span class="p">(</span><span class="n">plural</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">plural</span> <span class="o">=</span> <span class="n">plural</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_person</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">roles_description</span> <span class="o">=</span> <span class="n">roles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Role</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
         <span class="k">for</span> <span class="n">role_description</span> <span class="ow">in</span> <span class="n">roles</span><span class="p">:</span>
             <span class="n">role</span> <span class="o">=</span> <span class="n">Role</span><span class="p">(</span><span class="n">role_description</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">role</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">roles</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">role_description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;subroles&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">subroles</span> <span class="o">:=</span> <span class="n">role_description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;subroles&quot;</span><span class="p">):</span>
                 <span class="n">role</span><span class="o">.</span><span class="n">subroles</span> <span class="o">=</span> <span class="p">()</span>
-                <span class="k">for</span> <span class="n">subrole_key</span> <span class="ow">in</span> <span class="n">role_description</span><span class="p">[</span><span class="s2">&quot;subroles&quot;</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">subrole_key</span> <span class="ow">in</span> <span class="n">subroles</span><span class="p">:</span>
                     <span class="n">subrole</span> <span class="o">=</span> <span class="n">Role</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="n">subrole_key</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="bp">self</span><span class="p">)</span>
                     <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subrole</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">subrole</span><span class="p">)</span>
                     <span class="n">role</span><span class="o">.</span><span class="n">subroles</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">,</span> <span class="n">subrole</span><span class="p">)</span>
                 <span class="n">role</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">subroles</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">flattened_roles</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
-            <span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">subroles</span> <span class="ow">or</span> <span class="p">[</span><span class="n">role</span><span class="p">]</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="p">)</span>
+            <span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">subroles</span> <span class="ow">or</span> <span class="p">[</span><span class="n">role</span><span class="p">]</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="p">),</span>
         <span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_person</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">containing_entities</span> <span class="o">=</span> <span class="n">containing_entities</span></div>
 
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GroupEntity&quot;</span><span class="p">]</span>
 </pre></div>
 
           </div>
