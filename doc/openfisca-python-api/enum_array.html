@@ -144,84 +144,298 @@
 <span id="enum-enumarray"></span><h1>Enum &amp; EnumArray<a class="headerlink" href="#module-openfisca_core.indexed_enums" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.indexed_enums.Enum">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.indexed_enums.</span></span><span class="sig-name descname"><span class="pre">Enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum.html#Enum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.indexed_enums.Enum" title="Link to this definition">¶</a></dt>
-<dd><p>Enum based on <a class="reference external" href="https://pypi.python.org/pypi/enum34/">enum34</a>, whose items
-have an index.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.indexed_enums.</span></span><span class="sig-name descname"><span class="pre">Enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_Enum__args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_Enum__kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum.html#Enum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.indexed_enums.Enum" title="Link to this definition">¶</a></dt>
+<dd><p>Enum based on <a class="reference external" href="https://pypi.python.org/pypi/enum34/">enum34</a>.</p>
+<p>Its items have an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> index, useful and performant when running
+<a class="reference internal" href="simulations.html#module-openfisca_core.simulations" title="openfisca_core.simulations"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simulations</span></code></a> on large <a class="reference internal" href="populations.html#module-openfisca_core.populations" title="openfisca_core.populations"><code class="xref py py-mod docutils literal notranslate"><span class="pre">populations</span></code></a>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">indexed_enums</span> <span class="k">as</span> <span class="n">enum</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Housing</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">OWNER</span> <span class="o">=</span> <span class="s2">&quot;Owner&quot;</span>
+<span class="gp">... </span>    <span class="n">TENANT</span> <span class="o">=</span> <span class="s2">&quot;Tenant&quot;</span>
+<span class="gp">... </span>    <span class="n">FREE_LODGER</span> <span class="o">=</span> <span class="s2">&quot;Free lodger&quot;</span>
+<span class="gp">... </span>    <span class="n">HOMELESS</span> <span class="o">=</span> <span class="s2">&quot;Homeless&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">Housing</span><span class="p">)</span>
+<span class="go">&quot;&lt;enum &#39;Housing&#39;&gt;&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span><span class="p">)</span>
+<span class="go">&#39;Housing.TENANT&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span><span class="p">)</span>
+<span class="go">&#39;Housing.TENANT&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dict</span><span class="p">([(</span><span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span><span class="p">,</span> <span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span><span class="o">.</span><span class="n">value</span><span class="p">)])</span>
+<span class="go">{Housing.TENANT: &#39;Tenant&#39;}</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">Housing</span><span class="p">)</span>
+<span class="go">[Housing.OWNER, Housing.TENANT, Housing.FREE_LODGER, Housing.HOMELESS]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Housing</span><span class="p">[</span><span class="s2">&quot;TENANT&quot;</span><span class="p">]</span>
+<span class="go">Housing.TENANT</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Housing</span><span class="p">(</span><span class="s2">&quot;Tenant&quot;</span><span class="p">)</span>
+<span class="go">Housing.TENANT</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span> <span class="ow">in</span> <span class="n">Housing</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">Housing</span><span class="p">)</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span> <span class="o">==</span> <span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span> <span class="o">!=</span> <span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span><span class="o">.</span><span class="n">index</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;TENANT&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span><span class="o">.</span><span class="n">value</span>
+<span class="go">&#39;Tenant&#39;</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.indexed_enums.Enum.encode">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum.html#Enum.encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.indexed_enums.Enum.encode" title="Link to this definition">¶</a></dt>
-<dd><p>Encode a string numpy array, an enum item numpy array, or an int numpy
-array into an <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray" title="openfisca_core.indexed_enums.EnumArray"><code class="xref any py py-class docutils literal notranslate"><span class="pre">EnumArray</span></code></a>. See <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray.decode" title="openfisca_core.indexed_enums.EnumArray.decode"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">EnumArray.decode</span></code></a> for
-decoding.</p>
+<dd><p>Encode an encodable array into an <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray" title="openfisca_core.indexed_enums.EnumArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnumArray</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>array</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><em>numpy.ndarray</em></a>) – Array of string identifiers, or of enum
-items, to encode.</p>
+<dd class="field-odd"><p><strong>array</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.generic" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">generic</span></code></a>]] | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>]</span>) – <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> to encode.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>An <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray" title="openfisca_core.indexed_enums.EnumArray"><code class="xref any py py-class docutils literal notranslate"><span class="pre">EnumArray</span></code></a> encoding the input array values.</p>
+<dd class="field-even"><p><strong>EnumArray</strong> – An <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray" title="openfisca_core.indexed_enums.EnumArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnumArray</span></code></a> with the encoded input values.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray" title="openfisca_core.indexed_enums.EnumArray"><code class="xref any py py-class docutils literal notranslate"><span class="pre">EnumArray</span></code></a></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="types.html#openfisca_core.types.EnumArray" title="openfisca_core.types.EnumArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnumArray</span></code></a></span></p>
 </dd>
 </dl>
-<p>For instance:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">string_identifier_array</span> <span class="o">=</span> <span class="n">asarray</span><span class="p">([</span><span class="s2">&quot;free_lodger&quot;</span><span class="p">,</span> <span class="s2">&quot;owner&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">encoded_array</span> <span class="o">=</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">string_identifier_array</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">encoded_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">2  # Encoded value</span>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">free_lodger</span> <span class="o">=</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">free_lodger</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">owner</span> <span class="o">=</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">owner</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_item_array</span> <span class="o">=</span> <span class="n">asarray</span><span class="p">([</span><span class="n">free_lodger</span><span class="p">,</span> <span class="n">owner</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">encoded_array</span> <span class="o">=</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">enum_item_array</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">encoded_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">2  # Encoded value</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">indexed_enums</span> <span class="k">as</span> <span class="n">enum</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Housing</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">OWNER</span> <span class="o">=</span> <span class="s2">&quot;Owner&quot;</span>
+<span class="gp">... </span>    <span class="n">TENANT</span> <span class="o">=</span> <span class="s2">&quot;Tenant&quot;</span>
+</pre></div>
+</div>
+<p># EnumArray</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">Housing</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Housing</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">enum_array</span><span class="p">)</span>
+<span class="go">EnumArray([Housing.TENANT])</span>
+</pre></div>
+</div>
+<p># Array of Enum</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">Housing</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">==</span> <span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span>
+<span class="go">array([ True])</span>
+</pre></div>
+</div>
+<p># Array of integers</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">Housing</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">==</span> <span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span>
+<span class="go">array([ True])</span>
+</pre></div>
+</div>
+<p># Array of strings</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;TENANT&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">Housing</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">==</span> <span class="n">Housing</span><span class="o">.</span><span class="n">TENANT</span>
+<span class="go">array([ True])</span>
+</pre></div>
+</div>
+<p># Array of bytes</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="sa">b</span><span class="s2">&quot;TENANT&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">Housing</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">EnumEncodingError</span>: <span class="n">Failed to encode &quot;[b&#39;TENANT&#39;]&quot; of type &#39;bytes...</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray.decode" title="openfisca_core.indexed_enums.EnumArray.decode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">EnumArray.decode()</span></code></a> for decoding.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.indexed_enums.Enum.index">
+<span class="sig-name descname"><span class="pre">index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></em><a class="headerlink" href="#openfisca_core.indexed_enums.Enum.index" title="Link to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#openfisca_core.indexed_enums.Enum.index" title="openfisca_core.indexed_enums.Enum.index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">index</span></code></a> of the <a class="reference internal" href="#openfisca_core.indexed_enums.Enum" title="openfisca_core.indexed_enums.Enum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a> member.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.indexed_enums.EnumArray">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.indexed_enums.</span></span><span class="sig-name descname"><span class="pre">EnumArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">t.Array</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.int16</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">possible_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.12)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#openfisca_core.indexed_enums.Enum" title="openfisca_core.indexed_enums.Enum"><span class="pre">Enum</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum_array.html#EnumArray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.indexed_enums.EnumArray" title="Link to this definition">¶</a></dt>
-<dd><p>NumPy array subclass representing an array of enum items.</p>
-<p>EnumArrays are encoded as <code class="docutils literal notranslate"><span class="pre">int</span></code> arrays to improve performance</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.indexed_enums.</span></span><span class="sig-name descname"><span class="pre">EnumArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><span class="pre">ndarray</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><span class="pre">dtype</span></a><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">possible_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.13)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="types.html#openfisca_core.types.Enum" title="openfisca_core.types.Enum"><span class="pre">Enum</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum_array.html#EnumArray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.indexed_enums.EnumArray" title="Link to this definition">¶</a></dt>
+<dd><p>A subclass of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> of <a class="reference internal" href="#openfisca_core.indexed_enums.Enum" title="openfisca_core.indexed_enums.Enum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a>.</p>
+<p><a class="reference internal" href="#openfisca_core.indexed_enums.Enum" title="openfisca_core.indexed_enums.Enum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a> arrays are encoded as <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> to improve performance.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Subclassing <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> is a little tricky™. To read more
+about the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">__array_finalize__()</span></code> methods
+below, see <a class="reference external" href="https://numpy.org/doc/stable/user/basics.subclassing.html">Subclassing ndarray</a>.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">indexed_enums</span> <span class="k">as</span> <span class="n">enum</span><span class="p">,</span> <span class="n">variables</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Housing</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">OWNER</span> <span class="o">=</span> <span class="s2">&quot;Owner&quot;</span>
+<span class="gp">... </span>    <span class="n">TENANT</span> <span class="o">=</span> <span class="s2">&quot;Tenant&quot;</span>
+<span class="gp">... </span>    <span class="n">FREE_LODGER</span> <span class="o">=</span> <span class="s2">&quot;Free lodger&quot;</span>
+<span class="gp">... </span>    <span class="n">HOMELESS</span> <span class="o">=</span> <span class="s2">&quot;Homeless&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">Housing</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">)</span>
+<span class="go">&quot;&lt;class &#39;openfisca_core.indexed_enums.enum_array.EnumArray&#39;&gt;&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">enum_array</span><span class="p">)</span>
+<span class="go">&#39;EnumArray([Housing.TENANT])&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">enum_array</span><span class="p">)</span>
+<span class="go">&quot;[&#39;TENANT&#39;]&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">enum_array</span><span class="p">))</span>
+<span class="go">[1]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">enum_array</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">enum_array</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">enum_array</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">Housing</span><span class="p">),</span> <span class="n">Housing</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">AttributeError</span>: <span class="n">&#39;list&#39; object has no attribute &#39;view&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">OccupancyStatus</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">value_type</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">Enum</span>
+<span class="gp">... </span>    <span class="n">possible_values</span> <span class="o">=</span> <span class="n">Housing</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enum</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">OccupancyStatus</span><span class="o">.</span><span class="n">possible_values</span><span class="p">)</span>
+<span class="go">EnumArray([Housing.TENANT])</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.indexed_enums.EnumArray.decode">
 <span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum_array.html#EnumArray.decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.indexed_enums.EnumArray.decode" title="Link to this definition">¶</a></dt>
-<dd><p>Return the array of enum items corresponding to self.</p>
-<p>For instance:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s2">&quot;housing_occupancy_status&quot;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span>  <span class="c1"># Encoded value</span>
-<span class="go">:rtype: :sphinx_autodoc_typehints_type:`\:py\:class\:\`\~numpy.object\_\``</span>
+<dd><p>Decode itself to a normal array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ndarray[Enum]</strong> – The items of the <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray" title="openfisca_core.indexed_enums.EnumArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnumArray</span></code></a>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – When the <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray.possible_values" title="openfisca_core.indexed_enums.EnumArray.possible_values"><code class="xref py py-attr docutils literal notranslate"><span class="pre">possible_values</span></code></a> is not defined.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.object_" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object_</span></code></a>]]</span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span><span class="o">.</span><span class="n">decode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">&lt;HousingOccupancyStatus.free_lodger: &#39;Free lodger&#39;&gt;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">indexed_enums</span> <span class="k">as</span> <span class="n">enum</span>
 </pre></div>
 </div>
-<p>Decoded value: enum item</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Housing</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">OWNER</span> <span class="o">=</span> <span class="s2">&quot;Owner&quot;</span>
+<span class="gp">... </span>    <span class="n">TENANT</span> <span class="o">=</span> <span class="s2">&quot;Tenant&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">Housing</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<span class="go">array([Housing.TENANT], dtype=object)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.indexed_enums.EnumArray.decode_to_str">
 <span class="sig-name descname"><span class="pre">decode_to_str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/indexed_enums/enum_array.html#EnumArray.decode_to_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.indexed_enums.EnumArray.decode_to_str" title="Link to this definition">¶</a></dt>
-<dd><p>Return the array of string identifiers corresponding to self.</p>
-<p>For instance:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s2">&quot;housing_occupancy_status&quot;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span>  <span class="c1"># Encoded value</span>
-<span class="go">:rtype: :sphinx_autodoc_typehints_type:`\:py\:class\:\`\~numpy.str\_\``</span>
+<dd><p>Decode itself to an array of strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ndarray[str_]</strong> – The string values of the <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray" title="openfisca_core.indexed_enums.EnumArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnumArray</span></code></a>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – When the <a class="reference internal" href="#openfisca_core.indexed_enums.EnumArray.possible_values" title="openfisca_core.indexed_enums.EnumArray.possible_values"><code class="xref py py-attr docutils literal notranslate"><span class="pre">possible_values</span></code></a> is not defined.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.str_" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str_</span></code></a>]]</span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span><span class="o">.</span><span class="n">decode_to_str</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">&#39;free_lodger&#39;  # String identifier</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">indexed_enums</span> <span class="k">as</span> <span class="n">enum</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Housing</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">OWNER</span> <span class="o">=</span> <span class="s2">&quot;Owner&quot;</span>
+<span class="gp">... </span>    <span class="n">TENANT</span> <span class="o">=</span> <span class="s2">&quot;Tenant&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">Housing</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enum_array</span><span class="o">.</span><span class="n">decode_to_str</span><span class="p">()</span>
+<span class="go">array([&#39;TENANT&#39;], dtype=&#39;&lt;U6&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.indexed_enums.EnumArray.possible_values">
+<span class="sig-name descname"><span class="pre">possible_values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> <span class="pre">|</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a><span class="pre">[</span><a class="reference internal" href="types.html#openfisca_core.types.Enum" title="openfisca_core.types.Enum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#openfisca_core.indexed_enums.EnumArray.possible_values" title="Link to this definition">¶</a></dt>
+<dd><p>Enum type of the array items.</p>
 </dd></dl>
 
 </dd></dl>

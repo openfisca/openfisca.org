@@ -115,26 +115,59 @@
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Sized</span>
-<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NewType</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
-<span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">TypeAlias</span>
+<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">DTypeLike</span><span class="p">,</span> <span class="n">NDArray</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NewType</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Self</span><span class="p">,</span> <span class="n">TypeAlias</span>
+
+<span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">enum</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">pendulum</span>
 
-<span class="n">_N_co</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_N_co&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">generic</span><span class="p">,</span> <span class="n">covariant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">#: Generic covariant type var.</span>
+<span class="n">_T_co</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_T_co&quot;</span><span class="p">,</span> <span class="n">covariant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Commons</span>
+
+<span class="c1">#: Type var for numpy arrays.</span>
+<span class="n">_N_co</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_N_co&quot;</span><span class="p">,</span> <span class="n">covariant</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;DTypeGeneric&quot;</span><span class="p">)</span>
 
 <span class="c1">#: Type representing an numpy array.</span>
 <span class="n">Array</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">_N_co</span><span class="p">]</span>
 
+<span class="c1">#: Type var for array-like objects.</span>
 <span class="n">_L</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_L&quot;</span><span class="p">)</span>
 
 <span class="c1">#: Type representing an array-like object.</span>
 <span class="n">ArrayLike</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">_L</span><span class="p">]</span>
 
-<span class="c1">#: Generic type vars.</span>
-<span class="n">_T_co</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_T_co&quot;</span><span class="p">,</span> <span class="n">covariant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">#: Type for bool arrays.</span>
+<span class="n">DTypeBool</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bool_</span>
 
+<span class="c1">#: Type for int arrays.</span>
+<span class="n">DTypeInt</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int32</span>
+
+<span class="c1">#: Type for float arrays.</span>
+<span class="n">DTypeFloat</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span>
+
+<span class="c1">#: Type for string arrays.</span>
+<span class="n">DTypeStr</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">str_</span>
+
+<span class="c1">#: Type for bytes arrays.</span>
+<span class="n">DTypeBytes</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bytes_</span>
+
+<span class="c1">#: Type for Enum arrays.</span>
+<span class="n">DTypeEnum</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">uint8</span>
+
+<span class="c1">#: Type for date arrays.</span>
+<span class="n">DTypeDate</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">datetime64</span>
+
+<span class="c1">#: Type for &quot;object&quot; arrays.</span>
+<span class="n">DTypeObject</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">object_</span>
+
+<span class="c1">#: Type for &quot;generic&quot; arrays.</span>
+<span class="n">DTypeGeneric</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">generic</span>
 
 <span class="c1"># Entities</span>
 
@@ -198,14 +231,46 @@
 
 
 
+<span class="c1"># Indexed enums</span>
+
+
+<div class="viewcode-block" id="EnumType">
+<a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.EnumType">[docs]</a>
+<span class="k">class</span> <span class="nc">EnumType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">EnumMeta</span><span class="p">):</span>
+    <span class="n">indices</span><span class="p">:</span> <span class="n">Array</span><span class="p">[</span><span class="n">DTypeEnum</span><span class="p">]</span>
+    <span class="n">names</span><span class="p">:</span> <span class="n">Array</span><span class="p">[</span><span class="n">DTypeStr</span><span class="p">]</span>
+    <span class="n">enums</span><span class="p">:</span> <span class="n">Array</span><span class="p">[</span><span class="n">DTypeObject</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="Enum">
+<a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.Enum">[docs]</a>
+<span class="k">class</span> <span class="nc">Enum</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">EnumType</span><span class="p">):</span>
+    <span class="n">index</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">_member_names_</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="EnumArray">
+<a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.EnumArray">[docs]</a>
+<span class="k">class</span> <span class="nc">EnumArray</span><span class="p">(</span><span class="n">Array</span><span class="p">[</span><span class="n">DTypeEnum</span><span class="p">],</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="n">possible_values</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">type</span><span class="p">[</span><span class="n">Enum</span><span class="p">]</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">input_array</span><span class="p">:</span> <span class="n">Array</span><span class="p">[</span><span class="n">DTypeEnum</span><span class="p">],</span> <span class="n">possible_values</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">Enum</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span> <span class="o">...</span></div>
+
+
+
 <span class="c1"># Holders</span>
 
 
 <div class="viewcode-block" id="Holder">
 <a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.Holder">[docs]</a>
 <span class="k">class</span> <span class="nc">Holder</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Holder</span><span class="p">:</span> <span class="o">...</span>
-    <span class="k">def</span> <span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span> <span class="o">...</span></div>
+    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">:</span> <span class="n">CorePopulation</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Holder</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]:</span> <span class="o">...</span></div>
 
 
 
@@ -276,6 +341,7 @@
     <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Instant</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Period</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span> <span class="o">...</span>
     <span class="k">def</span> <span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">DateUnit</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Period</span><span class="p">:</span> <span class="o">...</span></div>
 
 
@@ -283,12 +349,24 @@
 <span class="c1"># Populations</span>
 
 
-<div class="viewcode-block" id="Population">
-<a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.Population">[docs]</a>
-<span class="k">class</span> <span class="nc">Population</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
-    <span class="n">entity</span><span class="p">:</span> <span class="n">Any</span>
+<div class="viewcode-block" id="CorePopulation">
+<a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.CorePopulation">[docs]</a>
+<span class="k">class</span> <span class="nc">CorePopulation</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span> <span class="o">...</span></div>
 
-    <span class="k">def</span> <span class="nf">get_holder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">VariableName</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span> <span class="o">...</span></div>
+
+
+<div class="viewcode-block" id="SinglePopulation">
+<a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.SinglePopulation">[docs]</a>
+<span class="k">class</span> <span class="nc">SinglePopulation</span><span class="p">(</span><span class="n">CorePopulation</span><span class="p">,</span> <span class="n">Protocol</span><span class="p">):</span>
+    <span class="n">entity</span><span class="p">:</span> <span class="n">SingleEntity</span>
+
+    <span class="k">def</span> <span class="nf">get_holder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">VariableName</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Holder</span><span class="p">:</span> <span class="o">...</span></div>
+
+
+
+<div class="viewcode-block" id="GroupPopulation">
+<a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.GroupPopulation">[docs]</a>
+<span class="k">class</span> <span class="nc">GroupPopulation</span><span class="p">(</span><span class="n">CorePopulation</span><span class="p">,</span> <span class="n">Protocol</span><span class="p">):</span> <span class="o">...</span></div>
 
 
 
@@ -298,10 +376,16 @@
 <div class="viewcode-block" id="Simulation">
 <a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.Simulation">[docs]</a>
 <span class="k">class</span> <span class="nc">Simulation</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">VariableName</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span> <span class="o">...</span>
-    <span class="k">def</span> <span class="nf">calculate_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">VariableName</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span> <span class="o">...</span>
-    <span class="k">def</span> <span class="nf">calculate_divide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">VariableName</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span> <span class="o">...</span>
-    <span class="k">def</span> <span class="nf">get_population</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plural</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span> <span class="o">...</span></div>
+    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">VariableName</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">Period</span><span class="p">,</span> <span class="o">/</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">[</span><span class="n">DTypeGeneric</span><span class="p">]:</span> <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">calculate_add</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">VariableName</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">Period</span><span class="p">,</span> <span class="o">/</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">[</span><span class="n">DTypeGeneric</span><span class="p">]:</span> <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">calculate_divide</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">VariableName</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">Period</span><span class="p">,</span> <span class="o">/</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">[</span><span class="n">DTypeGeneric</span><span class="p">]:</span> <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">get_population</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plural</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CorePopulation</span><span class="p">:</span> <span class="o">...</span></div>
 
 
 
@@ -311,7 +395,7 @@
 <div class="viewcode-block" id="TaxBenefitSystem">
 <a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.TaxBenefitSystem">[docs]</a>
 <span class="k">class</span> <span class="nc">TaxBenefitSystem</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
-    <span class="n">person_entity</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="n">person_entity</span><span class="p">:</span> <span class="n">SingleEntity</span>
 
     <span class="k">def</span> <span class="nf">get_variable</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -331,7 +415,7 @@
 <div class="viewcode-block" id="Variable">
 <a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.Variable">[docs]</a>
 <span class="k">class</span> <span class="nc">Variable</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
-    <span class="n">entity</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="n">entity</span><span class="p">:</span> <span class="n">CoreEntity</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">VariableName</span></div>
 
 
@@ -344,11 +428,11 @@
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span></div>
 
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">population</span><span class="p">:</span> <span class="n">Population</span><span class="p">,</span>
+        <span class="n">population</span><span class="p">:</span> <span class="n">CorePopulation</span><span class="p">,</span>
         <span class="n">instant</span><span class="p">:</span> <span class="n">Instant</span><span class="p">,</span>
         <span class="n">params</span><span class="p">:</span> <span class="n">Params</span><span class="p">,</span>
         <span class="o">/</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span> <span class="o">...</span></div>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">[</span><span class="n">DTypeGeneric</span><span class="p">]:</span> <span class="o">...</span></div>
 
 
 
@@ -360,6 +444,9 @@
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">:</span> <span class="n">Instant</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ParameterNodeAtInstant</span><span class="p">:</span> <span class="o">...</span></div>
 </div>
 
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DTypeLike&quot;</span><span class="p">]</span>
 </pre></div>
 
           </div>

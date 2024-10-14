@@ -123,7 +123,7 @@
 <a class="viewcode-back" href="../../../openfisca-python-api/commons.html#openfisca_core.commons.average_rate">[docs]</a>
 <span class="k">def</span> <span class="nf">average_rate</span><span class="p">(</span>
     <span class="n">target</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span>
-    <span class="n">varying</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">varying</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">]</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
     <span class="n">trim</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the average rate of a target net income.</span>
@@ -141,9 +141,9 @@
 <span class="sd">        trim: The lower and upper bounds of the average rate.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Array[numpy.float32]: The average rate for each target. When ``trim``</span>
+<span class="sd">        ndarray[float32]: The average rate for each target. When ``trim``</span>
 <span class="sd">            is provided, values that are out of the provided bounds are</span>
-<span class="sd">            replaced by :any:`numpy.nan`.</span>
+<span class="sd">            replaced by :obj:`numpy.nan`.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; target = numpy.array([1, 2, 3])</span>
@@ -153,8 +153,9 @@
 <span class="sd">        array([ nan,  0. , -0.5])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">varying</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">varying</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">varying</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
-    <span class="n">average_rate</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">]</span>
     <span class="n">average_rate</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">target</span> <span class="o">/</span> <span class="n">varying</span>
 
     <span class="k">if</span> <span class="n">trim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -178,7 +179,7 @@
 <a class="viewcode-back" href="../../../openfisca-python-api/commons.html#openfisca_core.commons.marginal_rate">[docs]</a>
 <span class="k">def</span> <span class="nf">marginal_rate</span><span class="p">(</span>
     <span class="n">target</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span>
-    <span class="n">varying</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span>
+    <span class="n">varying</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">]</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
     <span class="n">trim</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the marginal rate of a target net income.</span>
@@ -196,9 +197,9 @@
 <span class="sd">        trim: The lower and upper bounds of the marginal rate.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Array[numpy.float32]: The marginal rate for each target. When ``trim``</span>
-<span class="sd">        is provided, values that are out of the provided bounds are replaced by</span>
-<span class="sd">        :any:`numpy.nan`.</span>
+<span class="sd">        ndarray[float32]: The marginal rate for each target. When ``trim``</span>
+<span class="sd">            is provided, values that are out of the provided bounds are</span>
+<span class="sd">            replaced by :class:`numpy.nan`.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; target = numpy.array([1, 2, 3])</span>
@@ -208,8 +209,9 @@
 <span class="sd">        array([nan, 0.5])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">varying</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">varying</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">varying</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
-    <span class="n">marginal_rate</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">]</span>
     <span class="n">marginal_rate</span> <span class="o">=</span> <span class="o">+</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">target</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">target</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="p">(</span><span class="n">varying</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">varying</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 
     <span class="k">if</span> <span class="n">trim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
