@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>openfisca_core.entities.entity &#8212; OpenFisca  documentation</title>
+    <title>openfisca_core.indexed_enums._enum_type &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
@@ -40,7 +40,7 @@
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">openfisca_core.entities.entity</a></li> 
+        <li class="nav-item nav-item-this"><a href="">openfisca_core.indexed_enums._enum_type</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -105,77 +105,89 @@
               
                 <li><a href="../../index.html">Module code</a></li>
               
-              <li>openfisca_core.entities.entity</li>
+              <li>openfisca_core.indexed_enums._enum_type</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <h1>Source code for openfisca_core.entities.entity</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">ClassVar</span>
+  <h1>Source code for openfisca_core.indexed_enums._enum_type</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">final</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
-<span class="kn">from</span> <span class="nn">._core_entity</span> <span class="kn">import</span> <span class="n">CoreEntity</span>
 
 
-<div class="viewcode-block" id="Entity">
-<a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.Entity">[docs]</a>
-<span class="k">class</span> <span class="nc">Entity</span><span class="p">(</span><span class="n">CoreEntity</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;An entity (e.g. a person, a household) on which calculations can be run.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        key: A key to identify the ``Entity``.</span>
-<span class="sd">        plural: The ``key`` pluralised.</span>
-<span class="sd">        label: A summary description.</span>
-<span class="sd">        doc: A full description.</span>
+<div class="viewcode-block" id="EnumType">
+<a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumType">[docs]</a>
+<span class="nd">@final</span>
+<span class="k">class</span> <span class="nc">EnumType</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">EnumType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Meta class for creating an indexed :class:`.Enum`.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; from openfisca_core import entities</span>
+<span class="sd">        &gt;&gt;&gt; from openfisca_core import indexed_enums as enum</span>
 
-<span class="sd">        &gt;&gt;&gt; entity = entities.SingleEntity(</span>
-<span class="sd">        ...     &quot;individual&quot;,</span>
-<span class="sd">        ...     &quot;individuals&quot;,</span>
-<span class="sd">        ...     &quot;An individual&quot;,</span>
-<span class="sd">        ...     &quot;\t\t\tThe minimal legal entity on which a rule might be a...&quot;,</span>
-<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; class Enum(enum.Enum, metaclass=enum.EnumType):</span>
+<span class="sd">        ...     pass</span>
 
-<span class="sd">        &gt;&gt;&gt; repr(entities.SingleEntity)</span>
-<span class="sd">        &quot;&lt;class &#39;openfisca_core.entities.entity.Entity&#39;&gt;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; Enum.items</span>
+<span class="sd">        Traceback (most recent call last):</span>
+<span class="sd">        AttributeError: ...</span>
 
-<span class="sd">        &gt;&gt;&gt; repr(entity)</span>
-<span class="sd">        &#39;Entity(individual)&#39;</span>
+<span class="sd">        &gt;&gt;&gt; class Housing(Enum):</span>
+<span class="sd">        ...     OWNER = &quot;Owner&quot;</span>
+<span class="sd">        ...     TENANT = &quot;Tenant&quot;</span>
 
-<span class="sd">        &gt;&gt;&gt; str(entity)</span>
-<span class="sd">        &#39;Entity(individual)&#39;</span>
+<span class="sd">        &gt;&gt;&gt; Housing.indices</span>
+<span class="sd">        array([0, 1], dtype=uint8)</span>
+
+<span class="sd">        &gt;&gt;&gt; Housing.names</span>
+<span class="sd">        array([&#39;OWNER&#39;, &#39;TENANT&#39;], dtype=&#39;&lt;U6&#39;)</span>
+
+<span class="sd">        &gt;&gt;&gt; Housing.enums</span>
+<span class="sd">        array([Housing.OWNER, Housing.TENANT], dtype=object)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1">#: A key to identify the ``Entity``.</span>
-    <span class="n">key</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityKey</span>
+<div class="viewcode-block" id="EnumType.__new__">
+<a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumType.__new__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>
+        <span class="n">metacls</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">bases</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="n">classdict</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">EnumDict</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwds</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">EnumType</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new indexed enum class.&quot;&quot;&quot;</span>
+        <span class="c1"># Create the enum class.</span>
+        <span class="bp">cls</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">metacls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">classdict</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
 
-    <span class="c1">#: The ``key`` pluralised.</span>
-    <span class="n">plural</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityPlural</span>
+        <span class="c1"># If the enum class has no members, return it as is.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span>
 
-    <span class="c1">#: A summary description.</span>
-    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
+        <span class="c1"># Add the indices attribute to the enum class.</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">cls</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">EnumDType</span><span class="p">)</span>
 
-    <span class="c1">#: A full description.</span>
-    <span class="n">doc</span><span class="p">:</span> <span class="nb">str</span>
+        <span class="c1"># Add the names attribute to the enum class.</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_member_names_</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">StrDType</span><span class="p">)</span>
 
-    <span class="c1">#: Whether the ``Entity`` is a person or not.</span>
-    <span class="n">is_person</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># Add the enums attribute to the enum class.</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">enums</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">ObjDType</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">plural</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">doc</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityKey</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">plural</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityPlural</span><span class="p">(</span><span class="n">plural</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span></div>
+        <span class="c1"># Return the modified enum class.</span>
+        <span class="k">return</span> <span class="bp">cls</span></div>
 
 
+    <span class="k">def</span> <span class="fm">__dir__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">({</span><span class="s2">&quot;indices&quot;</span><span class="p">,</span> <span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="s2">&quot;enums&quot;</span><span class="p">,</span> <span class="o">*</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__dir__</span><span class="p">()})</span></div>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Entity&quot;</span><span class="p">]</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;EnumType&quot;</span><span class="p">]</span>
 </pre></div>
 
           </div>
@@ -193,7 +205,7 @@
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">openfisca_core.entities.entity</a></li> 
+        <li class="nav-item nav-item-this"><a href="">openfisca_core.indexed_enums._enum_type</a></li> 
       </ul>
     </div>
   

@@ -96,6 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulate/index.html"><i icon-name="cog"></i> Running a simulation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html"><i icon-name="function-square"></i> OpenFisca Python API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="commons.html">Commons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_storage.html">Data Storage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tax-benefit-system.html">TaxBenefitSystem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
@@ -142,6 +143,243 @@
             
   <section id="module-openfisca_core.entities">
 <span id="entities"></span><h1>Entities<a class="headerlink" href="#module-openfisca_core.entities" title="Link to this heading">¶</a></h1>
+<p>Provide a way of representing the entities of a rule system.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.entities.CoreEntity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">CoreEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_CoreEntity__args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_CoreEntity__kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/_core_entity.html#CoreEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.CoreEntity" title="Link to this definition">¶</a></dt>
+<dd><p>Base class to build entities from.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*__args</strong> – Any arguments.</p></li>
+<li><p><strong>**__kwargs</strong> – Any keyword arguments.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core.entities</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Entity</span><span class="p">(</span><span class="n">entities</span><span class="o">.</span><span class="n">CoreEntity</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityKey</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Entity</span><span class="p">(</span><span class="s2">&quot;individual&quot;</span><span class="p">)</span>
+<span class="go">Entity(individual)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.CoreEntity.check_role_validity">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_role_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/_core_entity.html#CoreEntity.check_role_validity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.CoreEntity.check_role_validity" title="Link to this definition">¶</a></dt>
+<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">role</span></code> is an instance of  <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>role</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></span>) – Any object.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – When <code class="docutils literal notranslate"><span class="pre">role</span></code> is not a <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">role</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">Role</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">},</span> <span class="nb">object</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="s2">&quot;hey!&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">hey! is not a valid role</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.CoreEntity.check_variable_defined_for_entity">
+<span class="sig-name descname"><span class="pre">check_variable_defined_for_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/_core_entity.html#CoreEntity.check_variable_defined_for_entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.CoreEntity.check_variable_defined_for_entity" title="Link to this definition">¶</a></dt>
+<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> is defined for <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>variable_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">VariableName</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span>) – The <code class="docutils literal notranslate"><span class="pre">Variable</span></code> to be found.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists but is defined
+for another <code class="docutils literal notranslate"><span class="pre">Entity</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">entities</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">periods</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">taxbenefitsystems</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">variables</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;this&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">that</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;that&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">taxbenefitsystems</span><span class="o">.</span><span class="n">TaxBenefitSystem</span><span class="p">([</span><span class="n">that</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">set_tax_benefit_system</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VariableNotFoundError</span>: <span class="n">You tried to calculate or to set a value...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">tax</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">WEEK</span>
+<span class="gp">... </span>    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">int</span>
+<span class="gp">... </span>    <span class="n">entity</span> <span class="o">=</span> <span class="n">that</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">_tax_benefit_system</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">You tried to compute the variable &#39;tax&#39; for the enti...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tax</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="n">this</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">_tax_benefit_system</span><span class="o">.</span><span class="n">update_variable</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.CoreEntity.doc">
+<span class="sig-name descname"><span class="pre">doc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#openfisca_core.entities.CoreEntity.doc" title="Link to this definition">¶</a></dt>
+<dd><p>A full description.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.CoreEntity.get_variable">
+<span class="sig-name descname"><span class="pre">get_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_existence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/_core_entity.html#CoreEntity.get_variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.CoreEntity.get_variable" title="Link to this definition">¶</a></dt>
+<dd><p>Get <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> from <code class="docutils literal notranslate"><span class="pre">variables</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">VariableName</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span>) – The <code class="docutils literal notranslate"><span class="pre">Variable</span></code> to be found.</p></li>
+<li><p><strong>check_existence</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Was the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> found?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Variable</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists.</p></li>
+<li><p><strong>None</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> doesn’t exist.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – When the <code class="xref py py-attr docutils literal notranslate"><span class="pre">_tax_benefit_system</span></code> is not set yet.</p></li>
+<li><p><strong>ValueError</strong> – When <code class="docutils literal notranslate"><span class="pre">check_existence</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and
+the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> doesn’t exist.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="types.html#openfisca_core.types.Variable" title="openfisca_core.types.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">entities</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">periods</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">taxbenefitsystems</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">variables</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;this&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">that</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;that&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">You must set &#39;tax_benefit_system&#39; before calling thi...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">taxbenefitsystems</span><span class="o">.</span><span class="n">TaxBenefitSystem</span><span class="p">([</span><span class="n">this</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">set_tax_benefit_system</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="n">check_existence</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VariableNotFoundError</span>: <span class="n">You tried to calculate or to set a value...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">tax</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span>
+<span class="gp">... </span>    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+<span class="gp">... </span>    <span class="n">entity</span> <span class="o">=</span> <span class="n">that</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">_tax_benefit_system</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.CoreEntity.is_person">
+<span class="sig-name descname"><span class="pre">is_person</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#openfisca_core.entities.CoreEntity.is_person" title="Link to this definition">¶</a></dt>
+<dd><p>Whether the <code class="docutils literal notranslate"><span class="pre">CoreEntity</span></code> is a person or not.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.CoreEntity.key">
+<span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a><span class="pre">(</span><code class="docutils literal notranslate"><span class="pre">EntityKey</span></code><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">)</span></em><a class="headerlink" href="#openfisca_core.entities.CoreEntity.key" title="Link to this definition">¶</a></dt>
+<dd><p>A key to identify the <code class="docutils literal notranslate"><span class="pre">CoreEntity</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.CoreEntity.label">
+<span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#openfisca_core.entities.CoreEntity.label" title="Link to this definition">¶</a></dt>
+<dd><p>A summary description.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.entities.CoreEntity.plural">
+<span class="sig-name descname"><span class="pre">plural</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a><span class="pre">(</span><code class="docutils literal notranslate"><span class="pre">EntityPlural</span></code><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">)</span></em><a class="headerlink" href="#openfisca_core.entities.CoreEntity.plural" title="Link to this definition">¶</a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">key</span></code> pluralised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.entities.CoreEntity.set_tax_benefit_system">
+<span class="sig-name descname"><span class="pre">set_tax_benefit_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tax_benefit_system</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/_core_entity.html#CoreEntity.set_tax_benefit_system"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.CoreEntity.set_tax_benefit_system" title="Link to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">CoreEntity</span></code> belongs to a <code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.entities.Entity">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">Entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plural</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/entities/entity.html#Entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.entities.Entity" title="Link to this definition">¶</a></dt>
@@ -156,6 +394,30 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entity</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;individual&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;individuals&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;An individual&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;</span><span class="se">\t\t\t</span><span class="s2">The minimal legal entity on which a rule might be a...&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">)</span>
+<span class="go">&quot;&lt;class &#39;openfisca_core.entities.entity.Entity&#39;&gt;&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+<span class="go">&#39;Entity(individual)&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+<span class="go">&#39;Entity(individual)&#39;</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.entities.Entity.check_role_validity">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_role_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.Entity.check_role_validity" title="Link to this definition">¶</a></dt>
@@ -165,12 +427,25 @@
 <dd class="field-odd"><p><strong>role</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></span>) – Any object.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – When <code class="docutils literal notranslate"><span class="pre">role</span></code> is not a <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – When <code class="docutils literal notranslate"><span class="pre">role</span></code> is not a <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">role</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">Role</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">},</span> <span class="nb">object</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="s2">&quot;hey!&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">hey! is not a valid role</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -181,20 +456,59 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>variable_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">VariableName</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span>) – The <code class="docutils literal notranslate"><span class="pre">Variable</span></code> to be found.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>Variable</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists.</p></li>
-<li><p><strong>None</strong> – When the <code class="xref py py-attr docutils literal notranslate"><span class="pre">_tax_benefit_system</span></code> is not set.</p></li>
-</ul>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists but is defined
+for another <code class="docutils literal notranslate"><span class="pre">Entity</span></code>.</p>
 </dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists but is defined
-    for another <code class="docutils literal notranslate"><span class="pre">Entity</span></code>.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">entities</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">periods</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">taxbenefitsystems</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">variables</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;this&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">that</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;that&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">taxbenefitsystems</span><span class="o">.</span><span class="n">TaxBenefitSystem</span><span class="p">([</span><span class="n">that</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">set_tax_benefit_system</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VariableNotFoundError</span>: <span class="n">You tried to calculate or to set a value...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">tax</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">WEEK</span>
+<span class="gp">... </span>    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">int</span>
+<span class="gp">... </span>    <span class="n">entity</span> <span class="o">=</span> <span class="n">that</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">_tax_benefit_system</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">You tried to compute the variable &#39;tax&#39; for the enti...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tax</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="n">this</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">_tax_benefit_system</span><span class="o">.</span><span class="n">update_variable</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -221,13 +535,60 @@
 </ul>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – When <code class="docutils literal notranslate"><span class="pre">check_existence</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and
-    the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> doesn’t exist.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – When the <code class="xref py py-attr docutils literal notranslate"><span class="pre">_tax_benefit_system</span></code> is not set yet.</p></li>
+<li><p><strong>ValueError</strong> – When <code class="docutils literal notranslate"><span class="pre">check_existence</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and
+the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> doesn’t exist.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="types.html#openfisca_core.types.Variable" title="openfisca_core.types.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">entities</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">periods</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">taxbenefitsystems</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">variables</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;this&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">that</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;that&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">You must set &#39;tax_benefit_system&#39; before calling thi...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">taxbenefitsystems</span><span class="o">.</span><span class="n">TaxBenefitSystem</span><span class="p">([</span><span class="n">this</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">set_tax_benefit_system</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="n">check_existence</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VariableNotFoundError</span>: <span class="n">You tried to calculate or to set a value...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">tax</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span>
+<span class="gp">... </span>    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+<span class="gp">... </span>    <span class="n">entity</span> <span class="o">=</span> <span class="n">that</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">_tax_benefit_system</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -257,7 +618,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.entities.Entity.set_tax_benefit_system">
 <span class="sig-name descname"><span class="pre">set_tax_benefit_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tax_benefit_system</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.Entity.set_tax_benefit_system" title="Link to this definition">¶</a></dt>
-<dd><p>A <code class="docutils literal notranslate"><span class="pre">_CoreEntity</span></code> belongs to a <code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem</span></code>.</p>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">CoreEntity</span></code> belongs to a <code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -286,6 +647,57 @@ are guaranteed to be a superset of this group’s entities.</p></li>
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">family_roles</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;parent&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;subroles&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;first_parent&quot;</span><span class="p">,</span> <span class="s2">&quot;second_parent&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">family</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">GroupEntity</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;family&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;families&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;A family&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;</span><span class="se">\t\t\t</span><span class="s2">All the people somehow related living together.&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">family_roles</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">household_roles</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;partners&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;subroles&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;first_partner&quot;</span><span class="p">,</span> <span class="s2">&quot;second_partner&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">household</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">GroupEntity</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;household&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;households&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;A household&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;</span><span class="se">\t\t\t</span><span class="s2">All the people who live together in the same place.&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">household_roles</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="n">family</span><span class="o">.</span><span class="n">key</span><span class="p">,),</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">entities</span><span class="o">.</span><span class="n">GroupEntity</span><span class="p">)</span>
+<span class="go">&quot;&lt;class &#39;openfisca_core.entities.group_entity.GroupEntity&#39;&gt;&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">household</span><span class="p">)</span>
+<span class="go">&#39;GroupEntity(household)&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">household</span><span class="p">)</span>
+<span class="go">&#39;GroupEntity(household)&#39;</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.check_role_validity">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_role_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.GroupEntity.check_role_validity" title="Link to this definition">¶</a></dt>
@@ -295,12 +707,25 @@ are guaranteed to be a superset of this group’s entities.</p></li>
 <dd class="field-odd"><p><strong>role</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></span>) – Any object.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – When <code class="docutils literal notranslate"><span class="pre">role</span></code> is not a <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – When <code class="docutils literal notranslate"><span class="pre">role</span></code> is not a <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">role</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">Role</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">},</span> <span class="nb">object</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="s2">&quot;hey!&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">hey! is not a valid role</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -311,20 +736,59 @@ are guaranteed to be a superset of this group’s entities.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>variable_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">VariableName</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span>) – The <code class="docutils literal notranslate"><span class="pre">Variable</span></code> to be found.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>Variable</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists.</p></li>
-<li><p><strong>None</strong> – When the <code class="xref py py-attr docutils literal notranslate"><span class="pre">_tax_benefit_system</span></code> is not set.</p></li>
-</ul>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists but is defined
+for another <code class="docutils literal notranslate"><span class="pre">Entity</span></code>.</p>
 </dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – When the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> exists but is defined
-    for another <code class="docutils literal notranslate"><span class="pre">Entity</span></code>.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">entities</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">periods</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">taxbenefitsystems</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">variables</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;this&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">that</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;that&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">taxbenefitsystems</span><span class="o">.</span><span class="n">TaxBenefitSystem</span><span class="p">([</span><span class="n">that</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">set_tax_benefit_system</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VariableNotFoundError</span>: <span class="n">You tried to calculate or to set a value...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">tax</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">WEEK</span>
+<span class="gp">... </span>    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">int</span>
+<span class="gp">... </span>    <span class="n">entity</span> <span class="o">=</span> <span class="n">that</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">_tax_benefit_system</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">You tried to compute the variable &#39;tax&#39; for the enti...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tax</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="n">this</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">_tax_benefit_system</span><span class="o">.</span><span class="n">update_variable</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -351,13 +815,60 @@ are guaranteed to be a superset of this group’s entities.</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – When <code class="docutils literal notranslate"><span class="pre">check_existence</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and
-    the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> doesn’t exist.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – When the <code class="xref py py-attr docutils literal notranslate"><span class="pre">_tax_benefit_system</span></code> is not set yet.</p></li>
+<li><p><strong>ValueError</strong> – When <code class="docutils literal notranslate"><span class="pre">check_existence</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and
+the <code class="docutils literal notranslate"><span class="pre">Variable</span></code> doesn’t exist.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="types.html#openfisca_core.types.Variable" title="openfisca_core.types.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">entities</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">periods</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">taxbenefitsystems</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">variables</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;this&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">that</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">(</span><span class="s2">&quot;that&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">You must set &#39;tax_benefit_system&#39; before calling thi...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">taxbenefitsystems</span><span class="o">.</span><span class="n">TaxBenefitSystem</span><span class="p">([</span><span class="n">this</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">set_tax_benefit_system</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="n">check_existence</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VariableNotFoundError</span>: <span class="n">You tried to calculate or to set a value...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">tax</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">MONTH</span>
+<span class="gp">... </span>    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+<span class="gp">... </span>    <span class="n">entity</span> <span class="o">=</span> <span class="n">that</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">_tax_benefit_system</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">this</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -393,7 +904,7 @@ are guaranteed to be a superset of this group’s entities.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.entities.GroupEntity.set_tax_benefit_system">
 <span class="sig-name descname"><span class="pre">set_tax_benefit_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tax_benefit_system</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.GroupEntity.set_tax_benefit_system" title="Link to this definition">¶</a></dt>
-<dd><p>A <code class="docutils literal notranslate"><span class="pre">_CoreEntity</span></code> belongs to a <code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem</span></code>.</p>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">CoreEntity</span></code> belongs to a <code class="docutils literal notranslate"><span class="pre">TaxBenefitSystem</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -421,11 +932,13 @@ spouse, several dependents, and the like.</p>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">entity</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">GroupEntity</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="s2">&quot;plural&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="s2">&quot;doc&quot;</span><span class="p">,</span> <span class="p">[])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entity</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">GroupEntity</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="s2">&quot;plural&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="s2">&quot;doc&quot;</span><span class="p">,</span> <span class="p">[])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">role</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">Role</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;parent&quot;</span><span class="p">},</span> <span class="n">entity</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">Role</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">entities</span><span class="o">.</span><span class="n">Role</span><span class="p">)</span>
 <span class="go">&quot;&lt;class &#39;openfisca_core.entities.role.Role&#39;&gt;&quot;</span>
 </pre></div>
 </div>
@@ -526,7 +1039,7 @@ spouse, several dependents, and the like.</p>
 </ul>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.13)"><strong>NotImplementedError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">roles</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If <code class="docutils literal notranslate"><span class="pre">roles</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="types.html#openfisca_core.types.SingleEntity" title="openfisca_core.types.SingleEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleEntity</span></code></a> | <a class="reference internal" href="types.html#openfisca_core.types.GroupEntity" title="openfisca_core.types.GroupEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupEntity</span></code></a></span></p>
@@ -536,7 +1049,7 @@ spouse, several dependents, and the like.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entity</span> <span class="o">=</span> <span class="n">build_entity</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entity</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">build_entity</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;syndicate&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s2">&quot;syndicates&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s2">&quot;Banks loaning jointly.&quot;</span><span class="p">,</span>
@@ -547,7 +1060,7 @@ spouse, several dependents, and the like.</p>
 <span class="go">GroupEntity(syndicate)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">build_entity</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">build_entity</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;company&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s2">&quot;companies&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s2">&quot;A small or medium company.&quot;</span><span class="p">,</span>
@@ -559,7 +1072,7 @@ spouse, several dependents, and the like.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">role</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">Role</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">},</span> <span class="n">entity</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">build_entity</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">build_entity</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;syndicate&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s2">&quot;syndicates&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s2">&quot;Banks loaning jointly.&quot;</span><span class="p">,</span>
@@ -567,6 +1080,36 @@ spouse, several dependents, and the like.</p>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="gr">TypeError</span>: <span class="n">&#39;Role&#39; object is not subscriptable</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openfisca_core.entities.check_role_validity">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.entities.</span></span><span class="sig-name descname"><span class="pre">check_role_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openfisca_core.entities.check_role_validity" title="Link to this definition">¶</a></dt>
+<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">role</span></code> is an instance of  <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>role</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></span>) – Any object.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – When <code class="docutils literal notranslate"><span class="pre">role</span></code> is not a <code class="docutils literal notranslate"><span class="pre">Role</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">role</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">Role</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">},</span> <span class="nb">object</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">check_role_validity</span><span class="p">(</span><span class="s2">&quot;hey!&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">hey! is not a valid role</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -594,10 +1137,11 @@ spouse, several dependents, and the like.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core.entities.types</span> <span class="kn">import</span> <span class="n">RoleParams</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openfisca_core.entities</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">principal</span> <span class="o">=</span> <span class="n">RoleParams</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">principal</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">RoleParams</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">key</span><span class="o">=</span><span class="s2">&quot;principal&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Principal&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Person focus of a calculation in a family context.&quot;</span><span class="p">,</span>
@@ -605,7 +1149,7 @@ spouse, several dependents, and the like.</p>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">partner</span> <span class="o">=</span> <span class="n">RoleParams</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">partner</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">RoleParams</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">key</span><span class="o">=</span><span class="s2">&quot;partner&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">plural</span><span class="o">=</span><span class="s2">&quot;partners&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Partners&quot;</span><span class="p">,</span>
@@ -613,7 +1157,7 @@ spouse, several dependents, and the like.</p>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parent</span> <span class="o">=</span> <span class="n">RoleParams</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parent</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">RoleParams</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">key</span><span class="o">=</span><span class="s2">&quot;parent&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">plural</span><span class="o">=</span><span class="s2">&quot;parents&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Parents&quot;</span><span class="p">,</span>
@@ -622,7 +1166,7 @@ spouse, several dependents, and the like.</p>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">group_entity</span> <span class="o">=</span> <span class="n">build_entity</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">group_entity</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">build_entity</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">key</span><span class="o">=</span><span class="s2">&quot;family&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">plural</span><span class="o">=</span><span class="s2">&quot;families&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Family&quot;</span><span class="p">,</span>
@@ -631,19 +1175,19 @@ spouse, several dependents, and the like.</p>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">find_role</span><span class="p">(</span><span class="n">group_entity</span><span class="o">.</span><span class="n">roles</span><span class="p">,</span> <span class="s2">&quot;principal&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">find_role</span><span class="p">(</span><span class="n">group_entity</span><span class="o">.</span><span class="n">roles</span><span class="p">,</span> <span class="s2">&quot;principal&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Role(principal)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">find_role</span><span class="p">(</span><span class="n">group_entity</span><span class="o">.</span><span class="n">roles</span><span class="p">,</span> <span class="s2">&quot;partner&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">find_role</span><span class="p">(</span><span class="n">group_entity</span><span class="o">.</span><span class="n">roles</span><span class="p">,</span> <span class="s2">&quot;partner&quot;</span><span class="p">)</span>
 <span class="go">Role(partner)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">find_role</span><span class="p">(</span><span class="n">group_entity</span><span class="o">.</span><span class="n">roles</span><span class="p">,</span> <span class="s2">&quot;parent&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">find_role</span><span class="p">(</span><span class="n">group_entity</span><span class="o">.</span><span class="n">roles</span><span class="p">,</span> <span class="s2">&quot;parent&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">Role(parent)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">find_role</span><span class="p">(</span><span class="n">group_entity</span><span class="o">.</span><span class="n">roles</span><span class="p">,</span> <span class="s2">&quot;first_parent&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span><span class="o">.</span><span class="n">find_role</span><span class="p">(</span><span class="n">group_entity</span><span class="o">.</span><span class="n">roles</span><span class="p">,</span> <span class="s2">&quot;first_parent&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Role(first_parent)</span>
 </pre></div>
 </div>

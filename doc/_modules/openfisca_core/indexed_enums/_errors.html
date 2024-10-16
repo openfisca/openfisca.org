@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>openfisca_core.entities.entity &#8212; OpenFisca  documentation</title>
+    <title>openfisca_core.indexed_enums._errors &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
@@ -40,7 +40,7 @@
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">openfisca_core.entities.entity</a></li> 
+        <li class="nav-item nav-item-this"><a href="">openfisca_core.indexed_enums._errors</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -105,77 +105,54 @@
               
                 <li><a href="../../index.html">Module code</a></li>
               
-              <li>openfisca_core.entities.entity</li>
+              <li>openfisca_core.indexed_enums._errors</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <h1>Source code for openfisca_core.entities.entity</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">ClassVar</span>
-
-<span class="kn">import</span> <span class="nn">textwrap</span>
+  <h1>Source code for openfisca_core.indexed_enums._errors</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
-<span class="kn">from</span> <span class="nn">._core_entity</span> <span class="kn">import</span> <span class="n">CoreEntity</span>
 
 
-<div class="viewcode-block" id="Entity">
-<a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.Entity">[docs]</a>
-<span class="k">class</span> <span class="nc">Entity</span><span class="p">(</span><span class="n">CoreEntity</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;An entity (e.g. a person, a household) on which calculations can be run.</span>
+<div class="viewcode-block" id="EnumEncodingError">
+<a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumEncodingError">[docs]</a>
+<span class="k">class</span> <span class="nc">EnumEncodingError</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when an enum is encoded with an unsupported type.&quot;&quot;&quot;</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        key: A key to identify the ``Entity``.</span>
-<span class="sd">        plural: The ``key`` pluralised.</span>
-<span class="sd">        label: A summary description.</span>
-<span class="sd">        doc: A full description.</span>
-
-<span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; from openfisca_core import entities</span>
-
-<span class="sd">        &gt;&gt;&gt; entity = entities.SingleEntity(</span>
-<span class="sd">        ...     &quot;individual&quot;,</span>
-<span class="sd">        ...     &quot;individuals&quot;,</span>
-<span class="sd">        ...     &quot;An individual&quot;,</span>
-<span class="sd">        ...     &quot;\t\t\tThe minimal legal entity on which a rule might be a...&quot;,</span>
-<span class="sd">        ... )</span>
-
-<span class="sd">        &gt;&gt;&gt; repr(entities.SingleEntity)</span>
-<span class="sd">        &quot;&lt;class &#39;openfisca_core.entities.entity.Entity&#39;&gt;&quot;</span>
-
-<span class="sd">        &gt;&gt;&gt; repr(entity)</span>
-<span class="sd">        &#39;Entity(individual)&#39;</span>
-
-<span class="sd">        &gt;&gt;&gt; str(entity)</span>
-<span class="sd">        &#39;Entity(individual)&#39;</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1">#: A key to identify the ``Entity``.</span>
-    <span class="n">key</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityKey</span>
-
-    <span class="c1">#: The ``key`` pluralised.</span>
-    <span class="n">plural</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityPlural</span>
-
-    <span class="c1">#: A summary description.</span>
-    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
-
-    <span class="c1">#: A full description.</span>
-    <span class="n">doc</span><span class="p">:</span> <span class="nb">str</span>
-
-    <span class="c1">#: Whether the ``Entity`` is a person or not.</span>
-    <span class="n">is_person</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">plural</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">doc</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityKey</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">plural</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityPlural</span><span class="p">(</span><span class="n">plural</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">enum_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Enum</span><span class="p">],</span> <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VarArray</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Failed to encode </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> of type &#39;</span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;, &quot;</span>
+            <span class="s2">&quot;as it is not supported. Please, try again with an array of &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="nb">int</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="nb">str</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;, or &#39;</span><span class="si">{</span><span class="n">enum_class</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+        <span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Entity&quot;</span><span class="p">]</span>
+<div class="viewcode-block" id="EnumMemberNotFoundError">
+<a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumMemberNotFoundError">[docs]</a>
+<span class="k">class</span> <span class="nc">EnumMemberNotFoundError</span><span class="p">(</span><span class="ne">IndexError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when a member is not found in an enum.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enum_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Enum</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">enum</span> <span class="ow">in</span> <span class="n">enum_class</span><span class="p">]</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">enum</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">enum</span> <span class="ow">in</span> <span class="n">enum_class</span><span class="p">]</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Some members were not found in enum &#39;</span><span class="si">{</span><span class="n">enum_class</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Possible values are: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">names</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">, and </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">!s}</span><span class="s2">; &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;or their corresponding indices: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">index</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">, and &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;EnumEncodingError&quot;</span><span class="p">,</span> <span class="s2">&quot;EnumMemberNotFoundError&quot;</span><span class="p">]</span>
 </pre></div>
 
           </div>
@@ -193,7 +170,7 @@
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">openfisca_core.entities.entity</a></li> 
+        <li class="nav-item nav-item-this"><a href="">openfisca_core.indexed_enums._errors</a></li> 
       </ul>
     </div>
   

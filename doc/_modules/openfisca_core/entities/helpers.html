@@ -156,7 +156,7 @@
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; from openfisca_core import entities</span>
 
-<span class="sd">        &gt;&gt;&gt; entity = build_entity(</span>
+<span class="sd">        &gt;&gt;&gt; entity = entities.build_entity(</span>
 <span class="sd">        ...     &quot;syndicate&quot;,</span>
 <span class="sd">        ...     &quot;syndicates&quot;,</span>
 <span class="sd">        ...     &quot;Banks loaning jointly.&quot;,</span>
@@ -166,7 +166,7 @@
 <span class="sd">        &gt;&gt;&gt; entity</span>
 <span class="sd">        GroupEntity(syndicate)</span>
 
-<span class="sd">        &gt;&gt;&gt; build_entity(</span>
+<span class="sd">        &gt;&gt;&gt; entities.build_entity(</span>
 <span class="sd">        ...     &quot;company&quot;,</span>
 <span class="sd">        ...     &quot;companies&quot;,</span>
 <span class="sd">        ...     &quot;A small or medium company.&quot;,</span>
@@ -176,7 +176,7 @@
 
 <span class="sd">        &gt;&gt;&gt; role = entities.Role({&quot;key&quot;: &quot;key&quot;}, entity)</span>
 
-<span class="sd">        &gt;&gt;&gt; build_entity(</span>
+<span class="sd">        &gt;&gt;&gt; entities.build_entity(</span>
 <span class="sd">        ...     &quot;syndicate&quot;,</span>
 <span class="sd">        ...     &quot;syndicates&quot;,</span>
 <span class="sd">        ...     &quot;Banks loaning jointly.&quot;,</span>
@@ -186,7 +186,6 @@
 <span class="sd">        TypeError: &#39;Role&#39; object is not subscriptable</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">if</span> <span class="n">is_person</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">SingleEntity</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
 
@@ -224,23 +223,24 @@
 <span class="sd">        None: Else ``None``.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; from openfisca_core.entities.types import RoleParams</span>
+<span class="sd">        &gt;&gt;&gt; from openfisca_core import entities</span>
+<span class="sd">        &gt;&gt;&gt; from openfisca_core.entities import types as t</span>
 
-<span class="sd">        &gt;&gt;&gt; principal = RoleParams(</span>
+<span class="sd">        &gt;&gt;&gt; principal = t.RoleParams(</span>
 <span class="sd">        ...     key=&quot;principal&quot;,</span>
 <span class="sd">        ...     label=&quot;Principal&quot;,</span>
 <span class="sd">        ...     doc=&quot;Person focus of a calculation in a family context.&quot;,</span>
 <span class="sd">        ...     max=1,</span>
 <span class="sd">        ... )</span>
 
-<span class="sd">        &gt;&gt;&gt; partner = RoleParams(</span>
+<span class="sd">        &gt;&gt;&gt; partner = t.RoleParams(</span>
 <span class="sd">        ...     key=&quot;partner&quot;,</span>
 <span class="sd">        ...     plural=&quot;partners&quot;,</span>
 <span class="sd">        ...     label=&quot;Partners&quot;,</span>
 <span class="sd">        ...     doc=&quot;Persons partners of the principal.&quot;,</span>
 <span class="sd">        ... )</span>
 
-<span class="sd">        &gt;&gt;&gt; parent = RoleParams(</span>
+<span class="sd">        &gt;&gt;&gt; parent = t.RoleParams(</span>
 <span class="sd">        ...     key=&quot;parent&quot;,</span>
 <span class="sd">        ...     plural=&quot;parents&quot;,</span>
 <span class="sd">        ...     label=&quot;Parents&quot;,</span>
@@ -248,7 +248,7 @@
 <span class="sd">        ...     subroles=[&quot;first_parent&quot;, &quot;second_parent&quot;],</span>
 <span class="sd">        ... )</span>
 
-<span class="sd">        &gt;&gt;&gt; group_entity = build_entity(</span>
+<span class="sd">        &gt;&gt;&gt; group_entity = entities.build_entity(</span>
 <span class="sd">        ...     key=&quot;family&quot;,</span>
 <span class="sd">        ...     plural=&quot;families&quot;,</span>
 <span class="sd">        ...     label=&quot;Family&quot;,</span>
@@ -256,16 +256,16 @@
 <span class="sd">        ...     roles=[principal, partner, parent],</span>
 <span class="sd">        ... )</span>
 
-<span class="sd">        &gt;&gt;&gt; find_role(group_entity.roles, &quot;principal&quot;, total=1)</span>
+<span class="sd">        &gt;&gt;&gt; entities.find_role(group_entity.roles, &quot;principal&quot;, total=1)</span>
 <span class="sd">        Role(principal)</span>
 
-<span class="sd">        &gt;&gt;&gt; find_role(group_entity.roles, &quot;partner&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; entities.find_role(group_entity.roles, &quot;partner&quot;)</span>
 <span class="sd">        Role(partner)</span>
 
-<span class="sd">        &gt;&gt;&gt; find_role(group_entity.roles, &quot;parent&quot;, total=2)</span>
+<span class="sd">        &gt;&gt;&gt; entities.find_role(group_entity.roles, &quot;parent&quot;, total=2)</span>
 <span class="sd">        Role(parent)</span>
 
-<span class="sd">        &gt;&gt;&gt; find_role(group_entity.roles, &quot;first_parent&quot;, total=1)</span>
+<span class="sd">        &gt;&gt;&gt; entities.find_role(group_entity.roles, &quot;first_parent&quot;, total=1)</span>
 <span class="sd">        Role(first_parent)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>

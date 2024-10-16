@@ -121,14 +121,14 @@
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
-<span class="kn">from</span> <span class="nn">._core_entity</span> <span class="kn">import</span> <span class="n">_CoreEntity</span>
+<span class="kn">from</span> <span class="nn">._core_entity</span> <span class="kn">import</span> <span class="n">CoreEntity</span>
 <span class="kn">from</span> <span class="nn">.role</span> <span class="kn">import</span> <span class="n">Role</span>
 
 
 <div class="viewcode-block" id="GroupEntity">
 <a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity">[docs]</a>
-<span class="k">class</span> <span class="nc">GroupEntity</span><span class="p">(</span><span class="n">_CoreEntity</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an entity containing several others with different roles.</span>
+<span class="k">class</span> <span class="nc">GroupEntity</span><span class="p">(</span><span class="n">CoreEntity</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents an entity containing several others with different roles.</span>
 
 <span class="sd">    A ``GroupEntity`` represents an ``Entity`` containing several other entities,</span>
 <span class="sd">    with different roles, and on which calculations can be run.</span>
@@ -141,6 +141,49 @@
 <span class="sd">        roles: The list of roles of the group entity.</span>
 <span class="sd">        containing_entities: The list of keys of group entities whose members</span>
 <span class="sd">            are guaranteed to be a superset of this group&#39;s entities.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; from openfisca_core import entities</span>
+
+<span class="sd">        &gt;&gt;&gt; family_roles = [</span>
+<span class="sd">        ...     {</span>
+<span class="sd">        ...         &quot;key&quot;: &quot;parent&quot;,</span>
+<span class="sd">        ...         &quot;subroles&quot;: [&quot;first_parent&quot;, &quot;second_parent&quot;],</span>
+<span class="sd">        ...     }</span>
+<span class="sd">        ... ]</span>
+
+<span class="sd">        &gt;&gt;&gt; family = entities.GroupEntity(</span>
+<span class="sd">        ...     &quot;family&quot;,</span>
+<span class="sd">        ...     &quot;families&quot;,</span>
+<span class="sd">        ...     &quot;A family&quot;,</span>
+<span class="sd">        ...     &quot;\t\t\tAll the people somehow related living together.&quot;,</span>
+<span class="sd">        ...     family_roles,</span>
+<span class="sd">        ... )</span>
+
+<span class="sd">        &gt;&gt;&gt; household_roles = [</span>
+<span class="sd">        ...     {</span>
+<span class="sd">        ...         &quot;key&quot;: &quot;partners&quot;,</span>
+<span class="sd">        ...         &quot;subroles&quot;: [&quot;first_partner&quot;, &quot;second_partner&quot;],</span>
+<span class="sd">        ...     }</span>
+<span class="sd">        ... ]</span>
+
+<span class="sd">        &gt;&gt;&gt; household = entities.GroupEntity(</span>
+<span class="sd">        ...     &quot;household&quot;,</span>
+<span class="sd">        ...     &quot;households&quot;,</span>
+<span class="sd">        ...     &quot;A household&quot;,</span>
+<span class="sd">        ...     &quot;\t\t\tAll the people who live together in the same place.&quot;,</span>
+<span class="sd">        ...     household_roles,</span>
+<span class="sd">        ...     (family.key,),</span>
+<span class="sd">        ... )</span>
+
+<span class="sd">        &gt;&gt;&gt; repr(entities.GroupEntity)</span>
+<span class="sd">        &quot;&lt;class &#39;openfisca_core.entities.group_entity.GroupEntity&#39;&gt;&quot;</span>
+
+<span class="sd">        &gt;&gt;&gt; repr(household)</span>
+<span class="sd">        &#39;GroupEntity(household)&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; str(household)</span>
+<span class="sd">        &#39;GroupEntity(household)&#39;</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
