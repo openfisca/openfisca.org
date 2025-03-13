@@ -1,0 +1,8 @@
+{{ $target := default "_self" .target }}
+
+<a href="{{ .href }}" target="{{ $target }}" class="{{ with .class }}{{ . }}{{ end }}">
+  <button  class="{{ with .type }}button-{{ . }}{{ end }}{{ with .size }} button-{{ . }}{{ end }}{{ with .shape }} button-{{ . }}{{ end }}">
+    {{ with .icon }}<i icon-name="{{ . }}"></i>{{ end }}
+    {{ with .text }}{{ . }}{{ end }}
+  </button>
+</a>

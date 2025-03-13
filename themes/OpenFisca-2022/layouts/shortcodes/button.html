@@ -1,10 +1,18 @@
-{{ if .Get "href" }}
-  {{ $href := .Get "href" }}
-  {{ $relreflink := relref . $href }}
-  <a href="{{ $relreflink }}">
+{{ $target := .Get "target" }}
+{{ $href := .Get "href" }}
+{{ $text := .Get "text" }}
+{{ $mailto := .Get "mailto" }}
+{{ $icon := .Get "icon" }}
+{{ $type := .Get "type" }}
+{{ $size := .Get "size" }}
+{{ $shape := .Get "shape" }}
+
+{{ if hasPrefix $href "/" }}
+  {{ $href = relref . $href }}
 {{ end }}
-  <button class="{{ with .Get "type" }}button-{{ . }}{{ end }}{{ with .Get "size" }} button-{{ . }}{{ end }}{{ with .Get "shape" }} button-{{ . }}{{ end }}{{ with .Get "class" }}{{ . }}{{ end }}">
-    {{ with .Get "icon" }}<i icon-name="{{ . }}"></i>{{ end }}
-    {{ with .Get "text" }}{{ . }}{{ end }}
-  </button>
-{{ if .Get "href" }}</a>{{ end }}
+
+{{ if $mailto }}
+  {{ $href = "mailto:" | printf $mailto }}
+{{ end }}
+
+{{ partial "button.html" (dict "target" $target "href" $href "text" $text "mailto" $mailto "icon" $icon "type" $type "size" $size "shape" $shape) }}
