@@ -1,0 +1,6 @@
+{{ $svg := resources.Get (printf "img/%s" (.Get 0)) }}
+{{ if $svg }}
+  <div class="svg-wrapper {{ .Get 1 }}">
+    {{ $svg.Content | safeHTML }}
+  </div>
+{{ end }}
