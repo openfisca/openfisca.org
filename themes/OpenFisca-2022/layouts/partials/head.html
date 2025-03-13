@@ -1,16 +1,11 @@
 <head>
 	<meta charset="utf-8" />
-	<title>{{ .Title }} - OpenFisca</title>
-	<meta name="description" content="{{ .Description }}" />
+	<title>{{ with .Param "html_title" }}{{ . }}{{ else }}{{ .Title }}{{ end }}</title>
+	<meta name="description" content="{{ with .Param "html_description"}}{{ . }}{{ else }}{{ .Summary | truncate 160 }}{{ end }}">
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	{{ $loader := resources.Get "css/loader.css" | toCSS }}
-	{{ $styles := $loader | resources.PostCSS (dict "config" "themes/OpenFisca-2022/assets/css") }}
-	{{ if .Site.IsServer }}
-		<link rel="stylesheet" href="{{ $styles.RelPermalink }}">
-	{{ else }}
-		{{ $styles := $styles | minify | fingerprint | resources.PostProcess }}
-		<link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
-	{{ end }}
+	{{ $styles := resources.Get "css/loader.css" | toCSS | postCSS (dict "config" "./assets/css/postcss.config.cjs" "inlineImports" true) }}
+  {{ if hugo.IsProduction }}{{ $styles = $styles | minify | fingerprint | resources.PostProcess }}{{ end }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
 	<link rel="apple-touch-icon" sizes="180x180" href={{ "favicon/apple-touch-icon.png" | absURL }}>
 	<link rel="icon" type="image/png" sizes="32x32" href={{ "favicon/favicon-32x32.png" | absURL }}>
 	<link rel="icon" type="image/png" sizes="16x16" href={{ "favicon/favicon-16x16.png" | absURL }}>
