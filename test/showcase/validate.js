@@ -9,7 +9,7 @@ import showcaseSchema from './schema.js';
 
 
 const SHOWCASE_DIR = 'data/showcase';
-const ILLUSTRATIONS_DIR = 'static/img/showcase';
+const ILLUSTRATIONS_DIR = 'assets/img/showcase';
 
 describe('Showcase entries', () => {
   const entries = readdirSync(SHOWCASE_DIR);

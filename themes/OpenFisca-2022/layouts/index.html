@@ -27,7 +27,7 @@
             {{ range .Params.how_to.steps }}
                <div class="step {{ with .large }}step-isLarge{{ end }}">
                   <div class="step_demo">
-                     {{ with .image }}<img src="/img/how-to/{{ . }}" alt="" />{{ end }}
+                     {{ with resources.Get (printf "img/how-to/%s" .image) }}<img src="{{ .RelPermalink }}" alt="" />{{ end }}
                      {{ with .tabs }}
                         <div class="tabs">
                            <ul class="tabs_nav">
