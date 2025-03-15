@@ -119,16 +119,16 @@ Ces entités fournissent du support à l’usage d’OpenFisca à travers des fo
   ]
 {{< /members >}}
 
-### Gouvernance
+---
+
+## Gouvernance
 
 - Conseil d'administration
-	- Collège A : Pia Andrews
-	- Collège B : Institut des Politiques Publiques
-	- Collège C : Salsa Digital
-	- Collège E : Mahdi Ben Jelloul
+  - Collège A : Pia Andrews
+  - Collège B : Institut des Politiques Publiques
+  - Collège C : Salsa Digital
+  - Collège E : Mahdi Ben Jelloul
 - Directeur exécutif : Matti Schneider
-
----
 
 ## Documents officiels
 

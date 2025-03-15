@@ -119,16 +119,16 @@ These entities provide support on OpenFisca implementation through training, ser
   ]
 {{< /members >}}
 
-### Governance
+---
+
+## Governance
 
 - Board
-	- College A: Pia Andrews
-	- College B: Institut des Politiques Publiques
-	- College C: Salsa Digital
-	- College E: Mahdi Ben Jelloul
+  - College A: Pia Andrews
+  - College B: Institut des Politiques Publiques
+  - College C: Salsa Digital
+  - College E: Mahdi Ben Jelloul
 - Executive director: Matti Schneider
-
----
 
 ## Official documents
 
