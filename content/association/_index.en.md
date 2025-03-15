@@ -22,7 +22,7 @@ layout: association
 ## Framework of action
 
 The association's actions to achieve its purpose are carried out according to the following priorities:
-  1. Ensuring continuity of use of OpenFisca.
+  1. Ensure continuity of use of OpenFisca.
   2. Guarantee the application of OpenFisca's terms of use.
   3. Ensure adherence to community rules.
   4. Facilitate collaborative decision-making on the evolution of all OpenFisca components.
