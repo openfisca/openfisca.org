@@ -37,9 +37,9 @@ Les actions de l'association pour réaliser son objet sont effectuées selon les
 
 Pour équilibrer les intérêts de la communauté dans la durée, indépendamment du nombre d'acteurs impliqués, tous les membres sont répartis dans plusieurs collèges. Une proportion des voix est allouée à chaque collège pour les votes à l'Assemblée générale.
 
-### College B
+### College B : Implémenteurs
 
-Ces entités soutiennent OpenFisca en versant une [cotisation]({{< relref path="/association/rules-of-procedure" >}}) basée sur le nombre d'utilisateurs de leurs services.
+Ces entités utilisent OpenFisca pour fournir des services à des usagers finaux à travers des applications, des rapports, du conseil… Elles soutiennent l’existence du produit qui permet ces services en versant une cotisation [basée]({{< relref path="/association/rules-of-procedure" >}}) sur le nombre d'utilisateurs de leurs services et le revenu national brut de leur pays d’établissement.
 
 {{< members >}}
   [
@@ -73,9 +73,9 @@ Ces entités soutiennent OpenFisca en versant une [cotisation]({{< relref path="
   ]
 {{< /members >}}
 
-### College C
+### College C : Fournisseurs
 
-Ces entreprises soutiennent OpenFisca en versant 3% de leur chiffre d'affaires attribué à OpenFisca dans leurs cotisations à l'association.
+Ces entités fournissent du support à l’usage d’OpenFisca à travers des formations, du service, de l’accompagnement… Elles soutiennent l’existence du produit qui leur apporte ces missions en cotisant à hauteur de 3% du chiffre d’affaires qui peut être attribué à OpenFisca.
 
 {{< members >}}
   [

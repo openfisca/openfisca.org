@@ -37,9 +37,9 @@ The association's actions to achieve its purpose are carried out according to th
 
 To balance the interests of the community over time, regardless of the number of parties involved, all members are assigned to different colleges. A proportion of votes is allocated to each college for voting at the General Meeting.
 
-### College B
+### College B: Implementors
 
-These entities support OpenFisca by contributing a [membership fee]({{< relref path="/association/rules-of-procedure" >}}) based on the number of users of their services.
+These entities use OpenFisca to provide services to end users through apps, reports, consulting… They support the product that enables these products by contributing a membership fee [based]({{< relref path="/association/rules-of-procedure" >}}) on the number of users of their services and the gross national income of their country of establishment.
 
 {{< members >}}
   [
@@ -73,9 +73,9 @@ These entities support OpenFisca by contributing a [membership fee]({{< relref p
   ]
 {{< /members >}}
 
-### College C
+### College C: Vendors
 
-These companies support OpenFisca by contributing 3% of their gross revenue attributed to OpenFisca in membership fees to the Association.
+These entities provide support on OpenFisca implementation through training, service, expertise… They support the product that enables these contracts by contributing a membership fee worth 3% of the gross revenue that can be attributed to OpenFisca-related sales.
 
 {{< members >}}
   [
