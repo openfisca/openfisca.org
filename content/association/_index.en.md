@@ -22,15 +22,16 @@ layout: association
 ## Framework of action
 
 The association's actions to achieve its purpose are carried out according to the following priorities:
-  1. Ensure continuity of use of OpenFisca.
-  2. Guarantee the application of OpenFisca's terms of use.
-  3. Ensure adherence to community rules.
-  4. Facilitate collaborative decision-making on the evolution of all OpenFisca components.
-  5. Facilitate discussion between all stakeholders.
-  6. Promote OpenFisca and its community.
-  7. Promote the concepts and methods that enable OpenFisca to exist, develop and serve the general interest, in particular digital commons and Rules as Code.
-  8. Increase the number of jurisdictions with an OpenFisca model.
-  9. Increase the number and types of uses of OpenFisca.
+
+1. Ensure continuity of use.
+2. Enforce terms of use.
+3. Enforce community rules.
+4. Facilitate collaborative decision-making.
+5. Facilitate discussion between all stakeholders.
+6. Promote OpenFisca and its community.
+7. Promote the concepts and methods that enable OpenFisca to exist, develop and serve the general interest, in particular digital commons and Rules as Code.
+8. Increase the number of modelled jurisdictions.
+9. Increase use cases of OpenFisca.
 
 ## Members
 

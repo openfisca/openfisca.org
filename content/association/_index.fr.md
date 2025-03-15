@@ -21,16 +21,17 @@ layout: association
 
 ## Cadre d'action
 
-Les actions de l'association pour réaliser son objet sont effectuées selon les priorités suivantes :
-  1. Garantir la continuité d'usage d'OpenFisca.
-  2. Garantir l'application des règles d'utilisation d'OpenFisca.
-  3. Garantir le respect des règles de la communauté.
-  4. Faciliter la prise de décision collaborative sur l'évolution des différents composants d'OpenFisca.
-  5. Faciliter la discussion entre toutes les parties prenantes.
-  6. Promouvoir OpenFisca et sa communauté.
-  7. Promouvoir les concepts et méthodes qui permettent à OpenFisca d'exister, de se développer et de servir l'intérêt général, en particulier les communs numériques et Rules as Code.
-  8. Augmenter le nombre de juridictions disposant d'un modèle OpenFisca.
-  9. Augmenter le nombre et le type d'usages d'OpenFisca.
+Les actions de l'association pour réaliser son objet sont effectuées selon les priorités suivantes :
+
+1. Garantir la continuité d'usage.
+2. Garantir l'application des règles d'utilisation.
+3. Garantir le respect des règles de la communauté.
+4. Faciliter la prise de décision collaborative.
+5. Faciliter la discussion entre toutes les parties prenantes.
+6. Promouvoir OpenFisca et sa communauté.
+7. Promouvoir les concepts et méthodes qui permettent à OpenFisca d'exister, de se développer et de servir l'intérêt général, en particulier les communs numériques et Rules as Code.
+8. Augmenter le nombre de juridictions modélisées.
+9. Accroître les usages d'OpenFisca.
 
 ## Membres
 
