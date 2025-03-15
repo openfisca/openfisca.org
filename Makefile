@@ -10,7 +10,7 @@ install:
 	npm install
 
 serve:
-	hugo serve --port ${PORT} --watch --verbose --disableFastRender --printI18nWarnings --ignoreCache --logLevel warn
+	hugo serve --port ${PORT} --watch --disableFastRender --printI18nWarnings --ignoreCache --logLevel warn
 
 build:
 	hugo
