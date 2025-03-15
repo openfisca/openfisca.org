@@ -65,7 +65,7 @@ These entities use OpenFisca to provide services to end users through apps, repo
         {
           "type": "iconLink",
           "icon": "mail",
-          "href": "mailto:contact@openfisca.org",
+          "href": "mailto:association@openfisca.org",
           "text": "Contact us"
         }
       ]
@@ -111,7 +111,7 @@ These entities provide support on OpenFisca implementation through training, ser
         {
           "type": "iconLink",
           "icon": "mail",
-          "href": "mailto:contact@openfisca.org",
+          "href": "mailto:association@openfisca.org",
           "text": "Contact us"
         }
       ]

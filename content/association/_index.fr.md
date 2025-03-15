@@ -65,7 +65,7 @@ Ces entités utilisent OpenFisca pour fournir des services à des usagers finaux
         {
           "type": "iconLink",
           "icon": "mail",
-          "href": "mailto:contact@openfisca.org",
+          "href": "mailto:association@openfisca.org",
           "text": "Contactez-nous"
         }
       ]
@@ -111,7 +111,7 @@ Ces entités fournissent du support à l’usage d’OpenFisca à travers des fo
         {
           "type": "iconLink",
           "icon": "mail",
-          "href": "mailto:contact@openfisca.org",
+          "href": "mailto:association@openfisca.org",
           "text": "Contactez-nous"
         }
       ]
