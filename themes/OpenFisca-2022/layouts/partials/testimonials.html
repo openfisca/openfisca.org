@@ -5,9 +5,11 @@
 		{{ with .link }}<a href="{{ . }} ">{{ end }}
 			<div class="testimonials_item">
 				{{ if .image }}
-					<div class="testimonials_item_img">
-						<img src="/img/testimonials/{{ .image }}" alt="{{ $alt }}" title="{{ $alt }}" />
-					</div>
+					{{ with resources.Get (printf "img/testimonials/%s" .image) }}
+						<div class="testimonials_item_img">
+							<img src="{{ .RelPermalink }}" alt="{{ $alt }}" title="{{ $alt }}" />
+						</div>
+					{{ end }}
 				{{ end }}
 				{{ with .title }}
 					<p class="testimonials_item_desc">

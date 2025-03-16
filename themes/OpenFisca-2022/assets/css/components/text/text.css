@@ -1,29 +1,193 @@
 .text {
-  & > p:not(:last-child) {
+
+  blockquote {
+    position: relative;
     margin-bottom: var(--m);
 
-    & + h2 {
-      margin-top: var(--xl2);
-    }
-
-    & + h3 {
-      margin-top: var(--xl);
+    &::before {
+      content: "";
+      position: absolute;
+      left: calc(var(--m) * -1);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: var(--colorGray400);
     }
   }
 
-  & > h2 {
+  cite {
+    font-size: 0.9em;
+  }
+
+  & hr {
+    margin-bottom: var(--m);
+    border: none;
+    background-color: var(--colorGray400);
+    height: 1px;
+  }
+
+  & p {
+    margin-bottom: var(--m);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  & h1 {
+    margin-bottom: var(--xl);
+  }
+
+  & h2 {
     margin-bottom: var(--l);
   }
 
-  & > h3 {
+  & h3 {
     margin-bottom: var(--m);
   }
 
-  & > h4 {
-    margin-bottom: var(--s);
+  & h4 {
+    margin-bottom: var(--m);
   }
 
-  & > iframe {
+  & h5 {
+    margin-bottom: var(--m);
+  }
+
+  & h6 {
+    margin-bottom: var(--m);
+  }
+
+  & iframe {
     width: 100%;
+  }
+
+  & ul {
+    list-style: none;
+
+    &:not(:last-child) {
+      margin-bottom: var(--m);
+    }
+
+    & li {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        left: calc(var(--m) * -1);
+        width: 1em;
+        color: var(--colorGray600);
+        content: "\2022"; /* \2022 is the CSS Code/unicode for a bullet */
+      }
+
+      &:not(:last-child) {
+        margin-bottom: var(--xs);
+      }
+
+      & ul{
+        margin-left: var(--m);
+        margin-top: var(--xs2);
+      }
+    }
+  }
+
+  & ol {
+    list-style-position: outside;
+
+    &:not(:last-child) {
+      margin-bottom: var(--m);
+    }
+
+    & li {
+      &:not(:last-child) {
+        margin-bottom: var(--xs);
+      }
+    }
+  }
+
+  & .banner{
+    margin-bottom: var(--m);
+  }
+
+  & table{
+    margin-bottom: var(--m);
+  }
+
+  & p + hr,
+  & ul + hr,
+  & ol + hr,
+  & .members + hr{
+    margin-top: var(--xl4);
+  }
+
+  & p + h2,
+  & ul + h2,
+  & hr + h2,
+  & ol + h2,
+  & .banner + h2,
+  & .members + h2,
+  & table + h2 {
+    margin-top: var(--xl3);
+  }
+
+  & p + h3,
+  & ul + h3,
+  & hr + h3,
+  & ol + h3,
+  & .banner + h3,
+  & .members + h3,
+  & table + h3 {
+    margin-top: var(--xl2);
+  }
+
+  & p + h4,
+  & ul + h4,
+  & hr + h4,
+  & ol + h4,
+  & .banner + h4,
+  & .members + .banner,
+  & table + h4,
+  & .members + h4 {
+    margin-top: var(--xl);
+  }
+
+  & p + h5,
+  & ul + h5,
+  & hr + h5,
+  & ol + h5,
+  & p + .members,
+  & .banner + h5,
+  & .members + h5,
+  & table + h5 {
+    margin-top: var(--l);
+  }
+  
+  & p + h6,
+  & ul + h6,
+  & hr + h6,
+  & ol + h6,
+  & .banner + h6,
+  & .members + h6,
+  & table + h6 {
+    margin-top: var(--m);
+  }
+  
+  .footnotes{
+    margin-top: var(--xl4);
+    ol{
+      li{
+        p {
+          display:inline;
+        }
+      }
+    }
+  }
+
+  & a.footnote-ref::before {
+    content: '[';
+  }
+
+  & a.footnote-ref::after {
+    content: ']';
   }
 }

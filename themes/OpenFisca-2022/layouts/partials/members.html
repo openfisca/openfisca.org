@@ -1,0 +1,39 @@
+{{ with .members }}
+  <div class="members">
+    {{ range . }}
+      {{ if eq .type "placeholder" }}
+        <div class="member member-placeholder">
+          {{ range .content }}
+            {{ if eq .type "button" }}
+              {{ partial "button.html" (dict "target" "_blank" "href" .href "text" .text "class" .class "type" .buttonType) }}
+            {{ end }}
+            {{ if eq .type "iconLink" }}
+              {{ partial "iconLink.html" (dict "href" .href "icon" .icon "text" .text "class" .class "target" .target) }}
+            {{ end }}
+          {{ end }}
+        </div>
+      {{ else }}
+        {{ $imagePath := "img/members/default.png" }}
+        {{ $imageResource := resources.Get $imagePath }}
+        {{ if .image }}
+          {{ $imagePath = printf "img/members/%s" .image }}
+          {{ if resources.Get $imagePath }}
+            {{ $imageResource = resources.Get $imagePath }}
+          {{ end }}
+        {{ end }}
+        <div class="member {{ if .href }}member-hasLink{{ end }}">
+          {{ with $imageResource }}
+            <div class="member_image">
+              <img src="{{ .RelPermalink }}" alt="{{ $.name }}">
+            </div>
+          {{ end }}
+          {{ with .name }}<h4 class="member_name">{{ . }}</h4>{{ end }}
+          {{ with .href }}
+            <div class="member_website">{{ replaceRE "^https?://(www\\.)?" "" . }}</div>
+            <a class="member_link" target="_blank" href="{{ . | safeURL }}">{{ . | safeURL }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+    {{ end }}
+  </div>
+{{ end }}

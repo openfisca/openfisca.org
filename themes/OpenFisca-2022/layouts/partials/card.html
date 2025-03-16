@@ -1,7 +1,9 @@
-{{ $imageSrc := "/img/showcase/default.png" }}
-{{ $newImageSrc := printf "/img/showcase/%s.png" .id }}
-{{ if ( os.FileExists ( printf "/static%s" $newImageSrc ) ) }}
-	{{ $imageSrc = $newImageSrc}}
+{{ $imagePath := "img/showcase/default.png" }}
+{{ if .id }}
+  {{ $customImagePath := printf "img/showcase/%s.png" .id }}
+  {{ if resources.Get $customImagePath }}
+    {{ $imagePath = $customImagePath }}
+  {{ end }}
 {{ end }}
 
 {{ $authorType := .Site.Params.showcase.author.types.icons.default }}
@@ -16,9 +18,11 @@
 {{ end }}
 
 <div id="{{ .id }}" class="card {{ if .website }}{{ if not .until }}card-hasLink{{ end }}{{ end }}">
-	<div class="card_image">
-		<img class="screenshot" src="{{ $imageSrc }}" alt="{{ .title }}" />
-	</div>
+	{{ with resources.Get $imagePath }}
+		<div class="card_image">
+			<img class="screenshot" src="{{ .RelPermalink }}" alt="{{ $.title }}" />
+		</div>
+	{{ end }}
 	<div class="card_titleWrapper">
 		<h3 class="card_title">{{ .title }}</h3>
 		{{ with $package }}{{ with $package.jurisdiction }}

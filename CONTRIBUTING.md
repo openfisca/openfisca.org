@@ -49,7 +49,7 @@ If the source code of your reuse is not open, do not fill in the `source` parame
 
 ### Add an illustration
 
-Add an image in the PNG format to the [`static/img/showcase/` folder](https://github.com/openfisca/openfisca.org/tree/main/static/img/showcase), with the same name as the `.yml` file. For example: `legislation_explorer.png`.
+Add an image in the PNG format to the [`assets/img/showcase/` folder](https://github.com/openfisca/openfisca.org/tree/main/assets/img/showcase), with the same name as the `.yml` file. For example: `legislation_explorer.png`.
 
 The file should be in 16:9 format, at least 1280 × 720 pixels. To ensure fast loading and minimise the environmental impact of the OpenFisca website, the maximum allowed picture weight is 400 kB.
 

@@ -1,0 +1,11 @@
+{{ $bgImage := .Get "bgImage" }}
+<div class="banner {{ with .Get "class" }}{{ . }}{{ end }}">
+  <div class="banner_content">
+    {{ .Inner }}
+  </div>
+  {{ if $bgImage }}
+    <div class="banner_bg">
+      <svg><use href="#bg"></use></svg>
+    </div>
+  {{ end }}
+</div>
