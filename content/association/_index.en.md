@@ -90,9 +90,9 @@ These entities provide support on OpenFisca implementation through training, ser
       "name": "Assemblic"
     },
     {
-      "image": "codeurs-en-liberte.png",
+      "image": "codeureuses-en-liberte.png",
       "href": "https://www.codeursenliberte.fr",
-      "name": "Codeurs en Liberté"
+      "name": "Codeur·euses en Liberté"
     },
     {
       "image": "verb.png",
