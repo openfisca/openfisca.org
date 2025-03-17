@@ -243,6 +243,18 @@
   }]]];
   var link_default = Link;
 
+  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/mail.js
+  var Mail = ["svg", defaultAttributes_default, [["rect", {
+    x: "2",
+    y: "4",
+    width: "20",
+    height: "16",
+    rx: "2"
+  }], ["path", {
+    d: "m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"
+  }]]];
+  var mail_default = Mail;
+
   // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/menu.js
   var Menu = ["svg", defaultAttributes_default, [["line", {
     x1: "4",
@@ -402,6 +414,7 @@
       Slack: slack_default,
       Menu: menu_default,
       X: x_default,
+      Mail: mail_default,
       Landmark: landmark_default,
       TerminalSquare: terminal_square_default,
       LineChart: line_chart_default,
