@@ -5,7 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="/_static/jquery.min.js"></script>
+  <script src="/_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -118,6 +123,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -230,10 +236,10 @@ See:</p>
 </section>
 <section id="using-gunicorn-directly">
 <h3>Using gunicorn directly<a class="headerlink" href="#using-gunicorn-directly" title="Link to this heading">¶</a></h3>
-<p>If for any reason you nedd to run <code class="docutils literal notranslate"><span class="pre">gunicorn</span></code> directly, you can. See this example of <code class="docutils literal notranslate"><span class="pre">gunicorn</span></code> application:</p>
+<p>If for any reason you need to run <code class="docutils literal notranslate"><span class="pre">gunicorn</span></code> directly, you can. See this example of <code class="docutils literal notranslate"><span class="pre">gunicorn</span></code> application:</p>
 <p><strong>app.py:</strong></p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openfisca_core.scripts</span> <span class="kn">import</span> <span class="n">build_tax_benefit_system</span>
-<span class="kn">from</span> <span class="nn">openfisca_web_api.app</span> <span class="kn">import</span> <span class="n">create_app</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.scripts</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_tax_benefit_system</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_web_api.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
 
 <span class="n">country_package</span> <span class="o">=</span> <span class="s1">&#39;openfisca_france&#39;</span>
 <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;openfisca_paris&#39;</span><span class="p">]</span>
@@ -291,8 +297,11 @@ See:</p>
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>
