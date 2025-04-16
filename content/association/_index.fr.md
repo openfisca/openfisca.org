@@ -127,6 +127,7 @@ Ces entités fournissent du support à l’usage d’OpenFisca à travers des fo
   - Collège A : Pia Andrews
   - Collège B : Institut des Politiques Publiques
   - Collège C : Salsa Digital
+  - Collège D : Hamish Fraser
   - Collège E : Mahdi Ben Jelloul
 - Directeur exécutif : Matti Schneider
 

@@ -127,6 +127,7 @@ These entities provide support on OpenFisca implementation through training, ser
   - College A: Pia Andrews
   - College B: Institut des Politiques Publiques
   - College C: Salsa Digital
+  - College D: Hamish Fraser
   - College E: Mahdi Ben Jelloul
 - Executive director: Matti Schneider
 
