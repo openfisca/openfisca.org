@@ -137,7 +137,7 @@ Matti Schneider
 
 ## Official documents
 
-The OpenFisca Association is a global non-profit registered under French law (loi 1901), fiscally hosted by the OpenCollective Europe Foundation.
+The OpenFisca Association is a global non-profit registered under French law (_loi 1901_), fiscally hosted by the [OpenCollective Europe Foundation](https://opencollective.com/europe).
 
 - [Statutes]({{< relref path="/association/statutes" >}})
 - [Rules of procedure]({{< relref path="/association/rules-of-procedure" >}})

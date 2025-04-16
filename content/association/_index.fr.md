@@ -137,7 +137,7 @@ Matti Schneider
 
 ## Documents officiels
 
-L'association OpenFisca est une association à but non lucratif de droit français (loi 1901), hébergée fiscalement par la Fondation OpenCollective Europe.
+L'association OpenFisca est une association à but non lucratif de droit français (loi 1901), hébergée fiscalement par la [Fondation OpenCollective Europe](https://opencollective.com/europe).
 
 - [Statuts]({{< relref path="/association/statutes" >}})
 - [Règlement intérieur]({{< relref path="/association/rules-of-procedure" >}})
