@@ -123,16 +123,23 @@ These entities provide support on OpenFisca implementation through training, ser
 
 ## Governance
 
-- Board
-  - College A: Pia Andrews
-  - College B: Institut des Politiques Publiques
-  - College C: Salsa Digital
-  - College E: Mahdi Ben Jelloul
-- Executive director: Matti Schneider
+### Board
+
+- College A: Pia Andrews
+- College B: Lola Josseran (Institut des Politiques Publiques)
+- College C: Con Fountas (Salsa Digital)
+- College D: Hamish Fraser
+- College E: Mahdi Ben Jelloul
+
+### Executive director
+
+Matti Schneider
 
 ## Official documents
 
-The OpenFisca Association is a global non-profit registered under French law (loi 1901), fiscally hosted by the OpenCollective Europe Foundation.
+The OpenFisca Association is a global non-profit registered under French law (_loi 1901_), fiscally hosted by the [OpenCollective Europe Foundation](https://opencollective.com/europe).
 
 - [Statutes]({{< relref path="/association/statutes" >}})
 - [Rules of procedure]({{< relref path="/association/rules-of-procedure" >}})
+- National association number (_RNA_): `W751278370`
+- National company number (_SIRET_): `94316249500015`
