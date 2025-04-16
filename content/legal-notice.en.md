@@ -4,16 +4,13 @@ title: Legal notice
 
 ## Editor
 
-**Agence Nationale de la Cohésion des Territoires**
-https://agence-cohesion-territoires.gouv.fr/
-Mission incubateur de services numériques
-20, avenue de Ségur
-TSA 10717
-75 334 Paris Cedex 07
-+33 1 85 58 60 00
+**OpenFisca Association** (association loi 1901)
+42 avenue de Rosenwald, 75015 Paris
+`contact@openfisca.org`
 
-**Editorial director**
-Caroline Corbal
+### Editorial director
+
+Matti Schneider
 
 ## Hosting provider
 
