@@ -123,13 +123,17 @@ These entities provide support on OpenFisca implementation through training, ser
 
 ## Governance
 
-- Board
-  - College A: Pia Andrews
-  - College B: Lola Josseran (Institut des Politiques Publiques)
-  - College C: Con Fountas (Salsa Digital)
-  - College D: Hamish Fraser
-  - College E: Mahdi Ben Jelloul
-- Executive director: Matti Schneider
+### Board
+
+- College A: Pia Andrews
+- College B: Lola Josseran (Institut des Politiques Publiques)
+- College C: Con Fountas (Salsa Digital)
+- College D: Hamish Fraser
+- College E: Mahdi Ben Jelloul
+
+### Executive director
+
+Matti Schneider
 
 ## Official documents
 

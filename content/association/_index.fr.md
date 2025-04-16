@@ -123,13 +123,17 @@ Ces entités fournissent du support à l’usage d’OpenFisca à travers des fo
 
 ## Gouvernance
 
-- Conseil d'administration
-  - Collège A : Pia Andrews
-  - Collège B : Lola Josseran (Institut des Politiques Publiques)
-  - Collège C : Con Fountas (Salsa Digital)
-  - Collège D : Hamish Fraser
-  - Collège E : Mahdi Ben Jelloul
-- Directeur exécutif : Matti Schneider
+### Conseil d'administration
+
+- Collège A : Pia Andrews
+- Collège B : Lola Josseran (Institut des Politiques Publiques)
+- Collège C : Con Fountas (Salsa Digital)
+- Collège D : Hamish Fraser
+- Collège E : Mahdi Ben Jelloul
+
+### Directeur exécutif
+
+Matti Schneider
 
 ## Documents officiels
 
