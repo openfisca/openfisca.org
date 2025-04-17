@@ -6,7 +6,7 @@ url: /fr/mentions-legales
 ## Éditeur
 
 **OpenFisca Association** (association loi 1901)
-42 avenue de Rosenwald, 75015 Paris
+42 rue Rosenwald, 75015 Paris - France
 `contact@openfisca.org`
 
 ### Directeur de la publication

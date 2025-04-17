@@ -5,7 +5,7 @@ title: Legal notice
 ## Editor
 
 **OpenFisca Association** (association under French law _loi 1901_)
-42 avenue de Rosenwald, 75015 Paris
+42 rue Rosenwald, 75015 Paris - France
 `contact@openfisca.org`
 
 ### Editorial director
