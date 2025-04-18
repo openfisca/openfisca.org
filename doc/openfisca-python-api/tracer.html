@@ -151,21 +151,35 @@
   <section id="module-openfisca_core.tracers">
 <span id="tracer"></span><h1>Tracer<a class="headerlink" href="#module-openfisca_core.tracers" title="Link to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="openfisca_core.tracers.ComputationLog">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.tracers.</span></span><span class="sig-name descname"><span class="pre">ComputationLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full_tracer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/tracers/computation_log.html#ComputationLog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.tracers.ComputationLog" title="Link to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="openfisca_core.tracers.ComputationLog.print_log">
-<span class="sig-name descname"><span class="pre">print_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggregate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9223372036854775807</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/tracers/computation_log.html#ComputationLog.print_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.tracers.ComputationLog.print_log" title="Link to this definition">¶</a></dt>
-<dd><p>Print the computation log of a simulation.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">aggregate</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> (default), print the value of each
-computed vector.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">aggregate</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, only print the minimum, maximum, and
-average value of each computed vector.</p>
-<p>This mode is more suited for simulations on a large population.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> is <code class="docutils literal notranslate"><span class="pre">sys.maxsize</span></code> (default), print the entire
-computation.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> is set, for example to <code class="docutils literal notranslate"><span class="pre">3</span></code>, only print computed
-vectors up to a depth of <code class="docutils literal notranslate"><span class="pre">max_depth</span></code>.</p>
+<dt class="sig sig-object py" id="openfisca_core.tracers.SimpleTracer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.tracers.</span></span><span class="sig-name descname"><span class="pre">SimpleTracer</span></span><a class="reference internal" href="../_modules/openfisca_core/tracers/simple_tracer.html#SimpleTracer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.tracers.SimpleTracer" title="Link to this definition">¶</a></dt>
+<dd><p>A simple tracer that records a stack of traces.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.tracers.SimpleTracer.record_calculation_end">
+<span class="sig-name descname"><span class="pre">record_calculation_end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/tracers/simple_tracer.html#SimpleTracer.record_calculation_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.tracers.SimpleTracer.record_calculation_end" title="Link to this definition">¶</a></dt>
+<dd><p>Record the end of a calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">tracers</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tracer</span> <span class="o">=</span> <span class="n">tracers</span><span class="o">.</span><span class="n">SimpleTracer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_start</span><span class="p">(</span><span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_end</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.tracers.SimpleTracer.record_calculation_result">
+<span class="sig-name descname"><span class="pre">record_calculation_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/tracers/simple_tracer.html#SimpleTracer.record_calculation_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.tracers.SimpleTracer.record_calculation_result" title="Link to this definition">¶</a></dt>
+<dd><p>Ignore calculation result.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -173,28 +187,51 @@ vectors up to a depth of <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.tracers.SimpleTracer.record_calculation_start">
+<span class="sig-name descname"><span class="pre">record_calculation_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/tracers/simple_tracer.html#SimpleTracer.record_calculation_start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.tracers.SimpleTracer.record_calculation_start" title="Link to this definition">¶</a></dt>
+<dd><p>Record the start of a calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">VariableName</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span>) – The variable being calculated.</p></li>
+<li><p><strong>period</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">PeriodInt</span></code>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>), <a class="reference internal" href="types.html#openfisca_core.types.Period" title="openfisca_core.types.Period"><code class="xref py py-class docutils literal notranslate"><span class="pre">Period</span></code></a>]</span>) – The period for which the variable is being calculated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">tracers</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tracer</span> <span class="o">=</span> <span class="n">tracers</span><span class="o">.</span><span class="n">SimpleTracer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tracer</span><span class="o">.</span><span class="n">record_calculation_start</span><span class="p">(</span><span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span>
+<span class="go">[{&#39;name&#39;: &#39;variable&#39;, &#39;period&#39;: 2020}]</span>
+</pre></div>
+</div>
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="openfisca_core.tracers.FlatTrace">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.tracers.</span></span><span class="sig-name descname"><span class="pre">FlatTrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full_tracer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/tracers/flat_trace.html#FlatTrace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.tracers.FlatTrace" title="Link to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="openfisca_core.tracers.FlatTrace.key">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/tracers/flat_trace.html#FlatTrace.key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.tracers.FlatTrace.key" title="Link to this definition">¶</a></dt>
-<dd><p>Return the key of a node.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.tracers.SimpleTracer.record_parameter_access">
+<span class="sig-name descname"><span class="pre">record_parameter_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/tracers/simple_tracer.html#SimpleTracer.record_parameter_access"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.tracers.SimpleTracer.record_parameter_access" title="Link to this definition">¶</a></dt>
+<dd><p>Ignore parameter access.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">NodeKey</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="openfisca_core.tracers.SimpleTracer.stack">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stack</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="types.html#openfisca_core.types.SimpleTraceMap" title="openfisca_core.types.SimpleTraceMap"><span class="pre">SimpleTraceMap</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#openfisca_core.tracers.SimpleTracer.stack" title="Link to this definition">¶</a></dt>
+<dd><p>Return the stack of traces.</p>
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="openfisca_core.tracers.PerformanceLog">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.tracers.</span></span><span class="sig-name descname"><span class="pre">PerformanceLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full_tracer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/tracers/performance_log.html#PerformanceLog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.tracers.PerformanceLog" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.tracers.TraceNode">
@@ -353,11 +390,6 @@ vectors up to a depth of <code class="docutils literal notranslate"><span class=
 </dd></dl>
 
 </dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="openfisca_core.tracers.TracingParameterNodeAtInstant">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.tracers.</span></span><span class="sig-name descname"><span class="pre">TracingParameterNodeAtInstant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter_node_at_instant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tracer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/tracers/tracing_parameter_node_at_instant.html#TracingParameterNodeAtInstant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.tracers.TracingParameterNodeAtInstant" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </section>
 
