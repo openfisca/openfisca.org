@@ -25,7 +25,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Kick-off &#8212; OpenFisca  documentation</title>
+    <title>Writing OpenFisca code &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
     <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
@@ -33,11 +33,11 @@
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts.js?v=30c476c5"></script>
-    <link rel="canonical" href="https://openfisca.org/doc/training/kickoff.html" />
+    <link rel="canonical" href="https://openfisca.org/doc/training/writing-code.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="RaC Background" href="rac-background.html" />
-    <link rel="prev" title="Training materials" href="index.html" />
+    <link rel="next" title="Using the web API" href="web-api.html" />
+    <link rel="prev" title="Getting started" href="getting-started.html" />
   
    
 
@@ -52,14 +52,14 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="rac-background.html" title="RaC Background"
+          <a href="web-api.html" title="Using the web API"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Training materials"
+          <a href="getting-started.html" title="Getting started"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="book"></i> Training materials</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Kick-off</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Writing OpenFisca code</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -108,10 +108,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html"><i icon-name="book"></i> Training materials</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Kick-off</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kickoff.html">Kick-off</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rac-background.html">RaC Background</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting-started.html">Getting started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="writing-code.html">Writing OpenFisca code</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Writing OpenFisca code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web-api.html">Using the web API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="python-api.html">Using the Python API</a></li>
 </ul>
@@ -133,115 +133,155 @@
               
                 <li><a href="index.html"><i icon-name="book"></i> Training materials</a></li>
               
-              <li>Kick-off</li>
+              <li>Writing OpenFisca code</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <section id="kick-off">
-<h1>Kick-off<a class="headerlink" href="#kick-off" title="Link to this heading">¶</a></h1>
+  <section id="writing-openfisca-code">
+<h1>Writing OpenFisca code<a class="headerlink" href="#writing-openfisca-code" title="Link to this heading">¶</a></h1>
 <div class="present"><div class="reveal"><div class="slides">
   <section class="has-dark-background" data-background="#240b35" data-background-image="../_static/img/openfisca-bg.svg" data-background-position="230% 50%" data-background-size="auto 120%">
-    <h2>Kick off</h2>
+    <h2>Modelling legislation</h2>
     <p>
-      <small>(Rules as Code + OpenFisca) training series</small>
+      <small>(Rules as Code + OpenFisca) training series, session three.</small>
     </p>
     <p><a href="https://openfisca.org" class="logo"><img src="../_static/img/openfisca.svg" alt="OpenFisca" ></a></p>
-    <p><small class="author">Written by Matti Schneider</small></p>
   </section>
   <section>
-    <h2>Curriculum</h2>
-    <div class="column_two">
-    <ol>
-      <li>RaC Background</li>
-      <li>Getting started​</li>
-      <li>Modelling legislation​</li>
-      <li>Using the web API​</li>
-    </ol>
-    <ol start="5">
-      <li>Using the Python API​</li>
-      <li>Data interconnection​</li>
-      <li>Updating the model​​</li>
-      <li>Designing policy​​</li>
-    </ol>
-    </div>
+    <h2>Overview</h2>
+    <p>
+      <ol>
+        <li>Variables</li>
+        <li>Parameters</li>
+        <li>Testing</li>
+      </ol>
+    </p>
   </section>
   <section>
-    <h3>Vocabulary</h3>
-    <aside class="notes">
-      A discussion about the difficulties facing any discussion about rules-as-code/legislation-as-code/Better Rules/OpenFisca and words like "code" that law and programming have different uses for.
-    </aside>
+    <h2>1. Variables</h2>
+    <img src="../_static/img/training/variable.png" alt="Simple variable example showing 'fulltime employment'" />
+    <p>Simple variable boolean example, note:</p>
+    <small>
+      <ul>
+        <li>The reference url</li>
+        <li>The entity the variable belongs to</li>
+        <li>The definition period</li>
+        <li>The lack of a formula</li>
+      </ul>
+    </small>
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/variables/demographics/work.py">github.com/BetterRules/openfisca-aotearoa/.../demographics/work.py</a></small>
+    </p>
   </section>
   <section>
-    <h2>Rules as Code</h2>
-    <div class="column_two">
+    <small>Variables cont.</small>
+    <img src="../_static/img/training/formula.png" alt="Parameter example from OpenFisca Aotearoa showing 'Age of majority'" />
+    <p>Variable with formula example​</p>
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/variables/demographics/work.py">github.com/BetterRules/openfisca-aotearoa/.../demographics/work.py</a></small>
+    </p>
+  </section>
+  <section>
+    <small>Variables cont.</small>
+    <p>Working with vectors</p>
     <ul>
-      <li>An approach, not a technology</li>
-      <li>"Law is code", now what?</li>
-      <li>Government as a platform</li>
-      <li>Algorithmic transparency</li>
-    </ul>
-    <ul class="dotless">
-      <li><a target="_blank" href="https://www.oecd.org/en/publications/2020/10/dechiffrer-le-code_d56cab77.html">Cracking the code</a> (2020)</li>
-      <li><a target="_blank" href="https://hamish.dev/research/lac/">Legislation as code</a> (2021)</li>
-    </ul>
+      <li>OpenFisca formulas should always return vectors</li>
+      <li>The formulas need to preserve the incoming vector 'shape'</li>
+      <li>This means if/else statements aren't possible</li>
   </section>
   <section>
-    <h2>Better Rules</h2>
-    <div class="column_two">
-    <ul>
-      <li>Theoretical future state (for now)</li>
-      <li>Closing feedback loops in policy design and delivery</li>
-      <li>Lack of tooling in gap between policy and digital</li>
-    </ul>
-    <ul class="dotless">
-      <li><a target="_blank" href="https://www.digital.govt.nz/dmsdocument/95-better-rules-for-government-discovery-report/html">Better Rules for Government Discovery Report</a> (2018)</li>
-      <li><a target="_blank" href="https://betterrules.nz/workshop-manual.html">Better Rules Workshop Manual</a> (2019)</li>
-    </ul>
+    <h2>2. Parameters</h2>
+    <img src="../_static/img/training/parameter.png" alt="Parameter example from OpenFisca Aotearoa showing 'Age of majority'" />
+    <p>Simple parameter example​</p>
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/master/openfisca_aotearoa/parameters/general/age_of_majority.yaml">github.com/BetterRules/openfisca-aotearoa/.../age_of_majority.yaml</a></small>
+    </p>
   </section>
   <section>
-    <h2 class="docaps">OpenFisca</h2>
-    <div class="column_two">
-    <ul>
-      <li>Rules as Code engine</li>
-      <li>Most used, battle-tested</li>
-      <li>Advanced features: reforms, history…</li>
-      <li>Not a webapp</li>
-    </ul>
-    <div>
-      <img src="../_static/img/openfisca_white.svg" alt="OpenFisca" style="height: 70px; margin: 17rem auto 0 auto; background: transparent;"  >
-    </div>
+    <small>Parameters cont.</small>
+    <img src="../_static/img/training/parameter-refencing.png" alt="Parameter example from OpenFisca Aotearoa showing References to data point sources" />
+    <p>Referencing: note ref. urls for source data​</p>
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/parameters/social_security/schedule_5/asset_limits_1.yml">github.com/BetterRules/openfisca-aotearoa/.../asset_limits_1.yml</a></small>
+    </p>
   </section>
   <section>
-    <h2 class="docaps">Architecture</h2>
-    <img src="../_static/img/architecture.svg" alt="OpenFisca Architecture" style="width:98%; margin: 6rem auto 0 auto; background: transparent;"  >
-    <aside class="notes">
-      Note that the focus for country templates is the last two columns of the graphic
-    </aside>
+    <small>Parameters cont.</small>
+    <img src="../_static/img/training/parameter-time.png" alt="Parameter example showing value changes over time" />
+    <p>Time based values​</p>
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/parameters/social_security/schedule_5/asset_limits_1.yml">github.com/BetterRules/openfisca-aotearoa/.../asset_limits_1.yml</a></small>
+    </p>
   </section>
   <section>
-    <h2 class="docaps">Communication Channels</h2>
-    <ul>
-      <li><a href="https://github.com/openfisca" target="_blank">Github.com</a>: Everything related to code and modelling (traces)</li>
-      <li><a href="https://openfisca.slack.com/" target="_blank">Slack</a>: everything related to usage and support (reactivity)</li>
-      <li>Email: everything related to the administrative side (CCs)</li>
-    </ul>
+    <small>Parameters cont.</small><br/>
+    <img src="../_static/img/training/parameter-scale.png" alt="Parameter example showing value changes over time" />
+    <p>Scale example with use case</p>
+    <img src="../_static/img/training/parameter-scale2.png" alt="Utilising the parameter in a formula" />
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/parameters/social_security/income_test_1.yaml">github.com/BetterRules/openfisca-aotearoa/.../income_test_1.yaml</a></small>
+    </p>
   </section>
   <section>
-    <h2 class="docaps">Homework</h2>
-    <ul>
-      <li>Read references (see previous slides)</li>
-      <li>Install Python 3.11.xx</li>
-      <li>Install Git</li>
-      <li>Join the <a href="https://openfisca.slack.com/" target="_blank">OpenFisca Slack</a>, introduce yourself, join appropriate channels</li>
-      <li>Provide training team with your GitHub usernames or the git host you want to use</li>
-      <li>Get familiar with <a target="_blank" href="https://docs.github.com/en/get-started/using-github/github-flow">GitHub Flow</a></li>
-    </ul>
+    <small>Parameters cont.</small><br/>
+    <img src="../_static/img/training/parameter-complex1.png" alt="Parameter example showing value changes over time" />
+    <p>Complex example and use case</p>
+    <img src="../_static/img/training/parameter-complex2.png" alt="Utilising the parameter in a formula" />
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/parameters/social_security/jobseeker_support/base.yaml">github.com/BetterRules/openfisca-aotearoa/.../jobseeker_support/base.yaml</a></small>
+    </p>
   </section>
-</div>
-</div>
-</div>
+  <section>
+    <h2>3. Tests</h2>
+    <img src="../_static/img/training/tests-simple.png" alt="Simple test example" />
+    <p>Simple test with multiple inputs and one output</p>
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/tests/social_security/disability_allowance/entitled.yaml">github.com/BetterRules/openfisca-aotearoa/.../entitled.yaml</a></small>
+    </p>
+  </section>
+  <section>
+    <small>Tests cont.</small><br/>
+    <img src="../_static/img/training/tests-example2.png" alt="Simple test example with multiple scenarios" />
+    <p>Testing a single formula from multiple scenarios</p>
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/tests/social_security/child.yaml">github.com/BetterRules/openfisca-aotearoa/.../child.yaml</a></small>
+    </p>
+  </section>
+  <section>
+    <small>Tests cont.</small><br/>
+    <img src="../_static/img/training/tests-entities.png" alt="Testing with entities" />
+    <p>Testing example that utilises entities (families)</p>
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/tests/social_security/community_services_card.yaml">github.com/BetterRules/openfisca-aotearoa/.../community_services_card.yaml</a></small>
+    </p>
+  </section>
+  <section>
+    <small>Tests cont.</small><br/>
+    <img src="../_static/img/training/tests-entities.png" alt="Testing with entities" />
+    <p>Testing example that utilises entities (families)</p>
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/tests/social_security/community_services_card.yaml">github.com/BetterRules/openfisca-aotearoa/.../community_services_card.yaml</a></small>
+    </p>
+  </section>
+  <section>
+    <small>Tests cont.</small><br/>
+    <img src="../_static/img/training/tests-entities2.png" alt="Testing with entities and multiple people" />
+    <p>Testing example that utilises multiple family members</p>
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/tests/social_security/community_services_card.yaml">github.com/BetterRules/openfisca-aotearoa/.../community_services_card.yaml</a></small>
+    </p>
+  </section>
+  <section>
+    <small>Tests cont.</small><br/>
+    <img src="../_static/img/training/tests-complex.png" alt="Testing multiple scenarios over multiple periods" />
+    <p>Testing multiple scenarios over multiple periods</p>
+    <p>
+      <small><a href="https://github.com/BetterRules/openfisca-aotearoa/blob/main/openfisca_aotearoa/tests/social_security/jobseeker_support/base.yaml">github.com/BetterRules/openfisca-aotearoa/.../jobseeker_support/base.yaml</a></small>
+    </p>
+  </section>
+</div></div></div>
 <br>
 <p><strong>Hotkeys</strong></p>
 <ul class="simple">
@@ -268,14 +308,14 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="rac-background.html" title="RaC Background"
+          <a href="web-api.html" title="Using the web API"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Training materials"
+          <a href="getting-started.html" title="Getting started"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="book"></i> Training materials</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Kick-off</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Writing OpenFisca code</a></li> 
       </ul>
     </div>
   
