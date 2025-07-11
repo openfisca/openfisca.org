@@ -204,7 +204,7 @@
         <span class="n">baseline_parameters_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">baseline_parameters</span><span class="p">)</span>
         <span class="n">reform_parameters</span> <span class="o">=</span> <span class="n">modifier_function</span><span class="p">(</span><span class="n">baseline_parameters_copy</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reform_parameters</span><span class="p">,</span> <span class="n">ParameterNode</span><span class="p">):</span>
-            <span class="k">return</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;modifier_function </span><span class="si">{</span><span class="n">modifier_function</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> in module </span><span class="si">{</span><span class="n">modifier_function</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s2"> must return a ParameterNode&quot;</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">reform_parameters</span>
