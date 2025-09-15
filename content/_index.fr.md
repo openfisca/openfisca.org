@@ -19,7 +19,7 @@ hero:
     - image: dpg.png
       author: Digital Public Goods Alliance
       title: Reconnu comme Bien Public Numérique par le PNUD, l'UNICEF et la Norad
-      link: https://app.digitalpublicgoods.net/a/10318
+      link: https://www.digitalpublicgoods.net/r/openfisca
 for_who:
   - title: Administrations et cabinets
     description: OpenFisca permet aux institutions de partager efficacement les mises à jour de la réglementation et de mutualiser les coûts. L'interconnexion des règles entre les organismes publics sous la forme de paramètres lisibles et de code exécutable offre une transparence algorithmique minimale immédiate et réduit les frais pour le contribuable.
