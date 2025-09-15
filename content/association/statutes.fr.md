@@ -218,5 +218,5 @@ Si la dissolution est rejetée, aucune autre proposition de dissolution ne pourr
 
 [^1]: https://doi.org/10.3917/rfsp.695.0845
 [^2]: https://oecd-opsi.org/publications/cracking-the-code/
-[^3]: https://app.digitalpublicgoods.net/a/10318
+[^3]: https://www.digitalpublicgoods.net/r/openfisca
 [^4]: https://www.service-public.fr/particuliers/vosdroits/F1927
