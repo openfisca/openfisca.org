@@ -136,12 +136,29 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_instant_str</span> <span class="o">=</span> <span class="n">instant_str</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_get_appropriate_subnode_key</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_appropriate_subnode_function</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">k</span>
+            <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">_get_appropriate_subnode_key_string</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">k</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">_get_appropriate_subnode_key_enum</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">integer</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">_get_appropriate_subnode_key_integer</span>
+        <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">_get_appropriate_subnode_key_date</span>
 
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_appropriate_subnode_key_string</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">k</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_appropriate_subnode_key_enum</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">k</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_appropriate_subnode_key_integer</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_appropriate_subnode_key_date</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
         <span class="n">subnodes_name</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">_children</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">subnodes_name</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;before&quot;</span><span class="p">)]</span>
         <span class="n">points_in_time</span> <span class="o">=</span> <span class="p">[</span>
@@ -158,15 +175,18 @@
                 <span class="p">[</span><span class="n">key</span> <span class="o">==</span> <span class="n">item</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">],</span>
                 <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">enum</span><span class="p">],</span>
             <span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">object</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">Enum</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">key</span>
         <span class="k">return</span> <span class="n">key</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">build_from_node_name</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">check_node_vectorisable</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">node</span><span class="p">[</span><span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">_get_appropriate_subnode_key</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">a</span><span class="p">)]</span>
-            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">_get_appropriate_keys</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="p">]</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">_get_appropriate_keys</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">get_subnode_key</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">_get_appropriate_subnode_function</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="p">)</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="n">get_subnode_key</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">key</span><span class="p">)]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">build_from_nodes</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
@@ -176,15 +196,19 @@
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="p">[[</span><span class="n">attribute</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Enum</span><span class="p">):</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">key</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">):</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">possible_values</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="n">key</span>
 
-        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">v</span><span class="p">[</span><span class="n">a</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">a</span><span class="o">.</span><span class="n">value</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-        <span class="p">]</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">,</span> <span class="n">keys</span><span class="p">)]</span>
         <span class="k">return</span> <span class="n">VectorialParameterNodeAtInstant</span><span class="o">.</span><span class="n">build_from_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span>
 
 <div class="viewcode-block" id="VectorialParameterNodeAtInstant.check_node_vectorisable">
