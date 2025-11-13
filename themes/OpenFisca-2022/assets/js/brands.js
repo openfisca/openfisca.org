@@ -1,4 +1,4 @@
-import { siGithub, siMastodon, siSlack } from 'simple-icons';
+import {siGithub, siMastodon, siSlack} from 'simple-icons';
 
 const ICONS = {
   mastodon: siMastodon,
