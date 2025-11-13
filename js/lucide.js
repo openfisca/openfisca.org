@@ -157,14 +157,6 @@
   }]]];
   var file_code_default = FileCode;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/github.js
-  var Github = ["svg", defaultAttributes_default, [["path", {
-    d: "M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
-  }], ["path", {
-    d: "M9 18c-4.51 2-5-2-7-2"
-  }]]];
-  var github_default = Github;
-
   // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/globe.js
   var Globe = ["svg", defaultAttributes_default, [["circle", {
     cx: "12",
@@ -292,42 +284,6 @@
   }]]];
   var package_default = Package;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/slack.js
-  var Slack = ["svg", defaultAttributes_default, [["rect", {
-    x: "13",
-    y: "2",
-    width: "3",
-    height: "8",
-    rx: "1.5"
-  }], ["path", {
-    d: "M19 8.5V10h1.5A1.5 1.5 0 1 0 19 8.5"
-  }], ["rect", {
-    x: "8",
-    y: "14",
-    width: "3",
-    height: "8",
-    rx: "1.5"
-  }], ["path", {
-    d: "M5 15.5V14H3.5A1.5 1.5 0 1 0 5 15.5"
-  }], ["rect", {
-    x: "14",
-    y: "13",
-    width: "8",
-    height: "3",
-    rx: "1.5"
-  }], ["path", {
-    d: "M15.5 19H14v1.5a1.5 1.5 0 1 0 1.5-1.5"
-  }], ["rect", {
-    x: "2",
-    y: "8",
-    width: "8",
-    height: "3",
-    rx: "1.5"
-  }], ["path", {
-    d: "M8.5 5H10V3.5A1.5 1.5 0 1 0 8.5 5"
-  }]]];
-  var slack_default = Slack;
-
   // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/terminal-square.js
   var TerminalSquare = ["svg", defaultAttributes_default, [["path", {
     d: "m7 11 2-2-2-2"
@@ -342,12 +298,6 @@
     ry: "2"
   }]]];
   var terminal_square_default = TerminalSquare;
-
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/twitter.js
-  var Twitter = ["svg", defaultAttributes_default, [["path", {
-    d: "M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"
-  }]]];
-  var twitter_default = Twitter;
 
   // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/user.js
   var User = ["svg", defaultAttributes_default, [["path", {
@@ -409,9 +359,6 @@
   // <stdin>
   createIcons({
     icons: {
-      Twitter: twitter_default,
-      Github: github_default,
-      Slack: slack_default,
       Menu: menu_default,
       X: x_default,
       Mail: mail_default,
