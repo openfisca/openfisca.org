@@ -2,7 +2,6 @@ import {
   Building,
   Factory,
   FileCode,
-  Github,
   Globe,
   GraduationCap,
   Home,
@@ -12,9 +11,7 @@ import {
   Mail,
   Menu,
   Package,
-  Slack,
   TerminalSquare,
-  Twitter,
   User,
   Users,
   X,
@@ -23,9 +20,6 @@ import {
 
 createIcons({
   icons: {
-    Twitter,
-    Github,
-    Slack,
     Menu,
     X,
     Mail,
