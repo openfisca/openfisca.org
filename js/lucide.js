@@ -1,5 +1,5 @@
 (() => {
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/createElement.js
+  // node_modules/lucide/dist/esm/createElement.js
   var createElement = function createElement2(tag, attrs, children) {
     if (children === void 0) {
       children = [];
@@ -21,7 +21,7 @@
     return createElement(tag, attrs, children);
   };
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/replaceElement.js
+  // node_modules/lucide/dist/esm/replaceElement.js
   function _extends() {
     _extends = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -89,7 +89,7 @@
     return element.parentNode.replaceChild(svgElement, element);
   };
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/defaultAttributes.js
+  // node_modules/lucide/dist/esm/defaultAttributes.js
   var defaultAttributes_default = {
     xmlns: "http://www.w3.org/2000/svg",
     width: 24,
@@ -102,7 +102,7 @@
     "stroke-linejoin": "round"
   };
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/building.js
+  // node_modules/lucide/dist/esm/icons/building.js
   var Building = ["svg", defaultAttributes_default, [["rect", {
     x: "4",
     y: "2",
@@ -133,7 +133,7 @@
   }]]];
   var building_default = Building;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/factory.js
+  // node_modules/lucide/dist/esm/icons/factory.js
   var Factory = ["svg", defaultAttributes_default, [["path", {
     d: "M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"
   }], ["path", {
@@ -145,7 +145,7 @@
   }]]];
   var factory_default = Factory;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/file-code.js
+  // node_modules/lucide/dist/esm/icons/file-code.js
   var FileCode = ["svg", defaultAttributes_default, [["path", {
     d: "M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"
   }], ["polyline", {
@@ -157,15 +157,7 @@
   }]]];
   var file_code_default = FileCode;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/github.js
-  var Github = ["svg", defaultAttributes_default, [["path", {
-    d: "M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
-  }], ["path", {
-    d: "M9 18c-4.51 2-5-2-7-2"
-  }]]];
-  var github_default = Github;
-
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/globe.js
+  // node_modules/lucide/dist/esm/icons/globe.js
   var Globe = ["svg", defaultAttributes_default, [["circle", {
     cx: "12",
     cy: "12",
@@ -180,7 +172,7 @@
   }]]];
   var globe_default = Globe;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/graduation-cap.js
+  // node_modules/lucide/dist/esm/icons/graduation-cap.js
   var GraduationCap = ["svg", defaultAttributes_default, [["path", {
     d: "M22 10v6M2 10l10-5 10 5-10 5z"
   }], ["path", {
@@ -188,7 +180,7 @@
   }]]];
   var graduation_cap_default = GraduationCap;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/home.js
+  // node_modules/lucide/dist/esm/icons/home.js
   var Home = ["svg", defaultAttributes_default, [["path", {
     d: "m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
   }], ["polyline", {
@@ -196,7 +188,7 @@
   }]]];
   var home_default = Home;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/landmark.js
+  // node_modules/lucide/dist/esm/icons/landmark.js
   var Landmark = ["svg", defaultAttributes_default, [["line", {
     x1: "3",
     y1: "22",
@@ -227,7 +219,7 @@
   }]]];
   var landmark_default = Landmark;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/line-chart.js
+  // node_modules/lucide/dist/esm/icons/line-chart.js
   var LineChart = ["svg", defaultAttributes_default, [["path", {
     d: "M3 3v18h18"
   }], ["path", {
@@ -235,7 +227,7 @@
   }]]];
   var line_chart_default = LineChart;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/link.js
+  // node_modules/lucide/dist/esm/icons/link.js
   var Link = ["svg", defaultAttributes_default, [["path", {
     d: "M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
   }], ["path", {
@@ -243,7 +235,19 @@
   }]]];
   var link_default = Link;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/menu.js
+  // node_modules/lucide/dist/esm/icons/mail.js
+  var Mail = ["svg", defaultAttributes_default, [["rect", {
+    x: "2",
+    y: "4",
+    width: "20",
+    height: "16",
+    rx: "2"
+  }], ["path", {
+    d: "m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"
+  }]]];
+  var mail_default = Mail;
+
+  // node_modules/lucide/dist/esm/icons/menu.js
   var Menu = ["svg", defaultAttributes_default, [["line", {
     x1: "4",
     y1: "12",
@@ -262,7 +266,7 @@
   }]]];
   var menu_default = Menu;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/package.js
+  // node_modules/lucide/dist/esm/icons/package.js
   var Package = ["svg", defaultAttributes_default, [["line", {
     x1: "16.5",
     y1: "9.4",
@@ -280,43 +284,7 @@
   }]]];
   var package_default = Package;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/slack.js
-  var Slack = ["svg", defaultAttributes_default, [["rect", {
-    x: "13",
-    y: "2",
-    width: "3",
-    height: "8",
-    rx: "1.5"
-  }], ["path", {
-    d: "M19 8.5V10h1.5A1.5 1.5 0 1 0 19 8.5"
-  }], ["rect", {
-    x: "8",
-    y: "14",
-    width: "3",
-    height: "8",
-    rx: "1.5"
-  }], ["path", {
-    d: "M5 15.5V14H3.5A1.5 1.5 0 1 0 5 15.5"
-  }], ["rect", {
-    x: "14",
-    y: "13",
-    width: "8",
-    height: "3",
-    rx: "1.5"
-  }], ["path", {
-    d: "M15.5 19H14v1.5a1.5 1.5 0 1 0 1.5-1.5"
-  }], ["rect", {
-    x: "2",
-    y: "8",
-    width: "8",
-    height: "3",
-    rx: "1.5"
-  }], ["path", {
-    d: "M8.5 5H10V3.5A1.5 1.5 0 1 0 8.5 5"
-  }]]];
-  var slack_default = Slack;
-
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/terminal-square.js
+  // node_modules/lucide/dist/esm/icons/terminal-square.js
   var TerminalSquare = ["svg", defaultAttributes_default, [["path", {
     d: "m7 11 2-2-2-2"
   }], ["path", {
@@ -331,13 +299,7 @@
   }]]];
   var terminal_square_default = TerminalSquare;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/twitter.js
-  var Twitter = ["svg", defaultAttributes_default, [["path", {
-    d: "M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"
-  }]]];
-  var twitter_default = Twitter;
-
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/user.js
+  // node_modules/lucide/dist/esm/icons/user.js
   var User = ["svg", defaultAttributes_default, [["path", {
     d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"
   }], ["circle", {
@@ -347,7 +309,7 @@
   }]]];
   var user_default = User;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/users.js
+  // node_modules/lucide/dist/esm/icons/users.js
   var Users = ["svg", defaultAttributes_default, [["path", {
     d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
   }], ["circle", {
@@ -361,7 +323,7 @@
   }]]];
   var users_default = Users;
 
-  // ns-hugo:/home/circleci/project/node_modules/lucide/dist/esm/icons/x.js
+  // node_modules/lucide/dist/esm/icons/x.js
   var X = ["svg", defaultAttributes_default, [["line", {
     x1: "18",
     y1: "6",
@@ -397,11 +359,9 @@
   // <stdin>
   createIcons({
     icons: {
-      Twitter: twitter_default,
-      Github: github_default,
-      Slack: slack_default,
       Menu: menu_default,
       X: x_default,
+      Mail: mail_default,
       Landmark: landmark_default,
       TerminalSquare: terminal_square_default,
       LineChart: line_chart_default,
