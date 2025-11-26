@@ -75,6 +75,19 @@ For public entities, the number of users is considered to be the number of citiz
 
 Fee is a flat 3% of every revenue (service, consulting…) that can be attributed to OpenFisca.
 
+A minimum yearly fee applies, based on the number of collaborators (employees and contractors) working in the entity.
+
+| Number of collaborators | Minimum fee |
+|-------------------------|-------------|
+| 1 | 300 € |
+| 2 – 5 | 500 € |
+| 6 – 10 | 1 000 € |
+| 11 – 20 | 2 000 € |
+| 21 – 50 | 5 000 € |
+| 51 – 100 | 10 000 € |
+| 101 – 999 | 30 000 € |
+| \> 1 000 | 50 000 € |
+
 #### D. College D (college of individuals who have contributed recently)
 
 Fees are the same as college A.
