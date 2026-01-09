@@ -33,6 +33,12 @@ The association's actions to achieve its purpose are carried out according to th
 8. Increase the number of modelled jurisdictions.
 9. Increase use cases of OpenFisca.
 
+## Working groups
+
+Working groups structure discussions around specific lines of work on the development of OpenFisca, either targeting the product side, the community side or the Association itself. These spaces also allow members to collaborate on projects that benefit the entire OpenFisca community. As per the Association’s [statutes (§10)]({{< relref path="/association/statutes/#article-10-board-of-directors" >}}), the Board may delegate certain of its powers to these working groups. Working groups are open to all Association members.
+
+- [Technical working group]({{< relref path="/association/working-groups/technical-working-group" >}})
+
 ## Members
 
 To balance the interests of the community over time, regardless of the number of parties involved, all members are assigned to different colleges. A proportion of votes is allocated to each college for voting at the General Meeting.
