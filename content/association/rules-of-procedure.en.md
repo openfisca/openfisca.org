@@ -98,7 +98,7 @@ Fees are the same as college A.
 
 ### 3) Payment
 
-All fees are paid transparently on AssoConnect. The account on AssoConnect is the only one holding funds on behalf of the Foundation.
+All fees are paid transparently on AssoConnect.
 
 ### 4) Exclusion
 
