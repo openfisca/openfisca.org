@@ -35,7 +35,7 @@ Les actions de l'association pour réaliser son objet sont effectuées selon les
 
 ## Groupes de travail
 
-Les groupes de travail structurent des discussions autour d’axes spécifiques du développement d’OpenFisca, que ce soit le produit, la communauté ou l’Association elle-même. Ces espaces permettent également aux membres de collaborer sur des projets qui profitent à toute la communauté OpenFisca. Conformément aux [statuts (§10)]({{< relref path="/association/statutes/#article-10--conseil-dadministration-collégial" >}}) de l’Association, le Conseil d’administration peut déléguer certains de ses pouvoirs à ces groupes de travail. Les groupes de travail sont ouverts à tous les membres de l’Association.
+Les groupes de travail structurent des discussions autour d’axes spécifiques du développement d’OpenFisca, que ce soit le produit, la communauté ou l’Association elle-même. Ces espaces permettent également aux membres de collaborer sur des projets qui profitent à toute la communauté OpenFisca. Conformément aux [statuts (§10)]({{< relref path="/association/statutes/#article-10-conseil-d-administration-collegial" >}}) de l’Association, le Conseil d’administration peut déléguer certains de ses pouvoirs à ces groupes de travail. Les groupes de travail sont ouverts à tous les membres de l’Association.
 
 - [Groupe de travail technique]({{< relref path="/association/working-groups/technical-working-group" >}})
 
