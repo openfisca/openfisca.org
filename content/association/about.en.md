@@ -3,6 +3,8 @@ html_title: "About OpenFisca association"
 layout: association
 ---
 
+<iframe title="OpenFisca Association Official Launch Event" src="https://videos.lescommuns.org/videos/embed/1467f08f-7236-46ac-a096-56510e90607a" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+
 ## Framework of action
 
 The association's actions to achieve its purpose are carried out according to the following priorities:
