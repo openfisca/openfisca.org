@@ -141,5 +141,6 @@ L'association OpenFisca est une association à but non lucratif de droit frança
 
 - [Statuts]({{< relref path="/association/statutes" >}})
 - [Règlement intérieur]({{< relref path="/association/rules-of-procedure" >}})
+- [Procès-verbaux du conseil d'administration](https://cloud.openfisca.org/index.php/s/8DNNgcBtZYH9ejJ)
 - Numéro RNA : `W751278370`
 - Numéro SIRET : `94316249500015`
