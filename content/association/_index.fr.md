@@ -16,22 +16,9 @@ layout: association
 <cite>[Article 2 des statuts]({{< relref path="/association/statutes" >}})</cite>
 
 {{< banner class="banner-dark mt-xl2" bgImage="true">}}
-  {{< button href="https://openfisca.assoconnect.com/collect/description/661352-g-individual-membership" text="Rejoindre l'association" target="_blank" >}}
+  {{< button href="https://opencollective.com/openfisca" text="Rejoindre l'association" target="_blank" >}}
+  {{< button relref="/association/about" text="En savoir plus" type="secondary" >}}
 {{< /banner >}}
-
-## Cadre d'action
-
-Les actions de l'association pour réaliser son objet sont effectuées selon les priorités suivantes :
-
-1. Garantir la continuité d'usage.
-2. Garantir l'application des règles d'utilisation.
-3. Garantir le respect des règles de la communauté.
-4. Faciliter la prise de décision collaborative.
-5. Faciliter la discussion entre toutes les parties prenantes.
-6. Promouvoir OpenFisca et sa communauté.
-7. Promouvoir les concepts et méthodes qui permettent à OpenFisca d'exister, de se développer et de servir l'intérêt général, en particulier les communs numériques et Rules as Code.
-8. Augmenter le nombre de juridictions modélisées.
-9. Accroître les usages d'OpenFisca.
 
 ## Groupes de travail
 
@@ -126,6 +113,7 @@ Ces entités fournissent du support à l’usage d’OpenFisca à travers des fo
     }
   ]
 {{< /members >}}
+<<<<<<< HEAD
 
 ---
 
@@ -152,3 +140,5 @@ L'association OpenFisca est une association à but non lucratif de droit frança
 - [Procès-verbaux des réunions du Conseil d'administration](https://cloud.openfisca.org/index.php/s/8DNNgcBtZYH9ejJ)
 - Numéro RNA : `W751278370`
 - Numéro SIRET : `94316249500015`
+=======
+>>>>>>> ba928bdbb (Allow to use relref in button)
