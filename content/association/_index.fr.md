@@ -16,7 +16,7 @@ layout: association
 <cite>[Article 2 des statuts]({{< relref path="/association/statutes" >}})</cite>
 
 {{< banner class="banner-dark mt-xl2" bgImage="true">}}
-  {{< button href="https://opencollective.com/openfisca" text="Rejoindre l'association" target="_blank" >}}
+  {{< button href="https://openfisca.assoconnect.com/collect/description/661352-g-individual-membership" text="Rejoindre l'association" target="_blank" >}}
 {{< /banner >}}
 
 ## Cadre d'action
@@ -59,7 +59,7 @@ Ces entités utilisent OpenFisca pour fournir des services à des usagers finaux
         {
           "type": "button",
           "buttonType": "secondary",
-          "href": "https://opencollective.com/openfisca",
+          "href": "https://openfisca.assoconnect.com/collect/description/661375-h-implementors",
           "text": "Rejoindre le collège"
         },
         {
@@ -105,7 +105,7 @@ Ces entités fournissent du support à l’usage d’OpenFisca à travers des fo
         {
           "type": "button",
           "buttonType": "secondary",
-          "href": "https://opencollective.com/openfisca",
+          "href": "https://openfisca.assoconnect.com/collect/description/661366-z-vendors",
           "text": "Rejoindre le collège"
         },
         {
@@ -137,7 +137,7 @@ Matti Schneider
 
 ## Documents officiels
 
-L'association OpenFisca est une association à but non lucratif de droit français (loi 1901), hébergée fiscalement par la [Fondation OpenCollective Europe](https://opencollective.com/europe).
+L'association OpenFisca est une association à but non lucratif de droit français (loi 1901).
 
 - [Statuts]({{< relref path="/association/statutes" >}})
 - [Règlement intérieur]({{< relref path="/association/rules-of-procedure" >}})
