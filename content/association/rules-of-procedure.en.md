@@ -98,7 +98,7 @@ Fees are the same as college A.
 
 ### 3) Payment
 
-All fees are paid transparently on OpenCollective. The account on [opencollective.com/openfisca](https://opencollective.com/dashboard/openfisca) is the only one holding funds on behalf of the Foundation.
+All fees are paid transparently on AssoConnect. The account on AssoConnect is the only one holding funds on behalf of the Foundation.
 
 ### 4) Exclusion
 

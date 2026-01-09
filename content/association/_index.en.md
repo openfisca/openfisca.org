@@ -16,7 +16,7 @@ layout: association
 <cite>[Article 2 of the statutes]({{< relref path="/association/statutes" >}})</cite>
 
 {{< banner class="banner-dark mt-xl2" bgImage="true">}}
-  {{< button href="https://opencollective.com/openfisca" text="Join the association" target="_blank" >}}
+  {{< button href="https://openfisca.assoconnect.com/collect/description/661352-g-individual-membership" text="Join the association" target="_blank" >}}
 {{< /banner >}}
 
 ## Framework of action
@@ -59,7 +59,7 @@ These entities use OpenFisca to provide services to end users through apps, repo
         {
           "type": "button",
           "buttonType": "secondary",
-          "href": "https://opencollective.com/openfisca",
+          "href": "https://openfisca.assoconnect.com/collect/description/661375-h-implementors",
           "text": "Join the college"
         },
         {
@@ -105,7 +105,7 @@ These entities provide support on OpenFisca implementation through training, ser
         {
           "type": "button",
           "buttonType": "secondary",
-          "href": "https://opencollective.com/openfisca",
+          "href": "https://openfisca.assoconnect.com/collect/description/661366-z-vendors",
           "text": "Join the college"
         },
         {
@@ -137,7 +137,7 @@ Matti Schneider
 
 ## Official documents
 
-The OpenFisca Association is a global non-profit registered under French law (_loi 1901_), fiscally hosted by the [OpenCollective Europe Foundation](https://opencollective.com/europe).
+The OpenFisca Association is a global non-profit registered under French law (_loi 1901_).
 
 - [Statutes]({{< relref path="/association/statutes" >}})
 - [Rules of procedure]({{< relref path="/association/rules-of-procedure" >}})
