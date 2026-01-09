@@ -23,13 +23,9 @@ Discovery of development tools or application already produced by members of the
 #### Non-exhaustive examples:
 
 - [LexImpact application](https://socio-fiscal.leximpact.an.fr/?budget=true&test_case=66&test_case=67&parameters=irpp_economique)
-
-- Parameter editor ([FR](https://parameters.fr.tax-benefit.org/), [NC](https://parameters.nc.tax-benefit.org/), [TN](https://parameters.tn.tax-benefit.org/))
-
+- Parameter editor (for [France](https://parameters.fr.tax-benefit.org/), [New Caledonia](https://parameters.nc.tax-benefit.org/), [Tunisia](https://parameters.tn.tax-benefit.org/))
 - [Parameter validator](https://control-center.tax-benefit.org/)
-
 - [`openfisca-survey-manager`](https://github.com/openfisca/openfisca-survey-manager) to manage survey data or administrative data
-
 - Pooling of existing tools and scaling up of these tools to the community level to make them development tools or applications shared by the community.
 
 ### Presentation of limitations and problems encountered, desirable or planned improvements

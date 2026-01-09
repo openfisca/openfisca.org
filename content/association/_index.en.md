@@ -37,6 +37,8 @@ The association's actions to achieve its purpose are carried out according to th
 
 Working groups structure discussions around specific lines of work on the development of OpenFisca, either targeting the product side, the community side or the Association itself. These spaces also allow members to collaborate on projects that benefit the entire OpenFisca community. As per the Association’s [statutes (§10)]({{< relref path="/association/statutes/#article-10-board-of-directors" >}}), the Board may delegate certain of its powers to these working groups. Working groups are open to all Association members.
 
+The following working groups are currently active:
+
 - [Technical working group]({{< relref path="/association/working-groups/technical-working-group" >}})
 
 ## Members
