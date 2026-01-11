@@ -43,10 +43,8 @@
     }, {});
   };
   var getClassNames = function getClassNames2(attrs) {
-    if (typeof attrs === "string")
-      return attrs;
-    if (!attrs || !attrs["class"])
-      return "";
+    if (typeof attrs === "string") return attrs;
+    if (!attrs || !attrs["class"]) return "";
     if (attrs["class"] && typeof attrs["class"] === "string") {
       return attrs["class"].split(" ");
     }
