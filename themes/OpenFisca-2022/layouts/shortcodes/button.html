@@ -1,5 +1,6 @@
 {{ $target := .Get "target" }}
 {{ $href := .Get "href" }}
+{{ $relref := .Get "relref" }}
 {{ $text := .Get "text" }}
 {{ $mailto := .Get "mailto" }}
 {{ $icon := .Get "icon" }}
@@ -15,4 +16,4 @@
   {{ $href = "mailto:" | printf $mailto }}
 {{ end }}
 
-{{ partial "button.html" (dict "target" $target "href" $href "text" $text "mailto" $mailto "icon" $icon "type" $type "size" $size "shape" $shape) }}
+{{ partial "button.html" (dict "target" $target "href" $href "relref" $relref "text" $text "mailto" $mailto "icon" $icon "type" $type "size" $size "shape" $shape "context" .) }}

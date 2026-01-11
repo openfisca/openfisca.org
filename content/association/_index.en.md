@@ -16,22 +16,9 @@ layout: association
 <cite>[Article 2 of the statutes]({{< relref path="/association/statutes" >}})</cite>
 
 {{< banner class="banner-dark mt-xl2" bgImage="true">}}
-  {{< button href="https://openfisca.assoconnect.com/collect/description/661352-g-individual-membership" text="Join the association" target="_blank" >}}
+  {{< button href="https://opencollective.com/openfisca" text="Join the association" target="_blank" >}}
+  {{< button relref="/association/about" text="Learn more" type="secondary" >}}
 {{< /banner >}}
-
-## Framework of action
-
-The association's actions to achieve its purpose are carried out according to the following priorities:
-
-1. Ensure continuity of use.
-2. Enforce terms of use.
-3. Enforce community rules.
-4. Facilitate collaborative decision-making.
-5. Facilitate discussion between all stakeholders.
-6. Promote OpenFisca and its community.
-7. Promote the concepts and methods that enable OpenFisca to exist, develop and serve the general interest, in particular digital commons and Rules as Code.
-8. Increase the number of modelled jurisdictions.
-9. Increase use cases of OpenFisca.
 
 ## Working groups
 
@@ -126,6 +113,7 @@ These entities provide support on OpenFisca implementation through training, ser
     }
   ]
 {{< /members >}}
+<<<<<<< HEAD
 
 ---
 
@@ -152,3 +140,5 @@ The OpenFisca Association is a global non-profit registered under French law (_l
 - [Board meetings minutes](https://cloud.openfisca.org/index.php/s/8DNNgcBtZYH9ejJ)
 - National association number (_RNA_): `W751278370`
 - National company number (_SIRET_): `94316249500015`
+=======
+>>>>>>> ba928bdbb (Allow to use relref in button)

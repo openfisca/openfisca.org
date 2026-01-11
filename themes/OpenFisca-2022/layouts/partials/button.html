@@ -1,6 +1,11 @@
 {{ $target := default "_self" .target }}
+{{ $href := .href }}
 
-<a href="{{ .href }}" target="{{ $target }}" class="{{ with .class }}{{ . }}{{ end }}">
+{{ if .relref }}
+  {{ $href = relref .context .relref }}
+{{ end }}
+
+<a href="{{ $href }}" target="{{ $target }}" class="{{ with .class }}{{ . }}{{ end }}">
   <button  class="{{ with .type }}button-{{ . }}{{ end }}{{ with .size }} button-{{ . }}{{ end }}{{ with .shape }} button-{{ . }}{{ end }}">
     {{ with .icon }}<i icon-name="{{ . }}"></i>{{ end }}
     {{ with .text }}{{ . }}{{ end }}
