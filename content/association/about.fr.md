@@ -4,9 +4,7 @@ layout: association
 slug: a-propos
 ---
 
-<iframe title="OpenFisca Association Official Launch Event" src="https://videos.lescommuns.org/videos/embed/1467f08f-7236-46ac-a096-56510e90607a" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
-
-# À propos
+# À propos de l'association OpenFisca
 
 ## Cadre d'action
 
@@ -21,6 +19,12 @@ Les actions de l'association pour réaliser son objet sont effectuées selon les
 7. Promouvoir les concepts et méthodes qui permettent à OpenFisca d'exister, de se développer et de servir l'intérêt général, en particulier les communs numériques et Rules as Code.
 8. Augmenter le nombre de juridictions modélisées.
 9. Accroître les usages d'OpenFisca.
+
+## Rediffusion de l'événement de lancement
+
+Découvrez tout ce qu'il faut savoir sur le fonctionnement de l'association et pourquoi c'est important en regardant le discours d'ouverture de l'événement de lancement.
+
+<iframe title="OpenFisca Association Official Launch Event" src="https://videos.lescommuns.org/videos/embed/1467f08f-7236-46ac-a096-56510e90607a" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 
 ## Gouvernance
 

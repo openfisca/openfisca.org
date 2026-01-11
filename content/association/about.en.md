@@ -3,9 +3,7 @@ html_title: "About OpenFisca association"
 layout: association
 ---
 
-<iframe title="OpenFisca Association Official Launch Event" src="https://videos.lescommuns.org/videos/embed/1467f08f-7236-46ac-a096-56510e90607a" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
-
-# About
+# About the OpenFisca Association
 
 ## Framework of action
 
@@ -20,6 +18,12 @@ The association's actions to achieve its purpose are carried out according to th
 7. Promote the concepts and methods that enable OpenFisca to exist, develop and serve the general interest, in particular digital commons and Rules as Code.
 8. Increase the number of modelled jurisdictions.
 9. Increase use cases of OpenFisca.
+
+## Launch event replay
+
+Learn all about how the association works and why it matters by watching the official launch event keynote.
+
+<iframe title="OpenFisca Association Official Launch Event" src="https://videos.lescommuns.org/videos/embed/1467f08f-7236-46ac-a096-56510e90607a" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 
 ## Governance
 
