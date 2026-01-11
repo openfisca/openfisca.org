@@ -116,7 +116,7 @@ Les ressources de l'association sont constituées de :
   8. les revenus de manifestations exceptionnelles ;
   9. les revenus des produits et services.
 
-## Article 10 : Conseil d'administration collégial
+## Article 10 : Conseil d'administration collégial {#article-10-conseil-d-administration-collegial}
 
 L'association est dirigée par un Conseil d'administration collégial de 5 membres. Chaque membre est issu d'un collège différent. Chaque membre de l'association est éligible au Conseil d'administration.
 
