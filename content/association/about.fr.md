@@ -1,5 +1,5 @@
 ---
-html_title: "A propos de l'association OpenFisca"
+html_title: "À propos de l'association OpenFisca"
 layout: association
 slug: a-propos
 ---
