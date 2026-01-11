@@ -98,7 +98,6 @@ Clone the repository locally:
 ```sh
 git clone https://github.com/openfisca/openfisca.org
 cd openfisca.org
-make install
 ```
 
 ### Dependencies
@@ -116,6 +115,10 @@ The Hugo version is locked because of the dependencies in the CI environment. Th
 1. Add the Open Terms Archive Homebrew tap: `brew tap OpenTermsArchive/homebrew-tap`
 2. Remove any previous installation of Hugo: `brew unlink hugo`
 3. Install Hugo: `brew install hugo@0.147.1`
+
+#### Node.js dependencies
+
+Install [Node.js](https://nodejs.org), which should also install NPM, then run `npm install`.
 
 ## Usage
 
