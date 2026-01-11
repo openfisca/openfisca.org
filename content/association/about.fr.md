@@ -22,7 +22,7 @@ Les actions de l'association pour réaliser son objet sont effectuées selon les
 
 ## Rediffusion de l'événement de lancement
 
-Découvrez tout ce qu'il faut savoir sur le fonctionnement de l'association et pourquoi c'est important en regardant le discours d'ouverture de l'événement de lancement.
+Découvrez le fonctionnement de l'association et en quoi son action est importante en regardant l'événement de lancement officiel.
 
 <iframe title="OpenFisca Association Official Launch Event" src="https://videos.lescommuns.org/videos/embed/1467f08f-7236-46ac-a096-56510e90607a" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 
