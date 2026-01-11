@@ -4,15 +4,11 @@ PORT=1313
 
 all: serve
 
-install:
-	rm -rf public/
-	hugo
-	npm install
-
 serve:
 	hugo serve --port ${PORT} --watch --disableFastRender --printI18nWarnings --ignoreCache --logLevel warn
 
 build:
+	rm -rf public/
 	hugo
 
 test:
