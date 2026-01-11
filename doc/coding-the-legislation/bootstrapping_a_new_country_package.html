@@ -5,7 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../_static/jquery.min.js"></script>
+  <script src="../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -16,14 +21,15 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Bootstraping a new country package &#8212; OpenFisca  documentation</title>
+    <title>Bootstrapping a new country package &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=41f151b0" />
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/coding-the-legislation/bootstrapping_a_new_country_package.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Running a simulation" href="../simulate/index.html" />
@@ -49,7 +55,7 @@
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="terminal"></i> From law to code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Bootstraping a new country package</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Bootstrapping a new country package</a></li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -103,13 +109,14 @@
 <li class="toctree-l2"><a class="reference internal" href="inferences.html">Inferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing_yaml_tests.html">Writing YAML tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="legislation_parameters.html">Parameters</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Bootstraping a new country package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Bootstrapping a new country package</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulate/index.html"><i icon-name="cog"></i> Running a simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -127,14 +134,14 @@
               
                 <li><a href="index.html"><i icon-name="terminal"></i> From law to code</a></li>
               
-              <li>Bootstraping a new country package</li>
+              <li>Bootstrapping a new country package</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <section id="bootstraping-a-new-country-package">
-<h1>Bootstraping a new country package<a class="headerlink" href="#bootstraping-a-new-country-package" title="Link to this heading">¶</a></h1>
+  <section id="bootstrapping-a-new-country-package">
+<h1>Bootstrapping a new country package<a class="headerlink" href="#bootstrapping-a-new-country-package" title="Link to this heading">¶</a></h1>
 <p>If you want to use OpenFisca to run simulations about your own country’s legislation, our <a class="reference external" href="https://github.com/openfisca/country-template/">country package template</a> will provide you all the instructions and boilerplate code you need to quickly get something working.</p>
 <p>If you want to see more complex and complete examples of legislation coded in OpenFisca, you can check the <a class="reference external" href="https://github.com/openfisca/openfisca-france">French</a>, <a class="reference external" href="https://github.com/openfisca/openfisca-tunisia">Tunisian</a> and <a class="reference external" href="https://github.com/openfisca/senegal">Senegalese</a> country packages.</p>
 </section>
@@ -161,7 +168,7 @@
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="terminal"></i> From law to code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Bootstraping a new country package</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Bootstrapping a new country package</a></li> 
       </ul>
     </div>
   
@@ -174,8 +181,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

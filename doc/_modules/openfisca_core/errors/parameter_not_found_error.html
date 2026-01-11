@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../../../_static/jquery.min.js"></script>
+  <script src="../../../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>openfisca_core.errors.parameter_not_found_error &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=41f151b0" />
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/openfisca_core/errors/parameter_not_found_error.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -114,10 +121,10 @@
   <h1>Source code for openfisca_core.errors.parameter_not_found_error</h1><div class="highlight"><pre>
 <div class="viewcode-block" id="ParameterNotFoundError">
 <a class="viewcode-back" href="../../../openfisca-python-api/errors.html#openfisca_core.errors.ParameterNotFoundError">[docs]</a>
-<span></span><span class="k">class</span> <span class="nc">ParameterNotFoundError</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">):</span>
+<span></span><span class="k">class</span><span class="w"> </span><span class="nc">ParameterNotFoundError</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception raised when a parameter is not found in the parameters.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">,</span> <span class="n">variable_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">instant_str</span><span class="p">,</span> <span class="n">variable_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;:param name: Name of the parameter</span>
 <span class="sd">        :param instant_str: Instant where the parameter does not exist, in the format `YYYY-MM-DD`.</span>
 <span class="sd">        :param variable_name: If the parameter was queried during the computation of a variable, name of that variable.</span>
@@ -161,8 +168,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

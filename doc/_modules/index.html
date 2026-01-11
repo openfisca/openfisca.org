@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../_static/jquery.min.js"></script>
+  <script src="../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>Overview: module code &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=41f151b0" />
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/index.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
   
@@ -87,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -109,7 +116,8 @@
           <div class="document clearer body">
             
   <h1>All modules for which code is available</h1>
-<ul><li><a href="enum.html">enum</a></li>
+<ul><li><a href="builtins.html">builtins</a></li>
+<li><a href="enum.html">enum</a></li>
 <li><a href="openfisca_core/commons/dummy.html">openfisca_core.commons.dummy</a></li>
 <li><a href="openfisca_core/commons/formulas.html">openfisca_core.commons.formulas</a></li>
 <li><a href="openfisca_core/commons/misc.html">openfisca_core.commons.misc</a></li>
@@ -149,8 +157,8 @@
 <li><a href="openfisca_core/periods/helpers.html">openfisca_core.periods.helpers</a></li>
 <li><a href="openfisca_core/periods/instant_.html">openfisca_core.periods.instant_</a></li>
 <li><a href="openfisca_core/periods/period_.html">openfisca_core.periods.period_</a></li>
+<li><a href="openfisca_core/populations/_core_population.html">openfisca_core.populations._core_population</a></li>
 <li><a href="openfisca_core/populations/group_population.html">openfisca_core.populations.group_population</a></li>
-<li><a href="openfisca_core/populations/population.html">openfisca_core.populations.population</a></li>
 <li><a href="openfisca_core/reforms/reform.html">openfisca_core.reforms.reform</a></li>
 <li><a href="openfisca_core/scripts/simulation_generator.html">openfisca_core.scripts.simulation_generator</a></li>
 <li><a href="openfisca_core/simulations/helpers.html">openfisca_core.simulations.helpers</a></li>
@@ -158,13 +166,8 @@
 <li><a href="openfisca_core/simulations/simulation_builder.html">openfisca_core.simulations.simulation_builder</a></li>
 <li><a href="openfisca_core/taxbenefitsystems/tax_benefit_system.html">openfisca_core.taxbenefitsystems.tax_benefit_system</a></li>
 <li><a href="openfisca_core/tools/test_runner.html">openfisca_core.tools.test_runner</a></li>
-<li><a href="openfisca_core/tracers/computation_log.html">openfisca_core.tracers.computation_log</a></li>
-<li><a href="openfisca_core/tracers/flat_trace.html">openfisca_core.tracers.flat_trace</a></li>
-<li><a href="openfisca_core/tracers/full_tracer.html">openfisca_core.tracers.full_tracer</a></li>
-<li><a href="openfisca_core/tracers/performance_log.html">openfisca_core.tracers.performance_log</a></li>
 <li><a href="openfisca_core/tracers/simple_tracer.html">openfisca_core.tracers.simple_tracer</a></li>
 <li><a href="openfisca_core/tracers/trace_node.html">openfisca_core.tracers.trace_node</a></li>
-<li><a href="openfisca_core/tracers/tracing_parameter_node_at_instant.html">openfisca_core.tracers.tracing_parameter_node_at_instant</a></li>
 <li><a href="openfisca_core/types.html">openfisca_core.types</a></li>
 <li><a href="openfisca_core/variables/helpers.html">openfisca_core.variables.helpers</a></li>
 <li><a href="openfisca_core/variables/variable.html">openfisca_core.variables.variable</a></li>
@@ -197,8 +200,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

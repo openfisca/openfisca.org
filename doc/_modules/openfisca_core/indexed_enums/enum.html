@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../../../_static/jquery.min.js"></script>
+  <script src="../../../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>openfisca_core.indexed_enums.enum &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=41f151b0" />
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/openfisca_core/indexed_enums/enum.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -112,16 +119,16 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.indexed_enums.enum</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
-<span class="kn">from</span> <span class="nn">._enum_type</span> <span class="kn">import</span> <span class="n">EnumType</span>
-<span class="kn">from</span> <span class="nn">._errors</span> <span class="kn">import</span> <span class="n">EnumEncodingError</span><span class="p">,</span> <span class="n">EnumMemberNotFoundError</span>
-<span class="kn">from</span> <span class="nn">._guards</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._enum_type</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnumType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnumEncodingError</span><span class="p">,</span> <span class="n">EnumMemberNotFoundError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._guards</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">_is_enum_array</span><span class="p">,</span>
     <span class="n">_is_enum_array_like</span><span class="p">,</span>
     <span class="n">_is_int_array</span><span class="p">,</span>
@@ -129,13 +136,13 @@
     <span class="n">_is_str_array</span><span class="p">,</span>
     <span class="n">_is_str_array_like</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._utils</span> <span class="kn">import</span> <span class="n">_enum_to_index</span><span class="p">,</span> <span class="n">_int_to_index</span><span class="p">,</span> <span class="n">_str_to_index</span>
-<span class="kn">from</span> <span class="nn">.enum_array</span> <span class="kn">import</span> <span class="n">EnumArray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_enum_to_index</span><span class="p">,</span> <span class="n">_int_to_index</span><span class="p">,</span> <span class="n">_str_to_index</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.enum_array</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnumArray</span>
 
 
 <div class="viewcode-block" id="Enum">
 <a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum">[docs]</a>
-<span class="k">class</span> <span class="nc">Enum</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">EnumType</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Enum</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">EnumType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Enum based on `enum34 &lt;https://pypi.python.org/pypi/enum34/&gt;`_.</span>
 
 <span class="sd">    Its items have an :class:`int` index, useful and performant when running</span>
@@ -197,7 +204,7 @@
     <span class="c1">#: The :attr:`index` of the :class:`.Enum` member.</span>
     <span class="n">index</span><span class="p">:</span> <span class="nb">int</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">__args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">**</span><span class="n">__kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">__args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">**</span><span class="n">__kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Tweak :class:`enum.Enum` to add an :attr:`.index` to each enum item.</span>
 
 <span class="sd">        When the enum is initialised, ``_member_names_`` contains the names of</span>
@@ -233,38 +240,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_member_names_</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-
-<div class="viewcode-block" id="Enum.__eq__">
-<a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum.__eq__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">if</span> <span class="p">(</span>
-            <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Enum</span><span class="p">)</span>
-            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
-        <span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">index</span>
-        <span class="k">return</span> <span class="bp">NotImplemented</span></div>
-
-
-<div class="viewcode-block" id="Enum.__ne__">
-<a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum.__ne__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">if</span> <span class="p">(</span>
-            <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Enum</span><span class="p">)</span>
-            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
-        <span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">index</span>
-        <span class="k">return</span> <span class="bp">NotImplemented</span></div>
-
 
 <div class="viewcode-block" id="Enum.encode">
 <a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum.encode">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VarArray</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VarArray</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Encode an encodable array into an :class:`.EnumArray`.</span>
 
 <span class="sd">        Args:</span>
@@ -331,12 +313,12 @@
 
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_encode_array</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VarArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_encode_array</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VarArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">_is_int_array</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
             <span class="n">indices</span> <span class="o">=</span> <span class="n">_int_to_index</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">_is_str_array</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>  <span class="c1"># type: ignore[unreachable]</span>
             <span class="n">indices</span> <span class="o">=</span> <span class="n">_str_to_index</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">_is_enum_array</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">is</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">_is_enum_array</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">cls</span> <span class="o">==</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="p">:</span>
             <span class="n">indices</span> <span class="o">=</span> <span class="n">_enum_to_index</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">EnumEncodingError</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
@@ -345,7 +327,7 @@
         <span class="k">return</span> <span class="n">EnumArray</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_encode_array_like</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_encode_array_like</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">_is_int_array_like</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
             <span class="n">indices</span> <span class="o">=</span> <span class="n">_int_to_index</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">_is_str_array_like</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>  <span class="c1"># type: ignore[unreachable]</span>
@@ -391,8 +373,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

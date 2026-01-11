@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../../../_static/jquery.min.js"></script>
+  <script src="../../../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>openfisca_core.simulations.helpers &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=41f151b0" />
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/openfisca_core/simulations/helpers.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -112,22 +119,22 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.simulations.helpers</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">errors</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">errors</span>
 
-<span class="kn">from</span> <span class="nn">.typing</span> <span class="kn">import</span> <span class="n">ParamsWithoutAxes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParamsWithoutAxes</span>
 
 
-<span class="k">def</span> <span class="nf">calculate_output_add</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_output_add</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate_add</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">calculate_output_divide</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_output_divide</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate_divide</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">input_type</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_type</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">input_type</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">json_type_map</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nb">dict</span><span class="p">:</span> <span class="s2">&quot;Object&quot;</span><span class="p">,</span>
         <span class="nb">list</span><span class="p">:</span> <span class="s2">&quot;Array&quot;</span><span class="p">,</span>
@@ -146,7 +153,7 @@
 
 <div class="viewcode-block" id="check_unexpected_entities">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.helpers.check_unexpected_entities">[docs]</a>
-<span class="k">def</span> <span class="nf">check_unexpected_entities</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_unexpected_entities</span><span class="p">(</span>
     <span class="n">params</span><span class="p">:</span> <span class="n">ParamsWithoutAxes</span><span class="p">,</span>
     <span class="n">entities</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -192,7 +199,7 @@
 
 <div class="viewcode-block" id="has_unexpected_entities">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.helpers.has_unexpected_entities">[docs]</a>
-<span class="k">def</span> <span class="nf">has_unexpected_entities</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">ParamsWithoutAxes</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">has_unexpected_entities</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">ParamsWithoutAxes</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the input contains entities that are not in the system.</span>
 
 <span class="sd">    Args:</span>
@@ -223,7 +230,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">transform_to_strict_syntax</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">transform_to_strict_syntax</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -259,8 +266,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

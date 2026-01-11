@@ -5,7 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../_static/jquery.min.js"></script>
+  <script src="../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -19,11 +24,12 @@
     <title>Populations &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=41f151b0" />
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/openfisca-python-api/populations.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="tools.test_runner" href="test_runner.html" />
@@ -118,6 +124,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -144,61 +151,132 @@
   <section id="module-openfisca_core.populations">
 <span id="populations"></span><h1>Populations<a class="headerlink" href="#module-openfisca_core.populations" title="Link to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="openfisca_core.populations.Population">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.populations.</span></span><span class="sig-name descname"><span class="pre">Population</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/populations/population.html#Population"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.populations.Population" title="Link to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="openfisca_core.populations.Population.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/populations/population.html#Population.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.populations.Population.__call__" title="Link to this definition">¶</a></dt>
-<dd><p>Calculate the variable <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> for the entity and the period <code class="docutils literal notranslate"><span class="pre">period</span></code>, using the variable formula if it exists.</p>
-<p>Example:
-&gt;&gt;&gt; person(“salary”, “2017-04”)
-&gt;&gt;&gt; array([300.0])</p>
+<dt class="sig sig-object py" id="openfisca_core.populations.CorePopulation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.populations.</span></span><span class="sig-name descname"><span class="pre">CorePopulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_CorePopulation__args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_CorePopulation__kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/populations/_core_population.html#CorePopulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.populations.CorePopulation" title="Link to this definition">¶</a></dt>
+<dd><p>Base class to build populations from.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entity</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="types.html#openfisca_core.types.CoreEntity" title="openfisca_core.types.CoreEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">CoreEntity</span></code></a></span>) – The <code class="xref py py-class docutils literal notranslate"><span class="pre">CoreEntity</span></code> of the population.</p></li>
+<li><p><strong>*__args</strong> – Variable length argument list.</p></li>
+<li><p><strong>**__kwds</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.populations.CorePopulation.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/populations/_core_population.html#CorePopulation.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.populations.CorePopulation.__call__" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> for <code class="docutils literal notranslate"><span class="pre">period</span></code>, using the formula if it exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">VariableName</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</span>) – The name of the variable to calculate.</p></li>
+<li><p><strong>period</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="types.html#openfisca_core.types.Period" title="openfisca_core.types.Period"><code class="xref py py-class docutils literal notranslate"><span class="pre">Period</span></code></a>, <a class="reference internal" href="types.html#openfisca_core.types.PeriodStr" title="openfisca_core.types.PeriodStr"><code class="xref py py-class docutils literal notranslate"><span class="pre">PeriodStr</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.NewType" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewType</span></code></a>(<code class="docutils literal notranslate"><span class="pre">PeriodInt</span></code>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>)]</span>) – The period to calculate the variable for.</p></li>
+<li><p><strong>options</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code>]</span>) – The options to use for the calculation.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A numpy array containing the result of the calculation</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>None</strong> – If there is no <code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code>.</p></li>
+<li><p><strong>ndarray[generic]</strong> – The result of the calculation.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>IncompatibleOptionsError</strong> – If the options are incompatible.</p></li>
+<li><p><strong>InvalidOptionError</strong> – If the option is invalid.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> | <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.generic" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">generic</span></code></a>]]</span></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="openfisca_core.populations.Population.get_rank">
-<span class="sig-name descname"><span class="pre">get_rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criteria</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/populations/population.html#Population.get_rank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.populations.Population.get_rank" title="Link to this definition">¶</a></dt>
-<dd><p>Get the rank of a person within an entity according to a criteria.
-The person with rank 0 has the minimum value of criteria.
-If condition is specified, then the persons who don’t respect it are not taken into account and their rank is -1.</p>
-<p>Example:
-&gt;&gt;&gt; age = person(“age”, period)  # e.g [32, 34, 2, 8, 1]
-&gt;&gt;&gt; person.get_rank(household, age)
-&gt;&gt;&gt; [3, 4, 0, 2, 1]</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_child</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">Household</span><span class="o">.</span><span class="n">CHILD</span>
-<span class="gp">... </span><span class="p">)</span>  <span class="c1"># [False, False, True, True, True]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">get_rank</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">household</span><span class="p">,</span> <span class="o">-</span><span class="n">age</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="n">is_child</span>
-<span class="go">:rtype: :sphinx_autodoc_typehints_type:`\:py\:class\:\`\~numpy.ndarray\`\\ \\\[\:py\:data\:\`\~typing.Any\`\, \:py\:class\:\`\~numpy.dtype\`\\ \\\[\:py\:class\:\`int\`\]\]`</span>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">entities</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">periods</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">populations</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">simulations</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">taxbenefitsystems</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">variables</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>… )  # Sort in reverse order so that the eldest child gets the rank 0.
-&gt;&gt;&gt; [-1, -1, 1, 0, 2]</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">entities</span><span class="o">.</span><span class="n">SingleEntity</span><span class="p">):</span> <span class="o">...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&quot;person&quot;</span><span class="p">,</span> <span class="s2">&quot;people&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="o">.</span><span class="n">eternity</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">population</span> <span class="o">=</span> <span class="n">populations</span><span class="o">.</span><span class="n">CorePopulation</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">population</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">population</span><span class="p">(</span><span class="s2">&quot;salary&quot;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbs</span> <span class="o">=</span> <span class="n">taxbenefitsystems</span><span class="o">.</span><span class="n">TaxBenefitSystem</span><span class="p">([</span><span class="n">person</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">set_tax_benefit_system</span><span class="p">(</span><span class="n">tbs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">simulation</span> <span class="o">=</span> <span class="n">simulations</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span><span class="n">tbs</span><span class="p">,</span> <span class="p">{</span><span class="n">person</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="n">population</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">population</span><span class="p">(</span><span class="s2">&quot;salary&quot;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VariableNotFoundError</span>: <span class="n">You tried to calculate or to set a value ...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">Salary</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">ETERNITY</span>
+<span class="gp">... </span>    <span class="n">entity</span> <span class="o">=</span> <span class="n">person</span>
+<span class="gp">... </span>    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbs</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">Salary</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.populations._core_population.Salary object at...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">population</span><span class="p">(</span><span class="n">Salary</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="go">array([0, 0, 0], dtype=int32)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">Tax</span><span class="p">(</span><span class="n">Salary</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">default_value</span> <span class="o">=</span> <span class="mf">100.0</span>
+<span class="gp">... </span>    <span class="n">definition_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">ETERNITY</span>
+<span class="gp">... </span>    <span class="n">entity</span> <span class="o">=</span> <span class="n">person</span>
+<span class="gp">... </span>    <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbs</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">Tax</span><span class="p">)</span>
+<span class="go">&lt;openfisca_core.populations._core_population.Tax object at...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">population</span><span class="p">(</span><span class="n">Tax</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="go">array([100., 100., 100.], dtype=float32)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">population</span><span class="p">(</span><span class="n">Tax</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="p">[</span><span class="n">populations</span><span class="o">.</span><span class="n">ADD</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">Unable to ADD constant variable &#39;Tax&#39; over the perio...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">population</span><span class="p">(</span><span class="n">Tax</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="p">[</span><span class="n">populations</span><span class="o">.</span><span class="n">DIVIDE</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">Unable to DIVIDE constant variable &#39;Tax&#39; over the pe...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">population</span><span class="p">(</span><span class="n">Tax</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="p">[</span><span class="n">populations</span><span class="o">.</span><span class="n">ADD</span><span class="p">,</span> <span class="n">populations</span><span class="o">.</span><span class="n">DIVIDE</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">IncompatibleOptionsError</span>: <span class="n">Options ADD and DIVIDE are incompatibl...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">population</span><span class="p">(</span><span class="n">Tax</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;LAGRANGIAN&quot;</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">InvalidOptionError</span>: <span class="n">Option LAGRANGIAN is not a valid option (try...</span>
+</pre></div>
+</div>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="openfisca_core.populations.Population.has_role">
-<span class="sig-name descname"><span class="pre">has_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/populations/population.html#Population.has_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.populations.Population.has_role" title="Link to this definition">¶</a></dt>
-<dd><p>Check if a person has a given role within its <cite>GroupEntity</cite>.</p>
-<p>Example:
-&gt;&gt;&gt; person.has_role(Household.CHILD)
-&gt;&gt;&gt; array([False])</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
-</dd>
-</dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.populations.SinglePopulation">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.populations.</span></span><span class="sig-name descname"><span class="pre">SinglePopulation</span></span><a class="headerlink" href="#openfisca_core.populations.SinglePopulation" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Population</span></code></p>
 </dd></dl>
 
 <dl class="py class">
@@ -287,7 +365,7 @@ If condition is specified, then the persons who don’t respect it are not taken
 
 </dd></dl>
 
-<span class="target" id="module-openfisca_core.populations.config"></span></section>
+</section>
 
 
           </div>
@@ -324,8 +402,11 @@ If condition is specified, then the persons who don’t respect it are not taken
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

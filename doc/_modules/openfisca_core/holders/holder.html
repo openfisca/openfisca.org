@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../../../_static/jquery.min.js"></script>
+  <script src="../../../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>openfisca_core.holders.holder &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=41f151b0" />
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/openfisca_core/holders/holder.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -112,18 +119,18 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.holders.holder</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">psutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">psutil</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">commons</span><span class="p">,</span>
     <span class="n">data_storage</span> <span class="k">as</span> <span class="n">storage</span><span class="p">,</span>
     <span class="n">errors</span><span class="p">,</span>
@@ -132,15 +139,15 @@
     <span class="n">types</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">.memory_usage</span> <span class="kn">import</span> <span class="n">MemoryUsage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
 
 
 <div class="viewcode-block" id="Holder">
 <a class="viewcode-back" href="../../../openfisca-python-api/holder.html#openfisca_core.holders.Holder">[docs]</a>
-<span class="k">class</span> <span class="nc">Holder</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Holder</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A holder keeps tracks of a variable values after they have been calculated, or set as an input.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">population</span> <span class="o">=</span> <span class="n">population</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variable</span> <span class="o">=</span> <span class="n">variable</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">simulation</span>
@@ -163,7 +170,7 @@
 
 <div class="viewcode-block" id="Holder.clone">
 <a class="viewcode-back" href="../../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.clone">[docs]</a>
-    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">CorePopulation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Holder</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Copy the holder just enough to be able to run a new simulation without modifying the original simulation.&quot;&quot;&quot;</span>
         <span class="n">new</span> <span class="o">=</span> <span class="n">commons</span><span class="o">.</span><span class="n">empty_clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">new_dict</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="vm">__dict__</span>
@@ -178,7 +185,7 @@
         <span class="k">return</span> <span class="n">new</span></div>
 
 
-    <span class="k">def</span> <span class="nf">create_disk_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">preserve</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_disk_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">preserve</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">directory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">directory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">data_storage_dir</span>
         <span class="n">storage_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -192,7 +199,7 @@
 
 <div class="viewcode-block" id="Holder.delete_arrays">
 <a class="viewcode-back" href="../../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.delete_arrays">[docs]</a>
-    <span class="k">def</span> <span class="nf">delete_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;If ``period`` is ``None``, remove all known values of the variable.</span>
 
 <span class="sd">        If ``period`` is not ``None``, only remove all values for any period included in period (e.g. if period is &quot;2017&quot;, values for &quot;2017-01&quot;, &quot;2017-07&quot;, etc. would be removed)</span>
@@ -204,7 +211,7 @@
 
 <div class="viewcode-block" id="Holder.get_array">
 <a class="viewcode-back" href="../../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.get_array">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the value of the variable for the given period.</span>
 
 <span class="sd">        If the value is not known, return ``None``.</span>
@@ -221,7 +228,7 @@
 
 <div class="viewcode-block" id="Holder.get_memory_usage">
 <a class="viewcode-back" href="../../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.get_memory_usage">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MemoryUsage</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">MemoryUsage</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get data about the virtual memory usage of the Holder.</span>
 
 <span class="sd">        Returns:</span>
@@ -262,7 +269,7 @@
 <span class="sd">               &#39;total_nb_bytes&#39;: 0...</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">usage</span> <span class="o">=</span> <span class="n">MemoryUsage</span><span class="p">(</span>
+        <span class="n">usage</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">MemoryUsage</span><span class="p">(</span>
             <span class="n">nb_cells_by_array</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">population</span><span class="o">.</span><span class="n">count</span><span class="p">,</span>
             <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
         <span class="p">)</span>
@@ -287,7 +294,7 @@
 
 <div class="viewcode-block" id="Holder.get_known_periods">
 <a class="viewcode-back" href="../../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.get_known_periods">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_known_periods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_known_periods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the list of periods the variable value is known for.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">get_known_periods</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">get_known_periods</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span> <span class="k">else</span> <span class="p">[],</span>
@@ -296,7 +303,7 @@
 
 <div class="viewcode-block" id="Holder.set_input">
 <a class="viewcode-back" href="../../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.set_input">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_input</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_input</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">period</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Period</span><span class="p">,</span>
         <span class="n">array</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
@@ -324,7 +331,7 @@
 <span class="sd">            &gt;&gt;&gt; class MyVariable(variables.Variable):</span>
 <span class="sd">            ...     definition_period = periods.DateUnit.YEAR</span>
 <span class="sd">            ...     entity = entity</span>
-<span class="sd">            ...     value_type = int</span>
+<span class="sd">            ...     value_type = float</span>
 
 <span class="sd">            &gt;&gt;&gt; variable = MyVariable()</span>
 
@@ -334,11 +341,11 @@
 <span class="sd">            &gt;&gt;&gt; holder = Holder(variable, population)</span>
 <span class="sd">            &gt;&gt;&gt; holder.set_input(&quot;2018&quot;, numpy.array([12.5, 14]))</span>
 <span class="sd">            &gt;&gt;&gt; holder.get_array(&quot;2018&quot;)</span>
-<span class="sd">            array([12, 14], dtype=int32)</span>
+<span class="sd">            array([12.5, 14. ], dtype=float32)</span>
 
 <span class="sd">            &gt;&gt;&gt; holder.set_input(&quot;2018&quot;, [12.5, 14])</span>
 <span class="sd">            &gt;&gt;&gt; holder.get_array(&quot;2018&quot;)</span>
-<span class="sd">            array([12, 14], dtype=int32)</span>
+<span class="sd">            array([12.5, 14. ], dtype=float32)</span>
 
 <span class="sd">        .. _documentation:</span>
 <span class="sd">            https://openfisca.org/doc/coding-the-legislation/35_periods.html#set-input-automatically-process-variable-inputs-defined-for-periods-not-matching-the-definition-period</span>
@@ -373,7 +380,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_to_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -396,7 +403,7 @@
                 <span class="p">)</span>
         <span class="k">return</span> <span class="n">value</span>
 
-    <span class="k">def</span> <span class="nf">_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_array</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eternal</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -441,7 +448,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">put_in_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">put_in_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_not_store</span><span class="p">:</span>
             <span class="k">return</span>
 
@@ -456,7 +463,7 @@
 
 <div class="viewcode-block" id="Holder.default_array">
 <a class="viewcode-back" href="../../../openfisca-python-api/holder.html#openfisca_core.holders.Holder.default_array">[docs]</a>
-    <span class="k">def</span> <span class="nf">default_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a new array of the appropriate length for the entity, filled with the variable default values.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">default_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">population</span><span class="o">.</span><span class="n">count</span><span class="p">)</span></div>
 </div>
@@ -491,8 +498,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

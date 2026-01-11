@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../../../_static/jquery.min.js"></script>
+  <script src="../../../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>openfisca_core.taxbenefitsystems.tax_benefit_system &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=41f151b0" />
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/openfisca_core/taxbenefitsystems/tax_benefit_system.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -112,42 +119,42 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.taxbenefitsystems.tax_benefit_system</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="n">ParameterNodeAtInstant</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParameterNodeAtInstant</span>
 
-<span class="kn">import</span> <span class="nn">ast</span>
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">functools</span>
-<span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">import</span> <span class="nn">importlib</span>
-<span class="kn">import</span> <span class="nn">importlib.metadata</span>
-<span class="kn">import</span> <span class="nn">importlib.util</span>
-<span class="kn">import</span> <span class="nn">inspect</span>
-<span class="kn">import</span> <span class="nn">linecache</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ast</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.metadata</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.util</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">linecache</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">commons</span><span class="p">,</span> <span class="n">periods</span><span class="p">,</span> <span class="n">variables</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.entities</span> <span class="kn">import</span> <span class="n">Entity</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="kn">import</span> <span class="n">VariableNameConflictError</span><span class="p">,</span> <span class="n">VariableNotFoundError</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="kn">import</span> <span class="n">ParameterNode</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.periods</span> <span class="kn">import</span> <span class="n">Instant</span><span class="p">,</span> <span class="n">Period</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.populations</span> <span class="kn">import</span> <span class="n">GroupPopulation</span><span class="p">,</span> <span class="n">Population</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.simulations</span> <span class="kn">import</span> <span class="n">SimulationBuilder</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.variables</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">commons</span><span class="p">,</span> <span class="n">periods</span><span class="p">,</span> <span class="n">variables</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.entities</span><span class="w"> </span><span class="kn">import</span> <span class="n">Entity</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">VariableNameConflictError</span><span class="p">,</span> <span class="n">VariableNotFoundError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParameterNode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.periods</span><span class="w"> </span><span class="kn">import</span> <span class="n">Instant</span><span class="p">,</span> <span class="n">Period</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.populations</span><span class="w"> </span><span class="kn">import</span> <span class="n">GroupPopulation</span><span class="p">,</span> <span class="n">Population</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.simulations</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationBuilder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.variables</span><span class="w"> </span><span class="kn">import</span> <span class="n">Variable</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="TaxBenefitSystem">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem">[docs]</a>
-<span class="k">class</span> <span class="nc">TaxBenefitSystem</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TaxBenefitSystem</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the legislation.</span>
 
 <span class="sd">    It stores parameters (values defined for everyone) and variables (values</span>
@@ -171,14 +178,14 @@
     <span class="n">cache_blacklist</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">decomposition_file_path</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Entity</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Entity</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># TODO: Currently: Don&#39;t use a weakref, because they are cleared by Paste (at least) at each call.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span> <span class="n">ParameterNode</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">open_api_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="c1"># Tax benefit systems are mutable, so entities (which need to know about our variables) can&#39;t be shared among them</span>
         <span class="k">if</span> <span class="n">entities</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;A tax and benefit sytem must have at least an entity.&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;A tax and benefit system must have at least an entity.&quot;</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">person_entity</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
@@ -191,7 +198,7 @@
             <span class="n">entity</span><span class="o">.</span><span class="n">set_tax_benefit_system</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">base_tax_benefit_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">base_tax_benefit_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">base_tax_benefit_system</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base_tax_benefit_system</span>
         <span class="k">if</span> <span class="n">base_tax_benefit_system</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">baseline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span>
@@ -202,7 +209,7 @@
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">base_tax_benefit_system</span>
 
-    <span class="k">def</span> <span class="nf">instantiate_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">instantiate_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">person</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">person_entity</span>
         <span class="n">members</span> <span class="o">=</span> <span class="n">Population</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
         <span class="n">entities</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">Entity</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">person</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="n">members</span><span class="p">}</span>
@@ -213,22 +220,22 @@
         <span class="k">return</span> <span class="n">entities</span>
 
     <span class="c1"># Deprecated method of constructing simulations, to be phased out in favor of SimulationBuilder</span>
-    <span class="k">def</span> <span class="nf">new_scenario</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">class</span> <span class="nc">ScenarioAdapter</span><span class="p">:</span>
-            <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">new_scenario</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">class</span><span class="w"> </span><span class="nc">ScenarioAdapter</span><span class="p">:</span>
+            <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span>
 
-            <span class="k">def</span> <span class="nf">init_from_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">attributes</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">init_from_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">attributes</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="n">attributes</span>
                 <span class="k">return</span> <span class="bp">self</span>
 
-            <span class="k">def</span> <span class="nf">init_from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">init_from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="kc">None</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">dict</span> <span class="o">=</span> <span class="nb">dict</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;period&quot;</span><span class="p">)</span>
                 <span class="k">return</span> <span class="bp">self</span>
 
-            <span class="k">def</span> <span class="nf">new_simulation</span><span class="p">(</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">new_simulation</span><span class="p">(</span>
                 <span class="bp">self</span><span class="p">,</span>
                 <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                 <span class="n">opt_out_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -268,10 +275,10 @@
 
         <span class="k">return</span> <span class="n">ScenarioAdapter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">prefill_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">prefill_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span> <span class="nf">load_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_class</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_class</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">variable_class</span><span class="o">.</span><span class="vm">__name__</span>
 
         <span class="c1"># Check if a Variable with the same name is already registered.</span>
@@ -289,7 +296,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.add_variable">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.add_variable">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variable</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variable</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds an OpenFisca variable to the tax and benefit system.</span>
 
 <span class="sd">        Args:</span>
@@ -304,7 +311,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.replace_variable">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.replace_variable">[docs]</a>
-    <span class="k">def</span> <span class="nf">replace_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">replace_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Replaces an existing variable by a new one.</span>
 
 <span class="sd">        The new variable must have the same name than the replaced one.</span>
@@ -326,7 +333,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.update_variable">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.update_variable">[docs]</a>
-    <span class="k">def</span> <span class="nf">update_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variable</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variable</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Update an existing variable in the Tax-Benefit system.</span>
 
 <span class="sd">        All attributes of the updated variable that are not explicitly</span>
@@ -350,7 +357,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.add_variables_from_file">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.add_variables_from_file">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_variables_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_variables_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds all OpenFisca variables contained in a given file to the tax and benefit system.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">source_file_path</span> <span class="o">=</span> <span class="n">file_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
@@ -408,7 +415,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.add_variables_from_directory">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.add_variables_from_directory">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_variables_from_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_variables_from_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Recursively explores a directory, and adds all OpenFisca variables found there to the tax and benefit system.&quot;&quot;&quot;</span>
         <span class="n">py_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="s2">&quot;*.py&quot;</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">py_file</span> <span class="ow">in</span> <span class="n">py_files</span><span class="p">:</span>
@@ -420,7 +427,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.add_variables">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.add_variables">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">variables</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">variables</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a list of OpenFisca Variables to the `TaxBenefitSystem`.</span>
 
 <span class="sd">        See also :any:`add_variable`</span>
@@ -431,7 +438,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.load_extension">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.load_extension">[docs]</a>
-    <span class="k">def</span> <span class="nf">load_extension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_extension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads an extension to the tax and benefit system.</span>
 
 <span class="sd">        :param str extension: The extension to load. Can be an absolute path pointing to an extension directory, or the name of an OpenFisca extension installed as a pip package.</span>
@@ -461,7 +468,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.apply_reform">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.apply_reform">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply_reform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reform_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TaxBenefitSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_reform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reform_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TaxBenefitSystem</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates a new tax and benefit system applying a reform to the tax and benefit system.</span>
 
 <span class="sd">        The current tax and benefit system is **not** mutated.</span>
@@ -476,7 +483,7 @@
 <span class="sd">            &gt;&gt;&gt; self.apply_reform(&quot;openfisca_france.reforms.inversion_revenus&quot;)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">openfisca_core.reforms</span> <span class="kn">import</span> <span class="n">Reform</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.reforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">Reform</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reform_package</span><span class="p">,</span> <span class="n">reform_name</span> <span class="o">=</span> <span class="n">reform_path</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -511,7 +518,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.get_variable">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.get_variable">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_variable</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_variable</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">check_existence</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -535,7 +542,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.neutralize_variable">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.neutralize_variable">[docs]</a>
-    <span class="k">def</span> <span class="nf">neutralize_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">neutralize_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Neutralizes an OpenFisca variable existing in the tax and benefit system.</span>
 
 <span class="sd">        A neutralized variable always returns its default value when computed.</span>
@@ -547,7 +554,7 @@
         <span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">annualize_variable</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">annualize_variable</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">period</span><span class="p">:</span> <span class="n">Period</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -568,7 +575,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.load_parameters">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.load_parameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">load_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_to_yaml_dir</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_to_yaml_dir</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads the legislation parameter for a directory containing YAML parameters files.</span>
 
 <span class="sd">        :param path_to_yaml_dir: Absolute path towards the YAML parameter directory.</span>
@@ -585,7 +592,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">parameters</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_get_baseline_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_baseline_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
         <span class="n">baseline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span>
         <span class="k">if</span> <span class="n">baseline</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parameters_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
@@ -594,7 +601,7 @@
 <div class="viewcode-block" id="TaxBenefitSystem.get_parameters_at_instant">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.get_parameters_at_instant">[docs]</a>
     <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span>
-    <span class="k">def</span> <span class="nf">get_parameters_at_instant</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_parameters_at_instant</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">instant</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">Period</span> <span class="o">|</span> <span class="n">Instant</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ParameterNodeAtInstant</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
@@ -631,7 +638,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.get_package_metadata">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.get_package_metadata">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_package_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_package_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets metadata relative to the country package.</span>
 
 <span class="sd">        Returns:</span>
@@ -694,7 +701,7 @@
 
 <div class="viewcode-block" id="TaxBenefitSystem.get_variables">
 <a class="viewcode-back" href="../../../openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.get_variables">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_variables</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_variables</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">entity</span><span class="p">:</span> <span class="n">Entity</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]:</span>
@@ -717,7 +724,7 @@
         <span class="p">}</span></div>
 
 
-    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">new</span> <span class="o">=</span> <span class="n">commons</span><span class="o">.</span><span class="n">empty_clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">new_dict</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="vm">__dict__</span>
 
@@ -734,14 +741,14 @@
 
         <span class="n">new_dict</span><span class="p">[</span><span class="s2">&quot;parameters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
         <span class="n">new_dict</span><span class="p">[</span><span class="s2">&quot;_parameters_at_instant_cache&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">new_dict</span><span class="p">[</span><span class="s2">&quot;variables&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">new_dict</span><span class="p">[</span><span class="s2">&quot;variables&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
         <span class="n">new_dict</span><span class="p">[</span><span class="s2">&quot;open_api_config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">open_api_config</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">new</span>
 
-    <span class="k">def</span> <span class="nf">entities_plural</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">entities_plural</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">entities_by_singular</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">entities_by_singular</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="n">entity</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">}</span></div>
 
 </pre></div>
@@ -774,8 +781,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

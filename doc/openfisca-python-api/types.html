@@ -5,7 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../_static/jquery.min.js"></script>
+  <script src="../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -19,11 +24,12 @@
     <title>Types &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=41f151b0" />
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/openfisca-python-api/types.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="openfisca test" href="openfisca_test.html" />
@@ -118,6 +124,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -147,15 +154,34 @@
 <dt class="sig sig-object py" id="openfisca_core.types.Array">
 <span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Array</span></span><a class="headerlink" href="#openfisca_core.types.Array" title="Link to this definition">¶</a></dt>
 <dd><p>Type representing an numpy array.</p>
-<p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">_N_co</span></code>]]</p>
+<p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">_N_co</span></code>]]</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="openfisca_core.types.ArrayLike">
 <span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">ArrayLike</span></span><a class="headerlink" href="#openfisca_core.types.ArrayLike" title="Link to this definition">¶</a></dt>
 <dd><p>Type representing an array-like object.</p>
-<p>alias of <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">_L</span></code>]</p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">_L</span></code>]</p>
 </dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.BoolArray">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">BoolArray</span></span><a class="headerlink" href="#openfisca_core.types.BoolArray" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for a boolean array.</p>
+<p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool_</span></code>]]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.BytesArray">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">BytesArray</span></span><a class="headerlink" href="#openfisca_core.types.BytesArray" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for an array of bytes.</p>
+<p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.bytes_" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes_</span></code></a>]]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.ComputationLog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">ComputationLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#ComputationLog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.ComputationLog" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.Container">
@@ -226,6 +252,13 @@
 <dd><p>Type for string arrays.</p>
 </dd></dl>
 
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.DateArray">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">DateArray</span></span><a class="headerlink" href="#openfisca_core.types.DateArray" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for an array of dates.</p>
+<p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.datetime64" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime64</span></code></a>]]</p>
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.DateUnit">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">DateUnit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#DateUnit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.DateUnit" title="Link to this definition">¶</a></dt>
@@ -235,14 +268,14 @@
 <dt class="sig sig-object py" id="openfisca_core.types.EntityKey">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">EntityKey</span></span><a class="headerlink" href="#openfisca_core.types.EntityKey" title="Link to this definition">¶</a></dt>
 <dd><p>For example “person”.</p>
-<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.EntityPlural">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">EntityPlural</span></span><a class="headerlink" href="#openfisca_core.types.EntityPlural" title="Link to this definition">¶</a></dt>
 <dd><p>For example “persons”.</p>
-<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
@@ -252,13 +285,37 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.EnumArray">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">EnumArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><span class="pre">ndarray</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><span class="pre">dtype</span></a><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">possible_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.13)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#openfisca_core.types.Enum" title="openfisca_core.types.Enum"><span class="pre">Enum</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#EnumArray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.EnumArray" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">EnumArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><span class="pre">dtype</span></a><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">possible_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.14)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#openfisca_core.types.Enum" title="openfisca_core.types.Enum"><span class="pre">Enum</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#EnumArray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.EnumArray" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.EnumType">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">EnumType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classdict</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_simple</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#EnumType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.EnumType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.FlatNodeMap">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">FlatNodeMap</span></span><a class="headerlink" href="#openfisca_core.types.FlatNodeMap" title="Link to this definition">¶</a></dt>
+<dd><p>A type representing a mapping of flat traces.</p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[NodeKey, FlatTraceMap]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.FlatTrace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">FlatTrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#FlatTrace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.FlatTrace" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.FlatTraceMap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">FlatTraceMap</span></span><a class="reference internal" href="../_modules/openfisca_core/types.html#FlatTraceMap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.FlatTraceMap" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.FloatArray">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">FloatArray</span></span><a class="headerlink" href="#openfisca_core.types.FloatArray" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for an array of floats.</p>
+<p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</p>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.Formula">
@@ -269,12 +326,17 @@
 <dd><p>Call self as a function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.generic" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">generic</span></code></a>]]</span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.generic" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">generic</span></code></a>]]</span></p>
 </dd>
 </dl>
 </dd></dl>
 
 </dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.FullTracer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">FullTracer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#FullTracer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.FullTracer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.GroupEntity">
@@ -292,6 +354,23 @@
 <dd></dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.ISOCalendarStr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">ISOCalendarStr</span></span><a class="reference internal" href="../_modules/openfisca_core/types.html#ISOCalendarStr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.ISOCalendarStr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.ISOFormatStr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">ISOFormatStr</span></span><a class="reference internal" href="../_modules/openfisca_core/types.html#ISOFormatStr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.ISOFormatStr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.IndexArray">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">IndexArray</span></span><a class="headerlink" href="#openfisca_core.types.IndexArray" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for an array of enum indices.</p>
+<p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">uint8</span></code>]]</p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.Indexable">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Indexable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#Indexable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Indexable" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -302,16 +381,61 @@
 <dd></dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.InstantInt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">InstantInt</span></span><a class="headerlink" href="#openfisca_core.types.InstantInt" title="Link to this definition">¶</a></dt>
+<dd><p>For example 2020.</p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.InstantStr">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">InstantStr</span></span><a class="headerlink" href="#openfisca_core.types.InstantStr" title="Link to this definition">¶</a></dt>
-<dd><p>For example “2000-01”.</p>
-<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">InstantStr</span></span><a class="reference internal" href="../_modules/openfisca_core/types.html#InstantStr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.InstantStr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.IntArray">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">IntArray</span></span><a class="headerlink" href="#openfisca_core.types.IntArray" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for an array of integers.</p>
+<p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int32</span></code>]]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.MemoryUsage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">MemoryUsage</span></span><a class="reference internal" href="../_modules/openfisca_core/types.html#MemoryUsage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.MemoryUsage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.NodeKey">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">NodeKey</span></span><a class="headerlink" href="#openfisca_core.types.NodeKey" title="Link to this definition">¶</a></dt>
+<dd><p>Key of a trace.</p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.ObjArray">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">ObjArray</span></span><a class="headerlink" href="#openfisca_core.types.ObjArray" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for an array of objects.</p>
+<p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.object_" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object_</span></code></a>]]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.ParameterNode">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">ParameterNode</span></span><a class="headerlink" href="#openfisca_core.types.ParameterNode" title="Link to this definition">¶</a></dt>
+<dd><p>A type representing a node of parameters.</p>
+<p>alias of <a class="reference internal" href="#openfisca_core.types.ParameterNodeAtInstant" title="openfisca_core.types.ParameterNodeAtInstant"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParameterNodeAtInstant</span></code></a> | <a class="reference internal" href="#openfisca_core.types.VectorialParameterNodeAtInstant" title="openfisca_core.types.VectorialParameterNodeAtInstant"><code class="xref py py-class docutils literal notranslate"><span class="pre">VectorialParameterNodeAtInstant</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.ParameterNodeAtInstant">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">ParameterNodeAtInstant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#ParameterNodeAtInstant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.ParameterNodeAtInstant" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.ParameterNodeChild">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">ParameterNodeChild</span></span><a class="headerlink" href="#openfisca_core.types.ParameterNodeChild" title="Link to this definition">¶</a></dt>
+<dd><p>A type representing a ???</p>
+<p>alias of <a class="reference internal" href="#openfisca_core.types.ParameterNodeAtInstant" title="openfisca_core.types.ParameterNodeAtInstant"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParameterNodeAtInstant</span></code></a> | <a class="reference internal" href="#openfisca_core.types.VectorialParameterNodeAtInstant" title="openfisca_core.types.VectorialParameterNodeAtInstant"><code class="xref py py-class docutils literal notranslate"><span class="pre">VectorialParameterNodeAtInstant</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>]</p>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.Params">
@@ -330,16 +454,33 @@
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.PerformanceLog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">PerformanceLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#PerformanceLog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.PerformanceLog" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.Period">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#Period"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.Period" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="openfisca_core.types.PeriodStr">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">PeriodStr</span></span><a class="headerlink" href="#openfisca_core.types.PeriodStr" title="Link to this definition">¶</a></dt>
-<dd><p>For example “1:2000-01-01:day”.</p>
-<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dt class="sig sig-object py" id="openfisca_core.types.PeriodInt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">PeriodInt</span></span><a class="headerlink" href="#openfisca_core.types.PeriodInt" title="Link to this definition">¶</a></dt>
+<dd><p>For example 2020.</p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.PeriodLike">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">PeriodLike</span></span><a class="headerlink" href="#openfisca_core.types.PeriodLike" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for a period-like object.</p>
+<p>alias of <a class="reference internal" href="#openfisca_core.types.Period" title="openfisca_core.types.Period"><code class="xref py py-class docutils literal notranslate"><span class="pre">Period</span></code></a> | <a class="reference internal" href="#openfisca_core.types.PeriodStr" title="openfisca_core.types.PeriodStr"><code class="xref py py-class docutils literal notranslate"><span class="pre">PeriodStr</span></code></a> | <a class="reference internal" href="#openfisca_core.types.PeriodInt" title="openfisca_core.types.PeriodInt"><code class="xref py py-class docutils literal notranslate"><span class="pre">PeriodInt</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.PeriodStr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">PeriodStr</span></span><a class="reference internal" href="../_modules/openfisca_core/types.html#PeriodStr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.PeriodStr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.Role">
@@ -350,15 +491,49 @@
 <dt class="sig sig-object py" id="openfisca_core.types.RoleKey">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">RoleKey</span></span><a class="headerlink" href="#openfisca_core.types.RoleKey" title="Link to this definition">¶</a></dt>
 <dd><p>For example “principal”.</p>
-<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.RolePlural">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">RolePlural</span></span><a class="headerlink" href="#openfisca_core.types.RolePlural" title="Link to this definition">¶</a></dt>
 <dd><p>For example “parents”.</p>
-<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.SeqInt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">SeqInt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#SeqInt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.SeqInt" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.SerializedNodeMap">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">SerializedNodeMap</span></span><a class="headerlink" href="#openfisca_core.types.SerializedNodeMap" title="Link to this definition">¶</a></dt>
+<dd><p>A type representing a mapping of serialized traces.</p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[NodeKey, SerializedTraceMap]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.SerializedTraceMap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">SerializedTraceMap</span></span><a class="reference internal" href="../_modules/openfisca_core/types.html#SerializedTraceMap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.SerializedTraceMap" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.SimpleStack">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">SimpleStack</span></span><a class="headerlink" href="#openfisca_core.types.SimpleStack" title="Link to this definition">¶</a></dt>
+<dd><p>A stack of simple traces.</p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference internal" href="#openfisca_core.types.SimpleTraceMap" title="openfisca_core.types.SimpleTraceMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleTraceMap</span></code></a>]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.SimpleTraceMap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">SimpleTraceMap</span></span><a class="reference internal" href="../_modules/openfisca_core/types.html#SimpleTraceMap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.SimpleTraceMap" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.SimpleTracer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">SimpleTracer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#SimpleTracer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.SimpleTracer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.Simulation">
@@ -375,10 +550,35 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">SinglePopulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#SinglePopulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.SinglePopulation" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.StrArray">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">StrArray</span></span><a class="headerlink" href="#openfisca_core.types.StrArray" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for an array of strings.</p>
+<p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.str_" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str_</span></code></a>]]</p>
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.TaxBenefitSystem">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">TaxBenefitSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#TaxBenefitSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.TaxBenefitSystem" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openfisca_core.types.Time">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">Time</span></span><a class="headerlink" href="#openfisca_core.types.Time" title="Link to this definition">¶</a></dt>
+<dd><p>A type representing a unit time.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.TraceNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">TraceNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#TraceNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.TraceNode" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.VarArray">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">VarArray</span></span><a class="headerlink" href="#openfisca_core.types.VarArray" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for an array of generic objects.</p>
+<p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.generic" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">generic</span></code></a>]]</p>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="openfisca_core.types.Variable">
@@ -389,7 +589,24 @@
 <dt class="sig sig-object py" id="openfisca_core.types.VariableName">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">VariableName</span></span><a class="headerlink" href="#openfisca_core.types.VariableName" title="Link to this definition">¶</a></dt>
 <dd><p>For example “salary”.</p>
-<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="openfisca_core.types.VectorialParameterNodeAtInstant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">VectorialParameterNodeAtInstant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/types.html#VectorialParameterNodeAtInstant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.types.VectorialParameterNodeAtInstant" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.iso_calendar">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">iso_calendar</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">re.compile('^\\d{4}(-W(0[1-9]|[1-4][0-9]|5[0-3]))?(-[1-7])?$')</span></em><a class="headerlink" href="#openfisca_core.types.iso_calendar" title="Link to this definition">¶</a></dt>
+<dd><p>Matches “2015”, “2015-W01”, “2015-W53-1” but not “2015-W54”, “2015-W10-8”.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="openfisca_core.types.iso_format">
+<span class="sig-prename descclassname"><span class="pre">openfisca_core.types.</span></span><span class="sig-name descname"><span class="pre">iso_format</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">re.compile('^\\d{4}(-(?:0[1-9]|1[0-2])(-(?:0[1-9]|[12]\\d|3[01]))?)?$')</span></em><a class="headerlink" href="#openfisca_core.types.iso_format" title="Link to this definition">¶</a></dt>
+<dd><p>Matches “2015”, “2015-01”, “2015-01-01” but not “2015-13”, “2015-12-32”.</p>
 </dd></dl>
 
 </section>
@@ -429,8 +646,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

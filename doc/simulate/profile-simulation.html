@@ -5,7 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../_static/jquery.min.js"></script>
+  <script src="../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -19,11 +24,12 @@
     <title>Profiling a simulation’s performance &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=41f151b0" />
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/simulate/profile-simulation.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="OpenFisca Python API" href="../openfisca-python-api/index.html" />
@@ -103,6 +109,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -195,7 +202,7 @@
 </pre></div>
 </div>
 <p>Then we’ll use it to profile our formula by adding the <code class="docutils literal notranslate"><span class="pre">&#64;profile</span></code> decorator:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">impots_directs</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">impots_directs</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Menage</span>
     <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Impôts directs&quot;</span>
@@ -203,7 +210,7 @@
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">YEAR</span>
 
     <span class="nd">@profile</span>
-    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">menage</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">menage</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
 </pre></div>
 </div>
 <p>Finally, we run our test with the <code class="docutils literal notranslate"><span class="pre">line_profiler</span></code> enabled:</p>
@@ -300,7 +307,7 @@
 </pre></div>
 </div>
 <p>Performing a search to find the definition of <code class="docutils literal notranslate"><span class="pre">iter_cotisations</span></code> gives us the following:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">iter_cotisations</span><span class="p">():</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">iter_cotisations</span><span class="p">():</span>
         <span class="c1"># ...</span>
 
             <span class="k">yield</span> <span class="n">bareme</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span>
@@ -349,14 +356,14 @@
 </div>
 <p>And as before we add the <code class="docutils literal notranslate"><span class="pre">&#64;profile</span></code> decorator:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="nd">@profile</span>
-<span class="k">def</span> <span class="nf">get_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
 </pre></div>
 </div>
 <p>Let’s see:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#      Hits         Time  Per Hit   % Time  Line Contents</span>
 <span class="o">==============================================================</span>
    <span class="mi">337</span>                                               <span class="nd">@profile</span>
-   <span class="mi">338</span>                                               <span class="k">def</span> <span class="nf">get_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+   <span class="mi">338</span>                                               <span class="k">def</span><span class="w"> </span><span class="nf">get_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
    <span class="mi">339</span>                                                   <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">   340                                                   Get the parameters of the legislation at a given instant</span>
 <span class="s2">   341                                           </span>
@@ -379,11 +386,11 @@
 </pre></div>
 </div>
 <p>Let’s take a closer look at <code class="docutils literal notranslate"><span class="pre">parameters.get_at_instant</span></code>:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AtInstantLike</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AtInstantLike</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
     <span class="c1"># ...</span>
 
     <span class="nd">@profile</span>
-    <span class="k">def</span> <span class="nf">get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
         <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
 </pre></div>
@@ -392,13 +399,13 @@
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="c1">#      Hits         Time  Per Hit   % Time  Line Contents</span>
 <span class="o">==============================================================</span>
     <span class="mi">14</span>                                               <span class="nd">@profile</span>
-    <span class="mi">15</span>                                               <span class="k">def</span> <span class="nf">get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+    <span class="mi">15</span>                                               <span class="k">def</span><span class="w"> </span><span class="nf">get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
     <span class="mi">16</span>     <span class="mi">54550</span>     <span class="mf">681341.0</span>     <span class="mf">12.5</span>     <span class="mf">61.4</span>          <span class="n">instant</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span>
     <span class="mi">17</span>     <span class="mi">54550</span>     <span class="mf">429057.0</span>      <span class="mf">7.9</span>     <span class="mf">38.6</span>          <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_at_instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This is the whole snippet for the expensive <code class="docutils literal notranslate"><span class="pre">periods.instant</span></code> function:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">):</span>
     <span class="c1"># ... </span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -435,7 +442,7 @@
 <span class="c1"># ...</span>
 
 <span class="nd">@profile</span>
-<span class="k">def</span> <span class="nf">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -475,12 +482,12 @@
 <li><p>return values are identical for identical values of <code class="docutils literal notranslate"><span class="pre">fragment</span></code></p></li>
 </ul>
 <p>We’ll use <code class="docutils literal notranslate"><span class="pre">functools.lru_cache</span></code> for our lookup table:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">functools</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
 
 <span class="c1"># ...</span>
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -501,20 +508,20 @@
 <h2>Caching further<a class="headerlink" href="#caching-further" title="Link to this heading">¶</a></h2>
 <p>Once we know it works, can’t we go further?</p>
 <p>With a couple of extra caches and code refactoring, we could end up with something like this:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="c1"># ...</span>
 
-<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
 
 <span class="c1"># ...</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="c1"># ...</span>
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">]:</span>
 
     <span class="k">if</span> <span class="n">instant</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
@@ -550,22 +557,22 @@
 
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_fragment</span><span class="p">(</span><span class="n">fragment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
 
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">instant_1</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">instant_1</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">((</span><span class="n">instant</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">instant_2</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">instant_2</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">((</span><span class="n">instant</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">instant</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
 
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">instant_3</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">instant_3</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">periods</span><span class="o">.</span><span class="n">Instant</span><span class="p">(</span><span class="n">instant</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -604,7 +611,7 @@
 </pre></div>
 </div>
 <p>Let’s look at that code closer:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_get_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instant</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">value_at_instant</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_list</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">value_at_instant</span><span class="o">.</span><span class="n">instant_str</span> <span class="o">&lt;=</span> <span class="n">instant</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value_at_instant</span><span class="o">.</span><span class="n">value</span>
@@ -721,8 +728,11 @@ class Parameter(AtInstantLike):
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

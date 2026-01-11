@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../../../_static/jquery.min.js"></script>
+  <script src="../../../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>openfisca_core.simulations.simulation &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=41f151b0" />
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/openfisca_core/simulations/simulation.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -112,23 +119,23 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.simulations.simulation</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTuple</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.types</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">CorePopulation</span> <span class="k">as</span> <span class="n">Population</span><span class="p">,</span>
     <span class="n">TaxBenefitSystem</span><span class="p">,</span>
     <span class="n">Variable</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">tempfile</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">commons</span><span class="p">,</span>
     <span class="n">errors</span><span class="p">,</span>
     <span class="n">indexed_enums</span><span class="p">,</span>
@@ -140,14 +147,14 @@
 
 <div class="viewcode-block" id="Simulation">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation">[docs]</a>
-<span class="k">class</span> <span class="nc">Simulation</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Simulation</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a simulation, and handles the calculation logic.&quot;&quot;&quot;</span>
 
     <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span>
     <span class="n">populations</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Population</span><span class="p">]</span>
     <span class="n">invalidated_caches</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">Cache</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span>
         <span class="n">populations</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Population</span><span class="p">],</span>
@@ -175,30 +182,31 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">max_spiral_loops</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">memory_config</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_computation_period</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">trace</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trace</span>
 
     <span class="nd">@trace</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">trace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_trace</span> <span class="o">=</span> <span class="n">trace</span>
         <span class="k">if</span> <span class="n">trace</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">tracers</span><span class="o">.</span><span class="n">FullTracer</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span> <span class="o">=</span> <span class="n">tracers</span><span class="o">.</span><span class="n">SimpleTracer</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">link_to_entities_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">link_to_entities_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">entity_instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="n">entity_instance</span><span class="o">.</span><span class="n">simulation</span> <span class="o">=</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">create_shortcuts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_shortcuts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">population</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="c1"># create shortcut simulation.person and simulation.household (for instance)</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">data_storage_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">data_storage_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Temporary folder used to store intermediate calculation data in case the memory is saturated.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_data_storage_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;openfisca_&quot;</span><span class="p">)</span>
@@ -219,7 +227,7 @@
 
 <div class="viewcode-block" id="Simulation.calculate">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.calculate">[docs]</a>
-    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate ``variable_name`` for ``period``.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
             <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
@@ -236,7 +244,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">purge_cache_of_invalid_values</span><span class="p">()</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the variable ``variable_name`` for the period ``period``, using the variable formula if it exists.</span>
 
 <span class="sd">        :returns: A numpy array containing the result of the calculation</span>
@@ -263,6 +271,13 @@
         <span class="n">array</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># First, try to run a formula</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_computation_period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_computation_period</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">start_computation_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">start_computation_period</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="n">period</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_computation_period</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">holder</span><span class="o">.</span><span class="n">default_array</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_cycle</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
             <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_formula</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
@@ -279,7 +294,7 @@
 
         <span class="k">return</span> <span class="n">array</span>
 
-    <span class="k">def</span> <span class="nf">purge_cache_of_invalid_values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">purge_cache_of_invalid_values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># We wait for the end of calculate(), signalled by an empty stack, before purging the cache</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span><span class="p">:</span>
             <span class="k">return</span>
@@ -288,7 +303,7 @@
             <span class="n">holder</span><span class="o">.</span><span class="n">delete_arrays</span><span class="p">(</span><span class="n">_period</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">invalidated_caches</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">calculate_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span> <span class="o">|</span> <span class="kc">None</span>
 
         <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span>
@@ -333,7 +348,7 @@
             <span class="k">for</span> <span class="n">sub_period</span> <span class="ow">in</span> <span class="n">period</span><span class="o">.</span><span class="n">get_subperiods</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span><span class="p">)</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">calculate_divide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_divide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span> <span class="o">|</span> <span class="kc">None</span>
 
         <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span>
@@ -420,7 +435,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">calculation_period</span><span class="p">)</span> <span class="o">/</span> <span class="n">denominator</span>
 
-    <span class="k">def</span> <span class="nf">calculate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the value of a variable using the ``calculate_output`` attribute of the variable.&quot;&quot;&quot;</span>
         <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span> <span class="o">|</span> <span class="kc">None</span>
 
@@ -437,13 +452,13 @@
 
         <span class="k">return</span> <span class="n">variable</span><span class="o">.</span><span class="n">calculate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">trace_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula_period</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">trace_parameters_at_instant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formula_period</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">tracers</span><span class="o">.</span><span class="n">TracingParameterNodeAtInstant</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_parameters_at_instant</span><span class="p">(</span><span class="n">formula_period</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_run_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_run_formula</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Find the ``variable`` formula for the given ``period`` if it exists, and apply it to ``population``.&quot;&quot;&quot;</span>
         <span class="n">formula</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">get_formula</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">formula</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -461,7 +476,7 @@
 
         <span class="k">return</span> <span class="n">array</span>
 
-    <span class="k">def</span> <span class="nf">_check_period_consistency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_period_consistency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check that a period matches the variable definition_period.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">==</span> <span class="n">periods</span><span class="o">.</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">:</span>
             <span class="k">return</span>  <span class="c1"># For variables which values are constant in time, all periods are accepted</span>
@@ -499,7 +514,7 @@
                 <span class="n">msg</span><span class="p">,</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_cast_formula_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_cast_formula_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">indexed_enums</span><span class="o">.</span><span class="n">Enum</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
             <span class="n">value</span><span class="p">,</span>
             <span class="n">indexed_enums</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">,</span>
@@ -517,7 +532,7 @@
 
     <span class="c1"># ----- Handle circular dependencies in a calculation ----- #</span>
 
-    <span class="k">def</span> <span class="nf">_check_for_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_for_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Raise an exception in the case of a circular definition, where evaluating a variable for</span>
 <span class="sd">        a given period loops around to evaluating the same variable/period pair. Also guards, as</span>
 <span class="sd">        a heuristic, against &quot;quasicircles&quot;, where the evaluation of a variable at a period involves</span>
@@ -540,10 +555,10 @@
             <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Quasicircular definition detected on formula </span><span class="si">{</span><span class="n">variable</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">period</span><span class="si">}</span><span class="s2"> involving </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tracer</span><span class="o">.</span><span class="n">stack</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">SpiralError</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">invalidate_cache_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">invalidate_cache_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">invalidated_caches</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Cache</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">invalidate_spiral_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">invalidate_spiral_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Visit the stack, from the bottom (most recent) up; we know that we&#39;ll find</span>
         <span class="c1"># the variable implicated in the spiral (max_spiral_loops+1) times; we keep the</span>
         <span class="c1"># intermediate values computed (to avoid impacting performance) but we mark them</span>
@@ -560,8 +575,8 @@
 
 <div class="viewcode-block" id="Simulation.get_array">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_array">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the value of ``variable_name`` for ``period``, if this value is alreay in the cache (if it has been set as an input or previously calculated).</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the value of ``variable_name`` for ``period``, if this value is already in the cache (if it has been set as an input or previously calculated).</span>
 
 <span class="sd">        Unlike :meth:`.calculate`, this method *does not* trigger calculations and *does not* use any formula.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -572,14 +587,14 @@
 
 <div class="viewcode-block" id="Simulation.get_holder">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_holder">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_holder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_holder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the holder associated with the variable.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable_population</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Simulation.get_memory_usage">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.get_memory_usage">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get data about the virtual memory usage of the simulation.&quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;total_nb_bytes&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;by_variable&quot;</span><span class="p">:</span> <span class="p">{}}</span>
         <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
@@ -591,7 +606,7 @@
 
     <span class="c1"># ----- Misc ----- #</span>
 
-    <span class="k">def</span> <span class="nf">delete_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a variable&#39;s value for a given period.</span>
 
 <span class="sd">        :param variable: the variable to be set</span>
@@ -619,7 +634,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span><span class="o">.</span><span class="n">delete_arrays</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_known_periods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_known_periods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a list variable&#39;s known period, i.e. the periods where a value has been initialized and.</span>
 
 <span class="sd">        :param variable: the variable to be set</span>
@@ -635,12 +650,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span><span class="o">.</span><span class="n">get_known_periods</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a variable&#39;s value for a given period.</span>
 
 <span class="sd">        :param variable: the variable to be set</span>
 <span class="sd">        :param value: the input value for the variable</span>
-<span class="sd">        :param period: the period for which the value is setted</span>
+<span class="sd">        :param period: the period for which the value is set</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">        &gt;&gt;&gt; from openfisca_country_template import CountryTaxBenefitSystem</span>
@@ -667,7 +682,7 @@
             <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_holder</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_variable_population</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Population</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_variable_population</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Population</span><span class="p">:</span>
         <span class="n">variable</span><span class="p">:</span> <span class="n">Variable</span> <span class="o">|</span> <span class="kc">None</span>
 
         <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span>
@@ -680,7 +695,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="p">[</span><span class="n">variable</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">get_population</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plural</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Population</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_population</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plural</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Population</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">next</span><span class="p">(</span>
             <span class="p">(</span>
                 <span class="n">population</span>
@@ -690,20 +705,20 @@
             <span class="kc">None</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_entity</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_entity</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">plural</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Population</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">population</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_population</span><span class="p">(</span><span class="n">plural</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">population</span> <span class="ow">and</span> <span class="n">population</span><span class="o">.</span><span class="n">entity</span>
 
-    <span class="k">def</span> <span class="nf">describe_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="n">population</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">:</span> <span class="n">population</span><span class="o">.</span><span class="n">ids</span>
             <span class="k">for</span> <span class="n">population</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
         <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Copy the simulation just enough to be able to run the copy without modifying the original simulation.&quot;&quot;&quot;</span>
         <span class="n">new</span> <span class="o">=</span> <span class="n">commons</span><span class="o">.</span><span class="n">empty_clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">new_dict</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="vm">__dict__</span>
@@ -732,7 +747,7 @@
 
 
 
-<span class="k">class</span> <span class="nc">Cache</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Cache</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">period</span><span class="p">:</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span>
 </pre></div>
@@ -765,8 +780,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

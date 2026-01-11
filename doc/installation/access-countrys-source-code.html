@@ -5,7 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../_static/jquery.min.js"></script>
+  <script src="../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -19,11 +24,12 @@
     <title>Access a country’s source code &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=41f151b0" />
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/installation/access-countrys-source-code.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Install with Docker" href="install-with-docker.html" />
@@ -108,6 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -143,7 +150,7 @@
 <section id="testing-changes-on-ready-to-use-situations">
 <h2>Testing changes on “ready to use” situations<a class="headerlink" href="#testing-changes-on-ready-to-use-situations" title="Link to this heading">¶</a></h2>
 <p>Generally when making changes to legislation, there is a need to test the changes with a situation that works with the country’s tax and benefit system.</p>
-<p>Sometimes, these situations can be quite complicated to model. Instead of rewriting them everytime, they can be packaged in different formats:</p>
+<p>Sometimes, these situations can be quite complicated to model. Instead of rewriting them every time, they can be packaged in different formats:</p>
 <ul class="simple">
 <li><p>As <a class="reference internal" href="../coding-the-legislation/writing_yaml_tests.html"><span class="std std-doc">YAML tests</span></a> when the expected output result should be registered.</p></li>
 <li><p>As <a class="reference internal" href="../openfisca-web-api/input-output-data.html#describing-the-situation"><span class="std std-ref">JSON requests</span></a> when the output isn’t being tested. Refer to <a class="reference external" href="https://github.com/openfisca/country-template/tree/main/openfisca_country_template/situation_examples">these examples</a> in the <code class="docutils literal notranslate"><span class="pre">OpenFisca-Country-Template</span></code> repository. These can be adapted as requests to be sent to the OpenFisca web API.</p></li>
@@ -187,8 +194,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

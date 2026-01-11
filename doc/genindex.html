@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="_static/jquery.min.js"></script>
+  <script src="_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>Index &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=41f151b0" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/genindex.html" />
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
   
@@ -87,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -142,7 +149,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.__array_finalize__">__array_finalize__() (openfisca_core.indexed_enums.EnumArray method)</a>
 </li>
-      <li><a href="openfisca-python-api/populations.html#openfisca_core.populations.Population.__call__">__call__() (openfisca_core.populations.Population method)</a>
+      <li><a href="openfisca-python-api/populations.html#openfisca_core.populations.CorePopulation.__call__">__call__() (openfisca_core.populations.CorePopulation method)</a>
 
       <ul>
         <li><a href="openfisca-python-api/types.html#openfisca_core.types.Formula.__call__">(openfisca_core.types.Formula method)</a>
@@ -150,18 +157,18 @@
         <li><a href="openfisca-python-api/types.html#openfisca_core.types.Params.__call__">(openfisca_core.types.Params method)</a>
 </li>
       </ul></li>
-      <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum.__eq__">__eq__() (openfisca_core.indexed_enums.Enum method)</a>
+      <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.__eq__">__eq__() (openfisca_core.indexed_enums.EnumArray method)</a>
 
       <ul>
-        <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.__eq__">(openfisca_core.indexed_enums.EnumArray method)</a>
+        <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumType.__eq__">(openfisca_core.indexed_enums.EnumType method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum.__ne__">__ne__() (openfisca_core.indexed_enums.Enum method)</a>
+      <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.__ne__">__ne__() (openfisca_core.indexed_enums.EnumArray method)</a>
 
       <ul>
-        <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.__ne__">(openfisca_core.indexed_enums.EnumArray method)</a>
+        <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumType.__ne__">(openfisca_core.indexed_enums.EnumType method)</a>
 </li>
       </ul></li>
       <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum.__new__">__new__() (openfisca_core.indexed_enums.Enum method)</a>
@@ -192,9 +199,11 @@
 </li>
       <li><a href="openfisca-python-api/populations.html#openfisca_core.populations.GroupPopulation.all">all() (openfisca_core.populations.GroupPopulation method)</a>
 </li>
+      <li><a href="openfisca-python-api/populations.html#openfisca_core.populations.GroupPopulation.any">any() (openfisca_core.populations.GroupPopulation method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="openfisca-python-api/populations.html#openfisca_core.populations.GroupPopulation.any">any() (openfisca_core.populations.GroupPopulation method)</a>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.append_child">append_child() (openfisca_core.tracers.TraceNode method)</a>
 </li>
       <li><a href="openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.apply_reform">apply_reform() (openfisca_core.taxbenefitsystems.TaxBenefitSystem method)</a>
 </li>
@@ -216,6 +225,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="openfisca-python-api/variables.html#openfisca_core.variables.Variable.baseline_variable">baseline_variable (openfisca_core.variables.Variable attribute)</a>
 </li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.BoolArray">BoolArray (in module openfisca_core.types)</a>
+</li>
       <li><a href="openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.build_default_simulation">build_default_simulation() (openfisca_core.simulations.SimulationBuilder static method)</a>
 </li>
       <li><a href="openfisca-python-api/entities.html#openfisca_core.entities.build_entity">build_entity() (in module openfisca_core.entities)</a>
@@ -228,6 +239,8 @@
 </li>
       <li><a href="openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.build_from_variables">build_from_variables() (openfisca_core.simulations.SimulationBuilder method)</a>
 </li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.BytesArray">BytesArray (in module openfisca_core.types)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -235,6 +248,8 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation.calculate">calculate() (openfisca_core.simulations.Simulation method)</a>
+</li>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.calculation_time">calculation_time() (openfisca_core.tracers.TraceNode method)</a>
 </li>
       <li><a href="openfisca-python-api/parameters.html#openfisca_core.parameters.VectorialParameterNodeAtInstant.check_node_vectorisable">check_node_vectorisable() (openfisca_core.parameters.VectorialParameterNodeAtInstant static method)</a>
 </li>
@@ -260,11 +275,13 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.children">children (openfisca_core.tracers.TraceNode attribute)</a>
+</li>
       <li><a href="openfisca-python-api/holder.html#openfisca_core.holders.Holder.clone">clone() (openfisca_core.holders.Holder method)</a>
 </li>
       <li><a href="openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.YamlFile.collect">collect() (openfisca_core.tools.test_runner.YamlFile method)</a>
 </li>
-      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.ComputationLog">ComputationLog (class in openfisca_core.tracers)</a>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.ComputationLog">ComputationLog (class in openfisca_core.types)</a>
 </li>
       <li><a href="openfisca-python-api/commons.html#openfisca_core.commons.concat">concat() (in module openfisca_core.commons)</a>
 </li>
@@ -278,8 +295,12 @@
         <li><a href="openfisca-python-api/types.html#openfisca_core.types.CoreEntity">(class in openfisca_core.types)</a>
 </li>
       </ul></li>
-      <li><a href="openfisca-python-api/types.html#openfisca_core.types.CorePopulation">CorePopulation (class in openfisca_core.types)</a>
+      <li><a href="openfisca-python-api/populations.html#openfisca_core.populations.CorePopulation">CorePopulation (class in openfisca_core.populations)</a>
+
+      <ul>
+        <li><a href="openfisca-python-api/types.html#openfisca_core.types.CorePopulation">(class in openfisca_core.types)</a>
 </li>
+      </ul></li>
       <li><a href="openfisca-python-api/errors.html#openfisca_core.errors.CycleError">CycleError (class in openfisca_core.errors)</a>
 </li>
   </ul></td>
@@ -288,6 +309,8 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.DateArray">DateArray (in module openfisca_core.types)</a>
+</li>
       <li><a href="openfisca-python-api/types.html#openfisca_core.types.DateUnit">DateUnit (class in openfisca_core.types)</a>
 </li>
       <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.decode">decode() (openfisca_core.indexed_enums.EnumArray method)</a>
@@ -358,8 +381,12 @@
 </li>
       <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum.encode">encode() (openfisca_core.indexed_enums.Enum class method)</a>
 </li>
-      <li><a href="openfisca-python-api/variables.html#openfisca_core.variables.Variable.end">end (openfisca_core.variables.Variable attribute)</a>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.end">end (openfisca_core.tracers.TraceNode attribute)</a>
+
+      <ul>
+        <li><a href="openfisca-python-api/variables.html#openfisca_core.variables.Variable.end">(openfisca_core.variables.Variable attribute)</a>
 </li>
+      </ul></li>
       <li><a href="openfisca-python-api/entities.html#openfisca_core.entities.Entity">Entity (class in openfisca_core.entities)</a>
 </li>
       <li><a href="openfisca-python-api/entities.html#openfisca_core.entities.Role.entity">entity (openfisca_core.entities.Role attribute)</a>
@@ -412,15 +439,23 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="openfisca-python-api/entities.html#openfisca_core.entities.find_role">find_role() (in module openfisca_core.entities)</a>
 </li>
-      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.FlatTrace">FlatTrace (class in openfisca_core.tracers)</a>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.FlatNodeMap">FlatNodeMap (in module openfisca_core.types)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.FlatTrace">FlatTrace (class in openfisca_core.types)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.FlatTraceMap">FlatTraceMap (class in openfisca_core.types)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.FloatArray">FloatArray (in module openfisca_core.types)</a>
+</li>
       <li><a href="openfisca-python-api/types.html#openfisca_core.types.Formula">Formula (class in openfisca_core.types)</a>
+</li>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.formula_time">formula_time() (openfisca_core.tracers.TraceNode method)</a>
 </li>
       <li><a href="openfisca-python-api/variables.html#openfisca_core.variables.Variable.formulas">formulas (openfisca_core.variables.Variable attribute)</a>
 </li>
-      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.FullTracer">FullTracer (class in openfisca_core.tracers)</a>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.FullTracer">FullTracer (class in openfisca_core.types)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -472,8 +507,6 @@
 </li>
       <li><a href="openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.get_parameters_at_instant">get_parameters_at_instant() (openfisca_core.taxbenefitsystems.TaxBenefitSystem method)</a>
 </li>
-      <li><a href="openfisca-python-api/populations.html#openfisca_core.populations.Population.get_rank">get_rank() (openfisca_core.populations.Population method)</a>
-</li>
       <li><a href="openfisca-python-api/entities.html#openfisca_core.entities.CoreEntity.get_variable">get_variable() (openfisca_core.entities.CoreEntity method)</a>
 
       <ul>
@@ -504,8 +537,6 @@
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="openfisca-python-api/populations.html#openfisca_core.populations.Population.has_role">has_role() (openfisca_core.populations.Population method)</a>
-</li>
       <li><a href="openfisca-python-api/simulations.html#openfisca_core.simulations.helpers.has_unexpected_entities">has_unexpected_entities() (in module openfisca_core.simulations.helpers)</a>
 </li>
   </ul></td>
@@ -526,6 +557,8 @@
 </li>
       <li><a href="openfisca-python-api/types.html#openfisca_core.types.Indexable">Indexable (class in openfisca_core.types)</a>
 </li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.IndexArray">IndexArray (in module openfisca_core.types)</a>
+</li>
       <li><a href="openfisca-python-api/data_storage.html#openfisca_core.data_storage.InMemoryStorage">InMemoryStorage (class in openfisca_core.data_storage)</a>
 </li>
       <li><a href="openfisca-python-api/periods.html#openfisca_core.periods.Instant">Instant (class in openfisca_core.periods)</a>
@@ -538,10 +571,14 @@
 </li>
       <li><a href="openfisca-python-api/periods.html#openfisca_core.periods.helpers.instant_date">instant_date() (in module openfisca_core.periods.helpers)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.InstantInt">InstantInt (class in openfisca_core.types)</a>
+</li>
       <li><a href="openfisca-python-api/types.html#openfisca_core.types.InstantStr">InstantStr (class in openfisca_core.types)</a>
 </li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.IntArray">IntArray (in module openfisca_core.types)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="openfisca-python-api/data_storage.html#openfisca_core.data_storage.InMemoryStorage.is_eternal">is_eternal (openfisca_core.data_storage.InMemoryStorage attribute)</a>
 
       <ul>
@@ -560,6 +597,14 @@
         <li><a href="openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity.is_person">(openfisca_core.entities.GroupEntity attribute)</a>
 </li>
       </ul></li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.iso_calendar">iso_calendar (in module openfisca_core.types)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.iso_format">iso_format (in module openfisca_core.types)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.ISOCalendarStr">ISOCalendarStr (class in openfisca_core.types)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.ISOFormatStr">ISOFormatStr (class in openfisca_core.types)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -630,6 +675,8 @@
 </li>
       <li><a href="openfisca-python-api/variables.html#openfisca_core.variables.Variable.max_length">max_length (openfisca_core.variables.Variable attribute)</a>
 </li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.MemoryUsage">MemoryUsage (class in openfisca_core.types)</a>
+</li>
       <li><a href="openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterNode.merge">merge() (openfisca_core.parameters.ParameterNode method)</a>
 </li>
       <li><a href="openfisca-python-api/populations.html#openfisca_core.populations.GroupPopulation.min">min() (openfisca_core.populations.GroupPopulation method)</a>
@@ -668,8 +715,6 @@
 </li>
         <li><a href="openfisca-python-api/populations.html#module-openfisca_core.populations">openfisca_core.populations</a>
 </li>
-        <li><a href="openfisca-python-api/populations.html#module-openfisca_core.populations.config">openfisca_core.populations.config</a>
-</li>
         <li><a href="openfisca-python-api/reforms.html#module-openfisca_core.reforms">openfisca_core.reforms</a>
 </li>
         <li><a href="openfisca-python-api/simulation_generator.html#module-openfisca_core.scripts.simulation_generator">openfisca_core.scripts.simulation_generator</a>
@@ -702,6 +747,8 @@
       <li><a href="openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.YamlFile.name">name (openfisca_core.tools.test_runner.YamlFile attribute)</a>
 
       <ul>
+        <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.name">(openfisca_core.tracers.TraceNode attribute)</a>
+</li>
         <li><a href="openfisca-python-api/variables.html#openfisca_core.variables.Variable.name">(openfisca_core.variables.Variable attribute)</a>
 </li>
       </ul></li>
@@ -713,12 +760,16 @@
 </li>
       <li><a href="openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.neutralize_variable">neutralize_variable() (openfisca_core.taxbenefitsystems.TaxBenefitSystem method)</a>
 </li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.NodeKey">NodeKey (class in openfisca_core.types)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.ObjArray">ObjArray (in module openfisca_core.types)</a>
+</li>
       <li><a href="openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage">OnDiskStorage (class in openfisca_core.data_storage)</a>
 </li>
       <li>
@@ -805,6 +856,8 @@
         <li><a href="openfisca-python-api/periods.html#module-openfisca_core.periods.config">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     openfisca_core.periods.helpers
 
@@ -812,20 +865,11 @@
         <li><a href="openfisca-python-api/periods.html#module-openfisca_core.periods.helpers">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     openfisca_core.populations
 
       <ul>
         <li><a href="openfisca-python-api/populations.html#module-openfisca_core.populations">module</a>
-</li>
-      </ul></li>
-      <li>
-    openfisca_core.populations.config
-
-      <ul>
-        <li><a href="openfisca-python-api/populations.html#module-openfisca_core.populations.config">module</a>
 </li>
       </ul></li>
       <li>
@@ -918,19 +962,29 @@
       <li><a href="openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterAtInstant">ParameterAtInstant (class in openfisca_core.parameters)</a>
 </li>
       <li><a href="openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterNode">ParameterNode (class in openfisca_core.parameters)</a>
+
+      <ul>
+        <li><a href="openfisca-python-api/types.html#openfisca_core.types.ParameterNode">(in module openfisca_core.types)</a>
 </li>
+      </ul></li>
       <li><a href="openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterNodeAtInstant">ParameterNodeAtInstant (class in openfisca_core.parameters)</a>
 
       <ul>
         <li><a href="openfisca-python-api/types.html#openfisca_core.types.ParameterNodeAtInstant">(class in openfisca_core.types)</a>
 </li>
       </ul></li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.ParameterNodeChild">ParameterNodeChild (in module openfisca_core.types)</a>
+</li>
       <li><a href="openfisca-python-api/errors.html#openfisca_core.errors.ParameterNotFoundError">ParameterNotFoundError (class in openfisca_core.errors)</a>
 </li>
       <li><a href="openfisca-python-api/errors.html#openfisca_core.errors.ParameterParsingError">ParameterParsingError (class in openfisca_core.errors)</a>
 </li>
       <li><a href="openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.parameters">parameters (openfisca_core.taxbenefitsystems.TaxBenefitSystem attribute)</a>
+
+      <ul>
+        <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.parameters">(openfisca_core.tracers.TraceNode attribute)</a>
 </li>
+      </ul></li>
       <li><a href="openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterScale">ParameterScale (class in openfisca_core.parameters)</a>
 </li>
       <li><a href="openfisca-python-api/parameters.html#openfisca_core.parameters.ParameterScaleBracket">ParameterScaleBracket (class in openfisca_core.parameters)</a>
@@ -938,18 +992,28 @@
       <li><a href="openfisca-python-api/types.html#openfisca_core.types.Params">Params (class in openfisca_core.types)</a>
 </li>
       <li><a href="openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.YamlFile.parent">parent (openfisca_core.tools.test_runner.YamlFile attribute)</a>
+
+      <ul>
+        <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.parent">(openfisca_core.tracers.TraceNode attribute)</a>
 </li>
+      </ul></li>
       <li><a href="openfisca-python-api/variables.html#openfisca_core.variables.Variable.parse_formula_name">parse_formula_name() (openfisca_core.variables.Variable method)</a>
-</li>
-      <li><a href="openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.YamlFile.path">path (openfisca_core.tools.test_runner.YamlFile attribute)</a>
-</li>
-      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.PerformanceLog">PerformanceLog (class in openfisca_core.tracers)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.YamlFile.path">path (openfisca_core.tools.test_runner.YamlFile attribute)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.PerformanceLog">PerformanceLog (class in openfisca_core.types)</a>
+</li>
       <li><a href="openfisca-python-api/types.html#openfisca_core.types.Period">Period (class in openfisca_core.types)</a>
 </li>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.period">period (openfisca_core.tracers.TraceNode attribute)</a>
+</li>
       <li><a href="openfisca-python-api/periods.html#openfisca_core.periods.helpers.period">period() (in module openfisca_core.periods.helpers)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.PeriodInt">PeriodInt (class in openfisca_core.types)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.PeriodLike">PeriodLike (in module openfisca_core.types)</a>
 </li>
       <li><a href="openfisca-python-api/errors.html#openfisca_core.errors.PeriodMismatchError">PeriodMismatchError (class in openfisca_core.errors)</a>
 </li>
@@ -965,8 +1029,6 @@
         <li><a href="openfisca-python-api/entities.html#openfisca_core.entities.Role.plural">(openfisca_core.entities.Role property)</a>
 </li>
       </ul></li>
-      <li><a href="openfisca-python-api/populations.html#openfisca_core.populations.Population">Population (class in openfisca_core.populations)</a>
-</li>
       <li><a href="openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.possible_values">possible_values (openfisca_core.indexed_enums.EnumArray attribute)</a>
 
       <ul>
@@ -974,8 +1036,6 @@
 </li>
       </ul></li>
       <li><a href="openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage.preserve_storage_dir">preserve_storage_dir (openfisca_core.data_storage.OnDiskStorage attribute)</a>
-</li>
-      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.ComputationLog.print_log">print_log() (openfisca_core.tracers.ComputationLog method)</a>
 </li>
       <li><a href="openfisca-python-api/data_storage.html#openfisca_core.data_storage.InMemoryStorage.put">put() (openfisca_core.data_storage.InMemoryStorage method)</a>
 
@@ -991,16 +1051,24 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="openfisca-python-api/simulation_generator.html#openfisca_core.scripts.simulation_generator.randomly_init_variable">randomly_init_variable() (in module openfisca_core.scripts.simulation_generator)</a>
 </li>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.SimpleTracer.record_calculation_end">record_calculation_end() (openfisca_core.tracers.SimpleTracer method)</a>
+</li>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.SimpleTracer.record_calculation_result">record_calculation_result() (openfisca_core.tracers.SimpleTracer method)</a>
+</li>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.SimpleTracer.record_calculation_start">record_calculation_start() (openfisca_core.tracers.SimpleTracer method)</a>
+</li>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.SimpleTracer.record_parameter_access">record_parameter_access() (openfisca_core.tracers.SimpleTracer method)</a>
+</li>
       <li><a href="openfisca-python-api/variables.html#openfisca_core.variables.Variable.reference">reference (openfisca_core.variables.Variable attribute)</a>
 </li>
       <li><a href="openfisca-python-api/reforms.html#openfisca_core.reforms.Reform">Reform (class in openfisca_core.reforms)</a>
 </li>
       <li><a href="openfisca-python-api/tax-benefit-system.html#openfisca_core.taxbenefitsystems.TaxBenefitSystem.replace_variable">replace_variable() (openfisca_core.taxbenefitsystems.TaxBenefitSystem method)</a>
 </li>
-      <li><a href="openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage.restore">restore() (openfisca_core.data_storage.OnDiskStorage method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage.restore">restore() (openfisca_core.data_storage.OnDiskStorage method)</a>
+</li>
       <li><a href="openfisca-python-api/entities.html#openfisca_core.entities.Role">Role (class in openfisca_core.entities)</a>
 
       <ul>
@@ -1013,6 +1081,8 @@
 </li>
       <li><a href="openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity.roles">roles (openfisca_core.entities.GroupEntity attribute)</a>
 </li>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.round">round() (openfisca_core.tracers.TraceNode static method)</a>
+</li>
       <li><a href="openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.run_tests">run_tests() (in module openfisca_core.tools.test_runner)</a>
 </li>
   </ul></td>
@@ -1021,6 +1091,12 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.SeqInt">SeqInt (class in openfisca_core.types)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.SerializedNodeMap">SerializedNodeMap (in module openfisca_core.types)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.SerializedTraceMap">SerializedTraceMap (class in openfisca_core.types)</a>
+</li>
       <li><a href="openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.YamlFile.session">session (openfisca_core.tools.test_runner.YamlFile attribute)</a>
 </li>
       <li><a href="openfisca-python-api/variables.html#openfisca_core.variables.Variable.set_input">set_input (openfisca_core.variables.Variable attribute)</a>
@@ -1039,8 +1115,16 @@
         <li><a href="openfisca-python-api/entities.html#openfisca_core.entities.GroupEntity.set_tax_benefit_system">(openfisca_core.entities.GroupEntity method)</a>
 </li>
       </ul></li>
-      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.SimpleTracer">SimpleTracer (class in openfisca_core.tracers)</a>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.SimpleStack">SimpleStack (in module openfisca_core.types)</a>
 </li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.SimpleTraceMap">SimpleTraceMap (class in openfisca_core.types)</a>
+</li>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.SimpleTracer">SimpleTracer (class in openfisca_core.tracers)</a>
+
+      <ul>
+        <li><a href="openfisca-python-api/types.html#openfisca_core.types.SimpleTracer">(class in openfisca_core.types)</a>
+</li>
+      </ul></li>
       <li><a href="openfisca-python-api/simulations.html#openfisca_core.simulations.Simulation">Simulation (class in openfisca_core.simulations)</a>
 
       <ul>
@@ -1058,12 +1142,22 @@
 </li>
       </ul></li>
       <li><a href="openfisca-python-api/types.html#openfisca_core.types.SinglePopulation">SinglePopulation (class in openfisca_core.types)</a>
+
+      <ul>
+        <li><a href="openfisca-python-api/populations.html#openfisca_core.populations.SinglePopulation">(in module openfisca_core.populations)</a>
 </li>
+      </ul></li>
       <li><a href="openfisca-python-api/errors.html#openfisca_core.errors.SituationParsingError">SituationParsingError (class in openfisca_core.errors)</a>
 </li>
       <li><a href="openfisca-python-api/errors.html#openfisca_core.errors.SpiralError">SpiralError (class in openfisca_core.errors)</a>
 </li>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.SimpleTracer.stack">stack (openfisca_core.tracers.SimpleTracer property)</a>
+</li>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.start">start (openfisca_core.tracers.TraceNode attribute)</a>
+</li>
       <li><a href="openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage.storage_dir">storage_dir (openfisca_core.data_storage.OnDiskStorage attribute)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.StrArray">StrArray (in module openfisca_core.types)</a>
 </li>
       <li><a href="openfisca-python-api/commons.html#openfisca_core.commons.stringify_array">stringify_array() (in module openfisca_core.commons)</a>
 </li>
@@ -1085,14 +1179,18 @@
         <li><a href="openfisca-python-api/types.html#openfisca_core.types.TaxBenefitSystem">(class in openfisca_core.types)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.Test">Test (class in openfisca_core.tools.test_runner)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.Time">Time (in module openfisca_core.types)</a>
+</li>
       <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode">TraceNode (class in openfisca_core.tracers)</a>
+
+      <ul>
+        <li><a href="openfisca-python-api/types.html#openfisca_core.types.TraceNode">(class in openfisca_core.types)</a>
 </li>
-      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TracingParameterNodeAtInstant">TracingParameterNodeAtInstant (class in openfisca_core.tracers)</a>
-</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -1117,9 +1215,13 @@
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.value">value (openfisca_core.tracers.TraceNode attribute)</a>
+</li>
       <li><a href="openfisca-python-api/variables.html#openfisca_core.variables.Variable.value_type">value_type (openfisca_core.variables.Variable attribute)</a>
 </li>
       <li><a href="openfisca-python-api/parameters.html#openfisca_core.parameters.Parameter.values_list">values_list (openfisca_core.parameters.Parameter attribute)</a>
+</li>
+      <li><a href="openfisca-python-api/types.html#openfisca_core.types.VarArray">VarArray (in module openfisca_core.types)</a>
 </li>
       <li><a href="openfisca-python-api/types.html#openfisca_core.types.Variable">Variable (class in openfisca_core.types)</a>
 
@@ -1136,7 +1238,11 @@
       <li><a href="openfisca-python-api/errors.html#openfisca_core.errors.VariableNotFoundError">VariableNotFoundError (class in openfisca_core.errors)</a>
 </li>
       <li><a href="openfisca-python-api/parameters.html#openfisca_core.parameters.VectorialParameterNodeAtInstant">VectorialParameterNodeAtInstant (class in openfisca_core.parameters)</a>
+
+      <ul>
+        <li><a href="openfisca-python-api/types.html#openfisca_core.types.VectorialParameterNodeAtInstant">(class in openfisca_core.types)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -1177,8 +1283,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

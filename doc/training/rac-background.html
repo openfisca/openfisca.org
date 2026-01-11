@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../_static/jquery.min.js"></script>
+  <script src="../_static/lucide/lucide.min.js"></script>
+
+  
+  <link rel="stylesheet" href="../_static/reveal/reveal.css">
+  <link rel="stylesheet" href="../_static/css/components/presentation.css">
+  <link rel="stylesheet" href="../_static/reveal/theme/openfisca.css" id="theme">
+  
+
+  
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>RaC Background &#8212; OpenFisca  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=41f151b0" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/training/rac-background.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Getting started" href="getting-started.html" />
+    <link rel="prev" title="Kick-off" href="kickoff.html" />
+  
+   
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="getting-started.html" title="Getting started"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="kickoff.html" title="Kick-off"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><i icon-name="book"></i> Training materials</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RaC Background</a></li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><div class="sphinxsidebar-logo">
+    <a href="/">
+        <svg class="logo" viewBox="0 0 257 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.763527 104.891L0.744415 104.872L59.5103 46.106L75.7266 62.3222L33.1545 104.894L75.7233 147.463L59.5071 163.679L0.741158 104.913L0.763527 104.891Z" fill="#C42323"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M122.255 50.865C115.622 45.6901 114.267 36.1127 119.469 29.4458C124.607 22.8599 134.057 21.7898 140.68 26.7535L150.012 34.0353L166.259 17.7541L154.623 8.54467L154.614 8.55564C137.925 -4.12702 114.359 -1.47913 101.424 14.5007L100.584 15.5772C88.1288 32.1439 91.4448 55.8966 108.156 68.9351L108.158 68.9369L108.161 68.9333L110.162 70.5372C96.4602 77.9788 87.999 93.2683 90.025 109.681C91.4666 121.358 97.9197 131.193 106.962 137.296L106.961 137.296L135.367 158.906L135.357 158.918L135.36 158.92C141.992 164.095 143.347 173.672 138.146 180.339C133.007 186.925 123.557 187.995 116.935 183.032L107.602 175.75L91.3556 192.031L102.992 201.24L103 201.23C119.689 213.912 143.255 211.264 156.19 195.284L157.03 194.208C169.486 177.641 166.17 153.889 149.459 140.85L149.456 140.848L149.454 140.852L147.453 139.248C161.154 131.806 169.614 116.517 167.589 100.106C166.147 88.4274 159.693 78.5918 150.65 72.4893L150.653 72.4895L122.247 50.8791L122.257 50.8668L122.255 50.865ZM130.704 120.26C139.313 119.197 145.293 111.395 144.255 102.986C143.217 94.5768 135.519 88.4635 126.91 89.5262C118.301 90.589 112.321 98.3907 113.359 106.8C114.397 115.209 122.095 121.323 130.704 120.26Z" fill="#C42323"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M256.85 104.891L256.869 104.872L198.103 46.106L181.887 62.3222L224.459 104.894L181.89 147.463L198.106 163.679L256.872 104.913L256.85 104.891Z" fill="#C42323"/>
+        </svg>
+        <span>OpenFisca Documentation</span>
+    </a>
+</div>
+
+<div class="sphinxsidebar-search">
+    
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="sphinxsidebar-toc">
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html"><i icon-name="home"></i> Before you start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html"><i icon-name="boxes"></i> Architecture of OpenFisca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html"><i icon-name="download"></i> Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts/index.html"><i icon-name="lightbulb"></i> Key concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding-the-legislation/index.html"><i icon-name="terminal"></i> From law to code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../simulate/index.html"><i icon-name="cog"></i> Running a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html"><i icon-name="book"></i> Training materials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="kickoff.html">Kick-off</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RaC Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-code.html">Writing OpenFisca code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web-api.html">Using the web API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python-api.html">Using the Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
+</ul>
+
+</div>
+
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../summary.html">Docs</a></li>
+              
+                <li><a href="index.html"><i icon-name="book"></i> Training materials</a></li>
+              
+              <li>RaC Background</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <section id="rac-background">
+<h1>RaC Background<a class="headerlink" href="#rac-background" title="Link to this heading">¶</a></h1>
+<div class="present"><div class="reveal"><div class="slides">
+  <section class="has-dark-background" data-background="#240b35" data-background-image="../_static/img/openfisca-bg.svg" data-background-position="230% 50%" data-background-size="auto 120%">
+    <h2>Rules as Code Background</h2>
+    <p>
+      <small>(Rules as Code + OpenFisca) training series, session one.</small>
+    </p>
+    <p><a href="https://openfisca.org" class="logo"><img src="../_static/img/openfisca.svg" alt="OpenFisca" ></a></p>
+    <p><small class="author">Created by <a href="https://hamish.dev">Hamish Fraser</a></small></p>
+  </section>
+  <section class="has-dark-background" data-background="#240b35" data-background-image="../_static/img/openfisca-bg.svg" data-background-position="230% 50%" data-background-size="auto 120%">
+    <h2>Rules as Code</h2>
+    <blockquote>“To understand how to design rules-as-code projects it's important to understand what they are.”</blockquote>
+  </section>
+  <section>
+    <h2>Different Perspectives</h2>
+    <ol>
+    <li>Constitutional considerations</li>
+    <li>Policy development</li>
+    <li>Public service</li>
+    </ol>
+  </section>
+  <section class="has-dark-background" data-background="#240b35" data-background-image="../_static/img/openfisca-bg.svg" data-background-position="230% 50%" data-background-size="auto 120%">
+    <h2>Perspective 1</h2>
+    <p>Constitutional considerations</p>
+  </section>
+  <section>
+    <small>1. Constitutional considerations</small>
+    <h2>Separation of Powers 1/3</h2>
+    <div class="column_two">
+      <ul class="dotless">
+        <li>The Legislature <br>&nbsp;&nbsp;<small>-writes the law</small></li>
+        <li>The Executive <br>&nbsp;&nbsp;<small>-initiates &amp; implements</small></li>
+        <li>The Judiciary <br>&nbsp;&nbsp;<small>-interprets &amp; enforces</small></li>
+      </ul>
+      <p><br><br>&rArr; Separation of Powers<br><small>(Checks and balances to avoid concentration of power)</small></p>
+    </div>
+    <p>Enabled by attributes of <b>natural language</b></p>
+  </section>
+  <section>
+    <small>1. Constitutional considerations</small>
+    <h2>Separation of Powers 2/3</h2>
+    <div class="column_two">
+      <div>
+        <h4>Natural Language</h4>
+        <p>Socially agreed shared language. Words find meaning from context. ​</p><p>Written symbols gain meaning through their association to natural language. ​</p><p>A rule is applied to scenarios through interpretation</p>
+      </div>
+      <div>
+        <h4>Computer Code</h4>
+        <p>Specific instructions defining one singular interpretation by machine.​</p><p>Shares symbols with natural language; only one "meaning" to a machine.​</p><p>Requires scenarios to fit the  singular interpretation.​​</p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <small>1. Constitutional considerations</small>
+    <h2>Separation of Powers 3/3</h2>
+    <blockquote>“When law is expressed in code, the question of how the law should be interpreted is subsumed into the code itself.”​</blockquote>
+    <p><small><a href="https://hamish.dev/research/lac/part-three#para263" target="_blank">https://hamish.dev/research/lac/part-three#para263</a>​</small></p>
+    <aside class="notes">
+      Legislation which-IS-code; impacts on the separation of powers.
+    </aside>
+  </section>
+  <section>
+    <small>1. Constitutional considerations</small>
+    <h2>Rule of Law 1/3</h2>
+    <h3>Principles​</h3>
+    <p>Everyone is subject to the law​</p>
+    <p>The law should be clear, & clearly enforceable​​</p>
+    <p>There should be an independent, impartial judiciary​​​</p>
+  </section>
+  <section>
+    <small>1. Constitutional considerations</small>
+    <h2>Rule of Law 2/3</h2>
+    <blockquote>“Legislative complexity is a growing challenge across the Commonwealth statute book” <sup>1</sup>​​</blockquote>
+    <blockquote>“It undermines the rule of law” ​<sup>2</sup>.​​</blockquote>
+    <blockquote>“The Rule of Law requires that the law is simple, clear and accessible. Yet English law has in become increasingly more complex, unclear and inaccessible” <sup>3</sup>.​​</blockquote>
+    <p class="footnotes">(1) <a href="https://www.alrc.gov.au/datahub/legislative-complexity-and-law-design/measuring-legislative-complexity/" target="_blank">Measuring Legislative Complexity​</a><br>
+    (2) <a href="https://www.gov.uk/government/publications/when-laws-become-too-complex/when-laws-become-too-complex​" target="_blank">When laws become too complex</a>​<br>
+    (3) <a href="https://www.judiciary.uk/wp-content/uploads/2021/07/ENGLISH-LAW-AND-DESCENT-INTO-COMPLEXITY-1.pdf" target="_blank">ENGLISH LAW AND DESCENT INTO COMPLEXITY</a>​</p>
+  </section>
+  <section>
+    <small>1. Constitutional considerations</small>
+    <h2>Rule of Law 3/3</h2>
+    <p>Complexity is not the issue; humans are complex​​</p>
+    <p>The law being “clear” is the principle</p>
+    <p>Computers can make complexity clear​</p>
+  </section>
+  <section>
+    <small>1. Constitutional considerations</small>
+    <h2>Summary</h2>
+    <p class="left">RaC as interpretation of law works when:
+      <ul>
+        <li>it upholds the role of natural language (Separation of powers)​</li>
+        <li>it makes the law more clear​ (Rule of Law principles)</li>
+      </ul>
+    ​</p>
+    <p class="footnotes"><a href="https://hamish.dev/research/lac/part-four#highly-reliable-interpretations-are-valuable" target="_blank">“Highly reliable interpretations” are already valuable​</a>​</p>
+  </section>
+  <section class="has-dark-background" data-background="#240b35" data-background-image="../_static/img/openfisca-bg.svg" data-background-position="230% 50%" data-background-size="auto 120%">
+    <h2>Perspective 2</h2>
+    <p>Policy Development</p>
+  </section>
+  <section>
+    <small>2. Policy Development</small>
+    <h2>Introduction</h2>
+    <p>Structured analysis​</p>
+    <p>Digital models​​</p>
+    <p>Preserving institutional knowledge​</p>
+  </section>
+  <section>
+    <small>2. Policy Development</small>
+    <h2>Structured analysis 1/4</h2>
+    <p>The first step to explaining policy to a computer​</p>
+    <div class="column_two">
+      <div>
+        <img src="../_static/img/training/residential_rules_natural_language.png" alt="Natural language rule, example Residential areas" />
+        <p>Natural language city planning rules</p>
+      </div>
+      <div>
+        <img src="../_static/img/training/residential_rules_data.png" alt="Natural language rule, example Residential areas" />
+        <p>Analysis of planning zones​​​</p>
+      </div>
+    </div>
+    <aside class="notes">
+      The example is meant to give some insight as to what structured analysis might produce.
+    </aside>
+  </section>
+  <section>
+    <small>2. Policy Development</small>
+    <h2>Structured analysis 2/4</h2>
+    <p>Finding the structural “things”​</p>
+    <p>Object orientated type “objects”​​</p>
+    <p>“This thing is also that thing”​</p>
+    <p>Mapping hierarchy/relationships​</p>
+  </section>
+  <section>
+    <small>2. Policy Development</small>
+    <h2>Structured analysis 3/4</h2>
+    <p>Multi-Disciplinary Team (<a href="https://betterrules.nz/workshop-manual.html" target="_blank">Better Rules</a>)​</p>
+    <p>Programmers are bringing Structural Analysis​</p>
+    <p>“Not everyone’s brains are wired that way”​​</p>
+    <p>Humility critical for team dynamics​​</p>
+  </section>
+  <section>
+    <small>2. Policy Development</small>
+    <h2>Structured analysis 4/4</h2>
+    <p>Clarity is hard when mental models not shared​</p>
+    <p>Programmer role needed to: provide consumable models &amp; reduce reliance on words/labels​​​</p>
+    <p>Goal: avoid “talking past” by utilising concrete examples​​​</p>
+  </section>
+  <section class="has-dark-background" data-background="#240b35" data-background-image="../_static/img/openfisca-bg.svg" data-background-position="230% 50%" data-background-size="auto 120%">
+    <h2>Perspective 3</h2>
+    <p>Public Service</p>
+  </section>
+  <section>
+    <small>3. Public Service</small>
+    <h2>Rules as Code already exists</h2>
+    <p>Computer systems and operations​</p>
+    <p>Big P policy + Small P policy + Operations all blended</p>
+    <p>Analysis of systems is difficult​</p>
+  </section>
+  <section>
+    <small>3. Public Service</small>
+    <h2>Intentional Rules as Code</h2>
+    <p>Layered approach that clearly identifies and separates code based on authoritative source.​</p>
+    <p>Highly referenced code back to natural language rules for scrutiny and maintenance.</p>
+    <p>Open-source like approach that allows for open challenging of interpretation work​</p>
+  </section>
+  <section>
+    <small>3. Public Service</small>
+    <h2>Better Rules</h2>
+    <p>Policy development that utilises RaC.​</p>
+    <p>Test case utilisation for analysing impact.</p>
+    <p>RaC plus data for large/small scale explorations​</p>
+    <p class="footnote"><a href="https://www.digital.govt.nz/dmsdocument/95-better-rules-for-government-discovery-report/html" target="_blank">Better Rules for Government</a></p>
+  </section>
+  <section>
+    <small>3. Public Service</small>
+    <h2>Summary</h2>
+    <p>Full structural reform can “close the loop”​</p>
+    <p>Data from RaC usage/application informing policy development.</p>
+    <p>Allow for more data drive decision making​</p>
+  </section>
+</div></div></div>
+<br>
+<p><strong>Hotkeys</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">f</span></code>: full screen</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s</span></code>: speaker notes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b</span></code>: pause</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">←</span></code> / <code class="docutils literal notranslate"><span class="pre">→</span></code> / <code class="docutils literal notranslate"><span class="pre">space</span></code>: navigate through slides</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cltr</span></code> / <code class="docutils literal notranslate"><span class="pre">alt</span></code>  + click to zoom</p></li>
+</ul>
+</section>
+
+
+          </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="getting-started.html" title="Getting started"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="kickoff.html" title="Kick-off"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../summary.html">OpenFisca  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><i icon-name="book"></i> Training materials</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RaC Background</a></li> 
+      </ul>
+    </div>
+  
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+
+  
+  <script src="../_static/reveal/reveal.js"></script>
+  <script src="../_static/reveal/plugin/zoom/zoom.js"></script>
+  <script src="../_static/reveal/plugin/notes/notes.js"></script>
+  <script src="../_static/reveal/plugin/search/search.js"></script>
+  <script src="../_static/reveal/plugin/markdown/markdown.js"></script>
+  <script src="../_static/reveal/plugin/highlight/highlight.js"></script>
+  <script>
+    lucide.createIcons();
+    // https://revealjs.com/initialization/
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      center: true,
+      hash: true,
+      embedded: true,
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+    });
+  </script>
+  
+  </body>
+</html>

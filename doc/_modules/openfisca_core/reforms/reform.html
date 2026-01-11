@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../../../_static/jquery.min.js"></script>
+  <script src="../../../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>openfisca_core.reforms.reform &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=41f151b0" />
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/openfisca_core/reforms/reform.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -112,17 +119,17 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.reforms.reform</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core.parameters</span> <span class="kn">import</span> <span class="n">ParameterNode</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.taxbenefitsystems</span> <span class="kn">import</span> <span class="n">TaxBenefitSystem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParameterNode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.taxbenefitsystems</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaxBenefitSystem</span>
 
 
 <div class="viewcode-block" id="Reform">
 <a class="viewcode-back" href="../../../openfisca-python-api/reforms.html#openfisca_core.reforms.Reform">[docs]</a>
-<span class="k">class</span> <span class="nc">Reform</span><span class="p">(</span><span class="n">TaxBenefitSystem</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Reform</span><span class="p">(</span><span class="n">TaxBenefitSystem</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A modified TaxBenefitSystem.</span>
 
 <span class="sd">    All reforms must subclass `Reform` and implement a method `apply()`.</span>
@@ -153,7 +160,7 @@
 
     <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;:param baseline: Baseline TaxBenefitSystem.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">baseline</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span> <span class="o">=</span> <span class="n">baseline</span>
@@ -167,11 +174,11 @@
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseline</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">full_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">full_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
         <span class="k">assert</span> <span class="p">(</span>
             <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
@@ -183,20 +190,21 @@
 
 <div class="viewcode-block" id="Reform.modify_parameters">
 <a class="viewcode-back" href="../../../openfisca-python-api/reforms.html#openfisca_core.reforms.Reform.modify_parameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">modify_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modifier_function</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modify_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modifier_function</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make modifications on the parameters of the legislation.</span>
 
 <span class="sd">        Call this function in `apply()` if the reform asks for legislation parameter modifications.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            modifier_function: A function that takes a :obj:`.ParameterNode` and should return an object of the same type.</span>
+<span class="sd">            modifier_function: A function that takes a :obj:`~parameters.ParameterNode`</span>
+<span class="sd">            and should return an object of the same type.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">baseline_parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span><span class="o">.</span><span class="n">parameters</span>
         <span class="n">baseline_parameters_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">baseline_parameters</span><span class="p">)</span>
         <span class="n">reform_parameters</span> <span class="o">=</span> <span class="n">modifier_function</span><span class="p">(</span><span class="n">baseline_parameters_copy</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reform_parameters</span><span class="p">,</span> <span class="n">ParameterNode</span><span class="p">):</span>
-            <span class="k">return</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;modifier_function </span><span class="si">{</span><span class="n">modifier_function</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> in module </span><span class="si">{</span><span class="n">modifier_function</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s2"> must return a ParameterNode&quot;</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">reform_parameters</span>
@@ -234,8 +242,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

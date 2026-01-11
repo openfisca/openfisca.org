@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../../../_static/jquery.min.js"></script>
+  <script src="../../../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>openfisca_core.simulations.simulation_builder &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=41f151b0" />
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/openfisca_core/simulations/simulation_builder.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -112,30 +119,30 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.simulations.simulation_builder</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Sequence</span>
-<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span> <span class="k">as</span> <span class="n">Array</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NoReturn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span> <span class="k">as</span> <span class="n">Array</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoReturn</span>
 
-<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 
-<span class="kn">import</span> <span class="nn">dpath.util</span>
-<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dpath</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core</span> <span class="kn">import</span> <span class="n">entities</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="n">periods</span><span class="p">,</span> <span class="n">populations</span><span class="p">,</span> <span class="n">variables</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">entities</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="n">periods</span><span class="p">,</span> <span class="n">populations</span><span class="p">,</span> <span class="n">variables</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">helpers</span>
-<span class="kn">from</span> <span class="nn">._build_default_simulation</span> <span class="kn">import</span> <span class="n">_BuildDefaultSimulation</span>
-<span class="kn">from</span> <span class="nn">._build_from_variables</span> <span class="kn">import</span> <span class="n">_BuildFromVariables</span>
-<span class="kn">from</span> <span class="nn">._type_guards</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">helpers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._build_default_simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">_BuildDefaultSimulation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._build_from_variables</span><span class="w"> </span><span class="kn">import</span> <span class="n">_BuildFromVariables</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._type_guards</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">are_entities_fully_specified</span><span class="p">,</span>
     <span class="n">are_entities_short_form</span><span class="p">,</span>
     <span class="n">are_entities_specified</span><span class="p">,</span>
     <span class="n">has_axes</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.simulation</span> <span class="kn">import</span> <span class="n">Simulation</span>
-<span class="kn">from</span> <span class="nn">.typing</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.typing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Axis</span><span class="p">,</span>
     <span class="n">Entity</span><span class="p">,</span>
     <span class="n">FullySpecifiedEntities</span><span class="p">,</span>
@@ -154,8 +161,8 @@
 
 <div class="viewcode-block" id="SimulationBuilder">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder">[docs]</a>
-<span class="k">class</span> <span class="nc">SimulationBuilder</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimulationBuilder</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">default_period</span> <span class="o">=</span> <span class="p">(</span>
             <span class="kc">None</span>  <span class="c1"># Simulation period used for variables when no period is defined</span>
         <span class="p">)</span>
@@ -188,7 +195,7 @@
 
 <div class="viewcode-block" id="SimulationBuilder.build_from_dict">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.build_from_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">build_from_dict</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build_from_dict</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span>
         <span class="n">input_dict</span><span class="p">:</span> <span class="n">Params</span><span class="p">,</span>
@@ -275,7 +282,7 @@
 
 <div class="viewcode-block" id="SimulationBuilder.build_from_entities">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.build_from_entities">[docs]</a>
-    <span class="k">def</span> <span class="nf">build_from_entities</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build_from_entities</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span>
         <span class="n">input_dict</span><span class="p">:</span> <span class="n">FullySpecifiedEntities</span><span class="p">,</span>
@@ -393,7 +400,7 @@
 
 <div class="viewcode-block" id="SimulationBuilder.build_from_variables">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.build_from_variables">[docs]</a>
-    <span class="k">def</span> <span class="nf">build_from_variables</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build_from_variables</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span>
         <span class="n">input_dict</span><span class="p">:</span> <span class="n">Variables</span><span class="p">,</span>
@@ -437,7 +444,7 @@
 <div class="viewcode-block" id="SimulationBuilder.build_default_simulation">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.build_default_simulation">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">build_default_simulation</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build_default_simulation</span><span class="p">(</span>
         <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span>
         <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Simulation</span><span class="p">:</span>
@@ -458,26 +465,26 @@
         <span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">create_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">populations</span> <span class="o">=</span> <span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">instantiate_entities</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">declare_person_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person_singular</span><span class="p">,</span> <span class="n">persons_ids</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">declare_person_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person_singular</span><span class="p">,</span> <span class="n">persons_ids</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">person_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="p">[</span><span class="n">person_singular</span><span class="p">]</span>
         <span class="n">person_instance</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">persons_ids</span><span class="p">))</span>
         <span class="n">person_instance</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">person_instance</span><span class="o">.</span><span class="n">ids</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">persons_plural</span> <span class="o">=</span> <span class="n">person_instance</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span>
 
-    <span class="k">def</span> <span class="nf">declare_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_singular</span><span class="p">,</span> <span class="n">entity_ids</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">declare_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_singular</span><span class="p">,</span> <span class="n">entity_ids</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">):</span>
         <span class="n">entity_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="p">[</span><span class="n">entity_singular</span><span class="p">]</span>
         <span class="n">entity_instance</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">entity_ids</span><span class="p">))</span>
         <span class="n">entity_instance</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">entity_instance</span><span class="o">.</span><span class="n">ids</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">entity_instance</span>
 
-    <span class="k">def</span> <span class="nf">nb_persons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_singular</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nb_persons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_singular</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="p">[</span><span class="n">entity_singular</span><span class="p">]</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="n">role</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">join_with_persons</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">join_with_persons</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">group_population</span><span class="p">,</span>
         <span class="n">persons_group_assignment</span><span class="p">,</span>
@@ -504,12 +511,12 @@
                 <span class="n">flattened_roles</span><span class="p">,</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">populations</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SimulationBuilder.explicit_singular_entities">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.SimulationBuilder.explicit_singular_entities">[docs]</a>
-    <span class="k">def</span> <span class="nf">explicit_singular_entities</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">explicit_singular_entities</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span>
         <span class="n">input_dict</span><span class="p">:</span> <span class="n">ImplicitGroupEntities</span><span class="p">,</span>
@@ -560,7 +567,7 @@
         <span class="k">return</span> <span class="n">result</span></div>
 
 
-    <span class="k">def</span> <span class="nf">add_person_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">instances_json</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_person_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">instances_json</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add the simulation&#39;s instances of the persons entity as described in ``instances_json``.&quot;&quot;&quot;</span>
         <span class="n">helpers</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="n">instances_json</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">])</span>
         <span class="n">entity_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">instances_json</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
@@ -574,7 +581,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ids</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">add_default_group_entity</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_default_group_entity</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">persons_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
         <span class="n">entity</span><span class="p">:</span> <span class="n">GroupEntity</span><span class="p">,</span>
@@ -588,7 +595,7 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">roles</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">*</span> <span class="n">persons_count</span>
 
-    <span class="k">def</span> <span class="nf">add_group_entity</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_group_entity</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">persons_plural</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">persons_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
@@ -682,17 +689,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">memberships</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">memberships</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">set_default_period</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period_str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_default_period</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period_str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">period_str</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">default_period</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period_str</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">get_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">period_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">variable</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_buffer</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">input_buffer</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_buffer</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period_str</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">check_persons_to_allocate</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_persons_to_allocate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">persons_plural</span><span class="p">,</span>
         <span class="n">entity_plural</span><span class="p">,</span>
@@ -719,7 +726,7 @@
                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">person_id</span><span class="si">}</span><span class="s2"> has been declared more than once in </span><span class="si">{</span><span class="n">entity_plural</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">init_variable_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">instance_object</span><span class="p">,</span> <span class="n">instance_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">init_variable_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">instance_object</span><span class="p">,</span> <span class="n">instance_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">variable_values</span> <span class="ow">in</span> <span class="n">instance_object</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">path_in_json</span> <span class="o">=</span> <span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="p">,</span> <span class="n">instance_id</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">]</span>
             <span class="k">try</span><span class="p">:</span>
@@ -754,7 +761,7 @@
                     <span class="n">value</span><span class="p">,</span>
                 <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">add_variable_value</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_variable_value</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">entity</span><span class="p">,</span>
         <span class="n">variable</span><span class="p">,</span>
@@ -783,7 +790,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">input_buffer</span><span class="p">[</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period_str</span><span class="p">))]</span> <span class="o">=</span> <span class="n">array</span>
 
-    <span class="k">def</span> <span class="nf">finalize_variables_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">finalize_variables_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Due to set_input mechanism, we must bufferize all inputs, then actually set them,</span>
         <span class="c1"># so that the months are set first and the years last.</span>
         <span class="n">plural_key</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span>
@@ -816,12 +823,12 @@
                 <span class="k">if</span> <span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">period_value</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">date</span> <span class="o">&lt;=</span> <span class="n">variable</span><span class="o">.</span><span class="n">end</span><span class="p">):</span>
                     <span class="n">holder</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">period_value</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">raise_period_mismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">raise_period_mismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
         <span class="c1"># This error happens when we try to set a variable value for a period that doesn&#39;t match its definition period</span>
         <span class="c1"># It is only raised when we consume the buffer. We thus don&#39;t know which exact key caused the error.</span>
         <span class="c1"># We do a basic research to find the culprit path</span>
         <span class="n">culprit_path</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
-            <span class="n">dpath</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+            <span class="n">dpath</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
                 <span class="n">json</span><span class="p">,</span>
                 <span class="sa">f</span><span class="s2">&quot;*/</span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">period</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">,</span>
                 <span class="n">yielded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -838,15 +845,15 @@
         <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">SituationParsingError</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
 
     <span class="c1"># Returns the total number of instances of this entity, including when there is replication along axes</span>
-    <span class="k">def</span> <span class="nf">get_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes_entity_counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">entity_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_counts</span><span class="p">[</span><span class="n">entity_name</span><span class="p">])</span>
 
     <span class="c1"># Returns the ids of instances of this entity, including when there is replication along axes</span>
-    <span class="k">def</span> <span class="nf">get_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes_entity_ids</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">entity_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_ids</span><span class="p">[</span><span class="n">entity_name</span><span class="p">])</span>
 
     <span class="c1"># Returns the memberships of individuals in this entity, including when there is replication along axes</span>
-    <span class="k">def</span> <span class="nf">get_memberships</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_memberships</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_name</span><span class="p">):</span>
         <span class="c1"># Return empty array for the &quot;persons&quot; entity</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes_memberships</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
             <span class="n">entity_name</span><span class="p">,</span>
@@ -854,20 +861,20 @@
         <span class="p">)</span>
 
     <span class="c1"># Returns the roles of individuals in this entity, including when there is replication along axes</span>
-    <span class="k">def</span> <span class="nf">get_roles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Role</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_roles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Role</span><span class="p">]:</span>
         <span class="c1"># Return empty array for the &quot;persons&quot; entity</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes_roles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">entity_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">entity_name</span><span class="p">,</span> <span class="p">[]))</span>
 
-    <span class="k">def</span> <span class="nf">add_parallel_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_parallel_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># All parallel axes have the same count and entity.</span>
         <span class="c1"># Search for a compatible axis, if none exists, error out</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">add_perpendicular_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_perpendicular_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="n">Axis</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># This adds an axis perpendicular to all previous dimensions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">axis</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="nf">expand_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">expand_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># This method should be idempotent &amp; allow change in axes</span>
         <span class="n">perpendicular_dimensions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Axis</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span>
         <span class="n">cell_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
@@ -972,13 +979,13 @@
                     <span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">input_buffer</span><span class="p">[</span><span class="n">axis_name</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">axis_period</span><span class="p">)]</span> <span class="o">=</span> <span class="n">array</span>
 
-    <span class="k">def</span> <span class="nf">get_variable_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Entity</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_variable_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Entity</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable_entities</span><span class="p">[</span><span class="n">variable_name</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">register_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">entity</span><span class="p">:</span> <span class="n">Entity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">entity</span><span class="p">:</span> <span class="n">Entity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variable_entities</span><span class="p">[</span><span class="n">variable_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span>
 
-    <span class="k">def</span> <span class="nf">register_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">:</span> <span class="n">Simulation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">:</span> <span class="n">Simulation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">tax_benefit_system</span>
         <span class="n">variables</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">tax_benefit_system</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
@@ -1017,8 +1024,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

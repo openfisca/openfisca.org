@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../../../_static/jquery.min.js"></script>
+  <script src="../../../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>openfisca_core.entities._core_entity &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=41f151b0" />
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/openfisca_core/entities/_core_entity.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -112,20 +119,20 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.entities._core_entity</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">ClassVar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassVar</span>
 
-<span class="kn">import</span> <span class="nn">abc</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">abc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
-<span class="kn">from</span> <span class="nn">.role</span> <span class="kn">import</span> <span class="n">Role</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.role</span><span class="w"> </span><span class="kn">import</span> <span class="n">Role</span>
 
 
 <div class="viewcode-block" id="CoreEntity">
 <a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.CoreEntity">[docs]</a>
-<span class="k">class</span> <span class="nc">CoreEntity</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CoreEntity</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class to build entities from.</span>
 
 <span class="sd">    Args:</span>
@@ -164,21 +171,21 @@
     <span class="n">_tax_benefit_system</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">TaxBenefitSystem</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">__args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">**</span><span class="n">__kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">__args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">**</span><span class="n">__kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">)&quot;</span>
 
 <div class="viewcode-block" id="CoreEntity.set_tax_benefit_system">
 <a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.CoreEntity.set_tax_benefit_system">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_tax_benefit_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">TaxBenefitSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_tax_benefit_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">TaxBenefitSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;A ``CoreEntity`` belongs to a ``TaxBenefitSystem``.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span></div>
 
 
 <div class="viewcode-block" id="CoreEntity.get_variable">
 <a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.CoreEntity.get_variable">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_variable</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_variable</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variable_name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VariableName</span><span class="p">,</span>
         <span class="n">check_existence</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -211,7 +218,7 @@
 
 <span class="sd">            &gt;&gt;&gt; this.get_variable(&quot;tax&quot;)</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ValueError: You must set &#39;tax_benefit_system&#39; before calling thi...</span>
+<span class="sd">            ValueError: You must set &#39;tax_benefit_system&#39; before calling this...</span>
 
 <span class="sd">            &gt;&gt;&gt; tax_benefit_system = taxbenefitsystems.TaxBenefitSystem([this])</span>
 <span class="sd">            &gt;&gt;&gt; this.set_tax_benefit_system(tax_benefit_system)</span>
@@ -244,7 +251,7 @@
 
 <div class="viewcode-block" id="CoreEntity.check_variable_defined_for_entity">
 <a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.CoreEntity.check_variable_defined_for_entity">[docs]</a>
-    <span class="k">def</span> <span class="nf">check_variable_defined_for_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VariableName</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_variable_defined_for_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VariableName</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if ``variable_name`` is defined for ``self``.</span>
 
 <span class="sd">        Args:</span>
@@ -317,7 +324,7 @@
 <div class="viewcode-block" id="CoreEntity.check_role_validity">
 <a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.CoreEntity.check_role_validity">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if ``role`` is an instance of  ``Role``.</span>
 
 <span class="sd">        Args:</span>
@@ -375,8 +382,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

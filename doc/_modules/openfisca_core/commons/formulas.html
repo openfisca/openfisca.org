@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../../../_static/jquery.min.js"></script>
+  <script src="../../../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>openfisca_core.commons.formulas &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=41f151b0" />
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/openfisca_core/commons/formulas.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -112,22 +119,22 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.commons.formulas</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
 
 
 <div class="viewcode-block" id="apply_thresholds">
 <a class="viewcode-back" href="../../../openfisca-python-api/commons.html#openfisca_core.commons.apply_thresholds">[docs]</a>
-<span class="k">def</span> <span class="nf">apply_thresholds</span><span class="p">(</span>
-    <span class="nb">input</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_thresholds</span><span class="p">(</span>
+    <span class="nb">input</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">FloatArray</span><span class="p">,</span>
     <span class="n">thresholds</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
     <span class="n">choices</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">FloatArray</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a choice based on an input and thresholds.</span>
 
 <span class="sd">    From a list of ``choices``, this function selects one of these values</span>
@@ -170,10 +177,10 @@
 
 <div class="viewcode-block" id="concat">
 <a class="viewcode-back" href="../../../openfisca-python-api/commons.html#openfisca_core.commons.concat">[docs]</a>
-<span class="k">def</span> <span class="nf">concat</span><span class="p">(</span>
-    <span class="n">this</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">str_</span><span class="p">]</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">],</span>
-    <span class="n">that</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">str_</span><span class="p">]</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">str_</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span>
+    <span class="n">this</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">StrArray</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">],</span>
+    <span class="n">that</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">StrArray</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">StrArray</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Concatenate the values of two arrays.</span>
 
 <span class="sd">    Args:</span>
@@ -208,11 +215,11 @@
 
 <div class="viewcode-block" id="switch">
 <a class="viewcode-back" href="../../../openfisca-python-api/commons.html#openfisca_core.commons.switch">[docs]</a>
-<span class="k">def</span> <span class="nf">switch</span><span class="p">(</span>
-    <span class="n">conditions</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">]</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">switch</span><span class="p">(</span>
+    <span class="n">conditions</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">FloatArray</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
     <span class="n">value_by_condition</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mimick a switch statement.</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">FloatArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mimic a switch statement.</span>
 
 <span class="sd">    Given an array of conditions, returns an array of the same size,</span>
 <span class="sd">    replacing each condition item with the matching given value.</span>
@@ -272,8 +279,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

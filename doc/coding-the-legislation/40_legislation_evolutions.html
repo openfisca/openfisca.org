@@ -5,7 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../_static/jquery.min.js"></script>
+  <script src="../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -19,11 +24,12 @@
     <title>Legislation evolutions &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=41f151b0" />
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/coding-the-legislation/40_legislation_evolutions.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Entities" href="50_entities.html" />
@@ -103,13 +109,14 @@
 <li class="toctree-l2"><a class="reference internal" href="inferences.html">Inferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing_yaml_tests.html">Writing YAML tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="legislation_parameters.html">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bootstrapping_a_new_country_package.html">Bootstraping a new country package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootstrapping_a_new_country_package.html">Bootstrapping a new country package</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulate/index.html"><i icon-name="cog"></i> Running a simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -191,21 +198,21 @@
 </section>
 <section id="formula-evolution">
 <h2>Formula evolution<a class="headerlink" href="#formula-evolution" title="Link to this heading">¶</a></h2>
-<p>Some fiscal or benefit mechanism significantly evolve over time and call for a change in the formula that computes them. In this case, a simple parameter adjustement is not enough.</p>
+<p>Some fiscal or benefit mechanism significantly evolve over time and call for a change in the formula that computes them. In this case, a simple parameter adjustment is not enough.</p>
 <p>For instance, let’s assume that from the 1st of Jan. 2017, the <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> is not applied anymore on the first <code class="docutils literal notranslate"><span class="pre">1000</span></code> earned by a person.</p>
 <p>We implement this rule by adding a new formula to our variable, and <em>dating</em> it:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">flat_tax_on_salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">flat_tax_on_salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Individualized and monthly paid tax on salaries&quot;</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
-    <span class="k">def</span> <span class="nf">formula_2017</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">formula_2017</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
         <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="n">salary_above_1000</span> <span class="o">=</span> <span class="n">min_</span><span class="p">(</span><span class="n">salary</span> <span class="o">-</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">salary_above_1000</span> <span class="o">*</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">taxes</span><span class="o">.</span><span class="n">salary</span><span class="o">.</span><span class="n">rate</span>
 
-    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
         <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">salary</span> <span class="o">*</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">taxes</span><span class="o">.</span><span class="n">salary</span><span class="o">.</span><span class="n">rate</span>
@@ -243,18 +250,18 @@
 <p>In our previous example, we assumed that <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> had <em>always</em> had a formula, since the dawn of time. This is a reasonable hypothesis if we are only interested in running computations for recent years.</p>
 <p>But most fiscal and benefit mechanisms have been introduced at some point. Let’s for instance assume that our <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> only appeared in our legislation on the 1st of June 2005.</p>
 <p>This is easily implemented by <em>dating</em> the two formulas:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">flat_tax_on_salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">flat_tax_on_salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Individualized and monthly paid tax on salaries&quot;</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
-    <span class="k">def</span> <span class="nf">formula_2017</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">formula_2017</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
         <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="n">salary_above_1000</span> <span class="o">=</span> <span class="n">min_</span><span class="p">(</span><span class="n">salary</span> <span class="o">-</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">salary_above_1000</span> <span class="o">*</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">taxes</span><span class="o">.</span><span class="n">salary</span><span class="o">.</span><span class="n">rate</span>
 
-    <span class="k">def</span> <span class="nf">formula_2005_06</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">formula_2005_06</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
         <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">salary</span> <span class="o">*</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">taxes</span><span class="o">.</span><span class="n">salary</span><span class="o">.</span><span class="n">rate</span>
@@ -268,14 +275,14 @@
 <p>As legislation evolves, some fiscal or benefit mechanisms disappear.</p>
 <p>Let’s for instance assume that a <code class="docutils literal notranslate"><span class="pre">progressive_income_tax</span></code> used to exist before the <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> was introduced. This progressive tax then disappeared on the 1st of June 2005.</p>
 <p>This is implemented with an <code class="docutils literal notranslate"><span class="pre">end</span></code> attribute that defines the <em>last day</em> a variable can be calculated:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">progressive_income_tax</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">progressive_income_tax</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Former tax replaced by the flat tax on the 1st of June 2005&quot;</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
     <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;2005-05-31&#39;</span>
 
-    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">legislation</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">legislation</span><span class="p">):</span>
         <span class="c1"># Apply a marginal scale to the person&#39;s income</span>
         <span class="o">...</span>
 </pre></div>
@@ -414,8 +421,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

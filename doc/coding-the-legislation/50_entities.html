@@ -5,7 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../_static/jquery.min.js"></script>
+  <script src="../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -19,11 +24,12 @@
     <title>Entities &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=41f151b0" />
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/coding-the-legislation/50_entities.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Reforms" href="reforms.html" />
@@ -103,13 +109,14 @@
 <li class="toctree-l2"><a class="reference internal" href="inferences.html">Inferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="writing_yaml_tests.html">Writing YAML tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="legislation_parameters.html">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bootstrapping_a_new_country_package.html">Bootstraping a new country package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootstrapping_a_new_country_package.html">Bootstrapping a new country package</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../simulate/index.html"><i icon-name="cog"></i> Running a simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -144,7 +151,7 @@
 <section id="group-entity-composition">
 <h2>Group entity composition<a class="headerlink" href="#group-entity-composition" title="Link to this heading">¶</a></h2>
 <p>You can get the number of person with a given role in an entity with the <code class="docutils literal notranslate"><span class="pre">nb_persons(role)</span></code> method. If no role is given, it will return the numbers of people in the entity.</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="n">nb_persons</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">()</span>
         <span class="n">nb_adults</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">ADULT</span><span class="p">)</span>
         <span class="n">nb_children</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">CHILD</span><span class="p">)</span>
@@ -155,7 +162,7 @@
 <section id="check-if-a-person-has-a-given-role">
 <h2>Check if a person has a given role<a class="headerlink" href="#check-if-a-person-has-a-given-role" title="Link to this heading">¶</a></h2>
 <p>You can know whether a person has a certain role with the <code class="docutils literal notranslate"><span class="pre">has_role(role)</span></code> method:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="n">is_adult</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">ADULT</span><span class="p">)</span>
         <span class="n">is_child</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">CHILD</span><span class="p">)</span>
 </pre></div>
@@ -171,13 +178,13 @@
 <li><p>Any household is entitled to 500€ a month per adult, and 200€ a month per children.</p></li>
 <li><p>The sum of salaries from all household members are deducted from the amount of the benefit.</p></li>
 </ul>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">basic_income</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">basic_income</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Household</span>
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Basic income paid to households&quot;</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
-    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="n">nb_adults</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">ADULT</span><span class="p">)</span>
         <span class="n">nb_children</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">CHILD</span><span class="p">)</span>
         <span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
@@ -194,13 +201,13 @@
 <h2>Projection<a class="headerlink" href="#projection" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">person.entity('variable_name',</span> <span class="pre">period)</span></code> allows you to get the value of <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> for the entity containing <code class="docutils literal notranslate"><span class="pre">person</span></code>.</p>
 <p>Let’s for example consider that any college student whose family benefits from the basic income will also individually be granted a scholarship of 100€ per month:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">college_scholarship</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">college_scholarship</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;College Scholarship for basic income recipients.&quot;</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
-    <span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="n">is_student</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;is_student&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="n">has_household_basic_income</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">household</span><span class="p">(</span><span class="s1">&#39;basic_income&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
 
@@ -209,7 +216,7 @@
 </div>
 <p>Similarly, <code class="docutils literal notranslate"><span class="pre">entity.unique_role('variable_name',</span> <span class="pre">period)</span></code> allows you to get the value of <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> for <code class="docutils literal notranslate"><span class="pre">person</span></code> who has the role <code class="docutils literal notranslate"><span class="pre">unique_role</span></code> in <code class="docutils literal notranslate"><span class="pre">entity</span></code>.</p>
 <p>For instance, let’s assume <code class="docutils literal notranslate"><span class="pre">Household</span></code> has two unique roles, <code class="docutils literal notranslate"><span class="pre">main_declarant</span></code> and <code class="docutils literal notranslate"><span class="pre">partner</span></code>.</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
     <span class="n">household</span><span class="o">.</span><span class="n">main_declarant</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="c1"># main declarant&#39;s salary</span>
     <span class="n">household</span><span class="o">.</span><span class="n">partner</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="c1"># partner&#39;s salary</span>
 </pre></div>
@@ -252,8 +259,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>

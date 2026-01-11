@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Jquery already required by bootstrap, and two uses of $(document), current document site throwing js errors without this -->
+  <script src="../../../_static/jquery.min.js"></script>
+  <script src="../../../_static/lucide/lucide.min.js"></script>
+
+  
+
   
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -18,11 +23,12 @@
     <title>openfisca_core.tools.test_runner &#8212; OpenFisca  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/guzzle.css?v=ee5bbeb1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=0b2b57e4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=41f151b0" />
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts.js?v=30c476c5"></script>
+    <link rel="canonical" href="https://openfisca.org/doc/_modules/openfisca_core/tools/test_runner.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   
@@ -88,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-python-api/index.html"><i icon-name="function-square"></i> OpenFisca Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../openfisca-web-api/index.html"><i icon-name="curly-braces"></i> OpenFisca web API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../find-help.html"><i icon-name="heart-handshake"></i> To find help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html"><i icon-name="book"></i> Training materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html"><i icon-name="git-merge"></i> Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html"><i icon-name="copyleft"></i> Licence</a></li>
 </ul>
@@ -112,36 +119,51 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.tools.test_runner</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="c1"># Avoid T201 warning for print statements in this test runner</span>
+<span class="c1"># flake8: noqa: T201</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
-<span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">TypedDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">TypedDict</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core.types</span> <span class="kn">import</span> <span class="n">TaxBenefitSystem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaxBenefitSystem</span>
 
-<span class="kn">import</span> <span class="nn">dataclasses</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">textwrap</span>
-<span class="kn">import</span> <span class="nn">traceback</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dataclasses</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
-<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="c1"># Unix-specific modules for parallel testing (not available on Windows)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pty</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">select</span>
 
-<span class="kn">from</span> <span class="nn">openfisca_core.errors</span> <span class="kn">import</span> <span class="n">SituationParsingError</span><span class="p">,</span> <span class="n">VariableNotFound</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.simulation_builder</span> <span class="kn">import</span> <span class="n">SimulationBuilder</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.tools</span> <span class="kn">import</span> <span class="n">assert_near</span>
-<span class="kn">from</span> <span class="nn">openfisca_core.warnings</span> <span class="kn">import</span> <span class="n">LibYAMLWarning</span>
+    <span class="n">PARALLEL_AVAILABLE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">PARALLEL_AVAILABLE</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">SituationParsingError</span><span class="p">,</span> <span class="n">VariableNotFound</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.simulations</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationBuilder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">assert_near</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">LibYAMLWarning</span>
 
 
 <div class="viewcode-block" id="Options">
 <a class="viewcode-back" href="../../../openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.Options">[docs]</a>
-<span class="k">class</span> <span class="nc">Options</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Options</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">aggregate</span><span class="p">:</span> <span class="nb">bool</span>
     <span class="n">ignore_variables</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span>
-    <span class="n">max_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">max_depth</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">name_filter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
     <span class="n">only_variables</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span>
     <span class="n">pdb</span><span class="p">:</span> <span class="nb">bool</span>
@@ -154,10 +176,10 @@
 <div class="viewcode-block" id="ErrorMargin">
 <a class="viewcode-back" href="../../../openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.ErrorMargin">[docs]</a>
 <span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">ErrorMargin</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ErrorMargin</span><span class="p">:</span>
     <span class="n">__root__</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">],</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__root__</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__root__</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
@@ -168,7 +190,7 @@
 <div class="viewcode-block" id="Test">
 <a class="viewcode-back" href="../../../openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.Test">[docs]</a>
 <span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Test</span><span class="p">:</span>
     <span class="n">absolute_error_margin</span><span class="p">:</span> <span class="n">ErrorMargin</span>
     <span class="n">relative_error_margin</span><span class="p">:</span> <span class="n">ErrorMargin</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -183,7 +205,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">build_test</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Test</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_test</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Test</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;absolute_error_margin&quot;</span><span class="p">,</span> <span class="s2">&quot;relative_error_margin&quot;</span><span class="p">]:</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
@@ -198,11 +220,11 @@
     <span class="k">return</span> <span class="n">Test</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">import_yaml</span><span class="p">():</span>
-    <span class="kn">import</span> <span class="nn">yaml</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">import_yaml</span><span class="p">():</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">yaml</span> <span class="kn">import</span> <span class="n">CLoader</span> <span class="k">as</span> <span class="n">Loader</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">yaml</span><span class="w"> </span><span class="kn">import</span> <span class="n">CLoader</span> <span class="k">as</span> <span class="n">Loader</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="n">message</span> <span class="o">=</span> <span class="p">[</span>
             <span class="s2">&quot;libyaml is not installed in your environment.&quot;</span><span class="p">,</span>
@@ -211,7 +233,7 @@
             <span class="s2">&quot;so that it is used in your Python environment.&quot;</span><span class="p">,</span>
         <span class="p">]</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">LibYAMLWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">yaml</span> <span class="kn">import</span> <span class="n">SafeLoader</span> <span class="k">as</span> <span class="n">Loader</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">yaml</span><span class="w"> </span><span class="kn">import</span> <span class="n">SafeLoader</span> <span class="k">as</span> <span class="n">Loader</span>
     <span class="k">return</span> <span class="n">yaml</span><span class="p">,</span> <span class="n">Loader</span>
 
 
@@ -238,9 +260,364 @@
 <span class="n">options</span><span class="p">:</span> <span class="n">Options</span> <span class="o">=</span> <span class="n">Options</span><span class="p">()</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_create_worker_environment</span><span class="p">(</span><span class="n">options</span><span class="p">:</span> <span class="n">Options</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create environment variables for worker processes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        options: Test options to pass to workers</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Environment dictionary with OpenFisca configuration</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">env</span><span class="p">[</span><span class="s2">&quot;PYTHONUNBUFFERED&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>  <span class="c1"># Ensure output is not buffered</span>
+    <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;country_package&quot;</span><span class="p">):</span>
+        <span class="n">env</span><span class="p">[</span><span class="s2">&quot;OPENFISCA_COUNTRY_PACKAGE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;country_package&quot;</span><span class="p">)</span>
+    <span class="n">env</span><span class="p">[</span><span class="s2">&quot;OPENFISCA_EXTENSIONS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;extensions&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">[])</span>
+    <span class="n">env</span><span class="p">[</span><span class="s2">&quot;OPENFISCA_REFORMS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reforms&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">[])</span>
+    <span class="n">env</span><span class="p">[</span><span class="s2">&quot;OPENFISCA_OPTIONS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">env</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_spawn_worker</span><span class="p">(</span>
+    <span class="n">batch</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">python_bin</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Spawn a single worker process with PTY.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        batch: List of test files for this worker</span>
+<span class="sd">        python_bin: Path to Python executable</span>
+<span class="sd">        env: Environment variables</span>
+<span class="sd">        verbose: Whether to enable verbose output</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple of (subprocess.Popen, master_fd)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create PTY (pseudo-terminal) for real-time output capture</span>
+    <span class="c1"># PTY ensures output is line-buffered and flushed immediately</span>
+    <span class="n">master_fd</span><span class="p">,</span> <span class="n">slave_fd</span> <span class="o">=</span> <span class="n">pty</span><span class="o">.</span><span class="n">openpty</span><span class="p">()</span>
+
+    <span class="c1"># Build pytest command for this worker</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">python_bin</span><span class="p">,</span>
+        <span class="s2">&quot;-m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;pytest&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-p&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;openfisca_core.tools.parallel_plugin&quot;</span><span class="p">,</span>  <span class="c1"># Load our custom plugin</span>
+        <span class="s2">&quot;--maxfail=1&quot;</span><span class="p">,</span>  <span class="c1"># Stop on first failure within this worker</span>
+        <span class="s2">&quot;--disable-warnings&quot;</span><span class="p">,</span>  <span class="c1"># Reduce noise in output</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-vv&quot;</span><span class="p">)</span>
+    <span class="n">cmd</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>  <span class="c1"># Add test files for this worker</span>
+
+    <span class="c1"># Spawn worker process with PTY output</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+        <span class="n">cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">slave_fd</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span> <span class="n">close_fds</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">slave_fd</span><span class="p">)</span>  <span class="c1"># Close slave end in parent process</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">master_fd</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_format_file_list</span><span class="p">(</span><span class="n">file_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">max_display</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Format list of files for display.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_names: List of file names</span>
+<span class="sd">        max_display: Maximum number of files to show before truncating</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Formatted string of file names</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_names</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_display</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_names</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_names</span><span class="p">[:</span><span class="n">max_display</span><span class="p">])</span><span class="si">}</span><span class="s2"> (+</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">file_names</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">max_display</span><span class="si">}</span><span class="s2"> more)&quot;</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_read_worker_output</span><span class="p">(</span>
+    <span class="n">readable</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">fd_to_idx</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">outputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read output from workers that have data available.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        readable: List of file descriptors with data available</span>
+<span class="sd">        fd_to_idx: Mapping from file descriptor to worker index</span>
+<span class="sd">        outputs: List of accumulated outputs per worker</span>
+<span class="sd">        verbose: Whether to print output in real-time</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">fd</span> <span class="ow">in</span> <span class="n">readable</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">fd_to_idx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">chunk</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="mi">4096</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="s2">&quot;replace&quot;</span><span class="p">)</span>
+                <span class="n">outputs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+=</span> <span class="n">chunk</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[Worker </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">chunk</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+                <span class="k">pass</span>  <span class="c1"># FD closed or error, ignore</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_terminate_workers</span><span class="p">(</span><span class="n">procs</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">running</span><span class="p">:</span> <span class="nb">set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Terminate all running workers.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        procs: List of (worker_id, subprocess.Popen) tuples</span>
+<span class="sd">        running: Set of worker IDs still running</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">procs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">running</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">ProcessLookupError</span><span class="p">,</span> <span class="ne">PermissionError</span><span class="p">):</span>
+                <span class="k">pass</span>  <span class="c1"># Process already dead or permission denied</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">discover_test_files</span><span class="p">(</span>
+    <span class="n">paths</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">name_filter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Discover all test files (YAML and Python) in the given paths.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        paths: List of file or directory paths to search for test files</span>
+<span class="sd">        name_filter: Optional string filter to match against file names</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Sorted list of unique absolute paths to test files</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        - Accepts .yaml and .yml files</span>
+<span class="sd">        - Only accepts Python files starting with &#39;test_&#39;</span>
+<span class="sd">        - Recursively explores directories</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">yaml_exts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;.yml&quot;</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">suffix</span> <span class="ow">in</span> <span class="n">yaml_exts</span><span class="p">:</span>
+                <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">resolve</span><span class="p">()))</span>
+            <span class="k">elif</span> <span class="n">p</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.py&quot;</span><span class="p">:</span>
+                <span class="c1"># keep only test_*.py files</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;test_&quot;</span><span class="p">):</span>
+                    <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">resolve</span><span class="p">()))</span>
+        <span class="k">elif</span> <span class="n">p</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="c1"># collect yaml files</span>
+            <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">yaml_exts</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*</span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">):</span>
+                    <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">resolve</span><span class="p">()))</span>
+            <span class="c1"># collect only python test files named test_*.py</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;test_*.py&quot;</span><span class="p">):</span>
+                <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">resolve</span><span class="p">()))</span>
+    <span class="k">if</span> <span class="n">name_filter</span><span class="p">:</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="n">name_filter</span> <span class="ow">in</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">files</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_tests_in_parallel</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">num_workers</span><span class="p">,</span> <span class="n">verbose</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run OpenFisca tests in parallel across multiple worker processes.</span>
+
+<span class="sd">    This function implements parallel test execution by:</span>
+<span class="sd">    1. Discovering all test files in the given paths</span>
+<span class="sd">    2. Splitting test files into batches for each worker</span>
+<span class="sd">    3. Spawning pytest worker processes with the parallel_plugin</span>
+<span class="sd">    4. Monitoring worker progress and collecting output</span>
+<span class="sd">    5. Stopping all workers on first failure (fail-fast behavior)</span>
+<span class="sd">    6. Reporting results with colored output and timing</span>
+
+<span class="sd">    Architecture:</span>
+<span class="sd">        - Main process: orchestrates workers via subprocess.Popen</span>
+<span class="sd">        - Each worker: independent pytest process with parallel_plugin loaded</span>
+<span class="sd">        - Communication: PTY for real-time output capture</span>
+<span class="sd">        - Configuration: passed via environment variables</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tax_benefit_system: The tax-benefit system to test</span>
+<span class="sd">        paths: List of paths containing test files</span>
+<span class="sd">        options: Test options dict (name_filter, verbose, etc.)</span>
+<span class="sd">        num_workers: Number of parallel workers (0 = auto-detect from CPU count)</span>
+<span class="sd">        verbose: If True, print detailed output from each worker</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Exit code: 0 for success, 1 for failure</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        - Uses fail-fast: stops all workers on first failure</span>
+<span class="sd">        - Provides progress updates every 2 seconds</span>
+<span class="sd">        - Captures and displays output from failed workers</span>
+<span class="sd">        - Uses PTY to ensure proper output flushing</span>
+<span class="sd">        - On Windows, falls back to single-threaded testing</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">PARALLEL_AVAILABLE</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Parallel testing not available on this platform (requires Unix PTY support).&quot;</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Falling back to single-threaded testing...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">run_tests</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+
+    <span class="n">test_files</span> <span class="o">=</span> <span class="n">discover_test_files</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name_filter&quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">test_files</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No test files found&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="c1"># Auto-detect number of workers based on CPU count</span>
+    <span class="k">if</span> <span class="n">num_workers</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
+
+            <span class="c1"># Use N-1 CPUs to leave one for the system</span>
+            <span class="n">num_workers</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">NotImplementedError</span><span class="p">):</span>
+            <span class="n">num_workers</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Limit workers to number of test files (no point having idle workers)</span>
+    <span class="n">num_workers</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">num_workers</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_files</span><span class="p">))</span>
+
+    <span class="c1"># Split test files evenly across workers using round-robin distribution</span>
+    <span class="c1"># This ensures balanced workload even with uneven file counts</span>
+    <span class="n">batches</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_workers</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_files</span><span class="p">):</span>
+        <span class="n">batches</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">num_workers</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># Remove empty batches and adjust worker count</span>
+    <span class="n">batches</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batches</span> <span class="k">if</span> <span class="n">b</span><span class="p">]</span>
+    <span class="n">num_workers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">batches</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> test files across </span><span class="si">{</span><span class="n">num_workers</span><span class="si">}</span><span class="s2"> workers...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Prepare environment variables for pytest workers</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">_create_worker_environment</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+
+    <span class="c1"># Get python executable with fallback</span>
+    <span class="n">python_bin</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">executable</span> <span class="ow">or</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;python3&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;python&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">python_bin</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Could not find Python executable&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="c1"># Initialize data structures for worker management</span>
+    <span class="n">procs</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List of (worker_id, subprocess.Popen) tuples</span>
+    <span class="n">fds</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List of (worker_id, master_fd) tuples for PTY communication</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_workers</span><span class="p">)]</span>  <span class="c1"># Accumulated output from each worker</span>
+    <span class="n">worker_info</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Metadata about each worker (files, timing, status)</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="c1"># Launch worker processes</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">batches</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">batch</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Spawn worker process</span>
+        <span class="n">p</span><span class="p">,</span> <span class="n">master_fd</span> <span class="o">=</span> <span class="n">_spawn_worker</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">python_bin</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+        <span class="n">procs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">idx</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+        <span class="n">fds</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">idx</span><span class="p">,</span> <span class="n">master_fd</span><span class="p">))</span>
+
+        <span class="c1"># Store worker metadata for progress reporting</span>
+        <span class="n">file_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+        <span class="n">file_str</span> <span class="o">=</span> <span class="n">_format_file_list</span><span class="p">(</span><span class="n">file_names</span><span class="p">)</span>
+
+        <span class="n">worker_info</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="n">file_str</span><span class="p">,</span>
+            <span class="s2">&quot;batch&quot;</span><span class="p">:</span> <span class="n">batch</span><span class="p">,</span>
+            <span class="s2">&quot;start_time&quot;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;running&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Worker </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">file_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="n">running</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">procs</span><span class="p">)</span>  <span class="c1"># Set of worker IDs still running</span>
+    <span class="n">exit_codes</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Map of worker_id -&gt; exit_code</span>
+    <span class="n">last_update</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># For throttling progress updates</span>
+
+    <span class="c1"># Create fd -&gt; worker_idx mapping for O(1) lookup</span>
+    <span class="n">fd_to_idx</span> <span class="o">=</span> <span class="p">{</span><span class="n">fd</span><span class="p">:</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">fd</span> <span class="ow">in</span> <span class="n">fds</span><span class="p">}</span>
+
+    <span class="c1"># Monitor workers until all complete or one fails</span>
+    <span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+        <span class="c1"># Use select() to wait for output from any worker</span>
+        <span class="c1"># Timeout of 0.1s allows periodic checking of process status</span>
+        <span class="n">rlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">fd</span> <span class="k">for</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">fd</span><span class="p">)</span> <span class="ow">in</span> <span class="n">fds</span><span class="p">]</span>
+        <span class="n">readable</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">rlist</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[],</span> <span class="mf">0.1</span><span class="p">)</span>
+
+        <span class="c1"># Read output from any workers that have data available</span>
+        <span class="n">_read_worker_output</span><span class="p">(</span><span class="n">readable</span><span class="p">,</span> <span class="n">fd_to_idx</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+
+        <span class="c1"># Print progress update every 2 seconds (avoid spamming)</span>
+        <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">current_time</span> <span class="o">-</span> <span class="n">last_update</span> <span class="o">&gt;=</span> <span class="mf">2.0</span><span class="p">:</span>
+            <span class="n">completed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">exit_codes</span><span class="p">)</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="n">num_workers</span>
+            <span class="n">elapsed</span> <span class="o">=</span> <span class="n">current_time</span> <span class="o">-</span> <span class="n">start_time</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">Progress: </span><span class="si">{</span><span class="n">completed</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2"> workers completed (</span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s elapsed)&quot;</span><span class="p">,</span>
+                <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">last_update</span> <span class="o">=</span> <span class="n">current_time</span>
+
+        <span class="c1"># Check each worker for completion</span>
+        <span class="k">for</span> <span class="n">idx2</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">procs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">idx2</span> <span class="ow">in</span> <span class="n">running</span><span class="p">:</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>  <span class="c1"># Non-blocking check if process finished</span>
+                <span class="k">if</span> <span class="n">ret</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="c1"># Worker completed - record exit code and timing</span>
+                    <span class="n">exit_codes</span><span class="p">[</span><span class="n">idx2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span>
+                    <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">worker_info</span><span class="p">[</span><span class="n">idx2</span><span class="p">][</span><span class="s2">&quot;start_time&quot;</span><span class="p">]</span>
+                    <span class="n">worker_info</span><span class="p">[</span><span class="n">idx2</span><span class="p">][</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;passed&quot;</span> <span class="k">if</span> <span class="n">ret</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;failed&quot;</span>
+                    <span class="n">worker_info</span><span class="p">[</span><span class="n">idx2</span><span class="p">][</span><span class="s2">&quot;duration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">duration</span>
+
+                    <span class="c1"># Print completion with colored status indicator</span>
+                    <span class="n">status_symbol</span> <span class="o">=</span> <span class="s2">&quot;✓&quot;</span> <span class="k">if</span> <span class="n">ret</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;✗&quot;</span>
+                    <span class="n">status_color</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[32m&quot;</span> <span class="k">if</span> <span class="n">ret</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[31m&quot;</span>
+                    <span class="n">reset_color</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m&quot;</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\r</span><span class="si">{</span><span class="n">status_color</span><span class="si">}{</span><span class="n">status_symbol</span><span class="si">}{</span><span class="n">reset_color</span><span class="si">}</span><span class="s2"> Worker </span><span class="si">{</span><span class="n">idx2</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">worker_info</span><span class="p">[</span><span class="n">idx2</span><span class="p">][</span><span class="s1">&#39;files&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s)&quot;</span>
+                    <span class="p">)</span>
+
+                    <span class="n">running</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">idx2</span><span class="p">)</span>
+
+                    <span class="c1"># Fail-fast: if any worker fails, terminate all others</span>
+                    <span class="k">if</span> <span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">_terminate_workers</span><span class="p">(</span><span class="n">procs</span><span class="p">,</span> <span class="n">running</span><span class="p">)</span>
+                        <span class="n">running</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                        <span class="k">break</span>
+
+    <span class="c1"># Close file descriptors</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">fd</span> <span class="ow">in</span> <span class="n">fds</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+    <span class="n">total_duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="c1"># Report failures</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">exit_codes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">code</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">80</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Worker </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> FAILED&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">80</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Files: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">worker_info</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s1">&#39;batch&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">80</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="c1"># Success summary</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">80</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ All tests passed!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> test files across </span><span class="si">{</span><span class="n">num_workers</span><span class="si">}</span><span class="s2"> workers in </span><span class="si">{</span><span class="n">total_duration</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">80</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+
 <div class="viewcode-block" id="run_tests">
 <a class="viewcode-back" href="../../../openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.run_tests">[docs]</a>
-<span class="k">def</span> <span class="nf">run_tests</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_tests</span><span class="p">(</span>
     <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">TaxBenefitSystem</span><span class="p">,</span>
     <span class="n">paths</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">options</span><span class="p">:</span> <span class="n">Options</span> <span class="o">=</span> <span class="n">options</span><span class="p">,</span>
@@ -289,15 +666,15 @@
 
 <div class="viewcode-block" id="YamlFile">
 <a class="viewcode-back" href="../../../openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.YamlFile">[docs]</a>
-<span class="k">class</span> <span class="nc">YamlFile</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">YamlFile</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
 
 <div class="viewcode-block" id="YamlFile.collect">
 <a class="viewcode-back" href="../../../openfisca-python-api/test_runner.html#openfisca_core.tools.test_runner.YamlFile.collect">[docs]</a>
-    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">tests</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">),</span> <span class="n">Loader</span><span class="o">=</span><span class="n">Loader</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">scanner</span><span class="o">.</span><span class="n">ScannerError</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">ParserError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
@@ -323,7 +700,7 @@
                 <span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">should_ignore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">should_ignore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test</span><span class="p">):</span>
         <span class="n">name_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name_filter&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="n">name_filter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
@@ -334,10 +711,10 @@
 
 
 
-<span class="k">class</span> <span class="nc">YamlItem</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">Item</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">YamlItem</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">Item</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Terminal nodes of the test collection tree.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">baseline_tax_benefit_system</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">baseline_tax_benefit_system</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">baseline_tax_benefit_system</span> <span class="o">=</span> <span class="n">baseline_tax_benefit_system</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
@@ -345,7 +722,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">runtest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">runtest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">name</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">output</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -379,7 +756,7 @@
             <span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">],</span>
-            <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>  <span class="c1"># Keep the stack trace from the root error</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>  <span class="c1"># Keep the stack trace from the root error</span>
 
         <span class="k">if</span> <span class="n">max_spiral_loops</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">max_spiral_loops</span> <span class="o">=</span> <span class="n">max_spiral_loops</span>
@@ -396,16 +773,16 @@
             <span class="k">if</span> <span class="n">performance_tables</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">generate_performance_tables</span><span class="p">(</span><span class="n">tracer</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">print_computation_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracer</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_computation_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracer</span><span class="p">,</span> <span class="n">aggregate</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">tracer</span><span class="o">.</span><span class="n">print_computation_log</span><span class="p">(</span><span class="n">aggregate</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">generate_performance_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_performance_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">tracer</span><span class="o">.</span><span class="n">generate_performance_graph</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">generate_performance_tables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_performance_tables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">tracer</span><span class="o">.</span><span class="n">generate_performance_tables</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">check_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">output</span>
 
         <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -431,7 +808,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">VariableNotFound</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">check_variable</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_variable</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">expected_value</span><span class="p">,</span>
@@ -465,7 +842,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">relative_error_margin</span><span class="p">[</span><span class="n">variable_name</span><span class="p">],</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">should_ignore_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">should_ignore_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">only_variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;only_variables&quot;</span><span class="p">)</span>
         <span class="n">ignore_variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ignore_variables&quot;</span><span class="p">)</span>
         <span class="n">variable_ignored</span> <span class="o">=</span> <span class="p">(</span>
@@ -477,7 +854,7 @@
 
         <span class="k">return</span> <span class="n">variable_ignored</span> <span class="ow">or</span> <span class="n">variable_not_tested</span>
 
-    <span class="k">def</span> <span class="nf">repr_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">excinfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">repr_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">excinfo</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
             <span class="n">excinfo</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
             <span class="p">(</span><span class="ne">AssertionError</span><span class="p">,</span> <span class="n">VariableNotFound</span><span class="p">,</span> <span class="n">SituationParsingError</span><span class="p">),</span>
@@ -497,12 +874,12 @@
         <span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">OpenFiscaPlugin</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OpenFiscaPlugin</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
 
-    <span class="k">def</span> <span class="nf">pytest_collect_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pytest_collect_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Called by pytest for all plugins.</span>
 <span class="sd">        :return: The collector for test methods.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -516,7 +893,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
 
-<span class="k">def</span> <span class="nf">_get_tax_benefit_system</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">reforms</span><span class="p">,</span> <span class="n">extensions</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_tax_benefit_system</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">reforms</span><span class="p">,</span> <span class="n">extensions</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reforms</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="n">reforms</span> <span class="o">=</span> <span class="p">[</span><span class="n">reforms</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">extensions</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -570,8 +947,11 @@
   <div class="footer">
     &copy; Copyright . Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
+
+  
   <script>
     lucide.createIcons();
   </script>
+  
   </body>
 </html>
