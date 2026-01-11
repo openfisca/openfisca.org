@@ -89,17 +89,33 @@ For each type in the [user taxonomy](https://github.com/openfisca/openfisca-core
 
 ## Installation
 
-### Dependencies
+In order to build the website locally and contribute to it, you will need to install its dependencies.
 
-This website is built using [Hugo](https://gohugo.io), a static website editor, and uses [Node.js](https://nodejs.org).
+### Source code
 
-To build it, [install Hugo](https://gohugo.io/getting-started/installing/) and [Node.js](https://nodejs.org), and then:
+Clone the repository locally:
 
 ```sh
 git clone https://github.com/openfisca/openfisca.org
 cd openfisca.org
 make install
 ```
+
+### Dependencies
+
+This website is built using [Hugo](https://gohugo.io), a static website editor, and [Node.js](https://nodejs.org).
+
+#### Hugo
+
+[Install Hugo](https://gohugo.io/getting-started/installing/) in version `0.147.1` edition `extended`.
+
+##### With Homebrew
+
+The Hugo version is locked because of the dependencies in the CI environment. The easiest way to install this specific version of Hugo is to use the [Open Terms Archive homebrew tap](https://github.com/OpenTermsArchive/homebrew-tap), that shares the same constraints.
+
+1. Add the Open Terms Archive Homebrew tap: `brew tap OpenTermsArchive/homebrew-tap`
+2. Remove any previous installation of Hugo: `brew unlink hugo`
+3. Install Hugo: `brew install hugo@0.147.1`
 
 ## Usage
 
