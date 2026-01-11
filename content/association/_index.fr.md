@@ -39,7 +39,7 @@ Les groupes de travail structurent des discussions autour d’axes spécifiques 
 
 Les groupes de travail suivants sont actifs :
 
-- [Groupe de travail technique]({{< relref path="/association/working-groups/technical-working-group" >}})
+- [Groupe de travail technique]({{< relref path="/association/working-groups/technical-working-group" lang="en" >}})
 
 ## Membres
 
