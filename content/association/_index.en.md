@@ -113,7 +113,6 @@ These entities provide support on OpenFisca implementation through training, ser
     }
   ]
 {{< /members >}}
-<<<<<<< HEAD
 
 ---
 
@@ -140,5 +139,3 @@ The OpenFisca Association is a global non-profit registered under French law (_l
 - [Board meetings minutes](https://cloud.openfisca.org/index.php/s/8DNNgcBtZYH9ejJ)
 - National association number (_RNA_): `W751278370`
 - National company number (_SIRET_): `94316249500015`
-=======
->>>>>>> ba928bdbb (Allow to use relref in button)
