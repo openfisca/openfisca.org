@@ -113,7 +113,6 @@ Ces entités fournissent du support à l’usage d’OpenFisca à travers des fo
     }
   ]
 {{< /members >}}
-<<<<<<< HEAD
 
 ---
 
@@ -140,5 +139,3 @@ L'association OpenFisca est une association à but non lucratif de droit frança
 - [Procès-verbaux des réunions du Conseil d'administration](https://cloud.openfisca.org/index.php/s/8DNNgcBtZYH9ejJ)
 - Numéro RNA : `W751278370`
 - Numéro SIRET : `94316249500015`
-=======
->>>>>>> ba928bdbb (Allow to use relref in button)
