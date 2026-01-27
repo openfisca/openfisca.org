@@ -1,5 +1,5 @@
 ---
-html_title: "About OpenFisca association"
+html_title: "About the OpenFisca Association"
 layout: association
 ---
 
