@@ -22,7 +22,7 @@ layout: association
 
 ## Working groups
 
-Working groups structure discussions around specific lines of work on the development of OpenFisca, either targeting the product side, the community side or the Association itself. These spaces also allow members to collaborate on projects that benefit the entire OpenFisca community. As per the Association’s [statutes (§10)]({{< relref path="/association/statutes/#article-10-board-of-directors" >}}), the Board may delegate certain of its powers to these working groups. Working groups are open to all Association members.
+Working groups structure discussions around specific lines of work on the development of OpenFisca, either targeting the product side, the community side or the Association itself. These spaces also allow members to collaborate on projects that benefit the entire OpenFisca community. As per the Association’s [statutes (§10)]({{< relref path="/association/statutes/#article-10-board-of-directors" >}}), the Board may delegate some of its powers to these working groups. Working groups are open to all Association members.
 
 The following working groups are currently active:
 
@@ -113,29 +113,3 @@ These entities provide support on OpenFisca implementation through training, ser
     }
   ]
 {{< /members >}}
-
----
-
-## Governance
-
-### Board
-
-- College A: Pia Andrews
-- College B: Lola Josseran (Institut des Politiques Publiques)
-- College C: Con Fountas (Salsa Digital)
-- College D: Hamish Fraser
-- College E: Mahdi Ben Jelloul
-
-### Executive director
-
-Matti Schneider
-
-## Official documents
-
-The OpenFisca Association is a global non-profit registered under French law (_loi 1901_).
-
-- [Statutes]({{< relref path="/association/statutes" >}})
-- [Rules of procedure]({{< relref path="/association/rules-of-procedure" >}})
-- [Board meetings minutes](https://cloud.openfisca.org/index.php/s/8DNNgcBtZYH9ejJ)
-- National association number (_RNA_): `W751278370`
-- National company number (_SIRET_): `94316249500015`
