@@ -25,6 +25,8 @@ Learn all about how the association works and why it matters by watching the off
 
 <iframe title="OpenFisca Association Official Launch Event" src="https://videos.lescommuns.org/videos/embed/1467f08f-7236-46ac-a096-56510e90607a" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 
+- - -
+
 ## Governance
 
 ### Board
