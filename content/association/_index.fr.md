@@ -113,29 +113,3 @@ Ces entités fournissent du support à l’usage d’OpenFisca à travers des fo
     }
   ]
 {{< /members >}}
-
----
-
-## Gouvernance
-
-### Conseil d'administration
-
-- Collège A : Pia Andrews
-- Collège B : Lola Josseran (Institut des Politiques Publiques)
-- Collège C : Con Fountas (Salsa Digital)
-- Collège D : Hamish Fraser
-- Collège E : Mahdi Ben Jelloul
-
-### Directeur exécutif
-
-Matti Schneider
-
-## Documents officiels
-
-L'association OpenFisca est une association à but non lucratif de droit français (loi 1901).
-
-- [Statuts]({{< relref path="/association/statutes" >}})
-- [Règlement intérieur]({{< relref path="/association/rules-of-procedure" >}})
-- [Procès-verbaux des réunions du Conseil d'administration](https://cloud.openfisca.org/index.php/s/8DNNgcBtZYH9ejJ)
-- Numéro RNA : `W751278370`
-- Numéro SIRET : `94316249500015`

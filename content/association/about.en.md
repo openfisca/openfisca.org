@@ -1,5 +1,5 @@
 ---
-html_title: "About OpenFisca association"
+html_title: "About the OpenFisca Association"
 layout: association
 ---
 
@@ -24,6 +24,8 @@ The association's actions to achieve its purpose are carried out according to th
 Learn all about how the association works and why it matters by watching the official launch event keynote.
 
 <iframe title="OpenFisca Association Official Launch Event" src="https://videos.lescommuns.org/videos/embed/1467f08f-7236-46ac-a096-56510e90607a" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+
+- - -
 
 ## Governance
 
