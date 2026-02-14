@@ -16,7 +16,7 @@ layout: association
 <cite>[Article 2 des statuts]({{< relref path="/association/statutes" >}})</cite>
 
 {{< banner class="banner-dark mt-xl2" bgImage="true">}}
-  {{< button href="https://opencollective.com/openfisca" text="Rejoindre l'association" target="_blank" >}}
+  {{< button href="https://openfisca.assoconnect.com/collect/description/661352-g-individual-membership" text="Rejoindre l'association" target="_blank" >}}
   {{< button relref="/association/about" text="En savoir plus" type="secondary" >}}
 {{< /banner >}}
 
