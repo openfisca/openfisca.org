@@ -7,4 +7,4 @@ slug: reglement-interieur
 
 Le règlement intérieur n’est disponible qu'[en anglais]({{< relref path="/association/rules-of-procedure" lang="en" >}}) pour le moment. 
 
-Si vous avez besoin d’une version en français, n’hésitez pas à nous [contacter](mailto:contact@openfisca.org).
+Si vous avez besoin d’une version en français, n’hésitez pas à nous [contacter](mailto:contact@openfisca.org?subject=Traduction).
