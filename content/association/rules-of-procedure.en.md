@@ -94,6 +94,10 @@ The full fee is a flat 3% of every revenue (service, consulting…) that can be 
 
 For the avoidance of doubt: if the flat fee is above the minimum fee, only the flat fee is paid. The flat fee does not come on top of the minimum fee.
 
+##### c. Exemption for services paid for by the Association
+
+To prevent [kickbacks](https://en.wikipedia.org/wiki/Kickback_(finance)), revenue that is coming from contracts with the Association is exempt.
+
 #### D. College D (college of individuals who have contributed recently)
 
 Fees are the same as college A.
