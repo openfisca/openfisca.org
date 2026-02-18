@@ -73,7 +73,7 @@ For public entities, the number of users is considered to be the number of citiz
 
 #### C. College C (college of legal entities selling OpenFisca implementation support services)
 
-Fee is a flat 3% of every revenue (service, consulting…) that can be attributed to OpenFisca.
+##### a. Minimum yearly fee
 
 A minimum yearly fee applies, based on the number of collaborators (employees and contractors) working in the entity.
 
@@ -87,6 +87,12 @@ A minimum yearly fee applies, based on the number of collaborators (employees an
 | 51 – 100 | 10 000 € |
 | 101 – 999 | 30 000 € |
 | \> 1 000 | 50 000 € |
+
+##### b. Contract-based fee
+
+The full fee is a flat 3% of every revenue (service, consulting…) that can be attributed to OpenFisca.
+
+For the avoidance of doubt: if the flat fee is above the minimum fee, only the flat fee is paid. The flat fee does not come on top of the minimum fee.
 
 #### D. College D (college of individuals who have contributed recently)
 
