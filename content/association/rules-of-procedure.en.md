@@ -71,7 +71,7 @@ For public entities, the number of users is considered to be the number of citiz
 | 1M – 5M | 50% | 30 000 € |
 | \>5M | 100% | 60 000 € |
 
-For non-profit non-governmental organisations, a 90% discount applies.
+Non-profit, non-governmental organisations that are entirely volunteer-run (no employees) can apply for a 90% discount.
 
 #### C. College C (college of legal entities selling OpenFisca implementation support services)
 
