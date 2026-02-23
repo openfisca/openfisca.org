@@ -71,9 +71,11 @@ For public entities, the number of users is considered to be the number of citiz
 | 1M – 5M | 50% | 30 000 € |
 | \>5M | 100% | 60 000 € |
 
+Non-profit, non-governmental organisations that are entirely volunteer-run (no employees) can apply for a 90% discount.
+
 #### C. College C (college of legal entities selling OpenFisca implementation support services)
 
-Fee is a flat 3% of every revenue (service, consulting…) that can be attributed to OpenFisca.
+##### a. Minimum yearly fee
 
 A minimum yearly fee applies, based on the number of collaborators (employees and contractors) working in the entity.
 
@@ -87,6 +89,16 @@ A minimum yearly fee applies, based on the number of collaborators (employees an
 | 51 – 100 | 10 000 € |
 | 101 – 999 | 30 000 € |
 | \> 1 000 | 50 000 € |
+
+##### b. Contract-based fee
+
+The full fee is a flat 3% of every revenue (service, consulting…) that can be attributed to OpenFisca.
+
+For the avoidance of doubt: if the flat fee is above the minimum fee, only the flat fee is paid. The flat fee does not come on top of the minimum fee.
+
+##### c. Exemption for services paid for by the Association
+
+To prevent [kickbacks](https://en.wikipedia.org/wiki/Kickback_(finance)), revenue that is coming from contracts with the Association is exempt.
 
 #### D. College D (college of individuals who have contributed recently)
 
