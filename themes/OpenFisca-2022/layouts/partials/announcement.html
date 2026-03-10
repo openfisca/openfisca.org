@@ -1,0 +1,10 @@
+{{ with .Params.announcement }}
+  <div class="announcement">
+    <div class="announcement_content">
+      {{ if .text }}<p class="announcement_text">{{ .text }}</p>{{ end }}
+      {{ if .button }}
+        {{ partial "button.html" (dict "href" .button.href "text" .button.text "type" "secondary" "size" "small" "context" $) }}
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
