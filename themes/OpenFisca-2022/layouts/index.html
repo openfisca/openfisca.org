@@ -1,5 +1,7 @@
 {{ define "main" }}
 
+   {{ if .Params.announcement }}{{ partial "announcement.html" . }}{{ end }}
+
    {{ partial "hero.html" (dict "title" .Params.hero.title "subtitle" .Params.hero.subtitle "dark" "true" "testimonials" .Params.hero.testimonials "bg" "true") . }}
 
    {{ partial "columns.html" (dict "columns" .Params.for_who) . }}

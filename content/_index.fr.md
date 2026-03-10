@@ -1,5 +1,10 @@
 ---
 title: Transformer le code législatif en code logiciel
+announcement:
+  text: "🎉 30-31 mars 2026 Conférence internationale OpenFisca"
+  button:
+    text: "S'inscrire"
+    href: /en/conference/2026
 hero:
   title: Le moteur libre et open-source le plus utilisé pour transformer la loi en code
   subtitle: "Les administrations, les parlementaires et la société civile partagent enfin un langage commun pour débattre et actionner les politiques sociales et fiscales : OpenFisca permet de modéliser collaborativement les lois et règlementations et de les mettre à disposition des développeurs, des experts de la donnée et des chercheurs grâce à des API ouvertes."
