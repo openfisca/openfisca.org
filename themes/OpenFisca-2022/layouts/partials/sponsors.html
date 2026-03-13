@@ -1,0 +1,39 @@
+{{ with .sponsors }}
+  <div class="sponsors">
+    {{ range . }}
+      {{ if eq .type "placeholder" }}
+        <div class="sponsor sponsor-placeholder">
+          {{ range .content }}
+            {{ if eq .type "button" }}
+              {{ partial "button.html" (dict "target" "_blank" "href" .href "text" .text "class" .class "type" .buttonType) }}
+            {{ end }}
+            {{ if eq .type "iconLink" }}
+              {{ partial "iconLink.html" (dict "href" .href "icon" .icon "text" .text "class" .class "target" .target) }}
+            {{ end }}
+          {{ end }}
+        </div>
+      {{ else }}
+        {{ $imagePath := "img/sponsors/default.png" }}
+        {{ $imageResource := resources.Get $imagePath }}
+        {{ if .image }}
+          {{ $imagePath = printf "img/sponsors/%s" .image }}
+          {{ if resources.Get $imagePath }}
+            {{ $imageResource = resources.Get $imagePath }}
+          {{ end }}
+        {{ end }}
+        <div class="sponsor {{ if .href }}sponsor-hasLink{{ end }}">
+          {{ with $imageResource }}
+            <div class="sponsor_image">
+              <img src="{{ .RelPermalink }}" alt="{{ $.name }}">
+            </div>
+          {{ end }}
+          {{ with .name }}<h4 class="sponsor_name">{{ . }}</h4>{{ end }}
+          {{ with .href }}
+            <div class="sponsor_website">{{ replaceRE "^https?://(www\\.)?" "" . }}</div>
+            <a class="sponsor_link" target="_blank" href="{{ . | safeURL }}">{{ . | safeURL }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+    {{ end }}
+  </div>
+{{ end }}
