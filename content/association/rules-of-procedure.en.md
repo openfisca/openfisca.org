@@ -50,9 +50,11 @@ In order to even out renewals, college E members may anticipate the renewal of t
 
 #### A. College A (college of supporters)
 
-Fee is indexed on mean daily income in country of activity. The source data is the World Bank's [SI.SPR.PC40](https://data.worldbank.org/indicator/SI.SPR.PC40) indicator, converted to current euros.
+For natural persons, fee is indexed on mean daily income in country of activity. The source data is the World Bank's [SI.SPR.PC40](https://data.worldbank.org/indicator/SI.SPR.PC40) indicator, converted to current euros.
 
 If members do not want to disclose their country of activity or do not want to calculate their contribution, they must pay an amount higher than the highest value in the SI.SPR.PC40.
+
+For organisations, the fee is the minimum fee schedule of college C.
 
 #### B. College B (college of legal entities using OpenFisca)
 
