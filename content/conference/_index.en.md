@@ -13,4 +13,4 @@ To maximise value for international participants and increase discoverability, t
 
 ### [30<sup>th</sup>–31<sup>st</sup> March 2026, Canberra 🇦🇺<br/>Policy Innovation and Rules as Code]({{< relref path="2026" >}})
 
-### 17<sup>th</sup>–19<sup>th</sup> March 2025, Paris 🇫🇷<br/>Rules as Code Europe and Launch Event
+### [17<sup>th</sup>–19<sup>th</sup> March 2025, Paris 🇫🇷<br/>Rules as Code Europe and Association Launch Event]({{< relref path="2025" >}})
