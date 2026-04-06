@@ -11,6 +11,10 @@ In order to give representation to the diverse user and contributor base of Open
 
 To maximise value for international participants and increase discoverability, the Association aims at co-organising another local event with a broader focus alongside its yearly conference.
 
-### [30<sup>th</sup>–31<sup>st</sup> March 2026, Canberra 🇦🇺<br/>Policy Innovation and Rules as Code]({{< relref path="2026" >}})
+### 2026 — [Policy Innovation and Rules as Code]({{< relref path="2026" >}})
 
-### 17<sup>th</sup>–19<sup>th</sup> March 2025, Paris 🇫🇷<br/>Rules as Code Europe and Launch Event
+30<sup>th</sup>–31<sup>st</sup> March 2026, Canberra, Australia 🇦🇺
+
+### 2025 — [Rules as Code Europe and Association Launch Event]({{< relref path="2025" >}})
+
+17<sup>th</sup>–19<sup>th</sup> March 2025, Paris, France 🇫🇷

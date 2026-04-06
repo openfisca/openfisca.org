@@ -1,10 +1,5 @@
 ---
 title: Write rules as code
-announcement:
-  text: "🎉 30th–31st March 2026 OpenFisca International Conference"
-  button:
-    text: "Register now"
-    href: /en/conference/2026
 hero:
   title: The most widely adopted free and open-source engine to write rules as code
   subtitle: "Government departments, lawmakers and civil society finally share a common language to debate and activate social and fiscal policies: OpenFisca enables collaboratively modelling laws and regulations and making them computable over open APIs for developers, datascientists and researchers."
