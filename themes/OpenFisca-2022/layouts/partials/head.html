@@ -6,6 +6,9 @@
 	{{ $styles := resources.Get "css/loader.css" | toCSS | postCSS (dict "config" "./assets/css/postcss.config.cjs" "inlineImports" true) }}
 	{{ if hugo.IsProduction }}{{ $styles = $styles | minify | fingerprint | resources.PostProcess }}{{ end }}
 	<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+	{{ $printStyles := resources.Get "css/print.css" | toCSS | postCSS (dict "config" "./assets/css/postcss.config.cjs" "inlineImports" true) }}
+	{{ if hugo.IsProduction }}{{ $printStyles = $printStyles | minify | fingerprint | resources.PostProcess }}{{ end }}
+	<link rel="stylesheet" href="{{ $printStyles.RelPermalink }}" media="print" integrity="{{ $printStyles.Data.Integrity }}">
 	<link rel="apple-touch-icon" sizes="180x180" href={{ "favicon/apple-touch-icon.png" | absURL }}>
 	<link rel="icon" type="image/png" sizes="32x32" href={{ "favicon/favicon-32x32.png" | absURL }}>
 	<link rel="icon" type="image/png" sizes="16x16" href={{ "favicon/favicon-16x16.png" | absURL }}>
