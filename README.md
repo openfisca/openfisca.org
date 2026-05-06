@@ -118,7 +118,7 @@ The Hugo version is locked because of the dependencies in the CI environment. Th
 
 #### Node.js dependencies
 
-Install [Node.js](https://nodejs.org), which should also install NPM, then run `npm install`.
+Install [Node.js](https://nodejs.org), which should also install NPM, then run `npm ci`.
 
 ## Usage
 
