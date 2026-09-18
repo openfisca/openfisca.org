@@ -8,7 +8,6 @@ columns:
   title: Name
   website: Website
   source: Source
-  legislation_explorer: Legislation explorer
   openapi_spec: OpenAPI
 layout: packages
 ---

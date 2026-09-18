@@ -48,10 +48,6 @@ export default {
     type: String,
     use: {isUrl},
   },
-  legislation_explorer: {
-    type: String,
-    use: {isUrl},
-  },
   openapi_spec: {
     type: String,
     use: {isUrl},
