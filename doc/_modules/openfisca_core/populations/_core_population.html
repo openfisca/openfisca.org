@@ -121,10 +121,9 @@
   <h1>Source code for openfisca_core.populations._core_population</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeVar</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 
@@ -139,20 +138,20 @@
 <span class="p">)</span>
 
 <span class="c1">#: Type variable for a covariant data type.</span>
-<span class="n">_DT_co</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_DT_co&quot;</span><span class="p">,</span> <span class="n">covariant</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">VarDType</span><span class="p">)</span>
+<span class="n">_DT_co</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"_DT_co"</span><span class="p">,</span> <span class="n">covariant</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">VarDType</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="CorePopulation">
 <a class="viewcode-back" href="../../../openfisca-python-api/populations.html#openfisca_core.populations.CorePopulation">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CorePopulation</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class to build populations from.</span>
+<span class="w">    </span><span class="sd">"""Base class to build populations from.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        entity: The :class:`~entities.CoreEntity` of the population.</span>
 <span class="sd">        *__args: Variable length argument list.</span>
 <span class="sd">        **__kwds: Arbitrary keyword arguments.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1">#: The number :class:`~entities.CoreEntity` members in the population.</span>
     <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
@@ -178,7 +177,7 @@
         <span class="n">period</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodLike</span><span class="p">,</span>
         <span class="n">options</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Option</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">VarArray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate ``variable_name`` for ``period``, using the formula if it exists.</span>
+<span class="w">        </span><span class="sd">"""Calculate ``variable_name`` for ``period``, using the formula if it exists.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            variable_name: The name of the variable to calculate.</span>
@@ -205,16 +204,16 @@
 
 <span class="sd">            &gt;&gt;&gt; class Person(entities.SingleEntity): ...</span>
 
-<span class="sd">            &gt;&gt;&gt; person = Person(&quot;person&quot;, &quot;people&quot;, &quot;&quot;, &quot;&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; person = Person("person", "people", "", "")</span>
 <span class="sd">            &gt;&gt;&gt; period = periods.Period.eternity()</span>
 <span class="sd">            &gt;&gt;&gt; population = populations.CorePopulation(person)</span>
 <span class="sd">            &gt;&gt;&gt; population.count = 3</span>
-<span class="sd">            &gt;&gt;&gt; population(&quot;salary&quot;, period)</span>
+<span class="sd">            &gt;&gt;&gt; population("salary", period)</span>
 
 <span class="sd">            &gt;&gt;&gt; tbs = taxbenefitsystems.TaxBenefitSystem([person])</span>
 <span class="sd">            &gt;&gt;&gt; person.set_tax_benefit_system(tbs)</span>
 <span class="sd">            &gt;&gt;&gt; simulation = simulations.Simulation(tbs, {person.key: population})</span>
-<span class="sd">            &gt;&gt;&gt; population(&quot;salary&quot;, period)</span>
+<span class="sd">            &gt;&gt;&gt; population("salary", period)</span>
 <span class="sd">            Traceback (most recent call last):</span>
 <span class="sd">            VariableNotFoundError: You tried to calculate or to set a value ...</span>
 
@@ -243,21 +242,21 @@
 
 <span class="sd">            &gt;&gt;&gt; population(Tax().name, period, [populations.ADD])</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ValueError: Unable to ADD constant variable &#39;Tax&#39; over the perio...</span>
+<span class="sd">            ValueError: Unable to ADD constant variable 'Tax' over the perio...</span>
 
 <span class="sd">            &gt;&gt;&gt; population(Tax().name, period, [populations.DIVIDE])</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ValueError: Unable to DIVIDE constant variable &#39;Tax&#39; over the pe...</span>
+<span class="sd">            ValueError: Unable to DIVIDE constant variable 'Tax' over the pe...</span>
 
 <span class="sd">            &gt;&gt;&gt; population(Tax().name, period, [populations.ADD, populations.DIVIDE])</span>
 <span class="sd">            Traceback (most recent call last):</span>
 <span class="sd">            IncompatibleOptionsError: Options ADD and DIVIDE are incompatibl...</span>
 
-<span class="sd">            &gt;&gt;&gt; population(Tax().name, period, [&quot;LAGRANGIAN&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; population(Tax().name, period, ["LAGRANGIAN"])</span>
 <span class="sd">            Traceback (most recent call last):</span>
 <span class="sd">            InvalidOptionError: Option LAGRANGIAN is not a valid option (try...</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulation</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
 
@@ -295,7 +294,7 @@
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">empty_array</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">FloatArray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return an empty array.</span>
+<span class="w">        </span><span class="sd">"""Return an empty array.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ndarray[float32]: An empty array.</span>
@@ -315,13 +314,13 @@
 <span class="sd">            &gt;&gt;&gt; population.empty_array()</span>
 <span class="sd">            array([0., 0., 0.], dtype=float32)</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">FloatDType</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">filled_array</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">_DT_co</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">DTypeLike</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">_DT_co</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return an array filled with a value.</span>
+<span class="w">        </span><span class="sd">"""Return an array filled with a value.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: The value to fill the array with.</span>
@@ -346,17 +345,17 @@
 <span class="sd">            array([1., 1., 1.], dtype=float32)</span>
 
 <span class="sd">            &gt;&gt;&gt; population.filled_array(1, dtype=str)</span>
-<span class="sd">            array([&#39;1&#39;, &#39;1&#39;, &#39;1&#39;], dtype=&#39;&lt;U1&#39;)</span>
+<span class="sd">            array(['1', '1', '1'], dtype='&lt;U1')</span>
 
-<span class="sd">            &gt;&gt;&gt; population.filled_array(&quot;hola&quot;, dtype=numpy.uint8)</span>
+<span class="sd">            &gt;&gt;&gt; population.filled_array("hola", dtype=numpy.uint8)</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ValueError: could not convert string to float: &#39;hola&#39;</span>
+<span class="sd">            ValueError: could not convert string to float: 'hola'</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the index of an `id``.</span>
+<span class="w">        </span><span class="sd">"""Return the index of an `id``.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            id: The id to get the index for.</span>
@@ -369,24 +368,24 @@
 
 <span class="sd">            &gt;&gt;&gt; class Person(entities.SingleEntity): ...</span>
 
-<span class="sd">            &gt;&gt;&gt; person = Person(&quot;person&quot;, &quot;people&quot;, &quot;&quot;, &quot;&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; person = Person("person", "people", "", "")</span>
 <span class="sd">            &gt;&gt;&gt; population = populations.CorePopulation(person)</span>
-<span class="sd">            &gt;&gt;&gt; population.ids = [&quot;Juan&quot;, &quot;Megan&quot;, &quot;Brahim&quot;]</span>
+<span class="sd">            &gt;&gt;&gt; population.ids = ["Juan", "Megan", "Brahim"]</span>
 
-<span class="sd">            &gt;&gt;&gt; population.get_index(&quot;Megan&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; population.get_index("Megan")</span>
 <span class="sd">            1</span>
 
-<span class="sd">            &gt;&gt;&gt; population.get_index(&quot;Ibrahim&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; population.get_index("Ibrahim")</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ValueError: &#39;Ibrahim&#39; is not in list</span>
+<span class="sd">            ValueError: 'Ibrahim' is not in list</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ids</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 
     <span class="c1"># Calculations</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">check_array_compatible_with_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VarArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if an array is compatible with the population.</span>
+<span class="w">        </span><span class="sd">"""Check if an array is compatible with the population.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            array: The array to check.</span>
@@ -401,7 +400,7 @@
 
 <span class="sd">            &gt;&gt;&gt; class Person(entities.SingleEntity): ...</span>
 
-<span class="sd">            &gt;&gt;&gt; person = Person(&quot;person&quot;, &quot;people&quot;, &quot;&quot;, &quot;&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; person = Person("person", "people", "", "")</span>
 <span class="sd">            &gt;&gt;&gt; population = populations.CorePopulation(person)</span>
 <span class="sd">            &gt;&gt;&gt; population.count = 3</span>
 
@@ -413,7 +412,7 @@
 <span class="sd">            Traceback (most recent call last):</span>
 <span class="sd">            InvalidArraySizeError: Input [1 2 3 4] is not a valid value for t...</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="n">array</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="k">raise</span> <span class="n">InvalidArraySizeError</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
@@ -423,7 +422,7 @@
         <span class="n">variable_name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VariableName</span><span class="p">,</span>
         <span class="n">period</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodLike</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a period is valid.</span>
+<span class="w">        </span><span class="sd">"""Check if a period is valid.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            variable_name: The name of the variable.</span>
@@ -437,21 +436,21 @@
 
 <span class="sd">            &gt;&gt;&gt; class Person(entities.SingleEntity): ...</span>
 
-<span class="sd">            &gt;&gt;&gt; person = Person(&quot;person&quot;, &quot;people&quot;, &quot;&quot;, &quot;&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; period = periods.Period(&quot;2017-04&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; person = Person("person", "people", "", "")</span>
+<span class="sd">            &gt;&gt;&gt; period = periods.Period("2017-04")</span>
 <span class="sd">            &gt;&gt;&gt; population = populations.CorePopulation(person)</span>
 
-<span class="sd">            &gt;&gt;&gt; population.check_period_validity(&quot;salary&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; population.check_period_validity("salary")</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            PeriodValidityError: You requested computation of variable &quot;sala...</span>
+<span class="sd">            PeriodValidityError: You requested computation of variable "sala...</span>
 
-<span class="sd">            &gt;&gt;&gt; population.check_period_validity(&quot;salary&quot;, 2017)</span>
+<span class="sd">            &gt;&gt;&gt; population.check_period_validity("salary", 2017)</span>
 
-<span class="sd">            &gt;&gt;&gt; population.check_period_validity(&quot;salary&quot;, &quot;2017-04&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; population.check_period_validity("salary", "2017-04")</span>
 
-<span class="sd">            &gt;&gt;&gt; population.check_period_validity(&quot;salary&quot;, period)</span>
+<span class="sd">            &gt;&gt;&gt; population.check_period_validity("salary", period)</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">periods</span><span class="o">.</span><span class="n">Period</span><span class="p">)):</span>
             <span class="k">return</span>
         <span class="n">stack</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">extract_stack</span><span class="p">()</span>
@@ -461,7 +460,7 @@
     <span class="c1"># Helpers</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_holder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VariableName</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Holder</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the holder of a variable.</span>
+<span class="w">        </span><span class="sd">"""Return the holder of a variable.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            variable_name: The name of the variable.</span>
@@ -483,7 +482,7 @@
 
 <span class="sd">            &gt;&gt;&gt; class Person(entities.SingleEntity): ...</span>
 
-<span class="sd">            &gt;&gt;&gt; person = Person(&quot;person&quot;, &quot;people&quot;, &quot;&quot;, &quot;&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; person = Person("person", "people", "", "")</span>
 
 <span class="sd">            &gt;&gt;&gt; class Salary(variables.Variable):</span>
 <span class="sd">            ...     definition_period = periods.WEEK</span>
@@ -494,7 +493,7 @@
 <span class="sd">            &gt;&gt;&gt; person.set_tax_benefit_system(tbs)</span>
 <span class="sd">            &gt;&gt;&gt; population = populations.SinglePopulation(person)</span>
 <span class="sd">            &gt;&gt;&gt; simulation = simulations.Simulation(tbs, {person.key: population})</span>
-<span class="sd">            &gt;&gt;&gt; population.get_holder(&quot;income_tax&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; population.get_holder("income_tax")</span>
 <span class="sd">            Traceback (most recent call last):</span>
 <span class="sd">            VariableNotFoundError: You tried to calculate or to set a value ...</span>
 
@@ -505,7 +504,7 @@
 <span class="sd">            &gt;&gt;&gt; population.get_holder(salary.name)</span>
 <span class="sd">            &lt;openfisca_core.holders.holder.Holder object at ...</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">check_variable_defined_for_entity</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
         <span class="n">holder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_holders</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">holder</span><span class="p">:</span>
@@ -518,7 +517,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">VariableName</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">MemoryUsageByVariable</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the memory usage of the population per variable.</span>
+<span class="w">        </span><span class="sd">"""Return the memory usage of the population per variable.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            variables: The variables to get the memory usage for.</span>
@@ -540,7 +539,7 @@
 
 <span class="sd">            &gt;&gt;&gt; class Person(entities.SingleEntity): ...</span>
 
-<span class="sd">            &gt;&gt;&gt; person = Person(&quot;person&quot;, &quot;people&quot;, &quot;&quot;, &quot;&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; person = Person("person", "people", "", "")</span>
 
 <span class="sd">            &gt;&gt;&gt; class Salary(variables.Variable):</span>
 <span class="sd">            ...     definition_period = periods.WEEK</span>
@@ -555,12 +554,12 @@
 <span class="sd">            &gt;&gt;&gt; population._holders[salary.name] = holder</span>
 
 <span class="sd">            &gt;&gt;&gt; population.get_memory_usage()</span>
-<span class="sd">            {&#39;total_nb_bytes&#39;: 0, &#39;by_variable&#39;: {&#39;Salary&#39;: {&#39;nb_cells_by...}}}</span>
+<span class="sd">            {'total_nb_bytes': 0, 'by_variable': {'Salary': {'nb_cells_by...}}}</span>
 
 <span class="sd">            &gt;&gt;&gt; population.get_memory_usage([salary.name])</span>
-<span class="sd">            {&#39;total_nb_bytes&#39;: 0, &#39;by_variable&#39;: {&#39;Salary&#39;: {&#39;nb_cells_by...}}}</span>
+<span class="sd">            {'total_nb_bytes': 0, 'by_variable': {'Salary': {'nb_cells_by...}}}</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">holders_memory_usage</span> <span class="o">=</span> <span class="p">{</span>
             <span class="n">variable_name</span><span class="p">:</span> <span class="n">holder</span><span class="o">.</span><span class="n">get_memory_usage</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">holder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_holders</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
@@ -568,7 +567,7 @@
         <span class="p">}</span>
 
         <span class="n">total_memory_usage</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
-            <span class="n">holder_memory_usage</span><span class="p">[</span><span class="s2">&quot;total_nb_bytes&quot;</span><span class="p">]</span>
+            <span class="n">holder_memory_usage</span><span class="p">[</span><span class="s2">"total_nb_bytes"</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">holder_memory_usage</span> <span class="ow">in</span> <span class="n">holders_memory_usage</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
         <span class="p">)</span>
 
@@ -579,7 +578,7 @@
 
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;CorePopulation&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"CorePopulation"</span><span class="p">]</span>
 </pre></div>
 
           </div>

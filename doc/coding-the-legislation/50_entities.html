@@ -181,13 +181,13 @@
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">basic_income</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Household</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Basic income paid to households&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Basic income paid to households"</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="n">nb_adults</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">ADULT</span><span class="p">)</span>
         <span class="n">nb_children</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">nb_persons</span><span class="p">(</span><span class="n">Household</span><span class="o">.</span><span class="n">CHILD</span><span class="p">)</span>
-        <span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">members</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="n">sum_salaries</span> <span class="o">=</span> <span class="n">household</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">salaries</span><span class="p">)</span>
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">nb_adults</span> <span class="o">*</span> <span class="mi">500</span> <span class="o">+</span> <span class="n">nb_children</span> <span class="o">*</span> <span class="mi">200</span> <span class="o">-</span> <span class="n">sum_salaries</span>
@@ -204,12 +204,12 @@
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">college_scholarship</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;College Scholarship for basic income recipients.&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"College Scholarship for basic income recipients."</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-        <span class="n">is_student</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;is_student&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
-        <span class="n">has_household_basic_income</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">household</span><span class="p">(</span><span class="s1">&#39;basic_income&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">is_student</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'is_student'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">has_household_basic_income</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">household</span><span class="p">(</span><span class="s1">'basic_income'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
 
         <span class="k">return</span> <span class="n">is_student</span> <span class="o">*</span> <span class="n">has_household_basic_income</span> <span class="o">*</span> <span class="mi">100</span>
 </pre></div>
@@ -217,8 +217,8 @@
 <p>Similarly, <code class="docutils literal notranslate"><span class="pre">entity.unique_role('variable_name',</span> <span class="pre">period)</span></code> allows you to get the value of <code class="docutils literal notranslate"><span class="pre">variable_name</span></code> for <code class="docutils literal notranslate"><span class="pre">person</span></code> who has the role <code class="docutils literal notranslate"><span class="pre">unique_role</span></code> in <code class="docutils literal notranslate"><span class="pre">entity</span></code>.</p>
 <p>For instance, let’s assume <code class="docutils literal notranslate"><span class="pre">Household</span></code> has two unique roles, <code class="docutils literal notranslate"><span class="pre">main_declarant</span></code> and <code class="docutils literal notranslate"><span class="pre">partner</span></code>.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-    <span class="n">household</span><span class="o">.</span><span class="n">main_declarant</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="c1"># main declarant&#39;s salary</span>
-    <span class="n">household</span><span class="o">.</span><span class="n">partner</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="c1"># partner&#39;s salary</span>
+    <span class="n">household</span><span class="o">.</span><span class="n">main_declarant</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="c1"># main declarant's salary</span>
+    <span class="n">household</span><span class="o">.</span><span class="n">partner</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="c1"># partner's salary</span>
 </pre></div>
 </div>
 </section>

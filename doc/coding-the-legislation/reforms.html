@@ -152,13 +152,13 @@
 <p>We would write such a reform this way:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">income_tax</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Household</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Alternative formula to calculate the income tax, under experimentation&#39;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'Alternative formula to calculate the income tax, under experimentation'</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
         <span class="c1"># (...)</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">income_tax_reform</span><span class="p">(</span><span class="n">Reform</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Reform on income tax&#39;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'Reform on income tax'</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_variable</span><span class="p">(</span><span class="n">income_tax</span><span class="p">)</span>
@@ -184,13 +184,13 @@
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">periods</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">modify_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
-    <span class="n">reform_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s2">&quot;2015&quot;</span><span class="p">)</span>
+    <span class="n">reform_period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s2">"2015"</span><span class="p">)</span>
     <span class="n">parameters</span><span class="o">.</span><span class="n">tax_on_salary</span><span class="o">.</span><span class="n">brackets</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">threshold</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">period</span> <span class="o">=</span> <span class="n">reform_period</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">4000</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">parameters</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">increase_minimum_wage</span><span class="p">(</span><span class="n">Reform</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Increase the minimum wage&#39;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'Increase the minimum wage'</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">modify_parameters</span><span class="p">(</span><span class="n">modifier_function</span> <span class="o">=</span> <span class="n">modify_parameters</span><span class="p">)</span>
@@ -206,9 +206,9 @@
 <span class="n">dir_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">modify_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
-    <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="s1">&#39;plf2016.yaml&#39;</span><span class="p">)</span>
-    <span class="n">reform_parameters_subtree</span> <span class="o">=</span> <span class="n">load_parameter_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;plf2016&#39;</span><span class="p">)</span>
-    <span class="n">parameters</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s1">&#39;plf2016&#39;</span><span class="p">,</span> <span class="n">reform_parameters_subtree</span><span class="p">)</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="s1">'plf2016.yaml'</span><span class="p">)</span>
+    <span class="n">reform_parameters_subtree</span> <span class="o">=</span> <span class="n">load_parameter_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'plf2016'</span><span class="p">)</span>
+    <span class="n">parameters</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s1">'plf2016'</span><span class="p">,</span> <span class="n">reform_parameters_subtree</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">parameters</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">some_reform</span><span class="p">(</span><span class="n">Reform</span><span class="p">):</span>
@@ -224,22 +224,22 @@
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParameterNode</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">modify_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
-    <span class="n">reform_parameters_subtree</span> <span class="o">=</span> <span class="n">ParameterNode</span><span class="p">(</span><span class="s1">&#39;new_tax&#39;</span><span class="p">,</span> <span class="n">validated_yaml</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;decote_seuil_celib&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;2015-01-01&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)},</span>
-                <span class="s2">&quot;2016-01-01&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+    <span class="n">reform_parameters_subtree</span> <span class="o">=</span> <span class="n">ParameterNode</span><span class="p">(</span><span class="s1">'new_tax'</span><span class="p">,</span> <span class="n">validated_yaml</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'decote_seuil_celib'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'values'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"2015-01-01"</span><span class="p">:</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)},</span>
+                <span class="s2">"2016-01-01"</span><span class="p">:</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
                 <span class="p">}</span>
             <span class="p">},</span>
-        <span class="s1">&#39;decote_seuil_couple&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;2015-01-01&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">g</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)},</span>
-                <span class="s2">&quot;2016-01-01&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+        <span class="s1">'decote_seuil_couple'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'values'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"2015-01-01"</span><span class="p">:</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="n">g</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)},</span>
+                <span class="s2">"2016-01-01"</span><span class="p">:</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
                 <span class="p">}</span>
             <span class="p">},</span>
         <span class="p">})</span>
 
-    <span class="n">parameters</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s1">&#39;new_tax&#39;</span><span class="p">,</span> <span class="n">reform_parameters_subtree</span><span class="p">)</span>
+    <span class="n">parameters</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s1">'new_tax'</span><span class="p">,</span> <span class="n">reform_parameters_subtree</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">some_reform</span><span class="p">(</span><span class="n">Reform</span><span class="p">):</span>

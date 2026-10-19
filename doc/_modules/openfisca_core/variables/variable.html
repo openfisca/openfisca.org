@@ -121,16 +121,16 @@
   <h1>Source code for openfisca_core.variables.variable</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoReturn</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoReturn</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sortedcontainers</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">commons</span><span class="p">,</span> <span class="n">periods</span><span class="p">,</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">commons</span><span class="p">,</span> <span class="n">periods</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.entities</span><span class="w"> </span><span class="kn">import</span> <span class="n">Entity</span><span class="p">,</span> <span class="n">GroupEntity</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.indexed_enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">EnumArray</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core.periods</span><span class="w"> </span><span class="kn">import</span> <span class="n">DateUnit</span><span class="p">,</span> <span class="n">Period</span>
@@ -141,7 +141,7 @@
 <div class="viewcode-block" id="Variable">
 <a class="viewcode-back" href="../../../openfisca-python-api/variables.html#openfisca_core.variables.Variable">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Variable</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A `variable &lt;https://openfisca.org/doc/key-concepts/variables.html&gt;`_ of the legislation.</span>
+<span class="w">    </span><span class="sd">"""A `variable &lt;https://openfisca.org/doc/key-concepts/variables.html&gt;`_ of the legislation.</span>
 
 <span class="sd">    Main attributes:</span>
 
@@ -218,7 +218,7 @@
 <span class="sd">       .. attribute:: documentation</span>
 
 <span class="sd">           Free multilines text field describing the variable context and usage.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="vm">__name__</span><span class="p">:</span> <span class="nb">str</span>
 
@@ -227,74 +227,74 @@
         <span class="n">attr</span> <span class="o">=</span> <span class="p">{</span>
             <span class="n">name</span><span class="p">:</span> <span class="n">value</span>
             <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"__"</span><span class="p">)</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span> <span class="o">=</span> <span class="n">baseline_variable</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
             <span class="n">attr</span><span class="p">,</span>
-            <span class="s2">&quot;value_type&quot;</span><span class="p">,</span>
+            <span class="s2">"value_type"</span><span class="p">,</span>
             <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">allowed_values</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">VALUE_TYPES</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">][</span><span class="s2">&quot;dtype&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">json_type</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">][</span><span class="s2">&quot;json_type&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">][</span><span class="s2">"dtype"</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">json_type</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">][</span><span class="s2">"json_type"</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">Enum</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
                 <span class="n">attr</span><span class="p">,</span>
-                <span class="s2">&quot;possible_values&quot;</span><span class="p">,</span>
+                <span class="s2">"possible_values"</span><span class="p">,</span>
                 <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">setter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">set_possible_values</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">&quot;max_length&quot;</span><span class="p">,</span> <span class="n">allowed_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">"max_length"</span><span class="p">,</span> <span class="n">allowed_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;|S</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_length</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"|S</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_length</span><span class="si">}</span><span class="s2">"</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">Enum</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">default_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
                 <span class="n">attr</span><span class="p">,</span>
-                <span class="s2">&quot;default_value&quot;</span><span class="p">,</span>
+                <span class="s2">"default_value"</span><span class="p">,</span>
                 <span class="n">allowed_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span><span class="p">,</span>
                 <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">default_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
                 <span class="n">attr</span><span class="p">,</span>
-                <span class="s2">&quot;default_value&quot;</span><span class="p">,</span>
+                <span class="s2">"default_value"</span><span class="p">,</span>
                 <span class="n">allowed_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">,</span>
-                <span class="n">default</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">),</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"default"</span><span class="p">),</span>
             <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">&quot;entity&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">setter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">set_entity</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">"entity"</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">setter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">set_entity</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">definition_period</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
             <span class="n">attr</span><span class="p">,</span>
-            <span class="s2">&quot;definition_period&quot;</span><span class="p">,</span>
+            <span class="s2">"definition_period"</span><span class="p">,</span>
             <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">allowed_values</span><span class="o">=</span><span class="n">DateUnit</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="n">allowed_type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">setter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">set_label</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="n">allowed_type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">setter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">set_end</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">setter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">set_reference</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cerfa_field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">&quot;cerfa_field&quot;</span><span class="p">,</span> <span class="n">allowed_type</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span> <span class="n">allowed_type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">,</span> <span class="n">allowed_type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">setter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">set_label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">,</span> <span class="n">allowed_type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">setter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">set_end</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">"reference"</span><span class="p">,</span> <span class="n">setter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">set_reference</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cerfa_field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">"cerfa_field"</span><span class="p">,</span> <span class="n">allowed_type</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">,</span> <span class="n">allowed_type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">documentation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
             <span class="n">attr</span><span class="p">,</span>
-            <span class="s2">&quot;documentation&quot;</span><span class="p">,</span>
+            <span class="s2">"documentation"</span><span class="p">,</span>
             <span class="n">allowed_type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
             <span class="n">setter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">set_documentation</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_set_input</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;set_input&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_set_input</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"set_input"</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">calculate_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_calculate_output</span><span class="p">(</span>
-            <span class="n">attr</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;calculate_output&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">attr</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"calculate_output"</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_period_size_independent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
             <span class="n">attr</span><span class="p">,</span>
-            <span class="s2">&quot;is_period_size_independent&quot;</span><span class="p">,</span>
+            <span class="s2">"is_period_size_independent"</span><span class="p">,</span>
             <span class="n">allowed_type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
-            <span class="n">default</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">][</span><span class="s2">&quot;is_period_size_independent&quot;</span><span class="p">],</span>
+            <span class="n">default</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">VALUE_TYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_type</span><span class="p">][</span><span class="s2">"is_period_size_independent"</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">introspection_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
             <span class="n">attr</span><span class="p">,</span>
-            <span class="s2">&quot;introspection_data&quot;</span><span class="p">,</span>
+            <span class="s2">"introspection_data"</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="n">formulas_attr</span><span class="p">,</span> <span class="n">unexpected_attrs</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">_partition</span><span class="p">(</span>
@@ -304,9 +304,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">formulas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_formulas</span><span class="p">(</span><span class="n">formulas_attr</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">unexpected_attrs</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Unexpected attributes in definition of variable &quot;</span><span class="si">{}</span><span class="s1">&quot;: </span><span class="si">{!r}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">'Unexpected attributes in definition of variable "</span><span class="si">{}</span><span class="s1">": </span><span class="si">{!r}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">unexpected_attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
+                <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">unexpected_attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
             <span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="n">msg</span><span class="p">,</span>
@@ -330,12 +330,12 @@
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseline_variable</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">required</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Missing attribute &#39;</span><span class="si">{</span><span class="n">attribute_name</span><span class="si">}</span><span class="s2">&#39; in definition of variable &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Missing attribute '</span><span class="si">{</span><span class="n">attribute_name</span><span class="si">}</span><span class="s2">' in definition of variable '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">'."</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="n">msg</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">allowed_values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed_values</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39; for attribute &#39;</span><span class="si">{</span><span class="n">attribute_name</span><span class="si">}</span><span class="s2">&#39; in variable &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;. Allowed values are &#39;</span><span class="si">{</span><span class="n">allowed_values</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Invalid value '</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">' for attribute '</span><span class="si">{</span><span class="n">attribute_name</span><span class="si">}</span><span class="s2">' in variable '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">'. Allowed values are '</span><span class="si">{</span><span class="n">allowed_values</span><span class="si">}</span><span class="s2">'."</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="n">msg</span><span class="p">,</span>
             <span class="p">)</span>
@@ -347,7 +347,7 @@
             <span class="k">if</span> <span class="n">allowed_type</span> <span class="o">==</span> <span class="nb">float</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39; for attribute &#39;</span><span class="si">{</span><span class="n">attribute_name</span><span class="si">}</span><span class="s2">&#39; in variable &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;. Must be of type &#39;</span><span class="si">{</span><span class="n">allowed_type</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Invalid value '</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">' for attribute '</span><span class="si">{</span><span class="n">attribute_name</span><span class="si">}</span><span class="s2">' in variable '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">'. Must be of type '</span><span class="si">{</span><span class="n">allowed_type</span><span class="si">}</span><span class="s2">'."</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="n">msg</span><span class="p">,</span>
                 <span class="p">)</span>
@@ -360,8 +360,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">set_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="p">(</span><span class="n">Entity</span><span class="p">,</span> <span class="n">GroupEntity</span><span class="p">)):</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{</span><span class="n">entity</span><span class="si">}</span><span class="s2">&#39; for attribute &#39;entity&#39; in variable &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;. Must be an instance of Entity or GroupEntity.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Invalid value '</span><span class="si">{</span><span class="n">entity</span><span class="si">}</span><span class="s2">' for attribute 'entity' in variable "</span>
+                <span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">'. Must be an instance of Entity or GroupEntity."</span>
             <span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="n">msg</span><span class="p">,</span>
@@ -370,7 +370,7 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_possible_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">possible_values</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">possible_values</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Invalid value &#39;</span><span class="si">{</span><span class="n">possible_values</span><span class="si">}</span><span class="s2">&#39; for attribute &#39;possible_values&#39; in variable &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;. Must be a subclass of </span><span class="si">{</span><span class="n">Enum</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Invalid value '</span><span class="si">{</span><span class="n">possible_values</span><span class="si">}</span><span class="s2">' for attribute 'possible_values' in variable '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">'. Must be a subclass of </span><span class="si">{</span><span class="n">Enum</span><span class="si">}</span><span class="s2">."</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="n">msg</span><span class="p">,</span>
             <span class="p">)</span>
@@ -384,9 +384,9 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">set_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">end</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Incorrect &#39;end&#39; attribute format in &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;. &#39;YYYY-MM-DD&#39; expected where YYYY, MM and DD are year, month and day. Found: </span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Incorrect 'end' attribute format in '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">'. 'YYYY-MM-DD' expected where YYYY, MM and DD are year, month and day. Found: </span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">"</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="n">msg</span><span class="p">,</span>
                 <span class="p">)</span>
@@ -401,14 +401,14 @@
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
                 <span class="n">reference</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The reference of the variable </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span><span class="si">}</span><span class="s2"> instead of a String or a List of Strings.&quot;</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"The reference of the variable </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span><span class="si">}</span><span class="s2"> instead of a String or a List of Strings."</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
                     <span class="n">msg</span><span class="p">,</span>
                 <span class="p">)</span>
 
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">reference</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-                    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The reference of the variable </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span><span class="si">}</span><span class="s2"> instead of a String or a List of Strings.&quot;</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"The reference of the variable </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span><span class="si">}</span><span class="s2"> instead of a String or a List of Strings."</span>
                     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
                         <span class="n">msg</span><span class="p">,</span>
                     <span class="p">)</span>
@@ -436,7 +436,7 @@
             <span class="n">starting_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_formula_name</span><span class="p">(</span><span class="n">formula_name</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">starting_date</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;You declared that &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot; ends on &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="si">}</span><span class="s1">&quot;, but you wrote a formula to calculate it from &quot;</span><span class="si">{</span><span class="n">starting_date</span><span class="si">}</span><span class="s1">&quot; (</span><span class="si">{</span><span class="n">formula_name</span><span class="si">}</span><span class="s1">). The &quot;end&quot; attribute of a variable must be posterior to the start dates of all its formulas.&#39;</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'You declared that "</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">" ends on "</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="si">}</span><span class="s1">", but you wrote a formula to calculate it from "</span><span class="si">{</span><span class="n">starting_date</span><span class="si">}</span><span class="s1">" (</span><span class="si">{</span><span class="n">formula_name</span><span class="si">}</span><span class="s1">). The "end" attribute of a variable must be posterior to the start dates of all its formulas.'</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="n">msg</span><span class="p">,</span>
                 <span class="p">)</span>
@@ -460,18 +460,18 @@
 <div class="viewcode-block" id="Variable.parse_formula_name">
 <a class="viewcode-back" href="../../../openfisca-python-api/variables.html#openfisca_core.variables.Variable.parse_formula_name">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">parse_formula_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the starting date of a formula based on its name.</span>
+<span class="w">        </span><span class="sd">"""Returns the starting date of a formula based on its name.</span>
 
-<span class="sd">        Valid dated name formats are : &#39;formula&#39;, &#39;formula_YYYY&#39;, &#39;formula_YYYY_MM&#39; and &#39;formula_YYYY_MM_DD&#39; where YYYY, MM and DD are a year, month and day.</span>
+<span class="sd">        Valid dated name formats are : 'formula', 'formula_YYYY', 'formula_YYYY_MM' and 'formula_YYYY_MM_DD' where YYYY, MM and DD are a year, month and day.</span>
 
 <span class="sd">        By convention, the starting date of:</span>
 <span class="sd">            - `formula` is `0001-01-01` (minimal date in Python)</span>
 <span class="sd">            - `formula_YYYY` is `YYYY-01-01`</span>
 <span class="sd">            - `formula_YYYY_MM` is `YYYY-MM-01`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">raise_error</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Unrecognized formula name in variable &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;. Expecting &quot;formula_YYYY&quot; or &quot;formula_YYYY_MM&quot; or &quot;formula_YYYY_MM_DD where YYYY, MM and DD are year, month and day. Found: &quot;</span><span class="si">{</span><span class="n">attribute_name</span><span class="si">}</span><span class="s1">&quot;.&#39;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'Unrecognized formula name in variable "</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">". Expecting "formula_YYYY" or "formula_YYYY_MM" or "formula_YYYY_MM_DD where YYYY, MM and DD are year, month and day. Found: "</span><span class="si">{</span><span class="n">attribute_name</span><span class="si">}</span><span class="s1">".'</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="n">msg</span><span class="p">,</span>
             <span class="p">)</span>
@@ -479,17 +479,17 @@
         <span class="k">if</span> <span class="n">attribute_name</span> <span class="o">==</span> <span class="n">config</span><span class="o">.</span><span class="n">FORMULA_NAME_PREFIX</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">min</span>
 
-        <span class="n">FORMULA_REGEX</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;formula_(\d</span><span class="si">{4}</span><span class="s2">)(?:_(\d</span><span class="si">{2}</span><span class="s2">))?(?:_(\d</span><span class="si">{2}</span><span class="s2">))?$&quot;</span>  <span class="c1"># YYYY or YYYY_MM or YYYY_MM_DD</span>
+        <span class="n">FORMULA_REGEX</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"formula_(\d</span><span class="si">{4}</span><span class="s2">)(?:_(\d</span><span class="si">{2}</span><span class="s2">))?(?:_(\d</span><span class="si">{2}</span><span class="s2">))?$"</span>  <span class="c1"># YYYY or YYYY_MM or YYYY_MM_DD</span>
 
         <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">FORMULA_REGEX</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
             <span class="n">raise_error</span><span class="p">()</span>
-        <span class="n">date_str</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;01&quot;</span><span class="p">,</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;01&quot;</span><span class="p">],</span>
+        <span class="n">date_str</span> <span class="o">=</span> <span class="s2">"-"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">"01"</span><span class="p">,</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">"01"</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_str</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_str</span><span class="p">,</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>  <span class="c1"># formula_2005_99_99 for instance</span>
             <span class="n">raise_error</span><span class="p">()</span></div>
 
@@ -499,7 +499,7 @@
 <div class="viewcode-block" id="Variable.is_input_variable">
 <a class="viewcode-back" href="../../../openfisca-python-api/variables.html#openfisca_core.variables.Variable.is_input_variable">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_input_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the variable is an input variable.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Returns True if the variable is an input variable."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formulas</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></div>
 
 
@@ -508,7 +508,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">introspection_data</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span>
+            <span class="k">return</span> <span class="s2">""</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span>
 
 <div class="viewcode-block" id="Variable.get_formula">
 <a class="viewcode-back" href="../../../openfisca-python-api/variables.html#openfisca_core.variables.Variable.get_formula">[docs]</a>
@@ -516,7 +516,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">period</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Formula</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the formula to compute the variable at the given period.</span>
+<span class="w">        </span><span class="sd">"""Returns the formula to compute the variable at the given period.</span>
 
 <span class="sd">        If no period is given and the variable has several formulas, the method</span>
 <span class="sd">        returns the oldest formula.</span>
@@ -527,7 +527,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Formula used to compute the variable.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">instant</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">formulas</span><span class="p">:</span>
@@ -572,10 +572,10 @@
                 <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span><span class="p">[</span><span class="n">value</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="n">possible_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span><span class="p">]</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; is not a known value for &#39;</span><span class="si">{}</span><span class="s2">&#39;. Possible values are [&#39;</span><span class="si">{}</span><span class="s2">&#39;].&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">"'</span><span class="si">{}</span><span class="s2">' is not a known value for '</span><span class="si">{}</span><span class="s2">'. Possible values are ['</span><span class="si">{}</span><span class="s2">']."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">value</span><span class="p">,</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                    <span class="s2">&quot;&#39;, &#39;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">possible_values</span><span class="p">),</span>
+                    <span class="s2">"', '"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">possible_values</span><span class="p">),</span>
                 <span class="p">)</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="n">msg</span><span class="p">,</span>
@@ -587,12 +587,12 @@
             <span class="n">value</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">value</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">:</span>
-                <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Can&#39;t deal with date: &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+                <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Can't deal with date: '</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">'."</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Can&#39;t deal with value: expected type </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">json_type</span><span class="si">}</span><span class="s2">, received &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+                <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Can't deal with value: expected type </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">json_type</span><span class="si">}</span><span class="s2">, received '</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">'."</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">OverflowError</span><span class="p">:</span>
-            <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Can&#39;t deal with value: &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39;, it&#39;s too large for type &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">json_type</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+            <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Can't deal with value: '</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">', it's too large for type '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">json_type</span><span class="si">}</span><span class="s2">'."</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">value</span>

@@ -121,36 +121,51 @@
   <h1>Source code for openfisca_core.types</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Sized</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">DTypeLike</span><span class="p">,</span> <span class="n">NDArray</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NewType</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Required</span><span class="p">,</span> <span class="n">Self</span><span class="p">,</span> <span class="n">TypeAlias</span><span class="p">,</span> <span class="n">TypedDict</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">abc</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">enum</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Sized</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NewType</span><span class="p">,</span> <span class="n">Required</span><span class="p">,</span> <span class="n">Self</span><span class="p">,</span> <span class="n">TypeAlias</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pendulum</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">bool_</span> <span class="k">as</span> <span class="n">BoolDType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">bytes_</span> <span class="k">as</span> <span class="n">BytesDType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">datetime64</span> <span class="k">as</span> <span class="n">DateDType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">float32</span> <span class="k">as</span> <span class="n">FloatDType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">generic</span> <span class="k">as</span> <span class="n">VarDType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">int32</span> <span class="k">as</span> <span class="n">IntDType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">object_</span> <span class="k">as</span> <span class="n">ObjDType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">str_</span> <span class="k">as</span> <span class="n">StrDType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">uint8</span> <span class="k">as</span> <span class="n">EnumDType</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">DTypeLike</span><span class="p">,</span> <span class="n">NDArray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">TypedDict</span>
 
 <span class="c1">#: Generic covariant type var.</span>
-<span class="n">_T_co</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_T_co&quot;</span><span class="p">,</span> <span class="n">covariant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">_T_co</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"_T_co"</span><span class="p">,</span> <span class="n">covariant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Arrays</span>
 
 <span class="c1">#: Type var for numpy arrays.</span>
-<span class="n">_N_co</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_N_co&quot;</span><span class="p">,</span> <span class="n">covariant</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;DTypeGeneric&quot;</span><span class="p">)</span>
+<span class="n">_N_co</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"_N_co"</span><span class="p">,</span> <span class="n">covariant</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">"DTypeGeneric"</span><span class="p">)</span>
 
 <span class="c1">#: Type representing an numpy array.</span>
 <span class="n">Array</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">_N_co</span><span class="p">]</span>
@@ -185,7 +200,7 @@
 <span class="c1"># Arrays-like</span>
 
 <span class="c1">#: Type var for array-like objects.</span>
-<span class="n">_L</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_L&quot;</span><span class="p">)</span>
+<span class="n">_L</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"_L"</span><span class="p">)</span>
 
 <span class="c1">#: Type representing an array-like object.</span>
 <span class="n">ArrayLike</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">_L</span><span class="p">]</span>
@@ -211,10 +226,10 @@
 <span class="c1">#: Type for date arrays.</span>
 <span class="n">DTypeDate</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">datetime64</span>
 
-<span class="c1">#: Type for &quot;object&quot; arrays.</span>
+<span class="c1">#: Type for "object" arrays.</span>
 <span class="n">DTypeObject</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">object_</span>
 
-<span class="c1">#: Type for &quot;generic&quot; arrays.</span>
+<span class="c1">#: Type for "generic" arrays.</span>
 <span class="n">DTypeGeneric</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">generic</span>
 
 <span class="c1"># TODO(&lt;Mauko Quiroga-Alvarado&gt;): Properly resolve metaclass types.</span>
@@ -238,17 +253,17 @@
 
 <span class="c1"># Entities</span>
 
-<span class="c1">#: For example &quot;person&quot;.</span>
-<span class="n">EntityKey</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;EntityKey&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="c1">#: For example "person".</span>
+<span class="n">EntityKey</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">"EntityKey"</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 
-<span class="c1">#: For example &quot;persons&quot;.</span>
-<span class="n">EntityPlural</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;EntityPlural&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="c1">#: For example "persons".</span>
+<span class="n">EntityPlural</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">"EntityPlural"</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 
-<span class="c1">#: For example &quot;principal&quot;.</span>
-<span class="n">RoleKey</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;RoleKey&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="c1">#: For example "principal".</span>
+<span class="n">RoleKey</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">"RoleKey"</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 
-<span class="c1">#: For example &quot;parents&quot;.</span>
-<span class="n">RolePlural</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;RolePlural&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="c1">#: For example "parents".</span>
+<span class="n">RolePlural</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">"RolePlural"</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="CoreEntity">
@@ -323,7 +338,9 @@
 
 <div class="viewcode-block" id="EnumArray">
 <a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.EnumArray">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">EnumArray</span><span class="p">(</span><span class="n">Array</span><span class="p">[</span><span class="n">DTypeEnum</span><span class="p">],</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EnumArray</span><span class="p">(</span>
+    <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">[</span><span class="n">DTypeEnum</span><span class="p">]],</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span>
+<span class="p">):</span>
     <span class="n">possible_values</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">type</span><span class="p">[</span><span class="n">Enum</span><span class="p">]</span>
 
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
@@ -362,11 +379,11 @@
 
 <span class="c1">#: A type representing a node of parameters.</span>
 <span class="n">ParameterNode</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span>
-    <span class="s2">&quot;ParameterNodeAtInstant&quot;</span><span class="p">,</span> <span class="s2">&quot;VectorialParameterNodeAtInstant&quot;</span>
+    <span class="s2">"ParameterNodeAtInstant"</span><span class="p">,</span> <span class="s2">"VectorialParameterNodeAtInstant"</span>
 <span class="p">]</span>
 
 <span class="c1">#: A type representing a ???</span>
-<span class="n">ParameterNodeChild</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">ParameterNode</span><span class="p">,</span> <span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">]]</span>
+<span class="n">ParameterNodeChild</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">ParameterNode</span> <span class="o">|</span> <span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="ParameterNodeAtInstant">
@@ -397,17 +414,17 @@
 
 <span class="c1"># Periods</span>
 
-<span class="c1">#: Matches &quot;2015&quot;, &quot;2015-01&quot;, &quot;2015-01-01&quot; but not &quot;2015-13&quot;, &quot;2015-12-32&quot;.</span>
-<span class="n">iso_format</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">(-(?:0[1-9]|1[0-2])(-(?:0[1-9]|[12]\d|3[01]))?)?$&quot;</span><span class="p">)</span>
+<span class="c1">#: Matches "2015", "2015-01", "2015-01-01" but not "2015-13", "2015-12-32".</span>
+<span class="n">iso_format</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^\d</span><span class="si">{4}</span><span class="s2">(-(?:0[1-9]|1[0-2])(-(?:0[1-9]|[12]\d|3[01]))?)?$"</span><span class="p">)</span>
 
-<span class="c1">#: Matches &quot;2015&quot;, &quot;2015-W01&quot;, &quot;2015-W53-1&quot; but not &quot;2015-W54&quot;, &quot;2015-W10-8&quot;.</span>
-<span class="n">iso_calendar</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">(-W(0[1-9]|[1-4][0-9]|5[0-3]))?(-[1-7])?$&quot;</span><span class="p">)</span>
-
-<span class="c1">#: For example 2020.</span>
-<span class="n">InstantInt</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;InstantInt&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="c1">#: Matches "2015", "2015-W01", "2015-W53-1" but not "2015-W54", "2015-W10-8".</span>
+<span class="n">iso_calendar</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^\d</span><span class="si">{4}</span><span class="s2">(-W(0[1-9]|[1-4][0-9]|5[0-3]))?(-[1-7])?$"</span><span class="p">)</span>
 
 <span class="c1">#: For example 2020.</span>
-<span class="n">PeriodInt</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;PeriodInt&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">InstantInt</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">"InstantInt"</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+
+<span class="c1">#: For example 2020.</span>
+<span class="n">PeriodInt</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">"PeriodInt"</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_InstantStrMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
@@ -450,8 +467,8 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__instancecheck__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-            <span class="ow">and</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">arg</span>
-            <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">InstantStr</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="s2">":"</span> <span class="ow">in</span> <span class="n">arg</span>
+            <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">InstantStr</span><span class="p">)</span>
         <span class="p">)</span>
 
 
@@ -508,7 +525,7 @@
 
 <div class="viewcode-block" id="Period">
 <a class="viewcode-back" href="../../openfisca-python-api/types.html#openfisca_core.types.Period">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">Period</span><span class="p">(</span><span class="n">Indexable</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DateUnit</span><span class="p">,</span> <span class="n">Instant</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">Protocol</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Period</span><span class="p">(</span><span class="n">Indexable</span><span class="p">[</span><span class="n">DateUnit</span> <span class="o">|</span> <span class="n">Instant</span> <span class="o">|</span> <span class="nb">int</span><span class="p">],</span> <span class="n">Protocol</span><span class="p">):</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DateUnit</span><span class="p">:</span> <span class="o">...</span>
 
@@ -530,7 +547,7 @@
 
 
 <span class="c1">#: Type alias for a period-like object.</span>
-<span class="n">PeriodLike</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Period</span><span class="p">,</span> <span class="n">PeriodStr</span><span class="p">,</span> <span class="n">PeriodInt</span><span class="p">]</span>
+<span class="n">PeriodLike</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Period</span> <span class="o">|</span> <span class="n">PeriodStr</span> <span class="o">|</span> <span class="n">PeriodInt</span>
 
 <span class="c1"># Populations</span>
 
@@ -601,13 +618,13 @@
 <span class="n">Time</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="nb">float</span>
 
 <span class="c1">#: A type representing a mapping of flat traces.</span>
-<span class="n">FlatNodeMap</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">[</span><span class="s2">&quot;NodeKey&quot;</span><span class="p">,</span> <span class="s2">&quot;FlatTraceMap&quot;</span><span class="p">]</span>
+<span class="n">FlatNodeMap</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">[</span><span class="s2">"NodeKey"</span><span class="p">,</span> <span class="s2">"FlatTraceMap"</span><span class="p">]</span>
 
 <span class="c1">#: A type representing a mapping of serialized traces.</span>
-<span class="n">SerializedNodeMap</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">[</span><span class="s2">&quot;NodeKey&quot;</span><span class="p">,</span> <span class="s2">&quot;SerializedTraceMap&quot;</span><span class="p">]</span>
+<span class="n">SerializedNodeMap</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">[</span><span class="s2">"NodeKey"</span><span class="p">,</span> <span class="s2">"SerializedTraceMap"</span><span class="p">]</span>
 
 <span class="c1">#: Key of a trace.</span>
-<span class="n">NodeKey</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;NodeKey&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="n">NodeKey</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">"NodeKey"</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="FlatTraceMap">
@@ -731,8 +748,8 @@
 
 <span class="c1"># Variables</span>
 
-<span class="c1">#: For example &quot;salary&quot;.</span>
-<span class="n">VariableName</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">&quot;VariableName&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="c1">#: For example "salary".</span>
+<span class="n">VariableName</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s2">"VariableName"</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Variable">
@@ -769,7 +786,7 @@
 
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DTypeLike&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"DTypeLike"</span><span class="p">]</span>
 </pre></div>
 
           </div>

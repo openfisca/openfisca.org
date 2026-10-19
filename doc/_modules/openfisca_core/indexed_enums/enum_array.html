@@ -121,8 +121,7 @@
   <h1>Source code for openfisca_core.indexed_enums.enum_array</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoReturn</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Self</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoReturn</span><span class="p">,</span> <span class="n">Self</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 
@@ -132,7 +131,7 @@
 <div class="viewcode-block" id="EnumArray">
 <a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">EnumArray</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A subclass of :class:`~numpy.ndarray` of :class:`.Enum`.</span>
+<span class="w">    </span><span class="sd">"""A subclass of :class:`~numpy.ndarray` of :class:`.Enum`.</span>
 
 <span class="sd">    :class:`.Enum` arrays are encoded as :class:`int` to improve performance.</span>
 
@@ -147,22 +146,22 @@
 <span class="sd">        &gt;&gt;&gt; from openfisca_core import indexed_enums as enum, variables</span>
 
 <span class="sd">        &gt;&gt;&gt; class Housing(enum.Enum):</span>
-<span class="sd">        ...     OWNER = &quot;Owner&quot;</span>
-<span class="sd">        ...     TENANT = &quot;Tenant&quot;</span>
-<span class="sd">        ...     FREE_LODGER = &quot;Free lodger&quot;</span>
-<span class="sd">        ...     HOMELESS = &quot;Homeless&quot;</span>
+<span class="sd">        ...     OWNER = "Owner"</span>
+<span class="sd">        ...     TENANT = "Tenant"</span>
+<span class="sd">        ...     FREE_LODGER = "Free lodger"</span>
+<span class="sd">        ...     HOMELESS = "Homeless"</span>
 
 <span class="sd">        &gt;&gt;&gt; array = numpy.array([1], dtype=numpy.int16)</span>
 <span class="sd">        &gt;&gt;&gt; enum_array = enum.EnumArray(array, Housing)</span>
 
 <span class="sd">        &gt;&gt;&gt; repr(enum.EnumArray)</span>
-<span class="sd">        &quot;&lt;class &#39;openfisca_core.indexed_enums.enum_array.EnumArray&#39;&gt;&quot;</span>
+<span class="sd">        "&lt;class 'openfisca_core.indexed_enums.enum_array.EnumArray'&gt;"</span>
 
 <span class="sd">        &gt;&gt;&gt; repr(enum_array)</span>
-<span class="sd">        &#39;EnumArray([Housing.TENANT])&#39;</span>
+<span class="sd">        'EnumArray([Housing.TENANT])'</span>
 
 <span class="sd">        &gt;&gt;&gt; str(enum_array)</span>
-<span class="sd">        &quot;[&#39;TENANT&#39;]&quot;</span>
+<span class="sd">        "['TENANT']"</span>
 
 <span class="sd">        &gt;&gt;&gt; list(map(int, enum_array))</span>
 <span class="sd">        [1]</span>
@@ -178,7 +177,7 @@
 
 <span class="sd">        &gt;&gt;&gt; enum_array = enum.EnumArray(list(Housing), Housing)</span>
 <span class="sd">        Traceback (most recent call last):</span>
-<span class="sd">        AttributeError: &#39;list&#39; object has no attribute &#39;view&#39;</span>
+<span class="sd">        AttributeError: 'list' object has no attribute 'view'</span>
 
 <span class="sd">        &gt;&gt;&gt; class OccupancyStatus(variables.Variable):</span>
 <span class="sd">        ...     value_type = enum.Enum</span>
@@ -190,7 +189,7 @@
 <span class="sd">    .. _Subclassing ndarray:</span>
 <span class="sd">        https://numpy.org/doc/stable/user/basics.subclassing.html</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1">#: Enum type of the array items.</span>
     <span class="n">possible_values</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">type</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Enum</span><span class="p">]</span>
@@ -202,7 +201,7 @@
         <span class="n">input_array</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">IndexArray</span><span class="p">,</span>
         <span class="n">possible_values</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Enum</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;See comment above.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""See comment above."""</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">input_array</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">possible_values</span> <span class="o">=</span> <span class="n">possible_values</span>
         <span class="k">return</span> <span class="n">obj</span></div>
@@ -211,19 +210,19 @@
 <div class="viewcode-block" id="EnumArray.__array_finalize__">
 <a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.__array_finalize__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">__array_finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">EnumArray</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">VarArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;See comment above.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""See comment above."""</span>
         <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;possible_values&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">"possible_values"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="EnumArray.__eq__">
 <a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.__eq__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">BoolArray</span><span class="p">:</span>  <span class="c1"># type: ignore[override]</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compare equality with the item&#39;s :attr:`~.Enum.index`.</span>
+<span class="w">        </span><span class="sd">"""Compare equality with the item's :attr:`~.Enum.index`.</span>
 
 <span class="sd">        When comparing to an item of :attr:`.possible_values`, use the</span>
-<span class="sd">        item&#39;s :attr:`~.Enum.index`. to speed up the comparison.</span>
+<span class="sd">        item's :attr:`~.Enum.index`. to speed up the comparison.</span>
 
 <span class="sd">        Whenever possible, use :any:`numpy.ndarray.view` so that the result is</span>
 <span class="sd">        a classic :class:`~numpy.ndarray`, not an :obj:`.EnumArray`.</span>
@@ -241,8 +240,8 @@
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import indexed_enums as enum</span>
 
 <span class="sd">            &gt;&gt;&gt; class Housing(enum.Enum):</span>
-<span class="sd">            ...     OWNER = &quot;Owner&quot;</span>
-<span class="sd">            ...     TENANT = &quot;Tenant&quot;</span>
+<span class="sd">            ...     OWNER = "Owner"</span>
+<span class="sd">            ...     TENANT = "Tenant"</span>
 
 <span class="sd">            &gt;&gt;&gt; array = numpy.array([1])</span>
 <span class="sd">            &gt;&gt;&gt; enum_array = enum.EnumArray(array, Housing)</span>
@@ -262,7 +261,7 @@
 <span class="sd">            &gt;&gt;&gt; enum_array == [2]</span>
 <span class="sd">            array([False])</span>
 
-<span class="sd">            &gt;&gt;&gt; enum_array == &quot;1&quot;</span>
+<span class="sd">            &gt;&gt;&gt; enum_array == "1"</span>
 <span class="sd">            array([False])</span>
 
 <span class="sd">            &gt;&gt;&gt; enum_array is None</span>
@@ -277,7 +276,7 @@
 <span class="sd">        .. _Liskov substitution principle:</span>
 <span class="sd">            https://en.wikipedia.org/wiki/Liskov_substitution_principle</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">result</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">BoolArray</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -305,7 +304,7 @@
 <div class="viewcode-block" id="EnumArray.__ne__">
 <a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.__ne__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">BoolArray</span><span class="p">:</span>  <span class="c1"># type: ignore[override]</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Inequality.</span>
+<span class="w">        </span><span class="sd">"""Inequality.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            other: Another :class:`object` to compare to.</span>
@@ -320,8 +319,8 @@
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import indexed_enums as enum</span>
 
 <span class="sd">            &gt;&gt;&gt; class Housing(enum.Enum):</span>
-<span class="sd">            ...     OWNER = &quot;Owner&quot;</span>
-<span class="sd">            ...     TENANT = &quot;Tenant&quot;</span>
+<span class="sd">            ...     OWNER = "Owner"</span>
+<span class="sd">            ...     TENANT = "Tenant"</span>
 
 <span class="sd">            &gt;&gt;&gt; array = numpy.array([1])</span>
 <span class="sd">            &gt;&gt;&gt; enum_array = enum.EnumArray(array, Housing)</span>
@@ -341,7 +340,7 @@
 <span class="sd">            &gt;&gt;&gt; enum_array != [2]</span>
 <span class="sd">            array([ True])</span>
 
-<span class="sd">            &gt;&gt;&gt; enum_array != &quot;1&quot;</span>
+<span class="sd">            &gt;&gt;&gt; enum_array != "1"</span>
 <span class="sd">            array([ True])</span>
 
 <span class="sd">            &gt;&gt;&gt; enum_array is not None</span>
@@ -353,15 +352,15 @@
 <span class="sd">        .. _Liskov substitution principle:</span>
 <span class="sd">            https://en.wikipedia.org/wiki/Liskov_substitution_principle</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="bp">self</span> <span class="o">==</span> <span class="n">other</span><span class="p">)</span></div>
 
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_forbidden_operation</span><span class="p">(</span><span class="o">*</span><span class="n">__args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">**</span><span class="n">__kwds</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;Forbidden operation. The only operations allowed on EnumArrays &quot;</span>
-            <span class="s2">&quot;are &#39;==&#39; and &#39;!=&#39;.&quot;</span>
+            <span class="s2">"Forbidden operation. The only operations allowed on EnumArrays "</span>
+            <span class="s2">"are '==' and '!='."</span>
         <span class="p">)</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
@@ -377,7 +376,7 @@
 <div class="viewcode-block" id="EnumArray.decode">
 <a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.decode">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">ObjArray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decode itself to a normal array.</span>
+<span class="w">        </span><span class="sd">"""Decode itself to a normal array.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ndarray[Enum]: The items of the :obj:`.EnumArray`.</span>
@@ -391,20 +390,19 @@
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import indexed_enums as enum</span>
 
 <span class="sd">            &gt;&gt;&gt; class Housing(enum.Enum):</span>
-<span class="sd">            ...     OWNER = &quot;Owner&quot;</span>
-<span class="sd">            ...     TENANT = &quot;Tenant&quot;</span>
+<span class="sd">            ...     OWNER = "Owner"</span>
+<span class="sd">            ...     TENANT = "Tenant"</span>
 
 <span class="sd">            &gt;&gt;&gt; array = numpy.array([1])</span>
 <span class="sd">            &gt;&gt;&gt; enum_array = enum.EnumArray(array, Housing)</span>
 <span class="sd">            &gt;&gt;&gt; enum_array.decode()</span>
 <span class="sd">            array([Housing.TENANT], dtype=object)</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">result</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">ObjArray</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;The possible values of the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> are &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;not defined.&quot;</span>
+                <span class="sa">f</span><span class="s2">"The possible values of the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> are not defined."</span>
             <span class="p">)</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">EnumDType</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">self</span>
@@ -415,7 +413,7 @@
 <div class="viewcode-block" id="EnumArray.decode_to_str">
 <a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.EnumArray.decode_to_str">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">decode_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">StrArray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decode itself to an array of strings.</span>
+<span class="w">        </span><span class="sd">"""Decode itself to an array of strings.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ndarray[str_]: The string values of the :obj:`.EnumArray`.</span>
@@ -429,20 +427,19 @@
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import indexed_enums as enum</span>
 
 <span class="sd">            &gt;&gt;&gt; class Housing(enum.Enum):</span>
-<span class="sd">            ...     OWNER = &quot;Owner&quot;</span>
-<span class="sd">            ...     TENANT = &quot;Tenant&quot;</span>
+<span class="sd">            ...     OWNER = "Owner"</span>
+<span class="sd">            ...     TENANT = "Tenant"</span>
 
 <span class="sd">            &gt;&gt;&gt; array = numpy.array([1])</span>
 <span class="sd">            &gt;&gt;&gt; enum_array = enum.EnumArray(array, Housing)</span>
 <span class="sd">            &gt;&gt;&gt; enum_array.decode_to_str()</span>
-<span class="sd">            array([&#39;TENANT&#39;], dtype=&#39;&lt;U6&#39;)</span>
+<span class="sd">            array(['TENANT'], dtype='&lt;U6')</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">result</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">StrArray</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_values</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;The possible values of the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> are &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;not defined.&quot;</span>
+                <span class="sa">f</span><span class="s2">"The possible values of the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> are not defined."</span>
             <span class="p">)</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">EnumDType</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">self</span>
@@ -451,14 +448,14 @@
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">!s}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">!s}</span><span class="s2">)"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">decode_to_str</span><span class="p">())</span></div>
 
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;EnumArray&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"EnumArray"</span><span class="p">]</span>
 </pre></div>
 
           </div>

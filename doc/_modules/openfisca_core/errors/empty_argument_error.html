@@ -119,9 +119,7 @@
           <div class="document clearer body">
             
   <h1>Source code for openfisca_core.errors.empty_argument_error</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
@@ -130,7 +128,7 @@
 <div class="viewcode-block" id="EmptyArgumentError">
 <a class="viewcode-back" href="../../../openfisca-python-api/errors.html#openfisca_core.errors.EmptyArgumentError">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">EmptyArgumentError</span><span class="p">(</span><span class="ne">IndexError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception raised when a method is called with an empty argument.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Exception raised when a method is called with an empty argument."""</span>
 
     <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>
 
@@ -139,25 +137,27 @@
         <span class="n">class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">method_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">arg_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">arg_value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+        <span class="n">arg_value</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">message</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s2">&#39; can&#39;t be run with an empty &#39;</span><span class="si">{</span><span class="n">arg_name</span><span class="si">}</span><span class="s2">&#39;:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="sa">f</span><span class="s2">&quot;&gt;&gt;&gt; </span><span class="si">{</span><span class="n">arg_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">arg_value</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Here are some hints to help you get this working:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="sa">f</span><span class="s2">&quot;- Check that &#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&#39; isn&#39;t empty (see &#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">.add_bracket&#39;)&quot;</span><span class="p">,</span>
-            <span class="sa">f</span><span class="s2">&quot;- Check that &#39;</span><span class="si">{</span><span class="n">arg_name</span><span class="si">}</span><span class="s2">&#39; is being properly assigned &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;(&#39;</span><span class="si">{</span><span class="n">arg_name</span><span class="si">}</span><span class="s2">&#39; should be a non empty &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg_value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;For further support, please do not hesitate to:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;- Take a look at the official documentation https://openfisca.org/doc&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;- Open an issue on https://github.com/openfisca/openfisca-core/issues/new&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;- Mention us via https://twitter.com/openfisca&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;- Drop us a line to contact@openfisca.org</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;😃&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s2">' can't be run with an empty '</span><span class="si">{</span><span class="n">arg_name</span><span class="si">}</span><span class="s2">':</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"&gt;&gt;&gt; </span><span class="si">{</span><span class="n">arg_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">arg_value</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+            <span class="s2">"Here are some hints to help you get this working:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"- Check that '</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">' isn't empty (see '</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">.add_bracket')"</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"- Check that '</span><span class="si">{</span><span class="n">arg_name</span><span class="si">}</span><span class="s2">' is being properly assigned "</span>
+                <span class="sa">f</span><span class="s2">"('</span><span class="si">{</span><span class="n">arg_name</span><span class="si">}</span><span class="s2">' should be a non empty '</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg_value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">')</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="p">),</span>
+            <span class="s2">"For further support, please do not hesitate to:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+            <span class="s2">"- Take a look at the official documentation https://openfisca.org/doc"</span><span class="p">,</span>
+            <span class="s2">"- Open an issue on https://github.com/openfisca/openfisca-core/issues/new"</span><span class="p">,</span>
+            <span class="s2">"- Mention us via https://twitter.com/openfisca"</span><span class="p">,</span>
+            <span class="s2">"- Drop us a line to contact@openfisca.org</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+            <span class="s2">"😃"</span><span class="p">,</span>
         <span class="p">]</span>
         <span class="n">stacktrace</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">message</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">message</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">stacktrace</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">])</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
 

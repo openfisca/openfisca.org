@@ -135,7 +135,7 @@
     <span class="n">thresholds</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
     <span class="n">choices</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">FloatArray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a choice based on an input and thresholds.</span>
+<span class="w">    </span><span class="sd">"""Makes a choice based on an input and thresholds.</span>
 
 <span class="sd">    From a list of ``choices``, this function selects one of these values</span>
 <span class="sd">    based on a list of inputs, depending on the value of each ``input`` within</span>
@@ -156,7 +156,7 @@
 <span class="sd">        &gt;&gt;&gt; apply_thresholds(input, thresholds, choices)</span>
 <span class="sd">        array([10, 10, 15, 15, 20])</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">condlist</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">bool_</span><span class="p">]</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]</span>
     <span class="n">condlist</span> <span class="o">=</span> <span class="p">[</span><span class="nb">input</span> <span class="o">&lt;=</span> <span class="n">threshold</span> <span class="k">for</span> <span class="n">threshold</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">]</span>
 
@@ -166,8 +166,8 @@
         <span class="n">condlist</span> <span class="o">+=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span>
 
     <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;&#39;apply_thresholds&#39; must be called with the same number of thresholds &quot;</span>
-        <span class="s2">&quot;than choices, or one more choice.&quot;</span>
+        <span class="s2">"'apply_thresholds' must be called with the same number of thresholds "</span>
+        <span class="s2">"than choices, or one more choice."</span>
     <span class="p">)</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">condlist</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">choices</span><span class="p">),</span> <span class="n">msg</span>
 
@@ -181,7 +181,7 @@
     <span class="n">this</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">StrArray</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">],</span>
     <span class="n">that</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">StrArray</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">StrArray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Concatenate the values of two arrays.</span>
+<span class="w">    </span><span class="sd">"""Concatenate the values of two arrays.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        this: An array to concatenate.</span>
@@ -191,23 +191,23 @@
 <span class="sd">        ndarray[str_]: An array with the concatenated values.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; this = [&quot;this&quot;, &quot;that&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; this = ["this", "that"]</span>
 <span class="sd">        &gt;&gt;&gt; that = numpy.array([1, 2.5])</span>
 <span class="sd">        &gt;&gt;&gt; concat(this, that)</span>
-<span class="sd">        array([&#39;this1.0&#39;, &#39;that2.5&#39;]...)</span>
+<span class="sd">        array(['this1.0', 'that2.5']...)</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="n">this</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">str_</span><span class="p">):</span>
-        <span class="n">this</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>
+        <span class="n">this</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"str"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">that</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="n">that</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">that</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">that</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">str_</span><span class="p">):</span>
-        <span class="n">that</span> <span class="o">=</span> <span class="n">that</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>
+        <span class="n">that</span> <span class="o">=</span> <span class="n">that</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"str"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">that</span><span class="p">)</span></div>
 
@@ -219,7 +219,7 @@
     <span class="n">conditions</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">FloatArray</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
     <span class="n">value_by_condition</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">FloatArray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mimic a switch statement.</span>
+<span class="w">    </span><span class="sd">"""Mimic a switch statement.</span>
 
 <span class="sd">    Given an array of conditions, returns an array of the same size,</span>
 <span class="sd">    replacing each condition item with the matching given value.</span>
@@ -237,10 +237,10 @@
 <span class="sd">        &gt;&gt;&gt; switch(conditions, value_by_condition)</span>
 <span class="sd">        array([80, 80, 80, 90])</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">assert</span> <span class="p">(</span>
-        <span class="nb">len</span><span class="p">(</span><span class="n">value_by_condition</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="p">),</span> <span class="s2">&quot;&#39;switch&#39; must be called with at least one value.&quot;</span>
+<span class="sd">    """</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_by_condition</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span>
+        <span class="s2">"'switch' must be called with at least one value."</span>
+    <span class="p">)</span>
 
     <span class="n">condlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">conditions</span> <span class="o">==</span> <span class="n">condition</span> <span class="k">for</span> <span class="n">condition</span> <span class="ow">in</span> <span class="n">value_by_condition</span><span class="p">]</span>
 
@@ -248,7 +248,7 @@
 
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apply_thresholds&quot;</span><span class="p">,</span> <span class="s2">&quot;concat&quot;</span><span class="p">,</span> <span class="s2">&quot;switch&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"apply_thresholds"</span><span class="p">,</span> <span class="s2">"concat"</span><span class="p">,</span> <span class="s2">"switch"</span><span class="p">]</span>
 </pre></div>
 
           </div>

@@ -149,10 +149,10 @@
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Individualized and monthly paid tax on salaries&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Individualized and monthly paid tax on salaries"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-        <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">salary</span> <span class="o">*</span> <span class="mf">0.25</span>
 </pre></div>
 </div>
@@ -197,14 +197,14 @@ Available types are:</p>
 <section id="testing-a-formula">
 <h2>Testing a formula<a class="headerlink" href="#testing-a-formula" title="Link to this heading">¶</a></h2>
 <p>To make sure that the formula you have just written works the way you expect, you have to test it. Tests about the legislation are written in a <a class="reference internal" href="writing_yaml_tests.html"><span class="std std-doc">YAML syntax</span></a>. The <code class="docutils literal notranslate"><span class="pre">flat_tax_on_salary</span></code> formula can for instance be tested with the following test file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Flax</span><span class="nv"> </span><span class="s">tax</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">salary</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">No</span><span class="nv"> </span><span class="s">income&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Flax</span><span class="nv"> </span><span class="s">tax</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">salary</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">No</span><span class="nv"> </span><span class="s">income"</span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017-01</span>
 <span class="w">  </span><span class="nt">input</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">salary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
 <span class="w">  </span><span class="nt">output</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">flat_tax_on_salary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
 
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Flax</span><span class="nv"> </span><span class="s">tax</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">salary</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">With</span><span class="nv"> </span><span class="s">income&quot;</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Flax</span><span class="nv"> </span><span class="s">tax</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">salary</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">With</span><span class="nv"> </span><span class="s">income"</span>
 <span class="w">  </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017-01</span>
 <span class="w">  </span><span class="nt">input</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">salary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000</span>
@@ -220,11 +220,11 @@ Available types are:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">flat_tax_on_salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Individualized and monthly paid tax on salaries&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Individualized and monthly paid tax on salaries"</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">salary</span> <span class="o">*</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">taxes</span><span class="o">.</span><span class="n">salary</span><span class="o">.</span><span class="n">rate</span>
 </pre></div>

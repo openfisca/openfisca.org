@@ -143,7 +143,7 @@
 <div class="viewcode-block" id="Enum">
 <a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Enum</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">EnumType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enum based on `enum34 &lt;https://pypi.python.org/pypi/enum34/&gt;`_.</span>
+<span class="w">    </span><span class="sd">"""Enum based on `enum34 &lt;https://pypi.python.org/pypi/enum34/&gt;`_.</span>
 
 <span class="sd">    Its items have an :class:`int` index, useful and performant when running</span>
 <span class="sd">    :mod:`~openfisca_core.simulations` on large :mod:`~openfisca_core.populations`.</span>
@@ -152,30 +152,30 @@
 <span class="sd">        &gt;&gt;&gt; from openfisca_core import indexed_enums as enum</span>
 
 <span class="sd">        &gt;&gt;&gt; class Housing(enum.Enum):</span>
-<span class="sd">        ...     OWNER = &quot;Owner&quot;</span>
-<span class="sd">        ...     TENANT = &quot;Tenant&quot;</span>
-<span class="sd">        ...     FREE_LODGER = &quot;Free lodger&quot;</span>
-<span class="sd">        ...     HOMELESS = &quot;Homeless&quot;</span>
+<span class="sd">        ...     OWNER = "Owner"</span>
+<span class="sd">        ...     TENANT = "Tenant"</span>
+<span class="sd">        ...     FREE_LODGER = "Free lodger"</span>
+<span class="sd">        ...     HOMELESS = "Homeless"</span>
 
 <span class="sd">        &gt;&gt;&gt; repr(Housing)</span>
-<span class="sd">        &quot;&lt;enum &#39;Housing&#39;&gt;&quot;</span>
+<span class="sd">        "&lt;enum 'Housing'&gt;"</span>
 
 <span class="sd">        &gt;&gt;&gt; repr(Housing.TENANT)</span>
-<span class="sd">        &#39;Housing.TENANT&#39;</span>
+<span class="sd">        'Housing.TENANT'</span>
 
 <span class="sd">        &gt;&gt;&gt; str(Housing.TENANT)</span>
-<span class="sd">        &#39;Housing.TENANT&#39;</span>
+<span class="sd">        'Housing.TENANT'</span>
 
 <span class="sd">        &gt;&gt;&gt; dict([(Housing.TENANT, Housing.TENANT.value)])</span>
-<span class="sd">        {Housing.TENANT: &#39;Tenant&#39;}</span>
+<span class="sd">        {Housing.TENANT: 'Tenant'}</span>
 
 <span class="sd">        &gt;&gt;&gt; list(Housing)</span>
 <span class="sd">        [Housing.OWNER, Housing.TENANT, Housing.FREE_LODGER, Housing.HOMELESS]</span>
 
-<span class="sd">        &gt;&gt;&gt; Housing[&quot;TENANT&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; Housing["TENANT"]</span>
 <span class="sd">        Housing.TENANT</span>
 
-<span class="sd">        &gt;&gt;&gt; Housing(&quot;Tenant&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; Housing("Tenant")</span>
 <span class="sd">        Housing.TENANT</span>
 
 <span class="sd">        &gt;&gt;&gt; Housing.TENANT in Housing</span>
@@ -194,18 +194,18 @@
 <span class="sd">        1</span>
 
 <span class="sd">        &gt;&gt;&gt; Housing.TENANT.name</span>
-<span class="sd">        &#39;TENANT&#39;</span>
+<span class="sd">        'TENANT'</span>
 
 <span class="sd">        &gt;&gt;&gt; Housing.TENANT.value</span>
-<span class="sd">        &#39;Tenant&#39;</span>
+<span class="sd">        'Tenant'</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1">#: The :attr:`index` of the :class:`.Enum` member.</span>
     <span class="n">index</span><span class="p">:</span> <span class="nb">int</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">__args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">**</span><span class="n">__kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Tweak :class:`enum.Enum` to add an :attr:`.index` to each enum item.</span>
+<span class="w">        </span><span class="sd">"""Tweak :class:`enum.Enum` to add an :attr:`.index` to each enum item.</span>
 
 <span class="sd">        When the enum is initialised, ``_member_names_`` contains the names of</span>
 <span class="sd">        the already initialized items, so its length is the index of this item.</span>
@@ -219,13 +219,13 @@
 
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import indexed_enums as enum</span>
 
-<span class="sd">            &gt;&gt;&gt; Housing = enum.Enum(&quot;Housing&quot;, &quot;owner tenant&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; Housing = enum.Enum("Housing", "owner tenant")</span>
 <span class="sd">            &gt;&gt;&gt; Housing.tenant.index</span>
 <span class="sd">            1</span>
 
 <span class="sd">            &gt;&gt;&gt; class Housing(enum.Enum):</span>
-<span class="sd">            ...     OWNER = &quot;Owner&quot;</span>
-<span class="sd">            ...     TENANT = &quot;Tenant&quot;</span>
+<span class="sd">            ...     OWNER = "Owner"</span>
+<span class="sd">            ...     TENANT = "Tenant"</span>
 
 <span class="sd">            &gt;&gt;&gt; Housing.TENANT.index</span>
 <span class="sd">            1</span>
@@ -237,17 +237,17 @@
 <span class="sd">        Note:</span>
 <span class="sd">            ``_member_names_`` is undocumented in upstream :class:`enum.Enum`.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_member_names_</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span>
 
 <div class="viewcode-block" id="Enum.encode">
 <a class="viewcode-back" href="../../../openfisca-python-api/enum_array.html#openfisca_core.indexed_enums.Enum.encode">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VarArray</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">[</span><span class="nb">object</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">EnumArray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Encode an encodable array into an :class:`.EnumArray`.</span>
+<span class="w">        </span><span class="sd">"""Encode an encodable array into an :class:`.EnumArray`.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            array: :class:`~numpy.ndarray` to encode.</span>
@@ -261,8 +261,8 @@
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import indexed_enums as enum</span>
 
 <span class="sd">            &gt;&gt;&gt; class Housing(enum.Enum):</span>
-<span class="sd">            ...     OWNER = &quot;Owner&quot;</span>
-<span class="sd">            ...     TENANT = &quot;Tenant&quot;</span>
+<span class="sd">            ...     OWNER = "Owner"</span>
+<span class="sd">            ...     TENANT = "Tenant"</span>
 
 <span class="sd">            # EnumArray</span>
 
@@ -287,22 +287,22 @@
 
 <span class="sd">            # Array of strings</span>
 
-<span class="sd">            &gt;&gt;&gt; array = numpy.array([&quot;TENANT&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; array = numpy.array(["TENANT"])</span>
 <span class="sd">            &gt;&gt;&gt; enum_array = Housing.encode(array)</span>
 <span class="sd">            &gt;&gt;&gt; enum_array == Housing.TENANT</span>
 <span class="sd">            array([ True])</span>
 
 <span class="sd">            # Array of bytes</span>
 
-<span class="sd">            &gt;&gt;&gt; array = numpy.array([b&quot;TENANT&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; array = numpy.array([b"TENANT"])</span>
 <span class="sd">            &gt;&gt;&gt; enum_array = Housing.encode(array)</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            EnumEncodingError: Failed to encode &quot;[b&#39;TENANT&#39;]&quot; of type &#39;bytes...</span>
+<span class="sd">            EnumEncodingError: Failed to encode "[b'TENANT']" of type 'bytes...</span>
 
 <span class="sd">        .. seealso::</span>
 <span class="sd">            :meth:`.EnumArray.decode` for decoding.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">array</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -342,7 +342,7 @@
 
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Enum&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Enum"</span><span class="p">]</span>
 </pre></div>
 
           </div>

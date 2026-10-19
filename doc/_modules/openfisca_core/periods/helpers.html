@@ -121,10 +121,9 @@
   <h1>Source code for openfisca_core.periods.helpers</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoReturn</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoReturn</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pendulum</span>
 
@@ -142,7 +141,7 @@
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.helpers.instant">[docs]</a>
 <span class="nd">@functools</span><span class="o">.</span><span class="n">singledispatch</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">instant</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a new instant, aka a triple of integers (year, month, day).</span>
+<span class="w">    </span><span class="sd">"""Build a new instant, aka a triple of integers (year, month, day).</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        value(object): An ``instant-like`` object.</span>
@@ -151,7 +150,7 @@
 <span class="sd">        :obj:`.Instant`: A new instant.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        :exc:`ValueError`: When the arguments were invalid, like &quot;2021-32-13&quot;.</span>
+<span class="sd">        :exc:`ValueError`: When the arguments were invalid, like "2021-32-13".</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; instant((2021,))</span>
@@ -172,7 +171,7 @@
 <span class="sd">        &gt;&gt;&gt; instant(2021)</span>
 <span class="sd">        Instant((2021, 1, 1))</span>
 
-<span class="sd">        &gt;&gt;&gt; instant(&quot;2021&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; instant("2021")</span>
 <span class="sd">        Instant((2021, 1, 1))</span>
 
 <span class="sd">        &gt;&gt;&gt; instant([2021])</span>
@@ -183,9 +182,9 @@
 
 <span class="sd">        &gt;&gt;&gt; instant(None)</span>
 <span class="sd">        Traceback (most recent call last):</span>
-<span class="sd">        openfisca_core.periods._errors.InstantError: &#39;None&#39; is not a valid i...</span>
+<span class="sd">        openfisca_core.periods._errors.InstantError: 'None' is not a valid i...</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">SeqInt</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Instant</span><span class="p">((</span><span class="nb">list</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)[:</span><span class="mi">3</span><span class="p">])</span>
@@ -227,7 +226,7 @@
 <div class="viewcode-block" id="instant_date">
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.helpers.instant_date">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">instant_date</span><span class="p">(</span><span class="n">instant</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the date representation of an ``Instant``.</span>
+<span class="w">    </span><span class="sd">"""Returns the date representation of an ``Instant``.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        instant: An ``Instant``.</span>
@@ -240,7 +239,7 @@
 <span class="sd">        &gt;&gt;&gt; instant_date(Instant((2021, 1, 1)))</span>
 <span class="sd">        Date(2021, 1, 1)</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">instant</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
 
@@ -257,7 +256,7 @@
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.helpers.period">[docs]</a>
 <span class="nd">@functools</span><span class="o">.</span><span class="n">singledispatch</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">period</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a new period, aka a triple (unit, start_instant, size).</span>
+<span class="w">    </span><span class="sd">"""Build a new period, aka a triple (unit, start_instant, size).</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        value: A ``period-like`` object.</span>
@@ -266,45 +265,45 @@
 <span class="sd">        :obj:`.Period`: A period.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        :exc:`ValueError`: When the arguments were invalid, like &quot;2021-32-13&quot;.</span>
+<span class="sd">        :exc:`ValueError`: When the arguments were invalid, like "2021-32-13".</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; period(Period((DateUnit.YEAR, Instant((2021, 1, 1)), 1)))</span>
-<span class="sd">        Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2021, 1, 1)), 1))</span>
+<span class="sd">        Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2021, 1, 1)), 1))</span>
 
 <span class="sd">        &gt;&gt;&gt; period(Instant((2021, 1, 1)))</span>
-<span class="sd">        Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2021, 1, 1)), 1))</span>
+<span class="sd">        Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2021, 1, 1)), 1))</span>
 
 <span class="sd">        &gt;&gt;&gt; period(DateUnit.ETERNITY)</span>
-<span class="sd">        Period((&lt;DateUnit.ETERNITY: &#39;eternity&#39;&gt;, Instant((-1, -1, -1)), -1))</span>
+<span class="sd">        Period((&lt;DateUnit.ETERNITY: 'eternity'&gt;, Instant((-1, -1, -1)), -1))</span>
 
 <span class="sd">        &gt;&gt;&gt; period(2021)</span>
-<span class="sd">        Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2021, 1, 1)), 1))</span>
+<span class="sd">        Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2021, 1, 1)), 1))</span>
 
-<span class="sd">        &gt;&gt;&gt; period(&quot;2014&quot;)</span>
-<span class="sd">        Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 1, 1)), 1))</span>
+<span class="sd">        &gt;&gt;&gt; period("2014")</span>
+<span class="sd">        Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 1, 1)), 1))</span>
 
-<span class="sd">        &gt;&gt;&gt; period(&quot;year:2014&quot;)</span>
-<span class="sd">        Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 1, 1)), 1))</span>
+<span class="sd">        &gt;&gt;&gt; period("year:2014")</span>
+<span class="sd">        Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 1, 1)), 1))</span>
 
-<span class="sd">        &gt;&gt;&gt; period(&quot;month:2014-02&quot;)</span>
-<span class="sd">        Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 2, 1)), 1))</span>
+<span class="sd">        &gt;&gt;&gt; period("month:2014-02")</span>
+<span class="sd">        Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 2, 1)), 1))</span>
 
-<span class="sd">        &gt;&gt;&gt; period(&quot;year:2014-02&quot;)</span>
-<span class="sd">        Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 2, 1)), 1))</span>
+<span class="sd">        &gt;&gt;&gt; period("year:2014-02")</span>
+<span class="sd">        Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 2, 1)), 1))</span>
 
-<span class="sd">        &gt;&gt;&gt; period(&quot;day:2014-02-02&quot;)</span>
-<span class="sd">        Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2014, 2, 2)), 1))</span>
+<span class="sd">        &gt;&gt;&gt; period("day:2014-02-02")</span>
+<span class="sd">        Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2014, 2, 2)), 1))</span>
 
-<span class="sd">        &gt;&gt;&gt; period(&quot;day:2014-02-02:3&quot;)</span>
-<span class="sd">        Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2014, 2, 2)), 3))</span>
+<span class="sd">        &gt;&gt;&gt; period("day:2014-02-02:3")</span>
+<span class="sd">        Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2014, 2, 2)), 3))</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">three</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
 
-    <span class="c1"># We return an &quot;eternity-period&quot;, for example</span>
-    <span class="c1"># ``&lt;Period((&#39;eternity&#39;, &lt;Instant(-1, -1, -1)&gt;, -1))&gt;``.</span>
+    <span class="c1"># We return an "eternity-period", for example</span>
+    <span class="c1"># ``&lt;Period(('eternity', &lt;Instant(-1, -1, -1)&gt;, -1))&gt;``.</span>
     <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Period</span><span class="o">.</span><span class="n">eternity</span><span class="p">()</span>
 
@@ -312,9 +311,9 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">InstantStr</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">parse_period</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
-    <span class="c1"># A complex period has a &#39;:&#39; in its string.</span>
+    <span class="c1"># A complex period has a ':' in its string.</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">):</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)</span>
 
         <span class="c1"># The left-most component must be a valid unit</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -340,7 +339,7 @@
             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">PeriodError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span>
 
-        <span class="c1"># If there are more than 2 &quot;:&quot; in the string, the period is invalid</span>
+        <span class="c1"># If there are more than 2 ":" in the string, the period is invalid</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">PeriodError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
@@ -382,7 +381,7 @@
 <div class="viewcode-block" id="key_period_size">
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.helpers.key_period_size">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">key_period_size</span><span class="p">(</span><span class="n">period</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Define a key in order to sort periods by length.</span>
+<span class="w">    </span><span class="sd">"""Define a key in order to sort periods by length.</span>
 
 <span class="sd">    It uses two aspects: first, ``unit``, then, ``size``.</span>
 
@@ -397,28 +396,28 @@
 
 <span class="sd">        &gt;&gt;&gt; period = Period((DateUnit.DAY, instant, 1))</span>
 <span class="sd">        &gt;&gt;&gt; key_period_size(period)</span>
-<span class="sd">        &#39;100_1&#39;</span>
+<span class="sd">        '100_1'</span>
 
 <span class="sd">        &gt;&gt;&gt; period = Period((DateUnit.YEAR, instant, 3))</span>
 <span class="sd">        &gt;&gt;&gt; key_period_size(period)</span>
-<span class="sd">        &#39;300_3&#39;</span>
+<span class="sd">        '300_3'</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">unit_weight</span><span class="p">(</span><span class="n">period</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">period</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span></div>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">unit_weight</span><span class="p">(</span><span class="n">period</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">period</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2">"</span></div>
 
 
 
 <div class="viewcode-block" id="unit_weights">
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.helpers.unit_weights">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">unit_weights</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">DateUnit</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assign weights to date units.</span>
+<span class="w">    </span><span class="sd">"""Assign weights to date units.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; unit_weights()</span>
-<span class="sd">        {&lt;DateUnit.WEEKDAY: &#39;weekday&#39;&gt;: 100, ...ETERNITY: &#39;eternity&#39;&gt;: 400}</span>
+<span class="sd">        {&lt;DateUnit.WEEKDAY: 'weekday'&gt;: 100, ...ETERNITY: 'eternity'&gt;: 400}</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEKDAY</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
         <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
@@ -433,24 +432,24 @@
 <div class="viewcode-block" id="unit_weight">
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.helpers.unit_weight">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">unit_weight</span><span class="p">(</span><span class="n">unit</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">DateUnit</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieves a specific date unit weight.</span>
+<span class="w">    </span><span class="sd">"""Retrieves a specific date unit weight.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; unit_weight(DateUnit.DAY)</span>
 <span class="sd">        100</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">unit_weights</span><span class="p">()[</span><span class="n">unit</span><span class="p">]</span></div>
 
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;instant&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;instant_date&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;key_period_size&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;period&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;unit_weight&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;unit_weights&quot;</span><span class="p">,</span>
+    <span class="s2">"instant"</span><span class="p">,</span>
+    <span class="s2">"instant_date"</span><span class="p">,</span>
+    <span class="s2">"key_period_size"</span><span class="p">,</span>
+    <span class="s2">"period"</span><span class="p">,</span>
+    <span class="s2">"unit_weight"</span><span class="p">,</span>
+    <span class="s2">"unit_weights"</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 

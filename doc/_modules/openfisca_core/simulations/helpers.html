@@ -136,9 +136,9 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">check_type</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">input_type</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">json_type_map</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nb">dict</span><span class="p">:</span> <span class="s2">&quot;Object&quot;</span><span class="p">,</span>
-        <span class="nb">list</span><span class="p">:</span> <span class="s2">&quot;Array&quot;</span><span class="p">,</span>
-        <span class="nb">str</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span>
+        <span class="nb">dict</span><span class="p">:</span> <span class="s2">"Object"</span><span class="p">,</span>
+        <span class="nb">list</span><span class="p">:</span> <span class="s2">"Array"</span><span class="p">,</span>
+        <span class="nb">str</span><span class="p">:</span> <span class="s2">"String"</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -147,7 +147,7 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">input_type</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">SituationParsingError</span><span class="p">(</span>
             <span class="n">path</span><span class="p">,</span>
-            <span class="sa">f</span><span class="s2">&quot;Invalid type: must be of type &#39;</span><span class="si">{</span><span class="n">json_type_map</span><span class="p">[</span><span class="n">input_type</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"Invalid type: must be of type '</span><span class="si">{</span><span class="n">json_type_map</span><span class="p">[</span><span class="n">input_type</span><span class="p">]</span><span class="si">}</span><span class="s2">'."</span><span class="p">,</span>
         <span class="p">)</span>
 
 
@@ -157,7 +157,7 @@
     <span class="n">params</span><span class="p">:</span> <span class="n">ParamsWithoutAxes</span><span class="p">,</span>
     <span class="n">entities</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the input contains entities that are not in the system.</span>
+<span class="w">    </span><span class="sd">"""Check if the input contains entities that are not in the system.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        params(ParamsWithoutAxes): Simulation parameters.</span>
@@ -167,30 +167,30 @@
 <span class="sd">        SituationParsingError: If there are entities that are not in the system.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; entities = {&quot;persons&quot;, &quot;households&quot;}</span>
+<span class="sd">        &gt;&gt;&gt; entities = {"persons", "households"}</span>
 
 <span class="sd">        &gt;&gt;&gt; params = {</span>
-<span class="sd">        ...     &quot;persons&quot;: {&quot;Javier&quot;: {&quot;salary&quot;: {&quot;2018-11&quot;: 2000}}},</span>
-<span class="sd">        ...     &quot;households&quot;: {&quot;household&quot;: {&quot;parents&quot;: [&quot;Javier&quot;]}},</span>
+<span class="sd">        ...     "persons": {"Javier": {"salary": {"2018-11": 2000}}},</span>
+<span class="sd">        ...     "households": {"household": {"parents": ["Javier"]}},</span>
 <span class="sd">        ... }</span>
 
 <span class="sd">        &gt;&gt;&gt; check_unexpected_entities(params, entities)</span>
 
-<span class="sd">        &gt;&gt;&gt; params = {&quot;dogs&quot;: {&quot;Bart&quot;: {&quot;damages&quot;: {&quot;2018-11&quot;: 2000}}}}</span>
+<span class="sd">        &gt;&gt;&gt; params = {"dogs": {"Bart": {"damages": {"2018-11": 2000}}}}</span>
 
 <span class="sd">        &gt;&gt;&gt; check_unexpected_entities(params, entities)</span>
 <span class="sd">        Traceback (most recent call last):</span>
 <span class="sd">        openfisca_core.errors.situation_parsing_error.SituationParsingError</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">has_unexpected_entities</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">entities</span><span class="p">):</span>
         <span class="n">unexpected_entities</span> <span class="o">=</span> <span class="p">[</span><span class="n">entity</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">params</span> <span class="k">if</span> <span class="n">entity</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">]</span>
 
         <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;Some entities in the situation are not defined in the loaded tax &quot;</span>
-            <span class="s2">&quot;and benefit system. &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;These entities are not found: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">unexpected_entities</span><span class="p">)</span><span class="si">}</span><span class="s2">. &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;The defined entities are: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="s2">"Some entities in the situation are not defined in the loaded tax "</span>
+            <span class="s2">"and benefit system. "</span>
+            <span class="sa">f</span><span class="s2">"These entities are not found: </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">unexpected_entities</span><span class="p">)</span><span class="si">}</span><span class="s2">. "</span>
+            <span class="sa">f</span><span class="s2">"The defined entities are: </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
         <span class="p">)</span>
 
         <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">SituationParsingError</span><span class="p">([</span><span class="n">unexpected_entities</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">message</span><span class="p">)</span></div>
@@ -200,7 +200,7 @@
 <div class="viewcode-block" id="has_unexpected_entities">
 <a class="viewcode-back" href="../../../openfisca-python-api/simulations.html#openfisca_core.simulations.helpers.has_unexpected_entities">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">has_unexpected_entities</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">ParamsWithoutAxes</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the input contains entities that are not in the system.</span>
+<span class="w">    </span><span class="sd">"""Check if the input contains entities that are not in the system.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        params(ParamsWithoutAxes): Simulation parameters.</span>
@@ -210,22 +210,22 @@
 <span class="sd">        bool: True if the input contains entities that are not in the system.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; entities = {&quot;persons&quot;, &quot;households&quot;}</span>
+<span class="sd">        &gt;&gt;&gt; entities = {"persons", "households"}</span>
 
 <span class="sd">        &gt;&gt;&gt; params = {</span>
-<span class="sd">        ...     &quot;persons&quot;: {&quot;Javier&quot;: {&quot;salary&quot;: {&quot;2018-11&quot;: 2000}}},</span>
-<span class="sd">        ...     &quot;households&quot;: {&quot;household&quot;: {&quot;parents&quot;: [&quot;Javier&quot;]}},</span>
+<span class="sd">        ...     "persons": {"Javier": {"salary": {"2018-11": 2000}}},</span>
+<span class="sd">        ...     "households": {"household": {"parents": ["Javier"]}},</span>
 <span class="sd">        ... }</span>
 
 <span class="sd">        &gt;&gt;&gt; has_unexpected_entities(params, entities)</span>
 <span class="sd">        False</span>
 
-<span class="sd">        &gt;&gt;&gt; params = {&quot;dogs&quot;: {&quot;Bart&quot;: {&quot;damages&quot;: {&quot;2018-11&quot;: 2000}}}}</span>
+<span class="sd">        &gt;&gt;&gt; params = {"dogs": {"Bart": {"damages": {"2018-11": 2000}}}}</span>
 
 <span class="sd">        &gt;&gt;&gt; has_unexpected_entities(params, entities)</span>
 <span class="sd">        True</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">entity</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">params</span> <span class="k">if</span> <span class="n">entity</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">)</span></div>
 
 

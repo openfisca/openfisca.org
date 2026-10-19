@@ -159,14 +159,14 @@
 <li><p>Install it. At some point, the installer will ask you for a “Destination Folder”. You can keep the default or choose another one, but in all cases <strong>copy and paste the path to this folder somewhere</strong>. It will be useful later. For instance, this path may look like <code class="docutils literal notranslate"><span class="pre">C:\Users\my-name\AppData\Local\Miniconda2</span></code>.</p></li>
 <li><p>Run the program “Git Bash” from the “Start” menu. This should open a command line. Copy and paste the following lines in the console, be sure to <strong>adapt the first line using the path you noted in the last step</strong> and <strong>set the python version to the correct one</strong> (set to <code class="docutils literal notranslate"><span class="pre">3.11</span></code> here):</p></li>
 </ul>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;MINICONDA_PATH=&quot;C:\Users\form\AppData\Local\Miniconda2&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;function convert { echo /$1  | sed &#39;</span><span class="se">\&#39;</span><span class="s1">&#39;s/\\/\//g&#39;</span><span class="se">\&#39;</span><span class="s1">&#39; | sed &#39;</span><span class="se">\&#39;</span><span class="s1">&#39;s/://&#39;</span><span class="se">\&#39;</span><span class="s1">&#39; ; }&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;function add { export PATH=$(convert $1):$PATH ;}&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;add $MINICONDA_PATH&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;add &quot;$MINICONDA_PATH/Scripts&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s1">'MINICONDA_PATH="C:\Users\form\AppData\Local\Miniconda2"'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'function convert { echo /$1  | sed '</span><span class="se">\'</span><span class="s1">'s/\\/\//g'</span><span class="se">\'</span><span class="s1">' | sed '</span><span class="se">\'</span><span class="s1">'s/://'</span><span class="se">\'</span><span class="s1">' ; }'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'function add { export PATH=$(convert $1):$PATH ;}'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'add $MINICONDA_PATH'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'add "$MINICONDA_PATH/Scripts"'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
 <span class="nb">source</span><span class="w"> </span>.bashrc
 conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>openfisca<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7<span class="w">  </span>--offline<span class="w"> </span>--yes
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;source activate openfisca&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'source activate openfisca'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.bashrc
 <span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>openfisca
 </pre></div>
 </div>
@@ -186,7 +186,7 @@ conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </
 <li><p>Run the command <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">*</span></code></p></li>
 </ul>
 <p>To check that everything works correctly, run the following command in Git Bash:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from openfisca_france import CountryTaxBenefitSystem; CountryTaxBenefitSystem()&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"from openfisca_france import CountryTaxBenefitSystem; CountryTaxBenefitSystem()"</span>
 </pre></div>
 </div>
 <p>No error message should appear. If that is the case the country package is successfully installed.</p>

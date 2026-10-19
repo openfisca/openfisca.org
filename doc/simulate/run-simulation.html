@@ -151,10 +151,10 @@ OpenFisca looks for two kinds of inputs:</p>
 It’s the usual solution to define a small number of situations.</p>
 <p>Here is an example of test case (in Python):</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">BASIC_TEST_CASE</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}},</span>
-    <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;household_1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">]},</span>
-        <span class="s1">&#39;household_2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+    <span class="s1">'persons'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'Ari'</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">'Paul'</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">'Leila'</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">'Javier'</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="s1">'households'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'household_1'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'children'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Leila'</span><span class="p">],</span> <span class="s1">'parents'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Ari'</span><span class="p">,</span> <span class="s1">'Paul'</span><span class="p">]},</span>
+        <span class="s1">'household_2'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'parents'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Javier'</span><span class="p">]}</span>
         <span class="p">},</span>
     <span class="p">}</span>
 </pre></div>
@@ -169,21 +169,21 @@ For example, <code class="docutils literal notranslate"><span class="pre">Ari</s
 </ul>
 <p>To add a salary to <code class="docutils literal notranslate"><span class="pre">Ari</span></code> and <code class="docutils literal notranslate"><span class="pre">rent</span></code> to <code class="docutils literal notranslate"><span class="pre">household_1</span></code> would look like this:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_CASE</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;persons&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;Ari&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;salary&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;2011-01&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">}</span>
+    <span class="s1">'persons'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'Ari'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'salary'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'2011-01'</span><span class="p">:</span> <span class="mi">1000</span><span class="p">}</span>
         <span class="p">},</span>
-        <span class="s1">&#39;Paul&#39;</span><span class="p">:</span> <span class="p">{},</span>
-        <span class="s1">&#39;Leila&#39;</span><span class="p">:</span> <span class="p">{},</span>
-        <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="p">{}</span>
+        <span class="s1">'Paul'</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">'Leila'</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">'Javier'</span><span class="p">:</span> <span class="p">{}</span>
     <span class="p">},</span>
-    <span class="s1">&#39;households&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;household_1&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Leila&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ari&#39;</span><span class="p">,</span> <span class="s1">&#39;Paul&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;rent&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;2011-01&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">}</span>
+    <span class="s1">'households'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'household_1'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'children'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Leila'</span><span class="p">],</span>
+            <span class="s1">'parents'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Ari'</span><span class="p">,</span> <span class="s1">'Paul'</span><span class="p">],</span>
+            <span class="s1">'rent'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'2011-01'</span><span class="p">:</span> <span class="mi">300</span><span class="p">}</span>
         <span class="p">},</span>
-        <span class="s1">&#39;household_2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]}</span>
+        <span class="s1">'household_2'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'parents'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Javier'</span><span class="p">]}</span>
     <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
@@ -218,10 +218,10 @@ For example, <code class="docutils literal notranslate"><span class="pre">Ari</s
 <span class="n">simulation_builder</span> <span class="o">=</span> <span class="n">SimulationBuilder</span><span class="p">()</span>
 <span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation_builder</span><span class="o">.</span><span class="n">build_from_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">TEST_CASE</span><span class="p">)</span>
 
-<span class="n">housing_allowance</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;2011-01&#39;</span><span class="p">)</span>
+<span class="n">housing_allowance</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">'housing_allowance'</span><span class="p">,</span> <span class="s1">'2011-01'</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;households&quot;</span><span class="p">,</span> <span class="n">simulation</span><span class="o">.</span><span class="n">household</span><span class="o">.</span><span class="n">ids</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;housing_allowance&quot;</span><span class="p">,</span> <span class="n">housing_allowance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"households"</span><span class="p">,</span> <span class="n">simulation</span><span class="o">.</span><span class="n">household</span><span class="o">.</span><span class="n">ids</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"housing_allowance"</span><span class="p">,</span> <span class="n">housing_allowance</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -309,7 +309,7 @@ pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="
 
 <span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data.csv&#39;</span><span class="p">)</span>  <span class="c1"># pandas.DataFrame object</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./data.csv'</span><span class="p">)</span>  <span class="c1"># pandas.DataFrame object</span>
 <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># ignores CSV header</span>
 </pre></div>
 </div>
@@ -340,14 +340,14 @@ pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="
 
 <span class="n">simulation</span> <span class="o">=</span> <span class="n">SimulationBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">build_default_simulation</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
 
-<span class="n">period</span> <span class="o">=</span> <span class="s1">&#39;2018-01&#39;</span>
-<span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">person_salary</span><span class="p">))</span>
+<span class="n">period</span> <span class="o">=</span> <span class="s1">'2018-01'</span>
+<span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">person_salary</span><span class="p">))</span>
 </pre></div>
 </div>
 </li>
 </ol>
 <p>It is now possible to calculate the <a class="reference external" href="https://legislation.demo.openfisca.org/income_tax">income_tax</a> variable for each person described in the <code class="docutils literal notranslate"><span class="pre">data.csv</span></code> file for the same period:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">income_tax</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;income_tax&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">income_tax</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">'income_tax'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">income_tax</span></code> is an instance of <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> as you can see with:</p>
@@ -419,8 +419,8 @@ pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="
 
 <span class="n">tax_benefit_system</span> <span class="o">=</span> <span class="n">CountryTaxBenefitSystem</span><span class="p">()</span>
 
-<span class="n">data_persons</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data_persons.csv&#39;</span><span class="p">)</span>
-<span class="n">data_households</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data_households.csv&#39;</span><span class="p">)</span>
+<span class="n">data_persons</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./data_persons.csv'</span><span class="p">)</span>
+<span class="n">data_households</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./data_households.csv'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Access the entity identifiers columns values:</p>
@@ -439,7 +439,7 @@ pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="
 <span class="n">sb</span><span class="o">.</span><span class="n">create_entities</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span>
 
 <span class="n">persons_ids</span> <span class="o">=</span> <span class="n">data_persons</span><span class="o">.</span><span class="n">person_id</span>
-<span class="n">sb</span><span class="o">.</span><span class="n">declare_person_entity</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">,</span> <span class="n">persons_ids</span><span class="p">)</span>
+<span class="n">sb</span><span class="o">.</span><span class="n">declare_person_entity</span><span class="p">(</span><span class="s1">'person'</span><span class="p">,</span> <span class="n">persons_ids</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -448,7 +448,7 @@ pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="
 
 <span class="c1"># Instantiate the household entity:</span>
 <span class="n">households_ids</span> <span class="o">=</span> <span class="n">data_households</span><span class="o">.</span><span class="n">household_id</span>
-<span class="n">household_instance</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">declare_entity</span><span class="p">(</span><span class="s1">&#39;household&#39;</span><span class="p">,</span> <span class="n">households_ids</span><span class="p">)</span>
+<span class="n">household_instance</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">declare_entity</span><span class="p">(</span><span class="s1">'household'</span><span class="p">,</span> <span class="n">households_ids</span><span class="p">)</span>
 
 <span class="c1"># Join households data on persons:</span>
 <span class="n">persons_households</span> <span class="o">=</span> <span class="n">data_persons</span><span class="o">.</span><span class="n">household_id</span>
@@ -460,14 +460,14 @@ pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="
 <li><p>Create a simulation from the configured builder and set other inputs like the <code class="docutils literal notranslate"><span class="pre">salary</span></code> values:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">tax_benefit_system</span><span class="p">)</span>
 
-<span class="n">period</span> <span class="o">=</span> <span class="s1">&#39;2019-03&#39;</span>
-<span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">data_persons</span><span class="o">.</span><span class="n">person_salary</span><span class="p">)</span>
+<span class="n">period</span> <span class="o">=</span> <span class="s1">'2019-03'</span>
+<span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">data_persons</span><span class="o">.</span><span class="n">person_salary</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 </ol>
 <p>This now allows calculation of the <a class="reference external" href="https://legislation.demo.openfisca.org/total_taxes">total_taxes</a> variable for each household of the <code class="docutils literal notranslate"><span class="pre">data_households.csv</span></code> file over the given period:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">total_taxes</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;total_taxes&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">total_taxes</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">'total_taxes'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 </pre></div>
 </div>
 <blockquote>

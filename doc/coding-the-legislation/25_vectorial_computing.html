@@ -149,7 +149,7 @@
 <p>Each <a class="reference internal" href="../key-concepts/variables.html#formulas"><span class="std std-ref">formula</span></a> computation in OpenFisca must return a vector.</p>
 <p>For instance, for a simulation containing 3 persons whose ages are 41, 42 and 45, executing the following formula:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">persons</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-    <span class="n">age</span> <span class="o">=</span> <span class="n">persons</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+    <span class="n">age</span> <span class="o">=</span> <span class="n">persons</span><span class="p">(</span><span class="s1">'age'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
     <span class="c1"># ... do some computation and return a value</span>
 </pre></div>
@@ -158,9 +158,9 @@
 <p>This formula code will work the same if there is one Person or three or three million in the modelled situation. Formulas always receive as their first parameter an array of the <a class="reference internal" href="50_entities.html"><span class="std std-doc">entity</span></a> on which they operate (e.g. <em>n</em> Person, Household…) and they should return an array of the same length.</p>
 <p>Most of the time, formulas will refer to other variables and NumPy will do the appropriate computation without you even noticing:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">persons</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-    <span class="n">tax_rebate</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">tax_rebate</span>  <span class="c1"># let&#39;s say this is 500</span>
-    <span class="n">eligibility_multiplier</span> <span class="o">=</span> <span class="n">persons</span><span class="p">(</span><span class="s1">&#39;eligibility_multiplier&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>  <span class="c1"># and this is [2, 0, 1]: there are three Persons</span>
-    <span class="k">return</span> <span class="n">eligibility_multiplier</span> <span class="o">*</span> <span class="n">tax_rebate</span>  <span class="c1"># this is [1000, 0, 500]. We&#39;ve returned a vector, yay!</span>
+    <span class="n">tax_rebate</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">tax_rebate</span>  <span class="c1"># let's say this is 500</span>
+    <span class="n">eligibility_multiplier</span> <span class="o">=</span> <span class="n">persons</span><span class="p">(</span><span class="s1">'eligibility_multiplier'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>  <span class="c1"># and this is [2, 0, 1]: there are three Persons</span>
+    <span class="k">return</span> <span class="n">eligibility_multiplier</span> <span class="o">*</span> <span class="n">tax_rebate</span>  <span class="c1"># this is [1000, 0, 500]. We've returned a vector, yay!</span>
 </pre></div>
 </div>
 <section id="what-happens-if-you-don-t-return-a-vector">
@@ -168,9 +168,9 @@
 <p>As programmers, we more often work with scalars than vectors. We thus have a tendency to write straightforward code that returns a scalar rather than a unidimensional vector (in other words, an array of length 1), and get stuck when wanting to loop over it:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># THIS IS NOT A VALID OPENFISCA FORMULA</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">persons</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-    <span class="n">tax_rebate</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">tax_rebate</span>  <span class="c1"># let&#39;s say this is worth 500</span>
-    <span class="n">rebate_threshold</span> <span class="o">=</span> <span class="n">tax_rebate</span> <span class="o">*</span> <span class="n">persons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">eligibility_multiplier</span>  <span class="c1"># so this is 1000; see how we&#39;ve accidentally left out other Persons?</span>
-    <span class="k">return</span> <span class="n">rebate_threshold</span>  <span class="c1"># and this returns 1000. But it&#39;s not a vector!</span>
+    <span class="n">tax_rebate</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">(</span><span class="n">period</span><span class="p">)</span><span class="o">.</span><span class="n">tax_rebate</span>  <span class="c1"># let's say this is worth 500</span>
+    <span class="n">rebate_threshold</span> <span class="o">=</span> <span class="n">tax_rebate</span> <span class="o">*</span> <span class="n">persons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">eligibility_multiplier</span>  <span class="c1"># so this is 1000; see how we've accidentally left out other Persons?</span>
+    <span class="k">return</span> <span class="n">rebate_threshold</span>  <span class="c1"># and this returns 1000. But it's not a vector!</span>
 </pre></div>
 </div>
 <p>OpenFisca will help you notice this mistake by raising an error:</p>
@@ -192,7 +192,7 @@
 <p>Let’s say you want to write that logically reads as:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># THIS IS NOT A VALID OPENFISCA FORMULA</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-    <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+    <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">salary</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">200</span>
     <span class="k">else</span><span class="p">:</span>
@@ -202,7 +202,7 @@
 <p>This code does not work: it makes the assumption that there is always one single person, and that its salary is provided as a number, while <code class="docutils literal notranslate"><span class="pre">salary</span></code> is actually a vector of salaries that could be of any length.</p>
 <p>In such a case, apply the comparison to the <em>vector</em> of salaries, which will create a vector of booleans, and then multiply it:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">persons</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-    <span class="n">condition_salary</span> <span class="o">=</span> <span class="n">persons</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span>
+    <span class="n">condition_salary</span> <span class="o">=</span> <span class="n">persons</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span>
     <span class="k">return</span> <span class="n">condition_salary</span> <span class="o">*</span> <span class="mi">200</span>
 </pre></div>
 </div>
@@ -213,7 +213,7 @@
 <p>Let’s now write a formula that returns <code class="docutils literal notranslate"><span class="pre">200</span></code> if the Person’s salary is lower than <code class="docutils literal notranslate"><span class="pre">1000</span></code>, and <code class="docutils literal notranslate"><span class="pre">100</span></code> otherwise.</p>
 <p>The NumPy function <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html"><code class="docutils literal notranslate"><span class="pre">where</span></code></a> offers a simple syntax to handle these cases.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">persons</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-    <span class="n">condition_salary</span> <span class="o">=</span> <span class="n">persons</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span>
+    <span class="n">condition_salary</span> <span class="o">=</span> <span class="n">persons</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span>
     <span class="k">return</span> <span class="n">where</span><span class="p">(</span><span class="n">condition_salary</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -231,7 +231,7 @@
 </ul>
 <p>We can use the NumPy function <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.select.html"><code class="docutils literal notranslate"><span class="pre">select</span></code></a> to implement this behaviour:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-    <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+    <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">select</span><span class="p">(</span>
         <span class="p">[</span><span class="n">salary</span> <span class="o">&lt;=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">salary</span> <span class="o">&lt;=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">salary</span> <span class="o">&lt;=</span> <span class="mi">1500</span><span class="p">,</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">1500</span><span class="p">],</span>
         <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
@@ -250,9 +250,9 @@
 <li><p>or they are disabled.</p></li>
 </ul>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-    <span class="n">condition_age</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">25</span>
-    <span class="n">condition_salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span>
-    <span class="n">condition_handicap</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;handicap&#39;</span><span class="p">)</span>
+    <span class="n">condition_age</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'age'</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">25</span>
+    <span class="n">condition_salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span>
+    <span class="n">condition_handicap</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'handicap'</span><span class="p">)</span>
     <span class="n">condition</span> <span class="o">=</span> <span class="n">condition_age</span> <span class="o">*</span> <span class="n">condition_salary</span> <span class="o">+</span> <span class="n">condition_handicap</span>
     <span class="k">return</span> <span class="n">condition</span> <span class="o">*</span> <span class="mi">200</span>
 </pre></div>

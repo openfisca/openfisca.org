@@ -230,11 +230,11 @@
 <section id="using-periods-in-a-simulation">
 <h2>Using periods in a simulation<a class="headerlink" href="#using-periods-in-a-simulation" title="Link to this heading">¶</a></h2>
 <p>As an example, here is how to calculate a <code class="docutils literal notranslate"><span class="pre">housing_allowance</span></code> on a given month:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-05&#39;</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">'housing_allowance'</span><span class="p">,</span> <span class="s1">'2019-05'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This is equivalent to this more precise variant:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;housing_allowance&#39;</span><span class="p">,</span> <span class="s1">&#39;month:2019-05-01:1&#39;</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">'housing_allowance'</span><span class="p">,</span> <span class="s1">'month:2019-05-01:1'</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -254,7 +254,7 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Salary for a month&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Salary for a month"</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
@@ -271,11 +271,11 @@
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Taxes for a whole year&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Taxes for a whole year"</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">YEAR</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>  <span class="c1"># period is a year because definition_period = YEAR</span>
-        <span class="n">salary_past_year</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>  <span class="c1"># salary is a monthly variable. This will cause an error.</span>
+        <span class="n">salary_past_year</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>  <span class="c1"># salary is a monthly variable. This will cause an error.</span>
         <span class="o">...</span>
 </pre></div>
 </div>
@@ -284,11 +284,11 @@
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Taxes for a whole year&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s2">"Taxes for a whole year"</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">YEAR</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>  <span class="c1"># period is a year because definition_period = YEAR</span>
-        <span class="n">salary_last_year</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">ADD</span><span class="p">])</span>
+        <span class="n">salary_last_year</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">ADD</span><span class="p">])</span>
         <span class="o">...</span>
 </pre></div>
 </div>
@@ -296,15 +296,15 @@
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">salary_net_of_taxes</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Monthly salary, net of taxes&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Monthly salary, net of taxes"</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>  <span class="c1"># period is a month because definition_period = MONTH</span>
         <span class="c1"># The variable taxes is computed on a year, monthly_taxes equals the 12th of that result</span>
-        <span class="n">monthly_taxes</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;taxes&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">DIVIDE</span><span class="p">])</span>
+        <span class="n">monthly_taxes</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'taxes'</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">DIVIDE</span><span class="p">])</span>
 
         <span class="c1"># salary is a monthly variable, period is a month: no option is required</span>
-        <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">salary</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">salary</span> <span class="o">-</span> <span class="n">monthly_taxes</span>
 </pre></div>
@@ -317,12 +317,12 @@
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">unemployment_benefit</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Unemployment benefit&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Unemployment benefit"</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-        <span class="n">salary_last_3_months</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">.</span><span class="n">last_3_months</span><span class="p">)</span>
-        <span class="n">salary_last_year</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">.</span><span class="n">last_year</span><span class="p">)</span>
+        <span class="n">salary_last_3_months</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="o">.</span><span class="n">last_3_months</span><span class="p">)</span>
+        <span class="n">salary_last_year</span> <span class="o">=</span> <span class="n">person</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="n">period</span><span class="o">.</span><span class="n">last_year</span><span class="p">)</span>
 
         <span class="n">is_unemployed</span> <span class="o">=</span> <span class="p">(</span><span class="n">salary_last_3_months</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">salary_last_year</span> <span class="o">*</span> <span class="n">is_unemployed</span>
@@ -390,7 +390,7 @@
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Salary for a month&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Salary for a month"</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
     <span class="n">set_input</span> <span class="o">=</span> <span class="n">set_input_divide_by_period</span>
 
@@ -401,9 +401,9 @@
 <p>We can now provide an input for <code class="docutils literal notranslate"><span class="pre">2015</span></code> for <code class="docutils literal notranslate"><span class="pre">salary</span></code>: no error will be raised, and the value will be automatically split between the 12 months of <code class="docutils literal notranslate"><span class="pre">2015</span></code>.</p>
 <p>This example sets 3 years salaries for two persons and calculates how much they get for one month:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Each person earned 60,000 between 2014 and 2016</span>
-<span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;year:2014:3&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">60000.0</span><span class="p">,</span> <span class="mf">60000.0</span><span class="p">])</span>
+<span class="n">simulation</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="s1">'year:2014:3'</span><span class="p">,</span> <span class="p">[</span><span class="mf">60000.0</span><span class="p">,</span> <span class="mf">60000.0</span><span class="p">])</span>
 
-<span class="n">one_month_salaries</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-01&#39;</span><span class="p">)</span>
+<span class="n">one_month_salaries</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="s1">'salary'</span><span class="p">,</span> <span class="s1">'2014-01'</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">one_month_salaries</span><span class="p">)</span>  <span class="c1"># prints [1666.6666 1666.6666]</span>
 </pre></div>
 </div>

@@ -133,9 +133,9 @@
     <span class="n">variable</span><span class="p">:</span> <span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">,</span>
     <span class="n">annualization_period</span><span class="p">:</span> <span class="n">Period</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">variables</span><span class="o">.</span><span class="n">Variable</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a clone of ``variable`` that is annualized for the period ``annualization_period``.</span>
-<span class="sd">    When annualized, a variable&#39;s formula is only called for a January calculation, and the results for other months are assumed to be identical.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Returns a clone of ``variable`` that is annualized for the period ``annualization_period``.</span>
+<span class="sd">    When annualized, a variable's formula is only called for a January calculation, and the results for other months are assumed to be identical.</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">make_annual_formula</span><span class="p">(</span><span class="n">original_formula</span><span class="p">,</span> <span class="n">annualization_period</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">def</span><span class="w"> </span><span class="nf">annual_formula</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
@@ -164,16 +164,16 @@
 <div class="viewcode-block" id="get_neutralized_variable">
 <a class="viewcode-back" href="../../../openfisca-python-api/variables.html#openfisca_core.variables.helpers.get_neutralized_variable">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_neutralized_variable</span><span class="p">(</span><span class="n">variable</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a new neutralized variable (to be used by reforms).</span>
+<span class="w">    </span><span class="sd">"""Return a new neutralized variable (to be used by reforms).</span>
 <span class="sd">    A neutralized variable always returns its default value, and does not cache anything.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
     <span class="n">result</span><span class="o">.</span><span class="n">is_neutralized</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">result</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="p">(</span>
         <span class="p">(</span>
-            <span class="s2">&quot;[Neutralized]&quot;</span>
+            <span class="s2">"[Neutralized]"</span>
             <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;[Neutralized] </span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">else</span> <span class="sa">f</span><span class="s2">"[Neutralized] </span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">),</span>
     <span class="p">)</span>
 

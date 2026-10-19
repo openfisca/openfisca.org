@@ -147,7 +147,7 @@
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">salary</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Salary earned by a person for a given month&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Salary earned by a person for a given month"</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
 </pre></div>
 </div>
@@ -164,7 +164,7 @@
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">bool</span>
     <span class="n">default_value</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Person</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Whether the person is a French citizen&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Whether the person is a French citizen"</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">YEAR</span>
 </pre></div>
 </div>
@@ -191,10 +191,10 @@
 <p>The variable <code class="docutils literal notranslate"><span class="pre">housing_tax</span></code> will thus depend on <code class="docutils literal notranslate"><span class="pre">housing_occupancy_status</span></code>, an enumeration variable that can take 4 values: <code class="docutils literal notranslate"><span class="pre">tenant</span></code>, <code class="docutils literal notranslate"><span class="pre">owner</span></code>, <code class="docutils literal notranslate"><span class="pre">free_lodger</span></code> and <code class="docutils literal notranslate"><span class="pre">homeless</span></code>.</p>
 <p>First, we can create an <a class="reference external" href="https://en.wikipedia.org/wiki/Enumerated_type">enumerated type</a> <code class="docutils literal notranslate"><span class="pre">HousingOccupancyStatus</span></code>:</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">HousingOccupancyStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-    <span class="n">tenant</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Tenant or lodger who pays a rent&#39;</span>
-    <span class="n">owner</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Owner&#39;</span>
-    <span class="n">free_lodger</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Free logder&#39;</span>
-    <span class="n">homeless</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Homeless&#39;</span>
+    <span class="n">tenant</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'Tenant or lodger who pays a rent'</span>
+    <span class="n">owner</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'Owner'</span>
+    <span class="n">free_lodger</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'Free logder'</span>
+    <span class="n">homeless</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'Homeless'</span>
 </pre></div>
 </div>
 <blockquote>
@@ -211,7 +211,7 @@
     <span class="n">default_value</span> <span class="o">=</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">tenant</span>  <span class="c1"># The default is mandatory</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Household</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Legal housing situation of the household concerning their main residence&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Legal housing situation of the household concerning their main residence"</span>
 </pre></div>
 </div>
 <p>You can now use the enum in variable formulas!</p>
@@ -220,11 +220,11 @@
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Household</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span><span class="o">.</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Tax paid by each household proportionnally to the size of its accommodation&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Tax paid by each household proportionnally to the size of its accommodation"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">legislation</span><span class="p">):</span>
-        <span class="n">accommodation_size</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;accomodation_size&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
-        <span class="n">housing_occupancy_status</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;housing_occupancy_status&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">accommodation_size</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">'accomodation_size'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">housing_occupancy_status</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">'housing_occupancy_status'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
         <span class="n">tenant</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_occupancy_status</span> <span class="o">==</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">tenant</span><span class="p">)</span>
         <span class="n">owner</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_occupancy_status</span> <span class="o">==</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">owner</span><span class="p">)</span>
 
@@ -237,12 +237,12 @@
     <span class="n">value_type</span> <span class="o">=</span> <span class="nb">float</span>
     <span class="n">entity</span> <span class="o">=</span> <span class="n">Household</span>
     <span class="n">definition_period</span> <span class="o">=</span> <span class="n">MONTH</span><span class="o">.</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Tax paid by each household proportionnally to the size of its accommodation&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Tax paid by each household proportionnally to the size of its accommodation"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="n">household</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">legislation</span><span class="p">):</span>
-        <span class="n">accommodation_size</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;accomodation_size&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
-        <span class="n">housing_occupancy_status</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">&#39;housing_occupancy_status&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
-        <span class="n">HousingOccupancyStatus</span> <span class="o">=</span> <span class="n">housing_occupancy_status</span><span class="o">.</span><span class="n">possible_values</span>  <span class="c1"># &quot;Import&quot; the enum type. Careful: do not use python imports across variables files: comparisons would not work!</span>
+        <span class="n">accommodation_size</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">'accomodation_size'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">housing_occupancy_status</span> <span class="o">=</span> <span class="n">household</span><span class="p">(</span><span class="s1">'housing_occupancy_status'</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+        <span class="n">HousingOccupancyStatus</span> <span class="o">=</span> <span class="n">housing_occupancy_status</span><span class="o">.</span><span class="n">possible_values</span>  <span class="c1"># "Import" the enum type. Careful: do not use python imports across variables files: comparisons would not work!</span>
         <span class="n">tenant</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_occupancy_status</span> <span class="o">==</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">tenant</span><span class="p">)</span>
         <span class="n">owner</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_occupancy_status</span> <span class="o">==</span> <span class="n">HousingOccupancyStatus</span><span class="o">.</span><span class="n">owner</span><span class="p">)</span>
 

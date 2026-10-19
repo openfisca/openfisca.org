@@ -121,10 +121,9 @@
   <h1>Source code for openfisca_core.periods.period_</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">calendar</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pendulum</span>
 
@@ -138,7 +137,7 @@
 <div class="viewcode-block" id="Period">
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.Period">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Period</span><span class="p">(</span><span class="nb">tuple</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">DateUnit</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Toolbox to handle date intervals.</span>
+<span class="w">    </span><span class="sd">"""Toolbox to handle date intervals.</span>
 
 <span class="sd">    A :class:`.Period` is a triple (``unit``, ``start``, ``size``).</span>
 
@@ -146,7 +145,7 @@
 <span class="sd">        unit (:obj:`str`):</span>
 <span class="sd">            Either ``year``, ``month``, ``day`` or ``eternity``.</span>
 <span class="sd">        start (:obj:`.Instant`):</span>
-<span class="sd">            The &quot;instant&quot; the :obj:`.Period` starts at.</span>
+<span class="sd">            The "instant" the :obj:`.Period` starts at.</span>
 <span class="sd">        size (:obj:`int`):</span>
 <span class="sd">            The amount of ``unit``, starting at ``start``, at least ``1``.</span>
 
@@ -159,23 +158,23 @@
 <span class="sd">        &gt;&gt;&gt; period = Period((DateUnit.YEAR, instant, 3))</span>
 
 <span class="sd">        &gt;&gt;&gt; repr(Period)</span>
-<span class="sd">        &quot;&lt;class &#39;openfisca_core.periods.period_.Period&#39;&gt;&quot;</span>
+<span class="sd">        "&lt;class 'openfisca_core.periods.period_.Period'&gt;"</span>
 
 <span class="sd">        &gt;&gt;&gt; repr(period)</span>
-<span class="sd">        &quot;Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2021, 10, 1)), 3))&quot;</span>
+<span class="sd">        "Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2021, 10, 1)), 3))"</span>
 
 <span class="sd">        &gt;&gt;&gt; str(period)</span>
-<span class="sd">        &#39;year:2021-10:3&#39;</span>
+<span class="sd">        'year:2021-10:3'</span>
 
 <span class="sd">        &gt;&gt;&gt; dict([period, instant])</span>
 <span class="sd">        Traceback (most recent call last):</span>
 <span class="sd">        ValueError: dictionary update sequence element #0 has length 3...</span>
 
 <span class="sd">        &gt;&gt;&gt; list(period)</span>
-<span class="sd">        [&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2021, 10, 1)), 3]</span>
+<span class="sd">        [&lt;DateUnit.YEAR: 'year'&gt;, Instant((2021, 10, 1)), 3]</span>
 
 <span class="sd">        &gt;&gt;&gt; period[0]</span>
-<span class="sd">        &lt;DateUnit.YEAR: &#39;year&#39;&gt;</span>
+<span class="sd">        &lt;DateUnit.YEAR: 'year'&gt;</span>
 
 <span class="sd">        &gt;&gt;&gt; period[0] in period</span>
 <span class="sd">        True</span>
@@ -214,38 +213,38 @@
 <span class="sd">        Instant((2024, 9, 30))</span>
 
 <span class="sd">        &gt;&gt;&gt; period.unit</span>
-<span class="sd">        &lt;DateUnit.YEAR: &#39;year&#39;&gt;</span>
+<span class="sd">        &lt;DateUnit.YEAR: 'year'&gt;</span>
 
 <span class="sd">        &gt;&gt;&gt; period.last_3_months</span>
-<span class="sd">        Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2021, 7, 1)), 3))</span>
+<span class="sd">        Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2021, 7, 1)), 3))</span>
 
 <span class="sd">        &gt;&gt;&gt; period.last_month</span>
-<span class="sd">        Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2021, 9, 1)), 1))</span>
+<span class="sd">        Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2021, 9, 1)), 1))</span>
 
 <span class="sd">        &gt;&gt;&gt; period.last_year</span>
-<span class="sd">        Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2020, 1, 1)), 1))</span>
+<span class="sd">        Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2020, 1, 1)), 1))</span>
 
 <span class="sd">        &gt;&gt;&gt; period.n_2</span>
-<span class="sd">        Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2019, 1, 1)), 1))</span>
+<span class="sd">        Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2019, 1, 1)), 1))</span>
 
 <span class="sd">        &gt;&gt;&gt; period.this_year</span>
-<span class="sd">        Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2021, 1, 1)), 1))</span>
+<span class="sd">        Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2021, 1, 1)), 1))</span>
 
 <span class="sd">        &gt;&gt;&gt; period.first_month</span>
-<span class="sd">        Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2021, 10, 1)), 1))</span>
+<span class="sd">        Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2021, 10, 1)), 1))</span>
 
 <span class="sd">        &gt;&gt;&gt; period.first_day</span>
-<span class="sd">        Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2021, 10, 1)), 1))</span>
+<span class="sd">        Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2021, 10, 1)), 1))</span>
 
 
 <span class="sd">    Since a period is a triple it can be used as a dictionary key.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">:</span>
         <span class="n">unit</span><span class="p">,</span> <span class="n">start_instant</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="bp">self</span>
@@ -265,68 +264,68 @@
                 <span class="c1"># civil year starting from january</span>
                 <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">f_year</span><span class="p">))</span>
             <span class="c1"># rolling year</span>
-            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="c1"># simple month</span>
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span> <span class="ow">and</span> <span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="c1"># several civil years</span>
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span> <span class="ow">and</span> <span class="n">month</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">DAY</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="c1"># 1 week</span>
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span> <span class="ow">and</span> <span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">week</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W0</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W0</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="c1"># several weeks</span>
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span> <span class="ow">and</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">week</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W0</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W0</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="c1"># 1 weekday</span>
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEKDAY</span> <span class="ow">and</span> <span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">week</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W0</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">weekday</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W0</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">weekday</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">weekday</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">weekday</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="c1"># several weekdays</span>
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEKDAY</span> <span class="ow">and</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">week</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W0</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">weekday</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W0</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">weekday</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">weekday</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">c_year</span><span class="si">}</span><span class="s2">-W</span><span class="si">{</span><span class="n">week</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">weekday</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="c1"># complex period</span>
-        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">PeriodStr</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">f_year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">DateUnit</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ``unit`` of the ``Period``.</span>
+<span class="w">        </span><span class="sd">"""The ``unit`` of the ``Period``.</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            &gt;&gt;&gt; instant = Instant((2021, 10, 1))</span>
 <span class="sd">            &gt;&gt;&gt; period = Period((DateUnit.YEAR, instant, 3))</span>
 <span class="sd">            &gt;&gt;&gt; period.unit</span>
-<span class="sd">            &lt;DateUnit.YEAR: &#39;year&#39;&gt;</span>
+<span class="sd">            &lt;DateUnit.YEAR: 'year'&gt;</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ``Instant`` at which the ``Period`` starts.</span>
+<span class="w">        </span><span class="sd">"""The ``Instant`` at which the ``Period`` starts.</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            &gt;&gt;&gt; instant = Instant((2021, 10, 1))</span>
@@ -334,12 +333,12 @@
 <span class="sd">            &gt;&gt;&gt; period.start</span>
 <span class="sd">            Instant((2021, 10, 1))</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ``size`` of the ``Period``.</span>
+<span class="w">        </span><span class="sd">"""The ``size`` of the ``Period``.</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            &gt;&gt;&gt; instant = Instant((2021, 10, 1))</span>
@@ -347,12 +346,12 @@
 <span class="sd">            &gt;&gt;&gt; period.size</span>
 <span class="sd">            3</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pendulum</span><span class="o">.</span><span class="n">Date</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The date representation of the ``Period`` start date.</span>
+<span class="w">        </span><span class="sd">"""The date representation of the ``Period`` start date.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; instant = Instant((2021, 10, 1))</span>
@@ -364,18 +363,18 @@
 <span class="sd">            &gt;&gt;&gt; period = Period((DateUnit.YEAR, instant, 3))</span>
 <span class="sd">            &gt;&gt;&gt; period.date</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ValueError: &quot;date&quot; is undefined for a period of size &gt; 1: year:2021-10:3.</span>
+<span class="sd">            ValueError: "date" is undefined for a period of size &gt; 1: year:2021-10:3.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&quot;date&quot; is undefined for a period of size &gt; 1: </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s1">.&#39;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'"date" is undefined for a period of size &gt; 1: </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s1">.'</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">date</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">size_in_years</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ``size`` of the ``Period`` in years.</span>
+<span class="w">        </span><span class="sd">"""The ``size`` of the ``Period`` in years.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; instant = Instant((2021, 10, 1))</span>
@@ -387,18 +386,18 @@
 <span class="sd">            &gt;&gt;&gt; period = Period((DateUnit.MONTH, instant, 3))</span>
 <span class="sd">            &gt;&gt;&gt; period.size_in_years</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ValueError: Can&#39;t calculate number of years in a month.</span>
+<span class="sd">            ValueError: Can't calculate number of years in a month.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
 
-        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Can&#39;t calculate number of years in a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Can't calculate number of years in a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">."</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">size_in_months</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ``size`` of the ``Period`` in months.</span>
+<span class="w">        </span><span class="sd">"""The ``size`` of the ``Period`` in months.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; instant = Instant((2021, 10, 1))</span>
@@ -410,21 +409,21 @@
 <span class="sd">            &gt;&gt;&gt; period = Period((DateUnit.DAY, instant, 3))</span>
 <span class="sd">            &gt;&gt;&gt; period.size_in_months</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ValueError: Can&#39;t calculate number of months in a day.</span>
+<span class="sd">            ValueError: Can't calculate number of months in a day.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">*</span> <span class="mi">12</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
 
-        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Can&#39;t calculate number of months in a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Can't calculate number of months in a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">."</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">size_in_days</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ``size`` of the ``Period`` in days.</span>
+<span class="w">        </span><span class="sd">"""The ``size`` of the ``Period`` in days.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; instant = Instant((2019, 10, 1))</span>
@@ -437,7 +436,7 @@
 <span class="sd">            &gt;&gt;&gt; period.size_in_days</span>
 <span class="sd">            92</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="ow">in</span> <span class="p">(</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">):</span>
             <span class="n">last</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">last</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -453,12 +452,12 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="ow">in</span> <span class="p">(</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">DAY</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEKDAY</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
 
-        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Can&#39;t calculate number of days in a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Can't calculate number of days in a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">."</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">size_in_weeks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ``size`` of the ``Period`` in weeks.</span>
+<span class="w">        </span><span class="sd">"""The ``size`` of the ``Period`` in weeks.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; instant = Instant((2019, 10, 1))</span>
@@ -471,7 +470,7 @@
 <span class="sd">            &gt;&gt;&gt; period.size_in_weeks</span>
 <span class="sd">            261</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
             <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">date</span>
             <span class="n">cease</span> <span class="o">=</span> <span class="n">start</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
@@ -487,12 +486,12 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
 
-        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Can&#39;t calculate number of weeks in a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Can't calculate number of weeks in a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">."</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">size_in_weekdays</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ``size`` of the ``Period`` in weekdays.</span>
+<span class="w">        </span><span class="sd">"""The ``size`` of the ``Period`` in weekdays.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; instant = Instant((2019, 10, 1))</span>
@@ -505,7 +504,7 @@
 <span class="sd">            &gt;&gt;&gt; period.size_in_weekdays</span>
 <span class="sd">            21</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_in_weeks</span> <span class="o">*</span> <span class="mi">7</span>
 
@@ -524,12 +523,12 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="ow">in</span> <span class="p">(</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">DAY</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEKDAY</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
 
-        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Can&#39;t calculate number of weekdays in a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Can't calculate number of weekdays in a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">."</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">days</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Same as ``size_in_days``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Same as ``size_in_days``."""</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="o">.</span><span class="n">date</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">date</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">intersection</span><span class="p">(</span>
@@ -590,20 +589,20 @@
 <div class="viewcode-block" id="Period.get_subperiods">
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.Period.get_subperiods">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_subperiods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">DateUnit</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the list of periods of unit ``unit`` contained in self.</span>
+<span class="w">        </span><span class="sd">"""Return the list of periods of unit ``unit`` contained in self.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; period = Period((DateUnit.YEAR, Instant((2021, 1, 1)), 1))</span>
 <span class="sd">            &gt;&gt;&gt; period.get_subperiods(DateUnit.MONTH)</span>
-<span class="sd">            [Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2021, 1, 1)), 1)),...]</span>
+<span class="sd">            [Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2021, 1, 1)), 1)),...]</span>
 
 <span class="sd">            &gt;&gt;&gt; period = Period((DateUnit.YEAR, Instant((2021, 1, 1)), 2))</span>
 <span class="sd">            &gt;&gt;&gt; period.get_subperiods(DateUnit.YEAR)</span>
-<span class="sd">            [Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2021, 1, 1)), 1)), P...]</span>
+<span class="sd">            [Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2021, 1, 1)), 1)), P...]</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">helpers</span><span class="o">.</span><span class="n">unit_weight</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">helpers</span><span class="o">.</span><span class="n">unit_weight</span><span class="p">(</span><span class="n">unit</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Cannot subdivide </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2"> into </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Cannot subdivide </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2"> into </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">"</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">:</span>
@@ -632,251 +631,251 @@
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size_in_weekdays</span><span class="p">)</span>
             <span class="p">]</span>
 
-        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Cannot subdivide </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2"> into </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Cannot subdivide </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2"> into </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">"</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Period.offset">
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.Period.offset">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">DateUnit</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Increment (or decrement) the given period with offset units.</span>
+<span class="w">        </span><span class="sd">"""Increment (or decrement) the given period with offset units.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2021, 1, 1)), 365)).offset(1)</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2021, 1, 2)), 365))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2021, 1, 2)), 365))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2021, 1, 1)), 365)).offset(</span>
 <span class="sd">            ...     1, DateUnit.DAY</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2021, 1, 2)), 365))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2021, 1, 2)), 365))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2021, 1, 1)), 365)).offset(</span>
 <span class="sd">            ...     1, DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2021, 2, 1)), 365))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2021, 2, 1)), 365))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2021, 1, 1)), 365)).offset(</span>
 <span class="sd">            ...     1, DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2022, 1, 1)), 365))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2022, 1, 1)), 365))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2021, 1, 1)), 12)).offset(1)</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2021, 2, 1)), 12))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2021, 2, 1)), 12))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2021, 1, 1)), 12)).offset(</span>
 <span class="sd">            ...     1, DateUnit.DAY</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2021, 1, 2)), 12))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2021, 1, 2)), 12))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2021, 1, 1)), 12)).offset(</span>
 <span class="sd">            ...     1, DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2021, 2, 1)), 12))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2021, 2, 1)), 12))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2021, 1, 1)), 12)).offset(</span>
 <span class="sd">            ...     1, DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2022, 1, 1)), 12))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2022, 1, 1)), 12))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2021, 1, 1)), 1)).offset(1)</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2022, 1, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2022, 1, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2021, 1, 1)), 1)).offset(</span>
 <span class="sd">            ...     1, DateUnit.DAY</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2021, 1, 2)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2021, 1, 2)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2021, 1, 1)), 1)).offset(</span>
 <span class="sd">            ...     1, DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2021, 2, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2021, 2, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2021, 1, 1)), 1)).offset(</span>
 <span class="sd">            ...     1, DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2022, 1, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2022, 1, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2011, 2, 28)), 1)).offset(1)</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2011, 3, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2011, 3, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2011, 2, 28)), 1)).offset(1)</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2011, 3, 28)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2011, 3, 28)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2011, 2, 28)), 1)).offset(1)</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2012, 2, 28)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2012, 2, 28)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2011, 3, 1)), 1)).offset(-1)</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2011, 2, 28)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2011, 2, 28)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2011, 3, 1)), 1)).offset(-1)</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2011, 2, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2011, 2, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2011, 3, 1)), 1)).offset(-1)</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2010, 3, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2010, 3, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2014, 1, 30)), 1)).offset(3)</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2014, 2, 2)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2014, 2, 2)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 1, 30)), 1)).offset(3)</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 4, 30)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 4, 30)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 1, 30)), 1)).offset(3)</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2017, 1, 30)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2017, 1, 30)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2021, 1, 1)), 365)).offset(-3)</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2020, 12, 29)), 365))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2020, 12, 29)), 365))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2021, 1, 1)), 12)).offset(-3)</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2020, 10, 1)), 12))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2020, 10, 1)), 12))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 1, 1)), 1)).offset(-3)</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2011, 1, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2011, 1, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "first-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2014, 2, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2014, 2, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "first-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2014, 1, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2014, 1, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2014, 2, 3)), 4)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "first-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2014, 2, 1)), 4))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2014, 2, 1)), 4))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2014, 2, 3)), 4)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "first-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2014, 1, 1)), 4))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2014, 1, 1)), 4))</span>
 
-<span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 1)).offset(&quot;first-of&quot;)</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 2, 1)), 1))</span>
+<span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 1)).offset("first-of")</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 2, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "first-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 2, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 2, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "first-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 1, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 1, 1)), 1))</span>
 
-<span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 4)).offset(&quot;first-of&quot;)</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 2, 1)), 4))</span>
+<span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 4)).offset("first-of")</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 2, 1)), 4))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 4)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "first-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 2, 1)), 4))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 2, 1)), 4))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 4)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "first-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 1, 1)), 4))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 1, 1)), 4))</span>
 
-<span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 1, 30)), 1)).offset(&quot;first-of&quot;)</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 1, 1)), 1))</span>
+<span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 1, 30)), 1)).offset("first-of")</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 1, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 1, 30)), 1)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "first-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 1, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 1, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 1, 30)), 1)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "first-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 1, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 1, 1)), 1))</span>
 
-<span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 2, 3)), 1)).offset(&quot;first-of&quot;)</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 1, 1)), 1))</span>
+<span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 2, 3)), 1)).offset("first-of")</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 1, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "first-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 2, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 2, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;first-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "first-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 1, 1)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 1, 1)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "last-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2014, 2, 28)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2014, 2, 28)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "last-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2014, 12, 31)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2014, 12, 31)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2014, 2, 3)), 4)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "last-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2014, 2, 28)), 4))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2014, 2, 28)), 4))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2014, 2, 3)), 4)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "last-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.DAY: &#39;day&#39;&gt;, Instant((2014, 12, 31)), 4))</span>
+<span class="sd">            Period((&lt;DateUnit.DAY: 'day'&gt;, Instant((2014, 12, 31)), 4))</span>
 
-<span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 1)).offset(&quot;last-of&quot;)</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 2, 28)), 1))</span>
+<span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 1)).offset("last-of")</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 2, 28)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "last-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 2, 28)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 2, 28)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "last-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 12, 31)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 12, 31)), 1))</span>
 
-<span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 4)).offset(&quot;last-of&quot;)</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 2, 28)), 4))</span>
+<span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 4)).offset("last-of")</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 2, 28)), 4))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 4)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "last-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 2, 28)), 4))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 2, 28)), 4))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.MONTH, Instant((2014, 2, 3)), 4)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "last-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.MONTH: &#39;month&#39;&gt;, Instant((2014, 12, 31)), 4))</span>
+<span class="sd">            Period((&lt;DateUnit.MONTH: 'month'&gt;, Instant((2014, 12, 31)), 4))</span>
 
-<span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 2, 3)), 1)).offset(&quot;last-of&quot;)</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 12, 31)), 1))</span>
+<span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 2, 3)), 1)).offset("last-of")</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 12, 31)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 1, 1)), 1)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "last-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 1, 31)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 1, 31)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "last-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 12, 31)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 12, 31)), 1))</span>
 
-<span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 2, 3)), 1)).offset(&quot;last-of&quot;)</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 12, 31)), 1))</span>
+<span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 2, 3)), 1)).offset("last-of")</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 12, 31)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.MONTH</span>
+<span class="sd">            ...     "last-of", DateUnit.MONTH</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 2, 28)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 2, 28)), 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2014, 2, 3)), 1)).offset(</span>
-<span class="sd">            ...     &quot;last-of&quot;, DateUnit.YEAR</span>
+<span class="sd">            ...     "last-of", DateUnit.YEAR</span>
 <span class="sd">            ... )</span>
-<span class="sd">            Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2014, 12, 31)), 1))</span>
+<span class="sd">            Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2014, 12, 31)), 1))</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="n">start</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span>
             <span class="n">offset</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">unit</span>
@@ -897,17 +896,17 @@
 <div class="viewcode-block" id="Period.contains">
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.Period.contains">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns ``True`` if the period contains ``other``.</span>
+<span class="w">        </span><span class="sd">"""Returns ``True`` if the period contains ``other``.</span>
 
 <span class="sd">        For instance, ``period(2015)`` contains ``period(2015-01)``.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">start</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">stop</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the last day of the period as an Instant instance.</span>
+<span class="w">        </span><span class="sd">"""Return the last day of the period as an Instant instance.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.YEAR, Instant((2022, 1, 1)), 1)).stop</span>
@@ -937,7 +936,7 @@
 <span class="sd">            &gt;&gt;&gt; Period((DateUnit.DAY, Instant((2012, 2, 29)), 2)).stop</span>
 <span class="sd">            Instant((2012, 3, 1))</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">unit</span><span class="p">,</span> <span class="n">start_instant</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="bp">self</span>
 
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">:</span>
@@ -1002,28 +1001,28 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">last_year</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">:</span>
-        <span class="n">start</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">&quot;first-of&quot;</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">)</span>
+        <span class="n">start</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">"first-of"</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">:</span>
-        <span class="n">start</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">&quot;first-of&quot;</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">)</span>
+        <span class="n">start</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">"first-of"</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">this_year</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">:</span>
-        <span class="n">start</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">&quot;first-of&quot;</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">)</span>
+        <span class="n">start</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">"first-of"</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">YEAR</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">first_month</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">:</span>
-        <span class="n">start</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">&quot;first-of&quot;</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">)</span>
+        <span class="n">start</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">"first-of"</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">MONTH</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
@@ -1034,7 +1033,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">first_week</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">:</span>
-        <span class="n">start</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">&quot;first-of&quot;</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">)</span>
+        <span class="n">start</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Instant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="s2">"first-of"</span><span class="p">,</span> <span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">((</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">WEEK</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
@@ -1047,13 +1046,13 @@
 <a class="viewcode-back" href="../../../openfisca-python-api/periods.html#openfisca_core.periods.Period.eternity">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">eternity</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return an eternity period.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return an eternity period."""</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">,</span> <span class="n">Instant</span><span class="o">.</span><span class="n">eternity</span><span class="p">(),</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span></div>
 </div>
 
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Period&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Period"</span><span class="p">]</span>
 </pre></div>
 
           </div>

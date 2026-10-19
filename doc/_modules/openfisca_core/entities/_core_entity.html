@@ -121,10 +121,9 @@
   <h1>Source code for openfisca_core.entities._core_entity</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassVar</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">abc</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassVar</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">t</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.role</span><span class="w"> </span><span class="kn">import</span> <span class="n">Role</span>
@@ -133,7 +132,7 @@
 <div class="viewcode-block" id="CoreEntity">
 <a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.CoreEntity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CoreEntity</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class to build entities from.</span>
+<span class="w">    </span><span class="sd">"""Base class to build entities from.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        *__args: Any arguments.</span>
@@ -147,10 +146,10 @@
 <span class="sd">        ...     def __init__(self, key):</span>
 <span class="sd">        ...         self.key = t.EntityKey(key)</span>
 
-<span class="sd">        &gt;&gt;&gt; Entity(&quot;individual&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; Entity("individual")</span>
 <span class="sd">        Entity(individual)</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1">#: A key to identify the ``CoreEntity``.</span>
     <span class="n">key</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">EntityKey</span>
@@ -174,12 +173,12 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">__args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">**</span><span class="n">__kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">)"</span>
 
 <div class="viewcode-block" id="CoreEntity.set_tax_benefit_system">
 <a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.CoreEntity.set_tax_benefit_system">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_tax_benefit_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_benefit_system</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">TaxBenefitSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;A ``CoreEntity`` belongs to a ``TaxBenefitSystem``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""A ``CoreEntity`` belongs to a ``TaxBenefitSystem``."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tax_benefit_system</span> <span class="o">=</span> <span class="n">tax_benefit_system</span></div>
 
 
@@ -190,7 +189,7 @@
         <span class="n">variable_name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VariableName</span><span class="p">,</span>
         <span class="n">check_existence</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Variable</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get ``variable_name`` from ``variables``.</span>
+<span class="w">        </span><span class="sd">"""Get ``variable_name`` from ``variables``.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            variable_name: The ``Variable`` to be found.</span>
@@ -198,12 +197,12 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Variable: When the ``Variable`` exists.</span>
-<span class="sd">            None: When the ``Variable`` doesn&#39;t exist.</span>
+<span class="sd">            None: When the ``Variable`` doesn't exist.</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ValueError: When the :attr:`_tax_benefit_system` is not set yet.</span>
 <span class="sd">            ValueError: When ``check_existence`` is ``True`` and</span>
-<span class="sd">                the ``Variable`` doesn&#39;t exist.</span>
+<span class="sd">                the ``Variable`` doesn't exist.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import (</span>
@@ -213,19 +212,19 @@
 <span class="sd">            ...     variables,</span>
 <span class="sd">            ... )</span>
 
-<span class="sd">            &gt;&gt;&gt; this = entities.SingleEntity(&quot;this&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; that = entities.SingleEntity(&quot;that&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; this = entities.SingleEntity("this", "", "", "")</span>
+<span class="sd">            &gt;&gt;&gt; that = entities.SingleEntity("that", "", "", "")</span>
 
-<span class="sd">            &gt;&gt;&gt; this.get_variable(&quot;tax&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; this.get_variable("tax")</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ValueError: You must set &#39;tax_benefit_system&#39; before calling this...</span>
+<span class="sd">            ValueError: You must set 'tax_benefit_system' before calling this...</span>
 
 <span class="sd">            &gt;&gt;&gt; tax_benefit_system = taxbenefitsystems.TaxBenefitSystem([this])</span>
 <span class="sd">            &gt;&gt;&gt; this.set_tax_benefit_system(tax_benefit_system)</span>
 
-<span class="sd">            &gt;&gt;&gt; this.get_variable(&quot;tax&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; this.get_variable("tax")</span>
 
-<span class="sd">            &gt;&gt;&gt; this.get_variable(&quot;tax&quot;, check_existence=True)</span>
+<span class="sd">            &gt;&gt;&gt; this.get_variable("tax", check_existence=True)</span>
 <span class="sd">            Traceback (most recent call last):</span>
 <span class="sd">            VariableNotFoundError: You tried to calculate or to set a value...</span>
 
@@ -237,12 +236,12 @@
 <span class="sd">            &gt;&gt;&gt; this._tax_benefit_system.add_variable(tax)</span>
 <span class="sd">            &lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
 
-<span class="sd">            &gt;&gt;&gt; this.get_variable(&quot;tax&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; this.get_variable("tax")</span>
 <span class="sd">            &lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tax_benefit_system</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;You must set &#39;tax_benefit_system&#39; before calling this method.&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">"You must set 'tax_benefit_system' before calling this method."</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="n">msg</span><span class="p">,</span>
             <span class="p">)</span>
@@ -252,7 +251,7 @@
 <div class="viewcode-block" id="CoreEntity.check_variable_defined_for_entity">
 <a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.CoreEntity.check_variable_defined_for_entity">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_variable_defined_for_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">VariableName</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if ``variable_name`` is defined for ``self``.</span>
+<span class="w">        </span><span class="sd">"""Check if ``variable_name`` is defined for ``self``.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            variable_name: The ``Variable`` to be found.</span>
@@ -269,12 +268,12 @@
 <span class="sd">            ...     variables,</span>
 <span class="sd">            ... )</span>
 
-<span class="sd">            &gt;&gt;&gt; this = entities.SingleEntity(&quot;this&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; that = entities.SingleEntity(&quot;that&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; this = entities.SingleEntity("this", "", "", "")</span>
+<span class="sd">            &gt;&gt;&gt; that = entities.SingleEntity("that", "", "", "")</span>
 <span class="sd">            &gt;&gt;&gt; tax_benefit_system = taxbenefitsystems.TaxBenefitSystem([that])</span>
 <span class="sd">            &gt;&gt;&gt; this.set_tax_benefit_system(tax_benefit_system)</span>
 
-<span class="sd">            &gt;&gt;&gt; this.check_variable_defined_for_entity(&quot;tax&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; this.check_variable_defined_for_entity("tax")</span>
 <span class="sd">            Traceback (most recent call last):</span>
 <span class="sd">            VariableNotFoundError: You tried to calculate or to set a value...</span>
 
@@ -286,18 +285,18 @@
 <span class="sd">            &gt;&gt;&gt; this._tax_benefit_system.add_variable(tax)</span>
 <span class="sd">            &lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
 
-<span class="sd">            &gt;&gt;&gt; this.check_variable_defined_for_entity(&quot;tax&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; this.check_variable_defined_for_entity("tax")</span>
 <span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ValueError: You tried to compute the variable &#39;tax&#39; for the enti...</span>
+<span class="sd">            ValueError: You tried to compute the variable 'tax' for the enti...</span>
 
 <span class="sd">            &gt;&gt;&gt; tax.entity = this</span>
 
 <span class="sd">            &gt;&gt;&gt; this._tax_benefit_system.update_variable(tax)</span>
 <span class="sd">            &lt;openfisca_core.entities._core_entity.tax object at ...&gt;</span>
 
-<span class="sd">            &gt;&gt;&gt; this.check_variable_defined_for_entity(&quot;tax&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; this.check_variable_defined_for_entity("tax")</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">entity</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">CoreEntity</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">variable</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span>
             <span class="n">variable_name</span><span class="p">,</span>
@@ -312,11 +311,11 @@
 
         <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">key</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;You tried to compute the variable &#39;</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&#39; for&quot;</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">&quot;the entity &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="si">}</span><span class="s2">&#39;; however the variable&quot;</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&#39; is defined for &#39;</span><span class="si">{</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;Learn more about entities in our documentation:&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;&lt;https://openfisca.org/doc/coding-the-legislation/50_entities.html&gt;.&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"You tried to compute the variable '</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">' for"</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"the entity '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">plural</span><span class="si">}</span><span class="s2">'; however the variable"</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">' is defined for '</span><span class="si">{</span><span class="n">entity</span><span class="o">.</span><span class="n">plural</span><span class="si">}</span><span class="s2">'."</span><span class="p">,</span>
+                <span class="s2">"Learn more about entities in our documentation:"</span><span class="p">,</span>
+                <span class="s2">"&lt;https://openfisca.org/doc/coding-the-legislation/50_entities.html&gt;."</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">message</span><span class="p">))</span></div>
 
@@ -325,7 +324,7 @@
 <a class="viewcode-back" href="../../../openfisca-python-api/entities.html#openfisca_core.entities.CoreEntity.check_role_validity">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_role_validity</span><span class="p">(</span><span class="n">role</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if ``role`` is an instance of  ``Role``.</span>
+<span class="w">        </span><span class="sd">"""Check if ``role`` is an instance of  ``Role``.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            role: Any object.</span>
@@ -336,22 +335,22 @@
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import entities</span>
 
-<span class="sd">            &gt;&gt;&gt; role = entities.Role({&quot;key&quot;: &quot;key&quot;}, object())</span>
+<span class="sd">            &gt;&gt;&gt; role = entities.Role({"key": "key"}, object())</span>
 <span class="sd">            &gt;&gt;&gt; entities.check_role_validity(role)</span>
 
-<span class="sd">            &gt;&gt;&gt; entities.check_role_validity(&quot;hey!&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; entities.check_role_validity("hey!")</span>
 <span class="sd">            Traceback (most recent call last):</span>
 <span class="sd">            ValueError: hey! is not a valid role</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">role</span><span class="p">,</span> <span class="n">Role</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">role</span><span class="si">}</span><span class="s2"> is not a valid role&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">role</span><span class="si">}</span><span class="s2"> is not a valid role"</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 </div>
 
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;CoreEntity&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"CoreEntity"</span><span class="p">]</span>
 </pre></div>
 
           </div>

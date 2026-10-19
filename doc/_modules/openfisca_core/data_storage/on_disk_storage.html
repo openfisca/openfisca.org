@@ -121,10 +121,9 @@
   <h1>Source code for openfisca_core.data_storage.on_disk_storage</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">KeysView</span><span class="p">,</span> <span class="n">MutableMapping</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">KeysView</span><span class="p">,</span> <span class="n">MutableMapping</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 
@@ -138,14 +137,14 @@
 <div class="viewcode-block" id="OnDiskStorage">
 <a class="viewcode-back" href="../../../openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">OnDiskStorage</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Storing and retrieving calculated vectors on disk.</span>
+<span class="w">    </span><span class="sd">"""Storing and retrieving calculated vectors on disk.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        storage_dir: Path to store calculated vectors.</span>
 <span class="sd">        is_eternal: Whether the storage is eternal.</span>
 <span class="sd">        preserve_storage_dir: Whether to preserve the storage directory.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1">#: A dictionary containing data that has been stored on disk.</span>
     <span class="n">storage_dir</span><span class="p">:</span> <span class="nb">str</span>
@@ -178,7 +177,7 @@
 <div class="viewcode-block" id="OnDiskStorage._decode_file">
 <a class="viewcode-back" href="../../../openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage._decode_file">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_decode_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">DTypeGeneric</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decode a file by loading its contents as a :mod:`numpy` array.</span>
+<span class="w">        </span><span class="sd">"""Decode a file by loading its contents as a :mod:`numpy` array.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            file: Path to the file to be decoded.</span>
@@ -199,15 +198,15 @@
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import data_storage, indexed_enums, periods</span>
 
 <span class="sd">            &gt;&gt;&gt; class Housing(indexed_enums.Enum):</span>
-<span class="sd">            ...     OWNER = &quot;Owner&quot;</span>
-<span class="sd">            ...     TENANT = &quot;Tenant&quot;</span>
-<span class="sd">            ...     FREE_LODGER = &quot;Free lodger&quot;</span>
-<span class="sd">            ...     HOMELESS = &quot;Homeless&quot;</span>
+<span class="sd">            ...     OWNER = "Owner"</span>
+<span class="sd">            ...     TENANT = "Tenant"</span>
+<span class="sd">            ...     FREE_LODGER = "Free lodger"</span>
+<span class="sd">            ...     HOMELESS = "Homeless"</span>
 
 <span class="sd">            &gt;&gt;&gt; array = numpy.array([1])</span>
 <span class="sd">            &gt;&gt;&gt; value = indexed_enums.EnumArray(array, Housing)</span>
 <span class="sd">            &gt;&gt;&gt; instant = periods.Instant((2017, 1, 1))</span>
-<span class="sd">            &gt;&gt;&gt; period = periods.Period((&quot;year&quot;, instant, 1))</span>
+<span class="sd">            &gt;&gt;&gt; period = periods.Period(("year", instant, 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; with tempfile.TemporaryDirectory() as directory:</span>
 <span class="sd">            ...     storage = data_storage.OnDiskStorage(directory)</span>
@@ -215,7 +214,7 @@
 <span class="sd">            ...     storage._decode_file(storage._files[period])</span>
 <span class="sd">            EnumArray([Housing.TENANT])</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">enum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_enums</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">storage_dir</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">enum</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -229,7 +228,7 @@
 <div class="viewcode-block" id="OnDiskStorage.get">
 <a class="viewcode-back" href="../../../openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage.get">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">DTypeGeneric</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve the data for the specified period from disk.</span>
+<span class="w">        </span><span class="sd">"""Retrieve the data for the specified period from disk.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            period: The period for which data should be retrieved.</span>
@@ -248,7 +247,7 @@
 
 <span class="sd">            &gt;&gt;&gt; value = numpy.array([1, 2, 3])</span>
 <span class="sd">            &gt;&gt;&gt; instant = periods.Instant((2017, 1, 1))</span>
-<span class="sd">            &gt;&gt;&gt; period = periods.Period((&quot;year&quot;, instant, 1))</span>
+<span class="sd">            &gt;&gt;&gt; period = periods.Period(("year", instant, 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; with tempfile.TemporaryDirectory() as directory:</span>
 <span class="sd">            ...     storage = data_storage.OnDiskStorage(directory)</span>
@@ -256,7 +255,7 @@
 <span class="sd">            ...     storage.get(period)</span>
 <span class="sd">            array([1, 2, 3])</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_eternal</span><span class="p">:</span>
             <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">)</span>
         <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
@@ -270,7 +269,7 @@
 <div class="viewcode-block" id="OnDiskStorage.put">
 <a class="viewcode-back" href="../../../openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage.put">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Array</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">DTypeGeneric</span><span class="p">],</span> <span class="n">period</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Store the specified data on disk for the specified period.</span>
+<span class="w">        </span><span class="sd">"""Store the specified data on disk for the specified period.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: The data to store</span>
@@ -283,23 +282,23 @@
 
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import data_storage, periods</span>
 
-<span class="sd">            &gt;&gt;&gt; value = numpy.array([1, &quot;2&quot;, &quot;salary&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; value = numpy.array([1, "2", "salary"])</span>
 <span class="sd">            &gt;&gt;&gt; instant = periods.Instant((2017, 1, 1))</span>
-<span class="sd">            &gt;&gt;&gt; period = periods.Period((&quot;year&quot;, instant, 1))</span>
+<span class="sd">            &gt;&gt;&gt; period = periods.Period(("year", instant, 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; with tempfile.TemporaryDirectory() as directory:</span>
 <span class="sd">            ...     storage = data_storage.OnDiskStorage(directory)</span>
 <span class="sd">            ...     storage.put(value, period)</span>
 <span class="sd">            ...     storage.get(period)</span>
-<span class="sd">            array([&#39;1&#39;, &#39;2&#39;, &#39;salary&#39;], ...)</span>
+<span class="sd">            array(['1', '2', 'salary'], ...)</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_eternal</span><span class="p">:</span>
             <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">DateUnit</span><span class="o">.</span><span class="n">ETERNITY</span><span class="p">)</span>
         <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 
         <span class="n">filename</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">storage_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.npy&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">storage_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span> <span class="o">+</span> <span class="s2">".npy"</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">EnumArray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">possible_values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_enums</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">storage_dir</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">possible_values</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
@@ -310,7 +309,7 @@
 <div class="viewcode-block" id="OnDiskStorage.delete">
 <a class="viewcode-back" href="../../../openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage.delete">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">Period</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete the data for the specified period from disk.</span>
+<span class="w">        </span><span class="sd">"""Delete the data for the specified period from disk.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            period: The period for which data should be deleted. If not</span>
@@ -325,7 +324,7 @@
 
 <span class="sd">            &gt;&gt;&gt; value = numpy.array([1, 2, 3])</span>
 <span class="sd">            &gt;&gt;&gt; instant = periods.Instant((2017, 1, 1))</span>
-<span class="sd">            &gt;&gt;&gt; period = periods.Period((&quot;year&quot;, instant, 1))</span>
+<span class="sd">            &gt;&gt;&gt; period = periods.Period(("year", instant, 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; with tempfile.TemporaryDirectory() as directory:</span>
 <span class="sd">            ...     storage = data_storage.OnDiskStorage(directory)</span>
@@ -345,7 +344,7 @@
 <span class="sd">            ...     storage.delete()</span>
 <span class="sd">            ...     storage.get(period)</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_files</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">return</span>
@@ -364,10 +363,10 @@
 <div class="viewcode-block" id="OnDiskStorage.get_known_periods">
 <a class="viewcode-back" href="../../../openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage.get_known_periods">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_known_periods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KeysView</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;List of storage&#39;s known periods.</span>
+<span class="w">        </span><span class="sd">"""List of storage's known periods.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            KeysView[Period]: A sequence containing the storage&#39;s known periods.</span>
+<span class="sd">            KeysView[Period]: A sequence containing the storage's known periods.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; import tempfile</span>
@@ -375,7 +374,7 @@
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import data_storage, periods</span>
 
 <span class="sd">            &gt;&gt;&gt; instant = periods.Instant((2017, 1, 1))</span>
-<span class="sd">            &gt;&gt;&gt; period = periods.Period((&quot;year&quot;, instant, 1))</span>
+<span class="sd">            &gt;&gt;&gt; period = periods.Period(("year", instant, 1))</span>
 
 <span class="sd">            &gt;&gt;&gt; with tempfile.TemporaryDirectory() as directory:</span>
 <span class="sd">            ...     storage = data_storage.OnDiskStorage(directory)</span>
@@ -386,16 +385,16 @@
 <span class="sd">            ...     storage = data_storage.OnDiskStorage(directory)</span>
 <span class="sd">            ...     storage.put([], period)</span>
 <span class="sd">            ...     storage.get_known_periods()</span>
-<span class="sd">            dict_keys([Period((&#39;year&#39;, Instant((2017, 1, 1)), 1))])</span>
+<span class="sd">            dict_keys([Period(('year', Instant((2017, 1, 1)), 1))])</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_files</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="OnDiskStorage.restore">
 <a class="viewcode-back" href="../../../openfisca-python-api/data_storage.html#openfisca_core.data_storage.OnDiskStorage.restore">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">restore</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Restore the storage from disk.</span>
+<span class="w">        </span><span class="sd">"""Restore the storage from disk.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; import tempfile</span>
@@ -406,13 +405,13 @@
 
 <span class="sd">            &gt;&gt;&gt; value = numpy.array([1, 2, 3])</span>
 <span class="sd">            &gt;&gt;&gt; instant = periods.Instant((2017, 1, 1))</span>
-<span class="sd">            &gt;&gt;&gt; period = periods.Period((&quot;year&quot;, instant, 1))</span>
+<span class="sd">            &gt;&gt;&gt; period = periods.Period(("year", instant, 1))</span>
 <span class="sd">            &gt;&gt;&gt; directory = tempfile.TemporaryDirectory()</span>
 
 <span class="sd">            &gt;&gt;&gt; storage1 = data_storage.OnDiskStorage(directory.name)</span>
 <span class="sd">            &gt;&gt;&gt; storage1.put(value, period)</span>
 <span class="sd">            &gt;&gt;&gt; storage1._files</span>
-<span class="sd">            {Period((&#39;year&#39;, Instant((2017, 1, 1)), 1)): &#39;...2017.npy&#39;}</span>
+<span class="sd">            {Period(('year', Instant((2017, 1, 1)), 1)): '...2017.npy'}</span>
 
 <span class="sd">            &gt;&gt;&gt; storage2 = data_storage.OnDiskStorage(directory.name)</span>
 <span class="sd">            &gt;&gt;&gt; storage2._files</span>
@@ -420,18 +419,18 @@
 
 <span class="sd">            &gt;&gt;&gt; storage2.restore()</span>
 <span class="sd">            &gt;&gt;&gt; storage2._files</span>
-<span class="sd">            {Period((&lt;DateUnit.YEAR: &#39;year&#39;&gt;, Instant((2017, 1, 1...2017.npy&#39;}</span>
+<span class="sd">            {Period((&lt;DateUnit.YEAR: 'year'&gt;, Instant((2017, 1, 1...2017.npy'}</span>
 
 <span class="sd">            &gt;&gt;&gt; directory.cleanup()</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_files</span> <span class="o">=</span> <span class="n">files</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="c1"># Restore self._files from content of storage_dir.</span>
         <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">storage_dir</span><span class="p">):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.npy&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".npy"</span><span class="p">):</span>
                 <span class="k">continue</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">storage_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-            <span class="n">filename_core</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">filename_core</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="n">filename_core</span><span class="p">)</span>
             <span class="n">files</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span></div>
 
@@ -447,7 +446,7 @@
 
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;OnDiskStorage&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"OnDiskStorage"</span><span class="p">]</span>
 </pre></div>
 
           </div>

@@ -130,7 +130,7 @@
 <a class="viewcode-back" href="../../../openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode">[docs]</a>
 <span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">TraceNode</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A node in the tracing tree.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""A node in the tracing tree."""</span>
 
     <span class="c1">#: The name of the node.</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
@@ -159,7 +159,7 @@
 <div class="viewcode-block" id="TraceNode.calculation_time">
 <a class="viewcode-back" href="../../../openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.calculation_time">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">calculation_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">round_</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Time</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the time spent in the node.</span>
+<span class="w">        </span><span class="sd">"""Calculate the time spent in the node.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            round_: Whether to round the result.</span>
@@ -170,7 +170,7 @@
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import tracers</span>
 
-<span class="sd">            &gt;&gt;&gt; node = tracers.TraceNode(&quot;variable&quot;, 2020)</span>
+<span class="sd">            &gt;&gt;&gt; node = tracers.TraceNode("variable", 2020)</span>
 <span class="sd">            &gt;&gt;&gt; node.start = 1.123122313</span>
 <span class="sd">            &gt;&gt;&gt; node.end = 1.12312313123</span>
 
@@ -180,7 +180,7 @@
 <span class="sd">            &gt;&gt;&gt; node.calculation_time(round_=False)</span>
 <span class="sd">            8.182299999770493e-07</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
 
         <span class="k">if</span> <span class="n">round_</span><span class="p">:</span>
@@ -192,7 +192,7 @@
 <div class="viewcode-block" id="TraceNode.formula_time">
 <a class="viewcode-back" href="../../../openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.formula_time">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">formula_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Time</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the time spent on the formula.</span>
+<span class="w">        </span><span class="sd">"""Calculate the time spent on the formula.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            float: The time spent on the formula.</span>
@@ -200,10 +200,10 @@
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; from openfisca_core import tracers</span>
 
-<span class="sd">            &gt;&gt;&gt; node = tracers.TraceNode(&quot;variable&quot;, 2020)</span>
+<span class="sd">            &gt;&gt;&gt; node = tracers.TraceNode("variable", 2020)</span>
 <span class="sd">            &gt;&gt;&gt; node.start = 1.123122313 * 11</span>
 <span class="sd">            &gt;&gt;&gt; node.end = 1.12312313123 * 11</span>
-<span class="sd">            &gt;&gt;&gt; child = tracers.TraceNode(&quot;variable&quot;, 2020)</span>
+<span class="sd">            &gt;&gt;&gt; child = tracers.TraceNode("variable", 2020)</span>
 <span class="sd">            &gt;&gt;&gt; child.start = 1.123122313</span>
 <span class="sd">            &gt;&gt;&gt; child.end = 1.12312313123</span>
 
@@ -213,7 +213,7 @@
 <span class="sd">            &gt;&gt;&gt; node.formula_time()</span>
 <span class="sd">            8.182e-07</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">children_calculation_time</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
             <span class="n">child</span><span class="o">.</span><span class="n">calculation_time</span><span class="p">(</span><span class="n">round_</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span>
         <span class="p">)</span>
@@ -226,7 +226,7 @@
 <div class="viewcode-block" id="TraceNode.append_child">
 <a class="viewcode-back" href="../../../openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.append_child">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">append_child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">TraceNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Append a child to the node.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Append a child to the node."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div>
 
 
@@ -234,7 +234,7 @@
 <a class="viewcode-back" href="../../../openfisca-python-api/tracer.html#openfisca_core.tracers.TraceNode.round">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">time</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Time</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Time</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Keep only 4 significant figures.</span>
+<span class="w">        </span><span class="sd">"""Keep only 4 significant figures.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            time: The time to round.</span>
@@ -248,13 +248,13 @@
 <span class="sd">            &gt;&gt;&gt; tracers.TraceNode.round(0.000123456789)</span>
 <span class="sd">            0.0001235</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span></div>
 </div>
 
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TraceNode&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"TraceNode"</span><span class="p">]</span>
 </pre></div>
 
           </div>
