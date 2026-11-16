@@ -185,6 +185,15 @@
         <span class="n">new_dict</span><span class="p">[</span><span class="s2">"population"</span><span class="p">]</span> <span class="o">=</span> <span class="n">population</span>
         <span class="n">new_dict</span><span class="p">[</span><span class="s2">"simulation"</span><span class="p">]</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">simulation</span>
 
+        <span class="c1"># Storage must not be shared with the original holder: otherwise any</span>
+        <span class="c1"># value set, cached or deleted through one simulation would silently</span>
+        <span class="c1"># alter the other one.</span>
+        <span class="n">new_dict</span><span class="p">[</span><span class="s2">"_memory_storage"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_memory_storage</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new_dict</span><span class="p">[</span><span class="s2">"_disk_storage"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_storage</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">data_storage_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+            <span class="p">)</span>
+
         <span class="k">return</span> <span class="n">new</span></div>
 
 

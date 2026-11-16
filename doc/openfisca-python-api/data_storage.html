@@ -161,6 +161,44 @@
 </dd>
 </dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.data_storage.InMemoryStorage.clone">
+<span class="sig-name descname"><span class="pre">clone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/data_storage/in_memory_storage.html#InMemoryStorage.clone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.data_storage.InMemoryStorage.clone" title="Link to this definition">¶</a></dt>
+<dd><p>Create a copy of the storage whose future mutations are independent.</p>
+<p>The underlying arrays are shared, as they are treated as immutable by
+the engine; only the period-to-array mapping is copied.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>InMemoryStorage</strong> – A new storage with the same data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#openfisca_core.data_storage.InMemoryStorage" title="openfisca_core.data_storage.in_memory_storage.InMemoryStorage"><code class="xref py py-class docutils literal notranslate"><span class="pre">InMemoryStorage</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">data_storage</span><span class="p">,</span> <span class="n">periods</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">storage</span> <span class="o">=</span> <span class="n">data_storage</span><span class="o">.</span><span class="n">InMemoryStorage</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s2">"2017"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">storage</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span> <span class="n">period</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clone</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clone</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+<span class="go">array([1, 2, 3])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clone</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+<span class="go">array([1, 2, 3])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="openfisca_core.data_storage.InMemoryStorage.delete">
 <span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/data_storage/in_memory_storage.html#InMemoryStorage.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.data_storage.InMemoryStorage.delete" title="Link to this definition">¶</a></dt>
 <dd><p>Delete the data for the specified <a class="reference internal" href="types.html#openfisca_core.types.Period" title="openfisca_core.types.Period"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Period</span></code></a> from memory.</p>
@@ -418,6 +456,56 @@ array is converted back to an <code class="xref py py-obj docutils literal notra
 <span class="gp">... </span>    <span class="n">storage</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">storage</span><span class="o">.</span><span class="n">_decode_file</span><span class="p">(</span><span class="n">storage</span><span class="o">.</span><span class="n">_files</span><span class="p">[</span><span class="n">period</span><span class="p">])</span>
 <span class="go">EnumArray([Housing.TENANT])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openfisca_core.data_storage.OnDiskStorage.clone">
+<span class="sig-name descname"><span class="pre">clone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openfisca_core/data_storage/on_disk_storage.html#OnDiskStorage.clone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openfisca_core.data_storage.OnDiskStorage.clone" title="Link to this definition">¶</a></dt>
+<dd><p>Copy the storage into <code class="docutils literal notranslate"><span class="pre">storage_dir</span></code>, making future mutations independent.</p>
+<p>The stored files are copied into <code class="docutils literal notranslate"><span class="pre">storage_dir</span></code>, so that neither
+simulation writes into — or deletes — the files of the other.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>storage_dir</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to store the copied vectors. Must be different
+from the current storage directory; created if it does not
+exist yet.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>OnDiskStorage</strong> – A new storage with the same data.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">storage_dir</span></code> is the current storage directory.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#openfisca_core.data_storage.OnDiskStorage" title="openfisca_core.data_storage.on_disk_storage.OnDiskStorage"><code class="xref py py-class docutils literal notranslate"><span class="pre">OnDiskStorage</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">openfisca_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">data_storage</span><span class="p">,</span> <span class="n">periods</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">period</span> <span class="o">=</span> <span class="n">periods</span><span class="o">.</span><span class="n">period</span><span class="p">(</span><span class="s2">"2017"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">directory</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">clone_directory</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">storage</span> <span class="o">=</span> <span class="n">data_storage</span><span class="o">.</span><span class="n">OnDiskStorage</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">directory</span><span class="p">,</span> <span class="n">preserve_storage_dir</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">... </span>        <span class="p">)</span>
+<span class="gp">... </span>        <span class="n">storage</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">clone</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">clone_directory</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">clone</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+<span class="go">array([1, 2, 3])</span>
 </pre></div>
 </div>
 </dd></dl>

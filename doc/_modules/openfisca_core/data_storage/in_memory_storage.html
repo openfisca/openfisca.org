@@ -274,6 +274,40 @@
         <span class="p">}</span></div>
 
 
+<div class="viewcode-block" id="InMemoryStorage.clone">
+<a class="viewcode-back" href="../../../openfisca-python-api/data_storage.html#openfisca_core.data_storage.InMemoryStorage.clone">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InMemoryStorage</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Create a copy of the storage whose future mutations are independent.</span>
+
+<span class="sd">        The underlying arrays are shared, as they are treated as immutable by</span>
+<span class="sd">        the engine; only the period-to-array mapping is copied.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            InMemoryStorage: A new storage with the same data.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; import numpy</span>
+
+<span class="sd">            &gt;&gt;&gt; from openfisca_core import data_storage, periods</span>
+
+<span class="sd">            &gt;&gt;&gt; storage = data_storage.InMemoryStorage()</span>
+<span class="sd">            &gt;&gt;&gt; period = periods.period("2017")</span>
+<span class="sd">            &gt;&gt;&gt; storage.put(numpy.array([1, 2, 3]), period)</span>
+
+<span class="sd">            &gt;&gt;&gt; clone = storage.clone()</span>
+<span class="sd">            &gt;&gt;&gt; clone.get(period)</span>
+<span class="sd">            array([1, 2, 3])</span>
+
+<span class="sd">            &gt;&gt;&gt; clone.delete(period)</span>
+<span class="sd">            &gt;&gt;&gt; storage.get(period)</span>
+<span class="sd">            array([1, 2, 3])</span>
+
+<span class="sd">        """</span>
+        <span class="n">clone</span> <span class="o">=</span> <span class="n">InMemoryStorage</span><span class="p">(</span><span class="n">is_eternal</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_eternal</span><span class="p">)</span>
+        <span class="n">clone</span><span class="o">.</span><span class="n">_arrays</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_arrays</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">clone</span></div>
+
+
 <div class="viewcode-block" id="InMemoryStorage.get_known_periods">
 <a class="viewcode-back" href="../../../openfisca-python-api/data_storage.html#openfisca_core.data_storage.InMemoryStorage.get_known_periods">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_known_periods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KeysView</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Period</span><span class="p">]:</span>
